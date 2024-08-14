@@ -10,7 +10,7 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### Environment
 1. ~~Create field of play with textures~~
-2. Create net with colliders
+2. ~~Create net with colliders~~
 
 #### Player - Arcade
 1. Create Player Controller - Movement
