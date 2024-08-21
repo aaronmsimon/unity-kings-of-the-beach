@@ -13,9 +13,18 @@ I would like to actually finish this game this time. That means starting with a 
 2. ~~Create net with colliders~~
 
 #### Player - Arcade
-1. Create Player Controller - Movement
+1. ~~Create Player Controller - Movement~~
 2. Create player model
 3. Create Player Controller - Bump
+4. Raycasts to prevent movement
+
+#### Ball Mechanics
+1. Move to Target with parabola interpolation: 4 x (-x^2 + x)
 
 #### Assistants
 1. Coach - Bump
+
+#### Concepts/Ideas
+- use right stick to reach for ball on dig
+- amount of power, direction, depends on angle of ball, how quickly can get under it, etc
+- block calls
