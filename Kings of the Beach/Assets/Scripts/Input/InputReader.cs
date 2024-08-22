@@ -7,6 +7,8 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
 {
 	// Gameplay
 	public event UnityAction<Vector2> moveEvent;
+	public event UnityAction testEvent;
+	public event UnityAction testCanceledEvent;
 
 	private GameInput gameInput;
 
@@ -32,6 +34,15 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
 		{
 			moveEvent.Invoke(context.ReadValue<Vector2>());
 		}
+	}
+
+	public void OnTest(InputAction.CallbackContext context)
+	{
+		if (context.phase == InputActionPhase.Performed)
+			testEvent.Invoke();
+		
+		if (context.phase == InputActionPhase.Canceled)
+			testCanceledEvent.Invoke();
 	}
 
 	public void EnableGameplayInput()

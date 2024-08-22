@@ -19,10 +19,14 @@ I would like to actually finish this game this time. That means starting with a 
 4. Raycasts to prevent movement
 
 #### Ball Mechanics
-1. Move to Target with parabola interpolation: 4 x (-x^2 + x)
+1. Move to Target with parabola interpolation: $4(-x^2 + x)$
 
 #### Assistants
 1. Coach - Bump
+
+#### Presentation
+1. Cinemachine
+2. Post Processing - Bloom
 
 #### Concepts/Ideas
 - use right stick to reach for ball on dig

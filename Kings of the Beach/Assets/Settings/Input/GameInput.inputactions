@@ -1,5 +1,5 @@
 {
-    "name": "PlayerControls",
+    "name": "GameInput",
     "maps": [
         {
             "name": "Gameplay",
@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Test",
+                    "type": "Button",
+                    "id": "3a04d1cd-c8ac-4900-8fbb-8d19c8be18aa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -125,6 +134,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "524d73d6-c45e-4eac-8d9c-5a9a2dda45d6",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Test",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
