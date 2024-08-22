@@ -3,24 +3,37 @@ using System.Collections;
 
 public class Ball : MonoBehaviour
 {
-    public void Bump(float bumpPower, Vector3 targetPos, float ballSpeed) {
-        StartCoroutine(BallArc(bumpPower, targetPos, ballSpeed));
+    public void Bump(Vector3 targetPos, float height, float duration) {
+        StartCoroutine(BallArc(targetPos, height, duration));
     }
 
-    private IEnumerator BallArc(float bumpPower, Vector3 targetPos, float ballSpeed) {
+    private IEnumerator BallArc(Vector3 targetPos, float height, float duration) {
         Vector3 startPos = transform.position;
-        float percent = 0f;
+        float time = 0f;
 
-        while(transform.position.y >= 0) {
-            percent += Time.deltaTime * ballSpeed;
-            float x = Mathf.Lerp(startPos.x, targetPos.x, percent);
-            float y = bumpPower * (-percent * percent + percent) + startPos.y;
-            float z = Mathf.Lerp(startPos.z, targetPos.z, percent);
-            
-            transform.position = new Vector3(x, y, z);
+        while(transform.position != targetPos) {
+            time += Time.deltaTime;
+            float t = time / duration;
+            if (t > 1f) t = 1f;
+
+            Vector3 apex = new Vector3((startPos.x + targetPos.x) / 2, height, (startPos.z + targetPos.z) / 2);
+
+            transform.position = CalculateQuadraticBezierPoint(t, startPos, apex, targetPos);
 
             yield return null;
         }
+    }
+
+    private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2) {
+        float u = 1 - t;
+        float tt = t * t;
+        float uu = u * u;
+
+        Vector3 p = uu * p0;
+        p += 2 * u * t * p1;
+        p += tt * p2;
+
+        return p;
     }
 
     private void Update() {

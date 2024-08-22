@@ -4,8 +4,8 @@ public class Bump : MonoBehaviour
 {
     [SerializeField] private Ball ball;
     [SerializeField] private Transform target;
-    [SerializeField] private float speed;
-    [SerializeField] private float power;
+    [SerializeField] private float height;
+    [SerializeField] private float duration;
     [SerializeField] private InputReader inputReader;
 
     //Adds listeners for events being triggered in the InputReader script
@@ -21,7 +21,7 @@ public class Bump : MonoBehaviour
     }
 
     private void PerformBump() {
-        ball.Bump(power, target.position, speed);
+        ball.Bump(target.position, height, duration);
     }
 
     //---- EVENT LISTENERS ----
