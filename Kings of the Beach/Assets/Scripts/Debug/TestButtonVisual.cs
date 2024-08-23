@@ -7,8 +7,6 @@ namespace KotB.Testing
     {
         [SerializeField] private InputReader inputReader;
 
-        private bool testInput;
-
         private Color activeColor = new Color(0.2775892f, 0.8598382f, 0.221333f);
         private Color inactiveColor = Color.white;
 
@@ -21,38 +19,27 @@ namespace KotB.Testing
         //Adds listeners for events being triggered in the InputReader script
         private void OnEnable()
         {
-            inputReader.testEvent += OnTestInitiated;
+            inputReader.testEvent += OnTestPerformed;
             inputReader.testCanceledEvent += OnTestCanceled;
         }
         
         //Removes all listeners to the events coming from the InputReader script
         private void OnDisable()
         {
-            inputReader.testEvent -= OnTestInitiated;
+            inputReader.testEvent -= OnTestPerformed;
             inputReader.testCanceledEvent -= OnTestCanceled;
-        }
-
-        private void Update() {
-            UpdateTestButtonVisual();
-        }
-
-        private void UpdateTestButtonVisual() {
-            if (testInput)
-                img.color = activeColor;
-            else
-                img.color = inactiveColor;
         }
 
         //---- EVENT LISTENERS ----
 
-        private void OnTestInitiated()
+        private void OnTestPerformed()
         {
-            testInput = true;
+            img.color = activeColor;
         }
 
         private void OnTestCanceled()
         {
-            testInput = false;
+            img.color = inactiveColor;
         }
     }
 }

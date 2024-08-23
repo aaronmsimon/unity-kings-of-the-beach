@@ -11,13 +11,13 @@ public class Bump : MonoBehaviour
     //Adds listeners for events being triggered in the InputReader script
     private void OnEnable()
     {
-        inputReader.testCanceledEvent += OnBumpCanceled;
+        inputReader.testEvent += OnBump;
     }
     
     //Removes all listeners to the events coming from the InputReader script
     private void OnDisable()
     {
-        inputReader.testCanceledEvent -= OnBumpCanceled;
+        inputReader.testEvent -= OnBump;
     }
 
     private void PerformBump() {
@@ -26,7 +26,7 @@ public class Bump : MonoBehaviour
 
     //---- EVENT LISTENERS ----
 
-    private void OnBumpCanceled()
+    private void OnBump()
     {
         PerformBump();
     }
