@@ -17,9 +17,10 @@ I would like to actually finish this game this time. That means starting with a 
 2. Create player model
 3. Create Player Controller - Bump
 4. Raycasts to prevent movement
+5. Lock player in place to target
 
 #### Ball Mechanics
-1. Move to Target with parabola interpolation: $4(-x^2 + x)$
+1. ~~Move to Target with Bezier curve~~
 
 #### Assistants
 1. Coach - Bump

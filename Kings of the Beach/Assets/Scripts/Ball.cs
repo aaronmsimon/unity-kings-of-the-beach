@@ -3,7 +3,12 @@ using System.Collections;
 
 public class Ball : MonoBehaviour
 {
+    [SerializeField] private Transform targetPrefab;
+
+    private Transform ballTarget;
+
     public void Bump(Vector3 targetPos, float height, float duration) {
+        ballTarget = Instantiate(targetPrefab, targetPos, Quaternion.identity);
         StartCoroutine(BallArc(targetPos, height, duration));
     }
 
@@ -22,6 +27,8 @@ public class Ball : MonoBehaviour
 
             yield return null;
         }
+
+        Destroy(ballTarget.gameObject);
     }
 
     private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2) {
