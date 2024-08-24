@@ -10,7 +10,16 @@ namespace KotB.Actors
         [SerializeField] private InputReader inputReader;
 
         private Vector2 moveInput;
-        private bool canMove = true;
+        private AthleteState athleteState;
+
+        private enum AthleteState {
+            Normal,
+            Locked
+        }
+
+        private void Start() {
+            athleteState = AthleteState.Normal;
+        }
 
         //Adds listeners for events being triggered in the InputReader script
         private void OnEnable()
@@ -25,18 +34,30 @@ namespace KotB.Actors
         }
 
         private void Update() {
-            Move();
+            switch (athleteState) {
+                case AthleteState.Normal:
+                    Move();
+                    CheckForTarget();
+                    break;
+                case AthleteState.Locked:
+                    break;
+                default:
+                    Debug.LogWarning("Athlete State unhandled.");
+                    break;
+            }
         }
 
         private void Move() {
-            if (Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, out RaycastHit hitInfo, 1f, targetLayer)) {
+            Vector3 moveDir = new Vector3(moveInput.x, 0f, moveInput.y);
+            transform.position += moveDir * moveSpeed * Time.deltaTime;
+        }
+
+        private void CheckForTarget() {
+            bool isOverTarget = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, out RaycastHit hitInfo, 1f, targetLayer);
+
+            if (isOverTarget) {
                 transform.position = hitInfo.transform.position;
-                canMove = false;
-            }
-            
-            if (canMove) {
-                Vector3 moveDir = new Vector3(moveInput.x, 0f, moveInput.y);
-                transform.position += moveDir * moveSpeed * Time.deltaTime;
+                athleteState = AthleteState.Locked;
             }
         }
 
@@ -45,6 +66,10 @@ namespace KotB.Actors
         private void OnMove(Vector2 movement)
         {
             moveInput = movement;
+        }
+
+        public void OnTargetDestroyed() {
+            athleteState = AthleteState.Normal;
         }
     }
 }

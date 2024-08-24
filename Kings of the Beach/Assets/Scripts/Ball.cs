@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections;
+using RoboRyanTron.Unite2017.Events;
 
 public class Ball : MonoBehaviour
 {
     [SerializeField] private Transform targetPrefab;
+    [SerializeField] GameEvent targetDestroyedEvent;
+    [SerializeField] GameEvent resetBallEvent;
 
     private Transform ballTarget;
 
@@ -29,6 +32,7 @@ public class Ball : MonoBehaviour
         }
 
         Destroy(ballTarget.gameObject);
+        targetDestroyedEvent.Raise();
     }
 
     private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2) {
@@ -43,17 +47,19 @@ public class Ball : MonoBehaviour
         return p;
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            ResetBall();
-        }
+    public void ResetBall(/*Vector3 ballResetPos*/) {
+        // transform.position = ballResetPos;
+        transform.position = origPos;
     }
 
+    /* temp */
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            resetBallEvent.Raise();
+        }
+    }
     private Vector3 origPos;
     private void Awake() {
         origPos = transform.position;
-    }
-    private void ResetBall() {
-        transform.position = origPos;
     }
 }
