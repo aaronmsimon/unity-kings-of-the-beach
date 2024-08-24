@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class Coach : MonoBehaviour
 {
+    [Header("Coaching Details")]
+    [SerializeField] private float ballHeight;
+    [SerializeField] private float ballDuration;
+
     [Header("Target Area")]
     [SerializeField] private Vector2 targetZonePos;
     [SerializeField] private float targetZoneSize;
@@ -37,7 +41,7 @@ public class Coach : MonoBehaviour
     {
         float posX = Random.Range(targetZonePos.x - targetZoneSize / 2, targetZonePos.x + targetZoneSize / 2);
         float posY = Random.Range(targetZonePos.y - targetZoneSize / 2, targetZonePos.y + targetZoneSize / 2);
-        bump.PerformBump(new Vector3(posX, 0, posY), 12, 1.5f);
+        bump.PerformBump(new Vector3(posX, 0, posY), ballHeight, ballDuration);
     }
 
     //---- GIZMOS ----

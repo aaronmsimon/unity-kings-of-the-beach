@@ -16,8 +16,9 @@ I would like to actually finish this game this time. That means starting with a 
 1. ~~Create Player Controller - Movement~~
 2. Create player model
 3. Create Player Controller - Bump
-4. Raycasts to prevent movement
-5. Lock player in place to target
+4. Raycasts for collision detection to prevent movement
+5. ~~Lock player in place to target~~
+6. Implement a State Machine to control movement/locking
 
 #### Ball Mechanics
 1. ~~Move to Target with Bezier curve~~
@@ -33,3 +34,6 @@ I would like to actually finish this game this time. That means starting with a 
 - use right stick to reach for ball on dig
 - amount of power, direction, depends on angle of ball, how quickly can get under it, etc
 - block calls
+
+#### Cleanup
+- is it better to create a static TagHashes class instead of hard-coding tag strings?
