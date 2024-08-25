@@ -9,30 +9,66 @@ public class Ball : MonoBehaviour
     [SerializeField] GameEvent resetBallEvent;
 
     private Transform ballTarget;
+    private BallState ballState;
+    private float ballHeight;
+    private float ballDuration;
+    private Vector3 startPos;
+    private float time;
 
-    public void Bump(Vector3 targetPos, float height, float duration) {
-        ballTarget = Instantiate(targetPrefab, targetPos, Quaternion.identity);
-        StartCoroutine(BallArc(targetPos, height, duration));
+    private enum BallState {
+        Held,
+        Bump,
+        OnGround
     }
 
-    private IEnumerator BallArc(Vector3 targetPos, float height, float duration) {
-        Vector3 startPos = transform.position;
-        float time = 0f;
+    private void Start() {
+        ballState = BallState.Held;
+    }
 
-        while(transform.position != targetPos) {
-            time += Time.deltaTime;
-            float t = time / duration;
-            if (t > 1f) t = 1f;
-
-            Vector3 apex = new Vector3((startPos.x + targetPos.x) / 2, height, (startPos.z + targetPos.z) / 2);
-
-            transform.position = CalculateQuadraticBezierPoint(t, startPos, apex, targetPos);
-
-            yield return null;
+    private void Update() {
+        switch (ballState) {
+            case BallState.Held:
+                break;
+            case BallState.Bump:
+                BallArc();
+                break;
+            case BallState.OnGround:
+                break;
+            default:
+                Debug.LogWarning("Ball State unhandled.");
+                break;
         }
 
-        Destroy(ballTarget.gameObject);
-        targetDestroyedEvent.Raise();
+        /* temp */
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            resetBallEvent.Raise();
+        }
+    }
+    
+    public void Bump(Vector3 targetPos, float height, float duration) {
+        startPos = transform.position;
+        time = 0f;
+        DestroyBallTarget();
+        ballTarget = Instantiate(targetPrefab, targetPos, Quaternion.identity);
+        ballHeight = height;
+        ballDuration = duration;
+        ballState = BallState.Bump;
+    }
+
+    private void BallArc() {
+        Vector3 targetPos = ballTarget.position;
+        if (ballState == BallState.Bump && transform.position != targetPos) {
+            time += Time.deltaTime;
+            float t = time / ballDuration;
+            if (t > 1f) t = 1f;
+
+            Vector3 apex = new Vector3((startPos.x + targetPos.x) / 2, ballHeight, (startPos.z + targetPos.z) / 2);
+
+            transform.position = CalculateQuadraticBezierPoint(t, startPos, apex, targetPos);
+        } else {
+            ballState = BallState.OnGround;
+            DestroyBallTarget();
+        }
     }
 
     private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2) {
@@ -47,17 +83,20 @@ public class Ball : MonoBehaviour
         return p;
     }
 
-    public void ResetBall(/*Vector3 ballResetPos*/) {
-        // transform.position = ballResetPos;
-        transform.position = origPos;
-    }
-
-    /* temp */
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            resetBallEvent.Raise();
+    private void DestroyBallTarget() {
+        if (ballTarget != null) {
+            Destroy(ballTarget.gameObject);
+            targetDestroyedEvent.Raise();
         }
     }
+
+    public void ResetBall(/*Vector3 ballResetPos*/) {
+        // transform.position = ballResetPos;
+        DestroyBallTarget();
+        transform.position = origPos;
+        ballState = BallState.Held;
+    }
+
     private Vector3 origPos;
     private void Awake() {
         origPos = transform.position;
