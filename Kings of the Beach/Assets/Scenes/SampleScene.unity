@@ -971,7 +971,7 @@ Transform:
   m_GameObject: {fileID: 1704581607}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1161,9 +1161,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1302992652373046091, guid: 1f5a43912106afe4789ce7b072886be5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1f5a43912106afe4789ce7b072886be5, type: 3}
       propertyPath: m_Name
       value: playing surface
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549267885131808732, guid: 1f5a43912106afe4789ce7b072886be5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549267885131808732, guid: 1f5a43912106afe4789ce7b072886be5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1219,8 +1231,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.50000024, y: 0.5000007, z: 2.5000007}
-  m_Center: {x: 1.6543598e-23, y: -0.0000012516978, z: 1.2500002}
+  m_Size: {x: 0.5, y: 1.3, z: 2.5}
+  m_Center: {x: 0, y: 0.1, z: 1.2500002}
 --- !u!65 &1917600510
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1240,8 +1252,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.50000024, y: 0.5000007, z: 2.5000007}
-  m_Center: {x: 1.6543598e-23, y: -0.0000012516978, z: 1.2500002}
+  m_Size: {x: 0.5, y: 1.3, z: 2.5}
+  m_Center: {x: 0, y: -0.1, z: 1.25}
 --- !u!65 &1917600511
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1316,7 +1328,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

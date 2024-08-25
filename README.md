@@ -16,7 +16,7 @@ I would like to actually finish this game this time. That means starting with a 
 1. ~~Create Player Controller - Movement~~
 2. Create player model
 3. Create Player Controller - Bump
-4. Raycasts for collision detection to prevent movement
+4. ~~Raycasts for collision detection to prevent movement~~
 5. ~~Lock player in place to target~~
 6. Implement a State Machine to control movement/locking
 
@@ -37,3 +37,5 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### Cleanup
 - is it better to create a static TagHashes class instead of hard-coding tag strings?
+- magic numbers
+- debug: writing to console, gizmos like raycasts or boxes drawn
