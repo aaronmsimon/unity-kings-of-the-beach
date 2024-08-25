@@ -20,6 +20,11 @@ I would like to actually finish this game this time. That means starting with a 
 5. ~~Lock player in place to target~~
 6. Implement a State Machine to control movement/locking
 
+#### AI - Arcade
+1. AI Controller - Move towards target (while ball is active)
+2. AI Controller - Bump
+3. AI Controller - Aim logic
+
 #### Ball Mechanics
 1. ~~Move to Target with Bezier curve~~
 

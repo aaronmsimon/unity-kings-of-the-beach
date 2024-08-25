@@ -47,12 +47,17 @@ namespace KotB.Actors
             }
         }
 
+        private void OnTriggerEnter(Collider other) {
+            if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
+                ball.StopAllCoroutines();
+                ball.Bump(new Vector3(5,0,2), 12, 2);
+            }
+        }
+
         private void Move() {
             Vector3 moveDir = new Vector3(moveInput.x, 0f, moveInput.y);
 
             bool canMove = !Physics.Raycast(transform.position + Vector3.up * 0.5f, moveDir, out RaycastHit hit, 0.5f);
-            if (!canMove)
-                Debug.Log(hit.transform.name);
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, moveDir, Color.red);
             if (canMove) {
                 transform.position += moveDir * moveSpeed * Time.deltaTime;
