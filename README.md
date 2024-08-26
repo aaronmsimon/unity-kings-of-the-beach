@@ -15,7 +15,7 @@ I would like to actually finish this game this time. That means starting with a 
 #### Player - Arcade
 1. ~~Create Player Controller - Movement~~
 2. Create player model
-3. Create Player Controller - Bump
+3. ~~Create Player Controller - Bump~~
 4. ~~Raycasts for collision detection to prevent movement~~
 5. ~~Lock player in place to target~~
 6. Implement a State Machine to control movement/locking

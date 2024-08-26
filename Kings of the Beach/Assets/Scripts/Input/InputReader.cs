@@ -9,6 +9,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
 	public event UnityAction<Vector2> moveEvent;
 	public event UnityAction testEvent;
 	public event UnityAction testCanceledEvent;
+	public event UnityAction bumpEvent;
 
 	private GameInput gameInput;
 
@@ -34,6 +35,12 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
 		{
 			moveEvent.Invoke(context.ReadValue<Vector2>());
 		}
+	}
+
+	public void OnBump(InputAction.CallbackContext context)
+	{
+		if (context.phase == InputActionPhase.Performed)
+			bumpEvent.Invoke();
 	}
 
 	public void OnTest(InputAction.CallbackContext context)

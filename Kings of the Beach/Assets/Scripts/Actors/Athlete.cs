@@ -4,13 +4,19 @@ namespace KotB.Actors
 {
     public class Athlete : MonoBehaviour
     {
+        [Header("Player Controls")]
         [SerializeField] private float moveSpeed;
-        [SerializeField] private LayerMask targetLayer;
+        [SerializeField] private float coyoteTime;
 
+        [Header("Settings")]
+        [SerializeField] private LayerMask targetLayer;
         [SerializeField] private InputReader inputReader;
 
         private Vector2 moveInput;
         private AthleteState athleteState;
+        private bool canBump;
+        private Ball _ball;
+        private float bumpTimer;
 
         private enum AthleteState {
             Normal,
@@ -19,18 +25,22 @@ namespace KotB.Actors
 
         private void Start() {
             athleteState = AthleteState.Normal;
+            canBump = false;
+            bumpTimer = 0;
         }
 
         //Adds listeners for events being triggered in the InputReader script
         private void OnEnable()
         {
             inputReader.moveEvent += OnMove;
+            inputReader.bumpEvent += OnBump;
         }
         
         //Removes all listeners to the events coming from the InputReader script
         private void OnDisable()
         {
             inputReader.moveEvent -= OnMove;
+            inputReader.bumpEvent -= OnBump;
         }
 
         private void Update() {
@@ -40,6 +50,7 @@ namespace KotB.Actors
                     CheckForTarget();
                     break;
                 case AthleteState.Locked:
+                    Bump();
                     break;
                 default:
                     Debug.LogWarning("Athlete State unhandled.");
@@ -49,8 +60,14 @@ namespace KotB.Actors
 
         private void OnTriggerEnter(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
-                ball.StopAllCoroutines();
-                ball.Bump(new Vector3(5,0,2), 12, 2);
+                _ball = ball;
+                canBump = true;
+            }
+        }
+
+        private void OnTriggerExit(Collider other) {
+            if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
+                canBump = false;
             }
         }
 
@@ -73,11 +90,21 @@ namespace KotB.Actors
             }
         }
 
+        private void Bump() {
+            bumpTimer -= Time.deltaTime;
+            if (canBump && bumpTimer > 0 && _ball != null)
+                _ball.Bump(new Vector3(5,0,2), 12, 2);
+        }
+
         //---- EVENT LISTENERS ----
 
         private void OnMove(Vector2 movement)
         {
             moveInput = movement;
+        }
+
+        private void OnBump() {
+            bumpTimer = coyoteTime;
         }
 
         public void OnTargetDestroyed() {
