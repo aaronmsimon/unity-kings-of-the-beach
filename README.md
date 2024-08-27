@@ -18,12 +18,15 @@ I would like to actually finish this game this time. That means starting with a 
 3. ~~Create Player Controller - Bump~~
 4. ~~Raycasts for collision detection to prevent movement~~
 5. ~~Lock player in place to target~~
-6. Implement a State Machine to control movement/locking
+6. ~~Implement a State Machine to control movement/locking~~
+7. ~~Aiming Bump~~
+8. Don't move immediately after Bumping (from aiming)
 
 #### AI - Arcade
 1. AI Controller - Move towards target (while ball is active)
 2. AI Controller - Bump
 3. AI Controller - Aim logic
+4. AI Controller - Easing for following player
 
 #### Ball Mechanics
 1. ~~Move to Target with Bezier curve~~

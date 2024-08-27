@@ -1,3 +1,4 @@
+using KotB.Actors;
 using UnityEngine;
 
 public class Coach : MonoBehaviour
@@ -14,8 +15,9 @@ public class Coach : MonoBehaviour
     [Header("Game Input")]
     [SerializeField] private InputReader inputReader;
 
-    // [SerializeField] private float height;
-    // [SerializeField] private float duration;
+    [Header("temp")]
+    [SerializeField] private Athlete player;
+    [SerializeField] private float speed;
 
     private Bump bump;
 
@@ -33,6 +35,14 @@ public class Coach : MonoBehaviour
     private void OnDisable()
     {
         inputReader.testEvent -= OnBump;
+    }
+
+    private void Update() {
+        FollowPlayer();
+    }
+
+    private void FollowPlayer() {
+        transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Lerp(transform.position.z, player.transform.position.z, speed * Time.deltaTime));
     }
 
     //---- EVENT LISTENERS ----
