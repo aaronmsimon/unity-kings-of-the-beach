@@ -34,9 +34,17 @@ I would like to actually finish this game this time. That means starting with a 
 #### Assistants
 1. Coach - Bump
 
+#### Rules
+1. Same player can't hit ball twice in-a-row
+2. One side can only hit ball three times on side
+3. Point when ball hits ground (in/out depending on who last touched)
+
 #### Presentation
 1. Cinemachine
 2. Post Processing - Bloom
+3. Scoreboard
+
+#### Menus
 
 #### Concepts/Ideas
 - use right stick to reach for ball on dig

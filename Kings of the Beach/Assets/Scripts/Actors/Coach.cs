@@ -16,7 +16,7 @@ public class Coach : MonoBehaviour
     [SerializeField] private InputReader inputReader;
 
     [Header("temp")]
-    [SerializeField] private Athlete player;
+    [SerializeField] private Player player;
     [SerializeField] private float speed;
 
     private Bump bump;
