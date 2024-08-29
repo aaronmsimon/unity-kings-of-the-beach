@@ -1,12 +1,19 @@
 using UnityEngine;
-using System.Collections;
 using RoboRyanTron.Unite2017.Events;
+
+public enum BallState {
+    Held,
+    Bump,
+    OnGround
+}
 
 public class Ball : MonoBehaviour
 {
     [SerializeField] private Transform targetPrefab;
-    [SerializeField] GameEvent targetDestroyedEvent;
-    [SerializeField] GameEvent resetBallEvent;
+    [SerializeField] private GameEvent targetDestroyedEvent;
+    [SerializeField] private GameEvent resetBallEvent;
+    [SerializeField] private GameEvent targetSet;
+    [SerializeField] private BallSO ballSO;
 
     private Transform ballTarget;
     private BallState ballState;
@@ -14,12 +21,6 @@ public class Ball : MonoBehaviour
     private float ballDuration;
     private Vector3 startPos;
     private float time;
-
-    private enum BallState {
-        Held,
-        Bump,
-        OnGround
-    }
 
     private void Start() {
         ballState = BallState.Held;
@@ -39,6 +40,9 @@ public class Ball : MonoBehaviour
                 break;
         }
 
+        ballSO.Position = transform.position;
+        ballSO.ballState = ballState;
+
         /* temp */
         if (Input.GetKeyDown(KeyCode.Space)) {
             resetBallEvent.Raise();
@@ -50,6 +54,8 @@ public class Ball : MonoBehaviour
         time = 0f;
         DestroyBallTarget();
         ballTarget = Instantiate(targetPrefab, targetPos, Quaternion.identity);
+        ballSO.Target = targetPos;
+        targetSet.Raise();
         ballHeight = height;
         ballDuration = duration;
         ballState = BallState.Bump;

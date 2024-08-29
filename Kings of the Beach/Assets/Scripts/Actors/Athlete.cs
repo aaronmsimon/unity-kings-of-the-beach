@@ -5,7 +5,10 @@ namespace KotB.Actors
     public class Athlete : MonoBehaviour
     {
         [Header("Athlete Settings")]
-        [SerializeField] private float moveSpeed;
+        [SerializeField] protected float moveSpeed;
+
+        [Header("Ball")]
+        [SerializeField] protected BallSO ballSO;
 
         [Header("Settings")]
         [SerializeField] private LayerMask targetLayer;
@@ -29,7 +32,7 @@ namespace KotB.Actors
             bumpTimer = 0;
         }
 
-        private void Update() {
+        protected virtual void Update() {
             switch (athleteState) {
                 case AthleteState.Normal:
                     Move();

@@ -11,15 +11,21 @@ namespace KotB.Actors
 
         private float squareLength = 8;
 
-        private void Update() {
-            IsPointWithinMySide(new Vector2(0,0));
+        protected override void Update() {
+            base.Update(); 
+
+            if (ballSO == null) return;
+
+            Vector2 ballTarget = new Vector2(ballSO.Target.x, ballSO.Target.z);
+            if (ballSO.ballState == BallState.Bump && IsPointWithinMySide(ballTarget)) {
+                moveInput = ballTarget;
+            }
         }
 
         private bool IsPointWithinMySide(Vector2 point)
         {
-            Vector2 min = new Vector2(-8, 4);
-            Vector2 max = new Vector2(0, squareLength / 2 - squareLength * mySide);
-            Debug.Log(min + " " + max);
+            Vector2 min = new Vector2(-8, squareLength / 2 - squareLength * mySide);
+            Vector2 max = new Vector2(0, 4);
 
             // Check if the point's x is between minX and maxX
             bool withinX = point.x >= min.x && point.x <= max.x;
@@ -40,6 +46,11 @@ namespace KotB.Actors
                 Gizmos.color = mySideColor;
                 Gizmos.DrawCube(areaCenter, areaSize);
             }
+        }
+
+        //---- EVENT LISTENERS ----
+        public void OnTargetSet() {
+
         }
     }
 }
