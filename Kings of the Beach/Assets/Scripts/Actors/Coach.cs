@@ -11,6 +11,7 @@ public class Coach : MonoBehaviour
     [SerializeField] private Vector2 targetZonePos;
     [SerializeField] private float targetZoneSize;
     [SerializeField] private bool showTargetZone;
+    [SerializeField] private Color targetZoneColor;
 
     [Header("Game Input")]
     [SerializeField] private InputReader inputReader;
@@ -75,7 +76,7 @@ public class Coach : MonoBehaviour
             new Vector3(targetZonePos.x - targetZoneSize / 2, targetZoneHeight, targetZonePos.y + targetZoneSize / 2)
         };
 
-        Gizmos.color = Color.red;
+        Gizmos.color = targetZoneColor;
         if (showTargetZone)
             Gizmos.DrawLineList(points);
     }
