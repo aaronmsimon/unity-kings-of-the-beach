@@ -8,6 +8,8 @@ namespace KotB.Actors
         [SerializeField] private float coyoteTime;
         [SerializeField] private InputReader inputReader;
 
+        private Vector3 moveInput;
+
         //Adds listeners for events being triggered in the InputReader script
         private void OnEnable()
         {
@@ -54,6 +56,7 @@ namespace KotB.Actors
         private void OnMove(Vector2 movement)
         {
             moveInput = movement;
+            moveDir = new Vector3(movement.x, 0, movement.y);
         }
 
         private void OnBump() {

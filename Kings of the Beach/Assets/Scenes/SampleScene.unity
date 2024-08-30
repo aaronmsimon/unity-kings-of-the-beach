@@ -312,7 +312,8 @@ MonoBehaviour:
   targetPrefab: {fileID: 1498450459641571876, guid: cee38374b386f574f8399f26907a12be, type: 3}
   targetDestroyedEvent: {fileID: 11400000, guid: db5d0aeaee6ad0c4a94cc6ec7d3a6841, type: 2}
   resetBallEvent: {fileID: 11400000, guid: cdce984ebf142e04d8b85a25776cf011, type: 2}
-  targetSet: {fileID: 0}
+  targetSet: {fileID: 11400000, guid: 3311accdac754aa4cac2845a62a075de, type: 2}
+  ballSO: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
 --- !u!114 &526636205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -967,7 +968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1704581611
 Transform:
   m_ObjectHideFlags: 0
@@ -1075,6 +1076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  ballSO: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1509,7 +1511,6 @@ GameObject:
   - component: {fileID: 1976372853}
   - component: {fileID: 1976372852}
   - component: {fileID: 1976372851}
-  - component: {fileID: 1976372850}
   - component: {fileID: 1976372849}
   - component: {fileID: 1976372848}
   m_Layer: 0
@@ -1535,7 +1536,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1976372850}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: KotB.Actors.Athlete, Assembly-CSharp
         m_MethodName: OnTargetDestroyed
         m_Mode: 1
@@ -1560,30 +1561,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
+  ballSO: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
   mySide: 0.5
   showMySide: 1
   mySideColor: {r: 0.09979939, g: 0.8742227, b: 0.89218324, a: 0.5019608}
---- !u!114 &1976372850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1976372847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43a023c93079d9d4799082fd66a50f0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  coyoteTime: 0.5
-  inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
 --- !u!54 &1976372851
 Rigidbody:
   m_ObjectHideFlags: 0
