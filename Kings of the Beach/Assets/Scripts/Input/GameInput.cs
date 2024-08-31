@@ -53,6 +53,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BumpAcross"",
+                    ""type"": ""Button"",
+                    ""id"": ""301b1aa7-7b55-44d8-a099-3b54d7b57010"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -264,6 +273,39 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Bump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Controller"",
+                    ""id"": ""36b21559-b196-46c8-9b5d-78ca89278e00"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BumpAcross"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""8f778302-224e-4a42-8bdb-b7761a1b56af"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""BumpAcross"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""25eae36f-7336-4a83-9074-ba9fa1782ae5"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""BumpAcross"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -298,6 +340,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Test = m_Gameplay.FindAction("Test", throwIfNotFound: true);
         m_Gameplay_Bump = m_Gameplay.FindAction("Bump", throwIfNotFound: true);
+        m_Gameplay_BumpAcross = m_Gameplay.FindAction("BumpAcross", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -362,6 +405,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Test;
     private readonly InputAction m_Gameplay_Bump;
+    private readonly InputAction m_Gameplay_BumpAcross;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -369,6 +413,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @Test => m_Wrapper.m_Gameplay_Test;
         public InputAction @Bump => m_Wrapper.m_Gameplay_Bump;
+        public InputAction @BumpAcross => m_Wrapper.m_Gameplay_BumpAcross;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -387,6 +432,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Bump.started += instance.OnBump;
             @Bump.performed += instance.OnBump;
             @Bump.canceled += instance.OnBump;
+            @BumpAcross.started += instance.OnBumpAcross;
+            @BumpAcross.performed += instance.OnBumpAcross;
+            @BumpAcross.canceled += instance.OnBumpAcross;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -400,6 +448,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Bump.started -= instance.OnBump;
             @Bump.performed -= instance.OnBump;
             @Bump.canceled -= instance.OnBump;
+            @BumpAcross.started -= instance.OnBumpAcross;
+            @BumpAcross.performed -= instance.OnBumpAcross;
+            @BumpAcross.canceled -= instance.OnBumpAcross;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -440,5 +491,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnTest(InputAction.CallbackContext context);
         void OnBump(InputAction.CallbackContext context);
+        void OnBumpAcross(InputAction.CallbackContext context);
     }
 }

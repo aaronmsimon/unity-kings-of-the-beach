@@ -55,3 +55,4 @@ I would like to actually finish this game this time. That means starting with a 
 - is it better to create a static TagHashes class instead of hard-coding tag strings?
 - magic numbers
 - debug: writing to console, gizmos like raycasts or boxes drawn
+- bump/set vs pass/across

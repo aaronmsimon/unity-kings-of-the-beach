@@ -15,6 +15,7 @@ namespace KotB.Actors
         {
             inputReader.moveEvent += OnMove;
             inputReader.bumpEvent += OnBump;
+            inputReader.bumpAcrossEvent += OnBumpAcross;
         }
         
         //Removes all listeners to the events coming from the InputReader script
@@ -22,6 +23,7 @@ namespace KotB.Actors
         {
             inputReader.moveEvent -= OnMove;
             inputReader.bumpEvent -= OnBump;
+            inputReader.bumpAcrossEvent -= OnBumpAcross;
         }
         
         private Vector2 CircleMappedToSquare(float u, float v) {
@@ -60,6 +62,14 @@ namespace KotB.Actors
         }
 
         private void OnBump() {
+            bumpTimer = coyoteTime;
+
+            Vector2 aim = transform.position + moveInput * passRange;
+
+            bumpTarget = new Vector3(aim.x, 0f, aim.y);
+        }
+
+        private void OnBumpAcross() {
             bumpTimer = coyoteTime;
 
             Vector2 aim = CircleMappedToSquare(moveInput.x, moveInput.y);

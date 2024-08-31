@@ -6,6 +6,7 @@ namespace KotB.Actors
     {
         [Header("Athlete Settings")]
         [SerializeField] protected float moveSpeed;
+        [SerializeField] protected float passRange;
 
         [Header("Ball")]
         [SerializeField] protected BallSO ballSO;

@@ -10,6 +10,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
 	public event UnityAction testEvent;
 	public event UnityAction testCanceledEvent;
 	public event UnityAction bumpEvent;
+	public event UnityAction bumpAcrossEvent;
 
 	private GameInput gameInput;
 
@@ -41,6 +42,13 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
 	{
 		if (context.phase == InputActionPhase.Performed)
 			bumpEvent.Invoke();
+	}
+
+	public void OnBumpAcross(InputAction.CallbackContext context)
+	{
+		if (context.phase == InputActionPhase.Performed) {
+			bumpAcrossEvent.Invoke();
+		}
 	}
 
 	public void OnTest(InputAction.CallbackContext context)
