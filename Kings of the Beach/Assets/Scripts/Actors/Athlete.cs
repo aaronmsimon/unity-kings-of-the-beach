@@ -5,13 +5,13 @@ namespace KotB.Actors
     public abstract class Athlete : MonoBehaviour
     {
         [Header("Skills")]
-        [SerializeField] protected float moveSpeed;
+        [SerializeField] private float moveSpeed;
+        [SerializeField] private float targetLockDistance;
 
         [Header("Ball")]
         [SerializeField] protected BallSO ballSO;
 
         [Header("Settings")]
-        [SerializeField] private LayerMask targetLayer;
         [SerializeField] private LayerMask obstaclesLayer;
 
         private bool canBump;
@@ -37,7 +37,6 @@ namespace KotB.Actors
             switch (athleteState) {
                 case AthleteState.Normal:
                     Move();
-                    CheckForTarget();
                     break;
                 case AthleteState.Locked:
                     Bump();
@@ -62,19 +61,19 @@ namespace KotB.Actors
         }
 
         private void Move() {
+            if (ballSO.ballState == BallState.Bump) {
+                float distanceToTarget = Vector3.Distance(transform.position, ballSO.Target);
+                if (distanceToTarget <= targetLockDistance) {
+                    transform.position = ballSO.Target;
+                    athleteState = AthleteState.Locked;
+                    return;
+                }
+            }
+
             bool canMove = !Physics.Raycast(transform.position + Vector3.up * 0.5f, moveDir, out RaycastHit hit, 0.5f, obstaclesLayer);
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, moveDir, Color.red);
             if (canMove) {
                 transform.position += moveDir * moveSpeed * Time.deltaTime;
-            }
-        }
-
-        private void CheckForTarget() {
-            bool isOverTarget = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, out RaycastHit hitInfo, 1f, targetLayer);
-
-            if (isOverTarget) {
-                transform.position = hitInfo.transform.position;
-                athleteState = AthleteState.Locked;
             }
         }
 

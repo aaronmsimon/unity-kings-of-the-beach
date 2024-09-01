@@ -24,7 +24,7 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### AI - Arcade
 1. ~~AI Controller - Move towards target (while ball is active)~~
-2. AI Controller - Bump
+2. ~~AI Controller - Bump~~
 3. AI Controller - Aim logic
 4. AI Controller - State Machine
 5. Estimating out of bounds
@@ -61,6 +61,8 @@ I would like to actually finish this game this time. That means starting with a 
 - easing for ai following player
 - adjust code for considering which side of court player is on (tracking hits, aim, etc)
 - lots of testing code for Teammate that needs to be cleaned up
+- add ballSO property private fields
+- probably need to change ballstate.bump to inair/active/inplay/etc
 
 #### Concepts/Ideas
 - use right stick to reach for ball on dig

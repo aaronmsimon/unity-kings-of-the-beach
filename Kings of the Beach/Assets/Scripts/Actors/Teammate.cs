@@ -10,19 +10,18 @@ namespace KotB.Actors
         [SerializeField] private Color mySideColor;
 
         private float squareLength = 8;
-        private float stoppingDistance = 0.1f;
 
         protected override void Update() {
-            base.Update(); 
-
             if (ballSO == null) return;
 
             Vector2 ballTarget = new Vector2(ballSO.Target.x, ballSO.Target.z);
-            if (ballSO.ballState == BallState.Bump && IsPointWithinMySide(ballTarget) && Vector3.Distance(ballSO.Target, transform.position) > stoppingDistance) {
+            if (ballSO.ballState == BallState.Bump && IsPointWithinMySide(ballTarget)) {
                 moveDir = (ballSO.Target - transform.position).normalized;
             } else {
                 moveDir = Vector3.zero;
             }
+
+            base.Update(); 
         }
 
         protected override void OnTriggerEnter(Collider other) {
