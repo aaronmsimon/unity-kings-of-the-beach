@@ -25,6 +25,17 @@ namespace KotB.Actors
             }
         }
 
+        protected override void OnTriggerEnter(Collider other) {
+            base.OnTriggerEnter(other);
+            // probably need a slight delay
+            bumpTimer = 5; // any positive value to trigger the bump
+            // will need to create AI for passing or hitting to opponent's side
+            // for now, will be a pass on same side using similar logic to coach
+            float targetX = Random.Range(-8, 0);
+            float targetZ = Random.Range(-4, 4);
+            bumpTarget = new Vector3(targetX, 0f, targetZ);
+        }
+
         private bool IsPointWithinMySide(Vector2 point)
         {
             Vector2 min = new Vector2(-8, squareLength / 2 - squareLength * mySide);
@@ -54,6 +65,11 @@ namespace KotB.Actors
         //---- EVENT LISTENERS ----
         public void OnTargetSet() {
 
+        }
+
+        // if this is to be kept, will need to add to Athlete instead of Player
+        public void OnTargetDestroyed() {
+            athleteState = AthleteState.Normal;
         }
     }
 }

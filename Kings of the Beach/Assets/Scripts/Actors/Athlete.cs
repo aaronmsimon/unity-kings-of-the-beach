@@ -4,7 +4,7 @@ namespace KotB.Actors
 {
     public abstract class Athlete : MonoBehaviour
     {
-        [Header("Athlete Settings")]
+        [Header("Skills")]
         [SerializeField] protected float moveSpeed;
 
         [Header("Ball")]
@@ -48,7 +48,7 @@ namespace KotB.Actors
             }
         }
 
-        private void OnTriggerEnter(Collider other) {
+        protected virtual void OnTriggerEnter(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 _ball = ball;
                 canBump = true;

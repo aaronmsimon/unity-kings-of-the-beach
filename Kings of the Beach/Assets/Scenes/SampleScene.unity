@@ -1076,7 +1076,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  passRange: 5
   ballSO: {fileID: 0}
   targetLayer:
     serializedVersion: 2
@@ -1577,7 +1576,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  passRange: 0
   ballSO: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
   targetLayer:
     serializedVersion: 2

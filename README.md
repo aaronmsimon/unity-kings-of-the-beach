@@ -23,10 +23,19 @@ I would like to actually finish this game this time. That means starting with a 
 8. Don't move immediately after Bumping (from aiming)
 
 #### AI - Arcade
-1. AI Controller - Move towards target (while ball is active)
+1. ~~AI Controller - Move towards target (while ball is active)~~
 2. AI Controller - Bump
 3. AI Controller - Aim logic
-4. AI Controller - Easing for following player
+4. AI Controller - State Machine
+5. Estimating out of bounds
+
+#### Gameplay
+1. Randomness in aim
+
+#### Skills
+1. ~~Speed~~
+2. Pass Accuracy (affects aim)
+3. Dig (more important with speed of ball)
 
 #### Ball Mechanics
 1. ~~Move to Target with Bezier curve~~
@@ -46,10 +55,20 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### Menus
 
+#### Basic Updates to do (dynamic list)
+- Target Layer Mask just for Player
+- Refactor athlete to true player
+- easing for ai following player
+- adjust code for considering which side of court player is on (tracking hits, aim, etc)
+- lots of testing code for Teammate that needs to be cleaned up
+
 #### Concepts/Ideas
 - use right stick to reach for ball on dig
 - amount of power, direction, depends on angle of ball, how quickly can get under it, etc
+- is amount of power based on how long button is held?
 - block calls
+- confidence, high five/hug after every point and hold hands when changing sides
+- NEW interaction concept!!  hold for dig, press & release for directed pass/shot
 
 #### Cleanup
 - is it better to create a static TagHashes class instead of hard-coding tag strings?
