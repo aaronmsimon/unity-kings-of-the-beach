@@ -53,6 +53,16 @@ namespace KotB.Actors
             return new Vector2(x, y);
         }
 
+        private void Bump(bool pass) {
+            bumpTimer = coyoteTime;
+
+            Vector2 aim = CircleMappedToSquare(moveInput.x, moveInput.y);
+
+            float targetX = aim.x * 5 + 4 * (pass ? -1 : 1);
+            float targetZ = aim.y * 5;
+            bumpTarget = new Vector3(targetX, 0f, targetZ);
+        }
+
         //---- EVENT LISTENERS ----
 
         private void OnMove(Vector2 movement)
@@ -62,21 +72,11 @@ namespace KotB.Actors
         }
 
         private void OnBump() {
-            bumpTimer = coyoteTime;
-
-            Vector2 aim = transform.position + moveInput * passRange;
-
-            bumpTarget = new Vector3(aim.x, 0f, aim.y);
+            Bump(true);
         }
 
         private void OnBumpAcross() {
-            bumpTimer = coyoteTime;
-
-            Vector2 aim = CircleMappedToSquare(moveInput.x, moveInput.y);
-
-            float targetX = aim.x * 5 + 4;
-            float targetZ = aim.y * 5;
-            bumpTarget = new Vector3(targetX, 0f, targetZ);
+            Bump(false);
         }
 
         public void OnTargetDestroyed() {

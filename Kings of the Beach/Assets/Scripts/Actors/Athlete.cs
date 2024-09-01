@@ -2,11 +2,10 @@ using UnityEngine;
 
 namespace KotB.Actors
 {
-    public class Athlete : MonoBehaviour
+    public abstract class Athlete : MonoBehaviour
     {
         [Header("Athlete Settings")]
         [SerializeField] protected float moveSpeed;
-        [SerializeField] protected float passRange;
 
         [Header("Ball")]
         [SerializeField] protected BallSO ballSO;
