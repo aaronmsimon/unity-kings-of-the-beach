@@ -20,7 +20,7 @@ I would like to actually finish this game this time. That means starting with a 
 5. ~~Lock player in place to target~~
 6. ~~Implement a State Machine to control movement/locking~~
 7. ~~Aiming Bump~~
-8. Don't move immediately after Bumping (from aiming)
+8. ~~Don't move immediately after Bumping (from aiming)~~
 
 #### AI - Arcade
 1. ~~AI Controller - Move towards target (while ball is active)~~
@@ -63,6 +63,8 @@ I would like to actually finish this game this time. That means starting with a 
 - lots of testing code for Teammate that needs to be cleaned up
 - add ballSO property private fields
 - probably need to change ballstate.bump to inair/active/inplay/etc
+- make skills a scriptable object for all different players
+- is TargetDestroyedEvent still needed?
 
 #### Concepts/Ideas
 - use right stick to reach for ball on dig

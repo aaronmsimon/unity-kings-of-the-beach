@@ -78,9 +78,5 @@ namespace KotB.Actors
         private void OnBumpAcross() {
             Bump(false);
         }
-
-        public void OnTargetDestroyed() {
-            athleteState = AthleteState.Normal;
-        }
     }
 }

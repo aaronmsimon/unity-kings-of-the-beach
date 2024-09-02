@@ -309,11 +309,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d99be560782834ca52d9f0e6f111f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballSO: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
   targetPrefab: {fileID: 1498450459641571876, guid: cee38374b386f574f8399f26907a12be, type: 3}
-  targetDestroyedEvent: {fileID: 11400000, guid: db5d0aeaee6ad0c4a94cc6ec7d3a6841, type: 2}
   resetBallEvent: {fileID: 11400000, guid: cdce984ebf142e04d8b85a25776cf011, type: 2}
   targetSet: {fileID: 11400000, guid: 3311accdac754aa4cac2845a62a075de, type: 2}
-  ballSO: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
+  ballHitGroundEvent: {fileID: 11400000, guid: 8fc138420100eab479f8562b3551909f, type: 2}
 --- !u!114 &526636205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -997,13 +997,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: db5d0aeaee6ad0c4a94cc6ec7d3a6841, type: 2}
+  Event: {fileID: 11400000, guid: 8fc138420100eab479f8562b3551909f, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1704581616}
         m_TargetAssemblyTypeName: KotB.Actors.Athlete, Assembly-CSharp
-        m_MethodName: OnTargetDestroyed
+        m_MethodName: OnBallHitGround
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1532,7 +1532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1976372848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1551,7 +1551,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1976372849}
         m_TargetAssemblyTypeName: KotB.Actors.Athlete, Assembly-CSharp
-        m_MethodName: OnTargetDestroyed
+        m_MethodName: OnBallHitGround
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

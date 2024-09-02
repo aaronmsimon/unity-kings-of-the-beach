@@ -9,11 +9,16 @@ public enum BallState {
 
 public class Ball : MonoBehaviour
 {
+    [SerializeField] private BallSO ballSO;
+    [Space(10)]
+
     [SerializeField] private Transform targetPrefab;
-    [SerializeField] private GameEvent targetDestroyedEvent;
+    
+    [Header("Game Events")]
+    // [SerializeField] private GameEvent targetDestroyedEvent;
     [SerializeField] private GameEvent resetBallEvent;
     [SerializeField] private GameEvent targetSet;
-    [SerializeField] private BallSO ballSO;
+    [SerializeField] private GameEvent ballHitGroundEvent;
 
     private Transform ballTarget;
     private BallState ballState;
@@ -73,6 +78,7 @@ public class Ball : MonoBehaviour
             transform.position = CalculateQuadraticBezierPoint(t, startPos, apex, targetPos);
         } else {
             ballState = BallState.OnGround;
+            ballHitGroundEvent.Raise();
             DestroyBallTarget();
         }
     }
@@ -92,7 +98,7 @@ public class Ball : MonoBehaviour
     private void DestroyBallTarget() {
         if (ballTarget != null) {
             Destroy(ballTarget.gameObject);
-            targetDestroyedEvent.Raise();
+            // targetDestroyedEvent.Raise();
         }
     }
 

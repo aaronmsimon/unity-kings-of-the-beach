@@ -65,10 +65,5 @@ namespace KotB.Actors
         public void OnTargetSet() {
 
         }
-
-        // if this is to be kept, will need to add to Athlete instead of Player
-        public void OnTargetDestroyed() {
-            athleteState = AthleteState.Normal;
-        }
     }
 }
