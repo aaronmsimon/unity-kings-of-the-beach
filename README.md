@@ -39,6 +39,9 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### Ball Mechanics
 1. ~~Move to Target with Bezier curve~~
+2. Ball Fields and Properties
+3. Ball Events triggered when Property Set
+4. Ball State Machine (probably need to change ballstate.bump to inair/active/inplay/etc)
 
 #### Assistants
 1. Coach - Bump
@@ -56,13 +59,10 @@ I would like to actually finish this game this time. That means starting with a 
 #### Menus
 
 #### Basic Updates to do (dynamic list)
-- Target Layer Mask just for Player
-- Refactor athlete to true player
+- Refactor athlete: move anything only for the player to that class
 - easing for ai following player
 - adjust code for considering which side of court player is on (tracking hits, aim, etc)
 - lots of testing code for Teammate that needs to be cleaned up
-- add ballSO property private fields
-- probably need to change ballstate.bump to inair/active/inplay/etc
 - make skills a scriptable object for all different players
 - is TargetDestroyedEvent still needed?
 
