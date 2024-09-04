@@ -28,6 +28,7 @@ I would like to actually finish this game this time. That means starting with a 
 3. AI Controller - Aim logic
 4. AI Controller - State Machine
 5. Estimating out of bounds
+6. Positioning for block
 
 #### Gameplay
 1. Randomness in aim
@@ -59,12 +60,8 @@ I would like to actually finish this game this time. That means starting with a 
 #### Menus
 
 #### Basic Updates to do (dynamic list)
-- Refactor athlete: move anything only for the player to that class
-- easing for ai following player
+- Refactor athlete: move anything only for the player to that class - athletestate should be playerstate, teammatestate
 - adjust code for considering which side of court player is on (tracking hits, aim, etc)
-- lots of testing code for Teammate that needs to be cleaned up
-- make skills a scriptable object for all different players
-- is TargetDestroyedEvent still needed?
 
 #### Concepts/Ideas
 - use right stick to reach for ball on dig
@@ -73,9 +70,12 @@ I would like to actually finish this game this time. That means starting with a 
 - block calls
 - confidence, high five/hug after every point and hold hands when changing sides
 - NEW interaction concept!!  hold for dig, press & release for directed pass/shot
+- Replays
+- Argue calls
 
 #### Cleanup
 - is it better to create a static TagHashes class instead of hard-coding tag strings?
 - magic numbers
 - debug: writing to console, gizmos like raycasts or boxes drawn
 - bump/set vs pass/across
+- ball reset is temp

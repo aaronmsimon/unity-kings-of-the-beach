@@ -15,7 +15,6 @@ public class Ball : MonoBehaviour
     [SerializeField] private Transform targetPrefab;
     
     [Header("Game Events")]
-    // [SerializeField] private GameEvent targetDestroyedEvent;
     [SerializeField] private GameEvent resetBallEvent;
     [SerializeField] private GameEvent targetSet;
     [SerializeField] private GameEvent ballHitGroundEvent;
@@ -98,7 +97,6 @@ public class Ball : MonoBehaviour
     private void DestroyBallTarget() {
         if (ballTarget != null) {
             Destroy(ballTarget.gameObject);
-            // targetDestroyedEvent.Raise();
         }
     }
 

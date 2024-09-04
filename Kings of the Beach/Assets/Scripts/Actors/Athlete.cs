@@ -5,8 +5,7 @@ namespace KotB.Actors
     public abstract class Athlete : MonoBehaviour
     {
         [Header("Skills")]
-        [SerializeField] private float moveSpeed;
-        [SerializeField] private float targetLockDistance;
+        [SerializeField] private SkillsSO skills;
 
         [Header("Ball")]
         [SerializeField] protected BallSO ballSO;
@@ -67,7 +66,7 @@ namespace KotB.Actors
         private void Move() {
             if (ballSO.ballState == BallState.Bump) {
                 float distanceToTarget = Vector3.Distance(transform.position, ballSO.Target);
-                if (distanceToTarget <= targetLockDistance) {
+                if (distanceToTarget <= skills.TargetLockDistance) {
                     transform.position = ballSO.Target;
                     athleteState = AthleteState.Locked;
                     canUnlock = false;
@@ -78,7 +77,7 @@ namespace KotB.Actors
             bool canMove = !Physics.Raycast(transform.position + Vector3.up * 0.5f, moveDir, out RaycastHit hit, 0.5f, obstaclesLayer);
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, moveDir, Color.red);
             if (canMove) {
-                transform.position += moveDir * moveSpeed * Time.deltaTime;
+                transform.position += moveDir * skills.MoveSpeed * Time.deltaTime;
             }
         }
 

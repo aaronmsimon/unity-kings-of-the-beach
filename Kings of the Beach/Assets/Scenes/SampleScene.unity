@@ -1075,8 +1075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a023c93079d9d4799082fd66a50f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  targetLockDistance: 0.5
+  skills: {fileID: 11400000, guid: 819c6d31029030d45906e8d16ffbe3e5, type: 2}
   ballSO: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
   obstaclesLayer:
     serializedVersion: 2
@@ -1573,8 +1572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14e6fb03f9f1aea49b2a2f830b2cc6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
-  targetLockDistance: 0.1
+  skills: {fileID: 11400000, guid: ce57c4a0d93678e49bcbafcce5245da3, type: 2}
   ballSO: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
   obstaclesLayer:
     serializedVersion: 2
