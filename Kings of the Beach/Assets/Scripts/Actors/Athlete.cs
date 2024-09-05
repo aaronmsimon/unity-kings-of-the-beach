@@ -64,7 +64,7 @@ namespace KotB.Actors
         }
 
         private void Move() {
-            if (ballSO.ballState == BallState.Bump) {
+            if (ballSO.ballState == BallState.Bump && ballSO.lastPlayerToHit != this) {
                 float distanceToTarget = Vector3.Distance(transform.position, ballSO.Target);
                 if (distanceToTarget <= skills.TargetLockDistance) {
                     transform.position = ballSO.Target;
@@ -87,6 +87,10 @@ namespace KotB.Actors
                 _ball.Bump(bumpTarget, 12, 2);
                 canUnlock = true;
                 unlockTimer = unlockDelay;
+                canBump = false;
+                ballSO.HitsForTeam += 1;
+                Debug.Log("Hits: " + ballSO.HitsForTeam);
+                ballSO.lastPlayerToHit = this;
             }
         }
 

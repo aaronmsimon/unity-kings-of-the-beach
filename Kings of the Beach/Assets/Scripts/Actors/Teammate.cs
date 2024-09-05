@@ -15,7 +15,7 @@ namespace KotB.Actors
             if (ballSO == null) return;
 
             Vector2 ballTarget = new Vector2(ballSO.Target.x, ballSO.Target.z);
-            if (ballSO.ballState == BallState.Bump && IsPointWithinMySide(ballTarget)) {
+            if (ballSO.ballState == BallState.Bump && IsPointWithinMySide(ballTarget) && ballSO.lastPlayerToHit != this) {
                 moveDir = (ballSO.Target - transform.position).normalized;
             } else {
                 moveDir = Vector3.zero;

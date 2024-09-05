@@ -29,6 +29,7 @@ I would like to actually finish this game this time. That means starting with a 
 4. AI Controller - State Machine
 5. Estimating out of bounds
 6. Positioning for block
+7. Pass towards teammate
 
 #### Gameplay
 1. Randomness in aim
@@ -48,7 +49,7 @@ I would like to actually finish this game this time. That means starting with a 
 1. Coach - Bump
 
 #### Rules
-1. Same player can't hit ball twice in-a-row
+1. ~~Same player can't hit ball twice in-a-row~~
 2. One side can only hit ball three times on side
 3. Point when ball hits ground (in/out depending on who last touched)
 
@@ -62,6 +63,7 @@ I would like to actually finish this game this time. That means starting with a 
 #### Basic Updates to do (dynamic list)
 - Refactor athlete: move anything only for the player to that class - athletestate should be playerstate, teammatestate
 - adjust code for considering which side of court player is on (tracking hits, aim, etc)
+- Refactor Athlete Update() - new additions for checking ball touch, etc should be separate function for switching sides
 
 #### Concepts/Ideas
 - use right stick to reach for ball on dig
