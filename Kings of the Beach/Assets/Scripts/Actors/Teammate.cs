@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace KotB.Actors
@@ -15,10 +16,19 @@ namespace KotB.Actors
             if (ballSO == null) return;
 
             Vector2 ballTarget = new Vector2(ballSO.Target.x, ballSO.Target.z);
-            if (ballSO.ballState == BallState.Bump && IsPointWithinMySide(ballTarget) && ballSO.lastPlayerToHit != this) {
-                moveDir = (ballSO.Target - transform.position).normalized;
-            } else {
-                moveDir = Vector3.zero;
+
+            // Serve: only receive if in zone
+            if (ballSO.ballState == BallState.Bump && IsPointOnTeamSide(ballTarget)) {
+                if (ballSO.HitsForTeam == 0 && IsPointWithinMySide(ballTarget)) {
+                    moveDir = (ballSO.Target - transform.position).normalized;
+                }
+                // Any other hit: will hit if it's their turn
+                else if(ballSO.lastPlayerToHit != this) {
+                    moveDir = (ballSO.Target - transform.position).normalized;
+                }
+                else {
+                    moveDir = Vector3.zero;
+                }
             }
 
             base.Update(); 
@@ -27,7 +37,12 @@ namespace KotB.Actors
         protected override void OnTriggerEnter(Collider other) {
             base.OnTriggerEnter(other);
             bumpTimer = 5; // any positive value to trigger the bump
-            float targetX = Random.Range(-8, 0);
+            float targetX;
+            if (ballSO.HitsForTeam < 2) {
+                targetX = Random.Range(-8, 0);
+            } else {
+                targetX = Random.Range(0, 8);
+            }
             float targetZ = Random.Range(-4, 4);
             bumpTarget = new Vector3(targetX, 0f, targetZ);
         }
@@ -45,6 +60,10 @@ namespace KotB.Actors
 
             // Return true if both x and y are within bounds
             return withinX && withinY;
+        }
+
+        private bool IsPointOnTeamSide(Vector2 point) {
+            return point.x < 0;
         }
 
         private void OnDrawGizmos() {

@@ -11,16 +11,10 @@ public class SkillsSO : ScriptableObject
         get {
             return moveSpeed;
         }
-        set {
-            moveSpeed = value;
-        }
     }
     public float TargetLockDistance {
         get {
             return targetLockDistance;
-        }
-        set {
-            targetLockDistance = value;
         }
     }
 }
