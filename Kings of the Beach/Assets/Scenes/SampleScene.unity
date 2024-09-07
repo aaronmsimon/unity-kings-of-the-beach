@@ -1580,6 +1580,7 @@ MonoBehaviour:
   mySide: 0.5
   showMySide: 1
   mySideColor: {r: 0.09979939, g: 0.8742227, b: 0.89218324, a: 0.5019608}
+  teammateSO: {fileID: 11400000, guid: 819c6d31029030d45906e8d16ffbe3e5, type: 2}
 --- !u!54 &1976372851
 Rigidbody:
   m_ObjectHideFlags: 0
