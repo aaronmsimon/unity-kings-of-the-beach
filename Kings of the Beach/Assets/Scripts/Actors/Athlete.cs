@@ -5,7 +5,7 @@ namespace KotB.Actors
     public abstract class Athlete : MonoBehaviour
     {
         [Header("Skills")]
-        [SerializeField] private SkillsSO skills;
+        [SerializeField] protected SkillsSO skills;
 
         [Header("Ball")]
         [SerializeField] protected BallSO ballSO;
@@ -79,6 +79,8 @@ namespace KotB.Actors
             if (canMove) {
                 transform.position += moveDir * skills.MoveSpeed * Time.deltaTime;
             }
+
+            skills.Position = transform.position;
         }
 
         private void Bump() {

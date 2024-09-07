@@ -29,7 +29,7 @@ I would like to actually finish this game this time. That means starting with a 
 4. AI Controller - State Machine
 5. Estimating out of bounds
 6. Positioning for block
-7. Pass towards teammate
+7. ~~Pass towards teammate~~
 
 #### Gameplay
 1. Randomness in aim
@@ -64,7 +64,7 @@ I would like to actually finish this game this time. That means starting with a 
 - Refactor athlete: move anything only for the player to that class - athletestate should be playerstate, teammatestate
 - adjust code for considering which side of court player is on (tracking hits, aim, etc)
 - Refactor Athlete Update() - new additions for checking ball touch, etc should be separate function for switching sides
-- NEXT: refactor State Machines to proper ones - not the enum style
+- Teammate becomes AI with proper state machines
 
 #### Concepts/Ideas
 - use right stick to reach for ball on dig
