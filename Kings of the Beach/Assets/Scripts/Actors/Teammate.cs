@@ -1,9 +1,17 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace KotB.Actors
 {
     public class Teammate : Athlete
     {
+        private enum AIState {
+            ReceiveServe,
+            Offense,
+            NetDefense,
+            Defend
+        }
+
         [Header("Behavior")]
         [SerializeField][Range(0,1)] private float mySide = 0.5f;
         [SerializeField] private bool showMySide;
@@ -16,24 +24,36 @@ namespace KotB.Actors
         private float squareLength = 8;
         private float passRangeMin = 0.8f;
         private float passRangeMax = 2.5f;
+        private AIState state;
+
+        private void Start() {
+            state = AIState.ReceiveServe;
+        }
 
         protected override void Update() {
             if (ballSO == null) return;
 
             Vector2 ballTarget = new Vector2(ballSO.Target.x, ballSO.Target.z);
+            moveDir = Vector3.zero;
 
-            // Serve: only receive if in zone
-            if (ballSO.ballState == BallState.Bump && IsPointOnTeamSide(ballTarget)) {
-                if (ballSO.HitsForTeam == 0 && IsPointWithinMySide(ballTarget)) {
-                    moveDir = (ballSO.Target - transform.position).normalized;
-                }
-                // Any other hit: will hit if it's their turn
-                else if(ballSO.lastPlayerToHit != this && ballSO.lastPlayerToHit != null) {
-                    moveDir = (ballSO.Target - transform.position).normalized;
-                }
-                else {
-                    moveDir = Vector3.zero;
-                }
+            switch (state) {
+                case AIState.ReceiveServe:
+                    if (ballSO.ballState == BallState.Bump && IsPointWithinMySide(ballTarget)) {
+                        moveDir = (ballSO.Target - transform.position).normalized;
+                    }
+                    break;
+                case AIState.Offense:
+                    if (ballSO.lastPlayerToHit != this && ballSO.lastPlayerToHit != null) {
+                        moveDir = (ballSO.Target - transform.position).normalized;
+                    }
+                    break;
+                case AIState.NetDefense:
+                    break;
+                case AIState.Defend:
+                    break;
+                default:
+                    Debug.LogError("AI State not handled.");
+                    break;
             }
 
             base.Update(); 
