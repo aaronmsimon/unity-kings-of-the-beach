@@ -1577,7 +1577,9 @@ MonoBehaviour:
   obstaclesLayer:
     serializedVersion: 2
     m_Bits: 64
-  mySide: 0.5
+  mySidePct: 0.5
+  myZoneFront: 1.5
+  myZoneBack: 2
   showMySide: 1
   mySideColor: {r: 0.09979939, g: 0.8742227, b: 0.89218324, a: 0.5019608}
   teammateSO: {fileID: 11400000, guid: 819c6d31029030d45906e8d16ffbe3e5, type: 2}

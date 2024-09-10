@@ -13,18 +13,21 @@ namespace KotB.Actors
         }
 
         [Header("Behavior")]
-        [SerializeField][Range(0,1)] private float mySide = 0.5f;
+        [SerializeField][Range(0,1)] private float mySidePct = 0.5f;
+        [SerializeField] private float myZoneFront = 1.5f;
+        [SerializeField] private float myZoneBack = 2f;
         [SerializeField] private bool showMySide;
         [SerializeField] private Color mySideColor;
 
         [Header("Teammate")]
         [SerializeField] private SkillsSO teammateSO;
 
-        private int teamSide = -1;
-        private float squareLength = 8;
+        private float courtSideLength = 8;
         private float passRangeMin = 0.8f;
         private float passRangeMax = 2.5f;
         private AIState state;
+        private Vector2 myZoneTopLeft;
+        private Vector2 myZoneBotRight;
 
         private void Start() {
             state = AIState.ReceiveServe;
@@ -41,6 +44,7 @@ namespace KotB.Actors
                     if (ballSO.ballState == BallState.Bump && IsPointWithinMySide(ballTarget)) {
                         moveDir = (ballSO.Target - transform.position).normalized;
                     }
+                    UpdateMyZone();
                     break;
                 case AIState.Offense:
                     if (ballSO.lastPlayerToHit != this && ballSO.lastPlayerToHit != null) {
@@ -48,8 +52,10 @@ namespace KotB.Actors
                     }
                     break;
                 case AIState.NetDefense:
+                    UpdateMyZone();
                     break;
                 case AIState.Defend:
+                    UpdateMyZone();
                     break;
                 default:
                     Debug.LogError("AI State not handled.");
@@ -73,23 +79,34 @@ namespace KotB.Actors
             }
         }
 
+        private void UpdateMyZone() {
+            // Check if at front of court
+            if (transform.position.x > -myZoneFront) {
+                myZoneTopLeft = new Vector2(-myZoneFront, courtSideLength / 2);
+                myZoneBotRight = new Vector2(0, -courtSideLength / 2);
+            }
+            // Check if at back of court
+            else if (transform.position.x < -courtSideLength + myZoneBack) {
+                myZoneTopLeft = new Vector2(-courtSideLength, courtSideLength / 2);
+                myZoneBotRight = new Vector2(-courtSideLength + myZoneBack, -courtSideLength / 2);
+            }
+            // If not near front nor back, then take half
+            else {
+                myZoneTopLeft = new Vector2(-courtSideLength, courtSideLength / 2);
+                myZoneBotRight = new Vector2(0, (courtSideLength / 2) - (courtSideLength * mySidePct));
+            }
+        }
+
         private bool IsPointWithinMySide(Vector2 point)
         {
-            Vector2 min = new Vector2(-8, squareLength / 2 - squareLength * mySide);
-            Vector2 max = new Vector2(0, 4);
-
             // Check if the point's x is between minX and maxX
-            bool withinX = point.x >= min.x && point.x <= max.x;
+            bool withinX = point.x >= myZoneTopLeft.x && point.x <= myZoneBotRight.x;
 
             // Check if the point's y is between minY and maxY
-            bool withinY = point.y >= min.y && point.y <= max.y;
+            bool withinY = point.y >= myZoneBotRight.y && point.y <= myZoneTopLeft.y;
 
             // Return true if both x and y are within bounds
             return withinX && withinY;
-        }
-
-        private bool IsPointOnTeamSide(Vector2 point) {
-            return (point.x < 0 && teamSide < 0) || (point.x > 0 && teamSide > 0);
         }
 
         private Vector2 AdjustVectorAccuracy(Vector2 vector, float accuracy)
@@ -106,7 +123,6 @@ namespace KotB.Actors
             // Generate a random magnitude based on the deviation
             // float randomMagnitude = Random.Range(0f, deviation);
             float randomMagnitude = Random.Range(0, (passRangeMax - passRangeMin) * deviation) + passRangeMin;
-            Debug.Log(randomMagnitude);
 
             // Calculate the random offset
             Vector2 randomOffset = randomDirection * randomMagnitude;
@@ -117,9 +133,9 @@ namespace KotB.Actors
 
         private void OnDrawGizmos() {
             if (showMySide) {
-                Vector2 mySideArea = new Vector2(squareLength, squareLength * mySide);
-                Vector3 areaCenter = new Vector3(-mySideArea.x / 2, 0, squareLength / 2 - mySideArea.y / 2);
-                Vector3 areaSize = new Vector3(mySideArea.x, 0.1f, mySideArea.y);
+                UpdateMyZone();
+                Vector3 areaCenter = new Vector3((myZoneTopLeft.x + myZoneBotRight.x) / 2, 0f, (myZoneTopLeft.y + myZoneBotRight.y) / 2);
+                Vector3 areaSize = new Vector3(myZoneBotRight.x - myZoneTopLeft.x, 0.1f, myZoneTopLeft.y - myZoneBotRight.y);
 
                 Gizmos.color = mySideColor;
                 Gizmos.DrawCube(areaCenter, areaSize);
