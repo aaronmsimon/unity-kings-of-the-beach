@@ -11,6 +11,7 @@ namespace KotB.Actors
         [SerializeField] protected BallSO ballSO;
 
         [Header("Settings")]
+        [SerializeField] protected int courtSide;
         [SerializeField] private LayerMask obstaclesLayer;
 
         private bool canBump;
@@ -103,6 +104,14 @@ namespace KotB.Actors
                     athleteState = AthleteState.Normal;
                 }
             }
+        }
+
+        private void SetCourtSide(int courtSide) {
+            this.courtSide = courtSide;
+        }
+
+        private void SwitchCourtSide() {
+            courtSide *= -1;
         }
 
         //---- EVENT LISTENERS ----

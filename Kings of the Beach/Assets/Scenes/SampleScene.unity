@@ -1077,6 +1077,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skills: {fileID: 11400000, guid: 819c6d31029030d45906e8d16ffbe3e5, type: 2}
   ballSO: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
+  courtSide: 0
   obstaclesLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1574,6 +1575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skills: {fileID: 11400000, guid: ce57c4a0d93678e49bcbafcce5245da3, type: 2}
   ballSO: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
+  courtSide: -1
   obstaclesLayer:
     serializedVersion: 2
     m_Bits: 64

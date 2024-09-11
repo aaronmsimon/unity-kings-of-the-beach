@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace KotB.Actors
@@ -80,20 +79,28 @@ namespace KotB.Actors
         }
 
         private void UpdateMyZone() {
-            // Check if at front of court
-            if (transform.position.x > -myZoneFront) {
-                myZoneTopLeft = new Vector2(-myZoneFront, courtSideLength / 2);
-                myZoneBotRight = new Vector2(0, -courtSideLength / 2);
-            }
-            // Check if at back of court
-            else if (transform.position.x < -courtSideLength + myZoneBack) {
-                myZoneTopLeft = new Vector2(-courtSideLength, courtSideLength / 2);
-                myZoneBotRight = new Vector2(-courtSideLength + myZoneBack, -courtSideLength / 2);
-            }
-            // If not near front nor back, then take half
-            else {
-                myZoneTopLeft = new Vector2(-courtSideLength, courtSideLength / 2);
-                myZoneBotRight = new Vector2(0, (courtSideLength / 2) - (courtSideLength * mySidePct));
+            // If on the correct side
+            if (Mathf.Sign(transform.position.x) == courtSide) {
+                // Check if at front of court
+                if (Mathf.Abs(transform.position.x) <= myZoneFront) {
+                    myZoneTopLeft = new Vector2(courtSide * (myZoneFront / 2) + (myZoneFront / -2), courtSideLength / 2);
+                    myZoneBotRight = new Vector2(courtSide * (myZoneFront / 2) + (myZoneFront / 2), -courtSideLength / 2);
+                }
+                // Check if at back of court
+                else if (Mathf.Abs(transform.position.x) >= courtSideLength - myZoneBack) {
+                    myZoneTopLeft = new Vector2(courtSide * (courtSideLength + myZoneBack / -2) + (myZoneBack / -2), courtSideLength / 2);
+                    myZoneBotRight = new Vector2(courtSide * (courtSideLength + myZoneBack / -2) + (myZoneBack / 2), -courtSideLength / 2);
+                }
+                // If not near front nor back, then take half based on which half they're on
+                else {
+                        float startYpos = transform.position.z > 0 ? courtSideLength / 2 : 0;
+                        float halfCourtSideLength = courtSideLength / 2;
+                        myZoneTopLeft = new Vector2(courtSide * halfCourtSideLength - halfCourtSideLength, startYpos);
+                        myZoneBotRight = new Vector2(courtSide * halfCourtSideLength + halfCourtSideLength, startYpos - (courtSideLength * mySidePct));
+                }
+            } else {
+                myZoneTopLeft = Vector2.zero;
+                myZoneBotRight = Vector2.zero;
             }
         }
 

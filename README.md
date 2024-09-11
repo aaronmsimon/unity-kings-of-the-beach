@@ -65,11 +65,9 @@ I would like to actually finish this game this time. That means starting with a 
 - adjust code for considering which side of court player is on (tracking hits, aim, etc)
 - Refactor Athlete Update() - new additions for checking ball touch, etc should be separate function for switching sides
 - Teammate becomes AI with proper state machines
+- disable movement to opposite court side
 
 #### Needed for MVP
-1. Convert hard-code court positions to dynamic
-	a) position in stats
-	b) switch side function
 2. Test AI opponents
 3. Serving
 4. Scoring system
