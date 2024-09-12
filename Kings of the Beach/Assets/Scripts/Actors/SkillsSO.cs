@@ -1,5 +1,9 @@
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
+
+public enum PositionType {
+    Blocker,
+    Defender
+}
 
 [CreateAssetMenu(fileName = "Skills", menuName = "Game/Actor")]
 public class SkillsSO : ScriptableObject
@@ -10,6 +14,9 @@ public class SkillsSO : ScriptableObject
 
     [Header("Accuracy")]
     [SerializeField][Range(0,1)] private float passAccuracy;
+
+    [Header("Position")]
+    [SerializeField] private PositionType playerPosition;
 
     private Vector3 position;
 
@@ -34,6 +41,11 @@ public class SkillsSO : ScriptableObject
         }
         set {
             position = value;
+        }
+    }
+    public PositionType PlayerPosition {
+        get {
+            return playerPosition;
         }
     }
 }

@@ -46,12 +46,14 @@ public class Ball : MonoBehaviour
 
         ballSO.Position = transform.position;
         ballSO.ballState = ballState;
-        if ((transform.position.x > 0 && ballSO.Possession == -1) || (transform.position.x < 0 && ballSO.Possession == 1)) {
-            ballSO.HitsForTeam = 0;
-            ballSO.lastPlayerToHit = null;
-            Debug.Log("changed side");
-        }        
-        ballSO.Possession = transform.position.x > 0 ? 1 : -1;
+        if (ballTarget != null) {
+            if ((ballTarget.position.x > 0 && ballSO.Possession == -1) || (ballTarget.position.x < 0 && ballSO.Possession == 1)) {
+                ballSO.HitsForTeam = 0;
+                ballSO.lastPlayerToHit = null;
+                Debug.Log("changed side");
+            }        
+            ballSO.Possession = ballTarget.position.x > 0 ? 1 : -1;
+        }
 
         /* temp */
         if (Input.GetKeyDown(KeyCode.Space)) {

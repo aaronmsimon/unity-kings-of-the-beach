@@ -43,17 +43,44 @@ namespace KotB.Actors
                     if (ballSO.ballState == BallState.Bump && IsPointWithinMySide(ballTarget)) {
                         moveDir = (ballSO.Target - transform.position).normalized;
                     }
-                    UpdateMyZone();
+                    if (Mathf.Sign(ballSO.Target.x) == courtSide && ballSO.HitsForTeam > 0) {
+                        state = AIState.Offense;
+                    }
                     break;
                 case AIState.Offense:
+                    myZoneTopLeft = new Vector2(courtSide / 2 + courtSide / -2, courtSideLength / 2);
+                    myZoneBotRight = new Vector2(courtSide / 2 + courtSide / 2, -courtSideLength / 2);
                     if (ballSO.lastPlayerToHit != this && ballSO.lastPlayerToHit != null) {
                         moveDir = (ballSO.Target - transform.position).normalized;
                     }
+                    if (Mathf.Sign(ballSO.Target.x) == -courtSide) {
+                        if (skills.PlayerPosition == PositionType.Blocker) {
+                            state = AIState.NetDefense;
+                        } else if (skills.PlayerPosition == PositionType.Defender) {
+                            state = AIState.Defend;
+                        } else {
+                            Debug.LogError("Unhandled Position Type");
+                        }
+                    }
                     break;
                 case AIState.NetDefense:
+                    if (Mathf.Sign(ballSO.Target.x) == -courtSide) {
+                        moveDir = (new Vector3(1 * courtSide, 0, 0) - transform.position).normalized;
+                    } else {
+                        if (Vector3.Distance(ballTarget, transform.position) < Vector3.Distance(ballTarget, teammateSO.Position)) {
+                            moveDir = (ballSO.Target - transform.position).normalized;
+                        }
+                    }
                     UpdateMyZone();
                     break;
                 case AIState.Defend:
+                    if (Mathf.Sign(ballSO.Target.x) == -courtSide) {
+                        moveDir = (new Vector3(5.5f * courtSide, 0, 0) - transform.position).normalized;
+                    } else {
+                        if (Vector3.Distance(ballTarget, transform.position) < Vector3.Distance(ballTarget, teammateSO.Position)) {
+                            moveDir = (ballSO.Target - transform.position).normalized;
+                        }
+                    }
                     UpdateMyZone();
                     break;
                 default:
@@ -74,7 +101,7 @@ namespace KotB.Actors
                 bumpTarget = new Vector3(aimLocation.x, 0f, aimLocation.y);
             } else {
                 // shot
-                bumpTarget = new Vector3(Random.Range(0, 8), 0f, Random.Range(-4, 4));
+                bumpTarget = new Vector3(Random.Range(0, courtSideLength * -courtSide), 0f, Random.Range(-courtSideLength / 2, courtSideLength / 2));
             }
         }
 

@@ -68,7 +68,7 @@ I would like to actually finish this game this time. That means starting with a 
 - disable movement to opposite court side
 
 #### Needed for MVP
-2. Test AI opponents
+2b. Improve AI State Machine
 3. Serving
 4. Scoring system
 5. Spike ball
