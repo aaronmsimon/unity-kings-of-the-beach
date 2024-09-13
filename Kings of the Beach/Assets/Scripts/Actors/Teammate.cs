@@ -6,10 +6,10 @@ namespace KotB.Actors
     public class Teammate : Athlete
     {
         private enum AIState {
-            ReceiveServe,
+            DigReady,
             Offense,
-            NetDefense,
-            Defend
+            Defense,
+            Service
         }
 
         [Header("Behavior")]
@@ -28,66 +28,15 @@ namespace KotB.Actors
         private Vector2 myZoneBotRight;
 
         private void Start() {
-            state = AIState.ReceiveServe;
+            state = ballSO.Possession == courtSide ? AIState.Service : AIState.DigReady;
         }
 
         protected override void Update() {
-            if (ballSO == null) return;
+            UpdateMyZone();
 
-            Vector2 ballTarget = new Vector2(ballSO.Target.x, ballSO.Target.z);
-            moveDir = Vector3.zero;
+            DetermineMovement();
 
-            switch (state) {
-                case AIState.ReceiveServe:
-                    if (ballSO.ballState == BallState.Bump && IsPointWithinMySide(ballTarget)) {
-                        moveDir = (ballSO.Target - transform.position).normalized;
-                    }
-                    if (Mathf.Sign(ballSO.Target.x) == courtSide && ballSO.HitsForTeam > 0) {
-                        state = AIState.Offense;
-                    }
-                    break;
-                case AIState.Offense:
-                    myZoneTopLeft = new Vector2(courtSide / 2 + courtSide / -2, courtSideLength / 2);
-                    myZoneBotRight = new Vector2(courtSide / 2 + courtSide / 2, -courtSideLength / 2);
-                    if (ballSO.lastPlayerToHit != this && ballSO.lastPlayerToHit != null) {
-                        moveDir = (ballSO.Target - transform.position).normalized;
-                    }
-                    if (Mathf.Sign(ballSO.Target.x) == -courtSide) {
-                        if (skills.PlayerPosition == PositionType.Blocker) {
-                            state = AIState.NetDefense;
-                        } else if (skills.PlayerPosition == PositionType.Defender) {
-                            state = AIState.Defend;
-                        } else {
-                            Debug.LogError("Unhandled Position Type");
-                        }
-                    }
-                    break;
-                case AIState.NetDefense:
-                    if (Mathf.Sign(ballSO.Target.x) == -courtSide) {
-                        moveDir = (new Vector3(1 * courtSide, 0, 0) - transform.position).normalized;
-                    } else {
-                        if (Vector3.Distance(ballTarget, transform.position) < Vector3.Distance(ballTarget, teammateSO.Position)) {
-                            moveDir = (ballSO.Target - transform.position).normalized;
-                        }
-                    }
-                    UpdateMyZone();
-                    break;
-                case AIState.Defend:
-                    if (Mathf.Sign(ballSO.Target.x) == -courtSide) {
-                        moveDir = (new Vector3(5.5f * courtSide, 0, 0) - transform.position).normalized;
-                    } else {
-                        if (Vector3.Distance(ballTarget, transform.position) < Vector3.Distance(ballTarget, teammateSO.Position)) {
-                            moveDir = (ballSO.Target - transform.position).normalized;
-                        }
-                    }
-                    UpdateMyZone();
-                    break;
-                default:
-                    Debug.LogError("AI State not handled.");
-                    break;
-            }
-
-            base.Update(); 
+            base.Update();
         }
 
         protected override void OnTriggerEnter(Collider other) {
@@ -101,6 +50,51 @@ namespace KotB.Actors
             } else {
                 // shot
                 bumpTarget = new Vector3(Random.Range(0, courtSideLength * -courtSide), 0f, Random.Range(-courtSideLength / 2, courtSideLength / 2));
+            }
+        }
+
+        private void DetermineMovement() {
+            if (ballSO == null) return;
+            if (ballSO.ballState != BallState.Bump) return;
+
+            Vector2 ballTarget = new Vector2(ballSO.Target.x, ballSO.Target.z);
+            moveDir = Vector3.zero;
+
+            switch (state) {
+                case AIState.DigReady:
+                    if (IsTargetInMyZone(ballTarget)) {
+                        moveDir = (ballSO.Target - transform.position).normalized;
+                    } else {
+                        // move to offensive position
+                    }
+                    if (Mathf.Sign(ballSO.Target.x) == courtSide && ballSO.HitsForTeam == 1) {
+                        state = AIState.Offense;
+                    }
+                    break;
+                case AIState.Offense:
+                    if (ballSO.lastPlayerToHit != this && ballSO.lastPlayerToHit != null) {
+                        moveDir = (ballSO.Target - transform.position).normalized;
+                    } else {
+                        // move to offensive position
+                    }
+                    if (Mathf.Sign(ballSO.Target.x) == -courtSide) {
+                        state = AIState.Defense;
+                    }
+                    break;
+                case AIState.Defense:
+                    // move to defensive position
+                    if (Mathf.Sign(ballSO.Target.x) == -courtSide) {
+                        state = AIState.DigReady;
+                    }
+                    break;
+                case AIState.Service:
+                    // move to defensive position
+                    // when service completed
+                    state = AIState.Defense;
+                    break;
+                default:
+                    Debug.LogError("AI State not handled.");
+                    break;
             }
         }
 
@@ -130,7 +124,7 @@ namespace KotB.Actors
             }
         }
 
-        private bool IsPointWithinMySide(Vector2 point)
+        private bool IsTargetInMyZone(Vector2 point)
         {
             // Check if the point's x is between minX and maxX
             bool withinX = point.x >= myZoneTopLeft.x && point.x <= myZoneBotRight.x;

@@ -15,4 +15,6 @@ MonoBehaviour:
   moveSpeed: 6
   targetLockDistance: 0.25
   passAccuracy: 0.7
+  digRange: 0.5
+  myBlockArea: 1.5
   playerPosition: 1

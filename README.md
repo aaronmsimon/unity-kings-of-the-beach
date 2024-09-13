@@ -28,8 +28,9 @@ I would like to actually finish this game this time. That means starting with a 
 3. AI Controller - Aim logic
 4. AI Controller - State Machine
 5. Estimating out of bounds
-6. Positioning for block
+6. Defensive positioning
 7. ~~Pass towards teammate~~
+8. Offensive positioning
 
 #### Gameplay
 1. Randomness in aim
@@ -68,7 +69,7 @@ I would like to actually finish this game this time. That means starting with a 
 - disable movement to opposite court side
 
 #### Needed for MVP
-2b. Improve AI State Machine
+2. Improve AI State Machine
 3. Serving
 4. Scoring system
 5. Spike ball
