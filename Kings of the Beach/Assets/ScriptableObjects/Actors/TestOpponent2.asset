@@ -15,3 +15,4 @@ MonoBehaviour:
   moveSpeed: 6
   targetLockDistance: 0.25
   passAccuracy: 0.7
+  playerPosition: 1

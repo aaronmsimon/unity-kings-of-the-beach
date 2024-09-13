@@ -15,6 +15,12 @@ public class SkillsSO : ScriptableObject
     [Header("Accuracy")]
     [SerializeField][Range(0,1)] private float passAccuracy;
 
+    [Header("Range")]
+    [SerializeField] private float digRange;
+
+    [Header("Behavior")]
+    [SerializeField] private float myBlockArea = 1.5f;
+
     [Header("Position")]
     [SerializeField] private PositionType playerPosition;
 
@@ -46,6 +52,16 @@ public class SkillsSO : ScriptableObject
     public PositionType PlayerPosition {
         get {
             return playerPosition;
+        }
+    }
+    public float DigRange {
+        get {
+            return digRange;
+        }
+    }
+    public float MyBlockArea {
+        get {
+            return myBlockArea;
         }
     }
 }

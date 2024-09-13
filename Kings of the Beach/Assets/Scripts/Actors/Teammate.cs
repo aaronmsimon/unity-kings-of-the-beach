@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cackenballz.Helpers;
 
 namespace KotB.Actors
 {
@@ -13,8 +14,6 @@ namespace KotB.Actors
 
         [Header("Behavior")]
         [SerializeField][Range(0,1)] private float mySidePct = 0.5f;
-        [SerializeField] private float myZoneFront = 1.5f;
-        [SerializeField] private float myZoneBack = 2f;
         [SerializeField] private bool showMySide;
         [SerializeField] private Color mySideColor;
 
@@ -108,19 +107,19 @@ namespace KotB.Actors
         private void UpdateMyZone() {
             // If on the correct side
             if (Mathf.Sign(transform.position.x) == courtSide) {
-                // Check if at front of court
-                if (Mathf.Abs(transform.position.x) <= myZoneFront) {
-                    myZoneTopLeft = new Vector2(courtSide * (myZoneFront / 2) + (myZoneFront / -2), courtSideLength / 2);
-                    myZoneBotRight = new Vector2(courtSide * (myZoneFront / 2) + (myZoneFront / 2), -courtSideLength / 2);
+                // Check if at net
+                if (Mathf.Abs(transform.position.x) <= skills.MyBlockArea) {
+                    myZoneTopLeft = new Vector2(courtSide * (skills.MyBlockArea / 2) + (skills.MyBlockArea / -2), courtSideLength / 2);
+                    myZoneBotRight = new Vector2(courtSide * (skills.MyBlockArea / 2) + (skills.MyBlockArea / 2), -courtSideLength / 2);
                 }
-                // Check if at back of court
-                else if (Mathf.Abs(transform.position.x) >= courtSideLength - myZoneBack) {
-                    myZoneTopLeft = new Vector2(courtSide * (courtSideLength + myZoneBack / -2) + (myZoneBack / -2), courtSideLength / 2);
-                    myZoneBotRight = new Vector2(courtSide * (courtSideLength + myZoneBack / -2) + (myZoneBack / 2), -courtSideLength / 2);
+                // Check if teammate at net
+                else if (Mathf.Abs(teammateSO.Position.x) <= teammateSO.MyBlockArea) {
+                    myZoneTopLeft = new Vector2(transform.position.x > 0 ? teammateSO.MyBlockArea / 2 + teammateSO.MyBlockArea / -2 + teammateSO.MyBlockArea : -courtSideLength, courtSideLength / 2);
+                    myZoneBotRight = new Vector2(transform.position.x > 0 ? courtSideLength : -teammateSO.MyBlockArea, -courtSideLength / 2);
                 }
-                // If not near front nor back, then take half based on which half they're on
+                // If not near front nor back, then take their side
                 else {
-                        float startYpos = transform.position.z > 0 ? courtSideLength / 2 : 0;
+                        float startYpos = transform.position.z > 0 ? courtSideLength / 2 : 4 - (courtSideLength * (1 - mySidePct));
                         float halfCourtSideLength = courtSideLength / 2;
                         myZoneTopLeft = new Vector2(courtSide * halfCourtSideLength - halfCourtSideLength, startYpos);
                         myZoneBotRight = new Vector2(courtSide * halfCourtSideLength + halfCourtSideLength, startYpos - (courtSideLength * mySidePct));
@@ -174,6 +173,9 @@ namespace KotB.Actors
                 Gizmos.color = mySideColor;
                 Gizmos.DrawCube(areaCenter, areaSize);
             }
+            
+            // Dig Range
+            GizmoHelpers.DrawGizmoCircle(transform.position, skills.DigRange, Color.red, 12);
         }
     }
 }
