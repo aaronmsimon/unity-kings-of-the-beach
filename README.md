@@ -91,3 +91,14 @@ I would like to actually finish this game this time. That means starting with a 
 - debug: writing to console, gizmos like raycasts or boxes drawn
 - bump/set vs pass/across
 - ball reset is temp
+
+##### Notes:
+- Serve will use same process as bump. Will need to control the height and speed, though. Testing found that height of 5 and duration around 1 or even less was good.
+- However, should only be able to serve to the middle-to-back side of court - if you try to serve to the near court, you'll hit into the net.
+- Need to figure out a way to have this be an input for the player or AI controller. Perhaps a power meter along with aiming the height? That way, the distance in the court is controlled, but not specified like in bumps
+- Oh wow, that makes me wonder if that's a method for control for bumps too, lol. Nah
+- In order to facilitate, will need a state of the game as part of the game manager, too
+- And the players to communicate with this game state
+- Between points, the players can high-five, hug, etc (see Concepts/Ideas bullet 5), then player controlled skip to service
+- At service, players go to locations
+- also need to implement other locations like offensive and defensive (which are placeholders for now in the AI state machine, though this should also have a default for the player so consider adding to the Athlete script)
