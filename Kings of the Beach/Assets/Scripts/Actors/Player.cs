@@ -58,7 +58,7 @@ namespace KotB.Actors
 
             Vector2 aim = CircleMappedToSquare(moveInput.x, moveInput.y);
 
-            float targetX = aim.x * 5 + 4 * (pass ? -1 : 1);
+            float targetX = aim.x * 5 + 4 * (pass ? -courtSide : courtSide);
             float targetZ = aim.y * 5;
             bumpTarget = new Vector3(targetX, 0f, targetZ);
         }

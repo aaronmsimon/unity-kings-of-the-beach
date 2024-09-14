@@ -63,7 +63,6 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### Basic Updates to do (dynamic list)
 - Refactor athlete: move anything only for the player to that class - athletestate should be playerstate, teammatestate
-- adjust code for considering which side of court player is on (tracking hits, aim, etc)
 - Refactor Athlete Update() - new additions for checking ball touch, etc should be separate function for switching sides
 - Teammate becomes AI with proper state machines
 - disable movement to opposite court side
