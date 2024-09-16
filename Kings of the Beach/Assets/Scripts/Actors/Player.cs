@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace KotB.Actors
@@ -72,11 +73,36 @@ namespace KotB.Actors
         }
 
         private void OnBump() {
-            Bump(true);
+            switch(athleteState) {
+                case AthleteState.Normal:
+                    Bump(true);
+                    break;
+                case AthleteState.Locked:
+                    break;
+                case AthleteState.Serve:
+                    if (!powerMeterIsActive) {
+                        StartServeMeter();
+                    } else {
+                        StopServeMeter();
+                    }
+                    break;
+                default:
+                    Debug.LogError("Unhandled Athlete State in Player Bump");
+                    break;
+            }
         }
 
         private void OnBumpAcross() {
             Bump(false);
+        }
+
+        //---- TEMP ----
+        protected override void Update() {
+            base.Update();
+
+            if (Input.GetKeyDown(KeyCode.V)) {
+                SetAsServer();
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using RoboRyanTron.Unite2017.Variables;
 
 namespace KotB.Actors
 {
@@ -14,11 +15,21 @@ namespace KotB.Actors
         [SerializeField] protected int courtSide;
         [SerializeField] private LayerMask obstaclesLayer;
 
+        [Header("Values")]
+        [SerializeField] private FloatVariable powerValue;
+
         private bool canBump;
         private Ball _ball;
         private bool canUnlock;
         private float unlockTimer;
         private float unlockDelay = 0.25f;
+        private float skillLevelMax = 10;
+        private float servePowerFillSpeedMin = 1;
+        private float servePowerFillSpeedMax = 5;
+        private float servePowerDrainSpeedMin = 2;
+        private float servePowerDrainSpeedMax = 6;
+        protected bool powerMeterIsActive; // I think this should be only in the Player script
+        private bool powerMeterIsIncreasing;
 
         protected Vector3 moveDir;
         protected AthleteState athleteState;
@@ -27,7 +38,8 @@ namespace KotB.Actors
 
         protected enum AthleteState {
             Normal,
-            Locked
+            Locked,
+            Serve
         }
 
         private void Start() {
@@ -44,6 +56,17 @@ namespace KotB.Actors
                 case AthleteState.Locked:
                     Bump();
                     TryUnlock();
+                    break;
+                case AthleteState.Serve:
+                    if (powerMeterIsActive) {
+                        powerValue.Value += (powerMeterIsIncreasing ?
+                            (servePowerFillSpeedMax - servePowerFillSpeedMin) / (skillLevelMax - 1) * (skillLevelMax - skills.Serving) + servePowerFillSpeedMin :
+                            -((servePowerDrainSpeedMax - servePowerDrainSpeedMin) / (skillLevelMax - 1) * (skillLevelMax - skills.Serving) + servePowerDrainSpeedMin))
+                            * Time.deltaTime;
+                        powerValue.Value = Mathf.Clamp01(powerValue.Value);
+                        if (powerValue.Value == 1) powerMeterIsIncreasing = false;
+                        if (powerValue.Value == 0) StopServeMeter();
+                    }
                     break;
                 default:
                     Debug.LogWarning("Athlete State unhandled.");
@@ -62,6 +85,12 @@ namespace KotB.Actors
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 canBump = false;
             }
+        }
+
+        public void SetAsServer() {
+            athleteState = AthleteState.Serve;
+            powerValue.Value = 0;
+            StopServeMeter();
         }
 
         private void Move() {
@@ -112,6 +141,17 @@ namespace KotB.Actors
 
         private void SwitchCourtSide() {
             courtSide *= -1;
+        }
+
+        protected void StartServeMeter() {
+            powerValue.Value = 0;
+            powerMeterIsIncreasing = true;
+            powerMeterIsActive = true;
+        }
+
+        protected void StopServeMeter() {
+            powerMeterIsActive = false;
+            Debug.Log("Power is " + powerValue.Value);
         }
 
         //---- EVENT LISTENERS ----

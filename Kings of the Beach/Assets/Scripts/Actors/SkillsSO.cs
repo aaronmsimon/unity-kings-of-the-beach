@@ -18,6 +18,9 @@ public class SkillsSO : ScriptableObject
     [Header("Range")]
     [SerializeField] private float digRange;
 
+    [Header("Serving")]
+    [SerializeField][Range(1,10)] private int serving;
+
     [Header("Behavior")]
     [SerializeField] private float myBlockArea = 1.5f;
 
@@ -62,6 +65,11 @@ public class SkillsSO : ScriptableObject
     public float MyBlockArea {
         get {
             return myBlockArea;
+        }
+    }
+    public int Serving {
+        get {
+            return serving;
         }
     }
 }

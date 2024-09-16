@@ -99,4 +99,5 @@ I would like to actually finish this game this time. That means starting with a 
 - Between points, the players can high-five, hug, etc (see Concepts/Ideas bullet 5), then player controlled skip to service
 - At service, players go to locations
 - also need to implement other locations like offensive and defensive (which are placeholders for now in the AI state machine, though this should also have a default for the player so consider adding to the Athlete script)
-- Convert the Power Meter for the Serve to Scriptable Objects - value & event for notification and react to inputs from player
+- Implement the power meter into the actual service power strike on the ball, with aiming
+- Adjust Power Meter to appropriately place the necessary parts on Athlete abstract class and the Player class. As well as implement the randomized values for AI.
