@@ -9,8 +9,14 @@ public class PowerMeter : MonoBehaviour
     
     [Header("Setup")]
     [SerializeField] private Image barImage;
+    
+    private float hideDelay = 0.5f;
 
     private void Update() {
         barImage.fillAmount = powerValue.Value;
+    }
+
+    public void OnHidePowerMeter() {
+        Destroy(this.gameObject, hideDelay);
     }
 }

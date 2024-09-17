@@ -1,5 +1,6 @@
 using UnityEngine;
 using RoboRyanTron.Unite2017.Variables;
+using RoboRyanTron.Unite2017.Events;
 
 namespace KotB.Actors
 {
@@ -17,6 +18,10 @@ namespace KotB.Actors
 
         [Header("Values")]
         [SerializeField] private FloatVariable powerValue;
+
+        [Header("Game Events")]
+        [SerializeField] private GameEvent showPowerMeter;
+        [SerializeField] private GameEvent hidePowerMeter;
 
         private bool canBump;
         private Ball _ball;
@@ -72,6 +77,7 @@ namespace KotB.Actors
                     Debug.LogWarning("Athlete State unhandled.");
                     break;
             }
+            Debug.Log(athleteState);
         }
 
         protected virtual void OnTriggerEnter(Collider other) {
@@ -91,6 +97,7 @@ namespace KotB.Actors
             athleteState = AthleteState.Serve;
             powerValue.Value = 0;
             StopServeMeter();
+            showPowerMeter.Raise();
         }
 
         private void Move() {
@@ -152,6 +159,7 @@ namespace KotB.Actors
         protected void StopServeMeter() {
             powerMeterIsActive = false;
             Debug.Log("Power is " + powerValue.Value);
+            hidePowerMeter.Raise();
         }
 
         //---- EVENT LISTENERS ----
