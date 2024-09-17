@@ -59,7 +59,7 @@ namespace KotB.Actors
 
             Vector2 aim = CircleMappedToSquare(moveInput.x, moveInput.y);
 
-            float targetX = aim.x * 5 + 4 * (pass ? -courtSide : courtSide);
+            float targetX = aim.x * 5 + 4 * (pass ? courtSide : -courtSide);
             float targetZ = aim.y * 5;
             bumpTarget = new Vector3(targetX, 0f, targetZ);
         }
@@ -75,9 +75,9 @@ namespace KotB.Actors
         private void OnBump() {
             switch(athleteState) {
                 case AthleteState.Normal:
-                    Bump(true);
                     break;
                 case AthleteState.Locked:
+                    Bump(true);
                     break;
                 case AthleteState.Serve:
                     if (!powerMeterIsActive) {
@@ -94,15 +94,6 @@ namespace KotB.Actors
 
         private void OnBumpAcross() {
             Bump(false);
-        }
-
-        //---- TEMP ----
-        protected override void Update() {
-            base.Update();
-
-            if (Input.GetKeyDown(KeyCode.V)) {
-                SetAsServer();
-            }
         }
     }
 }

@@ -28,7 +28,13 @@ namespace KotB.Actors
         private Vector2 myZoneBotRight;
 
         private void Start() {
-            state = ballSO.Possession == courtSide ? AIState.Service : AIState.DigReady;
+            // setting state on start isn't safe since ball isn't instantiated yet - need to use an event (hard-coding for now)
+            if (this.name == "Teammate") {
+                state = AIState.DigReady;
+            }
+            else {
+                state = AIState.Service;
+            }
         }
 
         protected override void Update() {
