@@ -73,6 +73,7 @@ I would like to actually finish this game this time. That means starting with a 
 4. Scoring system
 5. Spike ball
 6. UI for scoring
+7. Game State Machine
 
 #### Concepts/Ideas
 - use right stick to reach for ball on dig

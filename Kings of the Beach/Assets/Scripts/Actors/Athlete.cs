@@ -1,6 +1,7 @@
 using UnityEngine;
 using RoboRyanTron.Unite2017.Variables;
 using RoboRyanTron.Unite2017.Events;
+using KotB.StateMachine;
 
 namespace KotB.Actors
 {
@@ -22,6 +23,10 @@ namespace KotB.Actors
         [Header("Game Events")]
         [SerializeField] private GameEvent showPowerMeter;
         [SerializeField] private GameEvent hidePowerMeter;
+
+        // Match State Machine
+        private MatchStateMachine matchStateMachine;
+        private PrePointState prePointState;
 
         private bool canBump;
         private Ball _ball;
@@ -47,7 +52,12 @@ namespace KotB.Actors
             Serve
         }
 
-        private void Start() {
+        protected virtual void Start() {
+            matchStateMachine = new MatchStateMachine();
+            prePointState = new PrePointState();
+
+            matchStateMachine.ChangeState(prePointState);
+
             athleteState = AthleteState.Normal;
             canBump = false;
             bumpTimer = 0;
@@ -77,7 +87,6 @@ namespace KotB.Actors
                     Debug.LogWarning("Athlete State unhandled.");
                     break;
             }
-            Debug.Log(athleteState);
         }
 
         protected virtual void OnTriggerEnter(Collider other) {

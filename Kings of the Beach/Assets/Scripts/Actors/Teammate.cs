@@ -27,7 +27,7 @@ namespace KotB.Actors
         private Vector2 myZoneTopLeft;
         private Vector2 myZoneBotRight;
 
-        private void Start() {
+        protected override void Start() {
             // setting state on start isn't safe since ball isn't instantiated yet - need to use an event (hard-coding for now)
             if (this.name == "Teammate") {
                 state = AIState.DigReady;
@@ -35,6 +35,7 @@ namespace KotB.Actors
             else {
                 state = AIState.Service;
             }
+            base.Start();
         }
 
         protected override void Update() {
