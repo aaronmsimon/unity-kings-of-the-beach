@@ -308,6 +308,45 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""BetweenPoints"",
+            ""id"": ""65a719ae-e941-48b5-ae2e-4f054e0e5f4a"",
+            ""actions"": [
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""bb47c288-12cd-4c8b-af6a-c131e34f461f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1f5df4bf-cde7-4074-9469-b8272d208bbb"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c384666-1dd9-4867-a03c-752319193eba"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -341,6 +380,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_Test = m_Gameplay.FindAction("Test", throwIfNotFound: true);
         m_Gameplay_Bump = m_Gameplay.FindAction("Bump", throwIfNotFound: true);
         m_Gameplay_BumpAcross = m_Gameplay.FindAction("BumpAcross", throwIfNotFound: true);
+        // BetweenPoints
+        m_BetweenPoints = asset.FindActionMap("BetweenPoints", throwIfNotFound: true);
+        m_BetweenPoints_Interact = m_BetweenPoints.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -468,6 +510,52 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // BetweenPoints
+    private readonly InputActionMap m_BetweenPoints;
+    private List<IBetweenPointsActions> m_BetweenPointsActionsCallbackInterfaces = new List<IBetweenPointsActions>();
+    private readonly InputAction m_BetweenPoints_Interact;
+    public struct BetweenPointsActions
+    {
+        private @GameInput m_Wrapper;
+        public BetweenPointsActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Interact => m_Wrapper.m_BetweenPoints_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_BetweenPoints; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BetweenPointsActions set) { return set.Get(); }
+        public void AddCallbacks(IBetweenPointsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_BetweenPointsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_BetweenPointsActionsCallbackInterfaces.Add(instance);
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+        }
+
+        private void UnregisterCallbacks(IBetweenPointsActions instance)
+        {
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+        }
+
+        public void RemoveCallbacks(IBetweenPointsActions instance)
+        {
+            if (m_Wrapper.m_BetweenPointsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IBetweenPointsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_BetweenPointsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_BetweenPointsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public BetweenPointsActions @BetweenPoints => new BetweenPointsActions(this);
     private int m_ControllerSchemeIndex = -1;
     public InputControlScheme ControllerScheme
     {
@@ -492,5 +580,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnTest(InputAction.CallbackContext context);
         void OnBump(InputAction.CallbackContext context);
         void OnBumpAcross(InputAction.CallbackContext context);
+    }
+    public interface IBetweenPointsActions
+    {
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

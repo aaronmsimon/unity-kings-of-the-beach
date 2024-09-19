@@ -2,21 +2,25 @@ using UnityEngine;
 
 namespace KotB.StateMachine
 {
-    public class PrePointState : State
+    public class PrePointState : MatchState
     {
-        public override void Enter()
-        {
-            Debug.Log("We're in the pre point state");
+        public PrePointState(MatchManager matchManager) : base(matchManager) { }
+
+        public override void Enter() {
+            Debug.Log("Entering the Pre Point state.");
+            matchManager.InputReader.EnableBetweenPointsInput();
+            matchManager.InputReader.interactEvent += OnInteract;
         }
 
-        public override void Exit()
-        {
-            throw new System.NotImplementedException();
+        public override void Exit() {
+            matchManager.InputReader.interactEvent -= OnInteract;
+            Debug.Log("Exiting the Pre Point State.");
         }
 
-        public override void Update()
-        {
-            throw new System.NotImplementedException();
+        public override void Update() { }
+
+        private void OnInteract() {
+            matchManager.MatchStateMachine.ChangeState(matchManager.ServeState);
         }
     }
 }

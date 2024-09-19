@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "InputReader", menuName = "Game/Input Reader")]
-public class InputReader : ScriptableObject, GameInput.IGameplayActions
+public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IBetweenPointsActions
 {
 	// Gameplay
 	public event UnityAction<Vector2> moveEvent;
@@ -11,6 +11,9 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
 	public event UnityAction testCanceledEvent;
 	public event UnityAction bumpEvent;
 	public event UnityAction bumpAcrossEvent;
+
+	// Between Points
+	public event UnityAction interactEvent;
 
 	private GameInput gameInput;
 
@@ -20,6 +23,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
 		{
 			gameInput = new GameInput();
 			gameInput.Gameplay.SetCallbacks(this);
+			gameInput.BetweenPoints.SetCallbacks(this);
 		}
 
 		EnableGameplayInput();
@@ -29,6 +33,8 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
 	{
 		DisableAllInput();
 	}
+
+	// Gameplay
 
 	public void OnMove(InputAction.CallbackContext context)
 	{
@@ -60,13 +66,31 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
 			testCanceledEvent.Invoke();
 	}
 
+	// Between Points
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+		if (context.phase == InputActionPhase.Performed)
+			interactEvent.Invoke();
+    }
+
+	// Enable/Disable
+
 	public void EnableGameplayInput()
 	{
 		gameInput.Gameplay.Enable();
+		gameInput.BetweenPoints.Disable();
+	}
+
+	public void EnableBetweenPointsInput()
+	{
+		gameInput.Gameplay.Disable();
+		gameInput.BetweenPoints.Enable();
 	}
 
 	public void DisableAllInput()
 	{
 		gameInput.Gameplay.Disable();
+		gameInput.BetweenPoints.Disable();
 	}
 }
