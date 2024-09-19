@@ -10,8 +10,9 @@ namespace KotB.Actors
         [Header("Skills")]
         [SerializeField] protected SkillsSO skills;
 
-        [Header("Ball")]
+        [Header("Scriptable Objects")]
         [SerializeField] protected BallSO ballSO;
+        [SerializeField] protected MatchStateSO matchStateSO;
 
         [Header("Settings")]
         [SerializeField] protected int courtSide;
@@ -23,10 +24,6 @@ namespace KotB.Actors
         [Header("Game Events")]
         [SerializeField] private GameEvent showPowerMeter;
         [SerializeField] private GameEvent hidePowerMeter;
-
-        // Match State Machine
-        private MatchStateMachine matchStateMachine;
-        private PrePointState prePointState;
 
         private bool canBump;
         private Ball _ball;
@@ -53,11 +50,6 @@ namespace KotB.Actors
         }
 
         protected virtual void Start() {
-            matchStateMachine = new MatchStateMachine();
-            prePointState = new PrePointState();
-
-            matchStateMachine.ChangeState(prePointState);
-
             athleteState = AthleteState.Normal;
             canBump = false;
             bumpTimer = 0;
