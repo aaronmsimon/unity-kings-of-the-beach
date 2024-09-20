@@ -1,26 +1,35 @@
 using UnityEngine;
+using RoboRyanTron.Unite2017.Events;
 
 namespace KotB.StateMachine
 {
-    public class PrePointState : MatchState
+    public class PrePointState : State
     {
-        public PrePointState(MatchManager matchManager) : base(matchManager) { }
+        private InputReader inputReader;
+        private GameEvent changeToServeState;
+
+        public PrePointState(InputReader inputReader, GameEvent changeToServeState) {
+            this.inputReader = inputReader;
+            this.changeToServeState = changeToServeState;
+        }
 
         public override void Enter() {
             Debug.Log("Entering the Pre Point state.");
-            matchManager.InputReader.EnableBetweenPointsInput();
-            matchManager.InputReader.interactEvent += OnInteract;
+
+            inputReader.EnableBetweenPointsInput();
+            inputReader.interactEvent += OnInteract;
         }
 
         public override void Exit() {
-            matchManager.InputReader.interactEvent -= OnInteract;
+            inputReader.interactEvent -= OnInteract;
+
             Debug.Log("Exiting the Pre Point State.");
         }
 
-        public override void Update() { }
+        public override void Update() {}
 
         private void OnInteract() {
-            matchManager.MatchStateMachine.ChangeState(matchManager.ServeState);
+            changeToServeState.Raise();
         }
     }
 }

@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e7bfa44ab1b6c345a48bf807cfa7eb4, type: 3}
-  m_Name: ShowPowerMeter
+  m_Name: ShowPowerMeterEvent
   m_EditorClassIdentifier: 

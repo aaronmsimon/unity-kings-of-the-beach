@@ -6,9 +6,9 @@ namespace KotB.StateMachine
     {
         public event Action<State> StateChanged;
 
-        private MatchState currentState;
+        private State currentState;
 
-        public void ChangeState(MatchState newState) {
+        public void ChangeState(State newState) {
             currentState?.Exit();
 
             currentState = newState;
