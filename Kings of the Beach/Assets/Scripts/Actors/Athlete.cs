@@ -25,17 +25,10 @@ namespace KotB.Actors
         private float unlockDelay = 0.25f;
 
         protected Vector3 moveDir;
-        protected AthleteState athleteState;
         protected float bumpTimer;
         protected Vector3 bumpTarget;
         protected bool canUnlock;
         protected float unlockTimer;
-
-        protected enum AthleteState {
-            // Normal,
-            Locked,
-            // Serve
-        }
 
         protected virtual void Start() {
             canBump = false;
@@ -71,7 +64,6 @@ namespace KotB.Actors
         }
 
         protected virtual void Move() {
-
             bool canMove = !Physics.Raycast(transform.position + Vector3.up * 0.5f, moveDir, out RaycastHit hit, 0.5f, obstaclesLayer);
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, moveDir, Color.red);
             if (canMove) {
