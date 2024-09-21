@@ -1,6 +1,6 @@
 using UnityEngine;
 using KotB.StatePattern;
-using KotB.Actors.PlayerStates;
+using KotB.StatePattern.PlayerStates;
 
 namespace KotB.Actors
 {
@@ -13,27 +13,29 @@ namespace KotB.Actors
         private Vector3 moveInput;
 
         private StateMachine playerStateMachine;
+        private NormalState normalState;
+        private LockState lockState;
         private ServeState serveState;
+        private PostPointState postPointState;
 
         protected override void Start() {
             base.Start();
 
             playerStateMachine = new StateMachine();
-            serveState = new ServeState(inputReader, this);
+            normalState = new NormalState(this);
+            lockState = new LockState(this);
+            serveState = new ServeState(this);
+            postPointState = new PostPointState(this);
         }
 
         //Adds listeners for events being triggered in the InputReader script
         private void OnEnable() {
             inputReader.moveEvent += OnMove;
-            inputReader.bumpEvent += OnBump;
-            inputReader.bumpAcrossEvent += OnBumpAcross;
         }
         
         //Removes all listeners to the events coming from the InputReader script
         private void OnDisable() {
             inputReader.moveEvent -= OnMove;
-            inputReader.bumpEvent -= OnBump;
-            inputReader.bumpAcrossEvent -= OnBumpAcross;
         }
         
         private Vector2 CircleMappedToSquare(float u, float v) {
@@ -63,16 +65,6 @@ namespace KotB.Actors
             return new Vector2(x, y);
         }
 
-        private void Bump(bool pass) {
-            bumpTimer = coyoteTime;
-
-            Vector2 aim = CircleMappedToSquare(moveInput.x, moveInput.y);
-
-            float targetX = aim.x * 5 + 4 * (pass ? courtSide : -courtSide);
-            float targetZ = aim.y * 5;
-            bumpTarget = new Vector3(targetX, 0f, targetZ);
-        }
-
         //---- EVENT LISTENERS ----
 
         private void OnMove(Vector2 movement) {
@@ -80,21 +72,12 @@ namespace KotB.Actors
             moveDir = new Vector3(movement.x, 0, movement.y);
         }
 
-        private void OnBump() {
-            switch(athleteState) {
-                case AthleteState.Normal:
-                    break;
-                case AthleteState.Locked:
-                    Bump(true);
-                    break;
-                default:
-                    Debug.LogError("Unhandled Athlete State in Player Bump");
-                    break;
-            }
-        }
+        //---- PROPERTIES ----
 
-        private void OnBumpAcross() {
-            Bump(false);
-        }
+        public InputReader InputReader { get { return inputReader; } }
+        public StateMachine StateMachine { get { return StateMachine; } }
+        public LockState LockState { get { return lockState; } }
+        public ServeState ServeState { get { return serveState; } }
+        public PostPointState PostPointState { get { return postPointState; } }
     }
 }

@@ -49,7 +49,7 @@ namespace KotB.Actors
         protected override void OnTriggerEnter(Collider other) {
             base.OnTriggerEnter(other);
             bumpTimer = Mathf.Infinity; // any positive value to trigger the bump
-            if (ballSO.HitsForTeam < 2) {
+            if (ballInfo.HitsForTeam < 2) {
                 // pass
                 Vector2 teammatePos = new Vector2(teammateSO.Position.x, teammateSO.Position.z);
                 Vector2 aimLocation = AdjustVectorAccuracy(teammatePos, skills.PassAccuracy);
@@ -61,36 +61,36 @@ namespace KotB.Actors
         }
 
         private void DetermineMovement() {
-            if (ballSO == null) return;
-            if (ballSO.ballState != BallState.Bump) return;
+            if (ballInfo == null) return;
+            if (ballInfo.ballState != BallState.Bump) return;
 
-            Vector2 ballTarget = new Vector2(ballSO.Target.x, ballSO.Target.z);
+            Vector2 ballTarget = new Vector2(ballInfo.Target.x, ballInfo.Target.z);
             moveDir = Vector3.zero;
 
             switch (state) {
                 case AIState.DigReady:
                     if (IsTargetInMyZone(ballTarget)) {
-                        moveDir = (ballSO.Target - transform.position).normalized;
+                        moveDir = (ballInfo.Target - transform.position).normalized;
                     } else {
                         // move to offensive position
                     }
-                    if (Mathf.Sign(ballSO.Target.x) == courtSide && ballSO.HitsForTeam == 1) {
+                    if (Mathf.Sign(ballInfo.Target.x) == courtSide && ballInfo.HitsForTeam == 1) {
                         state = AIState.Offense;
                     }
                     break;
                 case AIState.Offense:
-                    if (ballSO.lastPlayerToHit != this && ballSO.lastPlayerToHit != null) {
-                        moveDir = (ballSO.Target - transform.position).normalized;
+                    if (ballInfo.lastPlayerToHit != this && ballInfo.lastPlayerToHit != null) {
+                        moveDir = (ballInfo.Target - transform.position).normalized;
                     } else {
                         // move to offensive position
                     }
-                    if (Mathf.Sign(ballSO.Target.x) == -courtSide) {
+                    if (Mathf.Sign(ballInfo.Target.x) == -courtSide) {
                         state = AIState.Defense;
                     }
                     break;
                 case AIState.Defense:
                     // move to defensive position
-                    if (Mathf.Sign(ballSO.Target.x) == -courtSide) {
+                    if (Mathf.Sign(ballInfo.Target.x) == -courtSide) {
                         state = AIState.DigReady;
                     }
                     break;

@@ -1,7 +1,7 @@
 using UnityEngine;
 using KotB.Actors;
 using KotB.StatePattern;
-using KotB.Match.MatchStates;
+using KotB.StatePattern.MatchStates;
 using RoboRyanTron.Unite2017.Events;
 
 namespace KotB.Match
@@ -12,12 +12,11 @@ namespace KotB.Match
         [SerializeField] private Team[] teams = new Team[2];
 
         [Header("Configuration")]
-        [SerializeField] private MatchSO matchSO;
+        [SerializeField] private MatchInfoSO matchSO;
         [SerializeField] private InputReader inputReader;
 
         [Header("Events")]
         [SerializeField] private GameEvent changeToServeState;
-        [SerializeField] private GameEvent showPowerMeter;
 
         private int teamServeIndex = 0;
         private int playerServeIndex = 0;
@@ -34,6 +33,7 @@ namespace KotB.Match
             matchStateMachine.StateChanged += OnStateChanged;
 
             matchStateMachine.ChangeState(prePointState);
+            UpdateMatchSOServer();
         }
 
         public void OnChangeToServeState() {
@@ -45,10 +45,14 @@ namespace KotB.Match
             if (teamServeIndex == 0)
                 playerServeIndex = Mathf.Abs(playerServeIndex - 1);
             
+            UpdateMatchSOServer();
+        }
+
+        private void UpdateMatchSOServer() {
             matchSO.Server = teams[teamServeIndex].Athletes[playerServeIndex];
         }
 
-        private void OnStateChanged(State newState) {
+        private void OnStateChanged(IState newState) {
             matchSO.CurrentState = newState;
         }
 

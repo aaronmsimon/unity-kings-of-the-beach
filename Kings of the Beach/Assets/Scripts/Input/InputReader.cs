@@ -40,30 +40,30 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 	{
 		if (moveEvent != null)
 		{
-			moveEvent.Invoke(context.ReadValue<Vector2>());
+			moveEvent?.Invoke(context.ReadValue<Vector2>());
 		}
 	}
 
 	public void OnBump(InputAction.CallbackContext context)
 	{
 		if (context.phase == InputActionPhase.Performed)
-			bumpEvent.Invoke();
+			bumpEvent?.Invoke();
 	}
 
 	public void OnBumpAcross(InputAction.CallbackContext context)
 	{
 		if (context.phase == InputActionPhase.Performed) {
-			bumpAcrossEvent.Invoke();
+			bumpAcrossEvent?.Invoke();
 		}
 	}
 
 	public void OnTest(InputAction.CallbackContext context)
 	{
 		if (context.phase == InputActionPhase.Performed)
-			testEvent.Invoke();
+			testEvent?.Invoke();
 		
 		if (context.phase == InputActionPhase.Canceled)
-			testCanceledEvent.Invoke();
+			testCanceledEvent?.Invoke();
 	}
 
 	// Between Points
@@ -71,7 +71,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     public void OnInteract(InputAction.CallbackContext context)
     {
 		if (context.phase == InputActionPhase.Performed)
-			interactEvent.Invoke();
+			interactEvent?.Invoke();
     }
 
 	// Enable/Disable

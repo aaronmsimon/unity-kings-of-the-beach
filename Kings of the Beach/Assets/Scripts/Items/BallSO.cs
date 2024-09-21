@@ -1,7 +1,7 @@
 using KotB.Actors;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Ball", menuName = "Game/Ball")]
+[CreateAssetMenu(fileName = "BallInfo", menuName = "Game/Ball Info")]
 public class BallSO : ScriptableObject
 {
     public Vector3 Position { get; set; }

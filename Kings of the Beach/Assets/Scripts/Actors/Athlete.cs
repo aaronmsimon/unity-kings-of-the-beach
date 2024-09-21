@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using KotB.Match;
 
@@ -9,51 +10,51 @@ namespace KotB.Actors
         [SerializeField] protected SkillsSO skills;
 
         [Header("Scriptable Objects")]
-        [SerializeField] protected BallSO ballSO;
-        [SerializeField] protected MatchSO matchSO;
+        [SerializeField] protected BallSO ballInfo;
+        [SerializeField] protected MatchInfoSO matchInfo;
 
         [Header("Settings")]
         [SerializeField] protected int courtSide;
         [SerializeField] private LayerMask obstaclesLayer;
 
+        public event Action BallHitGround;
+        public event Action MatchChangeToServeState;
+
         private bool canBump;
         private Ball ball;
-        private bool canUnlock;
-        private float unlockTimer;
         private float unlockDelay = 0.25f;
 
         protected Vector3 moveDir;
         protected AthleteState athleteState;
         protected float bumpTimer;
         protected Vector3 bumpTarget;
-
-        public SkillsSO Skills { get { return skills; } }
+        protected bool canUnlock;
+        protected float unlockTimer;
 
         protected enum AthleteState {
-            Normal,
+            // Normal,
             Locked,
-            Serve
+            // Serve
         }
 
         protected virtual void Start() {
-            athleteState = AthleteState.Normal;
             canBump = false;
             bumpTimer = 0;
         }
 
         protected virtual void Update() {
-            switch (athleteState) {
-                case AthleteState.Normal:
+        //     switch (athleteState) {
+        //         case AthleteState.Normal:
                     Move();
-                    break;
-                case AthleteState.Locked:
-                    Bump();
-                    TryUnlock();
-                    break;
-                default:
-                    Debug.LogWarning("Athlete State unhandled.");
-                    break;
-            }
+        //             break;
+        //         case AthleteState.Locked:
+        //             Bump();
+        //             TryUnlock();
+        //             break;
+        //         default:
+        //             Debug.LogWarning("Athlete State unhandled.");
+        //             break;
+        //     }
         }
 
         protected virtual void OnTriggerEnter(Collider other) {
@@ -69,16 +70,7 @@ namespace KotB.Actors
             }
         }
 
-        private void Move() {
-            if (ballSO.ballState == BallState.Bump && ballSO.lastPlayerToHit != this) {
-                float distanceToTarget = Vector3.Distance(transform.position, ballSO.Target);
-                if (distanceToTarget <= skills.TargetLockDistance) {
-                    transform.position = ballSO.Target;
-                    athleteState = AthleteState.Locked;
-                    canUnlock = false;
-                    return;
-                }
-            }
+        protected virtual void Move() {
 
             bool canMove = !Physics.Raycast(transform.position + Vector3.up * 0.5f, moveDir, out RaycastHit hit, 0.5f, obstaclesLayer);
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, moveDir, Color.red);
@@ -89,25 +81,16 @@ namespace KotB.Actors
             skills.Position = transform.position;
         }
 
-        private void Bump() {
+        public void Bump() {
             bumpTimer -= Time.deltaTime;
             if (canBump && bumpTimer > 0 && this.ball != null) {
                 this.ball.Bump(bumpTarget, 12, 2);
                 canUnlock = true;
                 unlockTimer = unlockDelay;
                 canBump = false;
-                ballSO.HitsForTeam += 1;
-                Debug.Log("Hits: " + ballSO.HitsForTeam);
-                ballSO.lastPlayerToHit = this;
-            }
-        }
-
-        private void TryUnlock() {
-            if (canUnlock) {
-                unlockTimer -= Time.deltaTime;
-                if (unlockTimer <= 0) {
-                    athleteState = AthleteState.Normal;
-                }
+                ballInfo.HitsForTeam += 1;
+                Debug.Log("Hits: " + ballInfo.HitsForTeam);
+                ballInfo.lastPlayerToHit = this;
             }
         }
 
@@ -120,8 +103,20 @@ namespace KotB.Actors
         }
 
         //---- EVENT LISTENERS ----
+
         public void OnBallHitGround() {
-            athleteState = AthleteState.Normal;
+            BallHitGround?.Invoke();
         }
+
+        public void OnMatchChangeToServeState() {
+            MatchChangeToServeState?.Invoke();
+        }
+
+        //---- PROPERTIES ----
+
+        public SkillsSO Skills { get { return skills; } }
+        public BallSO BallInfo { get { return ballInfo; } }
+        public MatchInfoSO MatchInfo { get { return matchInfo; } }
+        public int CourtSide { get { return courtSide; } }
     }
 }
