@@ -1,4 +1,6 @@
 using UnityEngine;
+using KotB.StatePattern;
+using KotB.Actors.PlayerStates;
 
 namespace KotB.Actors
 {
@@ -10,17 +12,25 @@ namespace KotB.Actors
 
         private Vector3 moveInput;
 
+        private StateMachine playerStateMachine;
+        private ServeState serveState;
+
+        protected override void Start() {
+            base.Start();
+
+            playerStateMachine = new StateMachine();
+            serveState = new ServeState(inputReader, this);
+        }
+
         //Adds listeners for events being triggered in the InputReader script
-        private void OnEnable()
-        {
+        private void OnEnable() {
             inputReader.moveEvent += OnMove;
             inputReader.bumpEvent += OnBump;
             inputReader.bumpAcrossEvent += OnBumpAcross;
         }
         
         //Removes all listeners to the events coming from the InputReader script
-        private void OnDisable()
-        {
+        private void OnDisable() {
             inputReader.moveEvent -= OnMove;
             inputReader.bumpEvent -= OnBump;
             inputReader.bumpAcrossEvent -= OnBumpAcross;
@@ -65,8 +75,7 @@ namespace KotB.Actors
 
         //---- EVENT LISTENERS ----
 
-        private void OnMove(Vector2 movement)
-        {
+        private void OnMove(Vector2 movement) {
             moveInput = movement;
             moveDir = new Vector3(movement.x, 0, movement.y);
         }
@@ -77,13 +86,6 @@ namespace KotB.Actors
                     break;
                 case AthleteState.Locked:
                     Bump(true);
-                    break;
-                case AthleteState.Serve:
-                    if (!powerMeterIsActive) {
-                        StartServeMeter();
-                    } else {
-                        StopServeMeter();
-                    }
                     break;
                 default:
                     Debug.LogError("Unhandled Athlete State in Player Bump");

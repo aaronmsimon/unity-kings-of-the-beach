@@ -48,7 +48,7 @@ namespace KotB.Actors
 
         protected override void OnTriggerEnter(Collider other) {
             base.OnTriggerEnter(other);
-            bumpTimer = 5; // any positive value to trigger the bump
+            bumpTimer = Mathf.Infinity; // any positive value to trigger the bump
             if (ballSO.HitsForTeam < 2) {
                 // pass
                 Vector2 teammatePos = new Vector2(teammateSO.Position.x, teammateSO.Position.z);

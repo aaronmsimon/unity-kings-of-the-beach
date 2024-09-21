@@ -1,4 +1,4 @@
-namespace KotB.StateMachine
+namespace KotB.StatePattern
 {
     public abstract class State
     {

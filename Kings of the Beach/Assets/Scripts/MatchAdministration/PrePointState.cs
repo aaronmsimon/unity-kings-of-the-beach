@@ -1,7 +1,8 @@
 using UnityEngine;
+using KotB.StatePattern;
 using RoboRyanTron.Unite2017.Events;
 
-namespace KotB.StateMachine
+namespace KotB.Match.MatchStates
 {
     public class PrePointState : State
     {

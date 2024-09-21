@@ -1,23 +1,20 @@
 using UnityEngine;
-using RoboRyanTron.Unite2017.Events;
+using KotB.StatePattern;
 
-namespace KotB.StateMachine
+namespace KotB.Match.MatchStates
 {
     public class ServeState : State
     {
         private InputReader inputReader;
-        private GameEvent showPowerMeter;
 
-        public ServeState(InputReader inputReader, GameEvent showPowerMeter) {
+        public ServeState(InputReader inputReader) {
             this.inputReader = inputReader;
-            this.showPowerMeter = showPowerMeter;
         }
 
         public override void Enter() {
             Debug.Log("Entering the Serve state.");
 
             inputReader.EnableGameplayInput();
-            showPowerMeter.Raise();
         }
 
         public override void Exit() {

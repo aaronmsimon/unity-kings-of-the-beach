@@ -1,8 +1,8 @@
 using System;
 
-namespace KotB.StateMachine
+namespace KotB.StatePattern
 {
-    public class MatchStateMachine
+    public class StateMachine
     {
         public event Action<State> StateChanged;
 
