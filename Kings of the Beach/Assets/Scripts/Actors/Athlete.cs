@@ -24,6 +24,7 @@ namespace KotB.Actors
         private Ball ball;
         private float unlockDelay = 0.25f;
 
+        protected float courtSideLength = 8;
         protected Vector3 moveDir;
         protected float bumpTimer;
         protected Vector3 bumpTarget;
@@ -110,5 +111,10 @@ namespace KotB.Actors
         public BallSO BallInfo { get { return ballInfo; } }
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public int CourtSide { get { return courtSide; } }
+        public float CourtSideLength { get { return courtSideLength; } }
+        public Vector3 MoveDir {
+            get { return moveDir; }
+            set { moveDir = value; }
+        }
     }
 }

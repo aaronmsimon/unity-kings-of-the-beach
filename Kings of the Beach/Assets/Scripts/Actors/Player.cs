@@ -1,6 +1,9 @@
 using UnityEngine;
 using KotB.StatePattern;
 using KotB.StatePattern.PlayerStates;
+using RoboRyanTron.Unite2017.Events;
+using RoboRyanTron.Unite2017.Variables;
+using KotB.Cinemachine;
 
 namespace KotB.Actors
 {
@@ -10,7 +13,18 @@ namespace KotB.Actors
         [SerializeField] private float coyoteTime;
         [SerializeField] private InputReader inputReader;
 
+        [Header("Game Events")]
+        [SerializeField] private GameEvent updateCameraPriority;
+        [SerializeField] private GameEvent showServePowerMeter;
+        [SerializeField] private GameEvent hideServePowerMeter;
+
+        [Header("Variables")]
+        [SerializeField] private FloatVariable servePowerValue;
+        [SerializeField] private FloatVariable mainCameraPriority;
+        [SerializeField] private FloatVariable serveCameraPriority;
+
         private Vector3 moveInput;
+        private float skillLevelMax = 10;
 
         private StateMachine playerStateMachine;
         private NormalState normalState;
@@ -26,6 +40,15 @@ namespace KotB.Actors
             lockState = new LockState(this);
             serveState = new ServeState(this);
             postPointState = new PostPointState(this);
+            
+            playerStateMachine.ChangeState(normalState);
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+
+            playerStateMachine.Update();
         }
 
         //Adds listeners for events being triggered in the InputReader script
@@ -69,15 +92,31 @@ namespace KotB.Actors
 
         private void OnMove(Vector2 movement) {
             moveInput = movement;
-            moveDir = new Vector3(movement.x, 0, movement.y);
         }
 
         //---- PROPERTIES ----
 
         public InputReader InputReader { get { return inputReader; } }
-        public StateMachine StateMachine { get { return StateMachine; } }
+        public StateMachine StateMachine { get { return playerStateMachine; } }
         public LockState LockState { get { return lockState; } }
         public ServeState ServeState { get { return serveState; } }
         public PostPointState PostPointState { get { return postPointState; } }
+        public Vector3 MoveInput { get { return moveInput; } }
+        public FloatVariable ServePowerValue {
+            get { return servePowerValue; }
+            set { servePowerValue = value; }
+        }
+        public float SkillLevelMax { get { return skillLevelMax; } }
+        public GameEvent ShowServePowerMeter { get { return showServePowerMeter; } }
+        public GameEvent HideServePowerMeter { get { return hideServePowerMeter; } }
+        public GameEvent UpdateCameraPriorty { get { return updateCameraPriority; } }
+        public FloatVariable MainCameraPriority {
+            get { return mainCameraPriority; }
+            set { mainCameraPriority = value; }
+        }
+        public FloatVariable ServeCameraPriority {
+            get { return serveCameraPriority; }
+            set { serveCameraPriority = value; }
+        }
     }
 }

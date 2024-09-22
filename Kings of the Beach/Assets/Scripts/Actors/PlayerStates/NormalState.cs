@@ -10,6 +10,10 @@ namespace KotB.StatePattern.PlayerStates
         public override void Enter() {
             Debug.Log("Entering the Player Normal state.");
 
+            player.ServeCameraPriority.Value = 0;
+            player.MainCameraPriority.Value = 10;
+            player.UpdateCameraPriorty.Raise();
+
             player.BallHitGround += OnBallHitGround;
             player.MatchChangeToServeState += OnMatchChangeToServeState;
         }
@@ -23,6 +27,8 @@ namespace KotB.StatePattern.PlayerStates
 
         public override void Update()
         {
+            player.MoveDir = new Vector3(player.MoveInput.x, 0, player.MoveInput.y);
+
             if (player.BallInfo.lastPlayerToHit != player) {
                 float distanceToTarget = Vector3.Distance(player.transform.position, player.BallInfo.Target);
                 if (distanceToTarget <= player.Skills.TargetLockDistance) {
@@ -36,11 +42,13 @@ namespace KotB.StatePattern.PlayerStates
             if (player.MatchInfo.Server == player) {
                 player.StateMachine.ChangeState(player.ServeState);
             } else {
+                Vector3 newPos;
                 if (player.BallInfo.Possession == player.CourtSide) {
-                    player.transform.position = player.Skills.ServingPartnerPos;
+                    newPos = player.Skills.ServingPartnerPos;
                 } else {
-                    player.transform.position = player.Skills.ReceivingPos;
+                    newPos = player.Skills.ReceivingPos;
                 }
+                player.transform.position = new Vector3(newPos.x * player.CourtSide, newPos.y, newPos.z);
             }
         }
 

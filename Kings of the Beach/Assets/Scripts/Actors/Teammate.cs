@@ -20,7 +20,6 @@ namespace KotB.Actors
         [Header("Teammate")]
         [SerializeField] private SkillsSO teammateSO;
 
-        private float courtSideLength = 8;
         private float passRangeMin = 0.8f;
         private float passRangeMax = 2.5f;
         private AIState state;
