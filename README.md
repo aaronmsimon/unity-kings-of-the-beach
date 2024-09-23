@@ -2,6 +2,13 @@
  
 <img src="https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20Entertainment%20System/Named_Boxarts/Kings%20of%20the%20Beach%20-%20Professional%20Beach%20Volleyball%20%28USA%29.png" />
 
+<table>
+	<tr>
+		<td><img src="https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20Entertainment%20System/Named_Titles/Kings%20of%20the%20Beach%20-%20Professional%20Beach%20Volleyball%20%28USA%29.png" /></td>
+		<td><img src="https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20Entertainment%20System/Named_Snaps/Kings%20of%20the%20Beach%20-%20Professional%20Beach%20Volleyball%20%28USA%29.png" /></td>
+	</tr>
+</table>
+
 I used to love this game as a kid. Actually, I still do. The Paris Olympics have got me playing this again. I want to find a fun game like this to play, but with modern tournament rules. Basically, replay the Olympics. Maybe even have an arcade vs simulation style depending on how realistic you want to play.
 
 I would like to actually finish this game this time. That means starting with a working MVP and then expanding upon it. In order to do so effectively, I'll need to break it down into it's basic parts. Similar to Code Monkey's [Kitchen Chaos](https://youtu.be/AmGSEH7QcDg) and [XCOM](https://www.gamedev.tv/dashboard/courses/26) courses.
@@ -11,6 +18,8 @@ I would like to actually finish this game this time. That means starting with a 
 #### Environment
 1. ~~Create field of play with textures~~
 2. ~~Create net with colliders~~
+3. Stadium
+4. Skybox
 
 #### Player - Arcade
 1. ~~Create Player Controller - Movement~~
@@ -102,3 +111,7 @@ I would like to actually finish this game this time. That means starting with a 
 - also need to implement other locations like offensive and defensive (which are placeholders for now in the AI state machine, though this should also have a default for the player so consider adding to the Athlete script)
 - Implement the power meter into the actual service power strike on the ball, with aiming (including speed)
 - Adjust Power Meter to appropriately place the necessary parts on Athlete abstract class and the Player class. As well as implement the randomized values for AI.
+
+- need to work on serve arc
+- (future) Add Serve Power to SkillsSO, use value in duration
+- (future) Consolidate Serve and Bump functions and ball paths on Ball

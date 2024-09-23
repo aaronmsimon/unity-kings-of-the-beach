@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8487343117069050565}
   - component: {fileID: 1837625881206567898}
   - component: {fileID: 745760766897583411}
+  - component: {fileID: 2639611971611866920}
   m_Layer: 0
   m_Name: UI Manager
   m_TagString: Untagged
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
   powerMeter: {fileID: 8154767595376651232, guid: 11893fd2caa060d4aa1a2e3220d8520c, type: 3}
+  aimServe: {fileID: 54821141251907021, guid: 613a39fefbbf1c64aaba421d53d598b8, type: 3}
 --- !u!114 &745760766897583411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +68,34 @@ MonoBehaviour:
       - m_Target: {fileID: 1837625881206567898}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: OnShowPowerMeter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2639611971611866920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092603709538148506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 776db51e4f2b02d48a646f51ab718b47, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1837625881206567898}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnShowServeAim
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

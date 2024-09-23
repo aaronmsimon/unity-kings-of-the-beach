@@ -11,7 +11,7 @@ namespace KotB.StatePattern.PlayerStates
         private float servePowerFillSpeedMax = 5;
         private float servePowerDrainSpeedMin = 2;
         private float servePowerDrainSpeedMax = 6;
-        protected bool powerMeterIsActive;
+        private bool serveUIIsActive;
         private bool powerMeterIsIncreasing;
 
         public override void Enter() {
@@ -20,6 +20,8 @@ namespace KotB.StatePattern.PlayerStates
             player.ServeCameraPriority.Value = 10;
             player.MainCameraPriority.Value = 0;
             player.UpdateCameraPriorty.Raise();
+
+            player.ShowServeAim.Raise();
 
             player.transform.position = new Vector3((player.CourtSideLength + player.transform.localScale.x * .5f) * player.CourtSide, 0.01f, 0f);
             player.InputReader.bumpEvent += OnInteract;
@@ -33,22 +35,30 @@ namespace KotB.StatePattern.PlayerStates
 
         public override void Update() {
             ValidateMovement();
+            UpdateServeAim();
             UpdatePowerMeter();
         }
 
         private void ValidateMovement() {
             if (
-                player.MoveInput.x * player.CourtSide > 0 && player.transform.position.z >= player.CourtSideLength / 2 - player.transform.localScale.z / 2 ||
-                player.MoveInput.x * player.CourtSide < 0 && player.transform.position.z <= -player.CourtSideLength / 2 + player.transform.localScale.z / 2
+                player.RightStickInput.x * player.CourtSide > 0 && player.transform.position.z >= player.CourtSideLength / 2 - player.transform.localScale.z / 2 ||
+                player.RightStickInput.x * player.CourtSide < 0 && player.transform.position.z <= -player.CourtSideLength / 2 + player.transform.localScale.z / 2
             ) {
                 player.MoveDir = Vector3.zero;
             } else {
-                player.MoveDir = new Vector3(0, 0, player.MoveInput.x * player.CourtSide);
+                player.MoveDir = new Vector3(0, 0, player.RightStickInput.x * player.CourtSide);
             }
         }
 
+        private void UpdateServeAim() {
+            Vector2 aim = Helpers.CircleMappedToSquare(player.MoveInput.x, player.MoveInput.y);
+            float targetZ = aim.x * 4 * player.CourtSide;
+            float targetY = aim.y * 1.5f + 3.5f;
+            player.ServeAimPosition.Value = new Vector3(0f, targetY, targetZ);
+        }
+
         private void UpdatePowerMeter() {
-            if (powerMeterIsActive) {
+            if (serveUIIsActive) {
                 float servePowerStep;
                 if (powerMeterIsIncreasing) {
                     servePowerStep = (servePowerFillSpeedMax - servePowerFillSpeedMin) / (player.SkillLevelMax - 1) * (player.SkillLevelMax - player.Skills.Serving) + servePowerFillSpeedMin;
@@ -62,21 +72,24 @@ namespace KotB.StatePattern.PlayerStates
             }
         }
 
-        protected void StartServeMeter() {
+        private void StartServeMeter() {
             player.ServePowerValue.Value = 0;
             powerMeterIsIncreasing = true;
-            powerMeterIsActive = true;
+            serveUIIsActive = true;
             player.ShowServePowerMeter.Raise();
         }
 
-        protected void StopServeMeter() {
+        private void StopServeMeter() {
             player.HideServePowerMeter.Raise();
-            powerMeterIsActive = false;
+            serveUIIsActive = false;
+            if (player.ServePowerValue.Value > 0) {
+                player.Serve();
+            }
             Debug.Log("Power is " + player.ServePowerValue.Value);
         }
 
         private void OnInteract() {
-            if (!powerMeterIsActive) {
+            if (!serveUIIsActive) {
                 StartServeMeter();
             } else {
                 StopServeMeter();

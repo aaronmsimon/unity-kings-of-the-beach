@@ -676,8 +676,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
-  m_LocalPosition: {x: 0.0000009536743, y: 5.316183, z: -9.063078}
+  m_LocalRotation: {x: 0.06039796, y: 0.7045226, z: -0.06039796, w: 0.7045226}
+  m_LocalPosition: {x: -8, y: 2.91, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1374,7 +1374,7 @@ Transform:
   m_GameObject: {fileID: 1705077807}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
-  m_LocalPosition: {x: 0.0000009536743, y: 5.316183, z: -9.063078}
+  m_LocalPosition: {x: 0.0000009536743, y: 5.863109, z: -8.808043}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1987,13 +1987,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 23b44ef1d3bbbbe42a97b3fd37ef9578, type: 2}
     - target: {fileID: 2903952158050811650, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: hideServeAim
+      value: 
+      objectReference: {fileID: 11400000, guid: 3bc7c35d097785146b9e15d7f3183920, type: 2}
+    - target: {fileID: 2903952158050811650, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       propertyPath: matchStateSO
       value: 
       objectReference: {fileID: 11400000, guid: 23b44ef1d3bbbbe42a97b3fd37ef9578, type: 2}
     - target: {fileID: 2903952158050811650, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: showServeAim
+      value: 
+      objectReference: {fileID: 11400000, guid: 776db51e4f2b02d48a646f51ab718b47, type: 2}
+    - target: {fileID: 2903952158050811650, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       propertyPath: servePowerValue
       value: 
       objectReference: {fileID: 11400000, guid: ce289d1ed0780894094eca75d709a4e4, type: 2}
+    - target: {fileID: 2903952158050811650, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: serveAimPosition
+      value: 
+      objectReference: {fileID: 11400000, guid: a5541d2528aaeac4caba5bbbb85b3211, type: 2}
     - target: {fileID: 2903952158050811650, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       propertyPath: mainCameraPriority
       value: 
@@ -2215,6 +2227,10 @@ PrefabInstance:
       propertyPath: servePower
       value: 
       objectReference: {fileID: 11400000, guid: ce289d1ed0780894094eca75d709a4e4, type: 2}
+    - target: {fileID: 6059847001209752604, guid: a1d68553cfbbfda42a6bc6167b3f6f38, type: 3}
+      propertyPath: hideServeAim
+      value: 
+      objectReference: {fileID: 11400000, guid: 3bc7c35d097785146b9e15d7f3183920, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

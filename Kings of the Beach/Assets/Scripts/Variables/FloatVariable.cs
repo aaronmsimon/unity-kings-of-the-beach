@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace RoboRyanTron.Unite2017.Variables
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(fileName = "New FloatVariable", menuName = "Variables/Float")]
     public class FloatVariable : ScriptableObject
     {
 #if UNITY_EDITOR

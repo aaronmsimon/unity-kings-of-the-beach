@@ -30,6 +30,7 @@ namespace KotB.Actors
         protected Vector3 bumpTarget;
         protected bool canUnlock;
         protected float unlockTimer;
+        protected Vector3 serveTarget;
 
         protected virtual void Start() {
             canBump = false;
@@ -84,6 +85,13 @@ namespace KotB.Actors
                 ballInfo.HitsForTeam += 1;
                 Debug.Log("Hits: " + ballInfo.HitsForTeam);
                 ballInfo.lastPlayerToHit = this;
+            }
+        }
+
+        public void Serve() {
+            if (this.ball != null) {
+                this.ball.Serve(serveTarget, 1.5f);
+                Debug.Log("Ball Served");
             }
         }
 

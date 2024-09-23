@@ -17,13 +17,16 @@ namespace KotB.Actors
         [SerializeField] private GameEvent updateCameraPriority;
         [SerializeField] private GameEvent showServePowerMeter;
         [SerializeField] private GameEvent hideServePowerMeter;
-
+        [SerializeField] private GameEvent showServeAim;
+        
         [Header("Variables")]
         [SerializeField] private FloatVariable servePowerValue;
         [SerializeField] private FloatVariable mainCameraPriority;
         [SerializeField] private FloatVariable serveCameraPriority;
+        [SerializeField] private Vector3Variable serveAimPosition;
 
         private Vector3 moveInput;
+        private Vector3 rightStickInput;
         private float skillLevelMax = 10;
 
         private StateMachine playerStateMachine;
@@ -48,50 +51,30 @@ namespace KotB.Actors
         {
             base.Update();
 
+            serveTarget = serveAimPosition.Value;
             playerStateMachine.Update();
         }
 
         //Adds listeners for events being triggered in the InputReader script
         private void OnEnable() {
             inputReader.moveEvent += OnMove;
+            inputReader.rightStickEvent += OnRightStick;
         }
         
         //Removes all listeners to the events coming from the InputReader script
         private void OnDisable() {
             inputReader.moveEvent -= OnMove;
-        }
-        
-        private Vector2 CircleMappedToSquare(float u, float v) {
-            float u2 = u * u;
-            float v2 = v * v;
-            float tworoot2 = 2 * Mathf.Sqrt(2);
-            float subtermX = 2 + u2 - v2;
-            float subtermY = 2 - u2 + v2;
-            float termX1 = subtermX + u * tworoot2;
-            float termX2 = subtermX - u * tworoot2;
-            float termY1 = subtermY + v * tworoot2;
-            float termY2 = subtermY - v * tworoot2;
-
-            float epsilon = 0.0000001f;
-            if (termX1 < epsilon)
-                termX1 = 0;
-            if (termX2 < epsilon)
-                termX2 = 0;
-            if (termY1 < epsilon)
-                termY1 = 0;
-            if (termY2 < epsilon)
-                termY2 = 0;
-
-            float x = Mathf.Clamp(0.5f * Mathf.Sqrt(termX1) - 0.5f * Mathf.Sqrt(termX2), -1, 1);
-            float y = Mathf.Clamp(0.5f * Mathf.Sqrt(termY1) - 0.5f * Mathf.Sqrt(termY2), -1, 1);
-
-            return new Vector2(x, y);
+            inputReader.rightStickEvent -= OnRightStick;
         }
 
         //---- EVENT LISTENERS ----
 
         private void OnMove(Vector2 movement) {
             moveInput = movement;
+        }
+
+        private void OnRightStick(Vector2 movement) {
+            rightStickInput = movement;
         }
 
         //---- PROPERTIES ----
@@ -102,6 +85,7 @@ namespace KotB.Actors
         public ServeState ServeState { get { return serveState; } }
         public PostPointState PostPointState { get { return postPointState; } }
         public Vector3 MoveInput { get { return moveInput; } }
+        public Vector3 RightStickInput { get { return rightStickInput; } }
         public FloatVariable ServePowerValue {
             get { return servePowerValue; }
             set { servePowerValue = value; }
@@ -109,6 +93,7 @@ namespace KotB.Actors
         public float SkillLevelMax { get { return skillLevelMax; } }
         public GameEvent ShowServePowerMeter { get { return showServePowerMeter; } }
         public GameEvent HideServePowerMeter { get { return hideServePowerMeter; } }
+        public GameEvent ShowServeAim { get { return showServeAim; } }
         public GameEvent UpdateCameraPriorty { get { return updateCameraPriority; } }
         public FloatVariable MainCameraPriority {
             get { return mainCameraPriority; }
@@ -117,6 +102,12 @@ namespace KotB.Actors
         public FloatVariable ServeCameraPriority {
             get { return serveCameraPriority; }
             set { serveCameraPriority = value; }
+        }
+        public Vector3Variable ServeAimPosition {
+            get { return serveAimPosition; }
+            set {
+                serveAimPosition = value;
+            }
         }
     }
 }

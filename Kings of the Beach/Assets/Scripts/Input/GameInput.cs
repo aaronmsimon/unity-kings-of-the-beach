@@ -62,6 +62,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightStick"",
+                    ""type"": ""Value"",
+                    ""id"": ""0153b5fb-aa42-4240-9ae9-2b984c348051"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -306,6 +315,61 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""BumpAcross"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""RightThumbstick"",
+                    ""id"": ""553b2f11-d7b8-454b-80d6-12ec28034421"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightStick"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""e611d200-5b14-4cad-8c7a-ddbd4d9441fb"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""04ff1ade-e488-4434-bac5-fa5cd73ddb6c"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""abf8e4bb-f27b-4461-84cc-f5c9187e1b79"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""4f7835ae-0e74-4a3b-9d87-a4e45fa856a1"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -380,6 +444,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_Test = m_Gameplay.FindAction("Test", throwIfNotFound: true);
         m_Gameplay_Bump = m_Gameplay.FindAction("Bump", throwIfNotFound: true);
         m_Gameplay_BumpAcross = m_Gameplay.FindAction("BumpAcross", throwIfNotFound: true);
+        m_Gameplay_RightStick = m_Gameplay.FindAction("RightStick", throwIfNotFound: true);
         // BetweenPoints
         m_BetweenPoints = asset.FindActionMap("BetweenPoints", throwIfNotFound: true);
         m_BetweenPoints_Interact = m_BetweenPoints.FindAction("Interact", throwIfNotFound: true);
@@ -448,6 +513,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Test;
     private readonly InputAction m_Gameplay_Bump;
     private readonly InputAction m_Gameplay_BumpAcross;
+    private readonly InputAction m_Gameplay_RightStick;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -456,6 +522,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Test => m_Wrapper.m_Gameplay_Test;
         public InputAction @Bump => m_Wrapper.m_Gameplay_Bump;
         public InputAction @BumpAcross => m_Wrapper.m_Gameplay_BumpAcross;
+        public InputAction @RightStick => m_Wrapper.m_Gameplay_RightStick;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -477,6 +544,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @BumpAcross.started += instance.OnBumpAcross;
             @BumpAcross.performed += instance.OnBumpAcross;
             @BumpAcross.canceled += instance.OnBumpAcross;
+            @RightStick.started += instance.OnRightStick;
+            @RightStick.performed += instance.OnRightStick;
+            @RightStick.canceled += instance.OnRightStick;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -493,6 +563,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @BumpAcross.started -= instance.OnBumpAcross;
             @BumpAcross.performed -= instance.OnBumpAcross;
             @BumpAcross.canceled -= instance.OnBumpAcross;
+            @RightStick.started -= instance.OnRightStick;
+            @RightStick.performed -= instance.OnRightStick;
+            @RightStick.canceled -= instance.OnRightStick;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -580,6 +653,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnTest(InputAction.CallbackContext context);
         void OnBump(InputAction.CallbackContext context);
         void OnBumpAcross(InputAction.CallbackContext context);
+        void OnRightStick(InputAction.CallbackContext context);
     }
     public interface IBetweenPointsActions
     {

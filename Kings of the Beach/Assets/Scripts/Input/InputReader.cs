@@ -7,6 +7,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 {
 	// Gameplay
 	public event UnityAction<Vector2> moveEvent;
+	public event UnityAction<Vector2> rightStickEvent;
 	public event UnityAction testEvent;
 	public event UnityAction testCanceledEvent;
 	public event UnityAction bumpEvent;
@@ -56,6 +57,14 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 			bumpAcrossEvent?.Invoke();
 		}
 	}
+
+    public void OnRightStick(InputAction.CallbackContext context)
+    {
+		if (rightStickEvent != null)
+		{
+			rightStickEvent?.Invoke(context.ReadValue<Vector2>());
+		}
+    }
 
 	public void OnTest(InputAction.CallbackContext context)
 	{

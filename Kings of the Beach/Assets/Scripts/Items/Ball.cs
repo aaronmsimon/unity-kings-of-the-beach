@@ -20,6 +20,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private GameEvent resetBallEvent;
     [SerializeField] private GameEvent targetSet;
     [SerializeField] private GameEvent ballHitGroundEvent;
+    [SerializeField] private GameEvent hideServeAim;
 
     [Header("Variables")]
     [SerializeField] private FloatVariable servePower;
@@ -123,7 +124,8 @@ public class Ball : MonoBehaviour
         float serveDistance = possibleDistance * servePower.Value;
 
         // Calculate Target Position
-        Vector3 direction = new Vector3(aimPoint.x, 0, aimPoint.z).normalized;
+        Vector3 direction = new Vector3(aimPoint.x, 0, aimPoint.z) - new Vector3(transform.position.x, 0, transform.position.z);
+        direction.Normalize();
         Vector3 targetPos = new Vector3(transform.position.x, 0, transform.position.z) + direction * serveDistance;
 
         startPos = transform.position;
@@ -134,6 +136,7 @@ public class Ball : MonoBehaviour
         targetSet.Raise();
         serveP1 = aimPoint;
         ballDuration = duration;
+        hideServeAim.Raise();
         ballSO.ballState = BallState.Serve;
     }
 

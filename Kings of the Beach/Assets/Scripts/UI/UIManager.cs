@@ -5,6 +5,7 @@ public class UIManager : MonoBehaviour
     [Header("UI Prefabs")]
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject powerMeter;
+    [SerializeField] private GameObject aimServe;
 
     public void OnShowPowerMeter() {
         // Instantiate the UI object
@@ -16,5 +17,9 @@ public class UIManager : MonoBehaviour
         // Set the position within the canvas
         RectTransform rectTransform = uiInstance.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = Vector3.zero;
+    }
+
+    public void OnShowServeAim() {
+        Instantiate(aimServe);
     }
 }
