@@ -38,12 +38,12 @@ namespace KotB.StatePattern.PlayerStates
 
         private void ValidateMovement() {
             if (
-                player.MoveInput.y > 0 && player.transform.position.z >= player.CourtSideLength / 2 - player.transform.localScale.z / 2 ||
-                player.MoveInput.y < 0 && player.transform.position.z <= -player.CourtSideLength / 2 + player.transform.localScale.z / 2
+                player.MoveInput.x * player.CourtSide > 0 && player.transform.position.z >= player.CourtSideLength / 2 - player.transform.localScale.z / 2 ||
+                player.MoveInput.x * player.CourtSide < 0 && player.transform.position.z <= -player.CourtSideLength / 2 + player.transform.localScale.z / 2
             ) {
                 player.MoveDir = Vector3.zero;
             } else {
-                player.MoveDir = new Vector3(0, 0, player.MoveInput.y);
+                player.MoveDir = new Vector3(0, 0, player.MoveInput.x * player.CourtSide);
             }
         }
 

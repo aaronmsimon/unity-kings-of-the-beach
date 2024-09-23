@@ -41,6 +41,7 @@ namespace KotB.StatePattern.PlayerStates
         private void OnMatchChangeToServeState() {
             if (player.MatchInfo.Server == player) {
                 player.StateMachine.ChangeState(player.ServeState);
+                player.BallInfo.GiveBall(player);
             } else {
                 Vector3 newPos;
                 if (player.BallInfo.Possession == player.CourtSide) {
