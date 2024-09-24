@@ -147,7 +147,7 @@ public class Ball : MonoBehaviour
             float t = time / ballDuration;
             if (t > 1f) t = 1f;
 
-            transform.position = CalculateQuadraticBezierPoint(t, startPos, serveP1, targetPos);
+            transform.position = CalculateArcPosition(t, startPos, targetPos, serveP1.y);
         } else {
             ballSO.ballState = BallState.OnGround;
             ballHitGroundEvent.Raise();
@@ -165,6 +165,20 @@ public class Ball : MonoBehaviour
         p += tt * p2;
 
         return p;
+    }
+
+    private Vector3 CalculateArcPosition(float t, Vector3 start, Vector3 end, float height)
+    {
+        // Linear interpolation for horizontal position (XZ plane)
+        Vector3 horizontalPosition = Vector3.Lerp(start, end, t);
+
+        // Parabolic interpolation for vertical position (Y-axis)
+        float verticalPosition = 4 * height * t * (1 - t) + Mathf.Lerp(start.y, end.y, t);
+
+        // Combine horizontal and vertical movement
+        horizontalPosition.y = verticalPosition;
+
+        return horizontalPosition;
     }
 
     private void DestroyBallTarget() {
