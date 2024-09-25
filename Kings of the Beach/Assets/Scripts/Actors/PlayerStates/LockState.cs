@@ -34,6 +34,22 @@ namespace KotB.StatePattern.PlayerStates
         //     float targetZ = aim.y * 5;
         //     bumpTarget = new Vector3(targetX, 0f, targetZ);
         // }
+        
+        // <athlete>
+        // the logic for the timer (coyote time) should only be handled by the player
+        // public void Bump() {
+        //     bumpTimer -= Time.deltaTime;
+        //     if (canBump && bumpTimer > 0 && this.ball != null) {
+        //         this.ball.Bump(bumpTarget, 12, 2);
+        //         canUnlock = true;
+        //         unlockTimer = unlockDelay;
+        //         canBump = false;
+        //         ballInfo.HitsForTeam += 1;
+        //         Debug.Log("Hits: " + ballInfo.HitsForTeam);
+        //         ballInfo.lastPlayerToHit = this;
+        //     }
+        // }
+        // </athlete>
 
         private void TryUnlock() {
             // if (canUnlock) {

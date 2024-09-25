@@ -83,6 +83,7 @@ I would like to actually finish this game this time. That means starting with a 
 5. Spike ball
 6. UI for scoring
 7. Game State Machine
+8. Convert Player to State Machine
 
 #### Concepts/Ideas
 - use right stick to reach for ball on dig
@@ -93,6 +94,7 @@ I would like to actually finish this game this time. That means starting with a 
 - NEW interaction concept!!  hold for dig, press & release for directed pass/shot
 - Replays
 - Argue calls
+- Pass will be the gameplay mechanic for both Dig and Set, but Set will be more accurate
 
 #### Cleanup
 - is it better to create a static TagHashes class instead of hard-coding tag strings?
@@ -102,16 +104,13 @@ I would like to actually finish this game this time. That means starting with a 
 - ball reset is temp
 
 ##### Notes:
-- Serve will use same process as bump. Will need to control the height and speed, though. Testing found that height of 5 and duration around 1 or even less was good.
-- However, should only be able to serve to the middle-to-back side of court - if you try to serve to the near court, you'll hit into the net.
-- In order to facilitate, will need a state of the game as part of the game manager, too
-- And the players to communicate with this game state
+- Consolidate Bump (Pass) and Serve processes
+- Ball net detection
 - Between points, the players can high-five, hug, etc (see Concepts/Ideas bullet 5), then player controlled skip to service
-- At service, players go to locations
 - also need to implement other locations like offensive and defensive (which are placeholders for now in the AI state machine, though this should also have a default for the player so consider adding to the Athlete script)
-- Implement the power meter into the actual service power strike on the ball, with aiming (including speed)
-- Adjust Power Meter to appropriately place the necessary parts on Athlete abstract class and the Player class. As well as implement the randomized values for AI.
+- Implement the power meter into the actual service power strike on the ball: accurace for aiming & duration for speed
 
-- need to work on serve arc
+- Player State for Pass (and corresponding Ball mechanics)
+- AI Serve (random values range based on skill), Athlete should control with input for Player and Random for AI, not serving go to places like on player class (can be on athlete?)
 - (future) Add Serve Power to SkillsSO, use value in duration
 - (future) Consolidate Serve and Bump functions and ball paths on Ball

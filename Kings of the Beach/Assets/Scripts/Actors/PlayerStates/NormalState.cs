@@ -1,5 +1,6 @@
 using UnityEngine;
 using KotB.Actors;
+using KotB.StatePattern.MatchStates;
 
 namespace KotB.StatePattern.PlayerStates
 {
@@ -29,7 +30,7 @@ namespace KotB.StatePattern.PlayerStates
         {
             player.MoveDir = new Vector3(player.MoveInput.x, 0, player.MoveInput.y);
 
-            if (player.BallInfo.lastPlayerToHit != player) {
+            if (player.MatchInfo.CurrentState is InPlayState && player.BallInfo.lastPlayerToHit != player) {
                 float distanceToTarget = Vector3.Distance(player.transform.position, player.BallInfo.Target);
                 if (distanceToTarget <= player.Skills.TargetLockDistance) {
                     player.transform.position = player.BallInfo.Target;
@@ -43,12 +44,7 @@ namespace KotB.StatePattern.PlayerStates
                 player.StateMachine.ChangeState(player.ServeState);
                 player.BallInfo.GiveBall(player);
             } else {
-                Vector3 newPos;
-                if (player.BallInfo.Possession == player.CourtSide) {
-                    newPos = player.Skills.ServingPartnerPos;
-                } else {
-                    newPos = player.Skills.ReceivingPos;
-                }
+                Vector3 newPos = player.BallInfo.Possession == player.CourtSide ? player.Skills.ServingPartnerPos : player.Skills.ReceivingPos;
                 player.transform.position = new Vector3(newPos.x * player.CourtSide, newPos.y, newPos.z);
             }
         }

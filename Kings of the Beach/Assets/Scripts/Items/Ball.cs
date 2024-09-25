@@ -1,6 +1,8 @@
 using UnityEngine;
 using RoboRyanTron.Unite2017.Events;
 using RoboRyanTron.Unite2017.Variables;
+using KotB.Actors;
+using KotB.Match;
 
 public enum BallState {
     Held,
@@ -11,16 +13,17 @@ public enum BallState {
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] private BallSO ballSO;
+    [SerializeField] private BallSO ballInfo;
+    [SerializeField] private MatchInfoSO matchInfo;
     [Space(10)]
 
     [SerializeField] private Transform targetPrefab;
     
     [Header("Game Events")]
-    [SerializeField] private GameEvent resetBallEvent;
     [SerializeField] private GameEvent targetSet;
     [SerializeField] private GameEvent ballHitGroundEvent;
     [SerializeField] private GameEvent hideServeAim;
+    [SerializeField] private GameEvent changeToInPlayStateEvent;
 
     [Header("Variables")]
     [SerializeField] private FloatVariable servePower;
@@ -39,18 +42,18 @@ public class Ball : MonoBehaviour
     private float idealServeHeight = 3f;
     private float minServeHeight = 2f;
     private float maxServeHeight = 5f;
-    private float minServeDistance = 5f;
+    private float minServeDistance = 7f;
     private float maxServeDistance = 18f;
     private Vector3 serveP1;
 
     private void Start() {
-        ballSO.ballState = BallState.OnGround;
+        ballInfo.ballState = BallState.OnGround;
     }
 
     private void Update() {
-        switch (ballSO.ballState) {
+        switch (ballInfo.ballState) {
             case BallState.Held:
-                transform.position = ballSO.ballHeldBy.transform.position + new Vector3(ballSO.ballHeldBy.CourtSide * -athleteColliderWidth, ballHeldHeight, 0);
+                transform.position = ballInfo.ballHeldBy.transform.position + new Vector3(ballInfo.ballHeldBy.CourtSide * -athleteColliderWidth, ballHeldHeight, 0);
                 break;
             case BallState.Bump:
                 BallArc();
@@ -65,20 +68,27 @@ public class Ball : MonoBehaviour
                 break;
         }
 
-        ballSO.Position = transform.position;
+        ballInfo.Position = transform.position;
         if (ballTarget != null) {
-            if ((ballTarget.position.x > 0 && ballSO.Possession == -1) || (ballTarget.position.x < 0 && ballSO.Possession == 1)) {
-                ballSO.HitsForTeam = 0;
-                ballSO.lastPlayerToHit = null;
+            if ((transform.position.x > 0 && ballInfo.Possession == -1) || (transform.position.x < 0 && ballInfo.Possession == 1)) {
+                ballInfo.HitsForTeam = 0;
+                ballInfo.lastPlayerToHit = null;
+
+                if (ballInfo.ballState == BallState.Serve) {
+                    changeToInPlayStateEvent.Raise();
+                }
+
                 Debug.Log("changed side");
-            }        
-            ballSO.Possession = ballTarget.position.x > 0 ? 1 : -1;
+            }
         }
+        ballInfo.Possession = (int)Mathf.Sign(transform.position.x);
 
         /* temp */
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Space)) {
-            resetBallEvent.Raise();
+            ResetBall();
         }
+#endif
     }
     
     public void Bump(Vector3 targetPos, float height, float duration) {
@@ -86,16 +96,16 @@ public class Ball : MonoBehaviour
         time = 0f;
         DestroyBallTarget();
         ballTarget = Instantiate(targetPrefab, targetPos, Quaternion.identity);
-        ballSO.Target = targetPos;
+        ballInfo.Target = targetPos;
         targetSet.Raise();
         ballHeight = height;
         ballDuration = duration;
-        ballSO.ballState = BallState.Bump;
+        ballInfo.ballState = BallState.Bump;
     }
 
     private void BallArc() {
         Vector3 targetPos = ballTarget.position;
-        if (ballSO.ballState == BallState.Bump && transform.position != targetPos) {
+        if (transform.position != targetPos) {
             time += Time.deltaTime;
             float t = time / ballDuration;
             if (t > 1f) t = 1f;
@@ -104,7 +114,7 @@ public class Ball : MonoBehaviour
 
             transform.position = CalculateQuadraticBezierPoint(t, startPos, apex, targetPos);
         } else {
-            ballSO.ballState = BallState.OnGround;
+            ballInfo.ballState = BallState.OnGround;
             ballHitGroundEvent.Raise();
             DestroyBallTarget();
         }
@@ -132,24 +142,24 @@ public class Ball : MonoBehaviour
         time = 0f;
         DestroyBallTarget();
         ballTarget = Instantiate(targetPrefab, targetPos, Quaternion.identity);
-        ballSO.Target = targetPos;
+        ballInfo.Target = targetPos;
         targetSet.Raise();
         serveP1 = aimPoint;
         ballDuration = duration;
         hideServeAim.Raise();
-        ballSO.ballState = BallState.Serve;
+        ballInfo.ballState = BallState.Serve;
     }
 
     private void ServePath() {
         Vector3 targetPos = ballTarget.position;
-        if (ballSO.ballState == BallState.Serve && transform.position != targetPos) {
+        if (transform.position != targetPos) {
             time += Time.deltaTime;
             float t = time / ballDuration;
             if (t > 1f) t = 1f;
 
             transform.position = CalculateArcPosition(t, startPos, targetPos, serveP1.y);
         } else {
-            ballSO.ballState = BallState.OnGround;
+            ballInfo.ballState = BallState.OnGround;
             ballHitGroundEvent.Raise();
             DestroyBallTarget();
         }
@@ -187,15 +197,14 @@ public class Ball : MonoBehaviour
         }
     }
 
+    /* temp */
     public void ResetBall(/*Vector3 ballResetPos*/) {
         // transform.position = ballResetPos;
-        DestroyBallTarget();
-        transform.position = origPos;
-        ballSO.ballState = BallState.Held;
-    }
-
-    private Vector3 origPos;
-    private void Awake() {
-        origPos = transform.position;
+        // DestroyBallTarget();
+        // transform.position = origPos;
+        // ballSO.ballState = BallState.Held;
+        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player.StateMachine.ChangeState(player.ServeState);
+        ballInfo.GiveBall(player);
     }
 }

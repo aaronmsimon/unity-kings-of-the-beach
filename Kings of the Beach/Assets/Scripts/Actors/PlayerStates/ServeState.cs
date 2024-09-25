@@ -68,24 +68,29 @@ namespace KotB.StatePattern.PlayerStates
                 player.ServePowerValue.Value += servePowerStep * Time.deltaTime;
                 player.ServePowerValue.Value = Mathf.Clamp01(player.ServePowerValue.Value);
                 if (player.ServePowerValue.Value == 1) powerMeterIsIncreasing = false;
-                if (player.ServePowerValue.Value == 0) StopServeMeter();
+                if (player.ServePowerValue.Value == 0) DisplayServeUI(false);
             }
         }
 
         private void StartServeMeter() {
             player.ServePowerValue.Value = 0;
             powerMeterIsIncreasing = true;
-            serveUIIsActive = true;
-            player.ShowServePowerMeter.Raise();
+            DisplayServeUI(true);
         }
 
         private void StopServeMeter() {
-            player.HideServePowerMeter.Raise();
-            serveUIIsActive = false;
-            if (player.ServePowerValue.Value > 0) {
-                player.Serve();
-            }
+            DisplayServeUI(false);
+            player.OnServeBallAction?.Invoke(player.ServeAimPosition.Value, 1.5f);
             Debug.Log("Power is " + player.ServePowerValue.Value);
+        }
+
+        private void DisplayServeUI(bool isActive) {
+            serveUIIsActive = isActive;
+            if (isActive) {
+                player.ShowServePowerMeter.Raise();
+            } else {
+                player.HideServePowerMeter.Raise();
+            }
         }
 
         private void OnInteract() {

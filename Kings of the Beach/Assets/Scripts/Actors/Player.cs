@@ -3,7 +3,6 @@ using KotB.StatePattern;
 using KotB.StatePattern.PlayerStates;
 using RoboRyanTron.Unite2017.Events;
 using RoboRyanTron.Unite2017.Variables;
-using KotB.Cinemachine;
 
 namespace KotB.Actors
 {
@@ -27,7 +26,6 @@ namespace KotB.Actors
 
         private Vector3 moveInput;
         private Vector3 rightStickInput;
-        private float skillLevelMax = 10;
 
         private StateMachine playerStateMachine;
         private NormalState normalState;
@@ -51,7 +49,6 @@ namespace KotB.Actors
         {
             base.Update();
 
-            serveTarget = serveAimPosition.Value;
             playerStateMachine.Update();
         }
 
@@ -90,7 +87,6 @@ namespace KotB.Actors
             get { return servePowerValue; }
             set { servePowerValue = value; }
         }
-        public float SkillLevelMax { get { return skillLevelMax; } }
         public GameEvent ShowServePowerMeter { get { return showServePowerMeter; } }
         public GameEvent HideServePowerMeter { get { return hideServePowerMeter; } }
         public GameEvent ShowServeAim { get { return showServeAim; } }

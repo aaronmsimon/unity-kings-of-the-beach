@@ -20,19 +20,27 @@ namespace KotB.Actors
         public event Action BallHitGround;
         public event Action MatchChangeToServeState;
 
+        public delegate void ServeBall(Vector3 aimPoint, float duration);
+        public ServeBall OnServeBallAction;
+
         private bool canBump;
-        private Ball ball;
         private float unlockDelay = 0.25f;
 
+        protected Ball ball;
         protected float courtSideLength = 8;
+        private float skillLevelMax = 10;
         protected Vector3 moveDir;
         protected float bumpTimer;
         protected Vector3 bumpTarget;
         protected bool canUnlock;
         protected float unlockTimer;
-        protected Vector3 serveTarget;
+        // protected Vector3 serveTarget;
 
         protected virtual void Start() {
+            if (skills == null) {
+                Debug.LogAssertion($"No skills found for { this.name }");
+            }
+
             canBump = false;
             bumpTimer = 0;
         }
@@ -55,6 +63,7 @@ namespace KotB.Actors
         protected virtual void OnTriggerEnter(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 this.ball = ball;
+                OnServeBallAction = ball.Serve;
                 canBump = true;
             }
         }
@@ -88,12 +97,12 @@ namespace KotB.Actors
             }
         }
 
-        public void Serve() {
-            if (this.ball != null) {
-                this.ball.Serve(serveTarget, 1.5f);
-                Debug.Log("Ball Served");
-            }
-        }
+        // public void Serve() {
+        //     if (this.ball != null) {
+        //         this.ball.Serve(serveTarget, 1.5f);
+        //         Debug.Log("Ball Served");
+        //     }
+        // }
 
         private void SetCourtSide(int courtSide) {
             this.courtSide = courtSide;
@@ -116,6 +125,7 @@ namespace KotB.Actors
         //---- PROPERTIES ----
 
         public SkillsSO Skills { get { return skills; } }
+        public float SkillLevelMax { get { return skillLevelMax; } }
         public BallSO BallInfo { get { return ballInfo; } }
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public int CourtSide { get { return courtSide; } }

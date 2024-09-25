@@ -24,11 +24,13 @@ namespace KotB.Match
         private StateMachine matchStateMachine;
         private PrePointState prePointState;
         private ServeState serveState;
+        private InPlayState inPlayState;
 
         private void Start() {
             matchStateMachine = new StateMachine();
             prePointState = new PrePointState(inputReader, changeToServeState);
             serveState = new ServeState(inputReader);
+            inPlayState = new InPlayState(inputReader);
 
             matchStateMachine.StateChanged += OnStateChanged;
 
@@ -38,6 +40,10 @@ namespace KotB.Match
 
         public void OnChangeToServeState() {
             matchStateMachine.ChangeState(serveState);
+        }
+
+        public void OnChangeToInPlayState() {
+            matchStateMachine.ChangeState(inPlayState);
         }
 
         public void NextServer() {
