@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class Bump : MonoBehaviour
 {
-    [SerializeField] private Ball ball;
+    public Ball ball;
     
     public void PerformBump(Vector3 targetPos, float height, float duration) {
-        ball.Bump(targetPos, height, duration);
+        ball.BallInfo.SetPassTarget(targetPos, height, duration);
+        ball.StateMachine.ChangeState(ball.InFlightState);
     }
 }

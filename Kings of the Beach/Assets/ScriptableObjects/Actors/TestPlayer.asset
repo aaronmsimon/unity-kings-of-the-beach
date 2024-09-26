@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: TestPlayer
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  targetLockDistance: 0.5
+  targetLockDistance: 0.75
   passAccuracy: 0
   digRange: 0
   serving: 1
   myBlockArea: 1.5
+  servingPartnerPos: {x: 5, y: 1.5}
+  receivingPos: {x: 5, y: 0}
   playerPosition: 0

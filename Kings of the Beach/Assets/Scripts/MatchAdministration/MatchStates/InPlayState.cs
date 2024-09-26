@@ -11,13 +11,7 @@ namespace KotB.StatePattern.MatchStates
         }
 
         public override void Enter() {
-            Debug.Log("Entering the In Play state.");
-
             inputReader.EnableGameplayInput();
-        }
-
-        public override void Exit() {
-            Debug.Log("Exiting the In Play State.");
         }
 
         public override void Update() {}

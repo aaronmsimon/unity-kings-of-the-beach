@@ -1,14 +1,13 @@
 using UnityEngine;
-using KotB.Actors;
 
-namespace KotB.StatePattern.PlayerStates
+namespace KotB.StatePattern.BallStates
 {
-    public abstract class PlayerBaseState : IState
+    public abstract class BallBaseState : IState
     {
-        protected readonly Player player;
+        protected readonly Ball ball;
 
-        protected PlayerBaseState(Player context) {
-            player = context;
+        protected BallBaseState(Ball context) {
+            ball = context;
         }
 
         public virtual void Enter() {

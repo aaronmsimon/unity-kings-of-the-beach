@@ -51,9 +51,9 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### Ball Mechanics
 1. ~~Move to Target with Bezier curve~~
-2. Ball Fields and Properties
+2. ~~Ball Fields and Properties~~
 3. Ball Events triggered when Property Set
-4. Ball State Machine (probably need to change ballstate.bump to inair/active/inplay/etc)
+4. ~~Ball State Machine (probably need to change ballstate.bump to inair/active/inplay/etc)~~
 
 #### Assistants
 1. Coach - Bump
@@ -71,12 +71,11 @@ I would like to actually finish this game this time. That means starting with a 
 #### Menus
 
 ##### Notes/Next Steps:
-- Player State for Pass (and corresponding Ball mechanics)
+- Distinguish Athlete and Player Classes, check for unnecessary fields, properties, and events
+- AI State Machine
 
 #### Basic Updates to do (dynamic list)
 **Athlete**
-- Refactor athlete: move anything only for the player to that class - athletestate should be playerstate, teammatestate
-- Refactor Athlete Update() - new additions for checking ball touch, etc should be separate function for switching sides
 - disable movement to opposite court side
 - also need to implement other locations like offensive and defensive (which are placeholders for now in the AI state machine, though this should also have a default for the player so consider adding to the Athlete script)
 - (future) Add Serve Power to SkillsSO, use value in duration
@@ -84,9 +83,7 @@ I would like to actually finish this game this time. That means starting with a 
 - Teammate becomes AI with proper state machines
 - AI Serve (random values range based on skill), Athlete should control with input for Player and Random for AI, not serving go to places like on player class (can be on athlete?)
 **Ball**
-- Consolidate Bump (Pass) and Serve processes and ball paths
 - Ball net detection
-- Add State Machine
 **Player**
 - Between points, the players can high-five, hug, etc (see Concepts/Ideas bullet 5), then player controlled skip to service
 - Implement the power meter into the actual service power strike on the ball: accurace for aiming & duration for speed
@@ -95,6 +92,7 @@ I would like to actually finish this game this time. That means starting with a 
 - Serve start
 - When starting match, setup side for Serve
 - Post Point: scoring, change serve, allow for celebration/skip
+- Determine in/out of bounds when ball hit ground
 
 
 #### Needed for MVP
@@ -104,7 +102,6 @@ I would like to actually finish this game this time. That means starting with a 
 5. Spike ball
 6. UI for scoring
 7. Game State Machine
-8. Convert Player to State Machine
 
 #### Concepts/Ideas
 - use right stick to reach for ball on dig

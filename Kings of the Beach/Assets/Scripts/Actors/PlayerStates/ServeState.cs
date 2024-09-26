@@ -15,22 +15,22 @@ namespace KotB.StatePattern.PlayerStates
         private bool powerMeterIsIncreasing;
 
         public override void Enter() {
-            Debug.Log("Entering the Player Serve state.");
-
             player.ServeCameraPriority.Value = 10;
             player.MainCameraPriority.Value = 0;
             player.UpdateCameraPriorty.Raise();
-
+            
             player.ShowServeAim.Raise();
 
             player.transform.position = new Vector3((player.CourtSideLength + player.transform.localScale.x * .5f) * player.CourtSide, 0.01f, 0f);
+            player.BallInfo.GiveBall(player);
+
             player.InputReader.bumpEvent += OnInteract;
+            player.BallHitGround += OnBallHitGround;
         }
 
         public override void Exit() {
             player.InputReader.bumpEvent -= OnInteract;
-
-            Debug.Log("Exiting the Player Serve State.");
+            player.BallHitGround -= OnBallHitGround;
         }
 
         public override void Update() {
@@ -80,8 +80,10 @@ namespace KotB.StatePattern.PlayerStates
 
         private void StopServeMeter() {
             DisplayServeUI(false);
-            player.OnServeBallAction?.Invoke(player.ServeAimPosition.Value, 1.5f);
+            player.HideServeAim.Raise();
+            player.BallInfo.SetServeTarget(player.ServeAimPosition.Value, player.ServePowerValue.Value);
             Debug.Log("Power is " + player.ServePowerValue.Value);
+            player.StateMachine.ChangeState(player.NormalState);
         }
 
         private void DisplayServeUI(bool isActive) {
@@ -99,6 +101,10 @@ namespace KotB.StatePattern.PlayerStates
             } else {
                 StopServeMeter();
             }
+        }
+
+        private void OnBallHitGround() {
+            player.StateMachine.ChangeState(player.PostPointState);
         }
     }
 }

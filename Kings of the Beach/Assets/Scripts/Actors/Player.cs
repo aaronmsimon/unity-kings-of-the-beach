@@ -17,6 +17,7 @@ namespace KotB.Actors
         [SerializeField] private GameEvent showServePowerMeter;
         [SerializeField] private GameEvent hideServePowerMeter;
         [SerializeField] private GameEvent showServeAim;
+        [SerializeField] private GameEvent hideServeAim;
         
         [Header("Variables")]
         [SerializeField] private FloatVariable servePowerValue;
@@ -64,6 +65,18 @@ namespace KotB.Actors
             inputReader.rightStickEvent -= OnRightStick;
         }
 
+        protected override void OnTriggerEnter(Collider other) {
+            base.OnTriggerEnter(other);
+
+            playerStateMachine.OnTriggerEnter(other);
+        }
+
+        protected override void OnTriggerExit(Collider other) {
+            base.OnTriggerEnter(other);
+
+            playerStateMachine.OnTriggerExit(other);
+        }
+
         //---- EVENT LISTENERS ----
 
         private void OnMove(Vector2 movement) {
@@ -78,6 +91,7 @@ namespace KotB.Actors
 
         public InputReader InputReader { get { return inputReader; } }
         public StateMachine StateMachine { get { return playerStateMachine; } }
+        public NormalState NormalState { get { return normalState; } }
         public LockState LockState { get { return lockState; } }
         public ServeState ServeState { get { return serveState; } }
         public PostPointState PostPointState { get { return postPointState; } }
@@ -90,6 +104,7 @@ namespace KotB.Actors
         public GameEvent ShowServePowerMeter { get { return showServePowerMeter; } }
         public GameEvent HideServePowerMeter { get { return hideServePowerMeter; } }
         public GameEvent ShowServeAim { get { return showServeAim; } }
+        public GameEvent HideServeAim { get { return hideServeAim; } }
         public GameEvent UpdateCameraPriorty { get { return updateCameraPriority; } }
         public FloatVariable MainCameraPriority {
             get { return mainCameraPriority; }
@@ -105,5 +120,6 @@ namespace KotB.Actors
                 serveAimPosition = value;
             }
         }
+        public float CoyoteTime { get { return coyoteTime; } }
     }
 }

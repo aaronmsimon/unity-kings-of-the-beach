@@ -11,13 +11,7 @@ namespace KotB.StatePattern.MatchStates
         }
 
         public override void Enter() {
-            Debug.Log("Entering the Serve state.");
-
             inputReader.EnableGameplayInput();
-        }
-
-        public override void Exit() {
-            Debug.Log("Exiting the Serve State.");
         }
 
         public override void Update() {}

@@ -20,57 +20,31 @@ namespace KotB.Actors
         public event Action BallHitGround;
         public event Action MatchChangeToServeState;
 
-        public delegate void ServeBall(Vector3 aimPoint, float duration);
-        public ServeBall OnServeBallAction;
-
-        private bool canBump;
-        private float unlockDelay = 0.25f;
-
         protected Ball ball;
         protected float courtSideLength = 8;
         private float skillLevelMax = 10;
         protected Vector3 moveDir;
-        protected float bumpTimer;
         protected Vector3 bumpTarget;
-        protected bool canUnlock;
-        protected float unlockTimer;
-        // protected Vector3 serveTarget;
 
         protected virtual void Start() {
             if (skills == null) {
                 Debug.LogAssertion($"No skills found for { this.name }");
             }
-
-            canBump = false;
-            bumpTimer = 0;
         }
 
         protected virtual void Update() {
-        //     switch (athleteState) {
-        //         case AthleteState.Normal:
-                    Move();
-        //             break;
-        //         case AthleteState.Locked:
-        //             Bump();
-        //             TryUnlock();
-        //             break;
-        //         default:
-        //             Debug.LogWarning("Athlete State unhandled.");
-        //             break;
-        //     }
+            Move();
         }
 
         protected virtual void OnTriggerEnter(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 this.ball = ball;
-                OnServeBallAction = ball.Serve;
-                canBump = true;
             }
         }
 
-        private void OnTriggerExit(Collider other) {
+        protected virtual void OnTriggerExit(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
-                canBump = false;
+                this.ball = null;
             }
         }
 
@@ -83,26 +57,6 @@ namespace KotB.Actors
 
             skills.Position = transform.position;
         }
-
-        public void Bump() {
-            bumpTimer -= Time.deltaTime;
-            if (canBump && bumpTimer > 0 && this.ball != null) {
-                this.ball.Bump(bumpTarget, 12, 2);
-                canUnlock = true;
-                unlockTimer = unlockDelay;
-                canBump = false;
-                ballInfo.HitsForTeam += 1;
-                Debug.Log("Hits: " + ballInfo.HitsForTeam);
-                ballInfo.lastPlayerToHit = this;
-            }
-        }
-
-        // public void Serve() {
-        //     if (this.ball != null) {
-        //         this.ball.Serve(serveTarget, 1.5f);
-        //         Debug.Log("Ball Served");
-        //     }
-        // }
 
         private void SetCourtSide(int courtSide) {
             this.courtSide = courtSide;

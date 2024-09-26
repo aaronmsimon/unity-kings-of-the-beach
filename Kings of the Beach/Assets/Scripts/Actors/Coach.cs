@@ -1,4 +1,6 @@
+using KotB.Match;
 using UnityEngine;
+using KotB.StatePattern.MatchStates;
 
 namespace KotB.Actors
 {
@@ -20,11 +22,21 @@ namespace KotB.Actors
         [Header("temp")]
         [SerializeField] private Player player;
         [SerializeField] private float speed;
+        [SerializeField] private MatchInfoSO matchInfo;
 
         private Bump bump;
 
         private void Awake() {
             bump = GetComponent<Bump>();
+
+            // place ball at same start
+            bump.ball.transform.position = new Vector3(transform.position.x, 1.09f, transform.position.z);
+
+            // place player at defensive position
+            player.transform.position = new Vector3(player.Skills.ServingPartnerPos.x * player.CourtSide, player.Skills.ServingPartnerPos.y, player.Skills.ServingPartnerPos.z);
+
+            InPlayState inPlayState = new InPlayState(inputReader);
+            matchInfo.CurrentState = inPlayState;
         }
 
         //Adds listeners for events being triggered in the InputReader script

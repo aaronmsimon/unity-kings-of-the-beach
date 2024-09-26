@@ -14,16 +14,12 @@ namespace KotB.StatePattern.MatchStates
         }
 
         public override void Enter() {
-            Debug.Log("Entering the Pre Point state.");
-
             inputReader.EnableBetweenPointsInput();
             inputReader.interactEvent += OnInteract;
         }
 
         public override void Exit() {
             inputReader.interactEvent -= OnInteract;
-
-            Debug.Log("Exiting the Pre Point State.");
         }
 
         private void OnInteract() {

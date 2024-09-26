@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace KotB.StatePattern
 {
@@ -19,5 +20,15 @@ namespace KotB.StatePattern
         public void Update() {
             currentState?.Update();
         }
+
+        public virtual void OnTriggerEnter(Collider other) {
+            currentState?.OnTriggerEnter(other);
+        }
+
+        public virtual void OnTriggerExit(Collider other) {
+            currentState?.OnTriggerExit(other);
+        }
+
+        public IState CurrentState { get { return currentState; } }
     }
 }

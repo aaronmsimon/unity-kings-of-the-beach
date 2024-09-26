@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5004104168837443307}
   - component: {fileID: 8316344147264950940}
   - component: {fileID: 8302372324360464159}
+  - component: {fileID: 4347333110165529635}
   m_Layer: 0
   m_Name: Match Manager
   m_TagString: Untagged
@@ -76,6 +77,34 @@ MonoBehaviour:
       - m_Target: {fileID: 8316344147264950940}
         m_TargetAssemblyTypeName: MatchManager, Assembly-CSharp
         m_MethodName: OnChangeToServeState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4347333110165529635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2889677268746467142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a94effd70fe10864486482732c9f7269, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8316344147264950940}
+        m_TargetAssemblyTypeName: KotB.Match.MatchManager, Assembly-CSharp
+        m_MethodName: OnChangeToInPlayState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

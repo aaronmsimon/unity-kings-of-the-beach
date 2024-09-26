@@ -8,11 +8,11 @@ namespace KotB.StatePattern.PlayerStates
         public PostPointState(Player player) : base(player) { }
 
         public override void Enter() {
-            Debug.Log("Entering the Player Post Point state.");
+            // this is obviously temporary for testing with coach
+            player.StateMachine.ChangeState(player.NormalState);
         }
 
         public override void Exit() {
-            Debug.Log("Exiting the Player Post Point State.");
         }
     }
 }

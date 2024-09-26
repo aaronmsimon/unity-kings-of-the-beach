@@ -7,65 +7,69 @@ namespace KotB.StatePattern.PlayerStates
     {
         public LockState(Player player) : base(player) { }
 
+        private float bumpTimer;
+        private Vector3 targetPos;
+        protected bool canUnlock;
+        protected float unlockTimer;
+        private float unlockDelay = 0.25f;
+
         public override void Enter() {
-            Debug.Log("Entering the Player Lock state.");
-            player.InputReader.bumpEvent += OnBump;
+            bumpTimer = 0;
+            canUnlock = false;
+
+            player.InputReader.bumpEvent += OnPass;
             player.InputReader.bumpAcrossEvent += OnBumpAcross;
+            player.BallHitGround += OnBallHitGround;
         }
 
         public override void Exit() {
-            player.InputReader.bumpEvent -= OnBump;
+            player.InputReader.bumpEvent -= OnPass;
             player.InputReader.bumpAcrossEvent -= OnBumpAcross;
-            Debug.Log("Exiting the Player Lock State.");
+            player.BallHitGround -= OnBallHitGround;
         }
 
         public override void Update()
         {
-            player.Bump();
+            bumpTimer -= Time.deltaTime;
             TryUnlock();
         }
 
-        // private void Bump(bool pass) {
-        //     bumpTimer = coyoteTime;
-
-        //     Vector2 aim = CircleMappedToSquare(moveInput.x, moveInput.y);
-
-        //     float targetX = aim.x * 5 + 4 * (pass ? courtSide : -courtSide);
-        //     float targetZ = aim.y * 5;
-        //     bumpTarget = new Vector3(targetX, 0f, targetZ);
-        // }
-        
-        // <athlete>
-        // the logic for the timer (coyote time) should only be handled by the player
-        // public void Bump() {
-        //     bumpTimer -= Time.deltaTime;
-        //     if (canBump && bumpTimer > 0 && this.ball != null) {
-        //         this.ball.Bump(bumpTarget, 12, 2);
-        //         canUnlock = true;
-        //         unlockTimer = unlockDelay;
-        //         canBump = false;
-        //         ballInfo.HitsForTeam += 1;
-        //         Debug.Log("Hits: " + ballInfo.HitsForTeam);
-        //         ballInfo.lastPlayerToHit = this;
-        //     }
-        // }
-        // </athlete>
-
-        private void TryUnlock() {
-            // if (canUnlock) {
-            //     unlockTimer -= Time.deltaTime;
-            //     if (unlockTimer <= 0) {
-            //         athleteState = AthleteState.Normal;
-            //     }
-            // }
+        public override void OnTriggerEnter(Collider other)
+        {
+            if (bumpTimer > 0) {
+                player.BallInfo.SetPassTarget(targetPos, 7, 1.75f);
+                player.BallInfo.HitsForTeam += 1;
+                player.BallInfo.lastPlayerToHit = player;
+                canUnlock = true;
+                unlockTimer = unlockDelay;
+            }
         }
 
-        private void OnBump() {
-            // Bump(true);
+        private void Bump(bool pass) {
+            bumpTimer = player.CoyoteTime;
+
+            Vector2 aim = Helpers.CircleMappedToSquare(player.MoveInput.x, player.MoveInput.y);
+
+            float targetX = aim.x * 5 + 4 * (pass ? player.CourtSide : -player.CourtSide);
+            float targetZ = aim.y * 5;
+            targetPos = new Vector3(targetX, 0f, targetZ);
+        }
+        
+        private void TryUnlock() {
+            if (canUnlock) {
+                unlockTimer -= Time.deltaTime;
+                if (unlockTimer <= 0) {
+                    player.StateMachine.ChangeState(player.NormalState);
+                }
+            }
+        }
+
+        private void OnPass() {
+            Bump(true);
         }
 
         private void OnBumpAcross() {
-            // Bump(false);
+            Bump(false);
         }
 
         private void OnTargetMoved() {
@@ -73,7 +77,7 @@ namespace KotB.StatePattern.PlayerStates
         }
 
         private void OnBallHitGround() {
-            // go to PostPointState
+            player.StateMachine.ChangeState(player.PostPointState);
         }
     }
 }
