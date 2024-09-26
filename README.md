@@ -70,11 +70,32 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### Menus
 
+##### Notes/Next Steps:
+- Player State for Pass (and corresponding Ball mechanics)
+
 #### Basic Updates to do (dynamic list)
+**Athlete**
 - Refactor athlete: move anything only for the player to that class - athletestate should be playerstate, teammatestate
 - Refactor Athlete Update() - new additions for checking ball touch, etc should be separate function for switching sides
-- Teammate becomes AI with proper state machines
 - disable movement to opposite court side
+- also need to implement other locations like offensive and defensive (which are placeholders for now in the AI state machine, though this should also have a default for the player so consider adding to the Athlete script)
+- (future) Add Serve Power to SkillsSO, use value in duration
+**AI**
+- Teammate becomes AI with proper state machines
+- AI Serve (random values range based on skill), Athlete should control with input for Player and Random for AI, not serving go to places like on player class (can be on athlete?)
+**Ball**
+- Consolidate Bump (Pass) and Serve processes and ball paths
+- Ball net detection
+- Add State Machine
+**Player**
+- Between points, the players can high-five, hug, etc (see Concepts/Ideas bullet 5), then player controlled skip to service
+- Implement the power meter into the actual service power strike on the ball: accurace for aiming & duration for speed
+**Match**
+- Complete all states
+- Serve start
+- When starting match, setup side for Serve
+- Post Point: scoring, change serve, allow for celebration/skip
+
 
 #### Needed for MVP
 2. Improve AI State Machine
@@ -102,15 +123,3 @@ I would like to actually finish this game this time. That means starting with a 
 - debug: writing to console, gizmos like raycasts or boxes drawn
 - bump/set vs pass/across
 - ball reset is temp
-
-##### Notes:
-- Consolidate Bump (Pass) and Serve processes
-- Ball net detection
-- Between points, the players can high-five, hug, etc (see Concepts/Ideas bullet 5), then player controlled skip to service
-- also need to implement other locations like offensive and defensive (which are placeholders for now in the AI state machine, though this should also have a default for the player so consider adding to the Athlete script)
-- Implement the power meter into the actual service power strike on the ball: accurace for aiming & duration for speed
-
-- Player State for Pass (and corresponding Ball mechanics)
-- AI Serve (random values range based on skill), Athlete should control with input for Player and Random for AI, not serving go to places like on player class (can be on athlete?)
-- (future) Add Serve Power to SkillsSO, use value in duration
-- (future) Consolidate Serve and Bump functions and ball paths on Ball
