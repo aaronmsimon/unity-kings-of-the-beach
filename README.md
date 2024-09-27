@@ -82,14 +82,18 @@ I would like to actually finish this game this time. That means starting with a 
 - disable movement to opposite court side
 - also need to implement other locations like offensive and defensive (which are placeholders for now in the AI state machine, though this should also have a default for the player so consider adding to the Athlete script)
 - (future) Add Serve Power to SkillsSO, use value in duration
+
 **AI**
 - Teammate becomes AI with proper state machines
 - AI Serve (random values range based on skill), Athlete should control with input for Player and Random for AI, not serving go to places like on player class (can be on athlete?)
+
 **Ball**
 - Ball net detection
+
 **Player**
 - Between points, the players can high-five, hug, etc (see Concepts/Ideas bullet 5), then player controlled skip to service
 - Implement the power meter into the actual service power strike on the ball: accurace for aiming & duration for speed
+
 **Match**
 - Complete all states
 - Serve start
