@@ -8,7 +8,14 @@ namespace KotB.StatePattern.PlayerStates
         public PostPointState(Player player) : base(player) { }
 
         public override void Enter() {
-            // this is obviously temporary for testing with coach
+            player.MatchInfo.TransitionToPrePointState += OnTransitionToPrePointState;
+        }
+
+        public override void Exit() {
+            player.MatchInfo.TransitionToPrePointState -= OnTransitionToPrePointState;
+        }
+
+        private void OnTransitionToPrePointState() {
             player.StateMachine.ChangeState(player.NormalState);
         }
     }

@@ -83,5 +83,6 @@ namespace KotB.Actors
             get { return moveDir; }
             set { moveDir = value; }
         }
+        public Ball Ball { get { return ball; } }
     }
 }

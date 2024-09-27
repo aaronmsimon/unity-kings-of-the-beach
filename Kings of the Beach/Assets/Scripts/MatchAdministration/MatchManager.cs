@@ -23,12 +23,14 @@ namespace KotB.Match
         private PrePointState prePointState;
         private ServeState serveState;
         private InPlayState inPlayState;
+        private PostPointState postPointState;
 
         private void Start() {
             matchStateMachine = new StateMachine();
             prePointState = new PrePointState(this);
             serveState = new ServeState(this);
             inPlayState = new InPlayState(this);
+            postPointState = new PostPointState(this);
 
             matchStateMachine.StateChanged += OnStateChanged;
 
@@ -65,6 +67,10 @@ namespace KotB.Match
             UpdateMatchSOServer();
         }
 
+        public void OnBallHitGround() {
+            matchStateMachine.ChangeState(postPointState);
+        }
+
         private void UpdateMatchSOServer() {
             matchInfo.Server = teams[teamServeIndex].Athletes[playerServeIndex];
         }
@@ -78,6 +84,7 @@ namespace KotB.Match
         public PrePointState PrePointState { get { return prePointState; } }
         public ServeState ServeState { get { return serveState; } }
         public InPlayState InPlayState { get { return inPlayState; } }
+        public PostPointState PostPointState { get { return postPointState; } }
         public InputReader InputReader { get { return inputReader; } }
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public BallSO BallInfo { get { return ballInfo; } }

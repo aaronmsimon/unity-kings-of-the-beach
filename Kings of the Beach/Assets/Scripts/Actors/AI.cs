@@ -53,6 +53,13 @@ namespace KotB.Actors
             ballInfo.SetPassTarget(targetPos, 7, 1.75f, this);
         }
 
+        public void Shoot() {
+            float targetX = Random.Range(0, courtSideLength / 2) * -courtSide;
+            float targetZ = Random.Range(-4, 4);
+            Vector3 targetPos = new Vector3(targetX, 0f, targetZ);
+            ballInfo.SetPassTarget(targetPos, 7, 1.75f, this);
+        }
+
         private Vector2 AdjustVectorAccuracy(Vector2 vector, float accuracy)
         {
             // Clamp accuracy to the range of 0 to 1 to avoid unexpected results
@@ -88,6 +95,7 @@ namespace KotB.Actors
         public DefenseState DefenseState { get { return defenseState; } }
         public OffenseState OffenseState { get { return offenseState; } }
         public DigReadyState DigReadyState { get { return digReadyState; } }
+        public PostPointState PostPointState { get { return postPointState; } }
         public Athlete Teammate { get { return teammate; } set { teammate = value; } }
     }
 }

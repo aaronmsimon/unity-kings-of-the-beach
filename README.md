@@ -72,9 +72,7 @@ I would like to actually finish this game this time. That means starting with a 
 
 ##### Notes/Next Steps:
 - Distinguish Athlete and Player Classes, check for unnecessary fields, properties, and events
-- AI State Machine
-- create AI bump across, check that state machine is flowing right
-
+- Spike ball - jump, low trajectory, and speed
 - get side based on team
 
 #### Basic Updates to do (dynamic list)
@@ -85,7 +83,8 @@ I would like to actually finish this game this time. That means starting with a 
 
 **AI**
 - Teammate becomes AI with proper state machines
-- AI Serve (random values range based on skill), Athlete should control with input for Player and Random for AI, not serving go to places like on player class (can be on athlete?)
+- AI Serve to location with random speed based on skill, chance to also go out
+- Offense and DigReady states are moving the same way, practically -> DRY
 
 **Ball**
 - Ball net detection
@@ -105,7 +104,6 @@ I would like to actually finish this game this time. That means starting with a 
 
 
 #### Needed for MVP
-2. Improve AI State Machine
 3. Serving
 4. Scoring system
 5. Spike ball

@@ -11,8 +11,13 @@ namespace KotB.Match
         private IState currentState;
         private Athlete server;
 
+        public event Action TransitionToPrePointState;
         public event Action TransitionToServeState;
 
+        public void TransitionToPrePointStateEvent() {
+            TransitionToPrePointState?.Invoke();
+        }
+        
         public void TransitionToServeStateEvent() {
             TransitionToServeState?.Invoke();
         }

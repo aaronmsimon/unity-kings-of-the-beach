@@ -45,6 +45,7 @@ namespace KotB.StatePattern.PlayerStates
         }
 
         private void OnBallHitGround() {
+            player.MoveDir = Vector3.zero;
             player.StateMachine.ChangeState(player.PostPointState);
         }
     }

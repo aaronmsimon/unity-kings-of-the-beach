@@ -9,10 +9,12 @@ namespace KotB.StatePattern.AIStates
 
         public override void Enter() {
             ai.MatchInfo.TransitionToServeState += OnMatchChangeToServeState;
+            ai.BallInfo.BallServed += OnBallServed;
         }
 
         public override void Exit() {
             ai.MatchInfo.TransitionToServeState -= OnMatchChangeToServeState;
+            ai.BallInfo.BallServed -= OnBallServed;
         }
 
         private void OnMatchChangeToServeState() {
@@ -21,8 +23,11 @@ namespace KotB.StatePattern.AIStates
             } else {
                 Vector3 newPos = ai.MatchInfo.Server.CourtSide == ai.CourtSide ? ai.Skills.ServingPartnerPos : ai.Skills.ReceivingPos;
                 ai.transform.position = new Vector3(newPos.x * ai.CourtSide, newPos.y, newPos.z);
-                ai.StateMachine.ChangeState(ai.DefenseState);
             }
+        }
+
+        private void OnBallServed() {
+            ai.StateMachine.ChangeState(ai.DefenseState);
         }
     }
 }
