@@ -1,19 +1,14 @@
 using UnityEngine;
+using KotB.Match;
 
 namespace KotB.StatePattern.MatchStates
 {
     public class InPlayState : MatchBaseState
     {
-        private InputReader inputReader;
-
-        public InPlayState(InputReader inputReader) {
-            this.inputReader = inputReader;
-        }
+        public InPlayState(MatchManager matchManager) : base(matchManager) { }
 
         public override void Enter() {
-            inputReader.EnableGameplayInput();
+            matchManager.InputReader.EnableGameplayInput();
         }
-
-        public override void Update() {}
     }
 }

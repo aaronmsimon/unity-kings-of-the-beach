@@ -6,11 +6,11 @@ using UnityEngine;
 public class BallSO : ScriptableObject
 {
     public Vector3 Position { get; set; }
-    public Vector3 TargetPos { get; set; }
+    [SerializeField] private Vector3 targetPos;
     public Vector3 StartPos { get; private set; }
     public float Height { get; set; }
     public float Duration { get; set; }
-    public int Possession { get; set; }
+    [SerializeField] private int possession;
     public int HitsForTeam { get; set; }
     public Athlete lastPlayerToHit { get; set; }
     public float TimeSinceLastHit { get; set; }
@@ -19,6 +19,8 @@ public class BallSO : ScriptableObject
 
     public event Action BallGiven;
     public event Action TargetSet;
+    public event Action BallChangePossession;
+    public event Action BallServed;
 
     // Serve
     private float idealServeHeight = 3f;
@@ -55,16 +57,34 @@ public class BallSO : ScriptableObject
         TargetSet?.Invoke();
     }
 
-    public void SetPassTarget(Vector3 targetPos, float height, float duration) {
+    public void SetPassTarget(Vector3 targetPos, float height, float duration, Athlete passer) {
         StartPos = Position;
         TargetPos = targetPos;
         Height = height;
         Duration = duration;
         ResetTimeSinceLastHit();
+        HitsForTeam += 1;
+        lastPlayerToHit = passer;
         TargetSet?.Invoke();
+    }
+
+    public void ClearTargetPos() {
+        targetPos = Vector3.zero;
+    }
+
+    public void BallChangePossessionEvent() {
+        BallChangePossession?.Invoke();
+    }
+
+    public void BallServedEvent() {
+        BallServed?.Invoke();
     }
 
     private void ResetTimeSinceLastHit() {
         TimeSinceLastHit = 0;
     }
+
+    //---- PROPERTIES ----
+    public int Possession { get { return possession; } set { possession = value; } }
+    public Vector3 TargetPos { get { return targetPos; } set { targetPos = value; } }
 }

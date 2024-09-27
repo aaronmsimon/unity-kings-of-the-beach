@@ -11,8 +11,5 @@ namespace KotB.StatePattern.PlayerStates
             // this is obviously temporary for testing with coach
             player.StateMachine.ChangeState(player.NormalState);
         }
-
-        public override void Exit() {
-        }
     }
 }

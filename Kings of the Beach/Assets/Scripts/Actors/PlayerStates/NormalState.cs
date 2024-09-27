@@ -14,16 +14,15 @@ namespace KotB.StatePattern.PlayerStates
             player.UpdateCameraPriorty.Raise();
 
             player.BallHitGround += OnBallHitGround;
-            player.MatchChangeToServeState += OnMatchChangeToServeState;
+            player.MatchInfo.TransitionToServeState += OnMatchChangeToServeState;
         }
 
         public override void Exit() {
             player.BallHitGround -= OnBallHitGround;
-            player.MatchChangeToServeState -= OnMatchChangeToServeState;
+            player.MatchInfo.TransitionToServeState -= OnMatchChangeToServeState;
         }
 
-        public override void Update()
-        {
+        public override void Update() {
             player.MoveDir = new Vector3(player.MoveInput.x, 0, player.MoveInput.y);
 
             if (player.MatchInfo.CurrentState is InPlayState && player.BallInfo.lastPlayerToHit != player) {
@@ -40,7 +39,7 @@ namespace KotB.StatePattern.PlayerStates
             if (player.MatchInfo.Server == player) {
                 player.StateMachine.ChangeState(player.ServeState);
             } else {
-                Vector3 newPos = player.BallInfo.Possession == player.CourtSide ? player.Skills.ServingPartnerPos : player.Skills.ReceivingPos;
+                Vector3 newPos = player.MatchInfo.Server.CourtSide == player.CourtSide ? player.Skills.ServingPartnerPos : player.Skills.ReceivingPos;
                 player.transform.position = new Vector3(newPos.x * player.CourtSide, newPos.y, newPos.z);
             }
         }

@@ -46,8 +46,7 @@ namespace KotB.Actors
             playerStateMachine.ChangeState(normalState);
         }
 
-        protected override void Update()
-        {
+        protected override void Update() {
             base.Update();
 
             playerStateMachine.Update();
@@ -101,11 +100,11 @@ namespace KotB.Actors
             get { return servePowerValue; }
             set { servePowerValue = value; }
         }
+        public GameEvent UpdateCameraPriorty { get { return updateCameraPriority; } }
         public GameEvent ShowServePowerMeter { get { return showServePowerMeter; } }
         public GameEvent HideServePowerMeter { get { return hideServePowerMeter; } }
         public GameEvent ShowServeAim { get { return showServeAim; } }
         public GameEvent HideServeAim { get { return hideServeAim; } }
-        public GameEvent UpdateCameraPriorty { get { return updateCameraPriority; } }
         public FloatVariable MainCameraPriority {
             get { return mainCameraPriority; }
             set { mainCameraPriority = value; }

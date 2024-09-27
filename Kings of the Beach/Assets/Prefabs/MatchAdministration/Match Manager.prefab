@@ -55,9 +55,9 @@ MonoBehaviour:
     athletes:
     - {fileID: 0}
     - {fileID: 0}
-  matchSO: {fileID: 11400000, guid: 23b44ef1d3bbbbe42a97b3fd37ef9578, type: 2}
+  matchInfo: {fileID: 11400000, guid: 23b44ef1d3bbbbe42a97b3fd37ef9578, type: 2}
+  ballInfo: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
   inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
-  changeToServeState: {fileID: 11400000, guid: 09bf76267e1a108438f99490e435f253, type: 2}
 --- !u!114 &8302372324360464159
 MonoBehaviour:
   m_ObjectHideFlags: 0

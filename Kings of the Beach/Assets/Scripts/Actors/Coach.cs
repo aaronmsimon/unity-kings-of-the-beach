@@ -35,8 +35,8 @@ namespace KotB.Actors
             // place player at defensive position
             player.transform.position = new Vector3(player.Skills.ServingPartnerPos.x * player.CourtSide, player.Skills.ServingPartnerPos.y, player.Skills.ServingPartnerPos.z);
 
-            InPlayState inPlayState = new InPlayState(inputReader);
-            matchInfo.CurrentState = inPlayState;
+            // InPlayState inPlayState = new InPlayState();
+            // matchInfo.CurrentState = inPlayState;
         }
 
         //Adds listeners for events being triggered in the InputReader script

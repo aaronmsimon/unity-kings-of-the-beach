@@ -57,6 +57,7 @@ public class Ball : MonoBehaviour
                     changeToInPlayStateEvent.Raise();
                 }
 
+                ballInfo.BallChangePossessionEvent();
                 Debug.Log("changed side");
             }
         }

@@ -1,19 +1,19 @@
 using UnityEngine;
+using KotB.Match;
 
 namespace KotB.StatePattern.MatchStates
 {
     public class ServeState : MatchBaseState
     {
-        private InputReader inputReader;
-
-        public ServeState(InputReader inputReader) {
-            this.inputReader = inputReader;
-        }
+        public ServeState(MatchManager matchManager) : base(matchManager) { }
 
         public override void Enter() {
-            inputReader.EnableGameplayInput();
+            matchManager.InputReader.EnableGameplayInput();
+            matchManager.BallInfo.BallServed += OnBallServed;
         }
 
-        public override void Update() {}
+        private void OnBallServed() {
+            matchManager.StateMachine.ChangeState(matchManager.InPlayState);
+        }
     }
 }

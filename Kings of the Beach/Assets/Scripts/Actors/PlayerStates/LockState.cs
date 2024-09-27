@@ -28,18 +28,14 @@ namespace KotB.StatePattern.PlayerStates
             player.BallHitGround -= OnBallHitGround;
         }
 
-        public override void Update()
-        {
+        public override void Update() {
             bumpTimer -= Time.deltaTime;
             TryUnlock();
         }
 
-        public override void OnTriggerEnter(Collider other)
-        {
+        public override void OnTriggerEnter(Collider other) {
             if (bumpTimer > 0) {
-                player.BallInfo.SetPassTarget(targetPos, 7, 1.75f);
-                player.BallInfo.HitsForTeam += 1;
-                player.BallInfo.lastPlayerToHit = player;
+                player.BallInfo.SetPassTarget(targetPos, 7, 1.75f, player);
                 canUnlock = true;
                 unlockTimer = unlockDelay;
             }

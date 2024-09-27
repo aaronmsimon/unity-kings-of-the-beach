@@ -1,14 +1,14 @@
-using KotB.Match;
 using UnityEngine;
+using KotB.Actors;
 
-namespace KotB.StatePattern.MatchStates
+namespace KotB.StatePattern.AIStates
 {
-    public abstract class MatchBaseState : IState
+    public abstract class AIBaseState : IState
     {
-        protected readonly MatchManager matchManager;
+        protected readonly AI ai;
 
-        protected MatchBaseState(MatchManager context) {
-            matchManager = context;
+        protected AIBaseState(AI context) {
+            ai = context;
         }
 
         public virtual void Enter() {

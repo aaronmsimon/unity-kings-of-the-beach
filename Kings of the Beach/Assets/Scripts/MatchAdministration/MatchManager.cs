@@ -1,8 +1,8 @@
 using UnityEngine;
-using KotB.Actors;
 using KotB.StatePattern;
 using KotB.StatePattern.MatchStates;
 using RoboRyanTron.Unite2017.Events;
+using KotB.Actors;
 
 namespace KotB.Match
 {
@@ -11,12 +11,10 @@ namespace KotB.Match
         [Header("Teams")]
         [SerializeField] private Team[] teams = new Team[2];
 
-        [Header("Configuration")]
-        [SerializeField] private MatchInfoSO matchSO;
+        [Header("Scriptable Objects")]
+        [SerializeField] private MatchInfoSO matchInfo;
+        [SerializeField] private BallSO ballInfo;
         [SerializeField] private InputReader inputReader;
-
-        [Header("Events")]
-        [SerializeField] private GameEvent changeToServeState;
 
         private int teamServeIndex = 0;
         private int playerServeIndex = 0;
@@ -28,22 +26,35 @@ namespace KotB.Match
 
         private void Start() {
             matchStateMachine = new StateMachine();
-            prePointState = new PrePointState(inputReader, changeToServeState);
-            serveState = new ServeState(inputReader);
-            inPlayState = new InPlayState(inputReader);
+            prePointState = new PrePointState(this);
+            serveState = new ServeState(this);
+            inPlayState = new InPlayState(this);
 
             matchStateMachine.StateChanged += OnStateChanged;
 
             matchStateMachine.ChangeState(prePointState);
             UpdateMatchSOServer();
+
+            for (int i = 0; i < teams.Length; i++) {
+                for (int j = 0; j < teams[i].Athletes.Length; j++){
+                    if (teams[i].Athletes[j] != null && teams[i].Athletes[j] is AI) {
+                        AI ai = (AI)teams[i].Athletes[j];
+                        ai.Teammate = GetTeammate(ai);
+                    }
+                }
+            }
         }
 
-        public void OnChangeToServeState() {
-            matchStateMachine.ChangeState(serveState);
-        }
+        public Athlete GetTeammate(AI ai) {
+            for (int i = 0; i < teams.Length; i++) {
+                for (int j = 0; j < teams[i].Athletes.Length; j++) {
+                    if (teams[i].Athletes[j] == ai) {
+                        return teams[i].Athletes[Mathf.Abs(j - 1)];
+                    }
+                }
+            }
 
-        public void OnChangeToInPlayState() {
-            matchStateMachine.ChangeState(inPlayState);
+            return null;
         }
 
         public void NextServer() {
@@ -55,25 +66,20 @@ namespace KotB.Match
         }
 
         private void UpdateMatchSOServer() {
-            matchSO.Server = teams[teamServeIndex].Athletes[playerServeIndex];
+            matchInfo.Server = teams[teamServeIndex].Athletes[playerServeIndex];
         }
 
         private void OnStateChanged(IState newState) {
-            matchSO.CurrentState = newState;
+            matchInfo.CurrentState = newState;
         }
 
-        // Class for Match
-        [System.Serializable]
-        private class Team
-        {
-            [SerializeField] private string teamName;
-            [SerializeField] private Athlete[] athletes = new Athlete[2];
-
-            public Athlete[] Athletes {
-                get {
-                    return athletes;
-                }
-            }
-        }
+        //---- PROPERTIES ----
+        public StateMachine StateMachine { get { return matchStateMachine; } }
+        public PrePointState PrePointState { get { return prePointState; } }
+        public ServeState ServeState { get { return serveState; } }
+        public InPlayState InPlayState { get { return inPlayState; } }
+        public InputReader InputReader { get { return inputReader; } }
+        public MatchInfoSO MatchInfo { get { return matchInfo; } }
+        public BallSO BallInfo { get { return ballInfo; } }
     }
 }

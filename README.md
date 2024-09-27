@@ -73,6 +73,9 @@ I would like to actually finish this game this time. That means starting with a 
 ##### Notes/Next Steps:
 - Distinguish Athlete and Player Classes, check for unnecessary fields, properties, and events
 - AI State Machine
+- create AI bump across, check that state machine is flowing right
+
+- get side based on team
 
 #### Basic Updates to do (dynamic list)
 **Athlete**
@@ -93,6 +96,8 @@ I would like to actually finish this game this time. That means starting with a 
 - When starting match, setup side for Serve
 - Post Point: scoring, change serve, allow for celebration/skip
 - Determine in/out of bounds when ball hit ground
+- review transitions that are not in a state
+- set teams will need to be a function from game setup
 
 
 #### Needed for MVP

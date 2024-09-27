@@ -98,18 +98,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14e6fb03f9f1aea49b2a2f830b2cc6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skills: {fileID: 11400000, guid: ce57c4a0d93678e49bcbafcce5245da3, type: 2}
-  ballSO: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
+  skills: {fileID: 0}
+  ballInfo: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
+  matchInfo: {fileID: 11400000, guid: 23b44ef1d3bbbbe42a97b3fd37ef9578, type: 2}
   courtSide: -1
   obstaclesLayer:
     serializedVersion: 2
     m_Bits: 64
-  mySidePct: 0.5
-  myZoneFront: 1.5
-  myZoneBack: 2
-  showMySide: 1
-  mySideColor: {r: 0.09979939, g: 0.8742227, b: 0.89218324, a: 0.5019608}
-  teammateSO: {fileID: 11400000, guid: 819c6d31029030d45906e8d16ffbe3e5, type: 2}
 --- !u!114 &1164755901000653087
 MonoBehaviour:
   m_ObjectHideFlags: 0

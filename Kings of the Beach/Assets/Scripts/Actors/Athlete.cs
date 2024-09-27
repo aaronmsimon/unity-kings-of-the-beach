@@ -18,13 +18,12 @@ namespace KotB.Actors
         [SerializeField] private LayerMask obstaclesLayer;
 
         public event Action BallHitGround;
-        public event Action MatchChangeToServeState;
 
         protected Ball ball;
         protected float courtSideLength = 8;
         private float skillLevelMax = 10;
         protected Vector3 moveDir;
-        protected Vector3 bumpTarget;
+        // protected Vector3 bumpTarget;
 
         protected virtual void Start() {
             if (skills == null) {
@@ -48,7 +47,7 @@ namespace KotB.Actors
             }
         }
 
-        protected virtual void Move() {
+        private void Move() {
             bool canMove = !Physics.Raycast(transform.position + Vector3.up * 0.5f, moveDir, out RaycastHit hit, 0.5f, obstaclesLayer);
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, moveDir, Color.red);
             if (canMove) {
@@ -58,11 +57,11 @@ namespace KotB.Actors
             skills.Position = transform.position;
         }
 
-        private void SetCourtSide(int courtSide) {
+        public void SetCourtSide(int courtSide) {
             this.courtSide = courtSide;
         }
 
-        private void SwitchCourtSide() {
+        public void SwitchCourtSide() {
             courtSide *= -1;
         }
 
@@ -70,10 +69,6 @@ namespace KotB.Actors
 
         public void OnBallHitGround() {
             BallHitGround?.Invoke();
-        }
-
-        public void OnMatchChangeToServeState() {
-            MatchChangeToServeState?.Invoke();
         }
 
         //---- PROPERTIES ----
