@@ -82,9 +82,10 @@ I would like to actually finish this game this time. That means starting with a 
 - (future) Add Serve Power to SkillsSO, use value in duration
 
 **AI**
-- Teammate becomes AI with proper state machines
+- check all movement from each state [when ai hits to opposing side, keeps moving in last direction; needs to change state when possession change]
 - AI Serve to location with random speed based on skill, chance to also go out
 - Offense and DigReady states are moving the same way, practically -> DRY
+- spike dir based on tactic
 
 **Ball**
 - Ball net detection

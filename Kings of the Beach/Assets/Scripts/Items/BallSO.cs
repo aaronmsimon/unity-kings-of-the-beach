@@ -68,6 +68,17 @@ public class BallSO : ScriptableObject
         TargetSet?.Invoke();
     }
 
+    public void SetSpikeTarget(Vector3 targetPos, float duration, Athlete spiker) {
+        StartPos = Position;
+        TargetPos = targetPos;
+        Height = -1;
+        Duration = duration;
+        ResetTimeSinceLastHit();
+        HitsForTeam += 1;
+        lastPlayerToHit = spiker;
+        TargetSet?.Invoke();
+    }
+
     public void ClearTargetPos() {
         targetPos = Vector3.zero;
     }

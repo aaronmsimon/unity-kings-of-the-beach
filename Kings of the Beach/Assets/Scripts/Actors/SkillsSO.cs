@@ -11,6 +11,7 @@ public class SkillsSO : ScriptableObject
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float targetLockDistance;
+    [SerializeField] private float reactionTime;
 
     [Header("Accuracy")]
     [SerializeField][Range(0,1)] private float passAccuracy;
@@ -33,6 +34,7 @@ public class SkillsSO : ScriptableObject
 
     public float MoveSpeed { get { return moveSpeed; } }
     public float TargetLockDistance { get { return targetLockDistance; } }
+    public float ReactionTime { get { return reactionTime; } }
     public float PassAccuracy { get { return passAccuracy; } }
     public PositionType PlayerPosition { get { return playerPosition; } }
     public float DigRange { get { return digRange; } }

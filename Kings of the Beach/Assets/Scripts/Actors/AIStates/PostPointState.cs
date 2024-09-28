@@ -8,6 +8,8 @@ namespace KotB.StatePattern.AIStates
         public PostPointState(AI ai) : base(ai) { }
 
         public override void Enter() {
+            ai.MoveDir = Vector3.zero;
+            
             ai.MatchInfo.TransitionToServeState += OnMatchChangeToServeState;
             ai.BallInfo.BallServed += OnBallServed;
         }

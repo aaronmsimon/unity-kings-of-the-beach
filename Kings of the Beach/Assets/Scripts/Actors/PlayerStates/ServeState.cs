@@ -83,7 +83,6 @@ namespace KotB.StatePattern.PlayerStates
             player.HideServeAim.Raise();
             player.BallInfo.BallServedEvent();
             player.BallInfo.SetServeTarget(player.ServeAimPosition.Value, player.ServePowerValue.Value);
-            Debug.Log("Power is " + player.ServePowerValue.Value);
             player.StateMachine.ChangeState(player.NormalState);
         }
 

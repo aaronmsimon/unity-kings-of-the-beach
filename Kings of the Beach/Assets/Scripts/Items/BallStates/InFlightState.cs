@@ -17,7 +17,11 @@ namespace KotB.StatePattern.BallStates
                 float t = ball.BallInfo.TimeSinceLastHit / ball.BallInfo.Duration;
                 if (t > 1f) t = 1f;
 
-                ball.transform.position = CalculateArcPosition(t, ball.BallInfo.StartPos, targetPos, ball.BallInfo.Height);
+                if (ball.BallInfo.Height >= 0) {
+                    ball.transform.position = CalculateInFlightPosition(t, ball.BallInfo.StartPos, targetPos, ball.BallInfo.Height);
+                } else {
+                    ball.transform.position = CalculateInFlightPosition(t, ball.BallInfo.StartPos, targetPos);
+                }
             } else {
                 ball.BallHitGround.Raise();
                 ball.StateMachine.ChangeState(ball.GroundState);
@@ -25,7 +29,7 @@ namespace KotB.StatePattern.BallStates
             }
         }
 
-        private Vector3 CalculateArcPosition(float t, Vector3 start, Vector3 end, float height)
+        private Vector3 CalculateInFlightPosition(float t, Vector3 start, Vector3 end, float height)
         {
             // Linear interpolation for horizontal position (XZ plane)
             Vector3 horizontalPosition = Vector3.Lerp(start, end, t);
@@ -37,6 +41,11 @@ namespace KotB.StatePattern.BallStates
             horizontalPosition.y = verticalPosition;
 
             return horizontalPosition;
+        }
+
+        private Vector3 CalculateInFlightPosition(float t, Vector3 start, Vector3 end) {
+            // Linear interpolation for horizontal position (XZ plane)
+            return Vector3.Lerp(start, end, t);
         }
     }
 }

@@ -65,6 +65,10 @@ namespace KotB.Actors
             courtSide *= -1;
         }
 
+        protected virtual void OnDrawGizmos() {
+            Debug.DrawLine(transform.position, ballInfo.Position, Color.green);
+        }
+
         //---- EVENT LISTENERS ----
 
         public void OnBallHitGround() {

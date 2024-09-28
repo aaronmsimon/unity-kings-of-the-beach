@@ -7,7 +7,11 @@ namespace KotB.StatePattern.AIStates
     {
         public DigReadyState(AI ai) : base(ai) { }
 
+        private float reactionTime;
+
         public override void Enter() {
+            reactionTime = ai.Skills.ReactionTime;
+
             ai.BallHitGround += OnBallHitGround;
         }
 
@@ -16,14 +20,16 @@ namespace KotB.StatePattern.AIStates
         }
 
         public override void Update() {
+            reactionTime -= Time.deltaTime;
+
             float myDistToBall = (ai.BallInfo.TargetPos - ai.transform.position).sqrMagnitude;
             float teammateDistToBall = (ai.BallInfo.TargetPos - ai.Teammate.transform.position).sqrMagnitude;
 
-            if (myDistToBall < teammateDistToBall) {
-                if (Vector3.Distance(ai.transform.position, ai.BallInfo.TargetPos) > ai.Skills.TargetLockDistance) {
-                    ai.MoveDir = (ai.BallInfo.TargetPos - ai.transform.position).normalized;
+            if (myDistToBall < teammateDistToBall && reactionTime < 0) {
+                if (Vector3.Distance(ai.transform.position, ai.AdjustedTargetPos) > ai.Skills.TargetLockDistance) {
+                    ai.MoveDir = (ai.AdjustedTargetPos - ai.transform.position).normalized;
                 } else {
-                    ai.transform.position = ai.BallInfo.TargetPos;
+                    ai.transform.position = ai.AdjustedTargetPos;
                     ai.MoveDir = Vector3.zero;
                 }
             }

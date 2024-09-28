@@ -58,7 +58,6 @@ public class Ball : MonoBehaviour
                 }
 
                 ballInfo.BallChangePossessionEvent();
-                Debug.Log("changed side");
             }
         }
         ballInfo.Possession = (int)Mathf.Sign(transform.position.x);

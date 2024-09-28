@@ -47,6 +47,10 @@ namespace KotB.Match
             }
         }
 
+        private void Update() {
+            matchStateMachine.Update();
+        }
+
         public Athlete GetTeammate(AI ai) {
             for (int i = 0; i < teams.Length; i++) {
                 for (int j = 0; j < teams[i].Athletes.Length; j++) {
