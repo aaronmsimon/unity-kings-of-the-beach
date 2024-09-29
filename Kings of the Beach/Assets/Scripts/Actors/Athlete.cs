@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using KotB.Match;
+using Unity.VisualScripting;
 
 namespace KotB.Actors
 {
@@ -21,18 +22,38 @@ namespace KotB.Actors
 
         protected Ball ball;
         protected float courtSideLength = 8;
-        private float skillLevelMax = 10;
         protected Vector3 moveDir;
-        // protected Vector3 bumpTarget;
+        protected bool isJumping;
+
+        private float skillLevelMax = 10;
+        private float jumpDuration = 0.25f;
+        private float jumpTimer;
+        private bool jumpAscending;
+        private float jumpDescendingMultiplier = 1.5f;
+        private Vector3 startJumpPos;
+        private Vector3 endJumpPos;
+
+        // caching
+        private float moveSpeed;
+        private float height;
+        private float jumpHeight;
 
         protected virtual void Start() {
-            if (skills == null) {
+            if (skills != null) {
+                moveSpeed = skills.MoveSpeed;
+                height = skills.Height;
+                jumpHeight = skills.JumpHeight;
+            } else {
                 Debug.LogAssertion($"No skills found for { this.name }");
             }
         }
 
         protected virtual void Update() {
-            Move();
+            if (!isJumping) {
+                Move();
+            } else {
+                Jump();
+            }
         }
 
         protected virtual void OnTriggerEnter(Collider other) {
@@ -51,10 +72,40 @@ namespace KotB.Actors
             bool canMove = !Physics.Raycast(transform.position + Vector3.up * 0.5f, moveDir, out RaycastHit hit, 0.5f, obstaclesLayer);
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, moveDir, Color.red);
             if (canMove) {
-                transform.position += moveDir * skills.MoveSpeed * Time.deltaTime;
+                transform.position += moveDir * moveSpeed * Time.deltaTime;
             }
 
             skills.Position = transform.position;
+        }
+
+        private void Jump() {
+            jumpTimer += Time.deltaTime;
+            if (jumpAscending) {
+                if (jumpTimer < jumpDuration) {
+                    float t = jumpTimer / jumpDuration;
+                    transform.position = Vector3.Lerp(startJumpPos, endJumpPos, t);
+                } else {
+                    transform.position = endJumpPos;
+                    jumpAscending = false;
+                    jumpTimer = 0;
+                }
+            } else {
+                if (jumpTimer < jumpDuration / jumpDescendingMultiplier) {
+                    float t = jumpTimer / jumpDuration;
+                    transform.position = Vector3.Lerp(endJumpPos, startJumpPos, t);
+                } else {
+                    transform.position = startJumpPos;
+                    isJumping = false;
+                }
+            }
+        }
+
+        public void PerformJump() {
+            isJumping = true;
+            jumpTimer = 0;
+            jumpAscending = true;
+            startJumpPos = transform.position;
+            endJumpPos = new Vector3(transform.position.x, jumpHeight, transform.position.z);
         }
 
         public void SetCourtSide(int courtSide) {

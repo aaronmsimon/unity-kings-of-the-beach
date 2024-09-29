@@ -56,12 +56,14 @@ namespace KotB.Actors
         private void OnEnable() {
             inputReader.moveEvent += OnMove;
             inputReader.rightStickEvent += OnRightStick;
+            inputReader.jumpEvent += OnJump;
         }
         
         //Removes all listeners to the events coming from the InputReader script
         private void OnDisable() {
             inputReader.moveEvent -= OnMove;
             inputReader.rightStickEvent -= OnRightStick;
+            inputReader.jumpEvent -= OnJump;
         }
 
         protected override void OnTriggerEnter(Collider other) {
@@ -84,6 +86,10 @@ namespace KotB.Actors
 
         private void OnRightStick(Vector2 movement) {
             rightStickInput = movement;
+        }
+
+        private void OnJump() {
+            PerformJump();
         }
 
         //---- PROPERTIES ----

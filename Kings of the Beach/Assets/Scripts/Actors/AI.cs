@@ -15,8 +15,6 @@ namespace KotB.Actors
         private PostPointState postPointState;
 
         private Athlete teammate;
-        private Vector3 adjustedTargetPos;
-        private Vector3 spikeOrigin;
 
         private float passRangeMin = 0.8f;
         private float passRangeMax = 2.5f;
@@ -32,18 +30,6 @@ namespace KotB.Actors
             postPointState = new PostPointState(this);
 
             aiStateMachine.ChangeState(postPointState);
-
-            CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
-            spikeOrigin = transform.position + new Vector3(0, capsuleCollider.center.y + capsuleCollider.height / 2, 0);
-            // teammate = (AI)matchInfo.GetTeammate(this);
-        }
-
-        private void OnEnable() {
-            ballInfo.TargetSet += OnTargetSet;
-        }
-
-        private void OnDisable() {
-            ballInfo.TargetSet -= OnTargetSet;
         }
 
         protected override void Update() {
@@ -64,15 +50,6 @@ namespace KotB.Actors
             Vector2 aimLocation = AdjustVectorAccuracy(teammatePos, skills.PassAccuracy);
             Vector3 targetPos = new Vector3(aimLocation.x, 0f, aimLocation.y);
             ballInfo.SetPassTarget(targetPos, 7, 1.75f, this);
-        }
-
-        private void OnTargetSet() {
-            adjustedTargetPos = ballInfo.TargetPos;
-
-            if (Mathf.Sign(ballInfo.TargetPos.x) == courtSide && Mathf.Abs(ballInfo.TargetPos.x) <= Mathf.Abs(transform.position.x)) {
-                Vector3 direction = (new Vector3(ballInfo.Position.x, 0.01f, ballInfo.Position.z) - transform.position).normalized;
-                adjustedTargetPos += direction * .5f;
-            }
         }
 
         private Vector2 AdjustVectorAccuracy(Vector2 vector, float accuracy)
@@ -113,7 +90,5 @@ namespace KotB.Actors
         public DigReadyState DigReadyState { get { return digReadyState; } }
         public PostPointState PostPointState { get { return postPointState; } }
         public Athlete Teammate { get { return teammate; } set { teammate = value; } }
-        public Vector3 AdjustedTargetPos { get { return adjustedTargetPos; } }
-        public Vector3 SpikeOrigin { get { return spikeOrigin; } }
     }
 }

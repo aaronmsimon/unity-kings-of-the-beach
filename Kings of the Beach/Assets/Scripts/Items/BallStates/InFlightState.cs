@@ -16,6 +16,10 @@ namespace KotB.StatePattern.BallStates
                 ball.BallInfo.TimeSinceLastHit += Time.deltaTime;
                 float t = ball.BallInfo.TimeSinceLastHit / ball.BallInfo.Duration;
                 if (t > 1f) t = 1f;
+                if (t >= 0.5f && !ball.BallInfo.ApexReachedFlag) {
+                    ball.BallInfo.ApexReachedEvent();
+                    ball.BallInfo.ApexReachedFlag = true;
+                }
 
                 if (ball.BallInfo.Height >= 0) {
                     ball.transform.position = CalculateInFlightPosition(t, ball.BallInfo.StartPos, targetPos, ball.BallInfo.Height);

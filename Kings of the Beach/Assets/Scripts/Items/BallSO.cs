@@ -14,6 +14,7 @@ public class BallSO : ScriptableObject
     public int HitsForTeam { get; set; }
     public Athlete lastPlayerToHit { get; set; }
     public float TimeSinceLastHit { get; set; }
+    public bool ApexReachedFlag { get; set; }
 
     public Athlete ballHeldBy { get; private set; }
 
@@ -21,6 +22,7 @@ public class BallSO : ScriptableObject
     public event Action TargetSet;
     public event Action BallChangePossession;
     public event Action BallServed;
+    public event Action ApexReached;
 
     // Serve
     private float idealServeHeight = 3f;
@@ -91,8 +93,13 @@ public class BallSO : ScriptableObject
         BallServed?.Invoke();
     }
 
+    public void ApexReachedEvent() {
+        ApexReached?.Invoke();
+    }
+
     private void ResetTimeSinceLastHit() {
         TimeSinceLastHit = 0;
+        ApexReachedFlag = false;
     }
 
     //---- PROPERTIES ----
