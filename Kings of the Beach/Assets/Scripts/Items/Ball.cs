@@ -36,6 +36,8 @@ public class Ball : MonoBehaviour
         inFlightState = new InFlightState(this);
         
         ballStateMachine.ChangeState(groundState);
+
+        ballInfo.BallRadius = GetComponent<Renderer>().bounds.size.x / 2;
     }
 
     private void OnEnable() {

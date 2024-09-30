@@ -64,17 +64,18 @@ I would like to actually finish this game this time. That means starting with a 
 1. ~~Same player can't hit ball twice in-a-row~~
 2. One side can only hit ball three times on side
 3. Point when ball hits ground (in/out depending on who last touched)
+4. Switch sides after 7 points
 
 #### Presentation
 1. ~~Cinemachine~~
 2. Post Processing - Bloom
 3. Scoreboard
+4. Instant Replay for in/out calls
 
 #### Menus
 
 ### Notes/Next Steps:
 - get side based on team
-- adjust in/out based on radius of ball touching line, too
 
 ### Basic Updates to do (dynamic list)
 #### Athlete

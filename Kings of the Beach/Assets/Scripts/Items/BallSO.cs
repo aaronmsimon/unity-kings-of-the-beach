@@ -15,6 +15,7 @@ public class BallSO : ScriptableObject
     public Athlete lastPlayerToHit { get; set; }
     public float TimeSinceLastHit { get; set; }
     public bool ApexReachedFlag { get; set; }
+    public float BallRadius { get; set; }
 
     public Athlete ballHeldBy { get; private set; }
 
@@ -87,7 +88,11 @@ public class BallSO : ScriptableObject
 
     public bool IsInBounds() {
         // sorry for magic numbers
-        return Position.x >= -8 && Position.x <= 8 && Position.z >= -4 && Position.z <= 4;
+        return
+            (Position.x + BallRadius) >= -8 &&
+            (Position.x - BallRadius) <= 8 &&
+            (Position.z + BallRadius) >= -4 &&
+            (Position.z - BallRadius) <= 4;
     }
 
     public void BallChangePossessionEvent() {
