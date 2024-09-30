@@ -35,13 +35,11 @@ namespace KotB.Actors
 
         // caching
         private float moveSpeed;
-        private float height;
         private float jumpHeight;
 
         protected virtual void Start() {
             if (skills != null) {
                 moveSpeed = skills.MoveSpeed;
-                height = skills.Height;
                 jumpHeight = skills.JumpHeight;
             } else {
                 Debug.LogAssertion($"No skills found for { this.name }");
@@ -139,5 +137,6 @@ namespace KotB.Actors
             set { moveDir = value; }
         }
         public Ball Ball { get { return ball; } }
+        public bool IsJumping { get { return isJumping; } }
     }
 }

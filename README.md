@@ -13,6 +13,8 @@ I used to love this game as a kid. Actually, I still do. The Paris Olympics have
 
 I would like to actually finish this game this time. That means starting with a working MVP and then expanding upon it. In order to do so effectively, I'll need to break it down into it's basic parts. Similar to Code Monkey's [Kitchen Chaos](https://youtu.be/AmGSEH7QcDg) and [XCOM](https://www.gamedev.tv/dashboard/courses/26) courses.
 
+[Canva attempt](https://www.canva.com/design/DAGSRB4ZBE0/guNKf3ODCAnbA20KxX11iw/edit)
+
 ### Process
 
 #### Environment
@@ -71,9 +73,6 @@ I would like to actually finish this game this time. That means starting with a 
 #### Menus
 
 ### Notes/Next Steps:
-- draw out all classes and where stuff is coming from and when
-- Distinguish Athlete and Player Classes, check for unnecessary fields, properties, and events
-- Spike ball - jump, low trajectory, and speed
 - get side based on team
 - adjust in/out based on radius of ball touching line, too
 
@@ -96,6 +95,7 @@ I would like to actually finish this game this time. That means starting with a 
 - Ball net detection
 
 #### Player
+- feint for player spike
 - Between points, the players can high-five, hug, etc (see Concepts/Ideas bullet 5), then player controlled skip to service
 - Implement the power meter into the actual service power strike on the ball: accurace for aiming & duration for speed
 
@@ -112,7 +112,6 @@ I would like to actually finish this game this time. That means starting with a 
 ### Needed for MVP
 3. Serving
 4. Scoring system
-5. Spike ball
 6. UI for scoring
 7. Game State Machine
 

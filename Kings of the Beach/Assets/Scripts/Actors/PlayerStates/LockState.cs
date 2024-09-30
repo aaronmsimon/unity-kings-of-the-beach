@@ -34,16 +34,27 @@ namespace KotB.StatePattern.PlayerStates
         }
 
         public override void OnTriggerEnter(Collider other) {
-            if (bumpTimer > 0) {
-                player.BallInfo.SetPassTarget(targetPos, 7, 1.75f, player);
-                canUnlock = true;
-                unlockTimer = unlockDelay;
+            if (player.Ball != null) {
+                if (!player.IsJumping) {
+                    if (bumpTimer > 0) {
+                        player.BallInfo.SetPassTarget(targetPos, 7, 1.75f, player);
+                        canUnlock = true;
+                        unlockTimer = unlockDelay;
+                    }
+                } else {
+                    // shot
+                    SetTargetPos(false);
+                    player.BallInfo.SetSpikeTarget(targetPos, Random.Range(0.5f, 1f), player);
+                }
             }
         }
 
         private void Bump(bool pass) {
             bumpTimer = player.CoyoteTime;
+            SetTargetPos(pass);
+        }
 
+        private void SetTargetPos(bool pass) {
             Vector2 aim = Helpers.CircleMappedToSquare(player.MoveInput.x, player.MoveInput.y);
 
             float targetX = aim.x * 5 + 4 * (pass ? player.CourtSide : -player.CourtSide);
