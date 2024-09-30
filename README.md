@@ -71,9 +71,11 @@ I would like to actually finish this game this time. That means starting with a 
 #### Menus
 
 ##### Notes/Next Steps:
+- draw out all classes and where stuff is coming from and when
 - Distinguish Athlete and Player Classes, check for unnecessary fields, properties, and events
 - Spike ball - jump, low trajectory, and speed
 - get side based on team
+- adjust in/out based on radius of ball touching line, too
 
 #### Basic Updates to do (dynamic list)
 **Athlete**
@@ -82,10 +84,13 @@ I would like to actually finish this game this time. That means starting with a 
 - (future) Add Serve Power to SkillsSO, use value in duration
 
 **AI**
+- doesn't chase ball when won't be hit over net
 - check all movement from each state [when ai hits to opposing side, keeps moving in last direction; needs to change state when possession change]
 - AI Serve to location with random speed based on skill, chance to also go out
 - Offense and DigReady states are moving the same way, practically -> DRY
 - spike dir based on tactic
+- figure out why both AIs chase serve sometimes
+- figure out why one AI is jumping too soon
 
 **Ball**
 - Ball net detection

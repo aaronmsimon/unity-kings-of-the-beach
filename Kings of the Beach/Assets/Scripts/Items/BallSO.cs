@@ -85,6 +85,11 @@ public class BallSO : ScriptableObject
         targetPos = Vector3.zero;
     }
 
+    public bool IsInBounds() {
+        // sorry for magic numbers
+        return Position.x >= -8 && Position.x <= 8 && Position.z >= -4 && Position.z <= 4;
+    }
+
     public void BallChangePossessionEvent() {
         BallChangePossession?.Invoke();
     }

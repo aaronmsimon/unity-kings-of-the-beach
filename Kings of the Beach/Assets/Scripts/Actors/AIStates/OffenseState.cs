@@ -48,9 +48,14 @@ namespace KotB.StatePattern.AIStates
                     ai.Pass();
                 } else {
                     // shot
-                    Debug.Log($"ball height at spike is {ai.BallInfo.Position.y}");
-                    Vector3 targetPos = new Vector3(Random.Range(2, 8.5f) * -ai.CourtSide, 0, Random.Range(-4.5f, 4.5f));
-                    ai.BallInfo.SetSpikeTarget(targetPos, Random.Range(0.5f, 1f), ai);
+                    if (Mathf.Abs(ai.transform.position.x) <= 2) {
+                        Vector3 targetPos = new Vector3(Random.Range(2, 8.5f) * -ai.CourtSide, 0, Random.Range(-4.5f, 4.5f));
+                        ai.BallInfo.SetSpikeTarget(targetPos, Random.Range(0.5f, 1f), ai);
+                        // Debug.Log($"ball height at spike is {ai.BallInfo.Position.y}");
+                    } else {
+                        ai.BallInfo.SetServeTarget(new Vector3(Random.Range(-4, 4), Random.Range(2, 5)), 0.5f);
+                        // Debug.Log($"ball height at hit over net is {ai.BallInfo.Position.y}");
+                    }
                 }
             }
         }
@@ -60,7 +65,6 @@ namespace KotB.StatePattern.AIStates
             if (Vector3.Distance(new Vector3(ai.transform.position.x, 0, ai.transform.position.z), new Vector3(ai.BallInfo.Position.x, 0, ai.BallInfo.Position.z)) <= spikeRangeH) {
                 float spikeRangeV = Random.Range(4.75f, 5.25f);
                 if (apexReached && ai.BallInfo.Position.y <= spikeRangeV) {
-                    Debug.Log($"height when starting jumping: {spikeRangeV}");
                     ai.PerformJump();
                     isSpiking = true;
                 }
