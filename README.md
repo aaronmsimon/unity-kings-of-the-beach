@@ -70,20 +70,20 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### Menus
 
-##### Notes/Next Steps:
+### Notes/Next Steps:
 - draw out all classes and where stuff is coming from and when
 - Distinguish Athlete and Player Classes, check for unnecessary fields, properties, and events
 - Spike ball - jump, low trajectory, and speed
 - get side based on team
 - adjust in/out based on radius of ball touching line, too
 
-#### Basic Updates to do (dynamic list)
-**Athlete**
+### Basic Updates to do (dynamic list)
+#### Athlete
 - disable movement to opposite court side
 - also need to implement other locations like offensive and defensive (which are placeholders for now in the AI state machine, though this should also have a default for the player so consider adding to the Athlete script)
 - (future) Add Serve Power to SkillsSO, use value in duration
 
-**AI**
+#### AI
 - doesn't chase ball when won't be hit over net
 - check all movement from each state [when ai hits to opposing side, keeps moving in last direction; needs to change state when possession change]
 - AI Serve to location with random speed based on skill, chance to also go out
@@ -92,14 +92,14 @@ I would like to actually finish this game this time. That means starting with a 
 - figure out why both AIs chase serve sometimes
 - figure out why one AI is jumping too soon
 
-**Ball**
+#### Ball
 - Ball net detection
 
-**Player**
+#### Player
 - Between points, the players can high-five, hug, etc (see Concepts/Ideas bullet 5), then player controlled skip to service
 - Implement the power meter into the actual service power strike on the ball: accurace for aiming & duration for speed
 
-**Match**
+#### Match
 - Complete all states
 - Serve start
 - When starting match, setup side for Serve
@@ -109,14 +109,14 @@ I would like to actually finish this game this time. That means starting with a 
 - set teams will need to be a function from game setup
 
 
-#### Needed for MVP
+### Needed for MVP
 3. Serving
 4. Scoring system
 5. Spike ball
 6. UI for scoring
 7. Game State Machine
 
-#### Concepts/Ideas
+### Concepts/Ideas
 - use right stick to reach for ball on dig
 - amount of power, direction, depends on angle of ball, how quickly can get under it, etc
 - is amount of power based on how long button is held?
@@ -127,7 +127,7 @@ I would like to actually finish this game this time. That means starting with a 
 - Argue calls
 - Pass will be the gameplay mechanic for both Dig and Set, but Set will be more accurate
 
-#### Cleanup
+### Cleanup
 - is it better to create a static TagHashes class instead of hard-coding tag strings?
 - magic numbers
 - debug: writing to console, gizmos like raycasts or boxes drawn
