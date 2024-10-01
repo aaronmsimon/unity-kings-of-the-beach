@@ -3,6 +3,7 @@ using KotB.StatePattern;
 using KotB.StatePattern.MatchStates;
 using RoboRyanTron.Unite2017.Events;
 using KotB.Actors;
+using System;
 
 namespace KotB.Match
 {
@@ -16,14 +17,17 @@ namespace KotB.Match
         [SerializeField] private BallSO ballInfo;
         [SerializeField] private InputReader inputReader;
 
-        private int teamServeIndex = 0;
-        private int playerServeIndex = 0;
+        [Header("Game Events")]
+        [SerializeField] public GameEvent ScoreChanged;
+
+        public event Action BallHitGround;
 
         private StateMachine matchStateMachine;
         private PrePointState prePointState;
         private ServeState serveState;
         private InPlayState inPlayState;
         private PostPointState postPointState;
+        private MatchEndState matchEndState;
 
         private void Start() {
             matchStateMachine = new StateMachine();
@@ -31,11 +35,16 @@ namespace KotB.Match
             serveState = new ServeState(this);
             inPlayState = new InPlayState(this);
             postPointState = new PostPointState(this);
+            matchEndState = new MatchEndState(this);
 
             matchStateMachine.StateChanged += OnStateChanged;
 
             matchStateMachine.ChangeState(prePointState);
-            UpdateMatchSOServer();
+
+            matchInfo.TeamServeIndex = 0;
+            matchInfo.PlayerServeIndex = 0;
+
+            matchInfo.Teams = teams;
 
             for (int i = 0; i < teams.Length; i++) {
                 for (int j = 0; j < teams[i].Athletes.Length; j++){
@@ -44,7 +53,11 @@ namespace KotB.Match
                         ai.Teammate = GetTeammate(ai);
                     }
                 }
+                teams[i].SetScore(0);
             }
+
+            matchInfo.TotalPoints = 0;
+            matchInfo.ScoreToWin = 21;
         }
 
         private void Update() {
@@ -63,20 +76,27 @@ namespace KotB.Match
             return null;
         }
 
-        public void NextServer() {
-            teamServeIndex = Mathf.Abs(teamServeIndex - 1);
-            if (teamServeIndex == 0)
-                playerServeIndex = Mathf.Abs(playerServeIndex - 1);
-            
-            UpdateMatchSOServer();
-        }
-
         public void OnBallHitGround() {
-            matchStateMachine.ChangeState(postPointState);
+            BallHitGround?.Invoke();
         }
 
-        private void UpdateMatchSOServer() {
-            matchInfo.Server = teams[teamServeIndex].Athletes[playerServeIndex];
+        public int GetTeamIndex(Athlete athlete) {
+            for (int i = 0; i < teams.Length; i++) {
+                for (int j = 0; j < teams[i].Athletes.Length; j++) {
+                    if (teams[i].Athletes[j] == athlete) {
+                        return i;
+                    }
+                }
+            }
+            return -1;
+        }
+
+        public int GetOpponentIndex(int teamIndex) {
+            if (teamIndex != -1) {
+                return Mathf.Abs(teamIndex - 1);
+            } else {
+                return -1;
+            }
         }
 
         private void OnStateChanged(IState newState) {
@@ -89,8 +109,18 @@ namespace KotB.Match
         public ServeState ServeState { get { return serveState; } }
         public InPlayState InPlayState { get { return inPlayState; } }
         public PostPointState PostPointState { get { return postPointState; } }
+        public MatchEndState MatchEndState { get { return matchEndState; } }
         public InputReader InputReader { get { return inputReader; } }
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public BallSO BallInfo { get { return ballInfo; } }
+        public Team[] Teams { get { return teams; } }
+
+        public void temp_onscorechanged() {
+            string scoreText = "";
+            for (int i = 0; i < teams.Length; i++) {
+                scoreText += $"Team {i}: {teams[i].Score} ";
+            }
+            Debug.Log(scoreText);
+        }
     }
 }

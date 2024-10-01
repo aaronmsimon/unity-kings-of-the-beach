@@ -53,7 +53,6 @@ public class Ball : MonoBehaviour
         if (ballTarget != null) {
             if ((transform.position.x > 0 && ballInfo.Possession == -1) || (transform.position.x < 0 && ballInfo.Possession == 1)) {
                 ballInfo.HitsForTeam = 0;
-                ballInfo.lastPlayerToHit = null;
 
                 if (matchInfo.CurrentState is ServeState) {
                     changeToInPlayStateEvent.Raise();

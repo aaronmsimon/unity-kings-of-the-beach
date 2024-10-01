@@ -410,6 +410,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teammate
       objectReference: {fileID: 0}
+    - target: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7855929619521182701, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -584,6 +588,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Match Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 2889677268746467142, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5004104168837443307, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -624,6 +632,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8302372324360464159, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnBallHitGround
+      objectReference: {fileID: 0}
+    - target: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
+      propertyPath: ScoreChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: f3394258f96f2574482e0cc63a9e4db6, type: 2}
     - target: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
       propertyPath: teams.Array.data[0].athletes.Array.data[0]
       value: 
@@ -643,7 +659,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2889677268746467142, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1625124556}
   m_SourcePrefab: {fileID: 100100000, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
 --- !u!1001 &1287105119
 PrefabInstance:
@@ -864,6 +883,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621039090}
   m_CullTransparentMesh: 1
+--- !u!1 &1625124552 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2889677268746467142, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
+  m_PrefabInstance: {fileID: 1233795791}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1625124554 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
+  m_PrefabInstance: {fileID: 1233795791}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625124552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 252ce7adc3f728542b676c1907249edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1625124556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625124552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f3394258f96f2574482e0cc63a9e4db6, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1625124554}
+        m_TargetAssemblyTypeName: KotB.Match.MatchManager, Assembly-CSharp
+        m_MethodName: temp_onscorechanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1673714961 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7664350322595879513, guid: 1f5a43912106afe4789ce7b072886be5, type: 3}
@@ -1278,6 +1341,10 @@ PrefabInstance:
     - target: {fileID: 8463576540012695194, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: courtSide
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8463576540012695194, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: spikeRangeV
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -9,6 +9,7 @@ namespace KotB.StatePattern.MatchStates
 
         public override void Enter() {
             matchManager.InputReader.EnableGameplayInput();
+            matchManager.BallInfo.GiveBall(matchManager.MatchInfo.Server);
             matchManager.BallInfo.BallServed += OnBallServed;
         }
 

@@ -8,8 +8,13 @@ namespace KotB.Match
     [CreateAssetMenu(fileName = "MatchInfo", menuName = "Game/Match Info")]
     public class MatchInfoSO : ScriptableObject
     {
+        public Team[] Teams { get; set; }
+        public int TotalPoints { get; set; }
+        public int ScoreToWin { get; set; }
+        public int TeamServeIndex { get; set; }
+        public int PlayerServeIndex { get; set; }
+        
         private IState currentState;
-        private Athlete server;
 
         public event Action TransitionToPrePointState;
         public event Action TransitionToServeState;
@@ -27,8 +32,7 @@ namespace KotB.Match
             set { currentState = value; }
         }
         public Athlete Server {
-            get { return server; }
-            set { server = value; }
+            get { return Teams[TeamServeIndex].Athletes[PlayerServeIndex]; }
         }
     }
 }

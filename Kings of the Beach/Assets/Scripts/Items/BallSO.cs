@@ -37,7 +37,7 @@ public class BallSO : ScriptableObject
         BallGiven?.Invoke();
     }
 
-    public void SetServeTarget(Vector3 aimPoint, float servePower) {
+    public void SetServeTarget(Vector3 aimPoint, float servePower, Athlete server) {
         Height = aimPoint.y;
         Height = Mathf.Clamp(Height, minServeHeight, maxServeHeight);
 
@@ -57,6 +57,7 @@ public class BallSO : ScriptableObject
         StartPos = Position;
         Duration = 1.5f; // this needs to be based on power and distance
         ResetTimeSinceLastHit();
+        lastPlayerToHit = server;
         TargetSet?.Invoke();
     }
 

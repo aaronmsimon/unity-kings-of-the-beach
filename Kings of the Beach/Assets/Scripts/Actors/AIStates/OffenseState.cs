@@ -53,7 +53,7 @@ namespace KotB.StatePattern.AIStates
                         ai.BallInfo.SetSpikeTarget(targetPos, Random.Range(0.5f, 1f), ai);
                         // Debug.Log($"ball height at spike is {ai.BallInfo.Position.y}");
                     } else {
-                        ai.BallInfo.SetServeTarget(new Vector3(Random.Range(-4, 4), Random.Range(2, 5)), 0.5f);
+                        ai.BallInfo.SetServeTarget(new Vector3(Random.Range(-4, 4), Random.Range(2, 5)), 0.5f, ai);
                         // Debug.Log($"ball height at hit over net is {ai.BallInfo.Position.y}");
                     }
                 }

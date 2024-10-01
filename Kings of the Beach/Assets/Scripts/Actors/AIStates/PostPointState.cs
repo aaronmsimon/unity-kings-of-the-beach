@@ -29,7 +29,11 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void OnBallServed() {
-            ai.StateMachine.ChangeState(ai.DefenseState);
+            if (ai.BallInfo.Possession == ai.CourtSide) {
+                ai.StateMachine.ChangeState(ai.DefenseState);
+            } else {
+                ai.StateMachine.ChangeState(ai.DigReadyState);
+            }
         }
     }
 }

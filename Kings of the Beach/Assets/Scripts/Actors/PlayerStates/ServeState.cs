@@ -22,7 +22,6 @@ namespace KotB.StatePattern.PlayerStates
             player.ShowServeAim.Raise();
 
             player.transform.position = new Vector3((player.CourtSideLength + player.transform.localScale.x * .5f) * player.CourtSide, 0.01f, 0f);
-            player.BallInfo.GiveBall(player);
 
             player.InputReader.bumpEvent += OnInteract;
             player.BallHitGround += OnBallHitGround;
@@ -82,7 +81,7 @@ namespace KotB.StatePattern.PlayerStates
             DisplayServeUI(false);
             player.HideServeAim.Raise();
             player.BallInfo.BallServedEvent();
-            player.BallInfo.SetServeTarget(player.ServeAimPosition.Value, player.ServePowerValue.Value);
+            player.BallInfo.SetServeTarget(player.ServeAimPosition.Value, player.ServePowerValue.Value, player);
             player.StateMachine.ChangeState(player.NormalState);
         }
 

@@ -19,7 +19,7 @@ MonoBehaviour:
   digRange: 0
   serving: 1
   height: 1.8
-  jumpHeight: 1.2
+  jumpHeight: 2.1
   servingPartnerPos: {x: 5, y: 1.5}
   receivingPos: {x: 5, y: 0}
   playerPosition: 0

@@ -45,6 +45,7 @@ namespace KotB.StatePattern.PlayerStates
                     // shot
                     SetTargetPos(false);
                     player.BallInfo.SetSpikeTarget(targetPos, Random.Range(0.5f, 1f), player);
+                    player.StateMachine.ChangeState(player.NormalState);
                 }
             }
         }

@@ -76,6 +76,11 @@ I would like to actually finish this game this time. That means starting with a 
 
 ### Notes/Next Steps:
 - get side based on team
+- switch sides on 7 points
+- start positioning
+- athlete #2
+- AI: see first 4 in AI
+- AI: if both of us contact same ball (first hit), last contact will override, but count increases so will hit across
 
 ### Basic Updates to do (dynamic list)
 #### Athlete
@@ -84,13 +89,13 @@ I would like to actually finish this game this time. That means starting with a 
 - (future) Add Serve Power to SkillsSO, use value in duration
 
 #### AI
-- doesn't chase ball when won't be hit over net
-- check all movement from each state [when ai hits to opposing side, keeps moving in last direction; needs to change state when possession change]
+- don't chase ball when won't be hit over net (test for when this occurs)
+- check all movement from each state [when ai hits to opposing side, keeps moving in last direction; needs to change state when possession change] - still some movement that needs to be zeroed out on state change
+- figure out why both AIs chase serve sometimes
+- figure out why one AI is jumping too soon
 - AI Serve to location with random speed based on skill, chance to also go out
 - Offense and DigReady states are moving the same way, practically -> DRY
 - spike dir based on tactic
-- figure out why both AIs chase serve sometimes
-- figure out why one AI is jumping too soon
 
 #### Ball
 - Ball net detection
@@ -104,17 +109,15 @@ I would like to actually finish this game this time. That means starting with a 
 - Complete all states
 - Serve start
 - When starting match, setup side for Serve
-- Post Point: scoring, change serve, allow for celebration/skip
-- Determine in/out of bounds when ball hit ground
+- Post Point: allow for celebration/skip
 - review transitions that are not in a state
 - set teams will need to be a function from game setup
 
 
 ### Needed for MVP
-3. Serving
-4. Scoring system
 6. UI for scoring
 7. Game State Machine
+8. Blocking
 
 ### Concepts/Ideas
 - use right stick to reach for ball on dig
