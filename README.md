@@ -115,8 +115,6 @@ I would like to actually finish this game this time. That means starting with a 
 
 
 ### Needed for MVP
-6. UI for scoring
-7. Game State Machine
 8. Blocking
 
 ### Concepts/Ideas

@@ -1,7 +1,6 @@
 using UnityEngine;
 using KotB.StatePattern;
 using KotB.StatePattern.MatchStates;
-using RoboRyanTron.Unite2017.Events;
 using KotB.Actors;
 using System;
 
@@ -16,9 +15,6 @@ namespace KotB.Match
         [SerializeField] private MatchInfoSO matchInfo;
         [SerializeField] private BallSO ballInfo;
         [SerializeField] private InputReader inputReader;
-
-        [Header("Game Events")]
-        [SerializeField] public GameEvent ScoreChanged;
 
         public event Action BallHitGround;
 
@@ -114,13 +110,5 @@ namespace KotB.Match
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public BallSO BallInfo { get { return ballInfo; } }
         public Team[] Teams { get { return teams; } }
-
-        public void temp_onscorechanged() {
-            string scoreText = "";
-            for (int i = 0; i < teams.Length; i++) {
-                scoreText += $"Team {i}: {teams[i].Score} ";
-            }
-            Debug.Log(scoreText);
-        }
     }
 }

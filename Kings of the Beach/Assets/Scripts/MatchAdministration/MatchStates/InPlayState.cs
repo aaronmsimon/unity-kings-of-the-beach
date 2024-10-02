@@ -31,15 +31,14 @@ namespace KotB.StatePattern.MatchStates
 
 
             matchManager.MatchInfo.TotalPoints += 1;
-            matchManager.ScoreChanged.Raise();
 
             CheckGameEnd();
         }
 
         private void CheckGameEnd() {
             for (int i = 0; i < matchManager.MatchInfo.Teams.Length; i++) {
-                if (matchManager.MatchInfo.Teams[i].Score == matchManager.MatchInfo.ScoreToWin) {
-                    Debug.Log($"{matchManager.MatchInfo.Teams[i].TeamName} wins!");
+                if (matchManager.MatchInfo.Teams[i].Score.Value == matchManager.MatchInfo.ScoreToWin) {
+                    Debug.Log($"{matchManager.MatchInfo.Teams[i].TeamName.Value} wins!");
                     matchManager.StateMachine.ChangeState(matchManager.MatchEndState);
                 }
             }
