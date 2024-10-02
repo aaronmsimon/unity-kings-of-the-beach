@@ -17,7 +17,7 @@ MonoBehaviour:
   reactionTime: 0
   passAccuracy: 0
   digRange: 0
-  serving: 1
+  serving: 10
   height: 1.8
   jumpHeight: 2.1
   servingPartnerPos: {x: 5, y: 1.5}

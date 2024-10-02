@@ -79,7 +79,7 @@ I would like to actually finish this game this time. That means starting with a 
 - switch sides on 7 points
 - start positioning
 - athlete #2
-- AI: see first 4 in AI
+- AI: see first 3 in AI
 - AI: if both of us contact same ball (first hit), last contact will override, but count increases so will hit across
 
 ### Basic Updates to do (dynamic list)

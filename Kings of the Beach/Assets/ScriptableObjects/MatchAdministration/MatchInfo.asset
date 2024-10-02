@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2dedaee14cbc0f4d9241cbac862b499, type: 3}
   m_Name: MatchInfo
   m_EditorClassIdentifier: 
+  teamServeIndex: {fileID: 11400000, guid: 0cdf1dd1f0057ca4c8beef0ef58af6e6, type: 2}
+  playerServeIndex: {fileID: 11400000, guid: e9d4a5e82758c5c4dbcb225676bd3730, type: 2}
