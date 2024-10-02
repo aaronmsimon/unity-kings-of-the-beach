@@ -2,6 +2,7 @@ using UnityEngine;
 using KotB.StatePattern;
 using KotB.Actors;
 using System;
+using RoboRyanTron.Unite2017.Variables;
 
 namespace KotB.Match
 {
@@ -11,9 +12,9 @@ namespace KotB.Match
         public Team[] Teams { get; set; }
         public int TotalPoints { get; set; }
         public int ScoreToWin { get; set; }
-        public int TeamServeIndex { get; set; }
-        public int PlayerServeIndex { get; set; }
-        
+        [SerializeField] private FloatVariable teamServeIndex;
+        [SerializeField] private FloatVariable playerServeIndex;
+
         private IState currentState;
 
         public event Action TransitionToPrePointState;
@@ -34,5 +35,7 @@ namespace KotB.Match
         public Athlete Server {
             get { return Teams[TeamServeIndex].Athletes[PlayerServeIndex]; }
         }
+        public int TeamServeIndex { get { return (int)teamServeIndex.Value; } set { teamServeIndex.Value = value; } }
+        public int PlayerServeIndex { get { return (int)playerServeIndex.Value; } set { playerServeIndex.Value = value; } }
     }
 }
