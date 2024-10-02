@@ -76,6 +76,7 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void OnTargetSet() {
+            apexReached = false;
             if (Mathf.Sign(ai.BallInfo.TargetPos.x) == -ai.CourtSide) {
                 ai.StateMachine.ChangeState(ai.DefenseState);
             }

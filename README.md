@@ -89,10 +89,9 @@ I would like to actually finish this game this time. That means starting with a 
 - (future) Add Serve Power to SkillsSO, use value in duration
 
 #### AI
-- don't chase ball when won't be hit over net (test for when this occurs)
+- don't chase ball when won't be hit over net [need to come up with better possession logic - serves, hit 3 times]
 - check all movement from each state [when ai hits to opposing side, keeps moving in last direction; needs to change state when possession change] - still some movement that needs to be zeroed out on state change
-- figure out why both AIs chase serve sometimes
-- figure out why one AI is jumping too soon
+- figure out why both AIs chase serve sometimes [correctly knows it's not their ball, but transitions to offense state and then chases]
 - AI Serve to location with random speed based on skill, chance to also go out
 - Offense and DigReady states are moving the same way, practically -> DRY
 - spike dir based on tactic

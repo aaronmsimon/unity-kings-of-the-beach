@@ -33,8 +33,6 @@ namespace KotB.Match
             postPointState = new PostPointState(this);
             matchEndState = new MatchEndState(this);
 
-            matchStateMachine.StateChanged += OnStateChanged;
-
             matchStateMachine.ChangeState(prePointState);
 
             matchInfo.TeamServeIndex = 0;
@@ -93,10 +91,6 @@ namespace KotB.Match
             } else {
                 return -1;
             }
-        }
-
-        private void OnStateChanged(IState newState) {
-            matchInfo.CurrentState = newState;
         }
 
         //---- PROPERTIES ----
