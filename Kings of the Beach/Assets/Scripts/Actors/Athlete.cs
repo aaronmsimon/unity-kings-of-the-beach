@@ -25,6 +25,7 @@ namespace KotB.Actors
         protected Vector3 moveDir;
         protected bool isJumping;
 
+        private float noMansLand = 0.5f;
         private float skillLevelMax = 10;
         private float jumpDuration = 0.25f;
         private float jumpTimer;
@@ -69,8 +70,9 @@ namespace KotB.Actors
         private void Move() {
             bool canMove = !Physics.Raycast(transform.position + Vector3.up * 0.5f, moveDir, out RaycastHit hit, 0.5f, obstaclesLayer);
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, moveDir, Color.red);
-            if (canMove) {
-                transform.position += moveDir * moveSpeed * Time.deltaTime;
+            Vector3 newPos = transform.position + moveDir * moveSpeed * Time.deltaTime;
+            if (canMove && MathF.Abs(newPos.x) > noMansLand) {
+                transform.position = newPos;
             }
 
             skills.Position = transform.position;

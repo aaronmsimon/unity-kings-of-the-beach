@@ -84,9 +84,9 @@ I would like to actually finish this game this time. That means starting with a 
 
 ### Basic Updates to do (dynamic list)
 #### Athlete
-- disable movement to opposite court side
 - also need to implement other locations like offensive and defensive (which are placeholders for now in the AI state machine, though this should also have a default for the player so consider adding to the Athlete script)
 - (future) Add Serve Power to SkillsSO, use value in duration
+- smooth movement if angled towards net
 
 #### AI
 - don't chase ball when won't be hit over net [need to come up with better possession logic - serves, hit 3 times]
