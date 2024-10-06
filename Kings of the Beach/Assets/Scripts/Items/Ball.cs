@@ -64,13 +64,6 @@ public class Ball : MonoBehaviour
         ballInfo.Possession = (int)Mathf.Sign(transform.position.x);
 
         ballStateMachine.Update();
-
-        /* temp */
-        #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            ResetBall();
-        }
-        #endif
     }
 
     private void OnTargetSet() {
@@ -84,7 +77,7 @@ public class Ball : MonoBehaviour
         }
     }
 
-    private void ResetBall() {
+    private void ResetBallForServeTest() {
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         player.StateMachine.ChangeState(player.ServeState);
         ballInfo.GiveBall(player);

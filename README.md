@@ -37,11 +37,11 @@ I would like to actually finish this game this time. That means starting with a 
 1. ~~AI Controller - Move towards target (while ball is active)~~
 2. ~~AI Controller - Bump~~
 3. AI Controller - Aim logic
-4. AI Controller - State Machine
+4. ~~AI Controller - State Machine~~
 5. Estimating out of bounds
-6. Defensive positioning
+6. ~~Defensive positioning~~
 7. ~~Pass towards teammate~~
-8. Offensive positioning
+8. ~~Offensive positioning~~
 
 #### Gameplay
 1. Randomness in aim
@@ -63,8 +63,9 @@ I would like to actually finish this game this time. That means starting with a 
 #### Rules
 1. ~~Same player can't hit ball twice in-a-row~~
 2. One side can only hit ball three times on side
-3. Point when ball hits ground (in/out depending on who last touched)
+3. ~~Point when ball hits ground (in/out depending on who last touched)~~
 4. Switch sides after 7 points
+5. Must pass over net (between sides)
 
 #### Presentation
 1. ~~Cinemachine~~
@@ -76,24 +77,17 @@ I would like to actually finish this game this time. That means starting with a 
 
 ### Notes/Next Steps:
 - get side based on team
-- switch sides on 7 points
-- start positioning
-- athlete #2
-- AI: see first 3 in AI
+- AI: see first 1 in AI
 - AI: if both of us contact same ball (first hit), last contact will override, but count increases so will hit across
 
 ### Basic Updates to do (dynamic list)
 #### Athlete
-- also need to implement other locations like offensive and defensive (which are placeholders for now in the AI state machine, though this should also have a default for the player so consider adding to the Athlete script)
-- (future) Add Serve Power to SkillsSO, use value in duration
 - smooth movement if angled towards net
+- (future) Add Serve Power to SkillsSO, use value in duration
 
 #### AI
 - don't chase ball when won't be hit over net [need to come up with better possession logic - serves, hit 3 times]
-- check all movement from each state [when ai hits to opposing side, keeps moving in last direction; needs to change state when possession change] - still some movement that needs to be zeroed out on state change
-- figure out why both AIs chase serve sometimes [correctly knows it's not their ball, but transitions to offense state and then chases]
 - AI Serve to location with random speed based on skill, chance to also go out
-- Offense and DigReady states are moving the same way, practically -> DRY
 - spike dir based on tactic
 
 #### Ball

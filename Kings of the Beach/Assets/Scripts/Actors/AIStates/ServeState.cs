@@ -45,6 +45,7 @@ namespace KotB.StatePattern.AIStates
 
         private void OnBallHitGround() {
             ai.StateMachine.ChangeState(ai.PostPointState);
+            ai.MoveDir = Vector3.zero;
         }
     }
 }

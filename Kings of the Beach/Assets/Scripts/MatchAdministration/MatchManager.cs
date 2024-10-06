@@ -25,14 +25,16 @@ namespace KotB.Match
         private PostPointState postPointState;
         private MatchEndState matchEndState;
 
-        private void Start() {
+        private void Awake() {
             matchStateMachine = new StateMachine();
             prePointState = new PrePointState(this);
             serveState = new ServeState(this);
             inPlayState = new InPlayState(this);
             postPointState = new PostPointState(this);
             matchEndState = new MatchEndState(this);
+        }
 
+        private void Start() {
             matchStateMachine.ChangeState(prePointState);
 
             matchInfo.TeamServeIndex = 0;
@@ -56,6 +58,14 @@ namespace KotB.Match
 
         private void Update() {
             matchStateMachine.Update();
+        }
+
+        private void OnEnable() {
+            matchStateMachine.StateChanged += OnStateChanged;
+        }
+
+        private void OnDisable() {
+            matchStateMachine.StateChanged -= OnStateChanged;
         }
 
         public Athlete GetTeammate(AI ai) {
@@ -91,6 +101,10 @@ namespace KotB.Match
             } else {
                 return -1;
             }
+        }
+
+        private void OnStateChanged(IState newState) {
+            matchInfo.CurrentState = newState;
         }
 
         //---- PROPERTIES ----

@@ -8,51 +8,95 @@ namespace KotB.StatePattern.AIStates
         public DigReadyState(AI ai) : base(ai) { }
 
         private float reactionTime;
+        private bool apexReached;
+        private bool isSpiking;
 
         public override void Enter() {
             reactionTime = ai.Skills.ReactionTime;
+            apexReached = false;
+            isSpiking = false;
 
             ai.BallHitGround += OnBallHitGround;
+            ai.BallInfo.ApexReached += OnApexReached;
         }
 
         public override void Exit() {
             ai.BallHitGround -= OnBallHitGround;
+            ai.BallInfo.ApexReached -= OnApexReached;
         }
 
         public override void Update() {
             reactionTime -= Time.deltaTime;
 
-            float myDistToBall = (ai.BallInfo.TargetPos - ai.transform.position).sqrMagnitude;
-            float teammateDistToBall = (ai.BallInfo.TargetPos - ai.Teammate.transform.position).sqrMagnitude;
-
-            bool myBall = (myDistToBall < teammateDistToBall) || (myDistToBall == teammateDistToBall && ai.Skills.PlayerPosition == PositionType.Defender);
-
-            if (myBall && reactionTime < 0) {
+            if (reactionTime < 0) {
                 if (Vector3.Distance(ai.transform.position, ai.BallInfo.TargetPos) > ai.Skills.TargetLockDistance) {
                     ai.MoveDir = (ai.BallInfo.TargetPos - ai.transform.position).normalized;
                 } else {
                     ai.transform.position = ai.BallInfo.TargetPos;
                     ai.MoveDir = Vector3.zero;
+                    if (ai.BallInfo.HitsForTeam == 2 && !isSpiking) {
+                        TrySpike();
+                    }
                 }
             }
-
-            CheckTransition();
         }
 
         public override void OnTriggerEnter(Collider other) {
             if (ai.Ball != null) {
-                ai.Pass();
+                switch (ai.BallInfo.HitsForTeam) {
+                    case 0:
+                        Pass();
+                        ai.StateMachine.ChangeState(ai.OffenseState);
+                        break;
+                    case 1:
+                        Pass();
+                        ai.StateMachine.ChangeState(ai.DefenseState);
+                        break;
+                    case 2:
+                        Spike();
+                        ai.StateMachine.ChangeState(ai.DefenseState);
+                        break;
+                    default:
+                        Debug.Log("Invalid number of hits, perhaps point for other team.");
+                        break;
+                }
             }
         }
 
-        private void CheckTransition() {
-            if (Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide && ai.BallInfo.HitsForTeam == 1) {
-                ai.StateMachine.ChangeState(ai.OffenseState);
+        private void Pass() {
+            Vector2 teammatePos = new Vector2(ai.Teammate.transform.position.x, ai.Teammate.transform.position.z);
+            Vector2 aimLocation = ai.AdjustVectorAccuracy(teammatePos, ai.Skills.PassAccuracy);
+            Vector3 targetPos = new Vector3(aimLocation.x, 0f, aimLocation.y);
+            ai.BallInfo.SetPassTarget(targetPos, 7, 1.75f, ai);
+        }
+
+        private void Spike() {
+            if (Mathf.Abs(ai.transform.position.x) <= 2) {
+                Vector3 targetPos = new Vector3(Random.Range(2, 8.5f) * -ai.CourtSide, 0, Random.Range(-4.5f, 4.5f));
+                ai.BallInfo.SetSpikeTarget(targetPos, Random.Range(0.5f, 1f), ai);
+            } else {
+                ai.BallInfo.SetServeTarget(new Vector3(Random.Range(-4, 4), Random.Range(2, 5)), 0.5f, ai);
             }
+        }
+
+        private void TrySpike() {
+            float spikeRangeH = 1;
+            if (Vector3.Distance(new Vector3(ai.transform.position.x, 0, ai.transform.position.z), new Vector3(ai.BallInfo.Position.x, 0, ai.BallInfo.Position.z)) <= spikeRangeH) {
+                float spikeRangeV = Random.Range(4.75f, 5.25f);
+                if (apexReached && ai.BallInfo.Position.y <= spikeRangeV) {
+                    ai.PerformJump();
+                    isSpiking = true;
+                }
+            }
+        }
+
+        private void OnApexReached() {
+            apexReached = true;
         }
 
         private void OnBallHitGround() {
             ai.StateMachine.ChangeState(ai.PostPointState);
+            ai.MoveDir = Vector3.zero;
         }
     }
 }

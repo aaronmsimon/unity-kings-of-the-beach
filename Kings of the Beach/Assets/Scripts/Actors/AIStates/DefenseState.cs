@@ -18,21 +18,32 @@ namespace KotB.StatePattern.AIStates
         }
 
         public override void Update() {
-            Vector3 receivingPos = new Vector3(ai.Skills.ReceivingPos.x * ai.CourtSide, ai.Skills.ReceivingPos.y, ai.Skills.ReceivingPos.z);
-            if (ai.transform.position != receivingPos) {
-                ai.MoveDir = receivingPos - ai.transform.position;
+            if (ai.transform.position != ai.DefensePos) {
+                ai.MoveDir = ai.DefensePos - ai.transform.position;
             } else {
                 ai.MoveDir = Vector3.zero;
             }
         }
 
+        private bool MyBall() {
+            float myDistToBall = (ai.BallInfo.TargetPos - ai.transform.position).sqrMagnitude;
+            float teammateDistToBall = (ai.BallInfo.TargetPos - ai.Teammate.transform.position).sqrMagnitude;
+
+            return (myDistToBall < teammateDistToBall) || (myDistToBall == teammateDistToBall && ai.Skills.PlayerPosition == PositionType.Defender);
+        }
+
         private void OnBallHitGround() {
             ai.StateMachine.ChangeState(ai.PostPointState);
+            ai.MoveDir = Vector3.zero;
         }
 
         private void OnTargetSet() {
             if (Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
-                ai.StateMachine.ChangeState(ai.DigReadyState);
+                if (MyBall()) {
+                    ai.StateMachine.ChangeState(ai.DigReadyState);
+                } else {
+                    ai.StateMachine.ChangeState(ai.OffenseState);
+                }
             }
         }
     }

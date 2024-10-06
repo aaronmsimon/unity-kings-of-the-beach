@@ -26,7 +26,8 @@ public class SkillsSO : ScriptableObject
     [SerializeField] private float height = 1.8f;
     [SerializeField] private float jumpHeight = 2.1f;
     [SerializeField] private Vector2 servingPartnerPos = new Vector2(5f, 1.5f);
-    [SerializeField] private Vector2 receivingPos = new Vector2(5f, 0f);
+    [SerializeField] private Vector2 defensePos = new Vector2(5, 2);
+    [SerializeField] private float offenseXPos = 1.25f;
 
     [Header("Position")]
     [SerializeField] private PositionType playerPosition;
@@ -44,7 +45,8 @@ public class SkillsSO : ScriptableObject
     public int Serving { get { return serving; } }
 
     public Vector3 ServingPartnerPos { get { return new Vector3(servingPartnerPos.x, 0.01f, servingPartnerPos.y); } }
-    public Vector3 ReceivingPos { get { return new Vector3(receivingPos.x, 0.01f, receivingPos.y); } }
+    public Vector2 DefensePos { get { return defensePos; } }
+    public float OffenseXPos { get { return offenseXPos; } }
 
     public Vector3 Position {
         get { return position; }

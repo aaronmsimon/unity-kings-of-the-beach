@@ -21,5 +21,6 @@ MonoBehaviour:
   height: 1.8
   jumpHeight: 2.1
   servingPartnerPos: {x: 5, y: 1.5}
-  receivingPos: {x: 5, y: 1.5}
+  defensePos: {x: 5, y: 2}
+  offenseXPos: 1.25
   playerPosition: 0

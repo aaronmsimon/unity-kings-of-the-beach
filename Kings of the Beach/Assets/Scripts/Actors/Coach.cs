@@ -1,5 +1,5 @@
-using KotB.Match;
 using UnityEngine;
+using KotB.Match;
 using KotB.StatePattern.MatchStates;
 
 namespace KotB.Actors
@@ -30,13 +30,13 @@ namespace KotB.Actors
             bump = GetComponent<Bump>();
 
             // place ball at same start
-            bump.ball.transform.position = new Vector3(transform.position.x, 1.09f, transform.position.z);
+            TakeBall();
 
             // place player at defensive position
             player.transform.position = new Vector3(player.Skills.ServingPartnerPos.x * player.CourtSide, player.Skills.ServingPartnerPos.y, player.Skills.ServingPartnerPos.z);
 
-            // InPlayState inPlayState = new InPlayState();
-            // matchInfo.CurrentState = inPlayState;
+            InPlayState inPlayState = new InPlayState(null);
+            matchInfo.CurrentState = inPlayState;
         }
 
         //Adds listeners for events being triggered in the InputReader script
@@ -49,6 +49,20 @@ namespace KotB.Actors
         private void OnDisable()
         {
             inputReader.testEvent -= OnBump;
+        }
+
+        private void Update() {
+            #if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                TakeBall();
+                player.StateMachine.ChangeState(player.NormalState);
+            }
+            #endif
+            Debug.Log(matchInfo.CurrentState);
+        }
+
+        public void TakeBall() {
+            bump.ball.transform.position = new Vector3(transform.position.x, 1.09f, transform.position.z);
         }
 
         //---- EVENT LISTENERS ----

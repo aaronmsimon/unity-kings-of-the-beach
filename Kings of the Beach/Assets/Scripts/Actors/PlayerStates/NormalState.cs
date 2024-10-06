@@ -39,7 +39,7 @@ namespace KotB.StatePattern.PlayerStates
             if (player.MatchInfo.Server == player) {
                 player.StateMachine.ChangeState(player.ServeState);
             } else {
-                Vector3 newPos = player.MatchInfo.Server.CourtSide == player.CourtSide ? player.Skills.ServingPartnerPos : player.Skills.ReceivingPos;
+                Vector3 newPos = player.MatchInfo.Server.CourtSide == player.CourtSide ? player.Skills.ServingPartnerPos : new Vector3(player.Skills.DefensePos.x, 0.01f, -2);
                 player.transform.position = new Vector3(newPos.x * player.CourtSide, newPos.y, newPos.z);
             }
         }

@@ -45,14 +45,7 @@ namespace KotB.Actors
             aiStateMachine.OnTriggerEnter(other);
         }
 
-        public void Pass() {
-            Vector2 teammatePos = new Vector2(teammate.transform.position.x, teammate.transform.position.z);
-            Vector2 aimLocation = AdjustVectorAccuracy(teammatePos, skills.PassAccuracy);
-            Vector3 targetPos = new Vector3(aimLocation.x, 0f, aimLocation.y);
-            ballInfo.SetPassTarget(targetPos, 7, 1.75f, this);
-        }
-
-        private Vector2 AdjustVectorAccuracy(Vector2 vector, float accuracy)
+        public Vector2 AdjustVectorAccuracy(Vector2 vector, float accuracy)
         {
             // Clamp accuracy to the range of 0 to 1 to avoid unexpected results
             accuracy = Mathf.Clamp01(accuracy);
@@ -74,6 +67,10 @@ namespace KotB.Actors
             return vector + randomOffset;
         }
 
+        public Vector3 GetMyDefensivePosition(Vector3 defensivePos) {
+            return new Vector3(defensivePos.x * courtSide, defensivePos.y, defensivePos.z * Mathf.Sign(defensivePos.z) == Mathf.Sign(teammate.Skills.Position.z) ? -1 : 1);
+        }
+
         protected override void OnDrawGizmos() {
             base.OnDrawGizmos();
             // Dig Range
@@ -90,5 +87,18 @@ namespace KotB.Actors
         public DigReadyState DigReadyState { get { return digReadyState; } }
         public PostPointState PostPointState { get { return postPointState; } }
         public Athlete Teammate { get { return teammate; } set { teammate = value; } }
+        public Vector3 DefensePos {
+            get {
+                float defenseZPos;
+                if (teammate.GetComponent<Player>() != null || teammate.Skills.PlayerPosition == PositionType.Defender) {
+                    defenseZPos = GetMyDefensivePosition(transform.position).z;
+                } else {
+                    defenseZPos = transform.position.z;
+                }
+
+                return new Vector3(skills.DefensePos.x * courtSide, 0.01f, defenseZPos);
+            }
+        }
+        public Vector3 OffensePos { get { return new Vector3(skills.OffenseXPos, 0.01f, transform.position.z); } }
     }
 }
