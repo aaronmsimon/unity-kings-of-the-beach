@@ -6,30 +6,46 @@ namespace KotB.StatePattern.BallStates
     {
         public InFlightState(Ball ball) : base(ball) { }
 
+        private bool ballIntoNet;
+        private float ballSpeedToGround = 5;
+
         public override void Enter() {
             ball.BallInfo.TimeSinceLastHit = 0f;
+            ballIntoNet = false;
         }
 
         public override void Update() {
             Vector3 targetPos = ball.BallInfo.TargetPos;
-            if (ball.transform.position != targetPos) {
-                ball.BallInfo.TimeSinceLastHit += Time.deltaTime;
-                float t = ball.BallInfo.TimeSinceLastHit / ball.BallInfo.Duration;
-                if (t > 1f) t = 1f;
-                if (t >= 0.5f && !ball.BallInfo.ApexReachedFlag) {
-                    ball.BallInfo.ApexReachedEvent();
-                    ball.BallInfo.ApexReachedFlag = true;
-                }
-
-                if (ball.BallInfo.Height >= 0) {
-                    ball.transform.position = CalculateInFlightPosition(t, ball.BallInfo.StartPos, targetPos, ball.BallInfo.Height);
+            if (ball.transform.position != targetPos && ball.transform.position.y > 0) {
+                if (!ballIntoNet) {
+                    ball.BallInfo.TimeSinceLastHit += Time.deltaTime;
+                    float t = ball.BallInfo.TimeSinceLastHit / ball.BallInfo.Duration;
+                    if (t > 1f) t = 1f;
+                    if (t >= 0.5f && !ball.BallInfo.ApexReachedFlag) {
+                        ball.BallInfo.ApexReachedEvent();
+                        ball.BallInfo.ApexReachedFlag = true;
+                    }
+                    if (ball.BallInfo.Height >= 0) {
+                        ball.transform.position = CalculateInFlightPosition(t, ball.BallInfo.StartPos, targetPos, ball.BallInfo.Height);
+                    } else {
+                        ball.transform.position = CalculateInFlightPosition(t, ball.BallInfo.StartPos, targetPos);
+                    }
+                    if (Mathf.Abs(ball.transform.position.x) < 0.13f) {
+                        CheckIfOverNet();
+                    }
                 } else {
-                    ball.transform.position = CalculateInFlightPosition(t, ball.BallInfo.StartPos, targetPos);
+                    ball.transform.position += Vector3.down * ballSpeedToGround * Time.deltaTime;
                 }
             } else {
                 ball.BallHitGround.Raise();
                 ball.StateMachine.ChangeState(ball.GroundState);
                 ball.DestroyBallTarget();
+            }
+        }
+
+        private void CheckIfOverNet() {
+            if (ball.transform.position.y < 2.43) {
+                ballIntoNet = true;
             }
         }
 

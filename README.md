@@ -56,6 +56,7 @@ I would like to actually finish this game this time. That means starting with a 
 2. ~~Ball Fields and Properties~~
 3. Ball Events triggered when Property Set
 4. ~~Ball State Machine (probably need to change ballstate.bump to inair/active/inplay/etc)~~
+5. Display target on playing surface (to help player)
 
 #### Assistants
 1. Coach - Bump
@@ -91,7 +92,7 @@ I would like to actually finish this game this time. That means starting with a 
 - spike dir based on tactic
 
 #### Ball
-- Ball net detection
+- Ball outside court width as crossing net
 
 #### Player
 - feint for player spike
@@ -120,6 +121,7 @@ I would like to actually finish this game this time. That means starting with a 
 - Replays
 - Argue calls
 - Pass will be the gameplay mechanic for both Dig and Set, but Set will be more accurate
+- adjustments for men vs women (spike speed, net dimensions, etc)
 
 ### Cleanup
 - is it better to create a static TagHashes class instead of hard-coding tag strings?
