@@ -80,6 +80,9 @@ I would like to actually finish this game this time. That means starting with a 
 - get side based on team
 - AI: see first 1 in AI
 - AI: if both of us contact same ball (first hit), last contact will override, but count increases so will hit across
+- Block
+- Add Target visual
+- Add AI thought process - what it's doing and why it's deciding on location. Toggle this on/off
 
 ### Basic Updates to do (dynamic list)
 #### Athlete

@@ -33,10 +33,16 @@ namespace KotB.Actors
         private float jumpDescendingMultiplier = 1.5f;
         private Vector3 startJumpPos;
         private Vector3 endJumpPos;
+        private float reachPct = 1.25f;
+        private CapsuleCollider capCollider;
 
         // caching
         private float moveSpeed;
         private float jumpHeight;
+
+        private void Awake() {
+            capCollider = GetComponent<CapsuleCollider>();
+        }
 
         protected virtual void Start() {
             if (skills != null) {
@@ -96,12 +102,16 @@ namespace KotB.Actors
                 } else {
                     transform.position = startJumpPos;
                     isJumping = false;
+                    capCollider.center *= 1 / reachPct;
+                    capCollider.height *= 1 / reachPct;
                 }
             }
         }
 
         public void PerformJump() {
             isJumping = true;
+            capCollider.center *= reachPct;
+            capCollider.height *= reachPct;
             jumpTimer = 0;
             jumpAscending = true;
             startJumpPos = transform.position;

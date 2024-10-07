@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using KotB.Actors;
 
@@ -12,6 +13,8 @@ namespace KotB.StatePattern.AIStates
         private float timeUntilServe;
         private float baseTime = 2f;
         private float randomOffsetTime = 0.5f;
+        private bool changeToDefenseState;
+        private float timeUntilDefense;
 
         public override void Enter() {
             ai.transform.position = new Vector3((ai.CourtSideLength + ai.transform.localScale.x * .5f) * ai.CourtSide, 0.01f, 0f);
@@ -19,6 +22,8 @@ namespace KotB.StatePattern.AIStates
 
             timeUntilServe = baseTime + Random.Range(-randomOffsetTime, randomOffsetTime);
             ai.BallHitGround += OnBallHitGround;
+
+            changeToDefenseState = false;
         }
 
         public override void Exit() {
@@ -26,18 +31,23 @@ namespace KotB.StatePattern.AIStates
         }
 
         public override void Update() {
-            if (Mathf.Abs(servePos.z - ai.transform.position.z) > servePosThreshold) {
-                ai.transform.position += (servePos - ai.transform.position).normalized * ai.Skills.MoveSpeed * Time.deltaTime;
-            } else {
-                timeUntilServe -= Time.deltaTime;
+            if (!changeToDefenseState) {
+                if (Mathf.Abs(servePos.z - ai.transform.position.z) > servePosThreshold) {
+                    ai.transform.position += (servePos - ai.transform.position).normalized * ai.Skills.MoveSpeed * Time.deltaTime;
+                } else {
+                    timeUntilServe -= Time.deltaTime;
 
-                if (timeUntilServe < 0) {
-                    float targetX = Random.Range(0, ai.CourtSideLength) * -ai.CourtSide;
-                    float targetZ = Random.Range(-ai.CourtSideLength / 2, ai.CourtSideLength / 2);
-                    Vector3 targetPos = new Vector3(targetX, 0, targetZ);
-                    float height = 3;
-                    ai.BallInfo.SetPassTarget(targetPos, height, 1.5f, ai);
-                    ai.BallInfo.BallServedEvent();
+                    if (timeUntilServe < 0) {
+                        Vector3 aimPoint = new Vector3(0, Random.Range(2.25f, 5), Random.Range(-2, 2));
+                        ai.BallInfo.SetServeTarget(aimPoint, Random.Range(0.65f, 1), ai);
+                        ai.BallInfo.BallServedEvent();
+                        changeToDefenseState = true;
+                        timeUntilDefense = 1;
+                    }
+                }
+            } else {
+                timeUntilDefense -= Time.deltaTime;
+                if (timeUntilDefense < 0) {
                     ai.StateMachine.ChangeState(ai.DefenseState);
                 }
             }

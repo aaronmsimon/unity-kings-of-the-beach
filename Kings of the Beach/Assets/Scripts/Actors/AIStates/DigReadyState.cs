@@ -71,18 +71,18 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void Spike() {
-            if (Mathf.Abs(ai.transform.position.x) <= 2) {
-                Vector3 targetPos = new Vector3(Random.Range(2, 8.5f) * -ai.CourtSide, 0, Random.Range(-4.5f, 4.5f));
+            if (Mathf.Abs(ai.transform.position.x) <= 1.5f) {
+                Vector3 targetPos = new Vector3(Random.Range(3.5f, 8.5f) * -ai.CourtSide, 0, Random.Range(-4.5f, 4.5f));
                 ai.BallInfo.SetSpikeTarget(targetPos, Random.Range(0.5f, 1f), ai);
             } else {
-                ai.BallInfo.SetServeTarget(new Vector3(Random.Range(-4, 4), Random.Range(2, 5)), 0.5f, ai);
+                ai.BallInfo.SetServeTarget(new Vector3(0, Random.Range(2.5f, 4), Random.Range(ai.transform.position.z - 1.5f, ai.transform.position.z + 1.5f)), 0.5f, ai);
             }
         }
 
         private void TrySpike() {
             float spikeRangeH = 1;
             if (Vector3.Distance(new Vector3(ai.transform.position.x, 0, ai.transform.position.z), new Vector3(ai.BallInfo.Position.x, 0, ai.BallInfo.Position.z)) <= spikeRangeH) {
-                float spikeRangeV = Random.Range(4.75f, 5.25f);
+                float spikeRangeV = Random.Range(6, 7);
                 if (apexReached && ai.BallInfo.Position.y <= spikeRangeV) {
                     ai.PerformJump();
                     isSpiking = true;
