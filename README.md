@@ -56,7 +56,7 @@ I would like to actually finish this game this time. That means starting with a 
 2. ~~Ball Fields and Properties~~
 3. Ball Events triggered when Property Set
 4. ~~Ball State Machine (probably need to change ballstate.bump to inair/active/inplay/etc)~~
-5. Display target on playing surface (to help player)
+5. ~~Display target on playing surface (to help player)~~
 
 #### Assistants
 1. Coach - Bump
@@ -81,8 +81,8 @@ I would like to actually finish this game this time. That means starting with a 
 - AI: see first 1 in AI
 - AI: if both of us contact same ball (first hit), last contact will override, but count increases so will hit across
 - Block
-- Add Target visual
 - Add AI thought process - what it's doing and why it's deciding on location. Toggle this on/off
+- stadium scoreboard
 
 ### Basic Updates to do (dynamic list)
 #### Athlete

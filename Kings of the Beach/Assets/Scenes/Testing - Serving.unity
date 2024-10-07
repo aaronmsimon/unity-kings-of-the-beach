@@ -1005,6 +1005,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 85e4cb5a8d901de49a5c54cfb230235f, type: 2}
     - target: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
+      propertyPath: teams.Array.data[0].teamName
+      value: 
+      objectReference: {fileID: 11400000, guid: b3934a7ce76ccc74f823cb670d974eb3, type: 2}
+    - target: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
+      propertyPath: teams.Array.data[1].teamName
+      value: 
+      objectReference: {fileID: 11400000, guid: 4be0a0172db0e1f438985c94c6a04c9f, type: 2}
+    - target: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
       propertyPath: teams.Array.data[0].scoreChanged
       value: 
       objectReference: {fileID: 11400000, guid: f3394258f96f2574482e0cc63a9e4db6, type: 2}
