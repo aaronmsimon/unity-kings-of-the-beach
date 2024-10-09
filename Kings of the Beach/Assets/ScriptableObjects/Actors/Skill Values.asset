@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Skill Values
   m_EditorClassIdentifier: 
   servePower:
-    min: 80
-    max: 110
+    min: 25
+    max: 40
