@@ -5,7 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BallInfo", menuName = "Game/Ball Info")]
 public class BallSO : ScriptableObject
 {
+    [Header("Skill Values")]
+    [SerializeField] private SkillValues skillValues;
+
     public Vector3 Position { get; set; }
+    [Header("Everything else...")]
     [SerializeField] private Vector3 targetPos;
     public Vector3 StartPos { get; private set; }
     public float Height { get; set; }
@@ -55,7 +59,8 @@ public class BallSO : ScriptableObject
         TargetPos = new Vector3(Position.x, 0, Position.z) + direction * serveDistance;
 
         StartPos = Position;
-        Duration = 1.5f; // this needs to be based on power and distance
+        Duration = serveDistance / skillValues.ServeRate(server.Skills.ServePower) / 1000 * 60 * 60; // d x 1/r x 1km/1000m x 60min/hr x 60sec/min = sec
+        Debug.Log($"Distance: {serveDistance} Duration: {Duration} Serve Speed: {serveDistance / Duration} km/hr");
         ResetTimeSinceLastHit();
         lastPlayerToHit = server;
         TargetSet?.Invoke();

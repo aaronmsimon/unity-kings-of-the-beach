@@ -87,7 +87,7 @@ I would like to actually finish this game this time. That means starting with a 
 ### Basic Updates to do (dynamic list)
 #### Athlete
 - smooth movement if angled towards net
-- (future) Add Serve Power to SkillsSO, use value in duration
+- Add Serve Skill to serve aiming
 
 #### AI
 - don't chase ball when won't be hit over net [need to come up with better possession logic - serves, hit 3 times]
@@ -100,7 +100,6 @@ I would like to actually finish this game this time. That means starting with a 
 #### Player
 - feint for player spike
 - Between points, the players can high-five, hug, etc (see Concepts/Ideas bullet 5), then player controlled skip to service
-- Implement the power meter into the actual service power strike on the ball: accurace for aiming & duration for speed
 
 #### Match
 - Complete all states
