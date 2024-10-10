@@ -3,6 +3,7 @@ using KotB.StatePattern;
 using KotB.StatePattern.MatchStates;
 using KotB.Actors;
 using System;
+using RoboRyanTron.Unite2017.Events;
 
 namespace KotB.Match
 {
@@ -15,6 +16,9 @@ namespace KotB.Match
         [SerializeField] private MatchInfoSO matchInfo;
         [SerializeField] private BallSO ballInfo;
         [SerializeField] private InputReader inputReader;
+
+        [Header("Game Events")]
+        [SerializeField] private GameEvent scoreUpdate;
 
         public event Action BallHitGround;
 
@@ -118,5 +122,6 @@ namespace KotB.Match
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public BallSO BallInfo { get { return ballInfo; } }
         public Team[] Teams { get { return teams; } }
+        public GameEvent ScoreUpdate { get { return scoreUpdate; } }
     }
 }

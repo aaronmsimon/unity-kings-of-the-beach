@@ -29,7 +29,7 @@ namespace KotB.StatePattern.MatchStates
                 if (lastPlayerTeamIndex == matchManager.MatchInfo.TeamServeIndex) NextServer();
             }
 
-
+            matchManager.ScoreUpdate.Raise();            
             matchManager.MatchInfo.TotalPoints += 1;
 
             CheckGameEnd();
