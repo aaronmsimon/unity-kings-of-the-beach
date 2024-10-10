@@ -22,6 +22,7 @@ I would like to actually finish this game this time. That means starting with a 
 2. ~~Create net with colliders~~
 3. Stadium
 4. Skybox
+5. Stadium Scoreboard
 
 #### Player - Arcade
 1. ~~Create Player Controller - Movement~~
@@ -50,6 +51,8 @@ I would like to actually finish this game this time. That means starting with a 
 1. ~~Speed~~
 2. Pass Accuracy (affects aim)
 3. Dig (more important with speed of ball)
+4. Serve Skill (affects serve aim)
+5. Serve Power (affects speed and direction)
 
 #### Ball Mechanics
 1. ~~Move to Target with Bezier curve~~
@@ -76,23 +79,18 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### Menus
 
-### Notes/Next Steps:
-- get side based on team
-- AI: see first 1 in AI
-- AI: if both of us contact same ball (first hit), last contact will override, but count increases so will hit across
-- Block
-- Add AI thought process - what it's doing and why it's deciding on location. Toggle this on/off
-- stadium scoreboard
-
 ### Basic Updates to do (dynamic list)
+
 #### Athlete
 - smooth movement if angled towards net
-- Add Serve Skill to serve aiming
+- get side based on team
 
 #### AI
 - don't chase ball when won't be hit over net [need to come up with better possession logic - serves, hit 3 times]
 - AI Serve to location with random speed based on skill, chance to also go out
 - spike dir based on tactic
+- if both of us contact same ball (first hit), last contact will override, but count increases so will hit across
+- Add AI thought process - what it's doing and why it's deciding on location. Toggle this on/off
 
 #### Ball
 - Ball outside court width as crossing net
