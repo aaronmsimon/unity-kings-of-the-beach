@@ -52,7 +52,7 @@ I would like to actually finish this game this time. That means starting with a 
 2. Pass Accuracy (affects aim)
 3. Dig (more important with speed of ball)
 4. Serve Skill (affects serve aim)
-5. Serve Power (affects speed and direction)
+5. Serve Power (affects ~~speed and~~ direction)
 
 #### Ball Mechanics
 1. ~~Move to Target with Bezier curve~~
@@ -82,7 +82,6 @@ I would like to actually finish this game this time. That means starting with a 
 ### Basic Updates to do (dynamic list)
 
 #### Athlete
-- smooth movement if angled towards net
 - get side based on team
 
 #### AI
@@ -98,6 +97,7 @@ I would like to actually finish this game this time. That means starting with a 
 #### Player
 - feint for player spike
 - Between points, the players can high-five, hug, etc (see Concepts/Ideas bullet 5), then player controlled skip to service
+- issue: can't unlock after pass from ball at net (thoughts can help reveal; also need to make proper test area where can control where ai passes to)
 
 #### Match
 - Complete all states
@@ -129,3 +129,13 @@ I would like to actually finish this game this time. That means starting with a 
 - debug: writing to console, gizmos like raycasts or boxes drawn
 - bump/set vs pass/across
 - ball reset is temp
+
+### note to self
+a. test updated movedir with AI (need testing scene)
+1. move AdjustVectorAccuracy() from AI.cs to Helpers.cs
+2. update DigReadState.cs Pass() to new location of AdjustVectorAccuracy()
+3. move Pass() from DigReadyState.cs to Athlete.cs
+4. update DigReadyState.cs to use new location of Pass()
+5. update LockState.cs to use Pass()
+6. use AdjustVectorAccuracy() in PlayerStates.ServeState.cs
+7. use AdjustVectorAccuracy() in AIStates.ServeState.cs
