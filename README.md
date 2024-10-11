@@ -131,7 +131,6 @@ I would like to actually finish this game this time. That means starting with a 
 - ball reset is temp
 
 ### note to self
-a. test updated movedir with AI (need testing scene)
 1. move AdjustVectorAccuracy() from AI.cs to Helpers.cs
 2. update DigReadState.cs Pass() to new location of AdjustVectorAccuracy()
 3. move Pass() from DigReadyState.cs to Athlete.cs
