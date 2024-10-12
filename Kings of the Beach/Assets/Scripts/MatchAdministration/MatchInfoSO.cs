@@ -9,7 +9,7 @@ namespace KotB.Match
     [CreateAssetMenu(fileName = "MatchInfo", menuName = "Game/Match Info")]
     public class MatchInfoSO : ScriptableObject
     {
-        public Team[] Teams { get; set; }
+        [SerializeField] private Team[] teams;
         public int TotalPoints { get; set; }
         public int ScoreToWin { get; set; }
         [SerializeField] private FloatVariable teamServeIndex;
@@ -35,7 +35,10 @@ namespace KotB.Match
         public Athlete Server {
             get { return Teams[TeamServeIndex].Athletes[PlayerServeIndex]; }
         }
+
+        //---- PROPERTIES ----
         public int TeamServeIndex { get { return (int)teamServeIndex.Value; } set { teamServeIndex.Value = value; } }
         public int PlayerServeIndex { get { return (int)playerServeIndex.Value; } set { playerServeIndex.Value = value; } }
+        public Team[] Teams { get { return teams; } set { teams = value; } }
     }
 }

@@ -91,7 +91,6 @@ I would like to actually finish this game this time. That means starting with a 
 - spike dir based on tactic (needs to be in Athlete for player, too)
 - if both of us contact same ball (first hit), last contact will override, but count increases so will hit across
 - Add AI thought process - what it's doing and why it's deciding on location. Toggle this on/off
-- Move speed seems to be really fast during state transitions (eg going to offense position)
 
 #### Ball
 - Ball outside court width as crossing net

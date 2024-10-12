@@ -77,6 +77,6 @@ namespace KotB.Actors
                 return new Vector3(skills.DefensePos.x * courtSide, 0.01f, defenseZPos);
             }
         }
-        public Vector3 OffensePos { get { return new Vector3(skills.OffenseXPos, 0.01f, transform.position.z); } }
+        public Vector3 OffensePos { get { return new Vector3(skills.OffenseXPos * courtSide, 0.01f, transform.position.z); } }
     }
 }
