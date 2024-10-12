@@ -39,7 +39,9 @@ namespace KotB.StatePattern.AIStates
 
                     if (timeUntilServe < 0) {
                         Vector3 aimPoint = new Vector3(0, Random.Range(2.25f, 5), Random.Range(-2, 2));
-                        ai.BallInfo.SetServeTarget(aimPoint, Random.Range(0.65f, 1), ai);
+                        Vector3 adjustedAimPoint = ai.BallInfo.SkillValues.AdjustedServeDirection(aimPoint, ai.Skills.Serving);
+                        Debug.Log($"aim pos: {aimPoint} adjusted: {adjustedAimPoint}");
+                        ai.BallInfo.SetServeTarget(adjustedAimPoint, Random.Range(0.65f, 1), ai);
                         ai.BallInfo.BallServedEvent();
                         changeToDefenseState = true;
                         timeUntilDefense = 1;

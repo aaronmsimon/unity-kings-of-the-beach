@@ -15,3 +15,9 @@ MonoBehaviour:
   servePower:
     min: 25
     max: 40
+  serveAccuracy:
+    min: 0
+    max: 1
+  passAccuracy:
+    min: 0.8
+    max: 2.5

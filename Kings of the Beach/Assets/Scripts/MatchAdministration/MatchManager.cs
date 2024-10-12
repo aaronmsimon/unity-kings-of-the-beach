@@ -36,10 +36,11 @@ namespace KotB.Match
             inPlayState = new InPlayState(this);
             postPointState = new PostPointState(this);
             matchEndState = new MatchEndState(this);
+            
+            matchStateMachine.ChangeState(prePointState);
         }
 
         private void Start() {
-            matchStateMachine.ChangeState(prePointState);
 
             matchInfo.TeamServeIndex = 0;
             matchInfo.PlayerServeIndex = 0;

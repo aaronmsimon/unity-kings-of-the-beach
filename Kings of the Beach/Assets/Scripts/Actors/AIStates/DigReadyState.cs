@@ -45,11 +45,11 @@ namespace KotB.StatePattern.AIStates
             if (ai.Ball != null) {
                 switch (ai.BallInfo.HitsForTeam) {
                     case 0:
-                        Pass();
+                        ai.Pass(CalculatePassTarget());
                         ai.StateMachine.ChangeState(ai.OffenseState);
                         break;
                     case 1:
-                        Pass();
+                        ai.Pass(CalculatePassTarget());
                         ai.StateMachine.ChangeState(ai.DefenseState);
                         break;
                     case 2:
@@ -63,11 +63,10 @@ namespace KotB.StatePattern.AIStates
             }
         }
 
-        private void Pass() {
+        private Vector3 CalculatePassTarget() {
             Vector2 teammatePos = new Vector2(ai.Teammate.transform.position.x, ai.Teammate.transform.position.z);
-            Vector2 aimLocation = ai.AdjustVectorAccuracy(teammatePos, ai.Skills.PassAccuracy);
-            Vector3 targetPos = new Vector3(aimLocation.x, 0f, aimLocation.y);
-            ai.BallInfo.SetPassTarget(targetPos, 7, 1.75f, ai);
+            Vector2 aimLocation = ai.BallInfo.SkillValues.AdjustedPassLocation(teammatePos, ai.Skills.PassAccuracy);
+            return new Vector3(aimLocation.x, 0f, aimLocation.y);
         }
 
         private void Spike() {

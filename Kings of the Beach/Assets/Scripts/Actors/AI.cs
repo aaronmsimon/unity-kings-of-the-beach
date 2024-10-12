@@ -16,12 +16,7 @@ namespace KotB.Actors
 
         private Athlete teammate;
 
-        private float passRangeMin = 0.8f;
-        private float passRangeMax = 2.5f;
-
-        protected override void Start() {
-            base.Start();
-
+        private void Awake() {
             aiStateMachine = new StateMachine();
             serveState = new ServeState(this);
             defenseState = new DefenseState(this);
@@ -43,28 +38,6 @@ namespace KotB.Actors
             base.OnTriggerEnter(other);
 
             aiStateMachine.OnTriggerEnter(other);
-        }
-
-        public Vector2 AdjustVectorAccuracy(Vector2 vector, float accuracy)
-        {
-            // Clamp accuracy to the range of 0 to 1 to avoid unexpected results
-            accuracy = Mathf.Clamp01(accuracy);
-
-            // Calculate the maximum deviation based on the accuracy
-            float deviation = 1 - accuracy;
-
-            // Generate a random unit vector (random direction)
-            Vector2 randomDirection = Random.insideUnitCircle.normalized;
-
-            // Generate a random magnitude based on the deviation
-            // float randomMagnitude = Random.Range(0f, deviation);
-            float randomMagnitude = Random.Range(0, (passRangeMax - passRangeMin) * deviation) + passRangeMin;
-
-            // Calculate the random offset
-            Vector2 randomOffset = randomDirection * randomMagnitude;
-
-            // Add the random offset to the original vector
-            return vector + randomOffset;
         }
 
         public Vector3 GetMyDefensivePosition(Vector3 defensivePos) {
@@ -90,10 +63,15 @@ namespace KotB.Actors
         public Vector3 DefensePos {
             get {
                 float defenseZPos;
-                if (teammate.GetComponent<Player>() != null || teammate.Skills.PlayerPosition == PositionType.Defender) {
-                    defenseZPos = GetMyDefensivePosition(transform.position).z;
+                // If no teammate (debugging but potentially practice, too)
+                if (teammate != null) {
+                    if (teammate.GetComponent<Player>() != null || teammate.Skills.PlayerPosition == PositionType.Defender) {
+                        defenseZPos = GetMyDefensivePosition(transform.position).z;
+                    } else {
+                        defenseZPos = transform.position.z;
+                    }
                 } else {
-                    defenseZPos = transform.position.z;
+                    defenseZPos = 0;
                 }
 
                 return new Vector3(skills.DefensePos.x * courtSide, 0.01f, defenseZPos);

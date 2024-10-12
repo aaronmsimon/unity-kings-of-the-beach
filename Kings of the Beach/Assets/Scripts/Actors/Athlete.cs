@@ -122,6 +122,10 @@ namespace KotB.Actors
             endJumpPos = new Vector3(transform.position.x, jumpHeight, transform.position.z);
         }
 
+        public void Pass(Vector3 targetPos) {
+            BallInfo.SetPassTarget(targetPos, 7, 1.75f, this);
+        }
+
         public void SetCourtSide(int courtSide) {
             this.courtSide = courtSide;
         }

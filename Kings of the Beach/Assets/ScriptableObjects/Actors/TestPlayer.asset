@@ -17,7 +17,7 @@ MonoBehaviour:
   reactionTime: 0
   passAccuracy: 0
   digRange: 0
-  serving: 10
+  serving: 5
   servePower: 8
   height: 1.8
   jumpHeight: 2.1

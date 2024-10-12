@@ -87,9 +87,10 @@ I would like to actually finish this game this time. That means starting with a 
 #### AI
 - don't chase ball when won't be hit over net [need to come up with better possession logic - serves, hit 3 times]
 - AI Serve to location with random speed based on skill, chance to also go out
-- spike dir based on tactic
+- spike dir based on tactic (needs to be in Athlete for player, too)
 - if both of us contact same ball (first hit), last contact will override, but count increases so will hit across
 - Add AI thought process - what it's doing and why it's deciding on location. Toggle this on/off
+- Change Pass Accuracy skill to 1-10 (for consistency with other skills) and then adjust the pass calc to divide by 10 (to ensure between 0-1)
 
 #### Ball
 - Ball outside court width as crossing net
@@ -98,6 +99,7 @@ I would like to actually finish this game this time. That means starting with a 
 - feint for player spike
 - Between points, the players can high-five, hug, etc (see Concepts/Ideas bullet 5), then player controlled skip to service
 - issue: can't unlock after pass from ball at net (thoughts can help reveal; also need to make proper test area where can control where ai passes to)
+- use pass accuracy skill in passing (use AdjustVectorAccuracy())
 
 #### Match
 - Complete all states
@@ -129,12 +131,3 @@ I would like to actually finish this game this time. That means starting with a 
 - debug: writing to console, gizmos like raycasts or boxes drawn
 - bump/set vs pass/across
 - ball reset is temp
-
-### note to self
-1. move AdjustVectorAccuracy() from AI.cs to Helpers.cs
-2. update DigReadState.cs Pass() to new location of AdjustVectorAccuracy()
-3. move Pass() from DigReadyState.cs to Athlete.cs
-4. update DigReadyState.cs to use new location of Pass()
-5. update LockState.cs to use Pass()
-6. use AdjustVectorAccuracy() in PlayerStates.ServeState.cs
-7. use AdjustVectorAccuracy() in AIStates.ServeState.cs

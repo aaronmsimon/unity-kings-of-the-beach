@@ -122,4 +122,5 @@ public class BallSO : ScriptableObject
     //---- PROPERTIES ----
     public int Possession { get { return possession; } set { possession = value; } }
     public Vector3 TargetPos { get { return targetPos; } set { targetPos = value; } }
+    public SkillValues SkillValues { get { return skillValues; } }
 }

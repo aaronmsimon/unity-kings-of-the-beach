@@ -34,9 +34,7 @@ namespace KotB.Actors
         private ServeState serveState;
         private PostPointState postPointState;
 
-        protected override void Start() {
-            base.Start();
-
+        private void Awake() {
             playerStateMachine = new StateMachine();
             normalState = new NormalState(this);
             lockState = new LockState(this);

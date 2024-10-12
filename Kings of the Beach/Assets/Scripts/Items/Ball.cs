@@ -29,14 +29,16 @@ public class Ball : MonoBehaviour
     private HeldState heldState;
     private InFlightState inFlightState;
 
-    private void Start() {
+    private void Awake() {
         ballStateMachine = new StateMachine();
         groundState = new GroundState(this);
         heldState = new HeldState(this);
         inFlightState = new InFlightState(this);
-        
-        ballStateMachine.ChangeState(groundState);
 
+        ballStateMachine.ChangeState(groundState);
+    }
+
+    private void Start() {
         ballInfo.BallRadius = GetComponent<Renderer>().bounds.size.x / 2;
     }
 
