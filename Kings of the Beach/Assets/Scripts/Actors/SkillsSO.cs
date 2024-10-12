@@ -14,7 +14,7 @@ public class SkillsSO : ScriptableObject
     [SerializeField] private float reactionTime;
 
     [Header("Accuracy")]
-    [SerializeField][Range(0,1)] private float passAccuracy;
+    [SerializeField][Range(1,10)] private float passAccuracy;
 
     [Header("Range")]
     [SerializeField] private float digRange;

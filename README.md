@@ -53,6 +53,7 @@ I would like to actually finish this game this time. That means starting with a 
 3. Dig (more important with speed of ball)
 4. Serve Skill (affects serve aim)
 5. Serve Power (affects ~~speed and~~ direction)
+6. Blocking (likelihood to be successful)
 
 #### Ball Mechanics
 1. ~~Move to Target with Bezier curve~~
@@ -90,7 +91,7 @@ I would like to actually finish this game this time. That means starting with a 
 - spike dir based on tactic (needs to be in Athlete for player, too)
 - if both of us contact same ball (first hit), last contact will override, but count increases so will hit across
 - Add AI thought process - what it's doing and why it's deciding on location. Toggle this on/off
-- Change Pass Accuracy skill to 1-10 (for consistency with other skills) and then adjust the pass calc to divide by 10 (to ensure between 0-1)
+- Move speed seems to be really fast during state transitions (eg going to offense position)
 
 #### Ball
 - Ball outside court width as crossing net
@@ -108,10 +109,6 @@ I would like to actually finish this game this time. That means starting with a 
 - Post Point: allow for celebration/skip
 - review transitions that are not in a state
 - set teams will need to be a function from game setup
-
-
-### Needed for MVP
-8. Blocking
 
 ### Concepts/Ideas
 - use right stick to reach for ball on dig
