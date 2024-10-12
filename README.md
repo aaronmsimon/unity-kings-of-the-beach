@@ -22,7 +22,7 @@ I would like to actually finish this game this time. That means starting with a 
 2. ~~Create net with colliders~~
 3. Stadium
 4. Skybox
-5. Stadium Scoreboard
+5. ~~Stadium Scoreboard~~
 
 #### Player - Arcade
 1. ~~Create Player Controller - Movement~~
@@ -45,13 +45,13 @@ I would like to actually finish this game this time. That means starting with a 
 8. ~~Offensive positioning~~
 
 #### Gameplay
-1. Randomness in aim
+1. ~~Randomness in aim~~
 
 #### Skills
 1. ~~Speed~~
-2. Pass Accuracy (affects aim)
+2. ~~Pass Accuracy (affects aim, AI only)~~
 3. Dig (more important with speed of ball)
-4. Serve Skill (affects serve aim)
+4. ~~Serve Skill (affects serve aim)~~
 5. Serve Power (affects ~~speed and~~ direction)
 6. Blocking (likelihood to be successful)
 
@@ -74,7 +74,7 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### Presentation
 1. ~~Cinemachine~~
-2. Post Processing - Bloom
+2. ~~Post Processing - Bloom~~
 3. Scoreboard
 4. Instant Replay for in/out calls
 
