@@ -90,16 +90,16 @@ I would like to actually finish this game this time. That means starting with a 
 - AI Serve to location with random speed based on skill, chance to also go out
 - spike dir based on tactic (needs to be in Athlete for player, too)
 - if both of us contact same ball (first hit), last contact will override, but count increases so will hit across
-- Add AI thought process - what it's doing and why it's deciding on location. Toggle this on/off
 - issue: was still moving towards net when "pass" is over net instead of changing state in passing testing scene (needs to change state after change of possession)
 
 #### Ball
 - Ball outside court width as crossing net
+- re-do ball logic using raycasts not position
 
 #### Player
 - feint for player spike
 - Between points, the players can high-five, hug, etc (see Concepts/Ideas bullet 5), then player controlled skip to service
-- issue: can't unlock after pass from ball at net (thoughts can help reveal; also need to make proper test area where can control where ai passes to)
+- issue: can't unlock after pass from ball at net (modify test area to control where ai passes to)
 - use pass accuracy skill in passing (use AdjustVectorAccuracy())
 
 #### Match
@@ -133,3 +133,4 @@ I would like to actually finish this game this time. That means starting with a 
 - I think the player should be using the match state, not the ball in flight (need to change this back)
 - that means the testing scene for passing needs to reference the match state (perhaps have another state for practice?
 - this should be implemented with AI, too so they stop moving if it's no longer in play (maybe this is how to handle if ball is not served to other side? but definitely can handle if hit outside of range of net (ball dynamic item)
+- tweak spike (create spike test scene) - should not be straight line to target (too many hitting net)

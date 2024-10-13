@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using KotB.Actors;
-using KotB.StatePattern;
 
 [CreateAssetMenu(fileName = "BallInfo", menuName = "Game/Ball Info")]
 public class BallSO : ScriptableObject
@@ -12,7 +11,6 @@ public class BallSO : ScriptableObject
     public Vector3 Position { get; set; }
     [Header("Everything else...")]
     [SerializeField] private Vector3 targetPos;
-    public IState CurrentState { get; set; }
     public Vector3 StartPos { get; private set; }
     public float Height { get; set; }
     public float Duration { get; set; }
