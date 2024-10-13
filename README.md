@@ -128,3 +128,8 @@ I would like to actually finish this game this time. That means starting with a 
 - debug: writing to console, gizmos like raycasts or boxes drawn
 - bump/set vs pass/across
 - ball reset is temp
+
+### Note to Self
+- I think the player should be using the match state, not the ball in flight (need to change this back)
+- that means the testing scene for passing needs to reference the match state (perhaps have another state for practice?
+- this should be implemented with AI, too so they stop moving if it's no longer in play (maybe this is how to handle if ball is not served to other side? but definitely can handle if hit outside of range of net (ball dynamic item)
