@@ -1,4 +1,6 @@
 using UnityEngine;
+using KotB.StatePattern.MatchStates;
+using KotB.Match;
 
 namespace KotB.Actors
 {
@@ -15,6 +17,7 @@ namespace KotB.Actors
 
         private AI ai;
         private Player player;
+        private MatchManager matchManager;
 
         protected override void Start() {
             base.Start();
@@ -22,6 +25,8 @@ namespace KotB.Actors
             ai = FindObjectOfType<AI>();
             player = FindObjectOfType<Player>();
             ai.Teammate = player;
+            InPlayState inPlayState = new InPlayState(matchManager);
+            matchInfo.CurrentState = inPlayState;
 
             TakeBall();
         }

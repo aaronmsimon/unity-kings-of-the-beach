@@ -1,5 +1,6 @@
 using UnityEngine;
 using KotB.Actors;
+using KotB.StatePattern.MatchStates;
 
 namespace KotB.StatePattern.AIStates
 {
@@ -32,10 +33,12 @@ namespace KotB.StatePattern.AIStates
                 if (Vector3.Distance(ai.transform.position, ai.BallInfo.TargetPos) > ai.Skills.TargetLockDistance) {
                     ai.MoveDir = (ai.BallInfo.TargetPos - ai.transform.position).normalized;
                 } else {
-                    ai.transform.position = ai.BallInfo.TargetPos;
-                    ai.MoveDir = Vector3.zero;
-                    if (ai.BallInfo.HitsForTeam == 2 && !isSpiking) {
-                        TrySpike();
+                    if (ai.MatchInfo.CurrentState is InPlayState && ai.BallInfo.lastPlayerToHit != ai && Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
+                        ai.transform.position = ai.BallInfo.TargetPos;
+                        ai.MoveDir = Vector3.zero;
+                        if (ai.BallInfo.HitsForTeam == 2 && !isSpiking) {
+                            TrySpike();
+                        }
                     }
                 }
             }
