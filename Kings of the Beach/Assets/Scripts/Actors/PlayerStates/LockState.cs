@@ -45,6 +45,7 @@ namespace KotB.StatePattern.PlayerStates
                     // shot
                     SetTargetPos(false);
                     player.BallInfo.SetSpikeTarget(targetPos, Random.Range(0.5f, 1f), player);
+                    player.TriggerThoughtEvent("LockState -> NormalState [spiked ball]");
                     player.StateMachine.ChangeState(player.NormalState);
                 }
             }
@@ -61,12 +62,14 @@ namespace KotB.StatePattern.PlayerStates
             float targetX = aim.x * 5 + 4 * (pass ? player.CourtSide : -player.CourtSide);
             float targetZ = aim.y * 5;
             targetPos = new Vector3(targetX, 0f, targetZ);
+            player.TriggerThoughtEvent($"{(pass ? "Passing" : "Hitting")}: input {player.MoveInput} aim {aim} converted to {targetPos}");
         }
         
         private void TryUnlock() {
             if (canUnlock) {
                 unlockTimer -= Time.deltaTime;
                 if (unlockTimer <= 0) {
+                    player.TriggerThoughtEvent("LockState -> NormalState [unlock timer expired]");
                     player.StateMachine.ChangeState(player.NormalState);
                 }
             }
@@ -85,6 +88,7 @@ namespace KotB.StatePattern.PlayerStates
         }
 
         private void OnBallHitGround() {
+            player.TriggerThoughtEvent("LockState -> PostPointState [ball hit ground]");
             player.StateMachine.ChangeState(player.PostPointState);
         }
     }

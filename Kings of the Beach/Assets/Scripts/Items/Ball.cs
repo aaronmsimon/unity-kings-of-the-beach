@@ -44,10 +44,12 @@ public class Ball : MonoBehaviour
 
     private void OnEnable() {
         ballInfo.TargetSet += OnTargetSet;
+        ballStateMachine.StateChanged += OnStateChanged;
     }
 
     private void OnDisable() {
         ballInfo.TargetSet -= OnTargetSet;
+        ballStateMachine.StateChanged -= OnStateChanged;
     }
 
     private void Update() {
@@ -84,6 +86,10 @@ public class Ball : MonoBehaviour
         player.StateMachine.ChangeState(player.ServeState);
         ballInfo.GiveBall(player);
         ballStateMachine.ChangeState(heldState);
+    }
+
+    private void OnStateChanged(IState newState) {
+        ballInfo.CurrentState = newState;
     }
 
     //---- PROPERTIES ----
