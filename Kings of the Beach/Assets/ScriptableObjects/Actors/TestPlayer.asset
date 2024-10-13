@@ -15,7 +15,7 @@ MonoBehaviour:
   moveSpeed: 4
   targetLockDistance: 0.75
   reactionTime: 0
-  passAccuracy: 0
+  passAccuracy: 10
   digRange: 0
   serving: 5
   servePower: 8

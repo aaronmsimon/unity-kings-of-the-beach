@@ -91,6 +91,7 @@ I would like to actually finish this game this time. That means starting with a 
 - spike dir based on tactic (needs to be in Athlete for player, too)
 - if both of us contact same ball (first hit), last contact will override, but count increases so will hit across
 - Add AI thought process - what it's doing and why it's deciding on location. Toggle this on/off
+- issue: was still moving towards net when "pass" is over net instead of changing state in passing testing scene (needs to change state after change of possession)
 
 #### Ball
 - Ball outside court width as crossing net

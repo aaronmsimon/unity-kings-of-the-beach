@@ -28,26 +28,20 @@ namespace KotB.Actors
         private Vector3 moveInput;
         private Vector3 rightStickInput;
 
-        private StateMachine playerStateMachine;
         private NormalState normalState;
         private LockState lockState;
         private ServeState serveState;
         private PostPointState postPointState;
 
-        private void Awake() {
-            playerStateMachine = new StateMachine();
+        protected override void Awake() {
+            base.Awake();
+
             normalState = new NormalState(this);
             lockState = new LockState(this);
             serveState = new ServeState(this);
             postPointState = new PostPointState(this);
             
-            playerStateMachine.ChangeState(normalState);
-        }
-
-        protected override void Update() {
-            base.Update();
-
-            playerStateMachine.Update();
+            stateMachine.ChangeState(normalState);
         }
 
         //Adds listeners for events being triggered in the InputReader script
@@ -67,13 +61,13 @@ namespace KotB.Actors
         protected override void OnTriggerEnter(Collider other) {
             base.OnTriggerEnter(other);
 
-            playerStateMachine.OnTriggerEnter(other);
+            stateMachine.OnTriggerEnter(other);
         }
 
         protected override void OnTriggerExit(Collider other) {
             base.OnTriggerEnter(other);
 
-            playerStateMachine.OnTriggerExit(other);
+            stateMachine.OnTriggerExit(other);
         }
 
         //---- EVENT LISTENERS ----
@@ -93,7 +87,6 @@ namespace KotB.Actors
         //---- PROPERTIES ----
 
         public InputReader InputReader { get { return inputReader; } }
-        public StateMachine StateMachine { get { return playerStateMachine; } }
         public NormalState NormalState { get { return normalState; } }
         public LockState LockState { get { return lockState; } }
         public ServeState ServeState { get { return serveState; } }

@@ -14,12 +14,14 @@ namespace KotB.Actors
         [SerializeField] private InputReader inputReader;
 
         private AI ai;
+        private Player player;
 
         protected override void Start() {
             base.Start();
 
             ai = FindObjectOfType<AI>();
-            ai.Teammate = FindObjectOfType<Player>();
+            player = FindObjectOfType<Player>();
+            ai.Teammate = player;
 
             TakeBall();
         }
@@ -43,6 +45,7 @@ namespace KotB.Actors
         public void TakeBall() {
             ballInfo.GiveBall(this);
             ai.StateMachine.ChangeState(ai.DefenseState);
+            player.StateMachine.ChangeState(player.NormalState);
         }
 
         //---- EVENT LISTENERS ----

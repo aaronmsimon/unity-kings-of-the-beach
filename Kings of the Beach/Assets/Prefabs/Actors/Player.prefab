@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 5719456530564004304}
   - component: {fileID: 2903952158050811650}
   - component: {fileID: 3030860562228718519}
-  - component: {fileID: 8915192720679999833}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -219,34 +218,6 @@ MonoBehaviour:
       - m_Target: {fileID: 2903952158050811650}
         m_TargetAssemblyTypeName: KotB.Actors.Athlete, Assembly-CSharp
         m_MethodName: OnBallHitGround
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &8915192720679999833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6765332559015744136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 09bf76267e1a108438f99490e435f253, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2903952158050811650}
-        m_TargetAssemblyTypeName: KotB.Actors.Athlete, Assembly-CSharp
-        m_MethodName: OnMatchChangeToServeState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

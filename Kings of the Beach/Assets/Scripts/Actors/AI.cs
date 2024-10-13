@@ -7,7 +7,6 @@ namespace KotB.Actors
 {
     public class AI : Athlete
     {
-        private StateMachine aiStateMachine;
         private ServeState serveState;
         private DefenseState defenseState;
         private OffenseState offenseState;
@@ -16,28 +15,23 @@ namespace KotB.Actors
 
         private Athlete teammate;
 
-        private void Awake() {
-            aiStateMachine = new StateMachine();
+        protected override void Awake() {
+            base.Awake();
+
             serveState = new ServeState(this);
             defenseState = new DefenseState(this);
             offenseState = new OffenseState(this);
             digReadyState = new DigReadyState(this);
             postPointState = new PostPointState(this);
 
-            aiStateMachine.ChangeState(postPointState);
-        }
-
-        protected override void Update() {
-            base.Update();
-
-            aiStateMachine.Update();
+            stateMachine.ChangeState(postPointState);
         }
 
         protected override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);
 
-            aiStateMachine.OnTriggerEnter(other);
+            stateMachine.OnTriggerEnter(other);
         }
 
         public Vector3 GetMyDefensivePosition(Vector3 defensivePos) {
@@ -53,7 +47,7 @@ namespace KotB.Actors
         }
 
         //---- PROPERTIES ----
-        public StateMachine StateMachine { get { return aiStateMachine; } }
+        
         public ServeState ServeState { get { return serveState; } }
         public DefenseState DefenseState { get { return defenseState; } }
         public OffenseState OffenseState { get { return offenseState; } }

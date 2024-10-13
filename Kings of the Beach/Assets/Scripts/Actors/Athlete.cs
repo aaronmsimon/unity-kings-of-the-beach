@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
+using KotB.StatePattern;
 using KotB.Match;
-using Unity.VisualScripting;
 
 namespace KotB.Actors
 {
@@ -19,8 +19,10 @@ namespace KotB.Actors
         [SerializeField] private LayerMask obstaclesLayer;
 
         public event Action BallHitGround;
+        public event Action<string> Thought;
 
         protected Ball ball;
+        protected StateMachine stateMachine;
         protected float courtSideLength = 8;
         protected Vector3 moveDir;
         protected bool isJumping;
@@ -40,7 +42,9 @@ namespace KotB.Actors
         private float moveSpeed;
         private float jumpHeight;
 
-        private void Awake() {
+        protected virtual void Awake() {
+            stateMachine = new StateMachine();
+
             capCollider = GetComponent<CapsuleCollider>();
         }
 
@@ -54,6 +58,8 @@ namespace KotB.Actors
         }
 
         protected virtual void Update() {
+            stateMachine.Update();
+            
             if (!isJumping) {
                 Move();
             } else {
@@ -134,6 +140,10 @@ namespace KotB.Actors
             courtSide *= -1;
         }
 
+        public void TriggerThoughtEvent(string thought) {
+            Thought?.Invoke(thought);
+        }
+
         protected virtual void OnDrawGizmos() {
             Debug.DrawLine(transform.position, ballInfo.Position, Color.green);
         }
@@ -150,6 +160,7 @@ namespace KotB.Actors
         public float SkillLevelMax { get { return skillLevelMax; } }
         public BallSO BallInfo { get { return ballInfo; } }
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
+        public StateMachine StateMachine { get { return stateMachine; } }
         public int CourtSide { get { return courtSide; } }
         public float CourtSideLength { get { return courtSideLength; } }
         public Vector3 MoveDir {
