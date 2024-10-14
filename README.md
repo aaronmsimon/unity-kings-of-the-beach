@@ -61,6 +61,8 @@ I would like to actually finish this game this time. That means starting with a 
 3. Ball Events triggered when Property Set
 4. ~~Ball State Machine (probably need to change ballstate.bump to inair/active/inplay/etc)~~
 5. ~~Display target on playing surface (to help player)~~
+6. Ball into net based on Raycast
+7. Ball detection outside of legal range at net
 
 #### Assistants
 1. Coach - Bump
@@ -91,10 +93,6 @@ I would like to actually finish this game this time. That means starting with a 
 - spike dir based on tactic (needs to be in Athlete for player, too)
 - if both of us contact same ball (first hit), last contact will override, but count increases so will hit across
 - issue: was still moving towards net when "pass" is over net instead of changing state in passing testing scene (needs to change state after change of possession)
-
-#### Ball
-- Ball outside court width as crossing net
-- re-do ball logic using raycasts not position
 
 #### Player
 - feint for player spike
@@ -130,4 +128,17 @@ I would like to actually finish this game this time. That means starting with a 
 - ball reset is temp
 
 ### Note to Self
-- tweak spike (create spike test scene) - should not be straight line to target (too many hitting net)
+1. tweak spike (create spike test scene) - should not be straight line to target (too many hitting net)
+	a. adjust ball graphics so transform is at the bottom of the ball
+	b. create ball model and add volleyball texture (https://www.google.com/search?q=fiv3+paris+olympic+volleyball&sca_esv=a531d7c2178cf6c1&rlz=1C1VDKB_enUS1027US1027&udm=2&biw=2195&bih=1066&sxsrf=ADLYWIKdkOFS03xH_dnMKgHAFuD1_Q0frA%3A1728879869991&ei=_ZwMZ4CdPMa5wN4PsJLa0QY&ved=0ahUKEwjAj4q0g42JAxXGHNAFHTCJNmoQ4dUDCBA&uact=5&oq=fiv3+paris+olympic+volleyball&gs_lp=Egxnd3Mtd2l6LXNlcnAiHWZpdjMgcGFyaXMgb2x5bXBpYyB2b2xsZXliYWxsSPcRUNYMWKcQcAF4AJABAJgBXaABqgSqAQE2uAEDyAEA-AEBmAIAoAIAmAMAiAYBkgcAoAeOAg&sclient=gws-wiz-serp#vhid=LwcMsTHP0eXCnM&vssid=mosaic)
+	c. update ball into net using raycast (check off ball mechanics #6)
+	d. create test scene
+	e. code will leverage two transforms - start and finish with flag for if below net top
+	f. draw line between two points
+	g. observe where height and distance are legal moves (not crashing into net)
+	h. consider spike point around 1.0 - 1.5 meters from net
+	i. consider spike target around 2m from end of court
+2. weak spike (feint)
+	a. slight arc, straight shot over net
+	b. power still used for speed, accuracy, and distance
+	c. angles are much easier this way (somewhat less distance)
