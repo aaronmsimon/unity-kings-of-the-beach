@@ -39,7 +39,7 @@ public class Ball : MonoBehaviour
     }
 
     private void Start() {
-        ballInfo.BallRadius = GetComponent<Renderer>().bounds.size.x / 2;
+        ballInfo.BallRadius = GetComponent<SphereCollider>().radius;
     }
 
     private void OnEnable() {
