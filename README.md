@@ -129,8 +129,6 @@ I would like to actually finish this game this time. That means starting with a 
 
 ### Note to Self
 1. tweak spike (create spike test scene) - should not be straight line to target (too many hitting net)
-	a. adjust ball graphics so transform is at the bottom of the ball
-	b. create ball model and add volleyball texture (https://www.google.com/search?q=fiv3+paris+olympic+volleyball&sca_esv=a531d7c2178cf6c1&rlz=1C1VDKB_enUS1027US1027&udm=2&biw=2195&bih=1066&sxsrf=ADLYWIKdkOFS03xH_dnMKgHAFuD1_Q0frA%3A1728879869991&ei=_ZwMZ4CdPMa5wN4PsJLa0QY&ved=0ahUKEwjAj4q0g42JAxXGHNAFHTCJNmoQ4dUDCBA&uact=5&oq=fiv3+paris+olympic+volleyball&gs_lp=Egxnd3Mtd2l6LXNlcnAiHWZpdjMgcGFyaXMgb2x5bXBpYyB2b2xsZXliYWxsSPcRUNYMWKcQcAF4AJABAJgBXaABqgSqAQE2uAEDyAEA-AEBmAIAoAIAmAMAiAYBkgcAoAeOAg&sclient=gws-wiz-serp#vhid=LwcMsTHP0eXCnM&vssid=mosaic)
 	c. update ball into net using raycast (check off ball mechanics #6)
 	d. create test scene
 	e. code will leverage two transforms - start and finish with flag for if below net top
