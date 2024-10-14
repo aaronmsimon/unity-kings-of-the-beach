@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 200157665986289291}
-  - component: {fileID: 5076741645602105172}
-  - component: {fileID: 4045385827116880432}
   - component: {fileID: 1408896858035837976}
   - component: {fileID: 6059847001209752604}
   m_Layer: 0
@@ -36,56 +34,6 @@ Transform:
   - {fileID: 3966602256791677011}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5076741645602105172
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210444293042598170}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4045385827116880432
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210444293042598170}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &1408896858035837976
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -122,6 +70,9 @@ MonoBehaviour:
   ballInfo: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
   matchInfo: {fileID: 11400000, guid: 23b44ef1d3bbbbe42a97b3fd37ef9578, type: 2}
   targetPrefab: {fileID: 1498450459641571876, guid: cee38374b386f574f8399f26907a12be, type: 3}
+  obstaclesLayer:
+    serializedVersion: 2
+    m_Bits: 64
   ballHitGroundEvent: {fileID: 11400000, guid: 8fc138420100eab479f8562b3551909f, type: 2}
   changeToInPlayStateEvent: {fileID: 11400000, guid: a94effd70fe10864486482732c9f7269, type: 2}
   servePower: {fileID: 11400000, guid: ce289d1ed0780894094eca75d709a4e4, type: 2}

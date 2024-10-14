@@ -61,7 +61,7 @@ I would like to actually finish this game this time. That means starting with a 
 3. Ball Events triggered when Property Set
 4. ~~Ball State Machine (probably need to change ballstate.bump to inair/active/inplay/etc)~~
 5. ~~Display target on playing surface (to help player)~~
-6. Ball into net based on Raycast
+6. ~~Ball into net based on Raycast~~
 7. Ball detection outside of legal range at net
 
 #### Assistants
@@ -86,6 +86,7 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### Athlete
 - get side based on team
+- spike tweaks: timing and height reach
 
 #### AI
 - don't chase ball when won't be hit over net [need to come up with better possession logic - serves, hit 3 times]
@@ -125,17 +126,9 @@ I would like to actually finish this game this time. That means starting with a 
 - magic numbers
 - debug: writing to console, gizmos like raycasts or boxes drawn
 - bump/set vs pass/across
-- ball reset is temp
+- athlete raycast isn't used
 
 ### Note to Self
-1. tweak spike (create spike test scene) - should not be straight line to target (too many hitting net)
-	c. update ball into net using raycast (check off ball mechanics #6)
-	d. create test scene
-	e. code will leverage two transforms - start and finish with flag for if below net top
-	f. draw line between two points
-	g. observe where height and distance are legal moves (not crashing into net)
-	h. consider spike point around 1.0 - 1.5 meters from net
-	i. consider spike target around 2m from end of court
 2. weak spike (feint)
 	a. slight arc, straight shot over net
 	b. power still used for speed, accuracy, and distance

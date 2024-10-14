@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour
     [Space(10)]
 
     [SerializeField] private Transform targetPrefab;
+    [SerializeField] private LayerMask obstaclesLayer;
     
     [Header("Game Events")]
     [SerializeField] private GameEvent ballHitGroundEvent;
@@ -93,4 +94,5 @@ public class Ball : MonoBehaviour
     public HeldState HeldState { get { return heldState; } }
     public InFlightState InFlightState { get { return inFlightState; } }
     public GameEvent BallHitGround { get { return ballHitGroundEvent; } }
+    public LayerMask ObstaclesLayer { get { return obstaclesLayer; } }
 }

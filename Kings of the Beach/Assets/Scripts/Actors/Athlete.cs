@@ -19,7 +19,6 @@ namespace KotB.Actors
         [SerializeField] private LayerMask obstaclesLayer;
 
         public event Action BallHitGround;
-        public event Action<string> Thought;
 
         protected Ball ball;
         protected StateMachine stateMachine;
@@ -140,13 +139,7 @@ namespace KotB.Actors
             courtSide *= -1;
         }
 
-        public void TriggerThoughtEvent(string thought) {
-            Thought?.Invoke(thought);
-        }
-
-        protected virtual void OnDrawGizmos() {
-            Debug.DrawLine(transform.position, ballInfo.Position, Color.green);
-        }
+        protected virtual void OnDrawGizmos() {}
 
         //---- EVENT LISTENERS ----
 

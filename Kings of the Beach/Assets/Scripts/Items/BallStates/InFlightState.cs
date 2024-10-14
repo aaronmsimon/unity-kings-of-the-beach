@@ -32,6 +32,7 @@ namespace KotB.StatePattern.BallStates
                     }
                     if (Mathf.Abs(ball.transform.position.x) < 0.13f) {
                         CheckIfOverNet();
+                        CheckNetCollision(targetPos - ball.transform.position);
                     }
                 } else {
                     ball.transform.position += Vector3.down * ballSpeedToGround * Time.deltaTime;
@@ -48,6 +49,10 @@ namespace KotB.StatePattern.BallStates
             if (ball.transform.position.y < 2.43) {
                 ballIntoNet = true;
             }
+        }
+
+        private void CheckNetCollision(Vector3 moveDir) {
+            ballIntoNet = Physics.Raycast(ball.transform.position, moveDir, out RaycastHit hit, 0.5f, ball.ObstaclesLayer);
         }
 
         private Vector3 CalculateInFlightPosition(float t, Vector3 start, Vector3 end, float height)

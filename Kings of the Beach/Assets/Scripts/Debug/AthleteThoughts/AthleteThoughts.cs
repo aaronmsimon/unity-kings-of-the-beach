@@ -16,11 +16,11 @@ namespace KotB.Actors
         }
 
         private void OnEnable() {
-            athlete.Thought += OnThought;
+            // athlete.Thought += OnThought;
         }
 
         private void OnDisable() {
-            athlete.Thought -= OnThought;
+            // athlete.Thought -= OnThought;
         }
 
         // Method to add an item to the queue
