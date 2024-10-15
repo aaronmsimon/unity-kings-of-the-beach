@@ -129,7 +129,12 @@ I would like to actually finish this game this time. That means starting with a 
 - athlete raycast isn't used
 
 ### Note to Self
+1. tweak spike/jump
+* adjust jump height to actual heights (not total height)
+* adjust calculation to add jump height (not take total height)
+* adjust duration of pass based on height and gravity
+* adjust duration of jump
 2. weak spike (feint)
-	a. slight arc, straight shot over net
-	b. power still used for speed, accuracy, and distance
-	c. angles are much easier this way (somewhat less distance)
+* slight arc, straight shot over net
+* power still used for speed, accuracy, and distance
+* angles are much easier this way (somewhat less distance)
