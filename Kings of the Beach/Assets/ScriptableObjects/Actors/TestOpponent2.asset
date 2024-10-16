@@ -15,11 +15,13 @@ MonoBehaviour:
   moveSpeed: 4
   targetLockDistance: 0.25
   reactionTime: 0.5
-  passAccuracy: 0.7
+  passAccuracy: 1
   digRange: 0.5
   serving: 1
+  servePower: 1
   height: 1.8
   jumpHeight: 2.1
+  reachPct: 0.3
   servingPartnerPos: {x: 5, y: 1.5}
   defensePos: {x: 5, y: 2}
   offenseXPos: 2

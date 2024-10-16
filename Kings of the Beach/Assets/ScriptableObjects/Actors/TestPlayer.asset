@@ -21,6 +21,7 @@ MonoBehaviour:
   servePower: 8
   height: 1.8
   jumpHeight: 2.1
+  reachPct: 0.3
   servingPartnerPos: {x: 5, y: 1.5}
   defensePos: {x: 5, y: 2}
   offenseXPos: 1.25

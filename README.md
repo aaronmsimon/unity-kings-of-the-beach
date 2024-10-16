@@ -86,7 +86,6 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### Athlete
 - get side based on team
-- spike tweaks: timing and height reach
 
 #### AI
 - don't chase ball when won't be hit over net [need to come up with better possession logic - serves, hit 3 times]
@@ -129,6 +128,10 @@ I would like to actually finish this game this time. That means starting with a 
 - athlete raycast isn't used
 
 ### Note to Self
+1. more spike tweaks
+* need to test with AI
+* float spikeRangeV = Random.Range(6, 7); for AI needs to be set in skills based on height
+* BallInfo.SetSpikeTarget(targetPos, Random.Range(0.5f, 1f), ai); range should be based on skill and a tighter variance and related to distance spiking
 2. weak spike (feint)
 * slight arc, straight shot over net
 * power still used for speed, accuracy, and distance
