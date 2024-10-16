@@ -40,11 +40,13 @@ namespace KotB.Actors
         private float moveSpeed;
         private float jumpHeight;
         private float reachPct;
+        private Animator animator;
 
         protected virtual void Awake() {
             stateMachine = new StateMachine();
 
             capCollider = GetComponent<CapsuleCollider>();
+            animator = GetComponentInChildren<Animator>();
         }
 
         protected virtual void Start() {
@@ -84,6 +86,13 @@ namespace KotB.Actors
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, moveDir, Color.red);
             Vector3 newPos = transform.position + moveDir * moveSpeed * Time.deltaTime;
             if (canMove) {
+                // Animate
+                if (newPos != transform.position) {
+                    animator.SetBool("isWalking", true);
+                } else {
+                    animator.SetBool("isWalking", false);
+                }
+                // Move
                 if (MathF.Abs(newPos.x) > noMansLand) {
                     transform.position = newPos;
                 } else {
@@ -96,26 +105,27 @@ namespace KotB.Actors
 
         private void Jump() {
             jumpTimer += Time.deltaTime;
-            if (jumpAscending) {
-                if (jumpTimer < jumpDuration) {
-                    float t = jumpTimer / jumpDuration;
-                    transform.position = Vector3.Lerp(startJumpPos, endJumpPos, t);
-                } else {
-                    transform.position = endJumpPos;
-                    jumpAscending = false;
-                    jumpTimer = 0;
-                }
-            } else {
-                if (jumpTimer < jumpDuration / jumpDescendingMultiplier) {
-                    float t = jumpTimer / jumpDuration;
-                    transform.position = Vector3.Lerp(endJumpPos, startJumpPos, t);
-                } else {
-                    transform.position = startJumpPos;
-                    isJumping = false;
-                    capCollider.center *= 1 / (1 + reachPct);
-                    capCollider.height *= 1 / (1 + reachPct);
-                }
-            }
+            // if (jumpAscending) {
+            //     if (jumpTimer < jumpDuration) {
+            //         float t = jumpTimer / jumpDuration;
+            //         transform.position = Vector3.Lerp(startJumpPos, endJumpPos, t);
+            //     } else {
+            //         transform.position = endJumpPos;
+            //         jumpAscending = false;
+            //         jumpTimer = 0;
+            //     }
+            // } else {
+            //     if (jumpTimer < jumpDuration / jumpDescendingMultiplier) {
+            //         float t = jumpTimer / jumpDuration;
+            //         transform.position = Vector3.Lerp(endJumpPos, startJumpPos, t);
+            //     } else {
+            //         transform.position = startJumpPos;
+            //         isJumping = false;
+            //         capCollider.center *= 1 / (1 + reachPct);
+            //         capCollider.height *= 1 / (1 + reachPct);
+            //     }
+            // }
+            if (jumpTimer >= jumpDuration) isJumping = false;
         }
 
         public void PerformJump() {
@@ -126,6 +136,7 @@ namespace KotB.Actors
             jumpAscending = true;
             startJumpPos = transform.position;
             endJumpPos = transform.position + Vector3.up * jumpHeight;
+            animator.SetTrigger("jump");
         }
 
         public void Pass(Vector3 targetPos) {
