@@ -28,18 +28,18 @@ namespace KotB.Actors
 
         private float noMansLand = 0.5f;
         private float skillLevelMax = 10;
-        private float jumpDuration = 0.25f;
+        private float jumpDuration = 0.4f;
         private float jumpTimer;
         private bool jumpAscending;
         private float jumpDescendingMultiplier = 1.5f;
         private Vector3 startJumpPos;
         private Vector3 endJumpPos;
-        private float reachPct = 1.25f;
         private CapsuleCollider capCollider;
 
         // caching
         private float moveSpeed;
         private float jumpHeight;
+        private float reachPct;
 
         protected virtual void Awake() {
             stateMachine = new StateMachine();
@@ -51,6 +51,7 @@ namespace KotB.Actors
             if (skills != null) {
                 moveSpeed = skills.MoveSpeed;
                 jumpHeight = skills.JumpHeight;
+                reachPct = skills.ReachPct;
             } else {
                 Debug.LogAssertion($"No skills found for { this.name }");
             }
@@ -111,20 +112,20 @@ namespace KotB.Actors
                 } else {
                     transform.position = startJumpPos;
                     isJumping = false;
-                    capCollider.center *= 1 / reachPct;
-                    capCollider.height *= 1 / reachPct;
+                    capCollider.center *= 1 / (1 + reachPct);
+                    capCollider.height *= 1 / (1 + reachPct);
                 }
             }
         }
 
         public void PerformJump() {
             isJumping = true;
-            capCollider.center *= reachPct;
-            capCollider.height *= reachPct;
+            capCollider.center *= (1 + reachPct);
+            capCollider.height *= (1 + reachPct);
             jumpTimer = 0;
             jumpAscending = true;
             startJumpPos = transform.position;
-            endJumpPos = new Vector3(transform.position.x, jumpHeight, transform.position.z);
+            endJumpPos = transform.position + Vector3.up * jumpHeight;
         }
 
         public void Pass(Vector3 targetPos) {

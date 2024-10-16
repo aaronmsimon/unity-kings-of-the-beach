@@ -26,6 +26,7 @@ public class SkillsSO : ScriptableObject
     [Header("Behavior")]
     [SerializeField] private float height = 1.8f;
     [SerializeField] private float jumpHeight = 2.1f;
+    [SerializeField] private float reachPct = 0.3f;
     [SerializeField] private Vector2 servingPartnerPos = new Vector2(5f, 1.5f);
     [SerializeField] private Vector2 defensePos = new Vector2(5, 2);
     [SerializeField] private float offenseXPos = 1.25f;
@@ -43,6 +44,7 @@ public class SkillsSO : ScriptableObject
     public float DigRange { get { return digRange; } }
     public float Height { get { return height; } }
     public float JumpHeight { get { return jumpHeight; } }
+    public float ReachPct { get { return reachPct; } }
     public int Serving { get { return serving; } }
     public int ServePower { get { return servePower; } }
 

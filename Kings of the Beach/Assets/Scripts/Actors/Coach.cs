@@ -4,8 +4,16 @@ using KotB.Match;
 
 namespace KotB.Actors
 {
+    public enum CoachType {
+        Pass,
+        Spike
+    }
+
     public class Coach : Athlete
     {
+        [Header("Coach Info")]
+        [SerializeField] private CoachType coachType;
+
         [Header("Target Area")]
         [SerializeField] private Vector2 targetZonePos;
         [SerializeField] private Vector2 targetZoneSize;
@@ -22,9 +30,12 @@ namespace KotB.Actors
         protected override void Start() {
             base.Start();
 
-            ai = FindObjectOfType<AI>();
+            if (coachType == CoachType.Pass) {
+                ai = FindObjectOfType<AI>();
+                ai.Teammate = player;
+            }
+
             player = FindObjectOfType<Player>();
-            ai.Teammate = player;
             InPlayState inPlayState = new InPlayState(matchManager);
             matchInfo.CurrentState = inPlayState;
 
@@ -49,7 +60,9 @@ namespace KotB.Actors
 
         public void TakeBall() {
             ballInfo.GiveBall(this);
-            ai.StateMachine.ChangeState(ai.DefenseState);
+            if (coachType == CoachType.Pass) {
+                ai.StateMachine.ChangeState(ai.DefenseState);
+            }
             player.StateMachine.ChangeState(player.NormalState);
         }
 
