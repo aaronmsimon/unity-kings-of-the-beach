@@ -28,24 +28,28 @@ namespace KotB.Actors
 
         private float noMansLand = 0.5f;
         private float skillLevelMax = 10;
-        private float jumpDuration = 0.4f;
-        private float jumpTimer;
-        private bool jumpAscending;
-        private float jumpDescendingMultiplier = 1.5f;
-        private Vector3 startJumpPos;
-        private Vector3 endJumpPos;
-        private CapsuleCollider capCollider;
+        private float jumpFrames = 8;
+        private float spikeFrames = 10;
+        private float spikeFallFrames = 8;
+        private float blockFrames = 10;
+        private float blockFallFrames = 8;
+        private float animationFrameRate = 20;
+        private float animationTime;
 
         // caching
         private float moveSpeed;
         private float jumpHeight;
         private float reachPct;
+        private CapsuleCollider capCollider;
+        private SphereCollider sphereCollider;
         private Animator animator;
+
 
         protected virtual void Awake() {
             stateMachine = new StateMachine();
 
             capCollider = GetComponent<CapsuleCollider>();
+            sphereCollider = GetComponent<SphereCollider>();
             animator = GetComponentInChildren<Animator>();
         }
 
@@ -100,42 +104,48 @@ namespace KotB.Actors
                 }
             }
 
+            float rotateSpeed = 10f;
+            transform.forward = Vector3.Slerp(transform.forward, moveDir, rotateSpeed * Time.deltaTime);
             skills.Position = transform.position;
         }
 
         private void Jump() {
-            jumpTimer += Time.deltaTime;
-            // if (jumpAscending) {
-            //     if (jumpTimer < jumpDuration) {
-            //         float t = jumpTimer / jumpDuration;
-            //         transform.position = Vector3.Lerp(startJumpPos, endJumpPos, t);
-            //     } else {
-            //         transform.position = endJumpPos;
-            //         jumpAscending = false;
-            //         jumpTimer = 0;
-            //     }
-            // } else {
-            //     if (jumpTimer < jumpDuration / jumpDescendingMultiplier) {
-            //         float t = jumpTimer / jumpDuration;
-            //         transform.position = Vector3.Lerp(endJumpPos, startJumpPos, t);
-            //     } else {
-            //         transform.position = startJumpPos;
-            //         isJumping = false;
-            //         capCollider.center *= 1 / (1 + reachPct);
-            //         capCollider.height *= 1 / (1 + reachPct);
-            //     }
-            // }
-            if (jumpTimer >= jumpDuration) isJumping = false;
+            animationTime += Time.deltaTime;
+
+            // Spiking
+            if (animator.GetBool("isSpike")) {
+                if (animationTime > jumpFrames / animationFrameRate && animationTime <= (jumpFrames + spikeFrames) / animationFrameRate) {
+                    sphereCollider.enabled = true;
+                } else if (animationTime > (jumpFrames + spikeFrames) / animationFrameRate && animationTime <= (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
+                    sphereCollider.enabled = false;
+                } else if (animationTime > (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
+                    animator.SetBool("isSpike", false);
+                    isJumping = false;
+                }
+            }
+
+            // Blocking
+            if (animator.GetBool("isBlock")) {
+                if (animationTime > jumpFrames / animationFrameRate && animationTime <= (jumpFrames + blockFrames) / animationFrameRate) {
+                    sphereCollider.enabled = true;
+                } else if (animationTime > (jumpFrames + blockFrames) / animationFrameRate && animationTime <= (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
+                    sphereCollider.enabled = false;
+                } else if (animationTime > (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
+                    animator.SetBool("isBlock", false);
+                    isJumping = false;
+                }
+            }
         }
 
         public void PerformJump() {
             isJumping = true;
-            capCollider.center *= (1 + reachPct);
-            capCollider.height *= (1 + reachPct);
-            jumpTimer = 0;
-            jumpAscending = true;
-            startJumpPos = transform.position;
-            endJumpPos = transform.position + Vector3.up * jumpHeight;
+            animationTime = 0;
+            transform.forward = new Vector3(-courtSide, 0, 0);
+            if (courtSide == Mathf.Sign(ballInfo.Position.x)) {
+                animator.SetBool("isSpike", true);
+            } else {
+                animator.SetBool("isBlock", true);
+            }
             animator.SetTrigger("jump");
         }
 

@@ -26,13 +26,14 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### Player - Arcade
 1. ~~Create Player Controller - Movement~~
-2. Create player model
+2. ~~Create player model~~ (using [Imphenzia's Crispoly Character](https://imphenzia.com/crispoly-characters-mini))
 3. ~~Create Player Controller - Bump~~
 4. ~~Raycasts for collision detection to prevent movement~~
 5. ~~Lock player in place to target~~
 6. ~~Implement a State Machine to control movement/locking~~
 7. ~~Aiming Bump~~
 8. ~~Don't move immediately after Bumping (from aiming)~~
+9. ~~Animations~~
 
 #### AI - Arcade
 1. ~~AI Controller - Move towards target (while ball is active)~~

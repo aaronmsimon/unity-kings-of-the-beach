@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8837344749861723447}
   - component: {fileID: 3988767890424874335}
+  - component: {fileID: 2641742546945953085}
   - component: {fileID: 5719456530564004304}
   - component: {fileID: 2903952158050811650}
   - component: {fileID: 3030860562228718519}
@@ -59,6 +60,27 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!135 &2641742546945953085
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765332559015744136}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 3.1, z: 0}
 --- !u!54 &5719456530564004304
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -200,6 +222,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ea3c2db3428c66e4e808252fea8bc3dc, type: 2}
+    - target: {fileID: 5866666021909216657, guid: f853c59756c95dc48b80cc1d019784c7, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fd231248d07552e4c92f217bd42401f9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
