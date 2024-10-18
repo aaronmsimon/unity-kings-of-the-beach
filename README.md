@@ -7,6 +7,10 @@
 		<td><img src="https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20Entertainment%20System/Named_Titles/Kings%20of%20the%20Beach%20-%20Professional%20Beach%20Volleyball%20%28USA%29.png" /></td>
 		<td><img src="https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20Entertainment%20System/Named_Snaps/Kings%20of%20the%20Beach%20-%20Professional%20Beach%20Volleyball%20%28USA%29.png" /></td>
 	</tr>
+	<tr>
+		<td><img src="https://github.com/aaronmsimon/unity-kings-of-the-beach/blob/main/Resources/Spike.gif" /></td>
+		<td></td>
+	</tr>
 </table>
 
 I used to love this game as a kid. Actually, I still do. The Paris Olympics have got me playing this again. I want to find a fun game like this to play, but with modern tournament rules. Basically, replay the Olympics. Maybe even have an arcade vs simulation style depending on how realistic you want to play.

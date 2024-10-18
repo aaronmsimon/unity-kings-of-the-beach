@@ -28,10 +28,10 @@ namespace KotB.Actors
 
         private float noMansLand = 0.5f;
         private float skillLevelMax = 10;
-        private float jumpFrames = 8;
-        private float spikeFrames = 10;
+        private float jumpFrames = 7;
+        private float spikeFrames = 9;
         private float spikeFallFrames = 8;
-        private float blockFrames = 10;
+        private float blockFrames = 9;
         private float blockFallFrames = 8;
         private float animationFrameRate = 20;
         private float animationTime;
@@ -114,25 +114,29 @@ namespace KotB.Actors
 
             // Spiking
             if (animator.GetBool("isSpike")) {
-                if (animationTime > jumpFrames / animationFrameRate && animationTime <= (jumpFrames + spikeFrames) / animationFrameRate) {
+                if (animationTime >= jumpFrames / animationFrameRate && animationTime < (jumpFrames + spikeFrames) / animationFrameRate) {
                     sphereCollider.enabled = true;
-                } else if (animationTime > (jumpFrames + spikeFrames) / animationFrameRate && animationTime <= (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
+                    capCollider.enabled = false;
+                } else if (animationTime >= (jumpFrames + spikeFrames) / animationFrameRate && animationTime < (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
                     sphereCollider.enabled = false;
-                } else if (animationTime > (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
+                } else if (animationTime >= (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
                     animator.SetBool("isSpike", false);
                     isJumping = false;
+                    capCollider.enabled = true;
                 }
             }
 
             // Blocking
             if (animator.GetBool("isBlock")) {
-                if (animationTime > jumpFrames / animationFrameRate && animationTime <= (jumpFrames + blockFrames) / animationFrameRate) {
+                if (animationTime >= jumpFrames / animationFrameRate && animationTime < (jumpFrames + blockFrames) / animationFrameRate) {
                     sphereCollider.enabled = true;
-                } else if (animationTime > (jumpFrames + blockFrames) / animationFrameRate && animationTime <= (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
+                    capCollider.enabled = false;
+                } else if (animationTime >= (jumpFrames + blockFrames) / animationFrameRate && animationTime < (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
                     sphereCollider.enabled = false;
-                } else if (animationTime > (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
+                } else if (animationTime >= (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
                     animator.SetBool("isBlock", false);
                     isJumping = false;
+                    capCollider.enabled = true;
                 }
             }
         }
