@@ -8,8 +8,7 @@
 		<td><img src="https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20Entertainment%20System/Named_Snaps/Kings%20of%20the%20Beach%20-%20Professional%20Beach%20Volleyball%20%28USA%29.png" /></td>
 	</tr>
 	<tr>
-		<td><img src="https://github.com/aaronmsimon/unity-kings-of-the-beach/blob/main/Resources/Spike.gif" /></td>
-		<td></td>
+		<td colspan="2"><img src="https://github.com/aaronmsimon/unity-kings-of-the-beach/blob/main/Resources/Spike.gif" /></td>
 	</tr>
 </table>
 
