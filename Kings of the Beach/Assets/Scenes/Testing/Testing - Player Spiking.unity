@@ -191,6 +191,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coach
       objectReference: {fileID: 0}
+    - target: {fileID: 7665264687059571853, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 534f158392c53b9448bcffd01da23540, type: 2}
     - target: {fileID: 7855929619521182701, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.127
@@ -381,6 +385,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 636462037422210638, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52e66030987a4834a961f01cd00735d3, type: 2}
+    - target: {fileID: 636462037422210638, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 49b996495bf03e34485acf903e1f88cc, type: 2}
+    - target: {fileID: 636462037422210638, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: f3e1256b454e7604eb84c6db802af7d0, type: 2}
+    - target: {fileID: 636462037422210638, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: ffd5796827529284bb8c1b5fa3d7281f, type: 2}
+    - target: {fileID: 636462037422210638, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9d1b94da805b4934789db1fcbb8a3205, type: 2}
     - target: {fileID: 2134150969564897340, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -401,6 +425,10 @@ PrefabInstance:
       propertyPath: skills
       value: 
       objectReference: {fileID: 11400000, guid: 819c6d31029030d45906e8d16ffbe3e5, type: 2}
+    - target: {fileID: 4934388022853752663, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       propertyPath: m_Name
       value: Player
