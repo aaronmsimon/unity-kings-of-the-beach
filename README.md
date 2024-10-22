@@ -70,6 +70,10 @@ I would like to actually finish this game this time. That means starting with a 
 
 #### Assistants
 1. Coach - Bump
+2. Coach - Set
+3. Coach - Spike
+4. Coach - Serve
+5. Coach - Block
 
 #### Rules
 1. ~~Same player can't hit ball twice in-a-row~~
