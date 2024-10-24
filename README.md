@@ -43,7 +43,7 @@ I would like to actually finish this game this time. That means starting with a 
 2. ~~AI Controller - Bump~~
 3. AI Controller - Aim logic
 4. ~~AI Controller - State Machine~~
-5. Estimating out of bounds
+5. ~~Estimating out of bounds~~
 6. ~~Defensive positioning~~
 7. ~~Pass towards teammate~~
 8. ~~Offensive positioning~~

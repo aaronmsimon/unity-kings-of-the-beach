@@ -41,6 +41,7 @@ public class SkillsSO : ScriptableObject
     public float TargetLockDistance { get { return targetLockDistance; } }
     public float ReactionTime { get { return reactionTime; } }
     public float PassAccuracy { get { return passAccuracy; } }
+    public float InBoundsJudgement { get { return inBoundsJudgement; } }
     public PositionType PlayerPosition { get { return playerPosition; } }
     public float DigRange { get { return digRange; } }
     public float Height { get { return height; } }

@@ -93,13 +93,13 @@ public class BallSO : ScriptableObject
         targetPos = Vector3.zero;
     }
 
-    public bool IsInBounds() {
+    public bool IsInBounds(Vector3 posToCheck) {
         // sorry for magic numbers
         return
-            (Position.x + BallRadius) >= -8 &&
-            (Position.x - BallRadius) <= 8 &&
-            (Position.z + BallRadius) >= -4 &&
-            (Position.z - BallRadius) <= 4;
+            (posToCheck.x + BallRadius) >= -8 &&
+            (posToCheck.x - BallRadius) <= 8 &&
+            (posToCheck.z + BallRadius) >= -4 &&
+            (posToCheck.z - BallRadius) <= 4;
     }
 
     public void BallChangePossessionEvent() {

@@ -21,7 +21,7 @@ namespace KotB.StatePattern.MatchStates
         private void OnBallHitGround() {
             int lastPlayerTeamIndex = matchManager.GetTeamIndex(matchManager.BallInfo.lastPlayerToHit);
 
-            if (matchManager.BallInfo.IsInBounds() && Mathf.Sign(matchManager.BallInfo.Position.x) == -matchManager.BallInfo.lastPlayerToHit.CourtSide) {
+            if (matchManager.BallInfo.IsInBounds(matchManager.BallInfo.Position) && Mathf.Sign(matchManager.BallInfo.Position.x) == -matchManager.BallInfo.lastPlayerToHit.CourtSide) {
                 matchManager.Teams[lastPlayerTeamIndex]?.AddScore(1);
                 if (lastPlayerTeamIndex != matchManager.MatchInfo.TeamServeIndex) NextServer();
             } else {
