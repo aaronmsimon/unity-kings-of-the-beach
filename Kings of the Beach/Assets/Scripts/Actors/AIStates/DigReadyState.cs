@@ -30,7 +30,7 @@ namespace KotB.StatePattern.AIStates
             reactionTime -= Time.deltaTime;
 
             if (reactionTime < 0) {
-                if (Vector3.Distance(ai.transform.position, ai.BallInfo.TargetPos) > ai.Skills.TargetLockDistance) {
+                if (Vector3.Distance(ai.transform.position, ai.BallInfo.TargetPos) > ai.Skills.TargetLockDistance && JudgeInBounds(ai.Skills.inBoundsJudgement)) {
                     ai.MoveDir = (ai.BallInfo.TargetPos - ai.transform.position).normalized;
                 } else {
                     if (ai.MatchInfo.CurrentState is InPlayState && ai.BallInfo.lastPlayerToHit != ai && Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
@@ -90,6 +90,10 @@ namespace KotB.StatePattern.AIStates
                     isSpiking = true;
                 }
             }
+        }
+
+        private bool JudgeInBounds(float skillLevel) {
+            return true;
         }
 
         private void OnApexReached() {
