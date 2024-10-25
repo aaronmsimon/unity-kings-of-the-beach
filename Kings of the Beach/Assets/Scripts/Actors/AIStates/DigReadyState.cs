@@ -11,13 +11,11 @@ namespace KotB.StatePattern.AIStates
         private float reactionTime;
         private bool apexReached;
         private bool isSpiking;
-        private float estimateRange;
 
         public override void Enter() {
             reactionTime = ai.Skills.ReactionTime;
             apexReached = false;
             isSpiking = false;
-            estimateRange = ai.BallInfo.BallRadius * 2;
 
             ai.BallHitGround += OnBallHitGround;
             ai.BallInfo.ApexReached += OnApexReached;
@@ -32,7 +30,7 @@ namespace KotB.StatePattern.AIStates
             reactionTime -= Time.deltaTime;
 
             if (reactionTime < 0) {
-                if ((ai.transform.position - ai.BallInfo.TargetPos).sqrMagnitude > ai.Skills.TargetLockDistance * ai.Skills.TargetLockDistance && JudgeInBounds(ai.Skills.InBoundsJudgement)) {
+                if ((ai.transform.position - ai.BallInfo.TargetPos).sqrMagnitude > ai.Skills.TargetLockDistance * ai.Skills.TargetLockDistance) {
                     ai.MoveDir = (ai.BallInfo.TargetPos - ai.transform.position).normalized;
                 } else {
                     if (ai.MatchInfo.CurrentState is InPlayState && ai.BallInfo.lastPlayerToHit != ai && Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
@@ -92,23 +90,6 @@ namespace KotB.StatePattern.AIStates
                     isSpiking = true;
                 }
             }
-        }
-
-        private bool JudgeInBounds(float skillLevel) {
-            // get a random value on the skill level scale
-            float randValue = Random.value * ai.SkillLevelMax;
-            // skill check
-            bool accurateEstimate = randValue <= skillLevel;
-            // get actual in bounds value
-            bool actualInBounds = ai.BallInfo.IsInBounds(ai.BallInfo.TargetPos);
-            // check if it's close
-            bool closeInBounds =
-                (Mathf.Abs(ai.BallInfo.TargetPos.x) >= ai.CourtSideLength - estimateRange && Mathf.Abs(ai.BallInfo.TargetPos.x) <= ai.CourtSideLength + estimateRange) ||
-                (Mathf.Abs(ai.BallInfo.TargetPos.z) >= ai.CourtSideLength / 2 - estimateRange && Mathf.Abs(ai.BallInfo.TargetPos.z) <= ai.CourtSideLength / 2 + estimateRange);
-            //                                                                             ↓ not close - anyone knows the right result
-            return closeInBounds ? (accurateEstimate ? actualInBounds : !actualInBounds) : actualInBounds;
-            //     ↑ if it's close  ↑ if passed skill chk,  correct ↑    ↑ otherwise, wrong
-            
         }
 
         private void OnApexReached() {
