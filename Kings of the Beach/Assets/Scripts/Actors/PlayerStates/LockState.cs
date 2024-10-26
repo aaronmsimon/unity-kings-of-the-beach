@@ -19,13 +19,11 @@ namespace KotB.StatePattern.PlayerStates
 
             player.InputReader.bumpEvent += OnPass;
             player.InputReader.bumpAcrossEvent += OnBumpAcross;
-            player.BallHitGround += OnBallHitGround;
         }
 
         public override void Exit() {
             player.InputReader.bumpEvent -= OnPass;
             player.InputReader.bumpAcrossEvent -= OnBumpAcross;
-            player.BallHitGround -= OnBallHitGround;
         }
 
         public override void Update() {
@@ -82,10 +80,6 @@ namespace KotB.StatePattern.PlayerStates
 
         private void OnTargetMoved() {
             // go to NormalState
-        }
-
-        private void OnBallHitGround() {
-            player.StateMachine.ChangeState(player.PostPointState);
         }
     }
 }

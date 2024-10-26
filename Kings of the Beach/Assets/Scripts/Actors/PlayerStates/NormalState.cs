@@ -15,12 +15,10 @@ namespace KotB.StatePattern.PlayerStates
 
             player.transform.forward = Vector3.right * -player.CourtSide;
 
-            player.BallHitGround += OnBallHitGround;
             player.MatchInfo.TransitionToServeState += OnMatchChangeToServeState;
         }
 
         public override void Exit() {
-            player.BallHitGround -= OnBallHitGround;
             player.MatchInfo.TransitionToServeState -= OnMatchChangeToServeState;
         }
 
@@ -44,11 +42,6 @@ namespace KotB.StatePattern.PlayerStates
                 Vector3 newPos = player.MatchInfo.Server.CourtSide == player.CourtSide ? player.Skills.ServingPartnerPos : new Vector3(player.Skills.DefensePos.x, 0.01f, -2);
                 player.transform.position = new Vector3(newPos.x * player.CourtSide, newPos.y, newPos.z);
             }
-        }
-
-        private void OnBallHitGround() {
-            player.MoveDir = Vector3.zero;
-            player.StateMachine.ChangeState(player.PostPointState);
         }
     }
 }

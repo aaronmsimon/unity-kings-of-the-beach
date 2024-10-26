@@ -18,8 +18,6 @@ namespace KotB.Actors
         [SerializeField] protected int courtSide;
         [SerializeField] private LayerMask obstaclesLayer;
 
-        public event Action BallHitGround;
-
         protected Ball ball;
         protected StateMachine stateMachine;
         protected float courtSideLength = 8;
@@ -168,12 +166,6 @@ namespace KotB.Actors
         }
 
         protected virtual void OnDrawGizmos() {}
-
-        //---- EVENT LISTENERS ----
-
-        public void OnBallHitGround() {
-            BallHitGround?.Invoke();
-        }
 
         //---- PROPERTIES ----
 

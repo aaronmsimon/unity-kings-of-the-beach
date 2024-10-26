@@ -17,12 +17,10 @@ namespace KotB.StatePattern.AIStates
             apexReached = false;
             isSpiking = false;
 
-            ai.BallHitGround += OnBallHitGround;
             ai.BallInfo.ApexReached += OnApexReached;
         }
 
         public override void Exit() {
-            ai.BallHitGround -= OnBallHitGround;
             ai.BallInfo.ApexReached -= OnApexReached;
         }
 
@@ -31,11 +29,11 @@ namespace KotB.StatePattern.AIStates
 
             if (reactionTime < 0) {
                 if ((ai.transform.position - ai.BallInfo.TargetPos).sqrMagnitude > ai.Skills.TargetLockDistance * ai.Skills.TargetLockDistance) {
-                    ai.MoveDir = (ai.BallInfo.TargetPos - ai.transform.position).normalized;
+                    ai.TargetPos = ai.BallInfo.TargetPos;
                 } else {
+                    // is this "lock" check still needed if we are setting a target?
                     if (ai.MatchInfo.CurrentState is InPlayState && ai.BallInfo.lastPlayerToHit != ai && Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
                         ai.transform.position = ai.BallInfo.TargetPos;
-                        ai.MoveDir = Vector3.zero;
                         if (ai.BallInfo.HitsForTeam == 2 && !isSpiking) {
                             TrySpike();
                         }
@@ -94,11 +92,6 @@ namespace KotB.StatePattern.AIStates
 
         private void OnApexReached() {
             apexReached = true;
-        }
-
-        private void OnBallHitGround() {
-            ai.StateMachine.ChangeState(ai.PostPointState);
-            ai.MoveDir = Vector3.zero;
         }
     }
 }

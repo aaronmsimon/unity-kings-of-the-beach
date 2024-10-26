@@ -24,12 +24,10 @@ namespace KotB.StatePattern.PlayerStates
             player.transform.position = new Vector3((player.CourtSideLength + player.transform.localScale.x * .5f) * player.CourtSide, 0.01f, 0f);
 
             player.InputReader.bumpEvent += OnInteract;
-            player.BallHitGround += OnBallHitGround;
         }
 
         public override void Exit() {
             player.InputReader.bumpEvent -= OnInteract;
-            player.BallHitGround -= OnBallHitGround;
         }
 
         public override void Update() {
@@ -101,10 +99,6 @@ namespace KotB.StatePattern.PlayerStates
             } else {
                 StopServeMeter();
             }
-        }
-
-        private void OnBallHitGround() {
-            player.StateMachine.ChangeState(player.PostPointState);
         }
     }
 }

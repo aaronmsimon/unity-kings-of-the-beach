@@ -12,22 +12,17 @@ namespace KotB.StatePattern.AIStates
         public override void Enter() {
             estimateRange = ai.BallInfo.BallRadius * 2;
             
-            ai.BallHitGround += OnBallHitGround;
             ai.BallInfo.TargetSet += OnTargetSet;
+            ai.ReachedTargetPos += OnReachedTargetPos;
         }
 
         public override void Exit() {
-            ai.BallHitGround -= OnBallHitGround;
             ai.BallInfo.TargetSet -= OnTargetSet;
+            ai.ReachedTargetPos -= OnReachedTargetPos;
         }
 
         public override void Update() {
-            if (ai.transform.position != ai.DefensePos) {
-                ai.MoveDir = ai.DefensePos - ai.transform.position;
-            } else {
-                ai.MoveDir = Vector3.zero;
-                ai.transform.forward = Vector3.right * -ai.CourtSide;
-            }
+            ai.TargetPos = ai.DefensePos;
         }
 
         private bool MyBall() {
@@ -56,7 +51,7 @@ namespace KotB.StatePattern.AIStates
 
         private void OnBallHitGround() {
             ai.StateMachine.ChangeState(ai.PostPointState);
-            ai.MoveDir = Vector3.zero;
+            ai.TargetPos = ai.transform.position;
         }
 
         private void OnTargetSet() {
@@ -67,6 +62,10 @@ namespace KotB.StatePattern.AIStates
                     ai.StateMachine.ChangeState(ai.OffenseState);
                 }
             }
+        }
+
+        private void OnReachedTargetPos() {
+            ai.transform.forward = Vector3.right * -ai.CourtSide;
         }
     }
 }

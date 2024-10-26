@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using KotB.StatePattern;
 using KotB.StatePattern.AIStates;
 using Cackenballz.Helpers;
 
@@ -13,7 +13,12 @@ namespace KotB.Actors
         private DigReadyState digReadyState;
         private PostPointState postPointState;
 
-        private Athlete teammate;
+        public Vector3 TargetPos { get; set; }
+        public Athlete Teammate { get; set; }
+
+        public event Action ReachedTargetPos;
+
+        private float stoppingDistance = 0.1f;
 
         protected override void Awake() {
             base.Awake();
@@ -27,8 +32,26 @@ namespace KotB.Actors
             stateMachine.ChangeState(postPointState);
         }
 
+        protected override void Update() {
+            Vector3 moveDiff = TargetPos - transform.position;
+
+            if (moveDiff.sqrMagnitude > stoppingDistance * stoppingDistance) {
+                moveDir = moveDiff.normalized;
+            } else {
+                moveDir = Vector3.zero;
+                ReachedTargetPos?.Invoke();
+            }
+
+            base.Update();
+        }
+
         public Vector3 GetMyDefensivePosition(Vector3 defensivePos) {
-            return new Vector3(defensivePos.x * courtSide, defensivePos.y, defensivePos.z * (Mathf.Sign(defensivePos.z) * Mathf.Sign(teammate.Skills.Position.z) * -1));
+            return new Vector3(skills.DefensePos.x * courtSide, defensivePos.y, skills.DefensePos.y * (Mathf.Sign(defensivePos.z) * Mathf.Sign(Teammate.Skills.Position.z) * -1));
+        }
+
+        public void OnBallHitGround() {
+            stateMachine.ChangeState(postPointState);
+            TargetPos = transform.position;
         }
 
         protected override void OnDrawGizmos() {
@@ -46,13 +69,12 @@ namespace KotB.Actors
         public OffenseState OffenseState { get { return offenseState; } }
         public DigReadyState DigReadyState { get { return digReadyState; } }
         public PostPointState PostPointState { get { return postPointState; } }
-        public Athlete Teammate { get { return teammate; } set { teammate = value; } }
         public Vector3 DefensePos {
             get {
                 float defenseZPos;
                 // If no teammate (debugging but potentially practice, too)
-                if (teammate != null) {
-                    if (teammate.GetComponent<Player>() != null || teammate.Skills.PlayerPosition == PositionType.Defender) {
+                if (Teammate != null) {
+                    if (Teammate.GetComponent<Player>() != null || Teammate.Skills.PlayerPosition == PositionType.Defender) {
                         defenseZPos = GetMyDefensivePosition(transform.position).z;
                     } else {
                         defenseZPos = transform.position.z;

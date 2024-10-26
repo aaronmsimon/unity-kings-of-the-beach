@@ -21,13 +21,8 @@ namespace KotB.StatePattern.AIStates
             servePos = new Vector3(ai.transform.position.x, ai.transform.position.y, Random.Range(-ai.CourtSideLength / 2, ai.CourtSideLength / 2));
 
             timeUntilServe = baseTime + Random.Range(-randomOffsetTime, randomOffsetTime);
-            ai.BallHitGround += OnBallHitGround;
 
             changeToDefenseState = false;
-        }
-
-        public override void Exit() {
-            ai.BallHitGround -= OnBallHitGround;
         }
 
         public override void Update() {
@@ -53,11 +48,6 @@ namespace KotB.StatePattern.AIStates
                     ai.StateMachine.ChangeState(ai.DefenseState);
                 }
             }
-        }
-
-        private void OnBallHitGround() {
-            ai.StateMachine.ChangeState(ai.PostPointState);
-            ai.MoveDir = Vector3.zero;
         }
     }
 }
