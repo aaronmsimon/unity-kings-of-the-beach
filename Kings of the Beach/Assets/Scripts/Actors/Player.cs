@@ -58,18 +58,6 @@ namespace KotB.Actors
             inputReader.jumpEvent -= OnJump;
         }
 
-        protected override void OnTriggerEnter(Collider other) {
-            base.OnTriggerEnter(other);
-
-            stateMachine.OnTriggerEnter(other);
-        }
-
-        protected override void OnTriggerExit(Collider other) {
-            base.OnTriggerEnter(other);
-
-            stateMachine.OnTriggerExit(other);
-        }
-
         //---- EVENT LISTENERS ----
 
         private void OnMove(Vector2 movement) {

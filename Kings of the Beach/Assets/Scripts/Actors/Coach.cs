@@ -30,12 +30,13 @@ namespace KotB.Actors
         protected override void Start() {
             base.Start();
 
+            player = FindObjectOfType<Player>();
+
             if (coachType == CoachType.Pass) {
                 ai = FindObjectOfType<AI>();
                 ai.Teammate = player;
             }
 
-            player = FindObjectOfType<Player>();
             InPlayState inPlayState = new InPlayState(matchManager);
             matchInfo.CurrentState = inPlayState;
 
@@ -64,6 +65,7 @@ namespace KotB.Actors
                 ai.StateMachine.ChangeState(ai.DefenseState);
             }
             player.StateMachine.ChangeState(player.NormalState);
+            transform.forward = Vector3.right * -CourtSide;
         }
 
         //---- EVENT LISTENERS ----

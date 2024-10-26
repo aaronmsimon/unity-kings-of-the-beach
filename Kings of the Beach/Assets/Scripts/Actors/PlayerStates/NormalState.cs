@@ -13,6 +13,8 @@ namespace KotB.StatePattern.PlayerStates
             player.MainCameraPriority.Value = 10;
             player.UpdateCameraPriorty.Raise();
 
+            player.transform.forward = Vector3.right * -player.CourtSide;
+
             player.BallHitGround += OnBallHitGround;
             player.MatchInfo.TransitionToServeState += OnMatchChangeToServeState;
         }

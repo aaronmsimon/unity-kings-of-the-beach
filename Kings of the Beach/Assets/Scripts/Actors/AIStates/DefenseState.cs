@@ -26,6 +26,7 @@ namespace KotB.StatePattern.AIStates
                 ai.MoveDir = ai.DefensePos - ai.transform.position;
             } else {
                 ai.MoveDir = Vector3.zero;
+                ai.transform.forward = Vector3.right * -ai.CourtSide;
             }
         }
 

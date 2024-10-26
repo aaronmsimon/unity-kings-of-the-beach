@@ -209,6 +209,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Volleyball-Male
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: f1cfc2e7d7c667d42bdcd72e0ea3f16b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fd231248d07552e4c92f217bd42401f9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

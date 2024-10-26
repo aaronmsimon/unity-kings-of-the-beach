@@ -27,15 +27,8 @@ namespace KotB.Actors
             stateMachine.ChangeState(postPointState);
         }
 
-        protected override void OnTriggerEnter(Collider other)
-        {
-            base.OnTriggerEnter(other);
-
-            stateMachine.OnTriggerEnter(other);
-        }
-
         public Vector3 GetMyDefensivePosition(Vector3 defensivePos) {
-            return new Vector3(defensivePos.x * courtSide, defensivePos.y, defensivePos.z * Mathf.Sign(defensivePos.z) == Mathf.Sign(teammate.Skills.Position.z) ? -1 : 1);
+            return new Vector3(defensivePos.x * courtSide, defensivePos.y, defensivePos.z * (Mathf.Sign(defensivePos.z) * Mathf.Sign(teammate.Skills.Position.z) * -1));
         }
 
         protected override void OnDrawGizmos() {

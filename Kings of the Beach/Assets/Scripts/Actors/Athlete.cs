@@ -77,6 +77,8 @@ namespace KotB.Actors
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 this.ball = ball;
             }
+
+            stateMachine.OnTriggerEnter(other);
         }
 
         protected virtual void OnTriggerExit(Collider other) {
