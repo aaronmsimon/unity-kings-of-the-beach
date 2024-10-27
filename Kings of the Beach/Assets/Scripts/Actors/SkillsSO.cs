@@ -24,6 +24,9 @@ public class SkillsSO : ScriptableObject
     [SerializeField][Range(1,10)] private int serving;
     [SerializeField][Range(1,10)] private int servePower;
 
+    [Header("Blocking")]
+    [SerializeField][Range(1,10)] private float blocking;
+
     [Header("Behavior")]
     [SerializeField] private float height = 1.8f;
     [SerializeField] private float jumpHeight = 2.1f;
@@ -49,6 +52,7 @@ public class SkillsSO : ScriptableObject
     public float ReachPct { get { return reachPct; } }
     public int Serving { get { return serving; } }
     public int ServePower { get { return servePower; } }
+    public float Blocking { get { return blocking; } }
 
     public Vector3 ServingPartnerPos { get { return new Vector3(servingPartnerPos.x, 0.01f, servingPartnerPos.y); } }
     public Vector2 DefensePos { get { return defensePos; } }

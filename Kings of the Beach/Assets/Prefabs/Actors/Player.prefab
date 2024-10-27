@@ -123,6 +123,7 @@ MonoBehaviour:
   skills: {fileID: 0}
   ballInfo: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
   matchInfo: {fileID: 11400000, guid: 23b44ef1d3bbbbe42a97b3fd37ef9578, type: 2}
+  blockEvent: {fileID: 11400000, guid: 6fb6d17fb0186004781fff51962c1397, type: 2}
   courtSide: -1
   obstaclesLayer:
     serializedVersion: 2

@@ -25,6 +25,10 @@ namespace KotB.StatePattern.AIStates
             ai.TargetPos = ai.DefensePos;
         }
 
+        public override void OnTriggerEnter(Collider other) {
+            base.OnTriggerEnter(other);
+        }
+
         private bool MyBall() {
             float myDistToBall = (ai.BallInfo.TargetPos - ai.transform.position).sqrMagnitude;
             float teammateDistToBall = (ai.BallInfo.TargetPos - ai.Teammate.transform.position).sqrMagnitude;
@@ -47,11 +51,6 @@ namespace KotB.StatePattern.AIStates
             return closeInBounds ? (accurateEstimate ? actualInBounds : !actualInBounds) : actualInBounds;
             //     ↑ if it's close  ↑ if passed skill chk,  correct ↑    ↑ otherwise, wrong
             
-        }
-
-        private void OnBallHitGround() {
-            ai.StateMachine.ChangeState(ai.PostPointState);
-            ai.TargetPos = ai.transform.position;
         }
 
         private void OnTargetSet() {

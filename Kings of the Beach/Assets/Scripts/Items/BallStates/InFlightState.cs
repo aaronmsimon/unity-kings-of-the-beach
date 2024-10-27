@@ -18,18 +18,25 @@ namespace KotB.StatePattern.BallStates
             Vector3 targetPos = ball.BallInfo.TargetPos;
             if (ball.transform.position != targetPos && ball.transform.position.y > 0) {
                 if (!ballIntoNet) {
+                    // Time calculations
                     ball.BallInfo.TimeSinceLastHit += Time.deltaTime;
                     float t = ball.BallInfo.TimeSinceLastHit / ball.BallInfo.Duration;
                     if (t > 1f) t = 1f;
+
+                    // Check apex
                     if (t >= 0.5f && !ball.BallInfo.ApexReachedFlag) {
                         ball.BallInfo.ApexReachedEvent();
                         ball.BallInfo.ApexReachedFlag = true;
                     }
+
+                    // Calculate ball path (spike vs pass)
                     if (ball.BallInfo.Height >= 0) {
                         ball.transform.position = CalculateInFlightPosition(t, ball.BallInfo.StartPos, targetPos, ball.BallInfo.Height);
                     } else {
                         ball.transform.position = CalculateInFlightPosition(t, ball.BallInfo.StartPos, targetPos);
                     }
+
+                    // Check if over the net [this needs improvements]
                     if (Mathf.Abs(ball.transform.position.x) < 0.13f) {
                         CheckIfOverNet();
                         CheckNetCollision(targetPos - ball.transform.position);

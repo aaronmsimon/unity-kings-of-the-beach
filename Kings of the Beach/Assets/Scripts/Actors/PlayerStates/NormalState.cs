@@ -35,6 +35,22 @@ namespace KotB.StatePattern.PlayerStates
             }            
         }
 
+        public override void OnTriggerEnter(Collider other) {
+            if (player.Ball != null) {
+                if (BlockAttempt(player.Skills.Blocking)) {
+                    player.Block();
+                }
+            }
+        }
+
+        private bool BlockAttempt(float skillLevel) {
+            // get a random value on the skill level scale
+            float randValue = Random.value * player.SkillLevelMax;
+            // skill check
+            Debug.Log($"block attempt {randValue} vs {skillLevel}");
+            return randValue <= skillLevel;
+        }
+
         private void OnMatchChangeToServeState() {
             if (player.MatchInfo.Server == player) {
                 player.StateMachine.ChangeState(player.ServeState);

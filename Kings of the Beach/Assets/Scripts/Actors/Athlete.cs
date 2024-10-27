@@ -160,6 +160,13 @@ namespace KotB.Actors
             BallInfo.SetPassTarget(targetPos, 7, 1.75f, this);
         }
 
+        public void Block() {
+            Vector3 targetPos = new Vector3(2 * -courtSide, 0.01f, transform.position.z);
+            float blockHeight = 4;
+            float blockDuration = 2;
+            ball.BallInfo.SetPassTarget(targetPos, blockHeight, blockDuration, this);
+        }
+
         public void SetCourtSide(int courtSide) {
             this.courtSide = courtSide;
         }
