@@ -27,6 +27,10 @@ namespace KotB.Actors
         private Player player;
         private MatchManager matchManager;
 
+        private float bumpFrames = 7;
+        private float bumpAnimationTime;
+        private bool canBump;
+
         protected override void Start() {
             base.Start();
 
@@ -34,8 +38,11 @@ namespace KotB.Actors
 
             if (coachType == CoachType.Pass) {
                 ai = FindObjectOfType<AI>();
-                ai.Teammate = player;
+                if (ai != null)
+                    ai.Teammate = player;
             }
+
+            canBump = false;
 
             InPlayState inPlayState = new InPlayState(matchManager);
             matchInfo.CurrentState = inPlayState;
@@ -57,24 +64,37 @@ namespace KotB.Actors
                 TakeBall();
             }
             #endif
+
+            bumpAnimationTime += Time.deltaTime;
+            if (canBump && bumpAnimationTime >= bumpFrames / animationFrameRate) {
+                Bump();
+            }
         }
 
         public void TakeBall() {
             ballInfo.GiveBall(this);
-            if (coachType == CoachType.Pass) {
+            if (ai != null && coachType == CoachType.Pass) {
                 ai.StateMachine.ChangeState(ai.DefenseState);
             }
             player.StateMachine.ChangeState(player.NormalState);
             transform.forward = Vector3.right * -CourtSide;
+            animator.Play("HoldBall");
+        }
+
+        private void Bump() {
+            float posX = Random.Range(targetZonePos.x - targetZoneSize.x / 2, targetZonePos.x + targetZoneSize.x / 2);
+            float posY = Random.Range(targetZonePos.y - targetZoneSize.y / 2, targetZonePos.y + targetZoneSize.y / 2);
+            Pass(new Vector3(posX, 0, posY));
+            canBump = false;
         }
 
         //---- EVENT LISTENERS ----
 
         private void OnBump()
         {
-            float posX = Random.Range(targetZonePos.x - targetZoneSize.x / 2, targetZonePos.x + targetZoneSize.x / 2);
-            float posY = Random.Range(targetZonePos.y - targetZoneSize.y / 2, targetZonePos.y + targetZoneSize.y / 2);
-            Pass(new Vector3(posX, 0, posY));
+            bumpAnimationTime = 0;
+            canBump = true;
+            animator.SetTrigger("Bump");
         }
 
         //---- GIZMOS ----

@@ -16,6 +16,7 @@ MonoBehaviour:
   targetLockDistance: 0.75
   reactionTime: 0
   passAccuracy: 10
+  inBoundsJudgement: 1
   digRange: 0
   serving: 5
   servePower: 8
@@ -23,6 +24,6 @@ MonoBehaviour:
   jumpHeight: 2.1
   reachPct: 0.3
   servingPartnerPos: {x: 5, y: 1.5}
-  defensePos: {x: 5, y: 2}
+  defensePos: {x: 5, y: -2}
   offenseXPos: 1.25
   playerPosition: 0

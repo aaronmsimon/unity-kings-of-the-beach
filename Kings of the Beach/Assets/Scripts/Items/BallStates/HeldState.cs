@@ -6,8 +6,7 @@ namespace KotB.StatePattern.BallStates
     {
         public HeldState(Ball ball) : base(ball) { }
 
-        private float athleteColliderWidth = .35f;
-        private float ballHeldHeight = 1.09f;
+        private Vector3 ballHeldPos;
         
         public override void Enter() {
             ball.BallInfo.TargetSet += OnTargetSet;
@@ -18,7 +17,7 @@ namespace KotB.StatePattern.BallStates
         }
 
         public override void Update() {
-            ball.transform.position = ball.BallInfo.ballHeldBy.transform.position + new Vector3(ball.BallInfo.ballHeldBy.CourtSide * -athleteColliderWidth, ballHeldHeight, 0);
+            ball.transform.position = ball.BallInfo.ballHeldBy.LeftHandEnd.position;
         }
 
         private void OnTargetSet() {

@@ -31,8 +31,8 @@ namespace KotB.Actors
         private float spikeFallFrames = 8;
         private float blockFrames = 9;
         private float blockFallFrames = 8;
-        private float animationFrameRate = 20;
-        private float animationTime;
+        protected float animationFrameRate = 24;
+        private float jumpAimationTime;
 
         // caching
         private float moveSpeed;
@@ -40,7 +40,8 @@ namespace KotB.Actors
         private float reachPct;
         private CapsuleCollider capCollider;
         private SphereCollider sphereCollider;
-        private Animator animator;
+        protected Animator animator;
+        private Transform leftHandEnd;
 
 
         protected virtual void Awake() {
@@ -59,6 +60,8 @@ namespace KotB.Actors
             } else {
                 Debug.LogAssertion($"No skills found for { this.name }");
             }
+
+            leftHandEnd = transform.Find("Volleyball-Character").Find("CCM-Armature").Find("Pelvis").Find("Spine1").Find("Spine2").Find("Shoulder.L").Find("UpperArm.L").Find("LowerArm.L").Find("Hand.L").Find("Hand.L_end");
         }
 
         protected virtual void Update() {
@@ -110,16 +113,16 @@ namespace KotB.Actors
         }
 
         private void Jump() {
-            animationTime += Time.deltaTime;
+            jumpAimationTime += Time.deltaTime;
 
             // Spiking
             if (animator.GetBool("isSpike")) {
-                if (animationTime >= jumpFrames / animationFrameRate && animationTime < (jumpFrames + spikeFrames) / animationFrameRate) {
+                if (jumpAimationTime >= jumpFrames / animationFrameRate && jumpAimationTime < (jumpFrames + spikeFrames) / animationFrameRate) {
                     sphereCollider.enabled = true;
                     capCollider.enabled = false;
-                } else if (animationTime >= (jumpFrames + spikeFrames) / animationFrameRate && animationTime < (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
+                } else if (jumpAimationTime >= (jumpFrames + spikeFrames) / animationFrameRate && jumpAimationTime < (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
                     sphereCollider.enabled = false;
-                } else if (animationTime >= (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
+                } else if (jumpAimationTime >= (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
                     animator.SetBool("isSpike", false);
                     isJumping = false;
                     capCollider.enabled = true;
@@ -128,12 +131,12 @@ namespace KotB.Actors
 
             // Blocking
             if (animator.GetBool("isBlock")) {
-                if (animationTime >= jumpFrames / animationFrameRate && animationTime < (jumpFrames + blockFrames) / animationFrameRate) {
+                if (jumpAimationTime >= jumpFrames / animationFrameRate && jumpAimationTime < (jumpFrames + blockFrames) / animationFrameRate) {
                     sphereCollider.enabled = true;
                     capCollider.enabled = false;
-                } else if (animationTime >= (jumpFrames + blockFrames) / animationFrameRate && animationTime < (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
+                } else if (jumpAimationTime >= (jumpFrames + blockFrames) / animationFrameRate && jumpAimationTime < (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
                     sphereCollider.enabled = false;
-                } else if (animationTime >= (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
+                } else if (jumpAimationTime >= (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
                     animator.SetBool("isBlock", false);
                     isJumping = false;
                     capCollider.enabled = true;
@@ -143,7 +146,7 @@ namespace KotB.Actors
 
         public void PerformJump() {
             isJumping = true;
-            animationTime = 0;
+            jumpAimationTime = 0;
             transform.forward = new Vector3(-courtSide, 0, 0);
             if (courtSide == Mathf.Sign(ballInfo.Position.x)) {
                 animator.SetBool("isSpike", true);
@@ -180,6 +183,7 @@ namespace KotB.Actors
             get { return moveDir; }
             set { moveDir = value; }
         }
+        public Transform LeftHandEnd { get { return leftHandEnd; } }
         public Ball Ball { get { return ball; } }
         public bool IsJumping { get { return isJumping; } }
     }
