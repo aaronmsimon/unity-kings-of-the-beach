@@ -7,22 +7,28 @@ namespace KotB.StatePattern.AIStates
     {
         public DefenseState(AI ai) : base(ai) { }
         
+        private Vector3 targetPos;
         private float estimateRange;
+        float halfCourtSide;
+
+        private float blockPos = 1;
+        private float defensePos = 6;
 
         public override void Enter() {
+            targetPos = ai.transform.position;
+
             estimateRange = ai.BallInfo.BallRadius * 2;
+            halfCourtSide = ai.CourtSideLength / 2;
             
             ai.BallInfo.TargetSet += OnTargetSet;
-            ai.ReachedTargetPos += OnReachedTargetPos;
         }
 
         public override void Exit() {
             ai.BallInfo.TargetSet -= OnTargetSet;
-            ai.ReachedTargetPos -= OnReachedTargetPos;
         }
 
         public override void Update() {
-            ai.TargetPos = ai.DefensePos;
+            ai.TargetPos = targetPos;
         }
 
         public override void OnTriggerEnter(Collider other) {
@@ -60,11 +66,19 @@ namespace KotB.StatePattern.AIStates
                 } else {
                     ai.StateMachine.ChangeState(ai.OffenseState);
                 }
+            } else {
+                // Blocker
+                if (ai.Skills.PlayerPosition == PositionType.Blocker) {
+                    targetPos = new Vector3(blockPos * ai.CourtSide, ai.transform.position.y, ai.BallInfo.TargetPos.z);
+                }
+                // Defender
+                else {
+                    float zBallTargetPos = ai.BallInfo.TargetPos.z;
+                    float openSideLength = zBallTargetPos - (-Mathf.Sign(zBallTargetPos) * halfCourtSide);
+                    targetPos = new Vector3(defensePos * ai.CourtSide, ai.transform.position.y, zBallTargetPos - openSideLength / 2);
+                    Debug.Log($"ball target(z): {zBallTargetPos}, open len: {openSideLength}, target pos: {targetPos}");
+                }
             }
-        }
-
-        private void OnReachedTargetPos() {
-            ai.transform.forward = Vector3.right * -ai.CourtSide;
         }
     }
 }

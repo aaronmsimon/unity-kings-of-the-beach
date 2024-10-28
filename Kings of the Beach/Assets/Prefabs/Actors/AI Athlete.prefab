@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7855929619521182701}
   - component: {fileID: 5482822381036295956}
+  - component: {fileID: 1302662470816433463}
   - component: {fileID: 5127179976974750972}
   - component: {fileID: 8463576540012695194}
   - component: {fileID: 1164755901000653087}
@@ -59,6 +60,27 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!135 &1302662470816433463
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5717242374435514889}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 3.1, z: 0}
 --- !u!54 &5127179976974750972
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -101,7 +123,6 @@ MonoBehaviour:
   skills: {fileID: 0}
   ballInfo: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
   matchInfo: {fileID: 11400000, guid: 23b44ef1d3bbbbe42a97b3fd37ef9578, type: 2}
-  blockEvent: {fileID: 11400000, guid: 6fb6d17fb0186004781fff51962c1397, type: 2}
   courtSide: -1
   obstaclesLayer:
     serializedVersion: 2

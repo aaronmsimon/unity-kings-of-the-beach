@@ -16,9 +16,11 @@ MonoBehaviour:
   targetLockDistance: 0.25
   reactionTime: 0.5
   passAccuracy: 1
+  inBoundsJudgement: 1
   digRange: 0.5
   serving: 1
   servePower: 1
+  blocking: 1
   height: 1.8
   jumpHeight: 2.1
   reachPct: 0.3

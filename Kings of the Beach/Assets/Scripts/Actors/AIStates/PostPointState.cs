@@ -21,9 +21,7 @@ namespace KotB.StatePattern.AIStates
             if (ai.MatchInfo.Server == ai) {
                 ai.StateMachine.ChangeState(ai.ServeState);
             } else {
-                Vector3 newPos = ai.MatchInfo.Server.CourtSide == ai.CourtSide ? ai.Skills.ServingPartnerPos : ai.GetMyDefensivePosition(ai.DefensePos);
-                ai.transform.position = new Vector3(newPos.x * ai.CourtSide, newPos.y, newPos.z);
-                ai.StateMachine.ChangeState(ai.DefenseState);
+                ai.StateMachine.ChangeState(ai.NonServeState);
             }
         }
     }

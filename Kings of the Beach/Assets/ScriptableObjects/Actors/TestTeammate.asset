@@ -20,10 +20,11 @@ MonoBehaviour:
   digRange: 0.5
   serving: 1
   servePower: 1
+  blocking: 1
   height: 1.8
   jumpHeight: 2.1
   reachPct: 0.3
   servingPartnerPos: {x: 5, y: 1.5}
   defensePos: {x: 5, y: 2}
   offenseXPos: 2
-  playerPosition: 0
+  playerPosition: 1

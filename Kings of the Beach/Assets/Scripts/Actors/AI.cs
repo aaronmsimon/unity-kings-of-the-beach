@@ -12,6 +12,7 @@ namespace KotB.Actors
         private OffenseState offenseState;
         private DigReadyState digReadyState;
         private PostPointState postPointState;
+        private NonServeState nonServeState;
 
         public Vector3 TargetPos { get; set; }
         public Athlete Teammate { get; set; }
@@ -28,6 +29,7 @@ namespace KotB.Actors
             offenseState = new OffenseState(this);
             digReadyState = new DigReadyState(this);
             postPointState = new PostPointState(this);
+            nonServeState = new NonServeState(this);
 
             stateMachine.ChangeState(postPointState);
         }
@@ -43,10 +45,6 @@ namespace KotB.Actors
             }
 
             base.Update();
-        }
-
-        public Vector3 GetMyDefensivePosition(Vector3 defensivePos) {
-            return new Vector3(skills.DefensePos.x * courtSide, defensivePos.y, skills.DefensePos.y * (Mathf.Sign(defensivePos.z) * Mathf.Sign(Teammate.Skills.Position.z) * -1));
         }
 
         public void OnBallHitGround() {
@@ -69,23 +67,7 @@ namespace KotB.Actors
         public OffenseState OffenseState { get { return offenseState; } }
         public DigReadyState DigReadyState { get { return digReadyState; } }
         public PostPointState PostPointState { get { return postPointState; } }
-        public Vector3 DefensePos {
-            get {
-                float defenseZPos;
-                // If no teammate (debugging but potentially practice, too)
-                if (Teammate != null) {
-                    if (Teammate.GetComponent<Player>() != null || Teammate.Skills.PlayerPosition == PositionType.Defender) {
-                        defenseZPos = GetMyDefensivePosition(transform.position).z;
-                    } else {
-                        defenseZPos = transform.position.z;
-                    }
-                } else {
-                    defenseZPos = 0;
-                }
-
-                return new Vector3(skills.DefensePos.x * courtSide, 0.01f, defenseZPos);
-            }
-        }
+        public NonServeState NonServeState { get { return nonServeState; } }
         public Vector3 OffensePos { get { return new Vector3(skills.OffenseXPos * courtSide, 0.01f, transform.position.z); } }
     }
 }

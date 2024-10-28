@@ -20,6 +20,7 @@ MonoBehaviour:
   digRange: 0.75
   serving: 8
   servePower: 6
+  blocking: 1
   height: 1.8
   jumpHeight: 2.1
   reachPct: 0.3
