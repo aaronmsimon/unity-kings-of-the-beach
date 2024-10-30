@@ -11,8 +11,8 @@ namespace KotB.Actors
 
     public class Coach : Athlete
     {
-        [Header("Coach Info")]
-        [SerializeField] private CoachType coachType;
+        // [Header("Coach Info")]
+        // [SerializeField] private CoachType coachType;
 
         [Header("Target Area")]
         [SerializeField] private Vector2 targetZonePos;
@@ -23,8 +23,8 @@ namespace KotB.Actors
         [Header("Game Input")]
         [SerializeField] private InputReader inputReader;
 
-        private AI ai;
-        private Player player;
+        // private AI ai;
+        // private Player player;
         private MatchManager matchManager;
 
         private float bumpFrames = 7;
@@ -34,13 +34,13 @@ namespace KotB.Actors
         protected override void Start() {
             base.Start();
 
-            player = FindObjectOfType<Player>();
+            // player = FindObjectOfType<Player>();
 
-            if (coachType == CoachType.Pass) {
-                ai = FindObjectOfType<AI>();
-                if (ai != null)
-                    ai.Teammate = player;
-            }
+            // if (coachType == CoachType.Pass) {
+            //     ai = FindObjectOfType<AI>();
+            //     if (ai != null)
+            //         ai.Teammate = player;
+            // }
 
             canBump = false;
 
@@ -73,10 +73,12 @@ namespace KotB.Actors
 
         public void TakeBall() {
             ballInfo.GiveBall(this);
-            if (ai != null && coachType == CoachType.Pass) {
-                ai.StateMachine.ChangeState(ai.DefenseState);
-            }
-            player.StateMachine.ChangeState(player.NormalState);
+            // if (ai != null && coachType == CoachType.Pass) {
+            //     ai.StateMachine.ChangeState(ai.DefenseState);
+            // }
+            // if (player != null) {
+            //     player.StateMachine.ChangeState(player.NormalState);
+            // }
             transform.forward = Vector3.right * -CourtSide;
             animator.Play("HoldBall");
         }

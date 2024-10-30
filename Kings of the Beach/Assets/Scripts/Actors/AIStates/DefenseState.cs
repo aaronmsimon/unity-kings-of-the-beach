@@ -36,10 +36,13 @@ namespace KotB.StatePattern.AIStates
         }
 
         private bool MyBall() {
-            float myDistToBall = (ai.BallInfo.TargetPos - ai.transform.position).sqrMagnitude;
-            float teammateDistToBall = (ai.BallInfo.TargetPos - ai.Teammate.transform.position).sqrMagnitude;
-
-            return (myDistToBall < teammateDistToBall) || (myDistToBall == teammateDistToBall && ai.Skills.PlayerPosition == PositionType.Defender);
+            if (ai.Teammate != null) {
+                float myDistToBall = (ai.BallInfo.TargetPos - ai.transform.position).sqrMagnitude;
+                float teammateDistToBall = (ai.BallInfo.TargetPos - ai.Teammate.transform.position).sqrMagnitude;
+                return (myDistToBall < teammateDistToBall) || (myDistToBall == teammateDistToBall && ai.Skills.PlayerPosition == PositionType.Defender);
+            } else {
+                return true;
+            }
         }
 
         private bool JudgeInBounds(float skillLevel) {

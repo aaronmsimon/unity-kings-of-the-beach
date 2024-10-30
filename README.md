@@ -134,12 +134,12 @@ I would like to actually finish this game this time. That means starting with a 
 - debug: writing to console, gizmos like raycasts or boxes drawn
 - bump/set vs pass/across
 - athlete raycast isn't used
+- exchange Distance() for ().sqrmagnitude when possible
 
 ### Note to Self
 1. more spike tweaks
-* need to test with AI
-* float spikeRangeV = Random.Range(6, 7); for AI needs to be set in skills based on height
 * BallInfo.SetSpikeTarget(targetPos, Random.Range(0.5f, 1f), ai); range should be based on skill and a tighter variance and related to distance spiking
+* figure out why AI is spiking sometimes and lobbing it others (same x-pos in testing scene)
 2. weak spike (feint)
 * slight arc, straight shot over net
 * power still used for speed, accuracy, and distance

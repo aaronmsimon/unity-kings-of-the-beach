@@ -24,6 +24,7 @@ namespace KotB.Actors
         protected Vector3 moveDir;
         protected bool isJumping;
 
+        private float defaultHeight = 1.9f;
         private float noMansLand = 0.5f;
         private float skillLevelMax = 10;
         private float jumpFrames = 7;
@@ -33,11 +34,10 @@ namespace KotB.Actors
         private float blockFallFrames = 8;
         protected float animationFrameRate = 24;
         private float jumpAimationTime;
+        private float reachHeight;
 
         // caching
         private float moveSpeed;
-        private float jumpHeight;
-        private float reachPct;
         private CapsuleCollider capCollider;
         private SphereCollider sphereCollider;
         protected Animator animator;
@@ -55,8 +55,10 @@ namespace KotB.Actors
         protected virtual void Start() {
             if (skills != null) {
                 moveSpeed = skills.MoveSpeed;
-                jumpHeight = skills.JumpHeight;
-                reachPct = skills.ReachPct;
+                float percentScale = skills.Height / defaultHeight;
+
+                transform.localScale = new Vector3(percentScale, percentScale, percentScale);
+                reachHeight = (sphereCollider.center.y + sphereCollider.radius) * percentScale;
             } else {
                 Debug.LogAssertion($"No skills found for { this.name }");
             }
@@ -193,5 +195,9 @@ namespace KotB.Actors
         public Transform LeftHandEnd { get { return leftHandEnd; } }
         public Ball Ball { get { return ball; } }
         public bool IsJumping { get { return isJumping; } }
+        public float ReachHeight { get { return reachHeight; } }
+        public float JumpFrames { get { return jumpFrames; } }
+        public float SpikeFrames { get { return spikeFrames; } }
+        public float AnimationFrameRate { get { return animationFrameRate; } }
     }
 }

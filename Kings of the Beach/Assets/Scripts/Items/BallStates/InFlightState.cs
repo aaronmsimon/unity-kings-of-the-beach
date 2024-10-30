@@ -23,12 +23,6 @@ namespace KotB.StatePattern.BallStates
                     float t = ball.BallInfo.TimeSinceLastHit / ball.BallInfo.Duration;
                     if (t > 1f) t = 1f;
 
-                    // Check apex
-                    if (t >= 0.5f && !ball.BallInfo.ApexReachedFlag) {
-                        ball.BallInfo.ApexReachedEvent();
-                        ball.BallInfo.ApexReachedFlag = true;
-                    }
-
                     // Calculate ball path (spike vs pass)
                     if (ball.BallInfo.Height >= 0) {
                         ball.transform.position = CalculateInFlightPosition(t, ball.BallInfo.StartPos, targetPos, ball.BallInfo.Height);

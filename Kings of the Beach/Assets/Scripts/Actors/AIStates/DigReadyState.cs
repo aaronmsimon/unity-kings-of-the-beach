@@ -1,6 +1,5 @@
 using UnityEngine;
 using KotB.Actors;
-using KotB.StatePattern.MatchStates;
 
 namespace KotB.StatePattern.AIStates
 {
@@ -9,19 +8,14 @@ namespace KotB.StatePattern.AIStates
         public DigReadyState(AI ai) : base(ai) { }
 
         private float reactionTime;
-        private bool apexReached;
+        private float spikeTime;
         private bool isSpiking;
 
         public override void Enter() {
             reactionTime = ai.Skills.ReactionTime;
-            apexReached = false;
+            // Expensive operation (square root) so running this just once this state is entered
+            spikeTime = GetTimeForSpike(ai.ReachHeight, ai.BallInfo.Height, ai.BallInfo.StartPos.y, ai.BallInfo.TargetPos.y, ai.BallInfo.Duration);
             isSpiking = false;
-
-            ai.BallInfo.ApexReached += OnApexReached;
-        }
-
-        public override void Exit() {
-            ai.BallInfo.ApexReached -= OnApexReached;
         }
 
         public override void Update() {
@@ -31,12 +25,8 @@ namespace KotB.StatePattern.AIStates
                 if ((ai.transform.position - ai.BallInfo.TargetPos).sqrMagnitude > ai.Skills.TargetLockDistance * ai.Skills.TargetLockDistance) {
                     ai.TargetPos = ai.BallInfo.TargetPos;
                 } else {
-                    // is this "lock" check still needed if we are setting a target?
-                    if (ai.MatchInfo.CurrentState is InPlayState && ai.BallInfo.lastPlayerToHit != ai && Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
-                        ai.transform.position = ai.BallInfo.TargetPos;
-                        if (ai.BallInfo.HitsForTeam == 2 && !isSpiking) {
-                            TrySpike();
-                        }
+                    if (ai.BallInfo.HitsForTeam == 2 && !isSpiking) {
+                        TrySpike();
                     }
                 }
             }
@@ -80,18 +70,36 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void TrySpike() {
-            float spikeRangeH = 1;
-            if (Vector3.Distance(new Vector3(ai.transform.position.x, 0, ai.transform.position.z), new Vector3(ai.BallInfo.Position.x, 0, ai.BallInfo.Position.z)) <= spikeRangeH) {
-                float spikeRangeV = Random.Range(6, 7);
-                if (apexReached && ai.BallInfo.Position.y <= spikeRangeV) {
-                    ai.PerformJump();
-                    isSpiking = true;
-                }
+            float jumpDuration = ai.JumpFrames / ai.AnimationFrameRate;
+            float spikeDuration = ai.SpikeFrames / ai.AnimationFrameRate;
+            if (ai.BallInfo.TimeSinceLastHit >= spikeTime - jumpDuration - spikeDuration / 2) {
+                ai.PerformJump();
+                isSpiking = true;
             }
         }
 
-        private void OnApexReached() {
-            apexReached = true;
+        private float GetTimeForSpike(float spikePos, float height, float start, float end, float duration)
+        {
+            float a = -4 * height;
+            float b = 4 * height - start + end;
+            float c = start - spikePos;
+
+            float discriminant = b * b - 4 * a * c;
+
+            if (discriminant >= 0)
+            {
+                float sqrtDiscriminant = Mathf.Sqrt(discriminant);
+                float t1 = (-b + sqrtDiscriminant) / (2 * a);
+                float t2 = (-b - sqrtDiscriminant) / (2 * a);
+
+                if (t1 >= 0.5f && t1 <= 1)
+                    return t1 * duration;
+                else if (t2 >= 0.5f && t2 <= 1)
+                    return t2 * duration;
+            }
+
+            Debug.LogError("No real solution for the given verticalPosition.");
+            return -1;
         }
     }
 }

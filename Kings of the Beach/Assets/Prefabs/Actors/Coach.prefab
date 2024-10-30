@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7855929619521182701}
   - component: {fileID: 5482822381036295956}
+  - component: {fileID: 7701450969778663800}
   - component: {fileID: 5127179976974750972}
   - component: {fileID: -6829632742945956471}
   m_Layer: 0
@@ -58,6 +59,27 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!135 &7701450969778663800
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5717242374435514889}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 3.1, z: 0}
 --- !u!54 &5127179976974750972
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -104,7 +126,6 @@ MonoBehaviour:
   obstaclesLayer:
     serializedVersion: 2
     m_Bits: 64
-  coachType: 0
   targetZonePos: {x: -4, y: 0}
   targetZoneSize: {x: 5.5, y: 5.5}
   showTargetZone: 1
