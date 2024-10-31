@@ -58,6 +58,7 @@ I would like to actually finish this game this time. That means starting with a 
 4. ~~Serve Skill (affects serve aim)~~
 5. Serve Power (affects ~~speed and~~ direction)
 6. Blocking (likelihood to be successful)
+7. ~~Spike Power (affects speed)~~
 
 #### Ball Mechanics
 1. ~~Move to Target with Bezier curve~~
@@ -138,12 +139,12 @@ I would like to actually finish this game this time. That means starting with a 
 
 ### Note to Self
 1. more spike tweaks
-* BallInfo.SetSpikeTarget(targetPos, Random.Range(0.5f, 1f), ai); range should be based on skill and a tighter variance and related to distance spiking
-* figure out why AI is spiking sometimes and lobbing it others (same x-pos in testing scene)
+* AI spike aim
+* timing: early = feint; late = pass close
 2. weak spike (feint)
-* slight arc, straight shot over net
+* use pass mechanics with lower height but slow
 * power still used for speed, accuracy, and distance
-* angles are much easier this way (somewhat less distance)
-
 3. block
 * hits for team wrong since using pass
+4. spike tweaks for player
+* might need to make this easier/more forgiving (higher collider and/or longer window)

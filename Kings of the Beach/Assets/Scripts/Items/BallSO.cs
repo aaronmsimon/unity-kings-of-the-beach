@@ -57,7 +57,7 @@ public class BallSO : ScriptableObject
         TargetPos = new Vector3(Position.x, 0, Position.z) + direction * serveDistance;
 
         StartPos = Position;
-        float serveSpeed = skillValues.ServeRate(server.Skills.ServePower) * servePower;
+        float serveSpeed = skillValues.SkillToValue(server.Skills.ServePower, skillValues.ServePower) * servePower;
         Duration = serveDistance / serveSpeed / 1000 * 60 * 60; // d x 1/r x 1km/1000m x 60min/hr x 60sec/min = sec
         Debug.Log($"Distance: {serveDistance} Duration: {Duration} Serve Speed: {Mathf.Round(serveDistance / Duration / 1000 * 60 * 60 * 10) / 10} km/hr");
         ResetTimeSinceLastHit();

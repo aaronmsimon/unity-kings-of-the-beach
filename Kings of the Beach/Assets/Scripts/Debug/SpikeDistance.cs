@@ -1,5 +1,4 @@
 using UnityEngine;
-using KotB.Actors;
 
 namespace KotB.Testing
 {
@@ -8,14 +7,11 @@ namespace KotB.Testing
         [SerializeField] private Ball ball;
         [SerializeField] private Transform spikePoint;
         [SerializeField] private Transform target;
-        [SerializeField] private Player player;
 
         private void Update() {
             if (Input.GetKey(KeyCode.Tab)) {
                 ball.StateMachine.ChangeState(ball.GroundState);
                 ball.transform.position = spikePoint.position;
-
-                if (player != null) player.StateMachine.ChangeState(player.NormalState);
             }
             if (Input.GetKey(KeyCode.Space)) {
                 ball.StateMachine.ChangeState(ball.InFlightState);

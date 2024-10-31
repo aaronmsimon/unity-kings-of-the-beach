@@ -110,7 +110,7 @@ namespace KotB.Actors
             }
 
             float rotateSpeed = 10f;
-            transform.forward = Vector3.Slerp(transform.forward, moveDir, rotateSpeed * Time.deltaTime);
+            if (moveDir != Vector3.zero) transform.forward = Vector3.Slerp(transform.forward, moveDir, rotateSpeed * Time.deltaTime);
             skills.Position = transform.position;
         }
 
@@ -159,14 +159,18 @@ namespace KotB.Actors
         }
 
         public void Pass(Vector3 targetPos) {
-            BallInfo.SetPassTarget(targetPos, 7, 1.75f, this);
+            ballInfo.SetPassTarget(targetPos, 7, 1.75f, this);
+        }
+
+        public void Spike(Vector3 targetPos) {
+            ballInfo.SetSpikeTarget(targetPos, ballInfo.SkillValues.SkillToValue(skills.SpikePower, ballInfo.SkillValues.SpikePower), this);
         }
 
         public void Block() {
             Vector3 targetPos = new Vector3(2 * -courtSide, 0.01f, transform.position.z);
             float blockHeight = 4;
             float blockDuration = 2;
-            ball.BallInfo.SetPassTarget(targetPos, blockHeight, blockDuration, this);
+            ballInfo.SetPassTarget(targetPos, blockHeight, blockDuration, this);
         }
 
         public void SetCourtSide(int courtSide) {

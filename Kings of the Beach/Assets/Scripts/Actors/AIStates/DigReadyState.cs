@@ -44,7 +44,7 @@ namespace KotB.StatePattern.AIStates
                         ai.StateMachine.ChangeState(ai.DefenseState);
                         break;
                     case 2:
-                        Spike();
+                        ai.Spike(CalculateSpikeTarget());
                         ai.StateMachine.ChangeState(ai.DefenseState);
                         break;
                     default:
@@ -60,19 +60,14 @@ namespace KotB.StatePattern.AIStates
             return new Vector3(aimLocation.x, 0f, aimLocation.y);
         }
 
-        private void Spike() {
-            if (Mathf.Abs(ai.transform.position.x) <= 1.5f) {
-                Vector3 targetPos = new Vector3(Random.Range(3.5f, 8.5f) * -ai.CourtSide, 0, Random.Range(-4.5f, 4.5f));
-                ai.BallInfo.SetSpikeTarget(targetPos, Random.Range(0.5f, 1f), ai);
-            } else {
-                ai.BallInfo.SetServeTarget(new Vector3(0, Random.Range(2.5f, 4), Random.Range(ai.transform.position.z - 1.5f, ai.transform.position.z + 1.5f)), 0.5f, ai);
-            }
+        private Vector3 CalculateSpikeTarget() {
+            return new Vector3(Random.Range(3.5f, 8.5f) * -ai.CourtSide, 0, Random.Range(-4.5f, 4.5f));
         }
 
         private void TrySpike() {
             float jumpDuration = ai.JumpFrames / ai.AnimationFrameRate;
             float spikeDuration = ai.SpikeFrames / ai.AnimationFrameRate;
-            if (ai.BallInfo.TimeSinceLastHit >= spikeTime - jumpDuration - spikeDuration / 2) {
+            if (ai.BallInfo.TimeSinceLastHit >= spikeTime - jumpDuration - spikeDuration / 2 && spikeTime >= 0) {
                 ai.PerformJump();
                 isSpiking = true;
             }

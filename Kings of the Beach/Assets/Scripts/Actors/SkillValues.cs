@@ -13,11 +13,10 @@ namespace KotB.Actors
         [Header("Passing")]
         [SerializeField] private MinMax passAccuracy;
 
-        private MinMax skillRange = new MinMax(1, 10);
+        [Header("Spiking")]
+        [SerializeField] private MinMax spikePower;
 
-        public float ServeRate(int servePowerSkill) {
-            return SkillToValueAscending(servePowerSkill, servePower);
-        }
+        private MinMax skillRange = new MinMax(1, 10);
 
         public Vector3 AdjustedServeDirection(Vector3 originalPos, float serving) {
             Vector2 adjAimPos = AdjustVectorAccuracy(new Vector2(originalPos.z, originalPos.y), serving / 10, serveAccuracy);
@@ -28,7 +27,7 @@ namespace KotB.Actors
             return AdjustVectorAccuracy(originalLoc, accuracy, passAccuracy);
         }
 
-        private float SkillToValueAscending(int skill, MinMax valueRange) {
+        public float SkillToValue(float skill, MinMax valueRange) {
             return (skill - skillRange.min) * (valueRange.max - valueRange.min) / (skillRange.max - skillRange.min) + valueRange.min;
         }
 
@@ -53,5 +52,8 @@ namespace KotB.Actors
             // Add the random offset to the original vector
             return vector + randomOffset;
         }
+
+        public MinMax ServePower { get { return servePower; } }
+        public MinMax SpikePower { get { return spikePower; } }
     }
 }

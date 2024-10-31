@@ -17,6 +17,9 @@ public class SkillsSO : ScriptableObject
     [SerializeField][Range(1,10)] private float passAccuracy;
     [SerializeField][Range(1,10)] private float inBoundsJudgement;
 
+    [Header("Spiking (Time)")]
+    [SerializeField][Range(1,10)] private float spikePower;
+
     [Header("Range")]
     [SerializeField] private float digRange;
 
@@ -41,18 +44,25 @@ public class SkillsSO : ScriptableObject
     public float MoveSpeed { get { return moveSpeed; } }
     public float TargetLockDistance { get { return targetLockDistance; } }
     public float ReactionTime { get { return reactionTime; } }
+
     public float PassAccuracy { get { return passAccuracy; } }
     public float InBoundsJudgement { get { return inBoundsJudgement; } }
-    public PositionType PlayerPosition { get { return playerPosition; } }
+
+    public float SpikePower { get { return spikePower; } }
+
     public float DigRange { get { return digRange; } }
-    public float Height { get { return height; } }
+
     public int Serving { get { return serving; } }
     public int ServePower { get { return servePower; } }
+
     public float Blocking { get { return blocking; } }
 
+    public float Height { get { return height; } }
     public Vector3 ServingPartnerPos { get { return new Vector3(servingPartnerPos.x, 0.01f, servingPartnerPos.y); } }
     public Vector2 DefensePos { get { return defensePos; } }
     public float OffenseXPos { get { return offenseXPos; } }
+
+    public PositionType PlayerPosition { get { return playerPosition; } }
 
     public Vector3 Position {
         get { return position; }

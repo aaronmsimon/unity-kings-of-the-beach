@@ -40,7 +40,6 @@ namespace KotB.StatePattern.BallStates
                 }
             } else {
                 ball.BallHitGround.Raise();
-                ball.BallInfo.TargetPos = Vector3.down;
                 ball.StateMachine.ChangeState(ball.GroundState);
                 ball.DestroyBallTarget();
             }

@@ -40,9 +40,8 @@ namespace KotB.StatePattern.PlayerStates
                         unlockTimer = unlockDelay;
                     }
                 } else {
-                    // shot
                     SetTargetPos(false);
-                    player.BallInfo.SetSpikeTarget(targetPos, Random.Range(0.5f, 1f), player);
+                    player.Spike(targetPos);
                     player.StateMachine.ChangeState(player.NormalState);
                 }
             }
@@ -76,10 +75,6 @@ namespace KotB.StatePattern.PlayerStates
 
         private void OnBumpAcross() {
             Bump(false);
-        }
-
-        private void OnTargetMoved() {
-            // go to NormalState
         }
     }
 }

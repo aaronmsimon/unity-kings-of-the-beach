@@ -60,6 +60,7 @@ namespace KotB.Actors
         //---- EVENT LISTENERS ----
 
         public void OnBallHitGround() {
+            moveDir = Vector3.zero;
             stateMachine.ChangeState(postPointState);
         }
 

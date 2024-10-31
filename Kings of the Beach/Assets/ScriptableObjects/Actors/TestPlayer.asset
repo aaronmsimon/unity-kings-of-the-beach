@@ -17,13 +17,12 @@ MonoBehaviour:
   reactionTime: 0
   passAccuracy: 10
   inBoundsJudgement: 1
+  spikePower: 10
   digRange: 0
   serving: 5
   servePower: 8
   blocking: 6.8
   height: 1.8
-  jumpHeight: 2.1
-  reachPct: 0.3
   servingPartnerPos: {x: 5, y: 1.5}
   defensePos: {x: 5, y: -2}
   offenseXPos: 1.25
