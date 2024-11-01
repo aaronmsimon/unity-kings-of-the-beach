@@ -14,6 +14,26 @@ namespace KotB.Match
         [SerializeField] private int courtSide;
         [SerializeField] private GameEvent scoreChanged;
 
+        public Team(Athlete athlete1, Athlete athlete2) {
+            athletes[0] = athlete1;
+            athletes[1] = athlete2;
+            if (athlete1 is AI ai1) ai1.Teammate = athlete2;
+            if (athlete2 is AI ai2) ai2.Teammate = athlete1;
+            SetScore(0);
+        }
+
+        // public Team(SkillsSO player1, bool aiControlled1, SkillsSO player2, bool aiControlled2) {
+        //     players[0] = player1;
+        //     players[1] = player2;
+        //     SetScore(0);
+
+        //     /* or maybe:
+        //         1. assign skillSO to Team (instead of Athletes)
+        //         2. set if AI or player controlled (or just AI y/n)
+        //         3. game mgr instantiates the players based on this list with teammate assignment as appropriate
+        //      */
+        // }
+
         public Athlete[] Athletes {
             get {
                 return athletes;

@@ -30,5 +30,25 @@ namespace KotB
 
             return new Vector2(x, y);
         }
+
+        public static void DrawTargetZone(Vector2 targetZonePos, Vector2 targetZoneSize, Color targetZoneColor, bool showTargetZone) {
+            float targetZoneHeight = 0.1f;
+
+            Vector3[] points;
+            points = new Vector3[8] {
+                new Vector3(targetZonePos.x - targetZoneSize.x / 2, targetZoneHeight, targetZonePos.y + targetZoneSize.y / 2),
+                new Vector3(targetZonePos.x + targetZoneSize.x / 2, targetZoneHeight, targetZonePos.y + targetZoneSize.y / 2),
+                new Vector3(targetZonePos.x + targetZoneSize.x / 2, targetZoneHeight, targetZonePos.y + targetZoneSize.y / 2),
+                new Vector3(targetZonePos.x + targetZoneSize.x / 2, targetZoneHeight, targetZonePos.y - targetZoneSize.y / 2),
+                new Vector3(targetZonePos.x + targetZoneSize.x / 2, targetZoneHeight, targetZonePos.y - targetZoneSize.y / 2),
+                new Vector3(targetZonePos.x - targetZoneSize.x / 2, targetZoneHeight, targetZonePos.y - targetZoneSize.y / 2),
+                new Vector3(targetZonePos.x - targetZoneSize.x / 2, targetZoneHeight, targetZonePos.y - targetZoneSize.y / 2),
+                new Vector3(targetZonePos.x - targetZoneSize.x / 2, targetZoneHeight, targetZonePos.y + targetZoneSize.y / 2)
+            };
+
+            Gizmos.color = targetZoneColor;
+            if (showTargetZone)
+                Gizmos.DrawLineList(points);
+        }
     }
 }
