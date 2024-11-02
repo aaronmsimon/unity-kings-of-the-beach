@@ -12,7 +12,7 @@ public class AimServe : MonoBehaviour
 
     private void Start() {
         MoveToPos(startPos);
-        RotateTowardSide(matchInfo.Server.CourtSide);
+        RotateTowardSide(matchInfo.GetServer().CourtSide);
     }
 
     private void Update() {

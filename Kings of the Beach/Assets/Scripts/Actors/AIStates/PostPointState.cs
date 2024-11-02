@@ -18,7 +18,7 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void OnMatchChangeToServeState() {
-            if (ai.MatchInfo.Server == ai) {
+            if (ai.MatchInfo.GetServer() == ai) {
                 ai.StateMachine.ChangeState(ai.ServeState);
             } else {
                 ai.StateMachine.ChangeState(ai.NonServeState);

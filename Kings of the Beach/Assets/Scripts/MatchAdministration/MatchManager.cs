@@ -1,8 +1,7 @@
+using System;
 using UnityEngine;
 using KotB.StatePattern;
 using KotB.StatePattern.MatchStates;
-using KotB.Actors;
-using System;
 using RoboRyanTron.Unite2017.Events;
 
 namespace KotB.Match
@@ -16,6 +15,10 @@ namespace KotB.Match
 
         [Header("Game Events")]
         [SerializeField] private GameEvent scoreUpdate;
+
+        [Header("Prefabs")]
+        [SerializeField] private GameObject aiPrefab;
+        [SerializeField] private GameObject playerPrefab;
 
         public event Action BallHitGround;
 
@@ -36,22 +39,36 @@ namespace KotB.Match
             matchEndState = new MatchEndState(this);
             matchStartState = new MatchStartState(this);
             
-            matchStateMachine.ChangeState(prePointState);
+            InitializeMatch();
+            matchStateMachine.ChangeState(matchStartState);
         }
 
-        private void Start() {
+        // Temp until teams can be assigned in the start UI
+        private void AssignTeams() {
 
-            matchInfo.TeamServeIndex = 0;
-            matchInfo.PlayerServeIndex = 0;
+        }
 
-            // matchInfo.Teams = teams;
-
+        private void InitializeMatch() {
             matchInfo.TotalPoints = 0;
             matchInfo.ScoreToWin = 21;
+
+            AssignTeams();
         }
 
-        private void Update() {
-            matchStateMachine.Update();
+        public void ScoreUpdate() {
+            scoreUpdate.Raise();
+            matchInfo.TotalPoints += 1;
+            CheckGameEnd();
+        }
+
+        private void CheckGameEnd() {
+            for (int i = 0; i < matchInfo.Teams.Length; i++) {
+                if (matchInfo.Teams[i].Score.Value == matchInfo.ScoreToWin) {
+                    Debug.Log($"{matchInfo.Teams[i].TeamName.Value} wins!");
+                    matchStateMachine.ChangeState(matchEndState);
+                }
+            }
+            matchStateMachine.ChangeState(postPointState);
         }
 
         private void OnEnable() {
@@ -62,24 +79,12 @@ namespace KotB.Match
             matchStateMachine.StateChanged -= OnStateChanged;
         }
 
-        public Athlete GetTeammate(AI ai) {
-            return null;
+        private void Update() {
+            matchStateMachine.Update();
         }
 
         public void OnBallHitGround() {
             BallHitGround?.Invoke();
-        }
-
-        public int GetTeamIndex(Athlete athlete) {
-            return -1;
-        }
-
-        public int GetOpponentIndex(int teamIndex) {
-            if (teamIndex != -1) {
-                return Mathf.Abs(teamIndex - 1);
-            } else {
-                return -1;
-            }
         }
 
         private void OnStateChanged(IState newState) {
@@ -97,6 +102,7 @@ namespace KotB.Match
         public InputReader InputReader { get { return inputReader; } }
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public BallSO BallInfo { get { return ballInfo; } }
-        public GameEvent ScoreUpdate { get { return scoreUpdate; } }
+        public GameObject AIPrefab { get { return aiPrefab; } }
+        public GameObject PlayerPrefab { get { return playerPrefab; } }
     }
 }

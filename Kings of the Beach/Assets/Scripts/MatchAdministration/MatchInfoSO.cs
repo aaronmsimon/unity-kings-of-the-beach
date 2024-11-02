@@ -1,8 +1,8 @@
+using System;
+using System.Linq;
 using UnityEngine;
 using KotB.StatePattern;
 using KotB.Actors;
-using System;
-using RoboRyanTron.Unite2017.Variables;
 
 namespace KotB.Match
 {
@@ -12,8 +12,6 @@ namespace KotB.Match
         [SerializeField] private Team[] teams = new Team[2];
         public int TotalPoints { get; set; }
         public int ScoreToWin { get; set; }
-        [SerializeField] private FloatVariable teamServeIndex;
-        [SerializeField] private FloatVariable playerServeIndex;
 
         private IState currentState;
 
@@ -27,19 +25,70 @@ namespace KotB.Match
         public void TransitionToServeStateEvent() {
             TransitionToServeState?.Invoke();
         }
+    
+        public Athlete GetTeammate(Athlete athlete)
+        {
+            foreach (Team team in teams)
+            {
+                if (team.Athletes.Contains(athlete))
+                {
+                    return team.Athletes.First(a => a != athlete);
+                }
+            }
+            return null; // Should never happen if setup correctly
+        }
 
+        public Athlete[] GetOpponents(Athlete athlete)
+        {
+            foreach (Team team in teams)
+            {
+                if (team.Athletes.Contains(athlete))
+                {
+                    // Return athletes from the opposing team
+                    return teams.First(t => t != team)?.Athletes;
+                }
+            }
+            return null;
+        }
+
+        public Team GetTeam(Athlete athlete) {
+            foreach (Team team in teams)
+            {
+                if (team.Athletes.Contains(athlete))
+                {
+                    return team;
+                }
+            }
+            return null;
+        }
+
+        public Team GetOpposingTeam(Athlete athlete) {
+            foreach (Team team in teams)
+            {
+                if (team.Athletes.Contains(athlete))
+                {
+                    return teams.First(t => t != team);
+                }
+            }
+            return null;
+        }
+
+        public Athlete GetServer() {
+            foreach (Team team in teams) {
+                foreach (Athlete athlete in team.Athletes) {
+                    if (team.Serving && team.Server == athlete) {
+                        return athlete;
+                    }
+                }
+            }
+            return null;
+        }
+
+        //---- PROPERTIES ----
         public IState CurrentState {
             get { return currentState; }
             set { currentState = value; }
         }
-        public Athlete Server {
-            // get { return Teams[TeamServeIndex].Athletes[PlayerServeIndex]; }
-            get { return null; }
-        }
-
-        //---- PROPERTIES ----
-        public int TeamServeIndex { get { return (int)teamServeIndex.Value; } set { teamServeIndex.Value = value; } }
-        public int PlayerServeIndex { get { return (int)playerServeIndex.Value; } set { playerServeIndex.Value = value; } }
         public Team[] Teams { get { return teams; } set { teams = value; } }
     }
 }

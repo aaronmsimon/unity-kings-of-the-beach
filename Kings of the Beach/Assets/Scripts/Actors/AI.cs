@@ -15,7 +15,6 @@ namespace KotB.Actors
         private NonServeState nonServeState;
 
         public Vector3 TargetPos { get; set; }
-        public Athlete Teammate { get; set; }
 
         public event Action ReachedTargetPos;
 
