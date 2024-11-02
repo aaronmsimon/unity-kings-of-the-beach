@@ -46,8 +46,8 @@ namespace KotB.StatePattern.BallStates
         }
 
         private void CheckIfOverNet() {
-            if (ball.transform.position.y < 2.43) {
-                ballIntoNet = true;
+            if (ball.transform.position.y < 2.43 || Mathf.Abs(ball.transform.position.z) > 4) {
+                ball.BallHitGround.Raise();
             }
         }
 

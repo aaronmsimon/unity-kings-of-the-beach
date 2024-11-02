@@ -20,7 +20,7 @@ namespace KotB.Testing
         }
 
         private void OnStateChanged(IState newState) {
-            athleteState = newState.ToString();
+            athleteState = newState?.ToString();
         }
     }
 }

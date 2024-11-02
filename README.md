@@ -66,8 +66,8 @@ I would like to actually finish this game this time. That means starting with a 
 3. Ball Events triggered when Property Set
 4. ~~Ball State Machine (probably need to change ballstate.bump to inair/active/inplay/etc)~~
 5. ~~Display target on playing surface (to help player)~~
-6. Ball into net based on Raycast - cleanup needed: checking twice
-7. Ball detection outside of legal range at net
+6. ~~Ball into net based on Raycast - cleanup needed: checking twice~~
+7. ~~Ball detection outside of legal range at net~~
 
 #### Assistants
 1. Coach - Bump
