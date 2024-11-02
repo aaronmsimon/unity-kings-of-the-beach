@@ -22,10 +22,10 @@ namespace KotB.StatePattern.MatchStates
             int lastPlayerTeamIndex = matchManager.GetTeamIndex(matchManager.BallInfo.lastPlayerToHit);
 
             if (matchManager.BallInfo.IsInBounds(matchManager.BallInfo.Position) && Mathf.Sign(matchManager.BallInfo.Position.x) == -matchManager.BallInfo.lastPlayerToHit.CourtSide) {
-                matchManager.Teams[lastPlayerTeamIndex]?.AddScore(1);
+                // matchManager.Teams[lastPlayerTeamIndex]?.AddScore(1);
                 if (lastPlayerTeamIndex != matchManager.MatchInfo.TeamServeIndex) NextServer();
             } else {
-                matchManager.Teams[matchManager.GetOpponentIndex(lastPlayerTeamIndex)]?.AddScore(1);
+                // matchManager.Teams[matchManager.GetOpponentIndex(lastPlayerTeamIndex)]?.AddScore(1);
                 if (lastPlayerTeamIndex == matchManager.MatchInfo.TeamServeIndex) NextServer();
             }
 

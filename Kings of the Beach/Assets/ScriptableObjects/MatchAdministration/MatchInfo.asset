@@ -12,5 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2dedaee14cbc0f4d9241cbac862b499, type: 3}
   m_Name: MatchInfo
   m_EditorClassIdentifier: 
+  teams:
+  - teamName: {fileID: 11400000, guid: b3934a7ce76ccc74f823cb670d974eb3, type: 2}
+    athleteInfo:
+    - skills: {fileID: 11400000, guid: a4115740a2e9dae4d8d039c26da20034, type: 2}
+      computerControlled: 0
+      outfit: 0
+      top: {fileID: 0}
+      bottom: {fileID: 0}
+    - skills: {fileID: 11400000, guid: ce57c4a0d93678e49bcbafcce5245da3, type: 2}
+      computerControlled: 0
+      outfit: 0
+      top: {fileID: 0}
+      bottom: {fileID: 0}
+    score: {fileID: 0}
+    courtSide: 0
+    scoreChanged: {fileID: 0}
+  - teamName: {fileID: 0}
+    athleteInfo:
+    - skills: {fileID: 11400000, guid: c71d49c0442b67c44b6dff987f17d336, type: 2}
+      computerControlled: 0
+      outfit: 0
+      top: {fileID: 0}
+      bottom: {fileID: 0}
+    - skills: {fileID: 11400000, guid: 1c0fe3fccb3977f40bca42833c35b42f, type: 2}
+      computerControlled: 0
+      outfit: 0
+      top: {fileID: 0}
+      bottom: {fileID: 0}
+    score: {fileID: 0}
+    courtSide: 0
+    scoreChanged: {fileID: 0}
   teamServeIndex: {fileID: 11400000, guid: 0cdf1dd1f0057ca4c8beef0ef58af6e6, type: 2}
   playerServeIndex: {fileID: 11400000, guid: e9d4a5e82758c5c4dbcb225676bd3730, type: 2}

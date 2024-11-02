@@ -9,9 +9,6 @@ namespace KotB.Match
 {
     public class MatchManager : MonoBehaviour
     {
-        [Header("Teams")]
-        [SerializeField] private Team[] teams = new Team[2];
-
         [Header("Scriptable Objects")]
         [SerializeField] private MatchInfoSO matchInfo;
         [SerializeField] private BallSO ballInfo;
@@ -28,6 +25,7 @@ namespace KotB.Match
         private InPlayState inPlayState;
         private PostPointState postPointState;
         private MatchEndState matchEndState;
+        private MatchStartState matchStartState;
 
         private void Awake() {
             matchStateMachine = new StateMachine();
@@ -36,6 +34,7 @@ namespace KotB.Match
             inPlayState = new InPlayState(this);
             postPointState = new PostPointState(this);
             matchEndState = new MatchEndState(this);
+            matchStartState = new MatchStartState(this);
             
             matchStateMachine.ChangeState(prePointState);
         }
@@ -45,17 +44,7 @@ namespace KotB.Match
             matchInfo.TeamServeIndex = 0;
             matchInfo.PlayerServeIndex = 0;
 
-            matchInfo.Teams = teams;
-
-            for (int i = 0; i < teams.Length; i++) {
-                for (int j = 0; j < teams[i].Athletes.Length; j++){
-                    if (teams[i].Athletes[j] != null && teams[i].Athletes[j] is AI) {
-                        AI ai = (AI)teams[i].Athletes[j];
-                        ai.Teammate = GetTeammate(ai);
-                    }
-                }
-                teams[i].SetScore(0);
-            }
+            // matchInfo.Teams = teams;
 
             matchInfo.TotalPoints = 0;
             matchInfo.ScoreToWin = 21;
@@ -74,14 +63,6 @@ namespace KotB.Match
         }
 
         public Athlete GetTeammate(AI ai) {
-            for (int i = 0; i < teams.Length; i++) {
-                for (int j = 0; j < teams[i].Athletes.Length; j++) {
-                    if (teams[i].Athletes[j] == ai) {
-                        return teams[i].Athletes[Mathf.Abs(j - 1)];
-                    }
-                }
-            }
-
             return null;
         }
 
@@ -90,13 +71,6 @@ namespace KotB.Match
         }
 
         public int GetTeamIndex(Athlete athlete) {
-            for (int i = 0; i < teams.Length; i++) {
-                for (int j = 0; j < teams[i].Athletes.Length; j++) {
-                    if (teams[i].Athletes[j] == athlete) {
-                        return i;
-                    }
-                }
-            }
             return -1;
         }
 
@@ -119,10 +93,10 @@ namespace KotB.Match
         public InPlayState InPlayState { get { return inPlayState; } }
         public PostPointState PostPointState { get { return postPointState; } }
         public MatchEndState MatchEndState { get { return matchEndState; } }
+        public MatchStartState MatchStartState { get { return matchStartState; } }
         public InputReader InputReader { get { return inputReader; } }
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public BallSO BallInfo { get { return ballInfo; } }
-        public Team[] Teams { get { return teams; } }
         public GameEvent ScoreUpdate { get { return scoreUpdate; } }
     }
 }

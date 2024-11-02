@@ -1,13 +1,29 @@
 using UnityEngine;
 
+public enum Gender {
+    Female,
+    Male
+}
 public enum PositionType {
     Blocker,
     Defender
+}
+public enum Outfit {
+    NoShirt,
+    Shirt,
+    Tank
 }
 
 [CreateAssetMenu(fileName = "Skills", menuName = "Game/Actor")]
 public class SkillsSO : ScriptableObject
 {
+    [Header("Display")]
+    [SerializeField] private string athleteName;
+    [SerializeField] private Gender gender;
+    [SerializeField] private Outfit defaultOutfit;
+    [SerializeField] private Texture defaultTop;
+    [SerializeField] private Texture defaultBottom;
+    
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float targetLockDistance;
@@ -40,6 +56,8 @@ public class SkillsSO : ScriptableObject
     [SerializeField] private PositionType playerPosition;
 
     private Vector3 position;
+
+    public Gender Gender { get { return gender; } }
 
     public float MoveSpeed { get { return moveSpeed; } }
     public float TargetLockDistance { get { return targetLockDistance; } }

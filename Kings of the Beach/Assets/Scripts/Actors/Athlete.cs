@@ -173,6 +173,10 @@ namespace KotB.Actors
             ballInfo.SetPassTarget(targetPos, blockHeight, blockDuration, this);
         }
 
+        public void SetSkills(SkillsSO skills) {
+            this.skills = skills;
+        }
+
         public void SetCourtSide(int courtSide) {
             this.courtSide = courtSide;
         }

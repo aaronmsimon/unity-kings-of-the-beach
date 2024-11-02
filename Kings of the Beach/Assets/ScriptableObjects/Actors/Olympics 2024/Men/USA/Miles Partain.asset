@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37262e169b0a64548b7fbd6f67883702, type: 3}
+  m_Name: Miles Partain
+  m_EditorClassIdentifier: 
+  athleteName: Miles Partain
+  gender: 1
+  defaultOutfit: 1
+  defaultTop: {fileID: 2800000, guid: eefe86d58a9ed9c48bda113e64c10cfe, type: 3}
+  defaultBottom: {fileID: 2800000, guid: 1a4801e473c7e5646abd770e987181e1, type: 3}
+  moveSpeed: 7
+  targetLockDistance: 0.5
+  reactionTime: 0.2
+  passAccuracy: 7
+  inBoundsJudgement: 8
+  spikePower: 6.5
+  digRange: 0.5
+  serving: 8
+  servePower: 7
+  blocking: 4
+  height: 1.91
+  servingPartnerPos: {x: 5, y: 1.5}
+  defensePos: {x: 5, y: 2}
+  offenseXPos: 1.25
+  playerPosition: 1
