@@ -103,6 +103,6 @@ namespace KotB.Match
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public BallSO BallInfo { get { return ballInfo; } }
         public GameObject AIPrefab { get { return aiPrefab; } }
-        public GameObject PlayerPrefab { get { return PlayerPrefab; } }
+        public GameObject PlayerPrefab { get { return playerPrefab; } }
     }
 }

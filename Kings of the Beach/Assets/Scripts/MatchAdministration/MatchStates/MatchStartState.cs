@@ -18,9 +18,10 @@ namespace KotB.StatePattern.MatchStates
 
         private void PopulateTeams() {
             foreach (Team team in matchManager.MatchInfo.Teams) {
+                team.athletes.Clear();
                 foreach (AthleteInfo athleteInfo in team.TeamInfo.AthleteInfos) {
                     Athlete athlete = InstantiateAthlete(athleteInfo, team.TeamInfo.CourtSide);
-                //     team.AssignAthlete(athlete);
+                    team.AssignAthlete(athlete);
                 }
             }
         }

@@ -110,9 +110,6 @@ I would like to actually finish this game this time. That means starting with a 
 - use pass accuracy skill in passing (use AdjustVectorAccuracy())
 
 #### Match
-- Complete all states
-- Serve start
-- When starting match, setup side for Serve
 - Post Point: allow for celebration/skip
 - review transitions that are not in a state
 - set teams will need to be a function from game setup
@@ -139,8 +136,8 @@ I would like to actually finish this game this time. That means starting with a 
 
 ### Note to Self
 1. more spike tweaks
-* AI spike aim
 * timing: early = feint; late = pass close
+* check calculatetarget for other direction (not all calcs have courtside in their calc
 2. weak spike (feint)
 * use pass mechanics with lower height but slow
 * power still used for speed, accuracy, and distance

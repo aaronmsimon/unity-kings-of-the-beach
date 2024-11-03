@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using KotB.Actors;
 using RoboRyanTron.Unite2017.Events;
@@ -13,16 +14,16 @@ namespace KotB.Match
         [Header("Events")]
         [SerializeField] private GameEvent scoreChanged;
 
-        public Athlete[] Athletes { get; private set; }
+        public List<Athlete> athletes = new List<Athlete>();
         public bool Serving { get; set; }
         public Athlete Server { get; private set; }
 
         private int maxAthletes = 2;
 
         public void AssignAthlete(Athlete athlete) {
-            if (Athletes.Length < maxAthletes) {
-                Athletes[Athletes.Length] = athlete;
-                if (Athletes.Length == maxAthletes) SetServer(athlete);
+            if (athletes.Count < maxAthletes) {
+                athletes.Add(athlete);
+                SetServer(athlete);
             }
         }
 
@@ -41,9 +42,10 @@ namespace KotB.Match
         }
 
         public void SwitchServer() {
-            Server = Server == Athletes[0] ? Athletes[1] : Athletes[0];
+            Server = Server == athletes[0] ? athletes[1] : athletes[0];
         }
 
         public TeamSO TeamInfo { get { return teamInfo; } }
+        public List<Athlete> Athletes { get { return athletes; } }
     }
 }

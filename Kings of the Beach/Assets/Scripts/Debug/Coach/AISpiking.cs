@@ -1,22 +1,25 @@
 using UnityEngine;
 using KotB.Actors;
+using KotB.Match;
 
 namespace KotB.Testing
 {
     public class AISpiking : MonoBehaviour
     {
         [SerializeField] private AI ai;
+        [SerializeField] private MatchManager matchManager;
 
         private Coach coach;
         private Vector3 aiStartPos;
 
         private void Awake() {
             coach = GetComponent<Coach>();
-            aiStartPos = ai.transform.position;
         }
 
         private void Start() {
-            SpikeReady();
+            matchManager.StateMachine.ChangeState(matchManager.InPlayState);
+            ai = (AI)matchManager.MatchInfo.Teams[0].athletes[0];
+            aiStartPos = new Vector3(-3, 0.01f, -2);
         }
 
         private void Update() {

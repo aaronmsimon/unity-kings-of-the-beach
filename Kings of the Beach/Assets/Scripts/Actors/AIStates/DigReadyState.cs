@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using KotB.Actors;
 
@@ -10,6 +11,8 @@ namespace KotB.StatePattern.AIStates
         private float reactionTime;
         private float spikeTime;
         private bool isSpiking;
+        private Vector2[] attackZoneCenters = new Vector2[2];
+        private Vector2[] attackZoneSizes = new Vector2[2];
 
         public override void Enter() {
             reactionTime = ai.Skills.ReactionTime;
@@ -30,7 +33,6 @@ namespace KotB.StatePattern.AIStates
                     }
                 }
             }
-            CalculateAttackZones();
         }
 
         public override void OnTriggerEnter(Collider other) {
@@ -63,7 +65,12 @@ namespace KotB.StatePattern.AIStates
         }
 
         private Vector3 CalculateSpikeTarget() {
-            return new Vector3(Random.Range(3.5f, 8.5f) * -ai.CourtSide, 0, Random.Range(-4.5f, 4.5f));
+            CalculateAttackZones();
+            int largestZoneIndex = LargestAttackZoneIndex();
+            Vector2 xRange = new Vector2(attackZoneCenters[largestZoneIndex].x - attackZoneSizes[largestZoneIndex].x / 2, attackZoneCenters[largestZoneIndex].x + attackZoneSizes[largestZoneIndex].x / 2);
+            Vector2 zRange = new Vector2(attackZoneCenters[largestZoneIndex].y - attackZoneSizes[largestZoneIndex].y / 2, attackZoneCenters[largestZoneIndex].y + attackZoneSizes[largestZoneIndex].y / 2);
+            Vector3 target = new Vector3(Random.Range(xRange.x, xRange.y), 0, Random.Range(zRange.x, zRange.y));
+            return target;
         }
 
         private void TrySpike() {
@@ -100,12 +107,9 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void CalculateAttackZones() {
-            Athlete[] opponents = ai.MatchInfo.GetOpponents(ai);
+            List<Athlete> opponents = ai.MatchInfo.GetOpponents(ai);
             Vector3 deepOpponent = (Mathf.Max(Mathf.Abs(opponents[0].transform.position.x), Mathf.Abs(opponents[1].transform.position.x)) == Mathf.Abs(opponents[0].transform.position.x) ? opponents[0] : opponents[1]).transform.position;
             Vector3 shallowOpponent = (Mathf.Max(Mathf.Abs(opponents[0].transform.position.x), Mathf.Abs(opponents[1].transform.position.x)) == Mathf.Abs(opponents[0].transform.position.x) ? opponents[1] : opponents[0]).transform.position;
-
-            Vector2[] attackZoneCenters = new Vector2[2];
-            Vector2[] attackZoneSizes = new Vector2[2];
 
             // Deep Zone
             attackZoneCenters[0] = new Vector2(
@@ -116,7 +120,6 @@ namespace KotB.StatePattern.AIStates
                 ai.CourtSideLength - shallowOpponent.x,
                 Mathf.Abs(deepOpponent.z) + 4
             );
-            Helpers.DrawTargetZone(attackZoneCenters[0], attackZoneSizes[0], Color.green, true);
 
             // Shallow Zone
             attackZoneCenters[1] = new Vector2(
@@ -127,7 +130,22 @@ namespace KotB.StatePattern.AIStates
                 Mathf.Abs(deepOpponent.x),
                 Mathf.Abs(shallowOpponent.z) + 4
             );
-            Helpers.DrawTargetZone(attackZoneCenters[1], attackZoneSizes[1], Color.magenta, true);
+        }
+
+        private int LargestAttackZoneIndex() {
+            float largestArea = -1;
+            int index = -1;
+
+            for (int i = 0; i < attackZoneSizes.Length; i++)
+            {
+                float thisArea = attackZoneSizes[i].x * attackZoneSizes[i].y;
+                if (thisArea > largestArea) {
+                    largestArea = thisArea;
+                    index = i;
+                }                
+            }
+
+            return index;
         }
     }
 }

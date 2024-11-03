@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using KotB.StatePattern;
 using KotB.Actors;
@@ -30,22 +31,22 @@ namespace KotB.Match
         {
             foreach (Team team in teams)
             {
-                if (team.Athletes.Contains(athlete))
+                if (team.athletes.Contains(athlete))
                 {
-                    return team.Athletes.First(a => a != athlete);
+                    return team.athletes.FirstOrDefault(a => a != athlete);
                 }
             }
             return null; // Should never happen if setup correctly
         }
 
-        public Athlete[] GetOpponents(Athlete athlete)
+        public List<Athlete> GetOpponents(Athlete athlete)
         {
             foreach (Team team in teams)
             {
-                if (team.Athletes.Contains(athlete))
+                if (team.athletes.Contains(athlete))
                 {
                     // Return athletes from the opposing team
-                    return teams.First(t => t != team)?.Athletes;
+                    return teams.FirstOrDefault(t => t != team)?.athletes;
                 }
             }
             return null;
@@ -54,7 +55,7 @@ namespace KotB.Match
         public Team GetTeam(Athlete athlete) {
             foreach (Team team in teams)
             {
-                if (team.Athletes.Contains(athlete))
+                if (team.athletes.Contains(athlete))
                 {
                     return team;
                 }
@@ -65,9 +66,9 @@ namespace KotB.Match
         public Team GetOpposingTeam(Athlete athlete) {
             foreach (Team team in teams)
             {
-                if (team.Athletes.Contains(athlete))
+                if (team.athletes.Contains(athlete))
                 {
-                    return teams.First(t => t != team);
+                    return teams.FirstOrDefault(t => t != team);
                 }
             }
             return null;
@@ -75,7 +76,7 @@ namespace KotB.Match
 
         public Athlete GetServer() {
             foreach (Team team in teams) {
-                foreach (Athlete athlete in team.Athletes) {
+                foreach (Athlete athlete in team.athletes) {
                     if (team.Serving && team.Server == athlete) {
                         return athlete;
                     }

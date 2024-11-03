@@ -18,11 +18,6 @@ MonoBehaviour:
     outfit: 0
     top: {fileID: 0}
     bottom: {fileID: 0}
-  - skills: {fileID: 11400000, guid: c71d49c0442b67c44b6dff987f17d336, type: 2}
-    computerControlled: 1
-    outfit: 0
-    top: {fileID: 0}
-    bottom: {fileID: 0}
   teamName: {fileID: 11400000, guid: b3934a7ce76ccc74f823cb670d974eb3, type: 2}
   score: {fileID: 11400000, guid: 9894eec9cec191c4bb9760253bc901bf, type: 2}
   courtSide: -1
