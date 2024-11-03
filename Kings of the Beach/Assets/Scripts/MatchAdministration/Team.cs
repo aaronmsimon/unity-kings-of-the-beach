@@ -1,6 +1,5 @@
 using UnityEngine;
 using KotB.Actors;
-using RoboRyanTron.Unite2017.Variables;
 using RoboRyanTron.Unite2017.Events;
 
 namespace KotB.Match
@@ -8,23 +7,17 @@ namespace KotB.Match
     [System.Serializable]
     public class Team
     {
-        [SerializeField] private StringVariable teamName;
-        [SerializeField] private AthleteInfo[] athletesInfo = new AthleteInfo[2];
-        [SerializeField] private FloatVariable score;
-        [SerializeField] private int courtSide;
+        [Header("Team Info")]
+        [SerializeField] private TeamSO teamInfo;
+
+        [Header("Events")]
         [SerializeField] private GameEvent scoreChanged;
 
         public Athlete[] Athletes { get; private set; }
         public bool Serving { get; set; }
-        public Athlete Server { get; set; }
+        public Athlete Server { get; private set; }
+
         private int maxAthletes = 2;
-
-        public Team(AthleteInfo athleteInfo1, AthleteInfo athleteInfo2) {
-            athletesInfo[0] = athleteInfo1;
-            athletesInfo[1] = athleteInfo2;
-
-            SetScore(0);
-        }
 
         public void AssignAthlete(Athlete athlete) {
             if (Athletes.Length < maxAthletes) {
@@ -34,12 +27,12 @@ namespace KotB.Match
         }
 
         public void SetScore(int amount) {
-            score.Value = amount;
+            teamInfo.Score.Value = amount;
             scoreChanged.Raise();
         }
 
         public void AddScore(int amount) {
-            score.Value += amount;
+            teamInfo.Score.Value += amount;
             scoreChanged.Raise();
         }
 
@@ -51,9 +44,6 @@ namespace KotB.Match
             Server = Server == Athletes[0] ? Athletes[1] : Athletes[0];
         }
 
-        public StringVariable TeamName { get { return teamName; } }
-        public AthleteInfo[] AthletesInfo { get { return athletesInfo; } }
-        public FloatVariable Score { get { return score; } }
-        public int CourtSide { get { return courtSide; } }
+        public TeamSO TeamInfo { get { return teamInfo; } }
     }
 }

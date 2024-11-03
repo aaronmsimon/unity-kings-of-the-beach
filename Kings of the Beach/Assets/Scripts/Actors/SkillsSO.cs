@@ -21,8 +21,8 @@ public class SkillsSO : ScriptableObject
     [SerializeField] private string athleteName;
     [SerializeField] private Gender gender;
     [SerializeField] private Outfit defaultOutfit;
-    [SerializeField] private Texture defaultTop;
-    [SerializeField] private Texture defaultBottom;
+    [SerializeField] private Material defaultTop;
+    [SerializeField] private Material defaultBottom;
     
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
@@ -57,7 +57,11 @@ public class SkillsSO : ScriptableObject
 
     private Vector3 position;
 
+    public string AthleteName { get { return athleteName; } }
     public Gender Gender { get { return gender; } }
+    public Outfit DefaultOutfit { get { return defaultOutfit; } }
+    public Material DefaultTop { get { return defaultTop; } }
+    public Material DefaultBottom { get { return defaultBottom; } }
 
     public float MoveSpeed { get { return moveSpeed; } }
     public float TargetLockDistance { get { return targetLockDistance; } }

@@ -30,6 +30,7 @@ namespace KotB.StatePattern.AIStates
                     }
                 }
             }
+            CalculateAttackZones();
         }
 
         public override void OnTriggerEnter(Collider other) {
@@ -99,30 +100,34 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void CalculateAttackZones() {
-            // Vector3 deepOpponent = (Mathf.Max(Mathf.Abs(opponent1.transform.position.x), Mathf.Abs(opponent2.transform.position.x)) == Mathf.Abs(opponent1.transform.position.x) ? opponent1 : opponent2).transform.position;
-            // Vector3 shallowOpponent = (Mathf.Max(Mathf.Abs(opponent1.transform.position.x), Mathf.Abs(opponent2.transform.position.x)) == Mathf.Abs(opponent1.transform.position.x) ? opponent2 : opponent1).transform.position;
+            Athlete[] opponents = ai.MatchInfo.GetOpponents(ai);
+            Vector3 deepOpponent = (Mathf.Max(Mathf.Abs(opponents[0].transform.position.x), Mathf.Abs(opponents[1].transform.position.x)) == Mathf.Abs(opponents[0].transform.position.x) ? opponents[0] : opponents[1]).transform.position;
+            Vector3 shallowOpponent = (Mathf.Max(Mathf.Abs(opponents[0].transform.position.x), Mathf.Abs(opponents[1].transform.position.x)) == Mathf.Abs(opponents[0].transform.position.x) ? opponents[1] : opponents[0]).transform.position;
 
-            // // Deep Zone
-            // Vector2 deepZonePos = new Vector2(
-            //     ((ai.CourtSideLength - Mathf.Abs(shallowOpponent.x)) / 2 + Mathf.Abs(shallowOpponent.x)) * Mathf.Sign(deepOpponent.x),
-            //     ((Mathf.Abs(deepOpponent.z) + 4) / 2 - Mathf.Abs(deepOpponent.z)) * -Mathf.Sign(deepOpponent.z)
-            // );
-            // Vector2 deepZoneSize = new Vector2(
-            //     ai.CourtSideLength - shallowOpponent.x,
-            //     Mathf.Abs(deepOpponent.z) + 4
-            // );
-            // Helpers.DrawTargetZone(deepZonePos, deepZoneSize, deepZoneColor, true);
+            Vector2[] attackZoneCenters = new Vector2[2];
+            Vector2[] attackZoneSizes = new Vector2[2];
 
-            // // Shallow Zone
-            // Vector2 shallowZonePos = new Vector2(
-            //     Mathf.Abs(deepOpponent.x) / 2 * Mathf.Sign(deepOpponent.x),
-            //     ((Mathf.Abs(shallowOpponent.z) + 4) / 2 - Mathf.Abs(shallowOpponent.z)) * -Mathf.Sign(shallowOpponent.z)
-            // );
-            // Vector2 shallowZoneSize = new Vector2(
-            //     Mathf.Abs(deepOpponent.x),
-            //     Mathf.Abs(shallowOpponent.z) + 4
-            // );
-            // Helpers.DrawTargetZone(shallowZonePos, shallowZoneSize, shallowZoneColor, true);
+            // Deep Zone
+            attackZoneCenters[0] = new Vector2(
+                ((ai.CourtSideLength - Mathf.Abs(shallowOpponent.x)) / 2 + Mathf.Abs(shallowOpponent.x)) * Mathf.Sign(deepOpponent.x),
+                ((Mathf.Abs(deepOpponent.z) + 4) / 2 - Mathf.Abs(deepOpponent.z)) * -Mathf.Sign(deepOpponent.z)
+            );
+            attackZoneSizes[0] = new Vector2(
+                ai.CourtSideLength - shallowOpponent.x,
+                Mathf.Abs(deepOpponent.z) + 4
+            );
+            Helpers.DrawTargetZone(attackZoneCenters[0], attackZoneSizes[0], Color.green, true);
+
+            // Shallow Zone
+            attackZoneCenters[1] = new Vector2(
+                Mathf.Abs(deepOpponent.x) / 2 * Mathf.Sign(deepOpponent.x),
+                ((Mathf.Abs(shallowOpponent.z) + 4) / 2 - Mathf.Abs(shallowOpponent.z)) * -Mathf.Sign(shallowOpponent.z)
+            );
+            attackZoneSizes[1] = new Vector2(
+                Mathf.Abs(deepOpponent.x),
+                Mathf.Abs(shallowOpponent.z) + 4
+            );
+            Helpers.DrawTargetZone(attackZoneCenters[1], attackZoneSizes[1], Color.magenta, true);
         }
     }
 }

@@ -12,18 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37262e169b0a64548b7fbd6f67883702, type: 3}
   m_Name: TestTeammate
   m_EditorClassIdentifier: 
+  athleteName: Randy
+  gender: 1
+  defaultOutfit: 0
+  defaultTop: {fileID: 2100000, guid: 6ff328efcb3edf24f9fa372963b1a5f5, type: 2}
+  defaultBottom: {fileID: 2100000, guid: 3abd92f06078a2646bc83fb8f4337b1f, type: 2}
   moveSpeed: 3
   targetLockDistance: 0.25
   reactionTime: 0.25
   passAccuracy: 5
   inBoundsJudgement: 1
+  spikePower: 1
   digRange: 0.5
   serving: 1
   servePower: 1
   blocking: 1
   height: 1.8
-  jumpHeight: 2.1
-  reachPct: 0.3
   servingPartnerPos: {x: 5, y: 1.5}
   defensePos: {x: 5, y: 2}
   offenseXPos: 2

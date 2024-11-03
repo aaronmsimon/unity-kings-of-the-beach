@@ -63,8 +63,8 @@ namespace KotB.Match
 
         private void CheckGameEnd() {
             for (int i = 0; i < matchInfo.Teams.Length; i++) {
-                if (matchInfo.Teams[i].Score.Value == matchInfo.ScoreToWin) {
-                    Debug.Log($"{matchInfo.Teams[i].TeamName.Value} wins!");
+                if (matchInfo.Teams[i].TeamInfo.Score.Value == matchInfo.ScoreToWin) {
+                    Debug.Log($"{matchInfo.Teams[i].TeamInfo.TeamName.Value} wins!");
                     matchStateMachine.ChangeState(matchEndState);
                 }
             }
@@ -103,6 +103,6 @@ namespace KotB.Match
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public BallSO BallInfo { get { return ballInfo; } }
         public GameObject AIPrefab { get { return aiPrefab; } }
-        public GameObject PlayerPrefab { get { return playerPrefab; } }
+        public GameObject PlayerPrefab { get { return PlayerPrefab; } }
     }
 }

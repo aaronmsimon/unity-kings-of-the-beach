@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37262e169b0a64548b7fbd6f67883702, type: 3}
   m_Name: TestPlayer
   m_EditorClassIdentifier: 
+  athleteName: Player
+  gender: 1
+  defaultOutfit: 1
+  defaultTop: {fileID: 2100000, guid: 27d818651567ec14e999cd9b220e7298, type: 2}
+  defaultBottom: {fileID: 2100000, guid: 87b50695baa08c94db8b43fa342a42b4, type: 2}
   moveSpeed: 4
   targetLockDistance: 0.75
   reactionTime: 0
