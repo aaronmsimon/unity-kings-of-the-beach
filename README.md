@@ -137,6 +137,8 @@ I would like to actually finish this game this time. That means starting with a 
 ### Note to Self
 1. more spike tweaks
 * check calculatetarget for other direction (not all calcs have courtside in their calc
+* will want to separate colliders for the net: one as an obstacle for the ball to crash into (mirrors the net's actual mesh) and another to be used when determining if ball path is clear to target (using the new collider that goes all the way to the ground).
+* reference [this commit](https://github.com/aaronmsimon/unity-kings-of-the-beach/commit/ef72225b7d68226d56ae185ee2c0112e5f3d2d0a#diff-632898874a75879cdafa5525639a78da33dd908a7f6fc1e9532cce12c22eed31)
 2. weak spike (feint)
 * use pass mechanics with lower height but slow
 * power still used for speed, accuracy, and distance
