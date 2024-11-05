@@ -66,7 +66,7 @@ namespace KotB.Actors
         private void Bump() {
             float posX = UnityEngine.Random.Range(targetZonePos.x - targetZoneSize.x / 2, targetZonePos.x + targetZoneSize.x / 2);
             float posY = UnityEngine.Random.Range(targetZonePos.y - targetZoneSize.y / 2, targetZonePos.y + targetZoneSize.y / 2);
-            Pass(new Vector3(posX, 0, posY));
+            Pass(new Vector3(posX, 0, posY), 7, 1.75f);
             canBump = false;
         }
 

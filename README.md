@@ -136,7 +136,6 @@ I would like to actually finish this game this time. That means starting with a 
 
 ### Note to Self
 1. more spike tweaks
-* timing: early = feint; late = pass close
 * check calculatetarget for other direction (not all calcs have courtside in their calc
 2. weak spike (feint)
 * use pass mechanics with lower height but slow

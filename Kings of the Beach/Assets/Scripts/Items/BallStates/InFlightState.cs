@@ -55,13 +55,22 @@ namespace KotB.StatePattern.BallStates
             ballIntoNet = Physics.Raycast(ball.transform.position, moveDir, out RaycastHit hit, 0.5f, ball.ObstaclesLayer);
         }
 
-        private Vector3 CalculateInFlightPosition(float t, Vector3 start, Vector3 end, float height)
+        private Vector3 CalculateInFlightPosition(float t, Vector3 start, Vector3 end, float maxHeightPoint)
         {
             // Linear interpolation for horizontal position (XZ plane)
             Vector3 horizontalPosition = Vector3.Lerp(start, end, t);
 
             // Parabolic interpolation for vertical position (Y-axis)
-            float verticalPosition = 4 * height * t * (1 - t) + Mathf.Lerp(start.y, end.y, t);
+                // Using quadratic Bezier curve formula
+                float oneMinusT = 1f - t;
+                
+                // Calculate control point for quadratic curve to pass through maxHeightPoint at t=0.5
+                float controlPoint = (maxHeightPoint - (0.25f * start.y) - (0.25f * end.y)) / 0.5f;
+                
+                // Quadratic interpolation
+                float verticalPosition = (oneMinusT * oneMinusT * start.y) + 
+                    (2f * oneMinusT * t * controlPoint) + 
+                    (t * t * end.y);
 
             // Combine horizontal and vertical movement
             horizontalPosition.y = verticalPosition;

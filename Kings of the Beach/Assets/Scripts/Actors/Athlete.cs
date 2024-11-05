@@ -158,12 +158,23 @@ namespace KotB.Actors
             animator.SetTrigger("jump");
         }
 
-        public void Pass(Vector3 targetPos) {
-            ballInfo.SetPassTarget(targetPos, 7, 1.75f, this);
+        public void Pass(Vector3 targetPos, float height, float time) {
+            ballInfo.SetPassTarget(targetPos, height, time, this);
         }
 
         public void Spike(Vector3 targetPos) {
-            ballInfo.SetSpikeTarget(targetPos, ballInfo.SkillValues.SkillToValue(skills.SpikePower, ballInfo.SkillValues.SpikePower), this);
+            // Raycast to target
+            Vector3 startPos = ballInfo.Position;
+            Vector3 distance = targetPos - startPos;
+            bool directLine = !Physics.Raycast(startPos, distance.normalized, distance.magnitude, obstaclesLayer);
+            float spikeTime = ballInfo.SkillValues.SkillToValue(skills.SpikePower, ballInfo.SkillValues.SpikePower);
+            if (directLine) {
+                // If clear, spike
+                ballInfo.SetSpikeTarget(targetPos, spikeTime, this);
+            } else {
+                // If not, pass
+                ballInfo.SetPassTarget(targetPos, startPos.y, spikeTime, this);
+            }
         }
 
         public void Block() {

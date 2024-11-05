@@ -35,7 +35,7 @@ namespace KotB.StatePattern.PlayerStates
             if (player.Ball != null) {
                 if (!player.IsJumping) {
                     if (bumpTimer > 0) {
-                        player.Pass(targetPos);
+                        player.Pass(targetPos, 7, 1.75f);
                         canUnlock = true;
                         unlockTimer = unlockDelay;
                     }

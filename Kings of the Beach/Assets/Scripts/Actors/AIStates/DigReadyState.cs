@@ -39,11 +39,11 @@ namespace KotB.StatePattern.AIStates
             if (ai.Ball != null) {
                 switch (ai.BallInfo.HitsForTeam) {
                     case 0:
-                        ai.Pass(CalculatePassTarget());
+                        ai.Pass(CalculatePassTarget(), 7, 1.75f);
                         ai.StateMachine.ChangeState(ai.OffenseState);
                         break;
                     case 1:
-                        ai.Pass(CalculatePassTarget());
+                        ai.Pass(CalculatePassTarget(), 7, 1.75f);
                         ai.StateMachine.ChangeState(ai.DefenseState);
                         break;
                     case 2:
