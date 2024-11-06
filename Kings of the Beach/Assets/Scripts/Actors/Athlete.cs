@@ -17,6 +17,7 @@ namespace KotB.Actors
         [Header("Settings")]
         [SerializeField] protected int courtSide;
         [SerializeField] private LayerMask obstaclesLayer;
+        [SerializeField] private LayerMask invalidAimLayer;
 
         protected Ball ball;
         protected StateMachine stateMachine;
@@ -166,7 +167,7 @@ namespace KotB.Actors
             // Raycast to target
             Vector3 startPos = ballInfo.Position;
             Vector3 distance = targetPos - startPos;
-            bool directLine = !Physics.Raycast(startPos, distance.normalized, distance.magnitude, obstaclesLayer);
+            bool directLine = !Physics.Raycast(startPos, distance.normalized, distance.magnitude, invalidAimLayer);
             float spikeTime = ballInfo.SkillValues.SkillToValue(skills.SpikePower, ballInfo.SkillValues.SpikePower);
             if (directLine) {
                 // If clear, spike

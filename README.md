@@ -99,8 +99,7 @@ I would like to actually finish this game this time. That means starting with a 
 #### AI
 - don't chase ball when won't be hit over net [need to come up with better possession logic - serves, hit 3 times]
 - AI Serve to location with random speed based on skill, chance to also go out
-- spike dir based on tactic (needs to be in Athlete for player, too)
-- if both of us contact same ball (first hit), last contact will override, but count increases so will hit across
+- block dir based on tactic (needs to be in Athlete for player, too)
 - issue: was still moving towards net when "pass" is over net instead of changing state in passing testing scene (needs to change state after change of possession)
 
 #### Player
@@ -135,14 +134,10 @@ I would like to actually finish this game this time. That means starting with a 
 - exchange Distance() for ().sqrmagnitude when possible
 
 ### Note to Self
-1. more spike tweaks
-* check calculatetarget for other direction (not all calcs have courtside in their calc
-* will want to separate colliders for the net: one as an obstacle for the ball to crash into (mirrors the net's actual mesh) and another to be used when determining if ball path is clear to target (using the new collider that goes all the way to the ground).
-* reference [this commit](https://github.com/aaronmsimon/unity-kings-of-the-beach/commit/ef72225b7d68226d56ae185ee2c0112e5f3d2d0a#diff-632898874a75879cdafa5525639a78da33dd908a7f6fc1e9532cce12c22eed31)
 2. weak spike (feint)
-* use pass mechanics with lower height but slow
 * power still used for speed, accuracy, and distance
 3. block
 * hits for team wrong since using pass
 4. spike tweaks for player
 * might need to make this easier/more forgiving (higher collider and/or longer window)
+5. adjust spike speed based on timing accuracy (perfect height)

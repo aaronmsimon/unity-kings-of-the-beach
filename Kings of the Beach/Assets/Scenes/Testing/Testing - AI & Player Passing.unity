@@ -193,7 +193,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2044308923}
   m_SourcePrefab: {fileID: 100100000, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
 --- !u!4 &34826191 stripped
 Transform:
@@ -208,6 +211,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 734742438333498155, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2ec7f059918f8a34dbbac6665c30b760, type: 2}
+    - target: {fileID: 4597024455235229692, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_Name
       value: Teammate
@@ -263,7 +274,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 874340461}
+    - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 874340462}
   m_SourcePrefab: {fileID: 100100000, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
 --- !u!1 &567755160
 GameObject:
@@ -383,6 +400,35 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &637615579 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+  m_PrefabInstance: {fileID: 1504901379}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &637615581 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2903952158050811650, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+  m_PrefabInstance: {fileID: 1504901379}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637615579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43a023c93079d9d4799082fd66a50f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &637615586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637615579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb81c29b3457c844f8bdfdd59db6ff33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  athleteState: 
 --- !u!1 &806263096
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,6 +566,47 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &874340454 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+  m_PrefabInstance: {fileID: 550915204}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &874340456 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8463576540012695194, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+  m_PrefabInstance: {fileID: 550915204}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874340454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e6fb03f9f1aea49b2a2f830b2cc6e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &874340461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874340454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb81c29b3457c844f8bdfdd59db6ff33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  athleteState: 
+--- !u!114 &874340462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874340454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 031055a86052a8c448cad9431eb433ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1033020641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -593,6 +680,10 @@ PrefabInstance:
       propertyPath: noAnimMoveDist
       value: 0.0001
       objectReference: {fileID: 0}
+    - target: {fileID: 4934388022853752663, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -640,7 +731,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 637615586}
   m_SourcePrefab: {fileID: 100100000, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
 --- !u!1001 &1545334884
 PrefabInstance:
@@ -699,6 +793,27 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f5a43912106afe4789ce7b072886be5, type: 3}
+--- !u!1 &2044308917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5717242374435514889, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
+  m_PrefabInstance: {fileID: 15431249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2044308923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044308917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d721d565c9560e43a166afcc2221acb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  athlete1: {fileID: 637615581}
+  athlete2: {fileID: 874340456}
+  teamIndex: 0
+  matchInfo: {fileID: 11400000, guid: 23b44ef1d3bbbbe42a97b3fd37ef9578, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

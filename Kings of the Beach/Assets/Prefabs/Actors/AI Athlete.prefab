@@ -127,6 +127,9 @@ MonoBehaviour:
   obstaclesLayer:
     serializedVersion: 2
     m_Bits: 64
+  invalidAimLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &1164755901000653087
 MonoBehaviour:
   m_ObjectHideFlags: 0

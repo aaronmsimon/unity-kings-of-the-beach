@@ -500,9 +500,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8463576540012695194, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: zone1
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8463576540012695194, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: zone2
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8463576540012695194, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: skills
       value: 
       objectReference: {fileID: 11400000, guid: c71d49c0442b67c44b6dff987f17d336, type: 2}
+    - target: {fileID: 8463576540012695194, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: courtSide
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -613,7 +625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7855929619521182701, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.53
+      value: 4.83
       objectReference: {fileID: 0}
     - target: {fileID: 7855929619521182701, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -990,7 +1002,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7855929619521182701, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.14
+      value: 2.13
       objectReference: {fileID: 0}
     - target: {fileID: 7855929619521182701, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_LocalPosition.y

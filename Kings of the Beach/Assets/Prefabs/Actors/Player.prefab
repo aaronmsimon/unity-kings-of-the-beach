@@ -127,6 +127,9 @@ MonoBehaviour:
   obstaclesLayer:
     serializedVersion: 2
     m_Bits: 64
+  invalidAimLayer:
+    serializedVersion: 2
+    m_Bits: 128
   coyoteTime: 0.5
   inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
   updateCameraPriority: {fileID: 11400000, guid: 0ce8929890bb9a740a7bf4d7249a2c90, type: 2}

@@ -25,9 +25,10 @@ namespace KotB.StatePattern.AIStates
             reactionTime -= Time.deltaTime;
 
             if (reactionTime < 0) {
-                if ((ai.transform.position - ai.BallInfo.TargetPos).sqrMagnitude > ai.Skills.TargetLockDistance * ai.Skills.TargetLockDistance) {
+                if ((ai.transform.position - ai.BallInfo.TargetPos).sqrMagnitude > ai.Skills.TargetLockDistance * ai.Skills.TargetLockDistance && !ai.BallInfo.LockedOn) {
                     ai.TargetPos = ai.BallInfo.TargetPos;
                 } else {
+                    ai.BallInfo.LockedOn = true;
                     if (ai.BallInfo.HitsForTeam == 2 && !isSpiking) {
                         TrySpike();
                     }
@@ -117,7 +118,7 @@ namespace KotB.StatePattern.AIStates
                 ((Mathf.Abs(deepOpponent.z) + 4) / 2 - Mathf.Abs(deepOpponent.z)) * -Mathf.Sign(deepOpponent.z)
             );
             attackZoneSizes[0] = new Vector2(
-                ai.CourtSideLength - shallowOpponent.x,
+                ai.CourtSideLength -Mathf.Abs(shallowOpponent.x),
                 Mathf.Abs(deepOpponent.z) + 4
             );
 

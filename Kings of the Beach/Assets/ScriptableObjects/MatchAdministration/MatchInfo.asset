@@ -17,6 +17,7 @@ MonoBehaviour:
     scoreChanged: {fileID: 11400000, guid: f3394258f96f2574482e0cc63a9e4db6, type: 2}
     athletes:
     - {fileID: 0}
+    - {fileID: 0}
   - teamInfo: {fileID: 11400000, guid: 2cc775d7c333e9c40a02b9bfdf1d8f7e, type: 2}
     scoreChanged: {fileID: 11400000, guid: f3394258f96f2574482e0cc63a9e4db6, type: 2}
     athletes:

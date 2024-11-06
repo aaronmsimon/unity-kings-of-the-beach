@@ -43,7 +43,7 @@ namespace KotB.Testing
         private void SpikeReady() {
             ai.transform.position = aiStartPos;
             ai.StateMachine.ChangeState(ai.DefenseState);
-            ai.transform.forward = Vector3.right;
+            ai.transform.forward = Vector3.right * -ai.CourtSide;
             ai.BallInfo.HitsForTeam = 1;
 
             coach.TakeBall();

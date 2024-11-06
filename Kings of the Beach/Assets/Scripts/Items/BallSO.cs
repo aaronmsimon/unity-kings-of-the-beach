@@ -19,6 +19,7 @@ public class BallSO : ScriptableObject
     public Athlete lastPlayerToHit { get; set; }
     public float TimeSinceLastHit { get; set; }
     public float BallRadius { get; set; }
+    public bool LockedOn;
 
     public Athlete ballHeldBy { get; private set; }
 
@@ -109,6 +110,7 @@ public class BallSO : ScriptableObject
     }
 
     private void ResetTimeSinceLastHit() {
+        LockedOn = false;
         TimeSinceLastHit = 0;
     }
 
