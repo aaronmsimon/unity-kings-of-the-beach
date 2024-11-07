@@ -23,7 +23,11 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void OnTargetSet() {
-            ai.StateMachine.ChangeState(ai.DigReadyState);
+            if (Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
+                ai.StateMachine.ChangeState(ai.DigReadyState);
+            } else {
+                ai.StateMachine.ChangeState(ai.DefenseState);
+            }
         }
     }
 }

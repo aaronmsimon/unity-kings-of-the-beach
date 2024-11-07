@@ -34,9 +34,12 @@ I would like to actually finish this game this time. That means starting with a 
 4. ~~Raycasts for collision detection to prevent movement~~
 5. ~~Lock player in place to target~~
 6. ~~Implement a State Machine to control movement/locking~~
-7. ~~Aiming Bump~~
+7. ~~Aiming Bump~~ with Accuracy
 8. ~~Don't move immediately after Bumping (from aiming)~~
 9. ~~Animations~~
+10. Feint Spike
+11. Block calls
+12. Confidence (post point, skip option)
 
 #### AI - Arcade
 1. ~~AI Controller - Move towards target (while ball is active)~~
@@ -47,6 +50,7 @@ I would like to actually finish this game this time. That means starting with a 
 6. ~~Defensive positioning~~
 7. ~~Pass towards teammate~~
 8. ~~Offensive positioning~~
+9. Block calls (making & obeying)
 
 #### Gameplay
 1. ~~Randomness in aim~~
@@ -90,6 +94,10 @@ I would like to actually finish this game this time. That means starting with a 
 4. Instant Replay for in/out calls
 
 #### Menus
+1. Game setup: choose players
+2. Game setup: choose outfits
+3. Game setup: choose points/set, sets/match
+4. Pass setup info to Match scene
 
 ### Basic Updates to do (dynamic list)
 
@@ -97,21 +105,7 @@ I would like to actually finish this game this time. That means starting with a 
 - get side based on team
 
 #### AI
-- don't chase ball when won't be hit over net [need to come up with better possession logic - serves, hit 3 times]
-- AI Serve to location with random speed based on skill, chance to also go out
-- block dir based on tactic (needs to be in Athlete for player, too)
-- issue: was still moving towards net when "pass" is over net instead of changing state in passing testing scene (needs to change state after change of possession)
-
-#### Player
-- feint for player spike
-- Between points, the players can high-five, hug, etc (see Concepts/Ideas bullet 5), then player controlled skip to service
-- issue: can't unlock after pass from ball at net (modify test area to control where ai passes to)
-- use pass accuracy skill in passing (use AdjustVectorAccuracy())
-
-#### Match
-- Post Point: allow for celebration/skip
-- review transitions that are not in a state
-- set teams will need to be a function from game setup
+- don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]
 
 ### Concepts/Ideas
 - use right stick to reach for ball on dig
@@ -132,6 +126,8 @@ I would like to actually finish this game this time. That means starting with a 
 - bump/set vs pass/across
 - athlete raycast isn't used
 - exchange Distance() for ().sqrmagnitude when possible
+- review all state machines for proper state handling
+- don't actually need all these variables (events, too?) as Scriptable Objects
 
 ### Note to Self
 2. weak spike (feint)
@@ -141,3 +137,6 @@ I would like to actually finish this game this time. That means starting with a 
 4. spike tweaks for player
 * might need to make this easier/more forgiving (higher collider and/or longer window)
 5. adjust spike speed based on timing accuracy (perfect height)
+6. UI: use [Game UI Database](https://www.gameuidatabase.com/)
+
+In case there are issues with passing/spiking ball, consider the LockedOn feature
