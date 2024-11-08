@@ -1604,6 +1604,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4597024455235229692, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_Name
       value: Teammate
@@ -1933,6 +1937,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 734742438333498155, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 97858ea295fe12443bd3ccd8a69bf8de, type: 2}
+    - target: {fileID: 4597024455235229692, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_Name
       value: AI Athlete (1)
@@ -2750,6 +2762,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 734742438333498155, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a6250e36c8d91cf4e95c07d8bc637aba, type: 2}
+    - target: {fileID: 4597024455235229692, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_Name
       value: AI Athlete
@@ -2827,6 +2847,10 @@ PrefabInstance:
       propertyPath: skills
       value: 
       objectReference: {fileID: 11400000, guid: 819c6d31029030d45906e8d16ffbe3e5, type: 2}
+    - target: {fileID: 4934388022853752663, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       propertyPath: m_Name
       value: Player

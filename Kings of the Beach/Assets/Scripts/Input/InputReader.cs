@@ -13,6 +13,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 	public event UnityAction bumpEvent;
 	public event UnityAction bumpAcrossEvent;
 	public event UnityAction jumpEvent;
+	public event UnityAction feintEvent;
 
 	// Between Points
 	public event UnityAction interactEvent;
@@ -63,6 +64,12 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 	{
 		if (context.phase == InputActionPhase.Performed)
 			jumpEvent?.Invoke();
+	}
+
+	public void OnFeint(InputAction.CallbackContext context)
+	{
+		if (context.phase == InputActionPhase.Performed)
+			feintEvent?.Invoke();
 	}
 
     public void OnRightStick(InputAction.CallbackContext context)

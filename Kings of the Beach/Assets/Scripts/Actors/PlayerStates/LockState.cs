@@ -41,7 +41,11 @@ namespace KotB.StatePattern.PlayerStates
                     }
                 } else {
                     SetTargetPos(false);
-                    player.Spike(targetPos);
+                    if (!player.Feint) {
+                        player.Spike(targetPos);
+                    } else {
+                        player.Pass(targetPos, 5, 1);
+                    }
                     player.StateMachine.ChangeState(player.NormalState);
                 }
             }

@@ -80,6 +80,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Feint"",
+                    ""type"": ""Button"",
+                    ""id"": ""92d713d2-71ee-4bc7-a3ad-dc3f6b4460e7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -401,6 +410,39 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Controller"",
+                    ""id"": ""03b7b835-1e14-4c3f-8465-26d3e028c788"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Feint"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""e13b2aca-4933-4808-864f-5ed7a1e467d9"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Feint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""62fb24cc-4c9d-4ac3-91ba-f542b2263d1f"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Feint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -477,6 +519,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_BumpAcross = m_Gameplay.FindAction("BumpAcross", throwIfNotFound: true);
         m_Gameplay_RightStick = m_Gameplay.FindAction("RightStick", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
+        m_Gameplay_Feint = m_Gameplay.FindAction("Feint", throwIfNotFound: true);
         // BetweenPoints
         m_BetweenPoints = asset.FindActionMap("BetweenPoints", throwIfNotFound: true);
         m_BetweenPoints_Interact = m_BetweenPoints.FindAction("Interact", throwIfNotFound: true);
@@ -547,6 +590,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_BumpAcross;
     private readonly InputAction m_Gameplay_RightStick;
     private readonly InputAction m_Gameplay_Jump;
+    private readonly InputAction m_Gameplay_Feint;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -557,6 +601,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @BumpAcross => m_Wrapper.m_Gameplay_BumpAcross;
         public InputAction @RightStick => m_Wrapper.m_Gameplay_RightStick;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
+        public InputAction @Feint => m_Wrapper.m_Gameplay_Feint;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -584,6 +629,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Feint.started += instance.OnFeint;
+            @Feint.performed += instance.OnFeint;
+            @Feint.canceled += instance.OnFeint;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -606,6 +654,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Feint.started -= instance.OnFeint;
+            @Feint.performed -= instance.OnFeint;
+            @Feint.canceled -= instance.OnFeint;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -695,6 +746,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnBumpAcross(InputAction.CallbackContext context);
         void OnRightStick(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnFeint(InputAction.CallbackContext context);
     }
     public interface IBetweenPointsActions
     {
