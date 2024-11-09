@@ -37,14 +37,14 @@ I would like to actually finish this game this time. That means starting with a 
 7. ~~Aiming Bump~~ with Accuracy
 8. ~~Don't move immediately after Bumping (from aiming)~~
 9. ~~Animations~~
-10. Feint Spike
+10. ~~Feint Spike~~
 11. Block calls
 12. Confidence (post point, skip option)
 
 #### AI - Arcade
 1. ~~AI Controller - Move towards target (while ball is active)~~
 2. ~~AI Controller - Bump~~
-3. AI Controller - Aim logic
+3. ~~AI Controller - Aim logic~~
 4. ~~AI Controller - State Machine~~
 5. ~~Estimating out of bounds~~
 6. ~~Defensive positioning~~
@@ -67,7 +67,7 @@ I would like to actually finish this game this time. That means starting with a 
 #### Ball Mechanics
 1. ~~Move to Target with Bezier curve~~
 2. ~~Ball Fields and Properties~~
-3. Ball Events triggered when Property Set
+3. <a style="color: gray;">Ball Events triggered when Property Set❓</a>
 4. ~~Ball State Machine (probably need to change ballstate.bump to inair/active/inplay/etc)~~
 5. ~~Display target on playing surface (to help player)~~
 6. ~~Ball into net based on Raycast - cleanup needed: checking twice~~
@@ -85,7 +85,7 @@ I would like to actually finish this game this time. That means starting with a 
 2. One side can only hit ball three times on side
 3. ~~Point when ball hits ground (in/out depending on who last touched)~~
 4. Switch sides after 7 points
-5. Must pass over net (between sides)
+5. ~~Must pass over net (between sides)~~
 
 #### Presentation
 1. ~~Cinemachine~~
@@ -98,11 +98,6 @@ I would like to actually finish this game this time. That means starting with a 
 2. Game setup: choose outfits
 3. Game setup: choose points/set, sets/match
 4. Pass setup info to Match scene
-
-### Basic Updates to do (dynamic list)
-- refactor match management
-- don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]
-- get side based on team
 
 ### Concepts/Ideas
 - use right stick to reach for ball on dig
@@ -136,5 +131,6 @@ I would like to actually finish this game this time. That means starting with a 
 7. BallInfo.cs has BallServedEvent() which should just be called from SetServeTarget() and not on the Athlete states
 8. should there be different controls for serving? using "bump" to interact
 9. DigReadyState.cs CalculateSpikeTarget() should determine if AI wants to do a feint
+10. don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature

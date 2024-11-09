@@ -22,14 +22,14 @@ namespace KotB.Testing
         private void Start() {
             if (matchManager != null) {
                 matchManager.StateMachine.ChangeState(matchManager.InPlayState);
-                ai = (AI)matchManager.MatchInfo.Teams[0].athletes[0];
+                // ai = (AI)matchManager.MatchInfo.Teams[0].athletes[0];
                 aiStartPos = new Vector3(-3, 0.01f, -2);
             } else {
-                matchInfo.Teams[0].athletes.Clear();
-                matchInfo.Teams[0].athletes.Add(ai);
-                matchInfo.Teams[1].athletes.Clear();
-                matchInfo.Teams[1].athletes.Add(opponent1);
-                matchInfo.Teams[1].athletes.Add(opponent2);
+                // matchInfo.Teams[0].athletes.Clear();
+                // matchInfo.Teams[0].athletes.Add(ai);
+                // matchInfo.Teams[1].athletes.Clear();
+                // matchInfo.Teams[1].athletes.Add(opponent1);
+                // matchInfo.Teams[1].athletes.Add(opponent2);
                 aiStartPos = ai.transform.position;
             }
         }

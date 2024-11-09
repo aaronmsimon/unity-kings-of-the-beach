@@ -1,51 +1,42 @@
 using System.Collections.Generic;
-using UnityEngine;
 using KotB.Actors;
-using RoboRyanTron.Unite2017.Events;
+using RoboRyanTron.Unite2017.Variables;
 
 namespace KotB.Match
 {
-    [System.Serializable]
     public class Team
     {
-        [Header("Team Info")]
-        [SerializeField] private TeamSO teamInfo;
-
-        [Header("Events")]
-        [SerializeField] private GameEvent scoreChanged;
-
-        public List<Athlete> athletes = new List<Athlete>();
+        public StringVariable TeamName { get; set; }
+        public List<Athlete> Athletes { get; private set; }
+        public FloatVariable Score { private get; set; }
+        public int CourtSide { get; private set; }
         public bool Serving { get; set; }
-        public Athlete Server { get; private set; }
+        public Athlete Server { get; set; }
 
-        private int maxAthletes = 2;
-
-        public void AssignAthlete(Athlete athlete) {
-            if (athletes.Count < maxAthletes) {
-                athletes.Add(athlete);
-                SetServer(athlete);
-            }
+        public Team(StringVariable teamName, int startingCourtSide) {
+            TeamName = teamName;
+            CourtSide = startingCourtSide;
+            SetScore(0);
         }
 
-        public void SetScore(int amount) {
-            teamInfo.Score.Value = amount;
-            scoreChanged.Raise();
+        public void AddAthlete(Athlete athlete) {
+            athlete.CourtSide = CourtSide;
+            Athletes.Add(athlete);
+        }
+
+        public void SetScore(int value) {
+            Score.Value = value;
         }
 
         public void AddScore(int amount) {
-            teamInfo.Score.Value += amount;
-            scoreChanged.Raise();
+            Score.Value += amount;
         }
 
-        public void SetServer(Athlete athlete) {
-            Server = athlete;
+        public void SwitchSides() {
+            CourtSide = -CourtSide;
+            foreach (Athlete athlete in Athletes) {
+                athlete.CourtSide = CourtSide;
+            }
         }
-
-        public void SwitchServer() {
-            Server = Server == athletes[0] ? athletes[1] : athletes[0];
-        }
-
-        public TeamSO TeamInfo { get { return teamInfo; } }
-        public List<Athlete> Athletes { get { return athletes; } }
     }
 }

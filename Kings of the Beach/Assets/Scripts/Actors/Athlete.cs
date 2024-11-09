@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using KotB.StatePattern;
 using KotB.Match;
+using System.Collections.Generic;
 
 namespace KotB.Actors
 {
@@ -36,6 +37,8 @@ namespace KotB.Actors
         protected float animationFrameRate = 24;
         private float jumpAimationTime;
         private float reachHeight;
+        private Athlete teammate;
+        private List<Athlete> opponents;
 
         // caching
         private float moveSpeed;
@@ -193,10 +196,6 @@ namespace KotB.Actors
             this.courtSide = courtSide;
         }
 
-        public void SwitchCourtSide() {
-            courtSide *= -1;
-        }
-
         protected virtual void OnDrawGizmos() {}
 
         //---- PROPERTIES ----
@@ -206,7 +205,7 @@ namespace KotB.Actors
         public BallSO BallInfo { get { return ballInfo; } }
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public StateMachine StateMachine { get { return stateMachine; } }
-        public int CourtSide { get { return courtSide; } }
+        public int CourtSide { get { return courtSide; } set { courtSide = value; } }
         public float CourtSideLength { get { return courtSideLength; } }
         public Vector3 MoveDir {
             get { return moveDir; }
@@ -219,5 +218,7 @@ namespace KotB.Actors
         public float JumpFrames { get { return jumpFrames; } }
         public float SpikeFrames { get { return spikeFrames; } }
         public float AnimationFrameRate { get { return animationFrameRate; } }
+        public Athlete Teammate { get { return teammate; } set { teammate = value; } }
+        public List<Athlete> Opponents { get { return opponents; } set { opponents = value; } }
     }
 }

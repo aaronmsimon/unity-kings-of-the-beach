@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 using KotB.Match;
 using KotB.Actors;
 
@@ -10,45 +11,57 @@ namespace KotB.StatePattern.MatchStates
 
         public override void Enter()
         {
-            // Instantiate and assign all Athletes
-            PopulateTeams();
+            InitializeTeams();
+            AssignTeammatesAndOpponents();
 
             matchManager.StateMachine.ChangeState(matchManager.PrePointState);
         }
 
-        private void PopulateTeams() {
+        private void InitializeTeams() {
+            matchManager.MatchInfo.Teams.Clear();
+            for (int i = 0; i < matchManager.TeamConfigs.Count; i++) {
+                int courtSide = i == 0 ? -1 : 1;
+                Team team = new Team(matchManager.TeamConfigs[i].TeamName, courtSide);
+                foreach (AthleteConfig athleteConfig in matchManager.TeamConfigs[i].AthleteConfigs) {
+                    Athlete athlete = InstantiateAthlete(athleteConfig, courtSide);
+                    team.AddAthlete(athlete);
+                }
+                matchManager.MatchInfo.Teams.Add(team);
+            }
+        }
+
+        private void AssignTeammatesAndOpponents() {
             foreach (Team team in matchManager.MatchInfo.Teams) {
-                team.athletes.Clear();
-                foreach (AthleteInfo athleteInfo in team.TeamInfo.AthleteInfos) {
-                    Athlete athlete = InstantiateAthlete(athleteInfo, team.TeamInfo.CourtSide);
-                    team.AssignAthlete(athlete);
+                foreach (Athlete athlete in team.Athletes) {
+                    athlete.Teammate = team.Athletes.FirstOrDefault(a => a != athlete);
+                    athlete.Opponents = matchManager.MatchInfo.GetOpposingTeam(athlete).Athletes;
                 }
             }
         }
 
-        private Athlete InstantiateAthlete(AthleteInfo athleteInfo, int courtSide) {
+        private Athlete InstantiateAthlete(AthleteConfig athleteConfig, int courtSide) {
             // Instantiate Prefab
-            GameObject athletePrefab = athleteInfo.ComputerControlled ? matchManager.AIPrefab : matchManager.PlayerPrefab;
+            GameObject athletePrefab = athleteConfig.ComputerControlled ? matchManager.AIPrefab : matchManager.PlayerPrefab;
             GameObject athleteGO = GameObject.Instantiate(athletePrefab);
 
             // Assign Skills
-            athleteGO.GetComponent<Athlete>().SetSkills(athleteInfo.Skills);
+            athleteGO.GetComponent<Athlete>().SetSkills(athleteConfig.Skills);
 
             // Activate Outfit
-            string outfit = athleteInfo.Outfit.ToString() ?? athleteInfo.Skills.DefaultOutfit.ToString();
-            Transform outfitTransform = athleteGO.transform.Find("Volleyball-Character").Find($"Volleyball-{athleteInfo.Skills.Gender}-{outfit}");
+            string outfit = athleteConfig.Outfit.ToString() ?? athleteConfig.Skills.DefaultOutfit.ToString();
+            Transform outfitTransform = athleteGO.transform.Find("Volleyball-Character").Find($"Volleyball-{athleteConfig.Skills.Gender}-{outfit}");
             outfitTransform.gameObject.SetActive(true);
 
             // Assign Materials
             SkinnedMeshRenderer r = outfitTransform.GetComponent<SkinnedMeshRenderer>();
             Material[] materials = r.materials;
-            materials[0] = athleteInfo.Bottom != null ? athleteInfo.Bottom : athleteInfo.Skills.DefaultBottom;
-            if (athleteInfo.Outfit.ToString() != "NoShirt") materials[1] = athleteInfo.Top != null ? athleteInfo.Top : athleteInfo.Skills.DefaultTop;
+            materials[0] = athleteConfig.Bottom != null ? athleteConfig.Bottom : athleteConfig.Skills.DefaultBottom;
+            if (athleteConfig.Outfit.ToString() != "NoShirt") materials[1] = athleteConfig.Top != null ? athleteConfig.Top : athleteConfig.Skills.DefaultTop;
             r.materials = materials;
 
             // Move to Position
             Vector2 dPos = new Vector3(athleteGO.GetComponent<Athlete>().Skills.DefensePos.x * courtSide, 0.01f, athleteGO.GetComponent<Athlete>().Skills.DefensePos.y);
-            if (athleteInfo.ComputerControlled) athleteGO.GetComponent<AI>().TargetPos = dPos;
+            if (athleteConfig.ComputerControlled) athleteGO.GetComponent<AI>().TargetPos = dPos;
             athleteGO.transform.position = dPos;
 
             return athleteGO.GetComponent<Athlete>();

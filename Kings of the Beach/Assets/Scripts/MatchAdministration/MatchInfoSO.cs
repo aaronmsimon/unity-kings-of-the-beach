@@ -1,6 +1,6 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using KotB.StatePattern;
 using KotB.Actors;
@@ -10,10 +10,7 @@ namespace KotB.Match
     [CreateAssetMenu(fileName = "MatchInfo", menuName = "Game/Match Info")]
     public class MatchInfoSO : ScriptableObject
     {
-        [SerializeField] private Team[] teams = new Team[2];
-        public int TotalPoints { get; set; }
-        public int ScoreToWin { get; set; }
-
+        private List<Team> teams;
         private IState currentState;
 
         public event Action TransitionToPrePointState;
@@ -26,36 +23,11 @@ namespace KotB.Match
         public void TransitionToServeStateEvent() {
             TransitionToServeState?.Invoke();
         }
-    
-        public Athlete GetTeammate(Athlete athlete)
-        {
-            foreach (Team team in teams)
-            {
-                if (team.athletes.Contains(athlete))
-                {
-                    return team.athletes.FirstOrDefault(a => a != athlete);
-                }
-            }
-            return null; // Should never happen if setup correctly
-        }
-
-        public List<Athlete> GetOpponents(Athlete athlete)
-        {
-            foreach (Team team in teams)
-            {
-                if (team.athletes.Contains(athlete))
-                {
-                    // Return athletes from the opposing team
-                    return teams.FirstOrDefault(t => t != team)?.athletes;
-                }
-            }
-            return null;
-        }
 
         public Team GetTeam(Athlete athlete) {
             foreach (Team team in teams)
             {
-                if (team.athletes.Contains(athlete))
+                if (team.Athletes.Contains(athlete))
                 {
                     return team;
                 }
@@ -66,7 +38,7 @@ namespace KotB.Match
         public Team GetOpposingTeam(Athlete athlete) {
             foreach (Team team in teams)
             {
-                if (team.athletes.Contains(athlete))
+                if (team.Athletes.Contains(athlete))
                 {
                     return teams.FirstOrDefault(t => t != team);
                 }
@@ -76,7 +48,7 @@ namespace KotB.Match
 
         public Athlete GetServer() {
             foreach (Team team in teams) {
-                foreach (Athlete athlete in team.athletes) {
+                foreach (Athlete athlete in team.Athletes) {
                     if (team.Serving && team.Server == athlete) {
                         return athlete;
                     }
@@ -86,10 +58,7 @@ namespace KotB.Match
         }
 
         //---- PROPERTIES ----
-        public IState CurrentState {
-            get { return currentState; }
-            set { currentState = value; }
-        }
-        public Team[] Teams { get { return teams; } set { teams = value; } }
+        public IState CurrentState { get { return currentState; } set { currentState = value; } }
+        public List<Team> Teams { get { return teams; } }
     }
 }

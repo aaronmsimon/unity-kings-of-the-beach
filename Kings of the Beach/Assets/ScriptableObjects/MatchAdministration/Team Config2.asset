@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bd228758501caa4c9567d1e85504f66, type: 3}
-  m_Name: TeamServeIndex
+  m_Script: {fileID: 11500000, guid: 6465757e73d50f440b408547455ee724, type: 3}
+  m_Name: Team Config2
   m_EditorClassIdentifier: 
-  DeveloperDescription: 
-  Value: 1
+  teamName: {fileID: 11400000, guid: b3934a7ce76ccc74f823cb670d974eb3, type: 2}
+  score: {fileID: 11400000, guid: 9894eec9cec191c4bb9760253bc901bf, type: 2}

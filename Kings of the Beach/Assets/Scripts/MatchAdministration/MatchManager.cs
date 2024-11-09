@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using KotB.StatePattern;
 using KotB.StatePattern.MatchStates;
 using RoboRyanTron.Unite2017.Events;
+using RoboRyanTron.Unite2017.Variables;
 
 namespace KotB.Match
 {
@@ -13,6 +15,9 @@ namespace KotB.Match
         [SerializeField] private BallSO ballInfo;
         [SerializeField] private InputReader inputReader;
 
+        [Header("Match Variables")]
+        [SerializeField] private FloatVariable scoreToWin;
+
         [Header("Game Events")]
         [SerializeField] private GameEvent scoreUpdate;
 
@@ -20,7 +25,12 @@ namespace KotB.Match
         [SerializeField] private GameObject aiPrefab;
         [SerializeField] private GameObject playerPrefab;
 
+        [Header("Teams")]
+        [SerializeField] private List<TeamConfigSO> teamConfigs;
+
         public event Action BallHitGround;
+
+        private float totalPoints;
 
         private StateMachine matchStateMachine;
         private PrePointState prePointState;
@@ -43,32 +53,14 @@ namespace KotB.Match
             matchStateMachine.ChangeState(matchStartState);
         }
 
-        // Temp until teams can be assigned in the start UI
-        private void AssignTeams() {
-
-        }
-
         private void InitializeMatch() {
-            matchInfo.TotalPoints = 0;
-            matchInfo.ScoreToWin = 21;
-
-            AssignTeams();
+            totalPoints = 0;
+            scoreToWin.Value = 21;
         }
 
         public void ScoreUpdate() {
             scoreUpdate.Raise();
-            matchInfo.TotalPoints += 1;
-            CheckGameEnd();
-        }
-
-        private void CheckGameEnd() {
-            for (int i = 0; i < matchInfo.Teams.Length; i++) {
-                if (matchInfo.Teams[i].TeamInfo.Score.Value == matchInfo.ScoreToWin) {
-                    Debug.Log($"{matchInfo.Teams[i].TeamInfo.TeamName.Value} wins!");
-                    matchStateMachine.ChangeState(matchEndState);
-                }
-            }
-            matchStateMachine.ChangeState(postPointState);
+            totalPoints += 1;
         }
 
         private void OnEnable() {
@@ -104,5 +96,6 @@ namespace KotB.Match
         public BallSO BallInfo { get { return ballInfo; } }
         public GameObject AIPrefab { get { return aiPrefab; } }
         public GameObject PlayerPrefab { get { return playerPrefab; } }
+        public List<TeamConfigSO> TeamConfigs { get { return teamConfigs; } }
     }
 }
