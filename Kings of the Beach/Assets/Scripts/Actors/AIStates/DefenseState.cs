@@ -32,7 +32,9 @@ namespace KotB.StatePattern.AIStates
         }
 
         public override void OnTriggerEnter(Collider other) {
-            base.OnTriggerEnter(other);
+            if (ai.Ball != null) {
+                ai.BlockAttempt();
+            }
         }
 
         private bool MyBall() {
@@ -65,6 +67,12 @@ namespace KotB.StatePattern.AIStates
 
         private void OnTargetSet() {
             if (Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
+                // probably will need to make different states for receiving a serve and defense during a point, but until then:
+                if (Mathf.Abs(ai.transform.position.x) < 2.5f) {
+                    ai.PerformJump();
+                    return;
+                }
+
                 if (MyBall() && JudgeInBounds(ai.Skills.InBoundsJudgement)) {
                     ai.StateMachine.ChangeState(ai.DigReadyState);
                 } else {

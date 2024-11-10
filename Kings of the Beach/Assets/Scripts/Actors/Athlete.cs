@@ -181,7 +181,15 @@ namespace KotB.Actors
             }
         }
 
-        public void Block() {
+        public void BlockAttempt() {
+            // get a random value on the skill level scale
+            float randValue = UnityEngine.Random.value * skillLevelMax;
+            // skill check
+            Debug.Log($"block attempt {randValue} vs {skills.Blocking}");
+            if (randValue <= skills.Blocking) Block();
+        }
+
+        private void Block() {
             Vector3 targetPos = new Vector3(2 * -courtSide, 0.01f, transform.position.z);
             float blockHeight = 4;
             float blockDuration = 2;

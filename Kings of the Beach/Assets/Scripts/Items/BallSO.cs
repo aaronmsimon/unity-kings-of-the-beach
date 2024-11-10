@@ -15,7 +15,7 @@ public class BallSO : ScriptableObject
     public float Height { get; set; }
     public float Duration { get; set; }
     [SerializeField] private int possession;
-    public int HitsForTeam { get; set; }
+    [SerializeField] private int hitsForTeam;
     public Athlete lastPlayerToHit { get; set; }
     public float TimeSinceLastHit { get; set; }
     public float BallRadius { get; set; }
@@ -118,4 +118,5 @@ public class BallSO : ScriptableObject
     public int Possession { get { return possession; } set { possession = value; } }
     public Vector3 TargetPos { get { return targetPos; } set { targetPos = value; } }
     public SkillValues SkillValues { get { return skillValues; } }
+    public int HitsForTeam { get { return hitsForTeam; } set { hitsForTeam = value; } }
 }

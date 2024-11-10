@@ -61,13 +61,13 @@ I would like to actually finish this game this time. That means starting with a 
 3. Dig (more important with speed of ball)
 4. ~~Serve Skill (affects serve aim)~~
 5. Serve Power (affects ~~speed and~~ direction)
-6. Blocking (likelihood to be successful)
+6. ~~Blocking (likelihood to be successful)~~
 7. ~~Spike Power (affects speed)~~
 
-#### Ball Mechanics
+#### Ball Mechanics 🏐
 1. ~~Move to Target with Bezier curve~~
 2. ~~Ball Fields and Properties~~
-3. <a style="color: gray;">Ball Events triggered when Property Set❓</a>
+3. ~~Ball Events triggered when Property Set❓~~
 4. ~~Ball State Machine (probably need to change ballstate.bump to inair/active/inplay/etc)~~
 5. ~~Display target on playing surface (to help player)~~
 6. ~~Ball into net based on Raycast - cleanup needed: checking twice~~
@@ -122,8 +122,6 @@ I would like to actually finish this game this time. That means starting with a 
 - don't actually need all these variables (events, too?) as Scriptable Objects
 
 ### Note to Self
-3. block
-* hits for team wrong since using pass
 4. spike tweaks for player
 * might need to make this easier/more forgiving (higher collider and/or longer window)
 5. adjust spike speed based on timing accuracy (perfect height)
@@ -132,5 +130,7 @@ I would like to actually finish this game this time. That means starting with a 
 8. should there be different controls for serving? using "bump" to interact
 9. DigReadyState.cs CalculateSpikeTarget() should determine if AI wants to do a feint
 10. don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]
+11. different AI states for receiving a serve vs defense during a point
+12. check block with hits for team accuracy
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature

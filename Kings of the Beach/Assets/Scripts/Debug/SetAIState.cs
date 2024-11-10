@@ -1,17 +1,18 @@
 using UnityEngine;
 using KotB.Actors;
-using KotB.StatePattern.AIStates;
 
 namespace KotB.Testing
 {
     public class SetAIState : MonoBehaviour
     {
         private AI ai;
-        
-        private void Start() {
+
+        private void Awake() {
             ai = GetComponent<AI>();
-            DefenseState defenseState = new DefenseState(ai);
-            ai.StateMachine.ChangeState(defenseState);
+        }
+        
+        public void SetAIState_Defense() {
+            ai.StateMachine.ChangeState(ai.DefenseState);
         }
     }
 }

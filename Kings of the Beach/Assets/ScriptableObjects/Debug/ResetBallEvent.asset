@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6465757e73d50f440b408547455ee724, type: 3}
-  m_Name: Team Config2
+  m_Script: {fileID: 11500000, guid: 4e7bfa44ab1b6c345a48bf807cfa7eb4, type: 3}
+  m_Name: ResetBallEvent
   m_EditorClassIdentifier: 
-  teamName: {fileID: 11400000, guid: 4be0a0172db0e1f438985c94c6a04c9f, type: 2}
-  score: {fileID: 11400000, guid: 85e4cb5a8d901de49a5c54cfb230235f, type: 2}
