@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "InputReader", menuName = "Game/Input Reader")]
-public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IBetweenPointsActions
+public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IBetweenPointsActions, GameInput.IMenuActions
 {
 	// Gameplay
 	public event UnityAction<Vector2> moveEvent;
@@ -18,6 +18,10 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 	// Between Points
 	public event UnityAction interactEvent;
 
+	// Menu
+	public event UnityAction selectEvent;
+	public event UnityAction startEvent;
+
 	private GameInput gameInput;
 
 	private void OnEnable()
@@ -27,6 +31,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 			gameInput = new GameInput();
 			gameInput.Gameplay.SetCallbacks(this);
 			gameInput.BetweenPoints.SetCallbacks(this);
+			gameInput.Menu.SetCallbacks(this);
 		}
 
 		EnableGameplayInput();
@@ -97,23 +102,49 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 			interactEvent?.Invoke();
     }
 
+	// Menu
+
+    public void OnSelect(InputAction.CallbackContext context)
+    {
+		if (context.phase == InputActionPhase.Performed)
+			selectEvent?.Invoke();
+    }
+
+    public void OnStart(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+			startEvent?.Invoke();
+    }
+
+	
+
 	// Enable/Disable
 
 	public void EnableGameplayInput()
 	{
 		gameInput.Gameplay.Enable();
 		gameInput.BetweenPoints.Disable();
+		gameInput.Menu.Disable();
 	}
 
 	public void EnableBetweenPointsInput()
 	{
 		gameInput.Gameplay.Disable();
 		gameInput.BetweenPoints.Enable();
+		gameInput.Menu.Disable();
+	}
+
+	public void EnableMenuInput()
+	{
+		gameInput.Gameplay.Disable();
+		gameInput.BetweenPoints.Disable();
+		gameInput.Menu.Enable();
 	}
 
 	public void DisableAllInput()
 	{
 		gameInput.Gameplay.Disable();
 		gameInput.BetweenPoints.Disable();
+		gameInput.Menu.Disable();
 	}
 }
