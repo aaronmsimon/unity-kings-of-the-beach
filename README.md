@@ -132,5 +132,6 @@ I would like to actually finish this game this time. That means starting with a 
 10. don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]
 11. different AI states for receiving a serve vs defense during a point
 12. check block with hits for team accuracy
+13. next to look for better UI
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature
