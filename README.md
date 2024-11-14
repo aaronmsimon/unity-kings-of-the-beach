@@ -133,6 +133,6 @@ I would like to actually finish this game this time. That means starting with a 
 11. different AI states for receiving a serve vs defense during a point
 12. check block with hits for team accuracy
 13. next to look for better UI
-14. selection like in NFL2K5
+14. selection like in NFL2K5 or EA old school games
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature
