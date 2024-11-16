@@ -24,6 +24,10 @@ namespace KotB.Match
             TransitionToServeState?.Invoke();
         }
 
+        public void InitializeTeamList() {
+            teams = new List<Team>();
+        }
+
         public Team GetTeam(Athlete athlete) {
             foreach (Team team in teams)
             {

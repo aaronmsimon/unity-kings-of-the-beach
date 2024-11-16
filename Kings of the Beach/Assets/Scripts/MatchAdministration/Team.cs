@@ -13,9 +13,10 @@ namespace KotB.Match
         public bool Serving { get; set; }
         public Athlete Server { get; set; }
 
-        public Team(StringVariable teamName, int startingCourtSide) {
+        public Team(StringVariable teamName, FloatVariable score, int startingCourtSide) {
             TeamName = teamName;
             CourtSide = startingCourtSide;
+            Score = score;
             SetScore(0);
         }
 

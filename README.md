@@ -132,8 +132,6 @@ I would like to actually finish this game this time. That means starting with a 
 10. don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]
 11. different AI states for receiving a serve vs defense during a point
 12. check block with hits for team accuracy
-13. next to look for better UI
-14. selection like in NFL2K5 or EA old school games
-15. work on stadium. should be modular for ease in generating different versions
+13. really want to test the full game features and need to - yet AGAIN - reimagine the athlete/team/match setup for ease of debug, which will also enable tutorials and practice
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature

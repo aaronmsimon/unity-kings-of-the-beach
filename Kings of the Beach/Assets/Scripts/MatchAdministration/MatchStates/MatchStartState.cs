@@ -18,10 +18,10 @@ namespace KotB.StatePattern.MatchStates
         }
 
         private void InitializeTeams() {
-            matchManager.MatchInfo.Teams.Clear();
+            matchManager.MatchInfo.InitializeTeamList();
             for (int i = 0; i < matchManager.TeamConfigs.Count; i++) {
                 int courtSide = i == 0 ? -1 : 1;
-                Team team = new Team(matchManager.TeamConfigs[i].TeamName, courtSide);
+                Team team = new Team(matchManager.TeamConfigs[i].TeamName, matchManager.TeamConfigs[i].Score, courtSide);
                 foreach (AthleteConfig athleteConfig in matchManager.TeamConfigs[i].AthleteConfigs) {
                     Athlete athlete = InstantiateAthlete(athleteConfig, courtSide);
                     team.AddAthlete(athlete);
