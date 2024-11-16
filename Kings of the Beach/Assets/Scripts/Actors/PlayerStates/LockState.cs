@@ -42,6 +42,12 @@ namespace KotB.StatePattern.PlayerStates
                 } else {
                     SetTargetPos(false);
                     if (!player.Feint) {
+                        Animator animator = player.GetComponentInChildren<Animator>();
+                        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+                        float kingFrame = 7;
+                        float totalFrames = 18;
+                        float perfectContact = kingFrame / totalFrames;
+                        Debug.Log($"contact: {stateInfo.normalizedTime} perfect: {perfectContact} result: {stateInfo.normalizedTime / perfectContact}");
                         player.Spike(targetPos);
                     } else {
                         player.Pass(targetPos, 5, 1);
