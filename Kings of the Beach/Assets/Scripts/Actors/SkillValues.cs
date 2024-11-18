@@ -15,6 +15,7 @@ namespace KotB.Actors
 
         [Header("Spiking")]
         [SerializeField] private MinMax spikePower;
+        [SerializeField] private MinMax spikeTimingWindow;
 
         private MinMax skillRange = new MinMax(1, 10);
 
@@ -55,5 +56,6 @@ namespace KotB.Actors
 
         public MinMax ServePower { get { return servePower; } }
         public MinMax SpikePower { get { return spikePower; } }
+        public MinMax SpikeTimingWindow { get { return spikeTimingWindow; } }
     }
 }

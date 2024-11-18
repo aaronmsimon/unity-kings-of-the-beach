@@ -24,3 +24,6 @@ MonoBehaviour:
   spikePower:
     min: 0.75
     max: 0.35
+  spikeTimingWindow:
+    min: 0
+    max: 0.1

@@ -34,6 +34,7 @@ public class SkillsSO : ScriptableObject
     [SerializeField][Range(1,10)] private float inBoundsJudgement;
 
     [Header("Spiking (Time)")]
+    [SerializeField][Range(1,10)] private float spikeSkill;
     [SerializeField][Range(1,10)] private float spikePower;
 
     [Header("Range")]
@@ -70,6 +71,7 @@ public class SkillsSO : ScriptableObject
     public float PassAccuracy { get { return passAccuracy; } }
     public float InBoundsJudgement { get { return inBoundsJudgement; } }
 
+    public float SpikeSkill { get { return spikeSkill; } }
     public float SpikePower { get { return spikePower; } }
 
     public float DigRange { get { return digRange; } }
