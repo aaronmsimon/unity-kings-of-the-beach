@@ -18,20 +18,20 @@ namespace KotB.StatePattern.MatchStates
         }
 
         private void InitializeTeams() {
-            matchManager.MatchInfo.InitializeTeamList();
-            for (int i = 0; i < matchManager.TeamConfigs.Count; i++) {
-                int courtSide = i == 0 ? -1 : 1;
-                Team team = new Team(matchManager.TeamConfigs[i].TeamName, matchManager.TeamConfigs[i].Score, courtSide);
-                foreach (AthleteConfig athleteConfig in matchManager.TeamConfigs[i].AthleteConfigs) {
-                    Athlete athlete = InstantiateAthlete(athleteConfig, courtSide);
-                    team.AddAthlete(athlete);
-                }
-                matchManager.MatchInfo.Teams.Add(team);
-            }
+            // matchManager.MatchInfo.InitializeTeamList();
+            // for (int i = 0; i < matchManager.TeamConfigs.Count; i++) {
+            //     int courtSide = i == 0 ? -1 : 1;
+            //     TeamSO team = new Team(matchManager.TeamConfigs[i].TeamName, matchManager.TeamConfigs[i].Score, courtSide);
+            //     foreach (AthleteConfig athleteConfig in matchManager.TeamConfigs[i].AthleteConfigs) {
+            //         Athlete athlete = InstantiateAthlete(athleteConfig, courtSide);
+            //         team.AddAthlete(athlete);
+            //     }
+            //     matchManager.MatchInfo.Teams.Add(team);
+            // }
         }
 
         private void AssignTeammatesAndOpponents() {
-            foreach (Team team in matchManager.MatchInfo.Teams) {
+            foreach (TeamSO team in matchManager.MatchInfo.Teams) {
                 foreach (Athlete athlete in team.Athletes) {
                     athlete.Teammate = team.Athletes.FirstOrDefault(a => a != athlete);
                     athlete.Opponents = matchManager.MatchInfo.GetOpposingTeam(athlete).Athletes;

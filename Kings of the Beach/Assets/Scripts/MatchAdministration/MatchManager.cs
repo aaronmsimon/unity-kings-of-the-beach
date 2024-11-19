@@ -25,9 +25,6 @@ namespace KotB.Match
         [SerializeField] private GameObject aiPrefab;
         [SerializeField] private GameObject playerPrefab;
 
-        [Header("Teams")]
-        [SerializeField] private List<TeamConfigSO> teamConfigs;
-
         public event Action BallHitGround;
 
         private float totalPoints;
@@ -96,6 +93,5 @@ namespace KotB.Match
         public BallSO BallInfo { get { return ballInfo; } }
         public GameObject AIPrefab { get { return aiPrefab; } }
         public GameObject PlayerPrefab { get { return playerPrefab; } }
-        public List<TeamConfigSO> TeamConfigs { get { return teamConfigs; } }
     }
 }

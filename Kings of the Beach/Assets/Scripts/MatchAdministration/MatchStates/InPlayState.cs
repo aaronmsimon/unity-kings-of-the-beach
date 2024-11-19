@@ -19,7 +19,7 @@ namespace KotB.StatePattern.MatchStates
         }
 
         private void OnBallHitGround() {
-            Team scoringTeam;
+            TeamSO scoringTeam;
             if (matchManager.BallInfo.IsInBounds(matchManager.BallInfo.Position) && Mathf.Sign(matchManager.BallInfo.Position.x) == -matchManager.BallInfo.lastPlayerToHit.CourtSide) {
                 scoringTeam = matchManager.MatchInfo.GetTeam(matchManager.BallInfo.lastPlayerToHit);
             } else {
@@ -32,7 +32,7 @@ namespace KotB.StatePattern.MatchStates
         }
 
         private void Sideout() {
-            foreach (Team team in matchManager.MatchInfo.Teams) {
+            foreach (TeamSO team in matchManager.MatchInfo.Teams) {
                 team.Serving = !team.Serving;
             }
         }

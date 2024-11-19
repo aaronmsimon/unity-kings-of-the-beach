@@ -10,7 +10,7 @@ namespace KotB.Match
     [CreateAssetMenu(fileName = "MatchInfo", menuName = "Game/Match Info")]
     public class MatchInfoSO : ScriptableObject
     {
-        private List<Team> teams;
+        private List<TeamSO> teams;
         private IState currentState;
 
         public event Action TransitionToPrePointState;
@@ -24,12 +24,8 @@ namespace KotB.Match
             TransitionToServeState?.Invoke();
         }
 
-        public void InitializeTeamList() {
-            teams = new List<Team>();
-        }
-
-        public Team GetTeam(Athlete athlete) {
-            foreach (Team team in teams)
+        public TeamSO GetTeam(Athlete athlete) {
+            foreach (TeamSO team in teams)
             {
                 if (team.Athletes.Contains(athlete))
                 {
@@ -39,8 +35,8 @@ namespace KotB.Match
             return null;
         }
 
-        public Team GetOpposingTeam(Athlete athlete) {
-            foreach (Team team in teams)
+        public TeamSO GetOpposingTeam(Athlete athlete) {
+            foreach (TeamSO team in teams)
             {
                 if (team.Athletes.Contains(athlete))
                 {
@@ -51,11 +47,9 @@ namespace KotB.Match
         }
 
         public Athlete GetServer() {
-            foreach (Team team in teams) {
-                foreach (Athlete athlete in team.Athletes) {
-                    if (team.Serving && team.Server == athlete) {
-                        return athlete;
-                    }
+            foreach (TeamSO team in teams) {
+                if (team.Serving) {
+                    return team.Server;
                 }
             }
             return null;
@@ -63,6 +57,6 @@ namespace KotB.Match
 
         //---- PROPERTIES ----
         public IState CurrentState { get { return currentState; } set { currentState = value; } }
-        public List<Team> Teams { get { return teams; } }
+        public List<TeamSO> Teams { get { return teams; } }
     }
 }
