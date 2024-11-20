@@ -13,4 +13,9 @@ MonoBehaviour:
   m_Name: Team2
   m_EditorClassIdentifier: 
   teamName: {fileID: 11400000, guid: 4be0a0172db0e1f438985c94c6a04c9f, type: 2}
+  athletes:
+  - {fileID: 0}
   score: {fileID: 11400000, guid: 85e4cb5a8d901de49a5c54cfb230235f, type: 2}
+  courtSide: 0
+  serving: 0
+  server: {fileID: 0}
