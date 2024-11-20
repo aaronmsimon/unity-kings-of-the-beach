@@ -204,6 +204,10 @@ namespace KotB.Actors
             this.courtSide = courtSide;
         }
 
+        public void OnSwitchSides() {
+            SetCourtSide(-courtSide);
+        }
+
         protected virtual void OnDrawGizmos() {}
 
         //---- PROPERTIES ----

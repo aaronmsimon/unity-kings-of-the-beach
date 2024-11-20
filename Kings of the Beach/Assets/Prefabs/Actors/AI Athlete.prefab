@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5127179976974750972}
   - component: {fileID: 8463576540012695194}
   - component: {fileID: 1164755901000653087}
+  - component: {fileID: -7593123743690455588}
   m_Layer: 0
   m_Name: AI Athlete
   m_TagString: Untagged
@@ -149,6 +150,34 @@ MonoBehaviour:
       - m_Target: {fileID: 8463576540012695194}
         m_TargetAssemblyTypeName: KotB.Actors.Athlete, Assembly-CSharp
         m_MethodName: OnBallHitGround
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-7593123743690455588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5717242374435514889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 92abfe43b3eb33343b11dcd8110b3278, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8463576540012695194}
+        m_TargetAssemblyTypeName: KotB.Actors.Athlete, Assembly-CSharp
+        m_MethodName: OnSwitchSides
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

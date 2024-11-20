@@ -50,11 +50,9 @@ MonoBehaviour:
   inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
   scoreToWin: {fileID: 11400000, guid: 15b385560c9d9234c98373e5cdec0082, type: 2}
   scoreUpdate: {fileID: 11400000, guid: f3394258f96f2574482e0cc63a9e4db6, type: 2}
+  switchSides: {fileID: 11400000, guid: 92abfe43b3eb33343b11dcd8110b3278, type: 2}
   aiPrefab: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
   playerPrefab: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
-  teamConfigs:
-  - {fileID: 11400000, guid: 7c9a9fdff16c4cb48abe71f93521b7c2, type: 2}
-  - {fileID: 11400000, guid: 114c7e95942f36b4bbdcaa65e4602a6f, type: 2}
 --- !u!114 &8302372324360464159
 MonoBehaviour:
   m_ObjectHideFlags: 0

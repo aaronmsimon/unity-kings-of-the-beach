@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using KotB.StatePattern;
 using KotB.StatePattern.MatchStates;
@@ -20,6 +19,7 @@ namespace KotB.Match
 
         [Header("Game Events")]
         [SerializeField] private GameEvent scoreUpdate;
+        [SerializeField] private GameEvent switchSides;
 
         [Header("Prefabs")]
         [SerializeField] private GameObject aiPrefab;
@@ -28,6 +28,8 @@ namespace KotB.Match
         public event Action BallHitGround;
 
         private float totalPoints;
+        private float switchSidesPointsDivisor = 3;
+        float switchSidesPoints;
 
         private StateMachine matchStateMachine;
         private PrePointState prePointState;
@@ -58,6 +60,10 @@ namespace KotB.Match
         public void ScoreUpdate() {
             scoreUpdate.Raise();
             totalPoints += 1;
+            switchSidesPoints = scoreToWin.Value / switchSidesPointsDivisor;
+            if (totalPoints % switchSidesPoints == 0) {
+                switchSides.Raise();
+            }
         }
 
         private void OnEnable() {
