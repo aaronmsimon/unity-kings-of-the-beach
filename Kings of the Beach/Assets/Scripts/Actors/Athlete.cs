@@ -37,8 +37,6 @@ namespace KotB.Actors
         protected float animationFrameRate = 24;
         private float jumpAimationTime;
         private float reachHeight;
-        private Athlete teammate;
-        private List<Athlete> opponents;
 
         // caching
         private float moveSpeed;
@@ -230,7 +228,5 @@ namespace KotB.Actors
         public float JumpFrames { get { return jumpFrames; } }
         public float SpikeFrames { get { return spikeFrames; } }
         public float AnimationFrameRate { get { return animationFrameRate; } }
-        public Athlete Teammate { get { return teammate; } set { teammate = value; } }
-        public List<Athlete> Opponents { get { return opponents; } set { opponents = value; } }
     }
 }

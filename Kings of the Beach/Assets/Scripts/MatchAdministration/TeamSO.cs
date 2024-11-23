@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RoboRyanTron.Unite2017.Variables;
+using KotB.Actors;
 
 namespace KotB.Match
 {
@@ -9,13 +10,14 @@ namespace KotB.Match
     {
         [SerializeField] private StringVariable teamName;
         [SerializeField] private FloatVariable score;
-        // [SerializeField] private bool serving;
-        // [SerializeField] private Athlete server;
+        [SerializeField] private List<Athlete> athletes;
 
         private List<AthleteConfig> athleteConfigs;
+        private int serverIndex;
 
         public void Initialize() {
             athleteConfigs = new List<AthleteConfig>();
+            serverIndex = 0;
             SetScore(0);
         }
 
@@ -29,6 +31,15 @@ namespace KotB.Match
 
         public void AddScore(int amount) {
             score.Value += amount;
+        }
+
+        public Athlete GetServer() {
+            return athletes[serverIndex];
+        }
+
+        public void SwitchServer() {
+            serverIndex++;
+            if (serverIndex > athletes.Count - 1) serverIndex = 0;
         }
 
         // public void SideOut() {
@@ -48,9 +59,7 @@ namespace KotB.Match
         //     server = athletes[serverIndex];
         // }
 
-        public StringVariable TeamName { get { return teamName; } set { teamName = value; } }
+        public List<Athlete> Athletes { get { return athletes; } set { athletes = value; } }
         public List<AthleteConfig> AthleteConfigs => athleteConfigs;
-        // public bool Serving { get { return serving; } set { serving = value; } }
-        // public Athlete Server { get { return server; } set { server = value; } }
     }
 }

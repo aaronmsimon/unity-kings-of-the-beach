@@ -65,7 +65,7 @@ namespace KotB.StatePattern.AIStates
         }
 
         private Vector3 CalculatePassTarget() {
-            Athlete teammate = ai.Teammate;
+            Athlete teammate = ai.MatchInfo.GetTeammate(ai);
             Vector2 teammatePos = new Vector2(teammate.transform.position.x, teammate.transform.position.z);
             Vector2 aimLocation = ai.BallInfo.SkillValues.AdjustedPassLocation(teammatePos, ai.Skills.PassAccuracy / 10);
             return new Vector3(aimLocation.x, 0f, aimLocation.y);
@@ -114,7 +114,7 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void CalculateAttackZones() {
-            List<Athlete> opponents = ai.Opponents;
+            List<Athlete> opponents = ai.MatchInfo.GetOpposingTeam(ai).Athletes;
             Vector3 deepOpponent = (Mathf.Max(Mathf.Abs(opponents[0].transform.position.x), Mathf.Abs(opponents[1].transform.position.x)) == Mathf.Abs(opponents[0].transform.position.x) ? opponents[0] : opponents[1]).transform.position;
             Vector3 shallowOpponent = (Mathf.Max(Mathf.Abs(opponents[0].transform.position.x), Mathf.Abs(opponents[1].transform.position.x)) == Mathf.Abs(opponents[0].transform.position.x) ? opponents[1] : opponents[0]).transform.position;
 

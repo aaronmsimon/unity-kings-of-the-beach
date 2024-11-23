@@ -38,7 +38,7 @@ namespace KotB.StatePattern.AIStates
         }
 
         private bool MyBall() {
-            Athlete teammate = ai.Teammate;
+            Athlete teammate = ai.MatchInfo.GetTeammate(ai);
             if (teammate != null) {
                 float myDistToBall = (ai.BallInfo.TargetPos - ai.transform.position).sqrMagnitude;
                 float teammateDistToBall = (ai.BallInfo.TargetPos - teammate.transform.position).sqrMagnitude;

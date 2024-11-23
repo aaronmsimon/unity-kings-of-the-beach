@@ -26,7 +26,7 @@ namespace KotB.StatePattern.AIStates
         private Vector3 GetMyDefensivePosition() {
             float defenseZPos;
             // If no teammate (debugging but potentially practice, too)
-            Athlete teammate = ai.Teammate;
+            Athlete teammate = ai.MatchInfo.GetTeammate(ai);
             if (teammate != null) {
                 defenseZPos = ai.Skills.DefensePos.y * (teammate.GetComponent<Player>() != null || teammate.Skills.PlayerPosition == PositionType.Blocker ? -Mathf.Sign(teammate.Skills.Position.z) : 1);
             } else {

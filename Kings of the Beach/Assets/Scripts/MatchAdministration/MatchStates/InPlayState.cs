@@ -26,15 +26,11 @@ namespace KotB.StatePattern.MatchStates
                 scoringTeam = matchManager.MatchInfo.GetOpposingTeam(matchManager.BallInfo.lastPlayerToHit);
             }
             scoringTeam?.AddScore(1);
-            if (!scoringTeam.Serving) Sideout();
+            if (scoringTeam != matchManager.MatchInfo.Teams[matchManager.MatchInfo.TeamServeIndex]) {
+                matchManager.MatchInfo.SideOut();
+            }
 
             matchManager.ScoreUpdate();            
-        }
-
-        private void Sideout() {
-            foreach (TeamSO team in matchManager.MatchInfo.Teams) {
-                team.Serving = !team.Serving;
-            }
         }
     }
 }

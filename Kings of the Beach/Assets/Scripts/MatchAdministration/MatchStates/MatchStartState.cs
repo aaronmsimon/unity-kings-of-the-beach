@@ -12,7 +12,6 @@ namespace KotB.StatePattern.MatchStates
         public override void Enter()
         {
             InitializeTeams();
-            AssignTeammatesAndOpponents();
 
             matchManager.StateMachine.ChangeState(matchManager.PrePointState);
         }
@@ -28,15 +27,6 @@ namespace KotB.StatePattern.MatchStates
             //     }
             //     matchManager.MatchInfo.Teams.Add(team);
             // }
-        }
-
-        private void AssignTeammatesAndOpponents() {
-            foreach (TeamSO team in matchManager.MatchInfo.Teams) {
-                foreach (Athlete athlete in team.Athletes) {
-                    athlete.Teammate = team.Athletes.FirstOrDefault(a => a != athlete);
-                    athlete.Opponents = matchManager.MatchInfo.GetOpposingTeam(athlete).Athletes;
-                }
-            }
         }
 
         private Athlete InstantiateAthlete(AthleteConfig athleteConfig, int courtSide) {
