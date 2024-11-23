@@ -10,12 +10,13 @@ namespace KotB.Match
     {
         [SerializeField] private StringVariable teamName;
         [SerializeField] private FloatVariable score;
-        [SerializeField] private List<Athlete> athletes;
 
         private List<AthleteConfig> athleteConfigs;
+        private List<Athlete> athletes;
         private int serverIndex;
 
         public void Initialize() {
+            athletes = new List<Athlete>();
             athleteConfigs = new List<AthleteConfig>();
             serverIndex = 0;
             SetScore(0);
@@ -23,6 +24,10 @@ namespace KotB.Match
 
         public void AddAthleteConfig(AthleteConfig athleteConfig) {
             athleteConfigs.Add(athleteConfig);
+        }
+
+        public void AddAthlete(Athlete athlete) {
+            athletes.Add(athlete);
         }
 
         public void SetScore(int value) {
@@ -42,24 +47,7 @@ namespace KotB.Match
             if (serverIndex > athletes.Count - 1) serverIndex = 0;
         }
 
-        // public void SideOut() {
-        //     serving = !serving;
-
-        //     int serverIndex = -1;
-        //     for (int i = 0; i < athletes.Count; i++) {
-        //         if (server = athletes[i]) {
-        //             serverIndex = i;
-        //         }
-        //     }
-        //     if (serverIndex < athletes.Count - 1) {
-        //         serverIndex++;
-        //     } else {
-        //         serverIndex = 0;
-        //     }
-        //     server = athletes[serverIndex];
-        // }
-
-        public List<Athlete> Athletes { get { return athletes; } set { athletes = value; } }
         public List<AthleteConfig> AthleteConfigs => athleteConfigs;
+        public List<Athlete> Athletes => athletes;
     }
 }

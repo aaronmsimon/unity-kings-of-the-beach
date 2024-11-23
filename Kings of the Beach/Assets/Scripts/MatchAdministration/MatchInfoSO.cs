@@ -10,7 +10,7 @@ namespace KotB.Match
     [CreateAssetMenu(fileName = "MatchInfo", menuName = "Game/Match Info")]
     public class MatchInfoSO : ScriptableObject
     {
-        private List<TeamSO> teams;
+        [SerializeField] private List<TeamSO> teams;
         private IState currentState;
         private int teamServeIndex;
 
