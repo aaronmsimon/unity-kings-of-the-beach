@@ -16,16 +16,15 @@ namespace KotB.StatePattern.MatchStates
         }
 
         private void InitializeTeams() {
-            // matchManager.MatchInfo.InitializeTeamList();
-            // for (int i = 0; i < matchManager.TeamConfigs.Count; i++) {
-            //     int courtSide = i == 0 ? -1 : 1;
-            //     TeamSO team = new Team(matchManager.TeamConfigs[i].TeamName, matchManager.TeamConfigs[i].Score, courtSide);
-            //     foreach (AthleteConfig athleteConfig in matchManager.TeamConfigs[i].AthleteConfigs) {
-            //         Athlete athlete = InstantiateAthlete(athleteConfig, courtSide);
-            //         team.AddAthlete(athlete);
-            //     }
-            //     matchManager.MatchInfo.Teams.Add(team);
-            // }
+            int teamIndex = 0;
+
+            foreach (TeamSO team in matchManager.MatchInfo.Teams) {
+                team.CourtSide.Value = teamIndex == 0 ? -1 : 1;
+                foreach (AthleteConfig athleteConfig in team.AthleteConfigs) {
+                    Athlete athlete = InstantiateAthlete(athleteConfig, team);
+                    team.AddAthlete(athlete);
+                }
+            }
         }
 
         private Athlete InstantiateAthlete(AthleteConfig athleteConfig, TeamSO team) {

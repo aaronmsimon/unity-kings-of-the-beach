@@ -133,8 +133,8 @@ I would like to actually finish this game this time. That means starting with a 
 11. different AI states for receiving a serve vs defense during a point
 12. check block with hits for team accuracy
 13. really want to test the full game features and need to - yet AGAIN - reimagine the athlete/team/match setup for ease of debug, which will also enable tutorials and practice
-14. continue working on the match administration: initialize teams
 
 [from 11/17](https://github.com/aaronmsimon/unity-kings-of-the-beach/commit/e3682d5b46cb8e528b990ae50d0317b46800b184): implemented Spike Timing accuracy adjustment, but not tested
+[from 11/24](url to follow): implemented instantiation of prefabs, but not tested
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature
