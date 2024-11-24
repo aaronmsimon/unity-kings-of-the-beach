@@ -72,6 +72,12 @@ namespace KotB.Match
             if (teamServeIndex > teams.Count - 1) teamServeIndex = 0;
         }
 
+        public void teamsSwitchSides() {
+            foreach (TeamSO team in teams) {
+                team.SwitchSides();
+            }
+        }
+
         //---- PROPERTIES ----
         public IState CurrentState { get { return currentState; } set { currentState = value; } }
         public List<TeamSO> Teams { get { return teams; } }

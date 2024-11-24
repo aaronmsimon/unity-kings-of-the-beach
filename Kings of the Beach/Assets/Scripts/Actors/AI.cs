@@ -67,6 +67,6 @@ namespace KotB.Actors
         public DigReadyState DigReadyState { get { return digReadyState; } }
         public PostPointState PostPointState { get { return postPointState; } }
         public NonServeState NonServeState { get { return nonServeState; } }
-        public Vector3 OffensePos { get { return new Vector3(skills.OffenseXPos * courtSide, 0.01f, transform.position.z); } }
+        public Vector3 OffensePos { get { return new Vector3(skills.OffenseXPos * courtSide.Value, 0.01f, transform.position.z); } }
     }
 }

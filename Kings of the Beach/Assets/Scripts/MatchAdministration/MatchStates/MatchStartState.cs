@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Linq;
 using KotB.Match;
 using KotB.Actors;
 
@@ -29,13 +28,15 @@ namespace KotB.StatePattern.MatchStates
             // }
         }
 
-        private Athlete InstantiateAthlete(AthleteConfig athleteConfig, int courtSide) {
+        private Athlete InstantiateAthlete(AthleteConfig athleteConfig, TeamSO team) {
             // Instantiate Prefab
             GameObject athletePrefab = athleteConfig.ComputerControlled ? matchManager.AIPrefab : matchManager.PlayerPrefab;
             GameObject athleteGO = GameObject.Instantiate(athletePrefab);
+            Athlete athlete = athleteGO.GetComponent<Athlete>();
 
-            // Assign Skills
-            athleteGO.GetComponent<Athlete>().SetSkills(athleteConfig.Skills);
+            // Assign Scriptable Objects
+            athlete.SetSkills(athleteConfig.Skills);
+            athlete.SetCourtSide(team.CourtSide);
 
             // Activate Outfit
             string outfit = athleteConfig.Outfit.ToString() ?? athleteConfig.Skills.DefaultOutfit.ToString();
@@ -50,11 +51,11 @@ namespace KotB.StatePattern.MatchStates
             r.materials = materials;
 
             // Move to Position
-            Vector2 dPos = new Vector3(athleteGO.GetComponent<Athlete>().Skills.DefensePos.x * courtSide, 0.01f, athleteGO.GetComponent<Athlete>().Skills.DefensePos.y);
+            Vector2 dPos = new Vector3(athlete.Skills.DefensePos.x * athlete.CourtSide, 0.01f, athlete.Skills.DefensePos.y);
             if (athleteConfig.ComputerControlled) athleteGO.GetComponent<AI>().TargetPos = dPos;
             athleteGO.transform.position = dPos;
 
-            return athleteGO.GetComponent<Athlete>();
+            return athlete;
         }
     }
 }

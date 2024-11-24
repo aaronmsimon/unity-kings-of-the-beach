@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using KotB.StatePattern;
 using KotB.Match;
-using System.Collections.Generic;
+using RoboRyanTron.Unite2017.Variables;
 
 namespace KotB.Actors
 {
@@ -16,7 +16,7 @@ namespace KotB.Actors
         [SerializeField] protected MatchInfoSO matchInfo;
 
         [Header("Settings")]
-        [SerializeField] protected int courtSide;
+        [SerializeField] protected FloatVariable courtSide;
         [SerializeField] private LayerMask obstaclesLayer;
         [SerializeField] private LayerMask invalidAimLayer;
 
@@ -151,8 +151,8 @@ namespace KotB.Actors
         public void PerformJump() {
             isJumping = true;
             jumpAimationTime = 0;
-            transform.forward = new Vector3(-courtSide, 0, 0);
-            if (courtSide == Mathf.Sign(ballInfo.Position.x)) {
+            transform.forward = new Vector3(-courtSide.Value, 0, 0);
+            if (courtSide.Value == Mathf.Sign(ballInfo.Position.x)) {
                 animator.SetBool("isSpike", true);
             } else {
                 animator.SetBool("isBlock", true);
@@ -188,7 +188,7 @@ namespace KotB.Actors
         }
 
         private void Block() {
-            Vector3 targetPos = new Vector3(2 * -courtSide, 0.01f, transform.position.z);
+            Vector3 targetPos = new Vector3(2 * -courtSide.Value, 0.01f, transform.position.z);
             float blockHeight = 4;
             float blockDuration = 2;
             ballInfo.SetPassTarget(targetPos, blockHeight, blockDuration, this);
@@ -198,12 +198,8 @@ namespace KotB.Actors
             this.skills = skills;
         }
 
-        public void SetCourtSide(int courtSide) {
+        public void SetCourtSide(FloatVariable courtSide) {
             this.courtSide = courtSide;
-        }
-
-        public void OnSwitchSides() {
-            SetCourtSide(-courtSide);
         }
 
         protected virtual void OnDrawGizmos() {}
@@ -215,7 +211,7 @@ namespace KotB.Actors
         public BallSO BallInfo { get { return ballInfo; } }
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public StateMachine StateMachine { get { return stateMachine; } }
-        public int CourtSide { get { return courtSide; } set { courtSide = value; } }
+        public float CourtSide => courtSide.Value;
         public float CourtSideLength { get { return courtSideLength; } }
         public Vector3 MoveDir {
             get { return moveDir; }

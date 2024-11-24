@@ -10,6 +10,7 @@ namespace KotB.Match
     {
         [SerializeField] private StringVariable teamName;
         [SerializeField] private FloatVariable score;
+        [SerializeField] private FloatVariable courtSide;
 
         private List<AthleteConfig> athleteConfigs;
         private List<Athlete> athletes;
@@ -47,7 +48,12 @@ namespace KotB.Match
             if (serverIndex > athletes.Count - 1) serverIndex = 0;
         }
 
+        public void SwitchSides() {
+            courtSide.Value = -courtSide.Value;
+        }
+
         public List<AthleteConfig> AthleteConfigs => athleteConfigs;
         public List<Athlete> Athletes => athletes;
+        public FloatVariable CourtSide => courtSide;
     }
 }

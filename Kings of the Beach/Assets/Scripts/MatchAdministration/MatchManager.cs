@@ -19,7 +19,6 @@ namespace KotB.Match
 
         [Header("Game Events")]
         [SerializeField] private GameEvent scoreUpdate;
-        [SerializeField] private GameEvent switchSides;
 
         [Header("Prefabs")]
         [SerializeField] private GameObject aiPrefab;
@@ -62,7 +61,7 @@ namespace KotB.Match
             totalPoints += 1;
             switchSidesPoints = scoreToWin.Value / switchSidesPointsDivisor;
             if (totalPoints % switchSidesPoints == 0) {
-                switchSides.Raise();
+                matchInfo.teamsSwitchSides();
             }
         }
 
