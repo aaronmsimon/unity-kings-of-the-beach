@@ -18,7 +18,7 @@ namespace KotB.Testing
             foreach (TeamSO team in athlete.MatchInfo.Teams) {
                 if (team == this.team) {
                     team.AddAthlete(athlete);
-                    Debug.Log($"Athlete {athlete} has been added to {team.name}. There are now {team.Athletes.Count} athlete(s) on the team.");
+                    Debug.Log($"Athlete {athlete} has been added to {team.name}. Athletes on the team: {team.Athletes.Count}.");
                 }
             }
         }
