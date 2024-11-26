@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using KotB.StatePattern.MatchStates;
 using KotB.Match;
+using RoboRyanTron.Unite2017.Events;
 
 namespace KotB.Actors
 {
@@ -15,6 +16,9 @@ namespace KotB.Actors
 
         [Header("Game Input")]
         [SerializeField] private InputReader inputReader;
+
+        [Header("Game Events")]
+        [SerializeField] private GameEvent resetBallEvent;
 
         public event Action BallTaken;
 
@@ -61,6 +65,7 @@ namespace KotB.Actors
             transform.forward = Vector3.right * -CourtSide;
             animator.Play("HoldBall");
             BallTaken?.Invoke();
+            resetBallEvent.Raise();
         }
 
         private void Bump() {

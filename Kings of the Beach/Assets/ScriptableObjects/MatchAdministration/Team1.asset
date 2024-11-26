@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamName: {fileID: 11400000, guid: b3934a7ce76ccc74f823cb670d974eb3, type: 2}
   score: {fileID: 11400000, guid: 9894eec9cec191c4bb9760253bc901bf, type: 2}
+  courtSide: {fileID: 11400000, guid: 718029772aacc8042a5d065803efe304, type: 2}

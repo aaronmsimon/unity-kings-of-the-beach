@@ -48,14 +48,28 @@ namespace KotB.Testing
 
         private void Awake() {
             athlete = GetComponent<Athlete>();
+            Player player = GetComponent<Player>();
+            AI ai = GetComponent<AI>();
 
-            if (GetComponent<Player>() != null) {
+            if (player != null) {
                 athleteType = AthleteType.player;
-            } else if (GetComponent<AI>() != null) {
+                playerNormalState = new NormalState(player);
+                playerLockState = new LockState(player);
+                playerServeState = new StatePattern.PlayerStates.ServeState(player);
+                playerPostPointState = new StatePattern.PlayerStates.PostPointState(player);
+
+            } else if (ai != null) {
                 athleteType = AthleteType.ai;
+                aiServeState = new StatePattern.AIStates.ServeState(ai);
+                aiDefenseState = new DefenseState(ai);
+                aiOffenseState = new OffenseState(ai);
+                aiDigReadyState = new DigReadyState(ai);
+                aiPostPointState = new StatePattern.AIStates.PostPointState(ai);
+                aiNonServeState = new NonServeState(ai);
             } else {
                 athleteType = AthleteType.none;
             }
+
         }
         
         public void SetState() {
