@@ -64,6 +64,7 @@ public class BallSO : ScriptableObject
         ResetTimeSinceLastHit();
         lastPlayerToHit = server;
         TargetSet?.Invoke();
+        BallServed?.Invoke();
     }
 
     public void SetPassTarget(Vector3 targetPos, float height, float duration, Athlete passer) {
@@ -103,10 +104,6 @@ public class BallSO : ScriptableObject
 
     public void BallChangePossessionEvent() {
         BallChangePossession?.Invoke();
-    }
-
-    public void BallServedEvent() {
-        BallServed?.Invoke();
     }
 
     private void ResetTimeSinceLastHit() {

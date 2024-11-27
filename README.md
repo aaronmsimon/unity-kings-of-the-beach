@@ -126,7 +126,6 @@ I would like to actually finish this game this time. That means starting with a 
 * might need to make this easier/more forgiving (higher collider and/or longer window)
 5. adjust spike speed based on timing accuracy (perfect height)
 6. UI: use [Game UI Database](https://www.gameuidatabase.com/)
-7. BallInfo.cs has BallServedEvent() which should just be called from SetServeTarget() and not on the Athlete states
 8. should there be different controls for serving? using "bump" to interact
 9. DigReadyState.cs CalculateSpikeTarget() should determine if AI wants to do a feint
 10. don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]
