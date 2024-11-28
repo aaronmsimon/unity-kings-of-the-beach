@@ -12,9 +12,6 @@ namespace KotB.StatePattern.PlayerStates
         private bool canUnlock;
         private float unlockTimer;
         private float unlockDelay = 0.25f;
-        private float kingFrame = 7;
-        private float totalFrames = 18;
-        private float perfectContact;
         private Animator animator;
         private AnimatorStateInfo stateInfo;
         private float spikeWindowPenalty = 10;
@@ -25,7 +22,6 @@ namespace KotB.StatePattern.PlayerStates
 
             animator = player.GetComponentInChildren<Animator>();
             stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            perfectContact = kingFrame / totalFrames;
 
             player.InputReader.bumpEvent += OnPass;
             player.InputReader.bumpAcrossEvent += OnBumpAcross;
@@ -52,11 +48,12 @@ namespace KotB.StatePattern.PlayerStates
                 } else {
                     SetTargetPos(false);
                     if (!player.Feint) {
-                        float timingVar = stateInfo.normalizedTime / perfectContact - 1;
+                        float timingVar = stateInfo.normalizedTime - 1;
                         float window = player.BallInfo.SkillValues.SkillToValue(player.Skills.SpikeSkill, player.BallInfo.SkillValues.SpikeTimingWindow);
                         float penalty = timingVar * window * spikeWindowPenalty;
+                        player.SpikeSpeedPenalty = timingVar * window;
                         Vector3 newTargetPos = new Vector3(targetPos.x + penalty, targetPos.y, targetPos.z);
-                        Debug.Log($"timing: {timingVar} window: {window} penalty: {penalty} target: {targetPos} newtarget: {newTargetPos}");
+                        Debug.Log($"timingVar: {timingVar} window: {window} penalty: {penalty} target: {targetPos} newtarget: {newTargetPos}");
                         player.Spike(newTargetPos);
                     } else {
                         player.Pass(targetPos, 5, 1);

@@ -121,16 +121,21 @@ I would like to actually finish this game this time. That means starting with a 
 - review all state machines for proper state handling
 - don't actually need all these variables (events, too?) as Scriptable Objects
 
+### Future Enchancements
+- diving
+- tweaks for accuracy in spiking (scale of influence, timing, use direction not just x, logarithmic curve for speed and/or direction)
+
 ### Note to Self
-5. adjust spike speed based on timing accuracy (perfect height)
 6. UI: use [Game UI Database](https://www.gameuidatabase.com/)
 8. should there be different controls for serving? using "bump" to interact
 9. DigReadyState.cs CalculateSpikeTarget() should determine if AI wants to do a feint
 10. don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]
-11. different AI states for receiving a serve vs defense during a point
+11. different AI states for receiving a serve vs defense during a point (for judgement vs deciding if it's their ball)
 12. check block with hits for team accuracy
 13. really want to test the full game features
 
 [from 11/24](https://github.com/aaronmsimon/unity-kings-of-the-beach/commit/e6f40a524b809e9d5be7fb1c147681d0143aa887): implemented instantiation of prefabs, but not tested
+
+[from 11/27](https://github.com/aaronmsimon/unity-kings-of-the-beach/commit/5639dae83adf8d2766f898c02d13c7b63e26c6ae): implemented change for spike collider for Player - does AI need the same?
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature

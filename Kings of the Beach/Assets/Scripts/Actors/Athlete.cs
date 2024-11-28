@@ -37,6 +37,7 @@ namespace KotB.Actors
         protected float animationFrameRate = 24;
         private float jumpAimationTime;
         private float reachHeight;
+        private float spikeSpeedPenalty = 0;
 
         // caching
         private float moveSpeed;
@@ -169,7 +170,8 @@ namespace KotB.Actors
             Vector3 startPos = ballInfo.Position;
             Vector3 distance = targetPos - startPos;
             bool directLine = !Physics.Raycast(startPos, distance.normalized, distance.magnitude, invalidAimLayer);
-            float spikeTime = ballInfo.SkillValues.SkillToValue(skills.SpikePower, ballInfo.SkillValues.SpikePower);
+            float spikeTime = ballInfo.SkillValues.SkillToValue(skills.SpikePower, ballInfo.SkillValues.SpikePower) * (1 - Mathf.Abs(spikeSpeedPenalty));
+            // Debug.Log($"spikeTime (skill): {ballInfo.SkillValues.SkillToValue(skills.SpikePower, ballInfo.SkillValues.SpikePower)} * (1 - Mathf.Abs({spikeSpeedPenalty})) = {spikeTime}");
             if (directLine) {
                 // If clear, spike
                 ballInfo.SetSpikeTarget(targetPos, spikeTime, this);
@@ -224,5 +226,6 @@ namespace KotB.Actors
         public float JumpFrames { get { return jumpFrames; } }
         public float SpikeFrames { get { return spikeFrames; } }
         public float AnimationFrameRate { get { return animationFrameRate; } }
+        public float SpikeSpeedPenalty { set { spikeSpeedPenalty = value; } }
     }
 }

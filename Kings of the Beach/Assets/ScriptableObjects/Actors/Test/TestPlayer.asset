@@ -22,6 +22,7 @@ MonoBehaviour:
   reactionTime: 0
   passAccuracy: 10
   inBoundsJudgement: 1
+  spikeSkill: 7
   spikePower: 10
   digRange: 0
   serving: 5
