@@ -122,15 +122,19 @@ MonoBehaviour:
   skills: {fileID: 0}
   ballInfo: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
   matchInfo: {fileID: 11400000, guid: 23b44ef1d3bbbbe42a97b3fd37ef9578, type: 2}
-  courtSide: 0
+  courtSide: {fileID: 0}
   obstaclesLayer:
     serializedVersion: 2
     m_Bits: 64
+  invalidAimLayer:
+    serializedVersion: 2
+    m_Bits: 0
   targetZonePos: {x: -4, y: 0}
   targetZoneSize: {x: 5.5, y: 5.5}
   showTargetZone: 1
   targetZoneColor: {r: 1, g: 0, b: 0, a: 1}
   inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
+  resetBallEvent: {fileID: 11400000, guid: 542de616c35a6e043865779e7eb78a57, type: 2}
 --- !u!1001 &4843598010807037157
 PrefabInstance:
   m_ObjectHideFlags: 0

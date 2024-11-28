@@ -148,18 +148,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
   m_PrefabInstance: {fileID: 1584516578}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &484165877 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2903952158050811650, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
-  m_PrefabInstance: {fileID: 1584516578}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484165875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43a023c93079d9d4799082fd66a50f0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &484165882
+--- !u!114 &484165888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,10 +157,51 @@ MonoBehaviour:
   m_GameObject: {fileID: 484165875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb81c29b3457c844f8bdfdd59db6ff33, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  athleteState: 
+  Event: {fileID: 11400000, guid: 542de616c35a6e043865779e7eb78a57, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 484165889}
+        m_TargetAssemblyTypeName: KotB.Testing.SetAthleteState, Assembly-CSharp
+        m_MethodName: SetState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &484165889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484165875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 031055a86052a8c448cad9431eb433ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  athleteState: 0
+--- !u!114 &484165890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484165875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c55f89befe89814199740124bedce3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coach: {fileID: 1973118027}
 --- !u!1001 &799167636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246,8 +276,8 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: aeafa150cef3e0547a00b597cbdb0353, type: 2}
     - target: {fileID: -6829632742945956471, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       propertyPath: courtSide
-      value: -1
-      objectReference: {fileID: 0}
+      value: 
+      objectReference: {fileID: 11400000, guid: 718029772aacc8042a5d065803efe304, type: 2}
     - target: {fileID: -6829632742945956471, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       propertyPath: targetZonePos.x
       value: -1.5
@@ -315,10 +345,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1973118026}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
 --- !u!1 &1107424080
 GameObject:
@@ -513,6 +540,10 @@ PrefabInstance:
       propertyPath: skills
       value: 
       objectReference: {fileID: 11400000, guid: 819c6d31029030d45906e8d16ffbe3e5, type: 2}
+    - target: {fileID: 2903952158050811650, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: courtSide
+      value: 
+      objectReference: {fileID: 11400000, guid: 718029772aacc8042a5d065803efe304, type: 2}
     - target: {fileID: 4934388022853752663, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -566,8 +597,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 484165890}
+    - targetCorrespondingSourceObject: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 484165889}
+    - targetCorrespondingSourceObject: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 484165882}
+      addedObject: {fileID: 484165888}
   m_SourcePrefab: {fileID: 100100000, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
 --- !u!1001 &1762804396
 PrefabInstance:
@@ -626,24 +663,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4dc8befa0f3dbf45a0dfad0024a9e6e, type: 3}
---- !u!1 &1973118020 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5717242374435514889, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
+--- !u!114 &1973118027 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6829632742945956471, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
   m_PrefabInstance: {fileID: 835024503}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1973118026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1973118020}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b10275600330aa48abec1768e6e26a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 04bcd3ede32f92d4386cf39e7ad76c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 484165877}
 --- !u!1 &2113379498
 GameObject:
   m_ObjectHideFlags: 0
