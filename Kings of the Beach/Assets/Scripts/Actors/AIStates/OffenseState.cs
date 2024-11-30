@@ -19,9 +19,6 @@ namespace KotB.StatePattern.AIStates
             ai.TargetPos = ai.OffensePos;
         }
 
-        public override void OnTriggerEnter(Collider other) {
-        }
-
         private void OnTargetSet() {
             if (Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
                 ai.StateMachine.ChangeState(ai.DigReadyState);

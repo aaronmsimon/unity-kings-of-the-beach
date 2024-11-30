@@ -35,7 +35,7 @@ namespace KotB.Actors
         private float blockFrames = 9;
         private float blockFallFrames = 8;
         protected float animationFrameRate = 24;
-        private float jumpAimationTime;
+        private float jumpAnimationTime;
         private float reachHeight;
         private float spikeSpeedPenalty = 0;
 
@@ -118,16 +118,16 @@ namespace KotB.Actors
         }
 
         private void Jump() {
-            jumpAimationTime += Time.deltaTime;
+            jumpAnimationTime += Time.deltaTime;
 
             // Spiking
             if (animator.GetBool("isSpike")) {
-                if (jumpAimationTime >= jumpFrames / animationFrameRate && jumpAimationTime < (jumpFrames + spikeFrames) / animationFrameRate) {
+                if (jumpAnimationTime >= jumpFrames / animationFrameRate && jumpAnimationTime < (jumpFrames + spikeFrames) / animationFrameRate) {
                     sphereCollider.enabled = true;
                     capCollider.enabled = false;
-                } else if (jumpAimationTime >= (jumpFrames + spikeFrames) / animationFrameRate && jumpAimationTime < (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
+                } else if (jumpAnimationTime >= (jumpFrames + spikeFrames) / animationFrameRate && jumpAnimationTime < (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
                     sphereCollider.enabled = false;
-                } else if (jumpAimationTime >= (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
+                } else if (jumpAnimationTime >= (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
                     animator.SetBool("isSpike", false);
                     isJumping = false;
                     capCollider.enabled = true;
@@ -136,12 +136,12 @@ namespace KotB.Actors
 
             // Blocking
             if (animator.GetBool("isBlock")) {
-                if (jumpAimationTime >= jumpFrames / animationFrameRate && jumpAimationTime < (jumpFrames + blockFrames) / animationFrameRate) {
+                if (jumpAnimationTime >= jumpFrames / animationFrameRate && jumpAnimationTime < (jumpFrames + blockFrames) / animationFrameRate) {
                     sphereCollider.enabled = true;
                     capCollider.enabled = false;
-                } else if (jumpAimationTime >= (jumpFrames + blockFrames) / animationFrameRate && jumpAimationTime < (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
+                } else if (jumpAnimationTime >= (jumpFrames + blockFrames) / animationFrameRate && jumpAnimationTime < (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
                     sphereCollider.enabled = false;
-                } else if (jumpAimationTime >= (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
+                } else if (jumpAnimationTime >= (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
                     animator.SetBool("isBlock", false);
                     isJumping = false;
                     capCollider.enabled = true;
@@ -151,7 +151,7 @@ namespace KotB.Actors
 
         public void PerformJump() {
             isJumping = true;
-            jumpAimationTime = 0;
+            jumpAnimationTime = 0;
             transform.forward = new Vector3(-courtSide.Value, 0, 0);
             if (courtSide.Value == Mathf.Sign(ballInfo.Position.x)) {
                 animator.SetBool("isSpike", true);
