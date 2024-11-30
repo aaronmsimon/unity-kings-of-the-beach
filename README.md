@@ -136,6 +136,4 @@ I would like to actually finish this game this time. That means starting with a 
 
 [from 11/24](https://github.com/aaronmsimon/unity-kings-of-the-beach/commit/e6f40a524b809e9d5be7fb1c147681d0143aa887): implemented instantiation of prefabs, but not tested
 
-[from 11/27](https://github.com/aaronmsimon/unity-kings-of-the-beach/commit/5639dae83adf8d2766f898c02d13c7b63e26c6ae): implemented change for spike collider for Player - does AI need the same?
-
 In case there are issues with passing/spiking ball, consider the LockedOn feature
