@@ -131,7 +131,6 @@ I would like to actually finish this game this time. That means starting with a 
 9. DigReadyState.cs CalculateSpikeTarget() should determine if AI wants to do a feint
 10. don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]
 11. different AI states for receiving a serve vs defense during a point (for judgement vs deciding if it's their ball)
-12. check block with hits for team accuracy
 13. really want to test the full game features
 
 [from 11/24](https://github.com/aaronmsimon/unity-kings-of-the-beach/commit/e6f40a524b809e9d5be7fb1c147681d0143aa887): implemented instantiation of prefabs, but not tested

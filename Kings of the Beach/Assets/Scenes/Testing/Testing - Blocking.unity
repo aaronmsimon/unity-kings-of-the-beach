@@ -235,7 +235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7855929619521182701, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7855929619521182701, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -277,6 +277,10 @@ PrefabInstance:
       propertyPath: skills
       value: 
       objectReference: {fileID: 11400000, guid: c71d49c0442b67c44b6dff987f17d336, type: 2}
+    - target: {fileID: 8463576540012695194, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: courtSide
+      value: 
+      objectReference: {fileID: 11400000, guid: 718029772aacc8042a5d065803efe304, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -507,13 +511,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2031965004}
-    - targetCorrespondingSourceObject: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2031965003}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
 --- !u!1 &1720338964 stripped
 GameObject:
@@ -550,8 +548,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1720338973}
-        m_TargetAssemblyTypeName: KotB.Testing.SetAIState, Assembly-CSharp
-        m_MethodName: SetAIState_Defense
+        m_TargetAssemblyTypeName: KotB.Testing.SetAthleteState, Assembly-CSharp
+        m_MethodName: SetState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -573,6 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 031055a86052a8c448cad9431eb433ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  athleteState: 5
 --- !u!1 &1750279404 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1210444293042598170, guid: a1d68553cfbbfda42a6bc6167b3f6f38, type: 3}
@@ -732,51 +731,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!1 &2031964996 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
-  m_PrefabInstance: {fileID: 1670449087}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2031965003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2031964996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 542de616c35a6e043865779e7eb78a57, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2031965004}
-        m_TargetAssemblyTypeName: KotB.Testing.SetPlayerState, Assembly-CSharp
-        m_MethodName: SetPlayerState_Normal
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2031965004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2031964996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b0d4248a9bc2fe4a814659b64837afa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2106519765
 PrefabInstance:
   m_ObjectHideFlags: 0

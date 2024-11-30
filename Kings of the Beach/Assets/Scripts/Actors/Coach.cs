@@ -19,6 +19,7 @@ namespace KotB.Actors
 
         [Header("Game Events")]
         [SerializeField] private GameEvent resetBallEvent;
+        [SerializeField][Range(0,2)] private int resetHitCounterAmount;
 
         public event Action BallTaken;
 
@@ -63,6 +64,7 @@ namespace KotB.Actors
         public void TakeBall() {
             ballInfo.GiveBall(this);
             transform.forward = Vector3.right * -CourtSide;
+            BallInfo.HitsForTeam = resetHitCounterAmount;
             animator.Play("HoldBall");
             BallTaken?.Invoke();
             resetBallEvent.Raise();

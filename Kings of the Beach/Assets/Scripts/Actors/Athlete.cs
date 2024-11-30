@@ -185,7 +185,7 @@ namespace KotB.Actors
             // get a random value on the skill level scale
             float randValue = UnityEngine.Random.value * skillLevelMax;
             // skill check
-            Debug.Log($"block attempt {randValue} vs {skills.Blocking}");
+            Debug.Log($"block attempt {randValue} vs {skills.Blocking} [{(randValue <= skills.Blocking ? "Blocked" : "Missed")}]");
             if (randValue <= skills.Blocking) Block();
         }
 
