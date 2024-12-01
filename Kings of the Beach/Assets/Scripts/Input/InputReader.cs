@@ -21,6 +21,10 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 	// Menu
 	public event UnityAction selectEvent;
 	public event UnityAction startEvent;
+	public event UnityAction selectionUpEvent;
+	public event UnityAction selectionDownEvent;
+	public event UnityAction selectionLeftEvent;
+	public event UnityAction selectionRightEvent;
 
 	private GameInput gameInput;
 
@@ -116,7 +120,29 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 			startEvent?.Invoke();
     }
 
-	
+    public void OnSelectionUp(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+			selectionUpEvent?.Invoke();
+    }
+
+    public void OnSelectionDown(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+			selectionDownEvent?.Invoke();
+    }
+
+    public void OnSelectionLeft(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+			selectionLeftEvent?.Invoke();
+    }
+
+    public void OnSelectionRight(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+			selectionRightEvent?.Invoke();
+    }
 
 	// Enable/Disable
 
