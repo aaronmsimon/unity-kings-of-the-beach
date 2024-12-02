@@ -25,6 +25,7 @@ namespace KotB.Actors
         protected float courtSideLength = 8;
         protected Vector3 moveDir;
         protected bool isJumping;
+        protected bool feint;
 
         private float defaultHeight = 1.9f;
         private float noMansLand = 0.5f;
@@ -38,6 +39,8 @@ namespace KotB.Actors
         private float jumpAnimationTime;
         private float reachHeight;
         private float spikeSpeedPenalty = 0;
+        private float feintHeight = 5;
+        private float feintTime = 1;
 
         // caching
         private float moveSpeed;
@@ -181,6 +184,10 @@ namespace KotB.Actors
             }
         }
 
+        public void SpikeFeint(Vector3 targetPos) {
+            Pass(targetPos, feintHeight, feintTime);
+        }
+
         public void BlockAttempt() {
             // get a random value on the skill level scale
             float randValue = UnityEngine.Random.value * skillLevelMax;
@@ -222,6 +229,7 @@ namespace KotB.Actors
         public Transform LeftHandEnd { get { return leftHandEnd; } }
         public Ball Ball { get { return ball; } }
         public bool IsJumping { get { return isJumping; } }
+        public bool Feint { get { return feint; } set { feint = value; } }
         public float ReachHeight { get { return reachHeight; } }
         public float JumpFrames { get { return jumpFrames; } }
         public float SpikeFrames { get { return spikeFrames; } }

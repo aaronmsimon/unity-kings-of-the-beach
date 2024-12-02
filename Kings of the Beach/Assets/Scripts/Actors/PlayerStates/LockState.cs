@@ -56,7 +56,7 @@ namespace KotB.StatePattern.PlayerStates
                         Debug.Log($"timingVar: {timingVar} window: {window} penalty: {penalty} target: {targetPos} newtarget: {newTargetPos}");
                         player.Spike(newTargetPos);
                     } else {
-                        player.Pass(targetPos, 5, 1);
+                        player.SpikeFeint(targetPos);
                     }
                     player.StateMachine.ChangeState(player.NormalState);
                 }

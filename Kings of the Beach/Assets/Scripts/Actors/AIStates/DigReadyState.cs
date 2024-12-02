@@ -54,7 +54,13 @@ namespace KotB.StatePattern.AIStates
                         ai.StateMachine.ChangeState(ai.DefenseState);
                         break;
                     case 2:
-                        ai.Spike(CalculateSpikeTarget());
+                        ConsiderSpikeFeint();
+                        Vector3 spikeTarget = CalculateSpikeTarget();
+                        if (!ai.Feint) {
+                            ai.Spike(spikeTarget);
+                        } else {
+                            ai.SpikeFeint(spikeTarget);
+                        }
                         ai.StateMachine.ChangeState(ai.DefenseState);
                         break;
                     default:
@@ -87,6 +93,15 @@ namespace KotB.StatePattern.AIStates
                 ai.PerformJump();
                 isSpiking = true;
             }
+        }
+
+        private void ConsiderSpikeFeint() {
+            // Opponent present
+            // Opponent's block skill (if applicable)
+            // Spike success this game
+
+            // Temp random
+            ai.Feint = Random.Range(0,1) > 0.9f;
         }
 
         private float GetTimeForSpike(float spikePos, float height, float start, float end, float duration)

@@ -27,7 +27,6 @@ namespace KotB.Actors
 
         private Vector3 moveInput;
         private Vector3 rightStickInput;
-        private bool feint;
 
         private NormalState normalState;
         private LockState lockState;
@@ -95,7 +94,6 @@ namespace KotB.Actors
         public PostPointState PostPointState { get { return postPointState; } }
         public Vector3 MoveInput { get { return moveInput; } }
         public Vector3 RightStickInput { get { return rightStickInput; } }
-        public bool Feint { get { return feint; } }
         public FloatVariable ServePowerValue {
             get { return servePowerValue; }
             set { servePowerValue = value; }
