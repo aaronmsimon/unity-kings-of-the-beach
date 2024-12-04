@@ -17,7 +17,7 @@ namespace KotB.Testing
                 moveDestination = mousePosition;
             }
 
-            if (moveDestination != Vector3.down && Vector3.Distance(moveDestination, aiAthlete.transform.position) > destBuffer) {
+            if (moveDestination != Vector3.down && (moveDestination - aiAthlete.transform.position).sqrMagnitude > destBuffer * destBuffer) {
                 aiAthlete.MoveDir = moveDestination - aiAthlete.transform.position;
             }
         }
