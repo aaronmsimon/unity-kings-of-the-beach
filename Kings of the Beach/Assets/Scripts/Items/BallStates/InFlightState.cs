@@ -30,10 +30,11 @@ namespace KotB.StatePattern.BallStates
                         ball.transform.position = CalculateInFlightPosition(t, ball.BallInfo.StartPos, targetPos);
                     }
 
-                    // Check if over the net [this needs improvements]
+                    // Check if over the net
                     if (Mathf.Abs(ball.transform.position.x) < 0.13f) {
-                        CheckIfOverNet();
-                        CheckNetCollision(targetPos - ball.transform.position);
+                        Vector3 moveDir = targetPos - ball.transform.position;
+                        CheckIfValid(moveDir);
+                        CheckNetCollision(moveDir);
                     }
                 } else {
                     ball.transform.position += Vector3.down * ballSpeedToGround * Time.deltaTime;
@@ -45,9 +46,10 @@ namespace KotB.StatePattern.BallStates
             }
         }
 
-        private void CheckIfOverNet() {
-            if (ball.transform.position.y < 2.43 || Mathf.Abs(ball.transform.position.z) > 4) {
+        private void CheckIfValid(Vector3 moveDir) {
+            if (Physics.Raycast(ball.transform.position, moveDir, out RaycastHit hit, 0.5f, ball.InvalidAimLayer)) {
                 ball.BallHitGround.Raise();
+                Debug.Log("Ball didn't make it over the net");
             }
         }
 
