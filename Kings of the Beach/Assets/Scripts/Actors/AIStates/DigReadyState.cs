@@ -78,10 +78,18 @@ namespace KotB.StatePattern.AIStates
         }
 
         private Vector3 CalculateSpikeTarget() {
-            CalculateAttackZones();
-            int largestZoneIndex = LargestAttackZoneIndex();
-            Vector2 xRange = new Vector2(attackZoneCenters[largestZoneIndex].x - attackZoneSizes[largestZoneIndex].x / 2, attackZoneCenters[largestZoneIndex].x + attackZoneSizes[largestZoneIndex].x / 2);
-            Vector2 zRange = new Vector2(attackZoneCenters[largestZoneIndex].y - attackZoneSizes[largestZoneIndex].y / 2, attackZoneCenters[largestZoneIndex].y + attackZoneSizes[largestZoneIndex].y / 2);
+            Vector2 xRange, zRange;
+
+            if (ai.MatchInfo.GetOpposingTeam(ai) != null) {
+                CalculateAttackZones();
+                int largestZoneIndex = LargestAttackZoneIndex();
+                xRange = new Vector2(attackZoneCenters[largestZoneIndex].x - attackZoneSizes[largestZoneIndex].x / 2, attackZoneCenters[largestZoneIndex].x + attackZoneSizes[largestZoneIndex].x / 2);
+                zRange = new Vector2(attackZoneCenters[largestZoneIndex].y - attackZoneSizes[largestZoneIndex].y / 2, attackZoneCenters[largestZoneIndex].y + attackZoneSizes[largestZoneIndex].y / 2);
+            } else {
+                xRange = new Vector2(0, ai.CourtSideLength * -ai.CourtSide);
+                zRange = new Vector2(-ai.CourtSideLength / 2, ai.CourtSideLength / 2);
+            }
+
             Vector3 target = new Vector3(Random.Range(xRange.x, xRange.y), 0, Random.Range(zRange.x, zRange.y));
             return target;
         }
@@ -101,7 +109,7 @@ namespace KotB.StatePattern.AIStates
             // Spike success this game
 
             // Temp random
-            ai.Feint = Random.Range(0,1) > 0.9f;
+            ai.Feint = Random.Range(0f,1) > 0.9f;
         }
 
         private float GetTimeForSpike(float spikePos, float height, float start, float end, float duration)

@@ -74,7 +74,6 @@ public class BallSO : ScriptableObject
         Duration = duration;
         ResetTimeSinceLastHit();
         HitsForTeam += 1;
-        Debug.Log($"Team {possession} has {HitsForTeam} hits.");
         lastPlayerToHit = passer;
         TargetSet?.Invoke();
     }
@@ -86,7 +85,6 @@ public class BallSO : ScriptableObject
         Duration = duration;
         ResetTimeSinceLastHit();
         HitsForTeam += 1;
-        Debug.Log($"Team {possession} has {HitsForTeam} hits.");
         lastPlayerToHit = spiker;
         TargetSet?.Invoke();
     }
@@ -105,7 +103,6 @@ public class BallSO : ScriptableObject
     }
 
     public void BallChangePossessionEvent() {
-        Debug.Log($"Ball changed possession - now in control: {(int)Mathf.Sign(Position.x)}");
         BallChangePossession?.Invoke();
     }
 
