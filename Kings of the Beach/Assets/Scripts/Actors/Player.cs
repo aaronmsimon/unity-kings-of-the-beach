@@ -2,7 +2,6 @@ using UnityEngine;
 using KotB.StatePattern.PlayerStates;
 using RoboRyanTron.Unite2017.Events;
 using RoboRyanTron.Unite2017.Variables;
-using KotB.StatePattern;
 
 namespace KotB.Actors
 {

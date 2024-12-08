@@ -128,13 +128,14 @@ MonoBehaviour:
     m_Bits: 64
   invalidAimLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   targetZonePos: {x: -4, y: 0}
   targetZoneSize: {x: 5.5, y: 5.5}
   showTargetZone: 1
   targetZoneColor: {r: 1, g: 0, b: 0, a: 1}
   inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
   resetBallEvent: {fileID: 11400000, guid: 542de616c35a6e043865779e7eb78a57, type: 2}
+  resetHitCounterAmount: 0
 --- !u!1001 &4843598010807037157
 PrefabInstance:
   m_ObjectHideFlags: 0

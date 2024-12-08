@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AthleteConfig1
   m_EditorClassIdentifier: 
   skills: {fileID: 11400000, guid: 819c6d31029030d45906e8d16ffbe3e5, type: 2}
-  computerControlled: 0
+  computerControlled: 1
   outfit: 1
   top: {fileID: 2100000, guid: a6250e36c8d91cf4e95c07d8bc637aba, type: 2}
   bottom: {fileID: 2100000, guid: 27d818651567ec14e999cd9b220e7298, type: 2}

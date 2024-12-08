@@ -126,13 +126,14 @@ I would like to actually finish this game this time. That means starting with a 
 - spike feint should consider opponent's blocking skill and maybe frequency of failure
 - change control names to be more universal
 - enable control remapping
+- customize character (eyes, hair, skin)
 
 ### Note to Self
 6 - UI: use [Game UI Database](https://www.gameuidatabase.com/)<br />
 10 - don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]<br />
 11 - different AI states for receiving a serve vs defense during a point (for judgement vs deciding if it's their ball)<br />
 13 - really want to test the full game features <br />
-14 - test instantiation of AI prefab (and multiple)
+15 - does athleteconfigs really need to be an SO?
 
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature
