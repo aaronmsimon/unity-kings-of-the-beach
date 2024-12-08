@@ -82,6 +82,7 @@ namespace KotB.Match
         }
 
         private void OnStateChanged(IState newState) {
+            Debug.Log($"new match state: {newState}");
             matchInfo.CurrentState = newState;
         }
 

@@ -8,6 +8,8 @@ namespace KotB.StatePattern.MatchStates
         public PrePointState(MatchManager matchManager) : base(matchManager) { }
 
         public override void Enter() {
+            matchManager.MatchInfo.TransitionToPrePointStateEvent();
+
             matchManager.InputReader.EnableBetweenPointsInput();
             matchManager.InputReader.interactEvent += OnInteract;
 

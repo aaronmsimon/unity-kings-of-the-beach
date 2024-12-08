@@ -12,18 +12,18 @@ namespace KotB.Match
         [SerializeField] private FloatVariable score;
         [SerializeField] private FloatVariable courtSide;
 
-        private List<AthleteConfig> athleteConfigs;
+        private List<AthleteConfigSO> athleteConfigs;
         private List<Athlete> athletes;
         private int serverIndex;
 
         public void Initialize() {
             athletes = new List<Athlete>();
-            athleteConfigs = new List<AthleteConfig>();
+            athleteConfigs = new List<AthleteConfigSO>();
             serverIndex = 0;
             SetScore(0);
         }
 
-        public void AddAthleteConfig(AthleteConfig athleteConfig) {
+        public void AddAthleteConfig(AthleteConfigSO athleteConfig) {
             athleteConfigs.Add(athleteConfig);
         }
 
@@ -52,7 +52,7 @@ namespace KotB.Match
             courtSide.Value = -courtSide.Value;
         }
 
-        public List<AthleteConfig> AthleteConfigs => athleteConfigs;
+        public List<AthleteConfigSO> AthleteConfigs => athleteConfigs;
         public List<Athlete> Athletes => athletes;
         public FloatVariable CourtSide => courtSide;
     }

@@ -2,6 +2,7 @@ using UnityEngine;
 using KotB.StatePattern.PlayerStates;
 using RoboRyanTron.Unite2017.Events;
 using RoboRyanTron.Unite2017.Variables;
+using KotB.StatePattern;
 
 namespace KotB.Actors
 {
@@ -41,7 +42,7 @@ namespace KotB.Actors
             serveState = new ServeState(this);
             postPointState = new PostPointState(this);
             
-            stateMachine.ChangeState(normalState);
+            stateMachine.ChangeState(postPointState);
         }
 
         //Adds listeners for events being triggered in the InputReader script

@@ -11,6 +11,7 @@ namespace KotB.Testing
         private void Awake() {
             foreach (TeamSO team in teams) {
                 team.Initialize();
+                Debug.Log($"Team {team.name} initialized.");
             }
         }
     }

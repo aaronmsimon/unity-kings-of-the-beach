@@ -28,7 +28,6 @@ namespace KotB.StatePattern.MatchStates
 
             if (timeUntilChangeState < 0) {
                 matchManager.StateMachine.ChangeState(matchManager.PrePointState);
-                matchManager.MatchInfo.TransitionToPrePointStateEvent();
             }
         }
 

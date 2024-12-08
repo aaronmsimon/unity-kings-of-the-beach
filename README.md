@@ -131,8 +131,8 @@ I would like to actually finish this game this time. That means starting with a 
 6 - UI: use [Game UI Database](https://www.gameuidatabase.com/)<br />
 10 - don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]<br />
 11 - different AI states for receiving a serve vs defense during a point (for judgement vs deciding if it's their ball)<br />
-13 - really want to test the full game features
+13 - really want to test the full game features <br />
+14 - test instantiation of AI prefab (and multiple)
 
-[from 11/24](https://github.com/aaronmsimon/unity-kings-of-the-beach/commit/e6f40a524b809e9d5be7fb1c147681d0143aa887): implemented instantiation of prefabs, but not tested
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature
