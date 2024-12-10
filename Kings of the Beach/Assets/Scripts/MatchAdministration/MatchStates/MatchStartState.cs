@@ -21,6 +21,7 @@ namespace KotB.StatePattern.MatchStates
 
             foreach (TeamSO team in matchManager.MatchInfo.Teams) {
                 team.CourtSide.Value = teamIndex == 0 ? -1 : 1;
+                Debug.Log(team.AthleteConfigs.Count);
                 foreach (AthleteConfigSO athleteConfig in team.AthleteConfigs) {
                     Athlete athlete = InstantiateAthlete(athleteConfig, team);
                     team.AddAthlete(athlete);

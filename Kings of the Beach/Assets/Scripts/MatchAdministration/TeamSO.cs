@@ -29,6 +29,7 @@ namespace KotB.Match
 
         public void AddAthlete(Athlete athlete) {
             athletes.Add(athlete);
+            Debug.Log($"Athlete {athlete} added to team {teamName.Value}");
         }
 
         public void SetScore(int value) {
