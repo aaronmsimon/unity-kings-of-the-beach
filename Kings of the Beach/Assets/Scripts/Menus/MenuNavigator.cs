@@ -13,7 +13,7 @@ namespace KotB.Menus {
         [SerializeField] private Color defaultColor = Color.white;
 
         [Header("Input Reader")]
-        [SerializeField] private InputReader inputReader;        
+        [SerializeField] private InputReader inputReader;
 
         // Tracks the currently selected menu index
         private int currentSelectedIndex = 0;

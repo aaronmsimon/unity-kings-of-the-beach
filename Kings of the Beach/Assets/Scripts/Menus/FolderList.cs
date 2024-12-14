@@ -6,9 +6,7 @@ namespace KotB.Menus
 {
     public class FolderList : MonoBehaviour
     {
-        [SerializeField] private string folderPath;
-
-        private string[] GetFolderArray() {
+        public string[] GetFolderArray(string folderPath) {
             string resourcesPath = Path.Combine(Application.dataPath, "Resources", folderPath);
 
             if (!Directory.Exists(resourcesPath)) {
