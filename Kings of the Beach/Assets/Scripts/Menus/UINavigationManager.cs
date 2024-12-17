@@ -22,12 +22,8 @@ public class UINavigationManager : MonoBehaviour
     public List<NavigationSection> navigableSections;
     public int currentVerticalIndex = 0;
 
-    [Header("Input Mapping")]
-    public KeyCode upKey = KeyCode.UpArrow;
-    public KeyCode downKey = KeyCode.DownArrow;
-    public KeyCode leftKey = KeyCode.LeftArrow;
-    public KeyCode rightKey = KeyCode.RightArrow;
-    public KeyCode selectKey = KeyCode.Return;
+    [Header("Input Reader")]
+    [SerializeField] private InputReader inputReader;
 
     [Header("Visual Feedback")]
     public Color defaultColor = Color.white;
@@ -39,9 +35,20 @@ public class UINavigationManager : MonoBehaviour
         UpdateVerticalHighlight();
     }
 
-    private void Update()
-    {
-        HandleNavigation();
+    private void OnEnable() {
+        inputReader.selectionUpEvent += OnSelectionUp;
+        inputReader.selectionDownEvent += OnSelectionDown;
+        inputReader.selectionLeftEvent += OnSelectionLeft;
+        inputReader.selectionRightEvent += OnSelectionRight;
+        inputReader.selectEvent += ConfirmSelection;
+    }
+
+    private void OnDisable() {
+        inputReader.selectionUpEvent -= OnSelectionUp;
+        inputReader.selectionDownEvent -= OnSelectionDown;
+        inputReader.selectionLeftEvent -= OnSelectionLeft;
+        inputReader.selectionRightEvent -= OnSelectionRight;
+        inputReader.selectEvent -= ConfirmSelection;
     }
 
     private void ValidateNavigationSetup()
@@ -61,37 +68,33 @@ public class UINavigationManager : MonoBehaviour
         }
     }
 
-    private void HandleNavigation()
-    {
-        // Vertical Navigation
-        if (Input.GetKeyDown(upKey))
-        {
-            NavigateVertical(-1);
-        }
-        else if (Input.GetKeyDown(downKey))
-        {
-            NavigateVertical(1);
-        }
+    private void OnSelectionUp() {
+        NavigateVertical(-1);
+    }
 
-        // Horizontal Navigation
+    private void OnSelectionDown() {
+        NavigateVertical(1);
+    }
+
+    private void OnSelectionLeft() {
+        HandleHorizontalNavigation(-1);
+    }
+
+    private void OnSelectionRight() {
+        HandleHorizontalNavigation(1);
+    }
+
+    private void HandleHorizontalNavigation(int direction)
+    {
         var currentSection = navigableSections[currentVerticalIndex];
         if (currentSection.allowHorizontalNavigation)
         {
-            if (Input.GetKeyDown(leftKey))
-            {
-                NavigateHorizontal(-1);
-            }
-            else if (Input.GetKeyDown(rightKey))
-            {
-                NavigateHorizontal(1);
-            }
+            NavigateHorizontal(direction);
         }
+    }
 
-        // Selection
-        if (Input.GetKeyDown(selectKey))
-        {
-            SelectCurrentSection();
-        }
+    private void ConfirmSelection() {
+        SelectCurrentSection();
     }
 
     private void NavigateVertical(int direction)
