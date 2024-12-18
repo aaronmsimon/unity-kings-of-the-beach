@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace KotB.Menus
 {
-    public class FolderList : MonoBehaviour
+    public class FolderList
     {
         public string[] GetFolderArray(string folderPath) {
             string resourcesPath = Path.Combine(Application.dataPath, "Resources", folderPath);
