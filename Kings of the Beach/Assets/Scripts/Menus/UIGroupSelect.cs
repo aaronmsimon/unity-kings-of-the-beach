@@ -1,9 +1,15 @@
 using System;
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 namespace KotB.Menus
 {
+    public enum UIGroupType {
+        Folder,
+        Skills
+    }
+
     public class UIGroupSelect : MonoBehaviour
     {
         [Header("Navigation")]
@@ -13,6 +19,7 @@ namespace KotB.Menus
         [Header("Group Data")]
         [SerializeField] private string resourcesPath;
         [SerializeField] private UIGroupSelect parentFolder;
+        [SerializeField] private UIGroupType groupType;
 
         public event Action SelectionChanged;
 
@@ -46,8 +53,21 @@ namespace KotB.Menus
 
         public void LoadSelections() {
             string folderPath = resourcesPath + (parentFolder != null ? $"/{parentFolder.Selected()}" : null);
-            groupItems = folderList.GetFolderArray(folderPath);
-            Debug.Log($"group items length from {folderPath}: {groupItems.Length}");
+            switch (groupType) {
+                case UIGroupType.Folder:
+                    groupItems = folderList.GetFolderArray(folderPath);
+                    break;
+                case UIGroupType.Skills:
+                    SkillsSO[] skills = Resources.LoadAll<SkillsSO>(folderPath);
+                    groupItems = new string[skills.Length];
+                    for(int i = 0; i < skills.Length; i++) {
+                        groupItems[i] = skills[i].AthleteName;
+                    }
+                    break;
+                default:
+                    Debug.LogAssertion("No Group Type selected.");
+                    break;
+            }
             display.text = groupItems[groupItemIndex];
             SelectionChanged?.Invoke();
         }

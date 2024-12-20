@@ -941,6 +941,7 @@ MonoBehaviour:
   navNext: {fileID: 1049129515}
   resourcesPath: Athletes/Olympics 2024/Men
   parentFolder: {fileID: 0}
+  groupType: 0
 --- !u!1 &936105883
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,6 +1294,7 @@ MonoBehaviour:
   navNext: {fileID: 475680361}
   resourcesPath: Athletes/Olympics 2024/Men
   parentFolder: {fileID: 475680365}
+  groupType: 1
 --- !u!1 &1103872670
 GameObject:
   m_ObjectHideFlags: 0
