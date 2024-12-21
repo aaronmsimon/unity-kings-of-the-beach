@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using TMPro;
-using System.Collections;
 
 namespace KotB.Menus
 {
@@ -10,12 +8,8 @@ namespace KotB.Menus
         Skills
     }
 
-    public class UIGroupSelect : MonoBehaviour
+    public class UIGroupSelect : UIMenuSelectable
     {
-        [Header("Navigation")]
-        [SerializeField] private GameObject navPrev;
-        [SerializeField] private GameObject navNext;
-
         [Header("Group Data")]
         [SerializeField] private string resourcesPath;
         [SerializeField] private UIGroupSelect parentFolder;
@@ -26,12 +20,6 @@ namespace KotB.Menus
         private FolderList folderList = new FolderList();
         private string[] groupItems;
         private int groupItemIndex = 0;
-
-        private TMP_Text display;
-
-        private void Awake() {
-            display = GetComponent<TMP_Text>();
-        }
 
         private void Start() {
             if (parentFolder != null) return;
@@ -52,7 +40,7 @@ namespace KotB.Menus
         }
 
         public void LoadSelections() {
-            string folderPath = resourcesPath + (parentFolder != null ? $"/{parentFolder.Selected()}" : null);
+            string folderPath = resourcesPath + (parentFolder != null ? $"/{parentFolder.GetSelectedValue()}" : null);
             switch (groupType) {
                 case UIGroupType.Folder:
                     groupItems = folderList.GetFolderArray(folderPath);
@@ -68,16 +56,38 @@ namespace KotB.Menus
                     Debug.LogAssertion("No Group Type selected.");
                     break;
             }
-            display.text = groupItems[groupItemIndex];
+            UpdateDisplay();
             SelectionChanged?.Invoke();
         }
 
-        public string Selected() {
+        public string GetSelectedValue() {
             if (groupItems != null && groupItemIndex >= 0 && groupItemIndex < groupItems.Length) {
                 return groupItems[groupItemIndex];
             } else {
                 return null;
             }
+        }
+
+        public void IncrementItemIndex(int direction) {
+            if (direction > 0) {
+                if (groupItemIndex < groupItems.Length - 1) {
+                    groupItemIndex++;
+                } else {
+                    groupItemIndex = 0;
+                }
+            } else {
+                if (groupItemIndex > 0) {
+                    groupItemIndex--;
+                } else {
+                    groupItemIndex = groupItems.Length - 1;
+                }
+            }
+            UpdateDisplay();
+            SelectionChanged?.Invoke();
+        }
+
+        private void UpdateDisplay() {
+            _menuText.text = groupItems[groupItemIndex];
         }
 
         private void OnParentSelectionChanged() {

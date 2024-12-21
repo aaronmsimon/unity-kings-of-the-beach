@@ -768,6 +768,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 428952681}
+  - component: {fileID: 428952682}
   m_Layer: 0
   m_Name: UI Navigation Manager
   m_TagString: Untagged
@@ -790,6 +791,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &428952682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428952679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8a6204b692837409fc211781581a81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSelection: {fileID: 475680365}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
 --- !u!1 &475680361
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,8 +954,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bff32724d36a17d40be71acba41245e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navPrev: {fileID: 1049129515}
-  navNext: {fileID: 1049129515}
+  prevUISelectable: {fileID: 1049129519}
+  nextUISelectable: {fileID: 1049129519}
   resourcesPath: Athletes/Olympics 2024/Men
   parentFolder: {fileID: 0}
   groupType: 0
@@ -1290,8 +1307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bff32724d36a17d40be71acba41245e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navPrev: {fileID: 475680361}
-  navNext: {fileID: 475680361}
+  prevUISelectable: {fileID: 475680365}
+  nextUISelectable: {fileID: 475680365}
   resourcesPath: Athletes/Olympics 2024/Men
   parentFolder: {fileID: 475680365}
   groupType: 1

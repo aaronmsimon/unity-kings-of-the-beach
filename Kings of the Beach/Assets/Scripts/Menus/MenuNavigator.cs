@@ -1,12 +1,10 @@
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI; // For working with UI elements
 
 namespace KotB.Menus {
 
     public class MenuNavigator : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI[] menuOptions;
+        [SerializeField] private UIMenuSelectable defaultSelection;
         
         [Header("Color Options")]
         [SerializeField] private Color selectedColor = Color.yellow;
@@ -15,15 +13,14 @@ namespace KotB.Menus {
         [Header("Input Reader")]
         [SerializeField] private InputReader inputReader;
 
-        // Tracks the currently selected menu index
-        private int currentSelectedIndex = 0;
+        private UIMenuSelectable currentSelection;
 
         void Start()
         {
             inputReader.EnableMenuInput();
             
-            // Initialize by highlighting the first option
-            UpdateSelectedOption();
+            currentSelection = defaultSelection;
+            UpdateSelectedOption(defaultSelection);
         }
 
         private void OnEnable() {
@@ -42,64 +39,74 @@ namespace KotB.Menus {
             inputReader.selectEvent -= ConfirmSelection;
         }
 
+        private void GoToNextUISelectable() {
+            UpdateSelectedOption(currentSelection.NextUISelectable);
+        }
+
+        private void GoToPrevUISelectable() {
+            UpdateSelectedOption(currentSelection.PrevUISelectable);
+        }
+
         private void OnSelectionUp() {
-            MoveSelection(-1);
+            if (currentSelection.GetType() == typeof(UIGroupSelect)) {
+                GoToPrevUISelectable();
+            } else {
+                Debug.LogAssertion("Can't go up");
+            }
         }
 
         private void OnSelectionDown() {
-            MoveSelection(1);
+            if (currentSelection.GetType() == typeof(UIGroupSelect)) {
+                GoToNextUISelectable();
+            } else {
+                Debug.LogAssertion("Can't go down");
+            }
         }
 
         private void OnSelectionLeft() {
-            MoveSelection(-1);
+            if (currentSelection.GetType() == typeof(UIGroupSelect)) {
+                UIGroupSelect grp = (UIGroupSelect)currentSelection;
+                grp.IncrementItemIndex(-1);
+            } else {
+                Debug.LogAssertion("Can't go left");
+            }
         }
 
         private void OnSelectionRight() {
-            MoveSelection(1);
-        }
-
-        private void MoveSelection(int direction)
-        {
-            // Calculate new index, wrapping around the list
-            currentSelectedIndex += direction;
-            
-            // Ensure index stays within bounds using modulo
-            currentSelectedIndex = (currentSelectedIndex + menuOptions.Length) % menuOptions.Length;
-
-            // Update visual selection
-            UpdateSelectedOption();
-        }
-
-        private void UpdateSelectedOption()
-        {
-            // Reset all options to default
-            for (int i = 0; i < menuOptions.Length; i++)
-            {
-                menuOptions[i].color = defaultColor;
+            if (currentSelection.GetType() == typeof(UIGroupSelect)) {
+                UIGroupSelect grp = (UIGroupSelect)currentSelection;
+                grp.IncrementItemIndex(1);
+            } else {
+                Debug.LogAssertion("Can't go right");
             }
+        }
 
-            // Highlight current selection
-            menuOptions[currentSelectedIndex].color = selectedColor;
+        private void UpdateSelectedOption(UIMenuSelectable newSelection)
+        {
+            currentSelection.MenuText.color = defaultColor;
+            currentSelection = newSelection;
+            currentSelection.MenuText.color = selectedColor;
         }
 
         private void ConfirmSelection()
         {
             // Trigger action based on selected menu item
-            switch(currentSelectedIndex)
-            {
-                case 0:
-                    Debug.Log("Start Game Selected");
-                    // Add your start game logic
-                    break;
-                case 1:
-                    Debug.Log("Settings Selected");
-                    // Add settings menu logic
-                    break;
-                case 2:
-                    Debug.Log("Quit Game Selected");
-                    Application.Quit();
-                    break;
-            }
+            // switch(currentSelectedIndex)
+            // {
+            //     case 0:
+            //         Debug.Log("Start Game Selected");
+            //         // Add your start game logic
+            //         break;
+            //     case 1:
+            //         Debug.Log("Settings Selected");
+            //         // Add settings menu logic
+            //         break;
+            //     case 2:
+            //         Debug.Log("Quit Game Selected");
+            //         Application.Quit();
+            //         break;
+            // }
+            Debug.Log($"selected {currentSelection}");
         }
     }
 }
