@@ -135,5 +135,11 @@ I would like to actually finish this game this time. That means starting with a 
 13 - really want to test the full game features <br />
 15 - does athleteconfigs really need to be an SO?
 
+### Next Steps for Menu UI
+- ~~Enable manual list~~
+- Content drawer to toggle manual list or Resources path
+- Complete all Athlete selections
+- Populate SO with selections
+
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature

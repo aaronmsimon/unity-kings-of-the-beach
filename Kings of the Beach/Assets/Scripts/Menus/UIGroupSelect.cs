@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace KotB.Menus
@@ -14,6 +15,9 @@ namespace KotB.Menus
         [SerializeField] private string resourcesPath;
         [SerializeField] private UIGroupSelect parentFolder;
         [SerializeField] private UIGroupType groupType;
+        [Space(10)]
+        [SerializeField] private bool useManualList;
+        [SerializeField] private List<string> manualSelectionsList;
 
         public event Action SelectionChanged;
 
@@ -40,22 +44,27 @@ namespace KotB.Menus
         }
 
         public void LoadSelections() {
-            string folderPath = resourcesPath + (parentFolder != null ? $"/{parentFolder.GetSelectedValue()}" : null);
-            switch (groupType) {
-                case UIGroupType.Folder:
-                    groupItems = folderList.GetFolderArray(folderPath);
-                    break;
-                case UIGroupType.ScriptableObject:
-                    ScriptableObject[] scriptableObjects = Resources.LoadAll<ScriptableObject>(folderPath);
-                    groupItems = new string[scriptableObjects.Length];
-                    for(int i = 0; i < scriptableObjects.Length; i++) {
-                        groupItems[i] = scriptableObjects[i].name;
-                    }
-                    break;
-                default:
-                    Debug.LogAssertion("No Group Type selected.");
-                    break;
+            if (!useManualList) {
+                string folderPath = resourcesPath + (parentFolder != null ? $"/{parentFolder.GetSelectedValue()}" : null);
+                switch (groupType) {
+                    case UIGroupType.Folder:
+                        groupItems = folderList.GetFolderArray(folderPath);
+                        break;
+                    case UIGroupType.ScriptableObject:
+                        ScriptableObject[] scriptableObjects = Resources.LoadAll<ScriptableObject>(folderPath);
+                        groupItems = new string[scriptableObjects.Length];
+                        for(int i = 0; i < scriptableObjects.Length; i++) {
+                            groupItems[i] = scriptableObjects[i].name;
+                        }
+                        break;
+                    default:
+                        Debug.LogAssertion("No Group Type selected.");
+                        break;
+                }
+            } else {
+                groupItems = manualSelectionsList.ToArray();
             }
+
             UpdateDisplay();
             SelectionChanged?.Invoke();
         }
@@ -87,7 +96,9 @@ namespace KotB.Menus
         }
 
         private void UpdateDisplay() {
-            _menuText.text = groupItems[groupItemIndex];
+            if (groupItems.Length > 0) {
+                _menuText.text = groupItems[groupItemIndex];
+            }
         }
 
         private void OnParentSelectionChanged() {
