@@ -5,7 +5,7 @@ namespace KotB.Menus
 {
     public enum UIGroupType {
         Folder,
-        Skills
+        ScriptableObject
     }
 
     public class UIGroupSelect : UIMenuSelectable
@@ -45,11 +45,11 @@ namespace KotB.Menus
                 case UIGroupType.Folder:
                     groupItems = folderList.GetFolderArray(folderPath);
                     break;
-                case UIGroupType.Skills:
-                    SkillsSO[] skills = Resources.LoadAll<SkillsSO>(folderPath);
-                    groupItems = new string[skills.Length];
-                    for(int i = 0; i < skills.Length; i++) {
-                        groupItems[i] = skills[i].AthleteName;
+                case UIGroupType.ScriptableObject:
+                    ScriptableObject[] scriptableObjects = Resources.LoadAll<ScriptableObject>(folderPath);
+                    groupItems = new string[scriptableObjects.Length];
+                    for(int i = 0; i < scriptableObjects.Length; i++) {
+                        groupItems[i] = scriptableObjects[i].name;
                     }
                     break;
                 default:

@@ -16,7 +16,7 @@ namespace KotB.Menus
         }
 
         public virtual void Selected() {
-            Debug.Log($"{name} was selected");
+            Debug.Log($"{name} was selected with value {_menuText.text}");
         }
 
         // --- PROPERTIES ---

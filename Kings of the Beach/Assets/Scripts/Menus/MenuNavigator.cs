@@ -28,7 +28,7 @@ namespace KotB.Menus {
             inputReader.selectionDownEvent += OnSelectionDown;
             inputReader.selectionLeftEvent += OnSelectionLeft;
             inputReader.selectionRightEvent += OnSelectionRight;
-            inputReader.selectEvent += ConfirmSelection;
+            inputReader.selectEvent += OnSelected;
         }
 
         private void OnDisable() {
@@ -36,7 +36,7 @@ namespace KotB.Menus {
             inputReader.selectionDownEvent -= OnSelectionDown;
             inputReader.selectionLeftEvent -= OnSelectionLeft;
             inputReader.selectionRightEvent -= OnSelectionRight;
-            inputReader.selectEvent -= ConfirmSelection;
+            inputReader.selectEvent -= OnSelected;
         }
 
         private void GoToNextUISelectable() {
@@ -88,25 +88,9 @@ namespace KotB.Menus {
             currentSelection.MenuText.color = selectedColor;
         }
 
-        private void ConfirmSelection()
+        private void OnSelected()
         {
-            // Trigger action based on selected menu item
-            // switch(currentSelectedIndex)
-            // {
-            //     case 0:
-            //         Debug.Log("Start Game Selected");
-            //         // Add your start game logic
-            //         break;
-            //     case 1:
-            //         Debug.Log("Settings Selected");
-            //         // Add settings menu logic
-            //         break;
-            //     case 2:
-            //         Debug.Log("Quit Game Selected");
-            //         Application.Quit();
-            //         break;
-            // }
-            Debug.Log($"selected {currentSelection}");
+            currentSelection.Selected();
         }
     }
 }
