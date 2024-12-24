@@ -15,15 +15,13 @@ namespace KotB.Menus
         [SerializeField] private string resourcesPath;
         [SerializeField] private UIGroupSelect parentFolder;
         [SerializeField] private UIGroupType groupType;
-        [Space(10)]
-        [SerializeField] private bool useManualList;
-        [SerializeField] private List<string> manualSelectionsList;
-
         public event Action SelectionChanged;
 
         private FolderList folderList = new FolderList();
         private string[] groupItems;
         private int groupItemIndex = 0;
+        private bool useManualList;
+        [SerializeField] private List<string> manualSelectionsList;
 
         private void Start() {
             if (parentFolder != null) return;
@@ -104,5 +102,9 @@ namespace KotB.Menus
         private void OnParentSelectionChanged() {
             LoadSelections();
         }
+
+        // --- PROPERTIES ---
+        public bool UseManualList { get { return useManualList; } set { useManualList = value; } }
+        public List<string> ManualSelectionsList { get { return manualSelectionsList; } set { manualSelectionsList = value; } }
     }
 }

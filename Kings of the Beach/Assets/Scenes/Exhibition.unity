@@ -1093,7 +1093,6 @@ MonoBehaviour:
   resourcesPath: Athletes/Olympics 2024/Men
   parentFolder: {fileID: 0}
   groupType: 0
-  useManualList: 0
   manualSelectionsList: []
 --- !u!1 &644603608
 GameObject:
@@ -1514,7 +1513,6 @@ MonoBehaviour:
   resourcesPath: Athletes/Olympics 2024/Men
   parentFolder: {fileID: 475680365}
   groupType: 1
-  useManualList: 0
   manualSelectionsList: []
 --- !u!1 &1049530414
 GameObject:
@@ -1665,10 +1663,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prevUISelectable: {fileID: 1049129519}
   nextUISelectable: {fileID: 475680365}
-  resourcesPath: Athletes/Olympics 2024/Men
+  resourcesPath: 
   parentFolder: {fileID: 475680365}
   groupType: 1
-  useManualList: 1
   manualSelectionsList:
   - Shirt
   - Tank

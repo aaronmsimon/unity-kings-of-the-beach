@@ -5,7 +5,7 @@ using KotB.Actors;
 namespace KotB.Testing
 {
     [CustomEditor(typeof(AthleteThoughts))]
-    public class EventEditor : Editor
+    public class ThoughtsEditor : Editor
     {
         private Vector2 scrollPos;  // Scroll position for the scrollable text box
 
