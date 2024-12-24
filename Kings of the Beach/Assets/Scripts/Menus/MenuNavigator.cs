@@ -48,7 +48,7 @@ namespace KotB.Menus {
         }
 
         private void OnSelectionUp() {
-            if (currentSelection.GetType() == typeof(UIGroupSelect)) {
+            if (currentSelection is UIGroupSelect) {
                 GoToPrevUISelectable();
             } else {
                 Debug.LogAssertion("Can't go up");
@@ -56,7 +56,7 @@ namespace KotB.Menus {
         }
 
         private void OnSelectionDown() {
-            if (currentSelection.GetType() == typeof(UIGroupSelect)) {
+            if (currentSelection is UIGroupSelect) {
                 GoToNextUISelectable();
             } else {
                 Debug.LogAssertion("Can't go down");
@@ -64,7 +64,7 @@ namespace KotB.Menus {
         }
 
         private void OnSelectionLeft() {
-            if (currentSelection.GetType() == typeof(UIGroupSelect)) {
+            if (currentSelection is UIGroupSelect) {
                 UIGroupSelect grp = (UIGroupSelect)currentSelection;
                 grp.IncrementItemIndex(-1);
             } else {
@@ -73,7 +73,7 @@ namespace KotB.Menus {
         }
 
         private void OnSelectionRight() {
-            if (currentSelection.GetType() == typeof(UIGroupSelect)) {
+            if (currentSelection is UIGroupSelect) {
                 UIGroupSelect grp = (UIGroupSelect)currentSelection;
                 grp.IncrementItemIndex(1);
             } else {

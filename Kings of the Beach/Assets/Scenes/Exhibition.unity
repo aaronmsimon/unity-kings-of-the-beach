@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 364220726}
   - component: {fileID: 364220727}
   m_Layer: 5
-  m_Name: Hori-Country
+  m_Name: Country (H)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1093,8 +1093,6 @@ MonoBehaviour:
   resourcesPath: Athletes/Olympics 2024/Men
   parentFolder: {fileID: 0}
   groupType: 0
-  useManualList: 0
-  manualSelectionsList: []
 --- !u!1 &644603608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,7 +1104,7 @@ GameObject:
   - component: {fileID: 644603609}
   - component: {fileID: 644603610}
   m_Layer: 5
-  m_Name: Hori-Outfit
+  m_Name: Outfit (H)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1171,7 +1169,7 @@ GameObject:
   - component: {fileID: 936105884}
   - component: {fileID: 936105885}
   m_Layer: 5
-  m_Name: Vert-Player Selections
+  m_Name: Player Selections (V)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1514,8 +1512,6 @@ MonoBehaviour:
   resourcesPath: Athletes/Olympics 2024/Men
   parentFolder: {fileID: 475680365}
   groupType: 1
-  useManualList: 0
-  manualSelectionsList: []
 --- !u!1 &1049530414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,19 +1656,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1049530414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bff32724d36a17d40be71acba41245e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 0083d10df3a3c8f48bf718bc49ba5bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prevUISelectable: {fileID: 1049129519}
   nextUISelectable: {fileID: 475680365}
   resourcesPath: 
-  parentFolder: {fileID: 475680365}
-  groupType: 1
-  useManualList: 1
-  manualSelectionsList:
-  - Shirt
-  - Tank
-  - No Shirt
+  parentFolder: {fileID: 0}
+  groupType: 0
 --- !u!1 &1103872670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1818,7 +1809,7 @@ GameObject:
   - component: {fileID: 1253047760}
   - component: {fileID: 1253047761}
   m_Layer: 5
-  m_Name: Hori-Player
+  m_Name: Player (H)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
