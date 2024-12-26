@@ -138,7 +138,9 @@ I would like to actually finish this game this time. That means starting with a 
 ### Next Steps for Menu UI
 - ~~Enable manual list~~
 - ~~Content drawer to toggle manual list or Resources path~~
-- Complete all Athlete selections and turn into a Prefab
+- ~~Complete all Athlete selections~~
+- Populate defaults
+- Turn into a Prefab
 - Populate SO with selections
 
 

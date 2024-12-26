@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a57c40882cd8b44b4e4d65b2cec148, type: 3}
+  m_Name: Cuba 01
+  m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: b78baedb813df6d48b89106f3a4181b7, type: 2}

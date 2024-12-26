@@ -1,5 +1,6 @@
 using UnityEngine;
 using KotB.Actors;
+using KotB.Items;
 
 namespace KotB.Testing
 {

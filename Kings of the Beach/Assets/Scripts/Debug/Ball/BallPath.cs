@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using KotB.Items;
 
 namespace KotB.Testing
 {

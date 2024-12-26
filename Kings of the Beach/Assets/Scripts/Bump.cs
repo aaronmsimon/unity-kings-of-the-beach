@@ -1,4 +1,5 @@
 using UnityEngine;
+using KotB.Items;
 
 public class Bump : MonoBehaviour
 {
