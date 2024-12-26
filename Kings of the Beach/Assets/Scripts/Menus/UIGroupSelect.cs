@@ -6,7 +6,8 @@ namespace KotB.Menus
 {
     public enum UIGroupType {
         Folder,
-        ScriptableObject
+        ScriptableObject,
+        Material
     }
 
     public class UIGroupSelect : UIMenuSelectable
@@ -51,6 +52,13 @@ namespace KotB.Menus
                     groupItems = new string[scriptableObjects.Length];
                     for(int i = 0; i < scriptableObjects.Length; i++) {
                         groupItems[i] = scriptableObjects[i].name;
+                    }
+                    break;
+                case UIGroupType.Material:
+                    Material[] materials = Resources.LoadAll<Material>(folderPath);
+                    groupItems = new string[materials.Length];
+                    for(int i = 0; i < materials.Length; i++) {
+                        groupItems[i] = materials[i].name;
                     }
                     break;
                 default:
