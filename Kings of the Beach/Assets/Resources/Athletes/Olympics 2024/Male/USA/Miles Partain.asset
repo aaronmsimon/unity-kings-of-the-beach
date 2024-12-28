@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37262e169b0a64548b7fbd6f67883702, type: 3}
-  m_Name: Noslen Diaz Amaro
+  m_Name: Miles Partain
   m_EditorClassIdentifier: 
-  athleteName: Noslen Diaz Amaro
+  athleteName: Miles Partain
   gender: 1
   defaultOutfit: 1
-  defaultTop: {fileID: 2100000, guid: ec78d5a73a06c554d86eedef29dfeaac, type: 2}
-  defaultBottom: {fileID: 2100000, guid: b78baedb813df6d48b89106f3a4181b7, type: 2}
+  defaultTop: {fileID: 11400000, guid: 702e83f40caeb1b46b8fceb49b1aef1b, type: 2}
+  defaultBottom: {fileID: 11400000, guid: a0cb325a93c0e404392f507e2cbad93f, type: 2}
   moveSpeed: 7
   targetLockDistance: 0.5
   reactionTime: 0.2
@@ -28,7 +28,7 @@ MonoBehaviour:
   serving: 8
   servePower: 7
   blocking: 4
-  height: 2.07
+  height: 1.91
   servingPartnerPos: {x: 5, y: 1.5}
   defensePos: {x: 5, y: 2}
   offenseXPos: 1.25

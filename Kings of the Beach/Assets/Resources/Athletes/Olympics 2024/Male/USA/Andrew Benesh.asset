@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37262e169b0a64548b7fbd6f67883702, type: 3}
-  m_Name: Miles Partain
+  m_Name: Andrew Benesh
   m_EditorClassIdentifier: 
-  athleteName: Miles Partain
+  athleteName: Andrew Benesh
   gender: 1
   defaultOutfit: 1
-  defaultTop: {fileID: 2100000, guid: 6ff328efcb3edf24f9fa372963b1a5f5, type: 2}
-  defaultBottom: {fileID: 2100000, guid: c07d3c7b15823d5448b02efab106cb54, type: 2}
+  defaultTop: {fileID: 11400000, guid: 702e83f40caeb1b46b8fceb49b1aef1b, type: 2}
+  defaultBottom: {fileID: 11400000, guid: a0cb325a93c0e404392f507e2cbad93f, type: 2}
   moveSpeed: 7
   targetLockDistance: 0.5
   reactionTime: 0.2
@@ -28,8 +28,8 @@ MonoBehaviour:
   serving: 8
   servePower: 7
   blocking: 4
-  height: 1.91
-  servingPartnerPos: {x: 5, y: 1.5}
-  defensePos: {x: 5, y: 2}
+  height: 2.03
+  servingPartnerPos: {x: 3, y: 1.5}
+  defensePos: {x: 2, y: 2}
   offenseXPos: 1.25
-  playerPosition: 1
+  playerPosition: 0

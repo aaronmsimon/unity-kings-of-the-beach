@@ -139,9 +139,13 @@ I would like to actually finish this game this time. That means starting with a 
 - ~~Enable manual list~~
 - ~~Content drawer to toggle manual list or Resources path~~
 - ~~Complete all Athlete selections~~
-- Populate defaults
+- ~~Populate defaults~~
+- Change population of Outfits based on male/female from default
 - Turn into a Prefab
 - Populate SO with selections
+
+### Next Steps for Match Loading
+- Change loading of Athletes to the selections from Menu UI
 
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature
