@@ -18,8 +18,6 @@ namespace KotB.Actors
 
         [Header("Settings")]
         [SerializeField] protected FloatVariable courtSide;
-        [SerializeField] private LayerMask obstaclesLayer;
-        [SerializeField] private LayerMask invalidAimLayer;
 
         protected Ball ball;
         protected StateMachine stateMachine;
@@ -28,6 +26,8 @@ namespace KotB.Actors
         protected bool isJumping;
         protected bool feint;
 
+        private LayerMask obstaclesLayer;
+        private LayerMask invalidAimLayer;
         private float defaultHeight = 1.9f;
         private float noMansLand = 0.5f;
         private float skillLevelMax = 10;
@@ -57,6 +57,9 @@ namespace KotB.Actors
             capCollider = GetComponent<CapsuleCollider>();
             sphereCollider = GetComponent<SphereCollider>();
             animator = GetComponentInChildren<Animator>();
+
+            obstaclesLayer = LayerMask.GetMask("Obstacles");
+            invalidAimLayer = LayerMask.GetMask("InvalidAim");
         }
 
         protected virtual void Start() {

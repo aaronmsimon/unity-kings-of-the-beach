@@ -1,4 +1,5 @@
 using UnityEngine;
+using KotB.Items;
 
 namespace KotB.Match
 {
@@ -8,7 +9,7 @@ namespace KotB.Match
         public SkillsSO skills;
         public bool computerControlled;
         public Outfit outfit;
-        public Material top;
-        public Material bottom;
+        public MaterialSO top;
+        public MaterialSO bottom;
     }
 }

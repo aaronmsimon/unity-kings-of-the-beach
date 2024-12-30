@@ -47,8 +47,8 @@ namespace KotB.StatePattern.MatchStates
             // Assign Materials
             SkinnedMeshRenderer r = outfitTransform.GetComponent<SkinnedMeshRenderer>();
             Material[] materials = r.materials;
-            materials[0] = athleteConfig.bottom != null ? athleteConfig.bottom : athleteConfig.skills.DefaultBottom.Mat;
-            if (athleteConfig.outfit.ToString() != "NoShirt") materials[1] = athleteConfig.top != null ? athleteConfig.top : athleteConfig.skills.DefaultTop.Mat;
+            materials[0] = athleteConfig.bottom != null ? athleteConfig.bottom.Mat : athleteConfig.skills.DefaultBottom.Mat;
+            if (athleteConfig.outfit.ToString() != "NoShirt") materials[1] = athleteConfig.top != null ? athleteConfig.top.Mat : athleteConfig.skills.DefaultTop.Mat;
             r.materials = materials;
 
             // Move to Position

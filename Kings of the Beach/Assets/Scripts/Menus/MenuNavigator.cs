@@ -1,4 +1,5 @@
 using UnityEngine;
+using RoboRyanTron.Unite2017.Events;
 
 namespace KotB.Menus {
 
@@ -9,6 +10,9 @@ namespace KotB.Menus {
         [Header("Color Options")]
         [SerializeField] private Color selectedColor = Color.yellow;
         [SerializeField] private Color defaultColor = Color.white;
+
+        [Header("Events")]
+        [SerializeField] private GameEvent startMatchEvent;
 
         [Header("Input Reader")]
         [SerializeField] private InputReader inputReader;
@@ -28,7 +32,7 @@ namespace KotB.Menus {
             inputReader.selectionDownEvent += OnSelectionDown;
             inputReader.selectionLeftEvent += OnSelectionLeft;
             inputReader.selectionRightEvent += OnSelectionRight;
-            inputReader.selectEvent += OnSelected;
+            inputReader.startEvent += OnStart;
         }
 
         private void OnDisable() {
@@ -36,7 +40,7 @@ namespace KotB.Menus {
             inputReader.selectionDownEvent -= OnSelectionDown;
             inputReader.selectionLeftEvent -= OnSelectionLeft;
             inputReader.selectionRightEvent -= OnSelectionRight;
-            inputReader.selectEvent -= OnSelected;
+            inputReader.startEvent -= OnStart;
         }
 
         private void GoToNextUISelectable() {
@@ -88,9 +92,9 @@ namespace KotB.Menus {
             currentSelection.MenuText.color = selectedColor;
         }
 
-        private void OnSelected()
+        private void OnStart()
         {
-            currentSelection.Selected();
+            startMatchEvent.Raise();
         }
     }
 }

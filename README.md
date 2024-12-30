@@ -99,6 +99,9 @@ I would like to actually finish this game this time. That means starting with a 
 3. Game setup: choose points/set, sets/match
 4. Pass setup info to Match scene
 
+#### UI
+1. Reference: [Game UI Database](https://www.gameuidatabase.com/)
+
 ### Concepts/Ideas
 - use right stick to reach for ball on dig
 - amount of power, direction, depends on angle of ball, how quickly can get under it, etc
@@ -129,7 +132,6 @@ I would like to actually finish this game this time. That means starting with a 
 - customize character (eyes, hair, skin)
 
 ### Note to Self
-6 - UI: use [Game UI Database](https://www.gameuidatabase.com/)<br />
 10 - don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]<br />
 11 - different AI states for receiving a serve vs defense during a point (for judgement vs deciding if it's their ball)<br />
 13 - really want to test the full game features <br />
