@@ -94,8 +94,8 @@ I would like to actually finish this game this time. That means starting with a 
 4. Instant Replay for in/out calls
 
 #### Menus
-1. Game setup: choose players
-2. Game setup: choose outfits
+1. ~~Game setup: choose players~~
+2. ~~Game setup: choose outfits~~
 3. Game setup: choose points/set, sets/match
 4. Pass setup info to Match scene
 
@@ -144,7 +144,7 @@ I would like to actually finish this game this time. That means starting with a 
 - ~~Populate defaults~~
 - Change population of Outfits based on male/female from default
 - Turn into a Prefab
-- Populate SO with selections
+- ~~Populate SO with selections~~
 
 ### Next Steps for Match Loading
 - Change loading of Athletes to the selections from Menu UI

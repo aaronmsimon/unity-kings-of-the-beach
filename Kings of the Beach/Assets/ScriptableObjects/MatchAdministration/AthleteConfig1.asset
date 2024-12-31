@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f95b03aad29bf43850c6ac3e15eb4f, type: 3}
   m_Name: AthleteConfig1
   m_EditorClassIdentifier: 
-  skills: {fileID: 11400000, guid: 819c6d31029030d45906e8d16ffbe3e5, type: 2}
-  computerControlled: 1
+  skills: {fileID: 11400000, guid: 55ae344156626884f8f5f3278687fdac, type: 2}
+  computerControlled: 0
   outfit: 1
-  top: {fileID: 2100000, guid: a6250e36c8d91cf4e95c07d8bc637aba, type: 2}
-  bottom: {fileID: 2100000, guid: 27d818651567ec14e999cd9b220e7298, type: 2}
+  top: {fileID: 11400000, guid: 702e83f40caeb1b46b8fceb49b1aef1b, type: 2}
+  bottom: {fileID: 11400000, guid: 2f5141de1063f6c4abd5139c27740747, type: 2}
