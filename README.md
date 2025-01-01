@@ -51,6 +51,7 @@ I would like to actually finish this game this time. That means starting with a 
 7. ~~Pass towards teammate~~
 8. ~~Offensive positioning~~
 9. Block calls (making & obeying)
+10. AI Controller - Aim with variable opponents
 
 #### Gameplay
 1. ~~Randomness in aim~~
@@ -135,7 +136,8 @@ I would like to actually finish this game this time. That means starting with a 
 10 - don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]<br />
 11 - different AI states for receiving a serve vs defense during a point (for judgement vs deciding if it's their ball)<br />
 13 - really want to test the full game features <br />
-15 - does athleteconfigs really need to be an SO?
+15 - does athleteconfigs really need to be an SO?<br />
+16 - Change loading of Athletes to the selections from Menu UI
 
 ### Next Steps for Menu UI
 - ~~Enable manual list~~
@@ -143,11 +145,7 @@ I would like to actually finish this game this time. That means starting with a 
 - ~~Complete all Athlete selections~~
 - ~~Populate defaults~~
 - Change population of Outfits based on male/female from default
-- Turn into a Prefab
+- ~~Turn into a Prefab~~
 - ~~Populate SO with selections~~
-
-### Next Steps for Match Loading
-- Change loading of Athletes to the selections from Menu UI
-
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature
