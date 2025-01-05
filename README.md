@@ -138,15 +138,16 @@ I would like to actually finish this game this time. That means starting with a 
 13 - really want to test the full game features <br />
 15 - does athleteconfigs really need to be an SO?<br />
 16 - Change loading of Athletes to the selections from Menu UI<br />
-<ul>
-	<li>ensure assigned to team</li>
-	<li>instatiate appropriate prefab</li>
-	<li>populate skills</li>
-	<li>make visible appropriate mesh</li>
-	<li>populate materials</li>
-	<li>place on starting point of side</li>
-	<li>start game</li>
-</ul>
+- document match administration classes and SOs
+- need to be able to populate teamSO with configSO in inspector for testing (answers 15)
+- reset Game scene start
+- ensure assigned to team
+- instatiate appropriate prefab
+- populate skills
+- make visible appropriate mesh
+- populate materials
+- place on starting point of side
+- start game
 
 ### Next Steps for Menu UI
 - ~~Enable manual list~~
