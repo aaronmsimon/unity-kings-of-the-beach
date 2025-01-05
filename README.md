@@ -137,7 +137,16 @@ I would like to actually finish this game this time. That means starting with a 
 11 - different AI states for receiving a serve vs defense during a point (for judgement vs deciding if it's their ball)<br />
 13 - really want to test the full game features <br />
 15 - does athleteconfigs really need to be an SO?<br />
-16 - Change loading of Athletes to the selections from Menu UI
+16 - Change loading of Athletes to the selections from Menu UI<br />
+<ul>
+	<li>ensure assigned to team</li>
+	<li>instatiate appropriate prefab</li>
+	<li>populate skills</li>
+	<li>make visible appropriate mesh</li>
+	<li>populate materials</li>
+	<li>place on starting point of side</li>
+	<li>start game</li>
+</ul>
 
 ### Next Steps for Menu UI
 - ~~Enable manual list~~
