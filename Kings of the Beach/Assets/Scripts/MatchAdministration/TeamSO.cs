@@ -11,8 +11,8 @@ namespace KotB.Match
         [SerializeField] private StringVariable teamName;
         [SerializeField] private FloatVariable score;
         [SerializeField] private FloatVariable courtSide;
+        [SerializeField] private List<AthleteConfigSO> athleteConfigs;
 
-        private List<AthleteConfigSO> athleteConfigs;
         private List<Athlete> athletes;
         private int serverIndex;
 

@@ -136,10 +136,8 @@ I would like to actually finish this game this time. That means starting with a 
 10 - don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]<br />
 11 - different AI states for receiving a serve vs defense during a point (for judgement vs deciding if it's their ball)<br />
 13 - really want to test the full game features <br />
-15 - does athleteconfigs really need to be an SO?<br />
 16 - Change loading of Athletes to the selections from Menu UI<br />
 - document match administration classes and SOs
-- need to be able to populate teamSO with configSO in inspector for testing (answers 15)
 - reset Game scene start
 - ensure assigned to team
 - instatiate appropriate prefab
