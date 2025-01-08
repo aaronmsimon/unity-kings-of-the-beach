@@ -137,15 +137,6 @@ I would like to actually finish this game this time. That means starting with a 
 11 - different AI states for receiving a serve vs defense during a point (for judgement vs deciding if it's their ball)<br />
 13 - really want to test the full game features <br />
 16 - Change loading of Athletes to the selections from Menu UI<br />
-- document match administration classes and SOs
-- reset Game scene start
-- ensure assigned to team
-- instatiate appropriate prefab
-- populate skills
-- make visible appropriate mesh
-- populate materials
-- place on starting point of side
-- start game
 
 ### Next Steps for Menu UI
 - ~~Enable manual list~~
@@ -155,5 +146,17 @@ I would like to actually finish this game this time. That means starting with a 
 - Change population of Outfits based on male/female from default
 - ~~Turn into a Prefab~~
 - ~~Populate SO with selections~~
+
+### Next Steps for Loading Game Scene
+- ~~document match administration classes and SOs~~
+- ~~need to be able to populate teamSO with configSO in inspector for testing~~
+- reset Game scene start
+- ensure assigned to team
+- instatiate appropriate prefab
+- populate skills
+- make visible appropriate mesh
+- populate materials
+- place on starting point of side
+- start game
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature
