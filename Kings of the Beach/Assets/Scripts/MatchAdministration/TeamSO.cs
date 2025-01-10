@@ -55,6 +55,7 @@ namespace KotB.Match
 
         public List<AthleteConfigSO> AthleteConfigs => athleteConfigs;
         public List<Athlete> Athletes => athletes;
+        public StringVariable TeamName => teamName;
         public FloatVariable CourtSide => courtSide;
     }
 }

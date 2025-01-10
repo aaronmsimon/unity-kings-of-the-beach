@@ -151,7 +151,7 @@ I would like to actually finish this game this time. That means starting with a 
 - ~~document match administration classes and SOs~~
 - ~~need to be able to populate teamSO with configSO in inspector for testing~~
 - ~~reset Game scene start~~
-- ensure assigned to team
+- ~~ensure assigned to team~~
 - instatiate appropriate prefab
 - populate skills
 - make visible appropriate mesh
