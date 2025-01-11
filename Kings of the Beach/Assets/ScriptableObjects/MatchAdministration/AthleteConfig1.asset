@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skills: {fileID: 11400000, guid: 55ae344156626884f8f5f3278687fdac, type: 2}
   computerControlled: 0
-  outfit: 1
-  top: {fileID: 11400000, guid: 702e83f40caeb1b46b8fceb49b1aef1b, type: 2}
+  outfit: 2
+  top: {fileID: 11400000, guid: f58e69f90f4af464486c2849fe586a95, type: 2}
   bottom: {fileID: 11400000, guid: 2f5141de1063f6c4abd5139c27740747, type: 2}
