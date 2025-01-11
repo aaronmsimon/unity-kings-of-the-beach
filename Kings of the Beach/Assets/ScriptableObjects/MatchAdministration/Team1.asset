@@ -17,3 +17,4 @@ MonoBehaviour:
   courtSide: {fileID: 11400000, guid: 718029772aacc8042a5d065803efe304, type: 2}
   athleteConfigs:
   - {fileID: 11400000, guid: b09022957e0637a40b0149006cc55afc, type: 2}
+  - {fileID: 11400000, guid: d89ea2c72a8992a4292ffc7c3e3a9682, type: 2}

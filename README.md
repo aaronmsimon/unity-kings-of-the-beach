@@ -152,7 +152,7 @@ I would like to actually finish this game this time. That means starting with a 
 - ~~need to be able to populate teamSO with configSO in inspector for testing~~
 - ~~reset Game scene start~~
 - ~~ensure assigned to team~~
-- instatiate appropriate prefab
+- ~~instatiate appropriate prefab~~
 - populate skills
 - make visible appropriate mesh
 - populate materials
