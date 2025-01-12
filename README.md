@@ -156,7 +156,7 @@ I would like to actually finish this game this time. That means starting with a 
 - ~~populate skills~~
 - ~~make visible appropriate mesh~~
 - ~~populate materials~~
-- place on starting point of side
+- ~~place on starting point of side~~
 - start game
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature

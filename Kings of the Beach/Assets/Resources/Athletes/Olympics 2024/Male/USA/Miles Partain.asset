@@ -30,6 +30,6 @@ MonoBehaviour:
   blocking: 4
   height: 1.91
   servingPartnerPos: {x: 5, y: 1.5}
-  defensePos: {x: 5, y: 2}
+  defensePos: {x: 2, y: 2}
   offenseXPos: 1.25
   playerPosition: 1

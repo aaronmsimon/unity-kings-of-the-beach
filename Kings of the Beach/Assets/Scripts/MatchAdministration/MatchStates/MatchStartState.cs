@@ -21,14 +21,14 @@ namespace KotB.StatePattern.MatchStates
 
             foreach (TeamSO team in matchManager.MatchInfo.Teams) {
                 team.CourtSide.Value = teamIndex == 0 ? -1 : 1;
-                foreach (AthleteConfigSO athleteConfig in team.AthleteConfigs) {
-                    Athlete athlete = InstantiateAthlete(athleteConfig, team);
+                for (int i = 0; i < team.AthleteConfigs.Count; i++) {
+                    Athlete athlete = InstantiateAthlete(team.AthleteConfigs[i], team, i);
                     team.AddAthlete(athlete);
                 }
             }
         }
 
-        private Athlete InstantiateAthlete(AthleteConfigSO athleteConfig, TeamSO team) {
+        private Athlete InstantiateAthlete(AthleteConfigSO athleteConfig, TeamSO team, int index) {
             // Instantiate Prefab
             GameObject athletePrefab = athleteConfig.computerControlled ? matchManager.AIPrefab : matchManager.PlayerPrefab;
             GameObject athleteGO = GameObject.Instantiate(athletePrefab);
@@ -51,7 +51,7 @@ namespace KotB.StatePattern.MatchStates
             r.materials = materials;
 
             // Move to Position
-            Vector2 dPos = new Vector3(athlete.Skills.DefensePos.x * athlete.CourtSide, 0.01f, athlete.Skills.DefensePos.y);
+            Vector3 dPos = new Vector3(athlete.Skills.DefensePos.x * athlete.CourtSide, 0.01f, athlete.Skills.DefensePos.y * (index == 0 ? 1 : -1));
             if (athleteConfig.computerControlled) athleteGO.GetComponent<AI>().TargetPos = dPos;
             athleteGO.transform.position = dPos;
 
