@@ -15,3 +15,6 @@ MonoBehaviour:
   teamName: {fileID: 11400000, guid: 4be0a0172db0e1f438985c94c6a04c9f, type: 2}
   score: {fileID: 11400000, guid: 85e4cb5a8d901de49a5c54cfb230235f, type: 2}
   courtSide: {fileID: 11400000, guid: 49066017a306d4c48954e99750cc8cf0, type: 2}
+  athleteConfigs:
+  - {fileID: 11400000, guid: 02c2bdb08431ef54cbf79b4e828d5e5d, type: 2}
+  - {fileID: 11400000, guid: 23f533b684c663945bfce66b28bce05b, type: 2}

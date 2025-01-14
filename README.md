@@ -97,8 +97,9 @@ I would like to actually finish this game this time. That means starting with a 
 #### Menus
 1. ~~Game setup: choose players~~
 2. ~~Game setup: choose outfits~~
-3. Game setup: choose points/set, sets/match
-4. Pass setup info to Match scene
+3. Game setup: choose points/set, sets/match, assign side
+4. Game setup: players assigned to teams
+5. Pass setup info to Match scene
 
 #### UI
 1. Reference: [Game UI Database](https://www.gameuidatabase.com/)
@@ -157,6 +158,6 @@ I would like to actually finish this game this time. That means starting with a 
 - ~~make visible appropriate mesh~~
 - ~~populate materials~~
 - ~~place on starting point of side~~
-- start game
+- ~~start game~~
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature

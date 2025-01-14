@@ -10,11 +10,7 @@ namespace KotB.Testing
         
         private void Update() {
             if (Input.GetKeyDown(KeyCode.J)) {
-                Athlete[] athletes = FindObjectsOfType<Athlete>();
-                foreach (Athlete athlete in athletes) {
-                    TeamSO team = matchInfo.GetTeam(athlete);
-                    Debug.Log($"Team {team.TeamName.Value} has athlete {athlete.Skills.AthleteName}");
-                }
+                Debug.Log(matchInfo.GetServer());
             }
         }
     }

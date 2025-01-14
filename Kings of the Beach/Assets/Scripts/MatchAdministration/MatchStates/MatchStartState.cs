@@ -17,10 +17,8 @@ namespace KotB.StatePattern.MatchStates
         }
 
         private void InitializeTeams() {
-            int teamIndex = 0;
-
             foreach (TeamSO team in matchManager.MatchInfo.Teams) {
-                team.CourtSide.Value = teamIndex == 0 ? -1 : 1;
+                team.Initialize();
                 for (int i = 0; i < team.AthleteConfigs.Count; i++) {
                     Athlete athlete = InstantiateAthlete(team.AthleteConfigs[i], team, i);
                     team.AddAthlete(athlete);
