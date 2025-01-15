@@ -1,6 +1,7 @@
 using UnityEngine;
 using KotB.Match;
 using KotB.Actors;
+using Cinemachine;
 
 namespace KotB.StatePattern.MatchStates
 {
@@ -52,6 +53,15 @@ namespace KotB.StatePattern.MatchStates
             Vector3 dPos = new Vector3(athlete.Skills.DefensePos.x * athlete.CourtSide, 0.01f, athlete.Skills.DefensePos.y * (index == 0 ? 1 : -1));
             if (athleteConfig.computerControlled) athleteGO.GetComponent<AI>().TargetPos = dPos;
             athleteGO.transform.position = dPos;
+
+            // If Player and Cinemachine Serve Camera exists, assign
+            if (!athleteConfig.computerControlled) {
+                CinemachineVirtualCamera cam = GameObject.FindGameObjectWithTag("Serve Camera").GetComponent<CinemachineVirtualCamera>();
+                if (cam != null) {
+                    cam.Follow = athlete.transform;
+                    cam.LookAt = athlete.transform;
+                }
+            }
 
             return athlete;
         }
