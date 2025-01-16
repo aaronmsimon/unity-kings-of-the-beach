@@ -124,12 +124,12 @@ I would like to actually finish this game this time. That means starting with a 
 - athlete raycast isn't used
 - review all state machines for proper state handling
 - don't actually need all these variables (events, too?) as Scriptable Objects
+- change control names to be more universal
 
 ### Future Enchancements
 - diving
 - tweaks for accuracy in spiking (scale of influence, timing, use direction not just x, logarithmic curve for speed and/or direction)
 - spike feint should consider opponent's blocking skill and maybe frequency of failure
-- change control names to be more universal
 - enable control remapping
 - customize character (eyes, hair, skin)
 
@@ -138,6 +138,8 @@ I would like to actually finish this game this time. That means starting with a 
 11 - different AI states for receiving a serve vs defense during a point (for judgement vs deciding if it's their ball)<br />
 13 - really want to test the full game features <br />
 16 - Change loading of Athletes to the selections from Menu UI<br />
+17 - Add script for Serve Camera to point in direction based on player's side <br />
+18 - Serve Controls need to be separate (shouldn't be able to spike while in serve mode)
 
 ### Next Steps for Menu UI
 - ~~Enable manual list~~
@@ -147,17 +149,5 @@ I would like to actually finish this game this time. That means starting with a 
 - Change population of Outfits based on male/female from default
 - ~~Turn into a Prefab~~
 - ~~Populate SO with selections~~
-
-### Next Steps for Loading Game Scene
-- ~~document match administration classes and SOs~~
-- ~~need to be able to populate teamSO with configSO in inspector for testing~~
-- ~~reset Game scene start~~
-- ~~ensure assigned to team~~
-- ~~instatiate appropriate prefab~~
-- ~~populate skills~~
-- ~~make visible appropriate mesh~~
-- ~~populate materials~~
-- ~~place on starting point of side~~
-- ~~start game~~
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature
