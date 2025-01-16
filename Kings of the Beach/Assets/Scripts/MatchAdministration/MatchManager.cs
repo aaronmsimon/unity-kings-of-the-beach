@@ -47,7 +47,9 @@ namespace KotB.Match
             postPointState = new PostPointState(this);
             matchEndState = new MatchEndState(this);
             matchStartState = new MatchStartState(this);
-            
+        }
+
+        private void Start() {
             InitializeMatch();
             matchStateMachine.ChangeState(matchStartState);
         }

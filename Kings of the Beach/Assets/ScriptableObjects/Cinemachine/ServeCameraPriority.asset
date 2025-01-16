@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ServeCameraPriority
   m_EditorClassIdentifier: 
   DeveloperDescription: 
-  Value: 10
+  Value: 0

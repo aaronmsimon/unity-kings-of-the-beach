@@ -4,8 +4,8 @@ using RoboRyanTron.Unite2017.Variables;
 
 namespace KotB.Cinemachine
 {
-    public class CinemachinePriority : MonoBehaviour {
-        [SerializeField] private FloatVariable cameraPriority;
+    public class CameraPriority : MonoBehaviour {
+        [SerializeField] private FloatVariable camPriority;
 
         private CinemachineVirtualCamera cam;
 
@@ -14,7 +14,7 @@ namespace KotB.Cinemachine
         }
 
         public void OnUpdateCameraPriorty() {
-            cam.Priority = (int)cameraPriority.Value;
+            cam.Priority = (int)camPriority.Value;
         }
     }
 }

@@ -59,7 +59,6 @@ namespace KotB.StatePattern.MatchStates
                 CinemachineVirtualCamera cam = GameObject.FindGameObjectWithTag("Serve Camera").GetComponent<CinemachineVirtualCamera>();
                 if (cam != null) {
                     cam.Follow = athlete.transform;
-                    cam.LookAt = athlete.transform;
                 }
             }
 

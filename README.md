@@ -151,3 +151,4 @@ I would like to actually finish this game this time. That means starting with a 
 - ~~Populate SO with selections~~
 
 In case there are issues with passing/spiking ball, consider the LockedOn feature
+In case there are issues with match management, consider the MatchManager StateMachine now initilized in Start

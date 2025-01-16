@@ -565,7 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742822b90ffb84e43b1abfddf0473d0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPriority: {fileID: 11400000, guid: 3383009f79583304abeea1c0d5ae9f0a, type: 2}
+  camPriority: {fileID: 11400000, guid: 3383009f79583304abeea1c0d5ae9f0a, type: 2}
 --- !u!114 &457143849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1794,8 +1794,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06039796, y: 0.7045226, z: -0.06039796, w: 0.7045226}
-  m_LocalPosition: {x: -8, y: 2.91, z: -1.5}
+  m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
+  m_LocalPosition: {x: 0.0000009536743, y: 5.668428, z: -8.390548}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2274,10 +2274,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2889677268746467142, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1625124556}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
 --- !u!1001 &1287105119
 PrefabInstance:
@@ -2568,50 +2565,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621039090}
   m_CullTransparentMesh: 1
---- !u!1 &1625124552 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2889677268746467142, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
-  m_PrefabInstance: {fileID: 1233795791}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1625124554 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
-  m_PrefabInstance: {fileID: 1233795791}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625124552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 252ce7adc3f728542b676c1907249edb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1625124556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625124552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: f3394258f96f2574482e0cc63a9e4db6, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1625124554}
-        m_TargetAssemblyTypeName: KotB.Match.MatchManager, Assembly-CSharp
-        m_MethodName: temp_onscorechanged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1638370931
 GameObject:
   m_ObjectHideFlags: 0
@@ -2888,7 +2841,7 @@ GameObject:
   - component: {fileID: 1751171876}
   - component: {fileID: 1751171875}
   - component: {fileID: 1751171874}
-  - component: {fileID: 1751171873}
+  - component: {fileID: 1751171877}
   m_Layer: 0
   m_Name: Virtual Camera - Serve
   m_TagString: Serve Camera
@@ -2896,34 +2849,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1751171873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1751171872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 0ce8929890bb9a740a7bf4d7249a2c90, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1751171874}
-        m_TargetAssemblyTypeName: KotB.Cinemachine.CinemachinePriorityManager, Assembly-CSharp
-        m_MethodName: OnUpdateCameraPriorty
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1751171874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2936,7 +2861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742822b90ffb84e43b1abfddf0473d0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPriority: {fileID: 11400000, guid: 2d278b1202028cd47bf52d7ebd3e11cd, type: 2}
+  camPriority: {fileID: 11400000, guid: 2d278b1202028cd47bf52d7ebd3e11cd, type: 2}
 --- !u!114 &1751171875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2953,7 +2878,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -2992,6 +2917,34 @@ Transform:
   - {fileID: 396288637}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1751171877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751171872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0ce8929890bb9a740a7bf4d7249a2c90, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1751171874}
+        m_TargetAssemblyTypeName: KotB.Cinemachine.CameraPriority, Assembly-CSharp
+        m_MethodName: OnUpdateCameraPriorty
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1789546879
 PrefabInstance:
   m_ObjectHideFlags: 0
