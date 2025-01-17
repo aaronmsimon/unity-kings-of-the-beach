@@ -30,7 +30,8 @@ namespace KotB.StatePattern.MatchStates
                 matchManager.MatchInfo.SideOut();
             }
 
-            matchManager.ScoreUpdate();            
+            matchManager.ScoreUpdate();
+            matchManager.StateMachine.ChangeState(matchManager.PostPointState);
         }
     }
 }

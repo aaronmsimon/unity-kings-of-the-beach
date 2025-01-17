@@ -47,7 +47,6 @@ namespace KotB.StatePattern.PlayerStates
                 player.StateMachine.ChangeState(player.ServeState);
             } else {
                 Athlete test = player.MatchInfo.GetServer();
-                Debug.Log(player.MatchInfo.TeamServeIndex);
                 // Vector3 newPos = player.MatchInfo.GetServer().CourtSide == player.CourtSide ? player.Skills.ServingPartnerPos : new Vector3(player.Skills.DefensePos.x, 0.01f, -2);
                 // player.transform.position = new Vector3(newPos.x * player.CourtSide, newPos.y, newPos.z);
             }

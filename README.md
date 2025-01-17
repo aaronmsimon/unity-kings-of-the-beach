@@ -126,29 +126,10 @@ I would like to actually finish this game this time. That means starting with a 
 - don't actually need all these variables (events, too?) as Scriptable Objects
 - change control names to be more universal
 
-### Future Enchancements
-- diving
-- tweaks for accuracy in spiking (scale of influence, timing, use direction not just x, logarithmic curve for speed and/or direction)
-- spike feint should consider opponent's blocking skill and maybe frequency of failure
-- enable control remapping
-- customize character (eyes, hair, skin)
+### Kanban Board
+To help with tracking the to-do items and their status, I've created a [Kanban board in Trello](https://trello.com/b/JTSdHvtL/kings-of-the-beach). This should have been done from the beginning of the project or very long ago, but better late than never, right? 
+I started, finally, because I wanted to keep tabs on the bugs as I attempt to finalize the gameplay. All other enhancements/to-dos in the readme have been moved there. The above "Process" items will be added to the board as I get to them.
 
-### Note to Self
-10 - don't chase ball when won't be served over net [need to come up with better possession logic - serves, hit 3 times]<br />
-11 - different AI states for receiving a serve vs defense during a point (for judgement vs deciding if it's their ball)<br />
-13 - really want to test the full game features <br />
-16 - Change loading of Athletes to the selections from Menu UI<br />
-17 - Add script for Serve Camera to point in direction based on player's side <br />
-18 - Serve Controls need to be separate (shouldn't be able to spike while in serve mode)
-
-### Next Steps for Menu UI
-- ~~Enable manual list~~
-- ~~Content drawer to toggle manual list or Resources path~~
-- ~~Complete all Athlete selections~~
-- ~~Populate defaults~~
-- Change population of Outfits based on male/female from default
-- ~~Turn into a Prefab~~
-- ~~Populate SO with selections~~
-
-In case there are issues with passing/spiking ball, consider the LockedOn feature
-In case there are issues with match management, consider the MatchManager StateMachine now initilized in Start
+### Considerations if Bugs
+- In case there are issues with passing/spiking ball, consider the LockedOn feature
+- In case there are issues with match management, consider the MatchManager StateMachine now initilized in Start
