@@ -18,10 +18,14 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void OnMatchChangeToServeState() {
-            if (ai.MatchInfo.GetServer() == ai) {
-                ai.StateMachine.ChangeState(ai.ServeState);
+            if (ai.MatchInfo.Teams[ai.MatchInfo.TeamServeIndex] == ai.MatchInfo.GetTeam(ai)) {
+                if (ai.MatchInfo.GetServer() == ai) {
+                    ai.StateMachine.ChangeState(ai.ServeState);
+                } else {
+                    ai.StateMachine.ChangeState(ai.NonServeState);
+                }
             } else {
-                ai.StateMachine.ChangeState(ai.NonServeState);
+                ai.StateMachine.ChangeState(ai.OffenseState);
             }
         }
     }
