@@ -66,31 +66,25 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void OnTargetSet() {
-            if (ai.Skills.AthleteName == "Miles Partain") Debug.Log($"Miles sees ball set to own side? {Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide}");
             if (Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
                 // probably will need to make different states for receiving a serve and defense during a point, but until then:
                 if (Mathf.Abs(ai.transform.position.x) < 2.5f) {
                     ai.PerformJump();
-                    if (ai.Skills.AthleteName == "Miles Partain") Debug.Log($"Miles will jumpt to try to block");
                     return;
                 }
 
                 if (MyBall() && JudgeInBounds(ai.Skills.InBoundsJudgement)) {
-                    if (ai.Skills.AthleteName == "Miles Partain") Debug.Log($"Miles claims the ball, will try to dig");
                     ai.StateMachine.ChangeState(ai.DigReadyState);
                 } else {
-                    if (ai.Skills.AthleteName == "Miles Partain") Debug.Log($"Miles can't reach the ball, so will get ready to receive a pass");
                     ai.StateMachine.ChangeState(ai.OffenseState);
                 }
             } else {
                 // Blocker
                 if (ai.Skills.PlayerPosition == PositionType.Blocker) {
-                    if (ai.Skills.AthleteName == "Miles Partain") Debug.Log($"Miles is the blocker so will try to block");
                     targetPos = new Vector3(blockPos * ai.CourtSide, ai.transform.position.y, ai.BallInfo.TargetPos.z);
                 }
                 // Defender
                 else {
-                    if (ai.Skills.AthleteName == "Miles Partain") Debug.Log($"Miles is the defender, so will try to defend");
                     float zBallTargetPos = ai.BallInfo.TargetPos.z;
                     float openSideLength = zBallTargetPos - (-Mathf.Sign(zBallTargetPos) * halfCourtSide);
                     targetPos = new Vector3(defensePos * ai.CourtSide, ai.transform.position.y, zBallTargetPos - openSideLength / 2);
