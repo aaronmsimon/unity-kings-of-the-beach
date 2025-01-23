@@ -130,6 +130,8 @@ I would like to actually finish this game this time. That means starting with a 
 To help with tracking the to-do items and their status, I've created a [Kanban board in Trello](https://trello.com/b/JTSdHvtL/kings-of-the-beach). This should have been done from the beginning of the project or very long ago, but better late than never, right? 
 I started, finally, because I wanted to keep tabs on the bugs as I attempt to finalize the gameplay. All other enhancements/to-dos in the readme have been moved there. The above "Process" items will be added to the board as I get to them.
 
+reminder: use kanban for cleanup
+
 ### Considerations if Bugs
 - In case there are issues with passing/spiking ball, consider the LockedOn feature
 - In case there are issues with match management, consider the MatchManager StateMachine now initilized in Start
