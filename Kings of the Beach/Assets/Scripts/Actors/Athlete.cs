@@ -25,6 +25,7 @@ namespace KotB.Actors
         protected Vector3 moveDir;
         protected bool isJumping;
         protected bool feint;
+        protected float receiveServeXPos = 5.5f;
 
         private LayerMask obstaclesLayer;
         private LayerMask invalidAimLayer;
@@ -239,5 +240,6 @@ namespace KotB.Actors
         public float SpikeFrames { get { return spikeFrames; } }
         public float AnimationFrameRate { get { return animationFrameRate; } }
         public float SpikeSpeedPenalty { set { spikeSpeedPenalty = value; } }
+        public float ReceiveServeXPos => receiveServeXPos;
     }
 }

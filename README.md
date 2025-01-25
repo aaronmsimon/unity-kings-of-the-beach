@@ -117,11 +117,7 @@ I would like to actually finish this game this time. That means starting with a 
 - adjustments for men vs women (spike speed, net dimensions, etc)
 
 ### Cleanup
-- is it better to create a static TagHashes class instead of hard-coding tag strings?
-- magic numbers
-- debug: writing to console, gizmos like raycasts or boxes drawn
 - bump/set vs pass/across
-- athlete raycast isn't used
 - review all state machines for proper state handling
 - don't actually need all these variables (events, too?) as Scriptable Objects
 - change control names to be more universal
@@ -129,9 +125,6 @@ I would like to actually finish this game this time. That means starting with a 
 ### Kanban Board
 To help with tracking the to-do items and their status, I've created a [Kanban board in Trello](https://trello.com/b/JTSdHvtL/kings-of-the-beach). This should have been done from the beginning of the project or very long ago, but better late than never, right? 
 I started, finally, because I wanted to keep tabs on the bugs as I attempt to finalize the gameplay. All other enhancements/to-dos in the readme have been moved there. The above "Process" items will be added to the board as I get to them.
-
-this should have been on 1/22
-reminder: use kanban for cleanup with color blue
 
 ### Considerations if Bugs
 - In case there are issues with passing/spiking ball, consider the LockedOn feature

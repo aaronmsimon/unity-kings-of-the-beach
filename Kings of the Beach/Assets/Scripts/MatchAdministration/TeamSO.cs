@@ -51,6 +51,10 @@ namespace KotB.Match
             courtSide.Value = -courtSide.Value;
         }
 
+        public bool IsCaptain(Athlete athlete) {
+            return athletes.Count > 0 && athletes[0] == athlete;
+        }
+
         public List<AthleteConfigSO> AthleteConfigs => athleteConfigs;
         public List<Athlete> Athletes => athletes;
         public StringVariable TeamName => teamName;

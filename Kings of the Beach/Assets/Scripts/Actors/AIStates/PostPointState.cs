@@ -1,5 +1,6 @@
 using UnityEngine;
 using KotB.Actors;
+using KotB.Match;
 
 namespace KotB.StatePattern.AIStates
 {
@@ -25,7 +26,11 @@ namespace KotB.StatePattern.AIStates
                     ai.StateMachine.ChangeState(ai.NonServeState);
                 }
             } else {
-                ai.StateMachine.ChangeState(ai.OffenseState);
+                TeamSO team = ai.MatchInfo.GetTeam(ai);
+                Vector3 serveDefPos = new Vector3(ai.ReceiveServeXPos * ai.CourtSide, 0.01f, ai.Skills.DefensePos.y * (team.IsCaptain(ai) ? 1 : -1));
+                ai.transform.position = serveDefPos;
+                ai.transform.forward = Vector3.right * -ai.CourtSide;
+                ai.StateMachine.ChangeState(ai.DefenseState);
             }
         }
     }
