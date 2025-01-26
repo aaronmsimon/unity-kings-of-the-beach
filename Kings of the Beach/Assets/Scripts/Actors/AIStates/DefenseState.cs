@@ -70,6 +70,7 @@ namespace KotB.StatePattern.AIStates
                 // probably will need to make different states for receiving a serve and defense during a point, but until then:
                 if (Mathf.Abs(ai.transform.position.x) < 2.5f) {
                     ai.PerformJump();
+                    ai.StateMachine.ChangeState(ai.OffenseState);
                     return;
                 }
 

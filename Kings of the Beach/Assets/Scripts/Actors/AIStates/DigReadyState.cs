@@ -132,7 +132,7 @@ namespace KotB.StatePattern.AIStates
                     return t2 * duration;
             }
 
-            Debug.LogError("No real solution for the given verticalPosition.");
+            Debug.LogError($"No real solution for spikePos={spikePos}, height={height}, start={start}, end={end}, duration={duration} leading to discriminant={discriminant}");
             return -1;
         }
 
