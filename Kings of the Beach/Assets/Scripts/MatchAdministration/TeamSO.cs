@@ -16,10 +16,11 @@ namespace KotB.Match
         private List<Athlete> athletes;
         private int serverIndex;
 
-        public void Initialize() {
+        public void Initialize(float courtSide) {
             athletes = new List<Athlete>();
             serverIndex = 0;
             SetScore(0);
+            this.courtSide.Value = courtSide;
         }
 
         public void AddAthleteConfig(AthleteConfigSO athleteConfig) {

@@ -9,7 +9,7 @@ namespace KotB.Testing
         [SerializeField] private AthleteConfigSO athleteConfig;
 
         private void Awake() {
-            team.Initialize();
+            team.Initialize(-1);
             team.AddAthleteConfig(athleteConfig);
             Debug.Log($"Team {team.name} has athleteconfig with skills {athleteConfig.skills.AthleteName} added.");
         }
