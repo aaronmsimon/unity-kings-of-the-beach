@@ -241,5 +241,10 @@ namespace KotB.Actors
         public float AnimationFrameRate { get { return animationFrameRate; } }
         public float SpikeSpeedPenalty { set { spikeSpeedPenalty = value; } }
         public float ReceiveServeXPos => receiveServeXPos;
+        public Vector3 ServeDefPos {
+            get {
+                return new Vector3(receiveServeXPos * courtSide.Value, 0.01f, skills.DefensePos.y * (matchInfo.GetTeam(this).IsCaptain(this) ? 1 : -1));
+            }
+        }
     }
 }
