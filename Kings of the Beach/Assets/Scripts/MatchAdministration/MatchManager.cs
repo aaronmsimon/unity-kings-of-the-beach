@@ -13,6 +13,7 @@ namespace KotB.Match
         [Header("Scriptable Objects")]
         [SerializeField] private MatchInfoSO matchInfo;
         [SerializeField] private BallSO ballInfo;
+        [SerializeField] private FloatVariable serveCamDirection;
         [SerializeField] private InputReader inputReader;
 
         [Header("Match Variables")]
@@ -65,6 +66,7 @@ namespace KotB.Match
             switchSidesPoints = scoreToWin.Value / switchSidesPointsDivisor;
             if (totalPoints % switchSidesPoints == 0) {
                 matchInfo.teamsSwitchSides();
+                serveCamDirection.Value *= -1;
             }
         }
 
