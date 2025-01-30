@@ -121,7 +121,21 @@ namespace KotB.Actors
             }
 
             float rotateSpeed = 10f;
-            if (moveDir != Vector3.zero) transform.forward = Vector3.Slerp(transform.forward, moveDir, rotateSpeed * Time.deltaTime);
+            
+            if (moveDir != Vector3.zero) {
+                // Project moveDir onto the XZ plane to remove any Y-axis influence
+                moveDir.y = 0;
+                moveDir.Normalize();
+
+                // Calculate the target rotation around the Y-axis
+                Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+
+                // Preserve the current X and Z rotation, modifying only Y
+                transform.rotation = Quaternion.Slerp(transform.rotation, 
+                                                    Quaternion.Euler(0, targetRotation.eulerAngles.y, 0), 
+                                                    rotateSpeed * Time.deltaTime);
+            }
+
             skills.Position = transform.position;
         }
 

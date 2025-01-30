@@ -124,12 +124,6 @@ MonoBehaviour:
   ballInfo: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
   matchInfo: {fileID: 11400000, guid: 23b44ef1d3bbbbe42a97b3fd37ef9578, type: 2}
   courtSide: {fileID: 0}
-  obstaclesLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  invalidAimLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!114 &1164755901000653087
 MonoBehaviour:
   m_ObjectHideFlags: 0
