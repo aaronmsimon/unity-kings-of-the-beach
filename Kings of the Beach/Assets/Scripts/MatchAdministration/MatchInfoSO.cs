@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using KotB.StatePattern;
 using KotB.Actors;
+using RoboRyanTron.Unite2017.Variables;
 
 namespace KotB.Match
 {
@@ -11,6 +12,8 @@ namespace KotB.Match
     public class MatchInfoSO : ScriptableObject
     {
         [SerializeField] private List<TeamSO> teams;
+        [SerializeField] private FloatVariable scoreToWin;
+
         private IState currentState;
         private int teamServeIndex;
 
@@ -82,5 +85,6 @@ namespace KotB.Match
         public IState CurrentState { get { return currentState; } set { currentState = value; } }
         public List<TeamSO> Teams { get { return teams; } }
         public int TeamServeIndex => teamServeIndex;
+        public float ScoreToWin => scoreToWin.Value;
     }
 }

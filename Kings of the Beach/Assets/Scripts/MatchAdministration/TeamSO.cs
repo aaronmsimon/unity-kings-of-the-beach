@@ -60,5 +60,6 @@ namespace KotB.Match
         public List<Athlete> Athletes => athletes;
         public StringVariable TeamName => teamName;
         public FloatVariable CourtSide => courtSide;
+        public float Score => score.Value;
     }
 }

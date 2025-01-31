@@ -15,3 +15,4 @@ MonoBehaviour:
   teams:
   - {fileID: 11400000, guid: 7c9a9fdff16c4cb48abe71f93521b7c2, type: 2}
   - {fileID: 11400000, guid: 114c7e95942f36b4bbdcaa65e4602a6f, type: 2}
+  scoreToWin: {fileID: 11400000, guid: 15b385560c9d9234c98373e5cdec0082, type: 2}

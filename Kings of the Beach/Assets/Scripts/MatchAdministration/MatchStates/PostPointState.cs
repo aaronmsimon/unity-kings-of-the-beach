@@ -1,5 +1,6 @@
 using UnityEngine;
 using KotB.Match;
+using System.Collections.Generic;
 
 namespace KotB.StatePattern.MatchStates
 {
@@ -37,13 +38,13 @@ namespace KotB.StatePattern.MatchStates
         }
 
         private void CheckGameEnd() {
-            // for (int i = 0; i < teams.Count; i++) {
-            //     if (teams[i].Score == scoreToWin.Value) {
-            //         Debug.Log($"{teams[i].TeamName} wins!");
-            //         matchStateMachine.ChangeState(matchEndState);
-            //     }
-            // }
-            // matchStateMachine.ChangeState(postPointState);
+            List<TeamSO> teams = matchManager.MatchInfo.Teams;
+            for (int i = 0; i < teams.Count; i++) {
+                if (teams[i].Score == matchManager.MatchInfo.ScoreToWin) {
+                    Debug.Log($"{teams[i].TeamName} wins!");
+                    matchManager.StateMachine.ChangeState(matchManager.MatchEndState);
+                }
+            }
         }
     }
 }
