@@ -59,17 +59,20 @@ namespace KotB.StatePattern.MatchStates
 
             // If Player and Cinemachine Serve Camera exists, assign
             if (!athleteConfig.computerControlled) {
-                CinemachineVirtualCamera cam = GameObject.FindGameObjectWithTag("Serve Camera").GetComponent<CinemachineVirtualCamera>();
-                if (cam != null) {
-                    cam.Follow = athlete.transform;
-                    Vector3 serveOffset = new Vector3(3, 3, 0);
-                    CinemachineTransposer transposer = cam.GetComponent<CinemachineTransposer>();
-                    if (transposer != null) {
-                        transposer.m_FollowOffset = new Vector3(serveOffset.x * team.CourtSide.Value, serveOffset.y, serveOffset.z);
-                    }
-                    ServeCamDirection serveCamDirection = cam.GetComponent<ServeCamDirection>();
-                    if (serveCamDirection != null) {
-                        serveCamDirection.SetServeCamDir(team.CourtSide.Value);
+                GameObject go = GameObject.FindGameObjectWithTag("Serve Camera");
+                if (go != null) {
+                    CinemachineVirtualCamera cam = go.GetComponent<CinemachineVirtualCamera>();
+                    if (cam != null) {
+                        cam.Follow = athlete.transform;
+                        Vector3 serveOffset = new Vector3(3, 3, 0);
+                        CinemachineTransposer transposer = cam.GetComponent<CinemachineTransposer>();
+                        if (transposer != null) {
+                            transposer.m_FollowOffset = new Vector3(serveOffset.x * team.CourtSide.Value, serveOffset.y, serveOffset.z);
+                        }
+                        ServeCamDirection serveCamDirection = cam.GetComponent<ServeCamDirection>();
+                        if (serveCamDirection != null) {
+                            serveCamDirection.SetServeCamDir(team.CourtSide.Value);
+                        }
                     }
                 }
             }
