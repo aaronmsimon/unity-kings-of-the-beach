@@ -11,7 +11,7 @@ namespace KotB.StatePattern.AIStates
         private float baseTime = 2f;
         private float randomOffsetTime = 0.5f;
         private bool changeToDefenseState;
-        private float timeUntilDefense;
+        private float timeUntilDefense = 1f;
 
         public override void Enter() {
             ai.transform.position = new Vector3((ai.CourtSideLength + ai.transform.localScale.x * .5f) * ai.CourtSide, 0.01f, 0f);
@@ -30,7 +30,6 @@ namespace KotB.StatePattern.AIStates
                     Vector3 aimPoint = new Vector3(0, Random.Range(2.25f, 5), Random.Range(-2, 2));
                     Vector3 adjustedAimPoint = ai.BallInfo.SkillValues.AdjustedServeDirection(aimPoint, ai.Skills.Serving);
                     changeToDefenseState = true;
-                    timeUntilDefense = 1;
                     ai.BallInfo.SetServeTarget(adjustedAimPoint, Random.Range(0.65f, 1), ai);
                 }
             } else {
