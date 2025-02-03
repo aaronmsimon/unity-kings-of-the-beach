@@ -8,8 +8,6 @@ namespace KotB.StatePattern.MatchStates
         public InPlayState(MatchManager matchManager) : base(matchManager) { }
 
         public override void Enter() {
-            matchManager.MatchInfo.TransitionToInPlayStateEvent();
-
             matchManager.InputReader.EnableGameplayInput();
 
             matchManager.BallHitGround += OnBallHitGround;

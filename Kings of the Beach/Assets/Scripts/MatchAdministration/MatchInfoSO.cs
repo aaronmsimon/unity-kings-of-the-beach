@@ -19,7 +19,6 @@ namespace KotB.Match
 
         public event Action TransitionToPrePointState;
         public event Action TransitionToServeState;
-        public event Action TransitionToInPlayState;
 
         public void Initialize() {
             teamServeIndex = 0;
@@ -31,10 +30,6 @@ namespace KotB.Match
         
         public void TransitionToServeStateEvent() {
             TransitionToServeState?.Invoke();
-        }
-
-        public void TransitionToInPlayStateEvent() {
-            TransitionToInPlayState?.Invoke();
         }
 
         public Athlete GetTeammate(Athlete athlete) {
