@@ -13,6 +13,7 @@ namespace KotB.Actors
         private DigReadyState digReadyState;
         private PostPointState postPointState;
         private NonServeState nonServeState;
+        private ServePosState servePosState;
 
         public Vector3 TargetPos { get; set; }
 
@@ -29,6 +30,7 @@ namespace KotB.Actors
             digReadyState = new DigReadyState(this);
             postPointState = new PostPointState(this);
             nonServeState = new NonServeState(this);
+            servePosState = new ServePosState(this);
 
             stateMachine.ChangeState(postPointState);
         }
@@ -67,6 +69,7 @@ namespace KotB.Actors
         public DigReadyState DigReadyState { get { return digReadyState; } }
         public PostPointState PostPointState { get { return postPointState; } }
         public NonServeState NonServeState { get { return nonServeState; } }
+        public ServePosState ServePosState { get { return servePosState; } }
         public Vector3 OffensePos { get { return new Vector3(skills.OffenseXPos * courtSide.Value, 0.01f, transform.position.z); } }
     }
 }

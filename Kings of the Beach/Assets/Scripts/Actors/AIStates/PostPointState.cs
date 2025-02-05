@@ -1,6 +1,5 @@
 using UnityEngine;
 using KotB.Actors;
-using KotB.Match;
 
 namespace KotB.StatePattern.AIStates
 {
@@ -21,7 +20,7 @@ namespace KotB.StatePattern.AIStates
         private void OnMatchChangeToServeState() {
             if (ai.MatchInfo.Teams[ai.MatchInfo.TeamServeIndex] == ai.MatchInfo.GetTeam(ai)) {
                 if (ai.MatchInfo.GetServer() == ai) {
-                    ai.StateMachine.ChangeState(ai.ServeState);
+                    ai.StateMachine.ChangeState(ai.ServePosState);
                 } else {
                     ai.StateMachine.ChangeState(ai.NonServeState);
                 }
