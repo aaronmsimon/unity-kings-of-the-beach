@@ -135,7 +135,6 @@ MonoBehaviour:
   mainCameraPriority: {fileID: 11400000, guid: 3383009f79583304abeea1c0d5ae9f0a, type: 2}
   serveCameraPriority: {fileID: 11400000, guid: 2d278b1202028cd47bf52d7ebd3e11cd, type: 2}
   serveAimPosition: {fileID: 11400000, guid: a5541d2528aaeac4caba5bbbb85b3211, type: 2}
-  serveCameraDirection: {fileID: 11400000, guid: 8fe988b8c9c9e0b48bd18cb35ad470eb, type: 2}
 --- !u!114 &3030860562228718519
 MonoBehaviour:
   m_ObjectHideFlags: 0

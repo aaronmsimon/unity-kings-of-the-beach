@@ -32,13 +32,13 @@ namespace KotB.Actors
         private float defaultHeight = 1.9f;
         private float noMansLand = 0.5f;
         private float skillLevelMax = 10;
+
         private float jumpFrames = 7;
-        private float spikeFrames = 9;
-        private float spikeFallFrames = 8;
-        private float blockFrames = 9;
-        private float blockFallFrames = 8;
+        private float actionFrames = 9;
+        private float actionFallFrames = 8;
         protected float animationFrameRate = 24;
         private float jumpAnimationTime;
+
         private float reachHeight;
         private float spikeSpeedPenalty = 0;
         private float feintHeight = 5;
@@ -142,32 +142,14 @@ namespace KotB.Actors
         private void Jump() {
             jumpAnimationTime += Time.deltaTime;
 
-            // Spiking
-            if (animator.GetBool("isSpike")) {
-                if (jumpAnimationTime >= jumpFrames / animationFrameRate && jumpAnimationTime < (jumpFrames + spikeFrames) / animationFrameRate) {
-                    sphereCollider.enabled = true;
-                    capCollider.enabled = false;
-                } else if (jumpAnimationTime >= (jumpFrames + spikeFrames) / animationFrameRate && jumpAnimationTime < (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
-                    sphereCollider.enabled = false;
-                } else if (jumpAnimationTime >= (jumpFrames + spikeFrames + spikeFallFrames) / animationFrameRate) {
-                    animator.SetBool("isSpike", false);
-                    isJumping = false;
-                    capCollider.enabled = true;
-                }
-            }
-
-            // Blocking
-            if (animator.GetBool("isBlock")) {
-                if (jumpAnimationTime >= jumpFrames / animationFrameRate && jumpAnimationTime < (jumpFrames + blockFrames) / animationFrameRate) {
-                    sphereCollider.enabled = true;
-                    capCollider.enabled = false;
-                } else if (jumpAnimationTime >= (jumpFrames + blockFrames) / animationFrameRate && jumpAnimationTime < (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
-                    sphereCollider.enabled = false;
-                } else if (jumpAnimationTime >= (jumpFrames + blockFrames + blockFallFrames) / animationFrameRate) {
-                    animator.SetBool("isBlock", false);
-                    isJumping = false;
-                    capCollider.enabled = true;
-                }
+            if (jumpAnimationTime >= jumpFrames / animationFrameRate && jumpAnimationTime < (jumpFrames + actionFrames) / animationFrameRate) {
+                sphereCollider.enabled = true;
+                capCollider.enabled = false;
+            } else if (jumpAnimationTime >= (jumpFrames + actionFrames) / animationFrameRate && jumpAnimationTime < (jumpFrames + actionFrames + actionFallFrames) / animationFrameRate) {
+                sphereCollider.enabled = false;
+            } else if (jumpAnimationTime >= (jumpFrames + actionFrames + actionFallFrames) / animationFrameRate) {
+                isJumping = false;
+                capCollider.enabled = true;
             }
         }
 
@@ -176,11 +158,10 @@ namespace KotB.Actors
             jumpAnimationTime = 0;
             transform.forward = new Vector3(-courtSide.Value, 0, 0);
             if (courtSide.Value == Mathf.Sign(ballInfo.Position.x)) {
-                animator.SetBool("isSpike", true);
+                animator.Play("Spike");
             } else {
-                animator.SetBool("isBlock", true);
+                animator.Play("Block");
             }
-            animator.SetTrigger("jump");
         }
 
         public void Pass(Vector3 targetPos, float height, float time) {
@@ -251,7 +232,7 @@ namespace KotB.Actors
         public bool Feint { get { return feint; } set { feint = value; } }
         public float ReachHeight { get { return reachHeight; } }
         public float JumpFrames { get { return jumpFrames; } }
-        public float SpikeFrames { get { return spikeFrames; } }
+        public float ActionFrames { get { return actionFrames; } }
         public float AnimationFrameRate { get { return animationFrameRate; } }
         public float SpikeSpeedPenalty { set { spikeSpeedPenalty = value; } }
         public float ReceiveServeXPos => receiveServeXPos;

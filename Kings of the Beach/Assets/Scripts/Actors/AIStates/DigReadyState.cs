@@ -96,7 +96,7 @@ namespace KotB.StatePattern.AIStates
 
         private void TrySpike() {
             float jumpDuration = ai.JumpFrames / ai.AnimationFrameRate;
-            float spikeDuration = ai.SpikeFrames / ai.AnimationFrameRate;
+            float spikeDuration = ai.ActionFrames / ai.AnimationFrameRate;
             if (ai.BallInfo.TimeSinceLastHit >= spikeTime - jumpDuration - spikeDuration / 2 && spikeTime >= 0) {
                 ai.PerformJump();
                 isSpiking = true;
