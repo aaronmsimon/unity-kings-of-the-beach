@@ -67,6 +67,9 @@ namespace KotB.Items
             lastPlayerToHit = server;
             TargetSet?.Invoke();
             BallServed?.Invoke();
+
+Vector3 zeroXPos = PredictHeightAtX(-0.13f, StartPos, TargetPos, Height);
+Debug.Log($"Calculated Position where x = 0: {zeroXPos}");
         }
 
         public void SetPassTarget(Vector3 targetPos, float height, float duration, Athlete passer) {
@@ -108,9 +111,52 @@ namespace KotB.Items
             BallChangePossession?.Invoke();
         }
 
+        public Vector3 CalculateInFlightPosition(float t, Vector3 start, Vector3 end, float maxHeightPoint)
+        {
+            // Linear interpolation for horizontal position (XZ plane)
+            Vector3 horizontalPosition = Vector3.Lerp(start, end, t);
+
+            // Parabolic interpolation for vertical position (Y-axis)
+                // Using quadratic Bezier curve formula
+                float oneMinusT = 1f - t;
+                
+                // Calculate control point for quadratic curve to pass through maxHeightPoint at t=0.5
+                float controlPoint = (maxHeightPoint - (0.25f * start.y) - (0.25f * end.y)) / 0.5f;
+                
+                // Quadratic interpolation
+                float verticalPosition = (oneMinusT * oneMinusT * start.y) + 
+                    (2f * oneMinusT * t * controlPoint) + 
+                    (t * t * end.y);
+
+            // Combine horizontal and vertical movement
+            horizontalPosition.y = verticalPosition;
+
+            return horizontalPosition;
+        }
+
+        public Vector3 CalculateInFlightPosition(float t, Vector3 start, Vector3 end) {
+            // Linear interpolation for horizontal position (XZ plane)
+            return Vector3.Lerp(start, end, t);
+        }
+
         private void ResetTimeSinceLastHit() {
             LockedOn = false;
             TimeSinceLastHit = 0;
+        }
+        
+        private Vector3 PredictHeightAtX(float targetX, Vector3 start, Vector3 end, float maxHeightPoint)
+        {
+            // First ensure the ball actually crosses this X position
+            if (!((start.x <= targetX && end.x >= targetX) || (start.x >= targetX && end.x <= targetX)))
+            {
+                return Vector3.zero; // or some error value
+            }
+
+            // Since X movement is linear, we can find exact t when we hit targetX
+            float t = Mathf.Abs((targetX - start.x) / (end.x - start.x));
+            
+            // Now we can calculate the exact position at this time t using your original flight calculation
+            return CalculateInFlightPosition(t, start, end, maxHeightPoint);
         }
 
         //---- PROPERTIES ----

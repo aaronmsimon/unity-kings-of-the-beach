@@ -575,10 +575,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2877084590409722826, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2903952158050811650, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       propertyPath: skills
       value: 
       objectReference: {fileID: 11400000, guid: 819c6d31029030d45906e8d16ffbe3e5, type: 2}
+    - target: {fileID: 2903952158050811650, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: courtSide
+      value: 
+      objectReference: {fileID: 11400000, guid: 718029772aacc8042a5d065803efe304, type: 2}
     - target: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       propertyPath: m_Name
       value: Player
