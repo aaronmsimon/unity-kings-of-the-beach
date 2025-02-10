@@ -55,6 +55,7 @@ namespace KotB.Actors
         }
 
         public MinMax ServePower { get { return servePower; } }
+        public MinMax ServeAccuracy { get { return serveAccuracy; } }
         public MinMax SpikePower { get { return spikePower; } }
         public MinMax SpikeTimingWindow { get { return spikeTimingWindow; } }
     }

@@ -36,13 +36,15 @@ namespace KotB.Items
         private float maxServeHeight = 5f;
         private float minServeDistance = 7f;
         private float maxServeDistance = 18f;
+
+        private float netHeight = 2.43f;
         
         public void GiveBall(Athlete athlete) {
             ballHeldBy = athlete;
             BallGiven?.Invoke();
         }
 
-        public void SetServeTarget(Vector3 aimPoint, float servePower, Athlete server) {
+        public bool ValidServe(Vector3 aimPoint, float servePower, Athlete server) {
             Height = aimPoint.y;
             Height = Mathf.Clamp(Height, minServeHeight, maxServeHeight);
 
@@ -62,14 +64,20 @@ namespace KotB.Items
             StartPos = Position;
             float serveSpeed = skillValues.SkillToValue(server.Skills.ServePower, skillValues.ServePower) * servePower;
             Duration = serveDistance / serveSpeed / 1000 * 60 * 60; // d x 1/r x 1km/1000m x 60min/hr x 60sec/min = sec
-            Debug.Log($"Distance: {serveDistance} Duration: {Duration} Serve Speed: {Mathf.Round(serveDistance / Duration / 1000 * 60 * 60 * 10) / 10} km/hr");
-            ResetTimeSinceLastHit();
+            // Debug.Log($"Distance: {serveDistance} Duration: {Duration} Serve Speed: {Mathf.Round(serveDistance / Duration / 1000 * 60 * 60 * 10) / 10} km/hr");
             lastPlayerToHit = server;
+
+            float netXPosCheck = 0.13f * server.CourtSide;
+            Vector3 ballAtNetPos = PredictHeightAtX(netXPosCheck, StartPos, TargetPos, Height);
+            // Debug.Log($"PredictHeightAtX({netXPosCheck}, {StartPos}, {TargetPos}, {Height}) -> Estimate serve height: {ballAtNetPos.y}");
+
+            return MathF.Abs(ballAtNetPos.z) <= server.CourtSideLength / 2 && ballAtNetPos.y > netHeight;
+        }
+
+        public void SetServeTarget() {
+            ResetTimeSinceLastHit();
             TargetSet?.Invoke();
             BallServed?.Invoke();
-
-Vector3 zeroXPos = PredictHeightAtX(-0.13f, StartPos, TargetPos, Height);
-Debug.Log($"Calculated Position where x = 0: {zeroXPos}");
         }
 
         public void SetPassTarget(Vector3 targetPos, float height, float duration, Athlete passer) {

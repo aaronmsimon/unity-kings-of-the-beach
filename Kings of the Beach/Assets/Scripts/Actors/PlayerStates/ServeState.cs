@@ -79,7 +79,8 @@ namespace KotB.StatePattern.PlayerStates
             DisplayServeUI(false);
             player.HideServeAim.Raise();
             Vector3 servePos = player.BallInfo.SkillValues.AdjustedServeDirection(player.ServeAimPosition.Value, player.Skills.Serving);
-            player.BallInfo.SetServeTarget(servePos, player.ServePowerValue.Value, player);
+            player.BallInfo.ValidServe(servePos, player.ServePowerValue.Value, player);
+            player.BallInfo.SetServeTarget();
             player.StateMachine.ChangeState(player.NormalState);
         }
 
