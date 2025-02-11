@@ -47,7 +47,7 @@ namespace KotB.Actors
         // caching
         private float moveSpeed;
         private CapsuleCollider capCollider;
-        private SphereCollider sphereCollider;
+        private SphereCollider spikeBlockCollider;
         protected Animator animator;
         private Transform leftHandEnd;
 
@@ -56,7 +56,7 @@ namespace KotB.Actors
             stateMachine = new StateMachine();
 
             capCollider = GetComponent<CapsuleCollider>();
-            sphereCollider = GetComponent<SphereCollider>();
+            spikeBlockCollider = GetComponent<SphereCollider>();
             animator = GetComponentInChildren<Animator>();
 
             obstaclesLayer = LayerMask.GetMask("Obstacles");
@@ -69,7 +69,7 @@ namespace KotB.Actors
                 float percentScale = skills.Height / defaultHeight;
 
                 transform.localScale = new Vector3(percentScale, percentScale, percentScale);
-                reachHeight = (sphereCollider.center.y + sphereCollider.radius) * percentScale;
+                reachHeight = (spikeBlockCollider.center.y + spikeBlockCollider.radius) * percentScale;
             } else {
                 Debug.LogAssertion($"No skills found for { this.name }");
             }
@@ -143,10 +143,10 @@ namespace KotB.Actors
             jumpAnimationTime += Time.deltaTime;
 
             if (jumpAnimationTime >= jumpFrames / animationFrameRate && jumpAnimationTime < (jumpFrames + actionFrames) / animationFrameRate) {
-                sphereCollider.enabled = true;
+                spikeBlockCollider.enabled = true;
                 capCollider.enabled = false;
             } else if (jumpAnimationTime >= (jumpFrames + actionFrames) / animationFrameRate && jumpAnimationTime < (jumpFrames + actionFrames + actionFallFrames) / animationFrameRate) {
-                sphereCollider.enabled = false;
+                spikeBlockCollider.enabled = false;
             } else if (jumpAnimationTime >= (jumpFrames + actionFrames + actionFallFrames) / animationFrameRate) {
                 isJumping = false;
                 capCollider.enabled = true;
@@ -242,5 +242,6 @@ namespace KotB.Actors
             }
         }
         public float NoMansLand { get { return noMansLand; } }
+        public SphereCollider SpikeBlockCollider { get { return spikeBlockCollider; } }
     }
 }
