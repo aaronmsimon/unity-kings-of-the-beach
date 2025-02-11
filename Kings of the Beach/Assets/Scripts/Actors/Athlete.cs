@@ -241,5 +241,6 @@ namespace KotB.Actors
                 return new Vector3(receiveServeXPos * courtSide.Value, 0.01f, skills.DefensePos.y * (matchInfo.GetTeam(this).IsCaptain(this) ? 1 : -1));
             }
         }
+        public float NoMansLand { get { return noMansLand; } }
     }
 }

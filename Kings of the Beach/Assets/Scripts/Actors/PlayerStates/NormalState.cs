@@ -27,7 +27,7 @@ namespace KotB.StatePattern.PlayerStates
 
             if (player.MatchInfo.CurrentState is InPlayState && player.BallInfo.lastPlayerToHit != player && Mathf.Sign(player.BallInfo.TargetPos.x) == player.CourtSide && !player.BallInfo.LockedOn) {
                 float distanceToTarget = (player.transform.position - player.BallInfo.TargetPos).sqrMagnitude;
-                if (distanceToTarget <= player.Skills.TargetLockDistance * player.Skills.TargetLockDistance) {
+                if (distanceToTarget <= player.Skills.TargetLockDistance * player.Skills.TargetLockDistance && Mathf.Abs(player.BallInfo.TargetPos.x) > player.NoMansLand) {
                     player.transform.position = player.BallInfo.TargetPos;
                     player.MoveDir = Vector3.zero;
                     player.BallInfo.LockedOn = true;
