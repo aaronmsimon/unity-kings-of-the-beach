@@ -25,7 +25,7 @@ namespace KotB.Actors
         }
 
         public Vector2 AdjustedPassLocation(Vector2 originalLoc, float accuracy) {
-            return AdjustVectorAccuracy(originalLoc, accuracy, passAccuracy);
+            return AdjustVectorAccuracy(originalLoc, accuracy, passAccuracy, 4f);
         }
 
         public float SkillToValue(float skill, MinMax valueRange) {
@@ -51,6 +51,39 @@ namespace KotB.Actors
             Vector2 randomOffset = randomDirection * randomMagnitude;
 
             // Add the random offset to the original vector
+            return vector + randomOffset;
+        }
+
+        private static Vector2 AdjustVectorAccuracy(Vector2 vector, float accuracy, MinMax skillRange, float netBias)
+        {
+            accuracy = Mathf.Clamp01(accuracy);
+            float deviation = 1 - accuracy;
+            Vector2 randomDirection = Random.insideUnitCircle.normalized;
+            string debugMsg = $"Random Direction: {randomDirection}";
+
+            // Calculate how close to the net we are (0 = at net, 1 = far from net)
+            float distanceFromNet = Mathf.Abs(vector.x);
+            float netProximity = Mathf.Clamp01(distanceFromNet / 2.5f); // Percentage of court size
+            
+            // If we're close to the net, adjust only the x component of the random direction
+            if (distanceFromNet < 2.5f)
+            {
+                // Create a bias x-component pointing away from the net
+                float biasX = Mathf.Sign(vector.x);
+                
+                // Lerp between the random x-component and the bias x-component based on net proximity
+                float biasStrength = 1f - (netProximity * netBias); // More bias when closer to net
+                float newX = Mathf.Lerp(randomDirection.x, biasX, biasStrength);
+                
+                // Keep the y component unchanged
+                randomDirection = new Vector2(newX, randomDirection.y).normalized;
+                debugMsg += $" bias update -> netProx: {netProximity}, bias: {biasStrength} => new Random Direction: {randomDirection} (x only={newX})";
+            }
+            Debug.Log(debugMsg);
+
+            float randomMagnitude = Random.Range(0, (skillRange.max - skillRange.min) * deviation) + skillRange.min;
+            Vector2 randomOffset = randomDirection * randomMagnitude;
+
             return vector + randomOffset;
         }
 

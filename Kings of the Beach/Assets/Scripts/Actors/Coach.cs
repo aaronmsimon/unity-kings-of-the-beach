@@ -3,11 +3,17 @@ using UnityEngine;
 using KotB.StatePattern.MatchStates;
 using KotB.Match;
 using RoboRyanTron.Unite2017.Events;
+using KotB.Items;
 
 namespace KotB.Actors
 {
     public class Coach : Athlete
     {
+        private enum CoachType { Bump, Pass }
+
+        [Header("Coach Info")]
+        [SerializeField] private CoachType coachType;
+        
         [Header("Target Area")]
         [SerializeField] private Vector2 targetZonePos;
         [SerializeField] private Vector2 targetZoneSize;
@@ -73,7 +79,19 @@ namespace KotB.Actors
         private void Bump() {
             float posX = UnityEngine.Random.Range(targetZonePos.x - targetZoneSize.x / 2, targetZonePos.x + targetZoneSize.x / 2);
             float posY = UnityEngine.Random.Range(targetZonePos.y - targetZoneSize.y / 2, targetZonePos.y + targetZoneSize.y / 2);
-            Pass(new Vector3(posX, 0, posY), 7, 1.75f);
+
+            if (coachType == CoachType.Bump) {
+                Pass(new Vector3(posX, 0, posY), 7, 1.75f);
+            } else {
+                Player player = FindObjectOfType<Player>();
+                if (player != null){
+                    Vector2 teammatePos = new Vector2(player.transform.position.x, player.transform.position.z);
+                    Vector2 aimLocation = ballInfo.SkillValues.AdjustedPassLocation(teammatePos, skills.PassAccuracy / 10);
+                    Vector3 passTarget = new Vector3(aimLocation.x, 0f, aimLocation.y);
+                    Pass(passTarget, 7, 1.75f);
+                }
+            }
+
             canBump = false;
         }
 
