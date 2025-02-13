@@ -13,6 +13,7 @@ namespace KotB.StatePattern.AIStates
 
         private float blockPos = 1;
         private float defensePos = 6;
+        private float distToGiveUp = 1;
 
         public override void Enter() {
             targetPos = ai.transform.position;
@@ -74,8 +75,12 @@ namespace KotB.StatePattern.AIStates
                     return;
                 }
 
-                if (MyBall() && JudgeInBounds(ai.Skills.InBoundsJudgement)) {
-                    ai.StateMachine.ChangeState(ai.DigReadyState);
+                if (MyBall()) {
+                    if (JudgeInBounds(ai.Skills.InBoundsJudgement)) {
+                        ai.StateMachine.ChangeState(ai.DigReadyState);
+                    } else {
+                        targetPos = Vector3.Lerp(ai.transform.position, ai.BallInfo.TargetPos, 1 - (distToGiveUp / Vector3.Distance(ai.transform.position, ai.BallInfo.TargetPos)));
+                    }
                 } else {
                     ai.StateMachine.ChangeState(ai.OffenseState);
                 }
