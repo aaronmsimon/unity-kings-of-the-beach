@@ -15,6 +15,8 @@ namespace KotB.Actors
         private NonServeState nonServeState;
         private ServePosState servePosState;
         private ReceiveServeState receiveServeState;
+        private DefenseBlockerState defenseBlockerState;
+        private DefenseDefenderState defenseDefenderState;
         private Vector3 targetPos;
         private float estimateRange;
 
@@ -34,6 +36,8 @@ namespace KotB.Actors
             nonServeState = new NonServeState(this);
             servePosState = new ServePosState(this);
             receiveServeState = new ReceiveServeState(this);
+            defenseBlockerState = new DefenseBlockerState(this);
+            defenseDefenderState = new DefenseDefenderState(this);
 
             stateMachine.ChangeState(postPointState);
 
@@ -108,6 +112,8 @@ namespace KotB.Actors
         public NonServeState NonServeState { get { return nonServeState; } }
         public ServePosState ServePosState { get { return servePosState; } }
         public ReceiveServeState ReceiveServeState { get { return receiveServeState; } }
+        public DefenseBlockerState DefenseBlockerState => defenseBlockerState;
+        public DefenseDefenderState DefenseDefenderState => defenseDefenderState;
         public Vector3 OffensePos { get { return new Vector3(skills.OffenseXPos * courtSide.Value, 0.01f, transform.position.z); } }
         public Vector3 TargetPos
         {

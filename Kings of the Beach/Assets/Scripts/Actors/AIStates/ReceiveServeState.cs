@@ -7,9 +7,9 @@ namespace KotB.StatePattern.AIStates
     {
         public ReceiveServeState(AI ai) : base(ai) { }
         
-        private Vector3 targetPos;
-
         public override void Enter() {
+            ai.TargetPos = ai.transform.position;
+            
             ai.ReachedTargetPos += OnReachedTargetPos;
             ai.BallInfo.TargetSet += OnTargetSet;
         }
