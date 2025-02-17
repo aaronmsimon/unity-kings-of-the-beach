@@ -36,6 +36,8 @@ namespace KotB.Actors
         private float jumpFrames = 7;
         private float actionFrames = 9;
         private float actionFallFrames = 8;
+        protected float serveOverhandFrames = 34;
+        protected float serveOverhandContactFrames = 25;
         protected float animationFrameRate = 24;
         private float jumpAnimationTime;
 
@@ -196,6 +198,10 @@ namespace KotB.Actors
             if (randValue <= skills.Blocking) Block();
         }
 
+        public void ServeOverhandAnimation() {
+            animator.Play("ServeOverhand");
+        }
+
         private void Block() {
             Vector3 targetPos = new Vector3(2 * -courtSide.Value, 0.01f, transform.position.z);
             float blockHeight = 4;
@@ -233,6 +239,7 @@ namespace KotB.Actors
         public float ReachHeight { get { return reachHeight; } }
         public float JumpFrames { get { return jumpFrames; } }
         public float ActionFrames { get { return actionFrames; } }
+        public float ServeOverhandContactFrames => serveOverhandContactFrames;
         public float AnimationFrameRate { get { return animationFrameRate; } }
         public float SpikeSpeedPenalty { set { spikeSpeedPenalty = value; } }
         public float ReceiveServeXPos => receiveServeXPos;

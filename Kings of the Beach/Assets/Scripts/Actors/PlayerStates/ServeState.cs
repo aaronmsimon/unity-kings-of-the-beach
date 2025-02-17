@@ -13,6 +13,8 @@ namespace KotB.StatePattern.PlayerStates
         private float servePowerDrainSpeedMax = 6;
         private bool serveUIIsActive;
         private bool powerMeterIsIncreasing;
+        private float serveContactTime;
+        private bool isServing;
 
         public override void Enter() {
             player.ServeCameraPriority.Value = 10;
@@ -22,6 +24,8 @@ namespace KotB.StatePattern.PlayerStates
             player.ShowServeAim.Raise();
 
             player.transform.position = new Vector3((player.CourtSideLength + player.transform.localScale.x * .5f) * player.CourtSide, 0.01f, 0f);
+
+            isServing = false;
 
             player.InputReader.bumpEvent += OnInteract;
         }
@@ -34,6 +38,7 @@ namespace KotB.StatePattern.PlayerStates
             ValidateMovement();
             UpdateServeAim();
             UpdatePowerMeter();
+            PerformServe();
         }
 
         private void ValidateMovement() {
@@ -45,6 +50,7 @@ namespace KotB.StatePattern.PlayerStates
             } else {
                 player.MoveDir = new Vector3(0, 0, player.RightStickInput.x * player.CourtSide);
             }
+            if (player.MoveDir == Vector3.zero) player.transform.rotation = Quaternion.LookRotation(Vector3.right * -player.CourtSide);
         }
 
         private void UpdateServeAim() {
@@ -80,8 +86,21 @@ namespace KotB.StatePattern.PlayerStates
             player.HideServeAim.Raise();
             Vector3 servePos = player.BallInfo.SkillValues.AdjustedServeDirection(player.ServeAimPosition.Value, player.Skills.Serving);
             player.BallInfo.ValidServe(servePos, player.ServePowerValue.Value, player);
-            player.BallInfo.SetServeTarget();
-            player.StateMachine.ChangeState(player.NormalState);
+            StartServe();
+        }
+
+        private void StartServe() {
+            player.ServeOverhandAnimation();
+            serveContactTime = Time.time + player.ServeOverhandContactFrames / player.AnimationFrameRate;
+            isServing = true;
+        }
+
+        private void PerformServe() {
+            if (isServing && Time.time > serveContactTime) {
+                Debug.Log("should have served");
+                player.BallInfo.SetServeTarget();
+                player.StateMachine.ChangeState(player.NormalState);
+            }
         }
 
         private void DisplayServeUI(bool isActive) {

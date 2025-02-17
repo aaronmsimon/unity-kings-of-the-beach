@@ -10,6 +10,7 @@ namespace KotB.StatePattern.AIStates
         private float timeUntilServe;
         private float baseTime = 1f;
         private float randomOffsetTime = 0.5f;
+        private float timeLeftOnAnimation;
         private bool changeToDefenseState;
         private float timeUntilDefense = 1f;
 
@@ -18,6 +19,7 @@ namespace KotB.StatePattern.AIStates
 
         public override void Enter() {
             timeUntilServe = baseTime + Random.Range(-randomOffsetTime, randomOffsetTime);
+            timeLeftOnAnimation = ai.ServeOverhandContactFrames / ai.AnimationFrameRate;
 
             changeToDefenseState = false;
         }
@@ -26,13 +28,17 @@ namespace KotB.StatePattern.AIStates
             if (!changeToDefenseState) {
                 // Face direction of serve
                 ai.transform.rotation = Quaternion.LookRotation(Vector3.right * -ai.CourtSide);
-
                 timeUntilServe -= Time.deltaTime;
 
                 if (timeUntilServe < 0) {
-                    changeToDefenseState = true;
-                    AimServe();
-                    ai.BallInfo.SetServeTarget();
+                    ai.ServeOverhandAnimation();
+                    timeLeftOnAnimation -= Time.deltaTime;
+
+                    if (timeLeftOnAnimation < 0) {
+                        changeToDefenseState = true;
+                        AimServe();
+                        ai.BallInfo.SetServeTarget();
+                    }
                 }
             } else {
                 timeUntilDefense -= Time.deltaTime;
