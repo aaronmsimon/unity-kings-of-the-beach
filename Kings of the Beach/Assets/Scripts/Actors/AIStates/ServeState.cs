@@ -7,6 +7,7 @@ namespace KotB.StatePattern.AIStates
     {
         public ServeState(AI ai) : base(ai) { }
 
+        private float timeUntilFaceOpponent = 0.5f;
         private float timeUntilServe;
         private float baseTime = 1f;
         private float randomOffsetTime = 0.5f;
@@ -26,18 +27,21 @@ namespace KotB.StatePattern.AIStates
 
         public override void Update() {
             if (!changeToDefenseState) {
-                // Face direction of serve
-                ai.FaceOpponent();
-                timeUntilServe -= Time.deltaTime;
+                timeUntilFaceOpponent -= Time.deltaTime;
+                if (timeUntilFaceOpponent < 0) {
+                    // Face direction of serve
+                    ai.FaceOpponent();
 
-                if (timeUntilServe < 0) {
-                    ai.ServeOverhandAnimation();
-                    timeLeftOnAnimation -= Time.deltaTime;
+                    timeUntilServe -= Time.deltaTime;
+                    if (timeUntilServe < 0) {
+                        ai.ServeOverhandAnimation();
+                        timeLeftOnAnimation -= Time.deltaTime;
 
-                    if (timeLeftOnAnimation < 0) {
-                        changeToDefenseState = true;
-                        AimServe();
-                        ai.BallInfo.SetServeTarget();
+                        if (timeLeftOnAnimation < 0) {
+                            changeToDefenseState = true;
+                            AimServe();
+                            ai.BallInfo.SetServeTarget();
+                        }
                     }
                 }
             } else {
