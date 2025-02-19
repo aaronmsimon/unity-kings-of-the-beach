@@ -15,7 +15,7 @@ namespace KotB.StatePattern.AIStates
         public override void Enter() {
             ai.transform.position = new Vector3((ai.CourtSideLength + ai.transform.localScale.x * .5f) * ai.CourtSide, 0.01f, 0f);
             ai.TargetPos = ai.transform.position;
-            ai.transform.rotation = Quaternion.LookRotation(Vector3.right * -ai.CourtSide);
+            ai.FaceOpponent();
             targetPos = new Vector3(ai.transform.position.x, ai.transform.position.y, Random.Range(-ai.CourtSideLength / 2, ai.CourtSideLength / 2));
 
             timeUntilWalk = baseTime + Random.Range(-randomOffsetTime, randomOffsetTime);

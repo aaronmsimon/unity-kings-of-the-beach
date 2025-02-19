@@ -50,7 +50,7 @@ namespace KotB.StatePattern.PlayerStates
             } else {
                 player.MoveDir = new Vector3(0, 0, player.RightStickInput.x * player.CourtSide);
             }
-            if (player.MoveDir == Vector3.zero) player.transform.rotation = Quaternion.LookRotation(Vector3.right * -player.CourtSide);
+            if (player.MoveDir == Vector3.zero) player.FaceOpponent();
         }
 
         private void UpdateServeAim() {
@@ -97,7 +97,6 @@ namespace KotB.StatePattern.PlayerStates
 
         private void PerformServe() {
             if (isServing && Time.time > serveContactTime) {
-                Debug.Log("should have served");
                 player.BallInfo.SetServeTarget();
                 player.StateMachine.ChangeState(player.NormalState);
             }

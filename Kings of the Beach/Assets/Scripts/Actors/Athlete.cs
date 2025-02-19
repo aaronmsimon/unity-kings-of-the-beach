@@ -217,6 +217,10 @@ namespace KotB.Actors
             this.courtSide = courtSide;
         }
 
+        public void FaceOpponent() {
+            transform.rotation = Quaternion.LookRotation(Vector3.right * -courtSide.Value);
+        }
+
         protected virtual void OnDrawGizmos() {}
 
         //---- PROPERTIES ----

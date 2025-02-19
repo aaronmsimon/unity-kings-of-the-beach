@@ -27,7 +27,7 @@ namespace KotB.StatePattern.AIStates
         public override void Update() {
             if (!changeToDefenseState) {
                 // Face direction of serve
-                ai.transform.rotation = Quaternion.LookRotation(Vector3.right * -ai.CourtSide);
+                ai.FaceOpponent();
                 timeUntilServe -= Time.deltaTime;
 
                 if (timeUntilServe < 0) {

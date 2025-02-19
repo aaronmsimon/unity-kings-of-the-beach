@@ -20,7 +20,7 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void OnReachedTargetPos() {
-            ai.transform.rotation = Quaternion.LookRotation(Vector3.right * -ai.CourtSide);
+            ai.FaceOpponent();
         }
 
         private void OnTargetSet() {
