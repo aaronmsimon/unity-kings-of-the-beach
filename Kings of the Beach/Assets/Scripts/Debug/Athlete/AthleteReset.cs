@@ -25,7 +25,7 @@ namespace KotB.Testing
 
         private void ResetPosition() {
             athlete.transform.position = startPos;
-            athlete.transform.forward = Vector3.right * -athlete.CourtSide;
+            athlete.FaceOpponent();
         }
     }
 }

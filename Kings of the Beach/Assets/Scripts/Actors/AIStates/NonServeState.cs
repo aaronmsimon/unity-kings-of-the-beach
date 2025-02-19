@@ -41,7 +41,7 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void OnReachedTargetPos() {
-            ai.transform.forward = Vector3.right * -ai.CourtSide;
+            ai.FaceOpponent();
         }
     }
 }

@@ -158,7 +158,7 @@ namespace KotB.Actors
         public void PerformJump() {
             isJumping = true;
             jumpAnimationTime = 0;
-            transform.forward = new Vector3(-courtSide.Value, 0, 0);
+            FaceOpponent();
             if (courtSide.Value == Mathf.Sign(ballInfo.Position.x)) {
                 animator.Play("Spike");
             } else {

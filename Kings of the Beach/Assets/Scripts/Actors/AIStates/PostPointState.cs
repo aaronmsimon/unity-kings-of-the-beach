@@ -26,7 +26,7 @@ namespace KotB.StatePattern.AIStates
                 }
             } else {
                 ai.transform.position = ai.ServeDefPos;
-                ai.transform.forward = Vector3.right * -ai.CourtSide;
+                ai.FaceOpponent();
                 ai.StateMachine.ChangeState(ai.ReceiveServeState);
             }
         }

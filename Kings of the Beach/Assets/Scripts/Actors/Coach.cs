@@ -69,7 +69,7 @@ namespace KotB.Actors
 
         public void TakeBall() {
             ballInfo.GiveBall(this);
-            transform.forward = Vector3.right * -CourtSide;
+            FaceOpponent();
             BallInfo.HitsForTeam = resetHitCounterAmount;
             animator.Play("HoldBall");
             BallTaken?.Invoke();

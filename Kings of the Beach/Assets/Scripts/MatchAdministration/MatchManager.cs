@@ -65,7 +65,7 @@ namespace KotB.Match
             totalPoints += 1;
             switchSidesPoints = scoreToWin.Value / switchSidesPointsDivisor;
             if (totalPoints % switchSidesPoints == 0) {
-                matchInfo.teamsSwitchSides();
+                matchInfo.TeamsSwitchSides();
                 serveCamDirection.Value *= -1;
             }
         }

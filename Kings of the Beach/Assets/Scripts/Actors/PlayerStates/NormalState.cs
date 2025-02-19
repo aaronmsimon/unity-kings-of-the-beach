@@ -13,8 +13,6 @@ namespace KotB.StatePattern.PlayerStates
             player.MainCameraPriority.Value = 10;
             player.UpdateCameraPriorty.Raise();
 
-            player.transform.forward = Vector3.right * -player.CourtSide;
-
             player.MatchInfo.TransitionToServeState += OnMatchChangeToServeState;
         }
 
@@ -48,11 +46,8 @@ namespace KotB.StatePattern.PlayerStates
             if (player.MatchInfo.GetServer() == player) {
                 player.StateMachine.ChangeState(player.ServeState);
             } else {
-                Athlete test = player.MatchInfo.GetServer();
-                // Vector3 newPos = player.MatchInfo.GetServer().CourtSide == player.CourtSide ? player.Skills.ServingPartnerPos : new Vector3(player.Skills.DefensePos.x, 0.01f, -2);
-                // player.transform.position = new Vector3(newPos.x * player.CourtSide, newPos.y, newPos.z);
                 player.transform.position = player.ServeDefPos;
-                player.transform.forward = Vector3.right * -player.CourtSide;
+                player.FaceOpponent();
             }
         }
     }
