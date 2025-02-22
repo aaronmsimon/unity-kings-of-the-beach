@@ -42,19 +42,11 @@ namespace KotB.Actors
             // Clamp accuracy to the range of 0 to 1 to avoid unexpected results
             accuracy = Mathf.Clamp01(accuracy);
             float deviation = 1f - accuracy;
-            string debugMsg = $"Skill: {accuracy}, Deviation: {deviation}\n";
-
             float angle = Random.Range(0f, 360f);
-            float skillCheck = Random.value;
-
-
-            if (Mathf.Abs(vector.x) <= netThreshold) {
-                debugMsg += "Target within No Man's Land\n";
-                debugMsg += $"Skill Check: {skillCheck} > {ignoreBiasThreshold} * (1 - {accuracy}) -> {skillCheck > ignoreBiasThreshold * (1 - accuracy)}\n";
-            }
+            float distance = Random.Range(0, (skillRange.max - skillRange.min) * deviation) + skillRange.min;
             
             // If target is close to net and passes a skill check, aim away from net
-            if (Mathf.Abs(vector.x) <= netThreshold && skillCheck > ignoreBiasThreshold * (1 - accuracy))
+            if (Mathf.Abs(vector.x) <= netThreshold && Random.value > ignoreBiasThreshold * (1 - accuracy))
             {
                 // Calculate angle range that would bias away from net
                 Vector3 backCourtDir = Vector3.up * courtside;
@@ -67,14 +59,11 @@ namespace KotB.Actors
                 
                 // Biased angle away from net
                 angle = Random.Range(minAngle, maxAngle);
-                debugMsg += "Angle will be biased\n";
+
+                Debug.Log($"Angle Adjustment\nAngle: {angle}, Dist: {distance}\nOriginal Target: {vector}, Adjusted Target: {vector + new Vector2((Quaternion.Euler(0, angle, 0) * Vector3.forward * distance).x, (Quaternion.Euler(0, angle, 0) * Vector3.forward * distance).z)}");
             }
 
-            float distance = Random.Range(0, (skillRange.max - skillRange.min) * deviation) + skillRange.min;
             Vector3 adjustment = Quaternion.Euler(0, angle, 0) * Vector3.forward * distance;
-            debugMsg += $"Angle: {angle}, Distance: {distance}\n";
-            debugMsg += $"Original Target: {vector}, Adjusted Target: {vector + new Vector2(adjustment.x, adjustment.z)}";
-            Debug.Log(debugMsg);
             return vector + new Vector2(adjustment.x, adjustment.z);
         }
 
