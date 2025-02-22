@@ -25,5 +25,50 @@ namespace Cackenballz.Helpers
             }
             Gizmos.DrawLine(pos, lastPos);
         }
+
+        public static void DrawGizmoArc(Vector3 center, float radius, float startAngleDegrees, float endAngleDegrees, Color color, int segments = 20)
+        {
+            Gizmos.color = color;
+            
+            // Convert angles to radians and normalize them
+            float startAngle = startAngleDegrees * Mathf.Deg2Rad;
+            float endAngle = endAngleDegrees * Mathf.Deg2Rad;
+            
+            // Ensure the end angle is greater than the start angle
+            if (endAngle < startAngle)
+            {
+                endAngle += 2 * Mathf.PI;
+            }
+            
+            // Calculate how many segments we need based on the angle difference
+            float angleDiff = endAngle - startAngle;
+            int segmentsToUse = Mathf.Max(1, Mathf.RoundToInt((angleDiff / (2 * Mathf.PI)) * segments));
+            float step = angleDiff / segmentsToUse;
+            
+            // Draw the arc segments
+            Vector3 lastPoint = center + new Vector3(
+                radius * Mathf.Cos(startAngle),
+                0,
+                radius * Mathf.Sin(startAngle)
+            );
+            
+            // Draw first line from center to arc start
+            Gizmos.DrawLine(center, lastPoint);
+            
+            // Draw the arc
+            for (float theta = startAngle + step; theta <= endAngle + 0.0001f; theta += step)
+            {
+                Vector3 nextPoint = center + new Vector3(
+                    radius * Mathf.Cos(theta),
+                    0,
+                    radius * Mathf.Sin(theta)
+                );
+                Gizmos.DrawLine(lastPoint, nextPoint);
+                lastPoint = nextPoint;
+            }
+            
+            // Draw last line back to center
+            Gizmos.DrawLine(lastPoint, center);
+        }
     }
 }

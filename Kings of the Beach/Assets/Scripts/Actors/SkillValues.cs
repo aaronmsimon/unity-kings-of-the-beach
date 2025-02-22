@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace KotB.Actors
@@ -25,7 +26,7 @@ namespace KotB.Actors
         }
 
         public Vector2 AdjustedPassLocation(Vector2 originalLoc, float accuracy) {
-            return AdjustVectorAccuracy(originalLoc, accuracy, passAccuracy, 4f);
+            return AdjustVectorAccuracy(originalLoc, accuracy, passAccuracy);
         }
 
         public float SkillToValue(float skill, MinMax valueRange) {
@@ -42,6 +43,18 @@ namespace KotB.Actors
 
             // Generate a random unit vector (random direction)
             Vector2 randomDirection = Random.insideUnitCircle.normalized;
+            string debugMsg = $"Random Direction: {randomDirection}, teammateX: {vector.x} {Mathf.Abs(vector.x) <= 1}";
+
+            // Percent of time away from net will be based on Accuracy and only if teammate is within 1 of the net
+            if (Mathf.Abs(vector.x) <= 1) {
+                float accuracyCheck = Random.Range(skillRange.min, skillRange.max);
+                debugMsg += $" Accuracy Check: {accuracyCheck} <= {accuracy * 10}? {accuracyCheck <= accuracy * 10}";
+                debugMsg += $" Is dir toward net: {randomDirection.x} vs {vector.x}? {Mathf.Abs(randomDirection.x) < Mathf.Abs(vector.x)}";
+                if (accuracyCheck <= accuracy * 10 && Mathf.Abs(randomDirection.x) < Mathf.Abs(vector.x)) {
+                    randomDirection = new Vector2(-randomDirection.x, randomDirection.y);
+                    debugMsg += $" Random Direction updated to: {randomDirection}";
+                }
+            }
 
             // Generate a random magnitude based on the deviation
             // float randomMagnitude = Random.Range(0f, deviation);
@@ -50,40 +63,10 @@ namespace KotB.Actors
             // Calculate the random offset
             Vector2 randomOffset = randomDirection * randomMagnitude;
 
-            // Add the random offset to the original vector
-            return vector + randomOffset;
-        }
-
-        private static Vector2 AdjustVectorAccuracy(Vector2 vector, float accuracy, MinMax skillRange, float netBias)
-        {
-            accuracy = Mathf.Clamp01(accuracy);
-            float deviation = 1 - accuracy;
-            Vector2 randomDirection = Random.insideUnitCircle.normalized;
-            string debugMsg = $"Random Direction: {randomDirection}";
-
-            // Calculate how close to the net we are (0 = at net, 1 = far from net)
-            float distanceFromNet = Mathf.Abs(vector.x);
-            float netProximity = Mathf.Clamp01(distanceFromNet / 2.5f); // Percentage of court size
-            
-            // If we're close to the net, adjust only the x component of the random direction
-            if (distanceFromNet < 2.5f)
-            {
-                // Create a bias x-component pointing away from the net
-                float biasX = Mathf.Sign(vector.x);
-                
-                // Lerp between the random x-component and the bias x-component based on net proximity
-                float biasStrength = 1f - (netProximity * netBias); // More bias when closer to net
-                float newX = Mathf.Lerp(randomDirection.x, biasX, biasStrength);
-                
-                // Keep the y component unchanged
-                randomDirection = new Vector2(newX, randomDirection.y).normalized;
-                debugMsg += $" bias update -> netProx: {netProximity}, bias: {biasStrength} => new Random Direction: {randomDirection} (x only={newX})";
-            }
+            debugMsg += $" randMag: {randomMagnitude} x randDir = {randomOffset} + {vector} = {vector + randomOffset}";
             Debug.Log(debugMsg);
 
-            float randomMagnitude = Random.Range(0, (skillRange.max - skillRange.min) * deviation) + skillRange.min;
-            Vector2 randomOffset = randomDirection * randomMagnitude;
-
+            // Add the random offset to the original vector
             return vector + randomOffset;
         }
 
