@@ -44,7 +44,7 @@ namespace KotB.StatePattern.AIStates
                 float zBallTargetPos = ai.BallInfo.TargetPos.z;
                 float openSideLength = zBallTargetPos - (-Mathf.Sign(zBallTargetPos) * halfCourtSide);
                 targetPos = new Vector3(defensePos * ai.CourtSide, ai.transform.position.y, zBallTargetPos - openSideLength / 2);
-                Debug.Log($"ball target(z): {zBallTargetPos}, open len: {openSideLength}, target pos: {targetPos}");
+                // Debug.Log($"ball target(z): {zBallTargetPos}, open len: {openSideLength}, target pos: {targetPos}");
             }
         }
     }

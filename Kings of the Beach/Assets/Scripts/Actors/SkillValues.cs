@@ -1,5 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using RoboRyanTron.Unite2017.Variables;
 
 namespace KotB.Actors
 {
@@ -21,53 +21,61 @@ namespace KotB.Actors
         private MinMax skillRange = new MinMax(1, 10);
 
         public Vector3 AdjustedServeDirection(Vector3 originalPos, float serving) {
-            Vector2 adjAimPos = AdjustVectorAccuracy(new Vector2(originalPos.z, originalPos.y), serving / 10, serveAccuracy);
+            Vector2 adjAimPos = AdjustVectorAccuracy(new Vector2(originalPos.z, originalPos.y), serving / 10, serveAccuracy, Mathf.Sign(originalPos.x));
             return new Vector3(0, adjAimPos.y, adjAimPos.x);
         }
 
-        public Vector2 AdjustedPassLocation(Vector2 originalLoc, float accuracy) {
-            return AdjustVectorAccuracy(originalLoc, accuracy, passAccuracy);
+        public Vector2 AdjustedPassLocation(Vector2 originalLoc, float accuracy, float courtside) {
+            return AdjustVectorAccuracy(originalLoc, accuracy, passAccuracy, courtside);
         }
 
         public float SkillToValue(float skill, MinMax valueRange) {
             return (skill - skillRange.min) * (valueRange.max - valueRange.min) / (skillRange.max - skillRange.min) + valueRange.min;
         }
 
-        private static Vector2 AdjustVectorAccuracy(Vector2 vector, float accuracy, MinMax skillRange)
+        private static Vector2 AdjustVectorAccuracy(Vector2 vector, float accuracy, MinMax skillRange, float courtside)
         {
+            // Settings
+            float netThreshold = 0.51f;
+            float ignoreBiasThreshold = 0.2f;
+
             // Clamp accuracy to the range of 0 to 1 to avoid unexpected results
             accuracy = Mathf.Clamp01(accuracy);
+            float deviation = 1f - accuracy;
+            string debugMsg = $"Skill: {accuracy}, Deviation: {deviation}\n";
 
-            // Calculate the maximum deviation based on the accuracy
-            float deviation = 1 - accuracy;
+            float angle = Random.Range(0f, 360f);
+            float skillCheck = Random.value;
 
-            // Generate a random unit vector (random direction)
-            Vector2 randomDirection = Random.insideUnitCircle.normalized;
-            string debugMsg = $"Random Direction: {randomDirection}, teammateX: {vector.x} {Mathf.Abs(vector.x) <= 1}";
 
-            // Percent of time away from net will be based on Accuracy and only if teammate is within 1 of the net
-            if (Mathf.Abs(vector.x) <= 1) {
-                float accuracyCheck = Random.Range(skillRange.min, skillRange.max);
-                debugMsg += $" Accuracy Check: {accuracyCheck} <= {accuracy * 10}? {accuracyCheck <= accuracy * 10}";
-                debugMsg += $" Is dir toward net: {randomDirection.x} vs {vector.x}? {Mathf.Abs(randomDirection.x) < Mathf.Abs(vector.x)}";
-                if (accuracyCheck <= accuracy * 10 && Mathf.Abs(randomDirection.x) < Mathf.Abs(vector.x)) {
-                    randomDirection = new Vector2(-randomDirection.x, randomDirection.y);
-                    debugMsg += $" Random Direction updated to: {randomDirection}";
-                }
+            if (Mathf.Abs(vector.x) <= netThreshold) {
+                debugMsg += "Target within No Man's Land\n";
+                debugMsg += $"Skill Check: {skillCheck} > {ignoreBiasThreshold} * (1 - {accuracy}) -> {skillCheck > ignoreBiasThreshold * (1 - accuracy)}\n";
+            }
+            
+            // If target is close to net and passes a skill check, aim away from net
+            if (Mathf.Abs(vector.x) <= netThreshold && skillCheck > ignoreBiasThreshold * (1 - accuracy))
+            {
+                // Calculate angle range that would bias away from net
+                Vector3 backCourtDir = Vector3.up * courtside;
+                float baseAngle = Mathf.Atan2(backCourtDir.x, backCourtDir.z) * Mathf.Rad2Deg;
+                
+                // Higher skill = narrower angle range
+                float angleRange = Mathf.Lerp(180f, 90f, accuracy);
+                float minAngle = baseAngle - (angleRange / 2f);
+                float maxAngle = baseAngle + (angleRange / 2f);
+                
+                // Biased angle away from net
+                angle = Random.Range(minAngle, maxAngle);
+                debugMsg += "Angle will be biased\n";
             }
 
-            // Generate a random magnitude based on the deviation
-            // float randomMagnitude = Random.Range(0f, deviation);
-            float randomMagnitude = Random.Range(0, (skillRange.max - skillRange.min) * deviation) + skillRange.min;
-
-            // Calculate the random offset
-            Vector2 randomOffset = randomDirection * randomMagnitude;
-
-            debugMsg += $" randMag: {randomMagnitude} x randDir = {randomOffset} + {vector} = {vector + randomOffset}";
+            float distance = Random.Range(0, (skillRange.max - skillRange.min) * deviation) + skillRange.min;
+            Vector3 adjustment = Quaternion.Euler(0, angle, 0) * Vector3.forward * distance;
+            debugMsg += $"Angle: {angle}, Distance: {distance}\n";
+            debugMsg += $"Original Target: {vector}, Adjusted Target: {vector + new Vector2(adjustment.x, adjustment.z)}";
             Debug.Log(debugMsg);
-
-            // Add the random offset to the original vector
-            return vector + randomOffset;
+            return vector + new Vector2(adjustment.x, adjustment.z);
         }
 
         public MinMax ServePower { get { return servePower; } }

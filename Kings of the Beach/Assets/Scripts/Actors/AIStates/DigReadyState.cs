@@ -73,7 +73,7 @@ namespace KotB.StatePattern.AIStates
         private Vector3 CalculatePassTarget() {
             Athlete teammate = ai.MatchInfo.GetTeammate(ai);
             Vector2 teammatePos = new Vector2(teammate.transform.position.x, teammate.transform.position.z);
-            Vector2 aimLocation = ai.BallInfo.SkillValues.AdjustedPassLocation(teammatePos, ai.Skills.PassAccuracy / 10);
+            Vector2 aimLocation = ai.BallInfo.SkillValues.AdjustedPassLocation(teammatePos, ai.Skills.PassAccuracy / 10, ai.CourtSide);
             return new Vector3(aimLocation.x, 0f, aimLocation.y);
         }
 
@@ -132,7 +132,7 @@ namespace KotB.StatePattern.AIStates
                     return t2 * duration;
             }
 
-            Debug.LogError($"No real solution for spikePos={spikePos}, height={height}, start={start}, end={end}, duration={duration} leading to discriminant={discriminant}");
+            // Debug.LogError($"No real solution for spikePos={spikePos}, height={height}, start={start}, end={end}, duration={duration} leading to discriminant={discriminant}");
             return -1;
         }
 
