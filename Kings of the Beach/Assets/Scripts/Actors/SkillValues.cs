@@ -49,7 +49,7 @@ namespace KotB.Actors
             if (Mathf.Abs(vector.x) <= netThreshold && Random.value > ignoreBiasThreshold * (1 - accuracy))
             {
                 // Calculate angle range that would bias away from net
-                Vector3 backCourtDir = Vector3.up * courtside;
+                Vector3 backCourtDir = Vector3.right * courtside;
                 float baseAngle = Mathf.Atan2(backCourtDir.x, backCourtDir.z) * Mathf.Rad2Deg;
                 
                 // Higher skill = narrower angle range
@@ -60,7 +60,7 @@ namespace KotB.Actors
                 // Biased angle away from net
                 angle = Random.Range(minAngle, maxAngle);
 
-                Debug.Log($"Angle Adjustment\nAngle: {angle}, Dist: {distance}\nOriginal Target: {vector}, Adjusted Target: {vector + new Vector2((Quaternion.Euler(0, angle, 0) * Vector3.forward * distance).x, (Quaternion.Euler(0, angle, 0) * Vector3.forward * distance).z)}");
+                Debug.Log($"Angle Adjustment toward direction {backCourtDir} (base angle {baseAngle})\nAngle: {angle}, Dist: {distance}\nOriginal Target: {vector}, Adjusted Target: {vector + new Vector2((Quaternion.Euler(0, angle, 0) * Vector3.forward * distance).x, (Quaternion.Euler(0, angle, 0) * Vector3.forward * distance).z)}");
             }
 
             Vector3 adjustment = Quaternion.Euler(0, angle, 0) * Vector3.forward * distance;
