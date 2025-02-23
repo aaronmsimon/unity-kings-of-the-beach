@@ -73,7 +73,7 @@ namespace KotB.StatePattern.AIStates
         private Vector3 CalculatePassTarget() {
             Athlete teammate = ai.MatchInfo.GetTeammate(ai);
             Vector2 teammatePos = new Vector2(teammate.transform.position.x, teammate.transform.position.z);
-            Vector2 aimLocation = ai.BallInfo.SkillValues.AdjustedPassLocation(teammatePos, ai.Skills.PassAccuracy / 10, ai.CourtSide);
+            Vector2 aimLocation = ai.BallInfo.SkillValues.AdjustedPassLocation(teammatePos, ai);
             return new Vector3(aimLocation.x, 0f, aimLocation.y);
         }
 

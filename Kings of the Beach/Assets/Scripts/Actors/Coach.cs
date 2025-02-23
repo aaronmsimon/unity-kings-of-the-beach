@@ -86,7 +86,7 @@ namespace KotB.Actors
                 Player player = FindObjectOfType<Player>();
                 if (player != null){
                     Vector2 teammatePos = new Vector2(player.transform.position.x, player.transform.position.z);
-                    Vector2 aimLocation = ballInfo.SkillValues.AdjustedPassLocation(teammatePos, skills.PassAccuracy / 10, courtSide.Value);
+                    Vector2 aimLocation = ballInfo.SkillValues.AdjustedPassLocation(teammatePos, this);
                     Vector3 passTarget = new Vector3(aimLocation.x, 0f, aimLocation.y);
                     Pass(passTarget, 7, 1.75f);
                 }

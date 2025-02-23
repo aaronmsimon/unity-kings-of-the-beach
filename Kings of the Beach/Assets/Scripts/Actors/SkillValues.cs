@@ -21,50 +21,58 @@ namespace KotB.Actors
         private MinMax skillRange = new MinMax(1, 10);
 
         public Vector3 AdjustedServeDirection(Vector3 originalPos, float serving) {
-            Vector2 adjAimPos = AdjustVectorAccuracy(new Vector2(originalPos.z, originalPos.y), serving / 10, serveAccuracy, Mathf.Sign(originalPos.x));
+            Vector2 adjAimPos = AdjustVectorAccuracy(new Vector2(originalPos.z, originalPos.y), serving / 10, serveAccuracy);
+            Debug.Log($"Serve aim: {new Vector2(originalPos.z, originalPos.y)}, final: {adjAimPos}");
             return new Vector3(0, adjAimPos.y, adjAimPos.x);
         }
 
-        public Vector2 AdjustedPassLocation(Vector2 originalLoc, float accuracy, float courtside) {
-            return AdjustVectorAccuracy(originalLoc, accuracy, passAccuracy, courtside);
+        public Vector2 AdjustedPassLocation(Vector2 originalLoc, Athlete athlete) {
+            return AdjustPassVector(originalLoc, athlete, passAccuracy);
         }
 
         public float SkillToValue(float skill, MinMax valueRange) {
             return (skill - skillRange.min) * (valueRange.max - valueRange.min) / (skillRange.max - skillRange.min) + valueRange.min;
         }
 
-        private static Vector2 AdjustVectorAccuracy(Vector2 vector, float accuracy, MinMax skillRange, float courtside)
+        private static Vector2 AdjustVectorAccuracy(Vector2 vector, float accuracy, MinMax skillRange)
         {
-            // Settings
-            float netThreshold = 0.51f;
-            float ignoreBiasThreshold = 0.2f;
-
             // Clamp accuracy to the range of 0 to 1 to avoid unexpected results
             accuracy = Mathf.Clamp01(accuracy);
-            float deviation = 1f - accuracy;
-            float angle = Random.Range(0f, 360f);
-            float distance = Random.Range(0, (skillRange.max - skillRange.min) * deviation) + skillRange.min;
-            
-            // If target is close to net and passes a skill check, aim away from net
-            if (Mathf.Abs(vector.x) <= netThreshold && Random.value > ignoreBiasThreshold * (1 - accuracy))
-            {
-                // Calculate angle range that would bias away from net
-                Vector3 backCourtDir = Vector3.right * courtside;
-                float baseAngle = Mathf.Atan2(backCourtDir.x, backCourtDir.z) * Mathf.Rad2Deg;
-                
-                // Higher skill = narrower angle range
-                float angleRange = Mathf.Lerp(180f, 90f, accuracy);
-                float minAngle = baseAngle - (angleRange / 2f);
-                float maxAngle = baseAngle + (angleRange / 2f);
-                
-                // Biased angle away from net
-                angle = Random.Range(minAngle, maxAngle);
 
-                Debug.Log($"Angle Adjustment toward direction {backCourtDir} (base angle {baseAngle})\nAngle: {angle}, Dist: {distance}\nOriginal Target: {vector}, Adjusted Target: {vector + new Vector2((Quaternion.Euler(0, angle, 0) * Vector3.forward * distance).x, (Quaternion.Euler(0, angle, 0) * Vector3.forward * distance).z)}");
+            // Calculate the maximum deviation based on the accuracy
+            float deviation = 1 - accuracy;
+
+            // Generate a random unit vector (random direction)
+            Vector2 randomDirection = Random.insideUnitCircle.normalized;
+
+            // Generate a random magnitude based on the deviation
+            // float randomMagnitude = Random.Range(0f, deviation);
+            float randomMagnitude = Random.Range(0, (skillRange.max - skillRange.min) * deviation) + skillRange.min;
+
+            // Calculate the random offset
+            Vector2 randomOffset = randomDirection * randomMagnitude;
+
+            // Add the random offset to the original vector
+            return vector + randomOffset;
+        }
+
+        private static Vector2 AdjustPassVector(Vector2 vector, Athlete athlete, MinMax skillRange)
+        {
+            Vector2 newVector = AdjustVectorAccuracy(vector, athlete.Skills.PassAccuracy / 10, skillRange);
+
+            // If in No Man's Land, push to closest side
+            float noMansLand = 0.52f;
+            if (Mathf.Abs(newVector.x) < noMansLand) {
+                string msg = $"Vector was going to be at {newVector}";
+                float rand = Random.value;
+                bool skillCheck = rand <= athlete.Skills.PassAccuracy / 10;
+                msg += $" skill check {rand} <= {athlete.Skills.PassAccuracy} / 10 = {(skillCheck ? "passed" : "failed")}";
+                float bufferedX = (skillCheck ? 1 : -1) * athlete.CourtSide * noMansLand;
+                newVector = new Vector2(bufferedX, newVector.y);
+                Debug.Log($"{msg} so pushed to {newVector}");
             }
 
-            Vector3 adjustment = Quaternion.Euler(0, angle, 0) * Vector3.forward * distance;
-            return vector + new Vector2(adjustment.x, adjustment.z);
+            return newVector;
         }
 
         public MinMax ServePower { get { return servePower; } }
