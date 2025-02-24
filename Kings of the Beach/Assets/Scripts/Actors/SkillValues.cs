@@ -64,11 +64,7 @@ namespace KotB.Actors
             float noMansLand = 0.52f;
             if (Mathf.Abs(newVector.x) < noMansLand) {
                 string msg = $"Vector was going to be at {newVector}";
-                float rand = Random.value;
-                bool skillCheck = rand <= athlete.Skills.PassAccuracy / 10;
-                msg += $" skill check {rand} <= {athlete.Skills.PassAccuracy} / 10 = {(skillCheck ? "passed" : "failed")}";
-                float bufferedX = (skillCheck ? 1 : -1) * athlete.CourtSide * noMansLand;
-                newVector = new Vector2(bufferedX, newVector.y);
+                newVector = new Vector2(athlete.CourtSide * noMansLand, newVector.y);
                 Debug.Log($"{msg} so pushed to {newVector}");
             }
 
