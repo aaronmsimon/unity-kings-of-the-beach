@@ -81,13 +81,6 @@ namespace KotB.Items
             }
         }
 
-        private void ResetBallForServeTest() {
-            Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-            player.StateMachine.ChangeState(player.ServeState);
-            ballInfo.GiveBall(player);
-            ballStateMachine.ChangeState(heldState);
-        }
-
         //---- PROPERTIES ----
         public BallSO BallInfo { get { return ballInfo; } }
         public StateMachine StateMachine { get { return ballStateMachine; } }
