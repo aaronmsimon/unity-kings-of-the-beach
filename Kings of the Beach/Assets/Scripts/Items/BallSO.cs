@@ -27,7 +27,6 @@ namespace KotB.Items
 
         public event Action BallGiven;
         public event Action TargetSet;
-        public event Action BallChangePossession;
         public event Action BallServed;
 
         // Serve
@@ -113,10 +112,6 @@ namespace KotB.Items
                 (posToCheck.x - BallRadius) <= 8 &&
                 (posToCheck.z + BallRadius) >= -4 &&
                 (posToCheck.z - BallRadius) <= 4;
-        }
-
-        public void BallChangePossessionEvent() {
-            BallChangePossession?.Invoke();
         }
 
         public Vector3 CalculateInFlightPosition(float t, Vector3 start, Vector3 end, float maxHeightPoint)

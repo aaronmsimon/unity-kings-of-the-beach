@@ -20,11 +20,11 @@ namespace KotB.StatePattern.AIStates
             spikeTime = GetTimeForSpike(ai.ReachHeight, ai.BallInfo.Height, ai.BallInfo.StartPos.y, ai.BallInfo.TargetPos.y, ai.BallInfo.Duration);
             isSpiking = false;
 
-            ai.BallInfo.BallChangePossession += OnBallChangePosession;
+            ai.BallInfo.TargetSet += OnTargetSet;
         }
 
         public override void Exit() {
-            ai.BallInfo.BallChangePossession -= OnBallChangePosession;
+            ai.BallInfo.TargetSet -= OnTargetSet;
         }
 
         public override void Update() {
@@ -178,8 +178,8 @@ namespace KotB.StatePattern.AIStates
             return index;
         }
 
-        private void OnBallChangePosession() {
-            if (ai.BallInfo.Possession == ai.CourtSide) {
+        private void OnTargetSet() {
+            if (ai.BallInfo.TargetPos.x != ai.CourtSide) {
                 ai.StateMachine.ChangeState(ai.DefenseState);
             }
         }

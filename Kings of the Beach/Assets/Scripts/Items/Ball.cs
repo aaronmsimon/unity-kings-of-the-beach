@@ -63,8 +63,6 @@ namespace KotB.Items
                     if (matchInfo.CurrentState is ServeState) {
                         changeToInPlayStateEvent.Raise();
                     }
-
-                    ballInfo.BallChangePossessionEvent();
                 }
             }
             ballInfo.Possession = (int)Mathf.Sign(transform.position.x);
