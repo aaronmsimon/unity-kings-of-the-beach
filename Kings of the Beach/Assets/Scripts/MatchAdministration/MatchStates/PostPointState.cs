@@ -40,8 +40,8 @@ namespace KotB.StatePattern.MatchStates
         private void CheckGameEnd() {
             List<TeamSO> teams = matchManager.MatchInfo.Teams;
             for (int i = 0; i < teams.Count; i++) {
-                if (teams[i].Score == matchManager.MatchInfo.ScoreToWin) {
-                    Debug.Log($"{teams[i].TeamName} wins!");
+                if (teams[i].Score >= matchManager.MatchInfo.ScoreToWin && Mathf.Abs(teams[i].Score - teams[1 - i].Score) > 1 && teams[i].Score > teams[1 - i].Score) {
+                    Debug.Log($"{teams[i].TeamName.Value} wins!");
                     matchManager.StateMachine.ChangeState(matchManager.MatchEndState);
                 }
             }

@@ -25,11 +25,13 @@ namespace KotB.StatePattern.PlayerStates
 
             player.InputReader.bumpEvent += OnPass;
             player.InputReader.bumpAcrossEvent += OnBumpAcross;
+            player.BallInfo.TargetSet += OnTargetSet;
         }
 
         public override void Exit() {
             player.InputReader.bumpEvent -= OnPass;
             player.InputReader.bumpAcrossEvent -= OnBumpAcross;
+            player.BallInfo.TargetSet -= OnTargetSet;
         }
 
         public override void Update() {
@@ -42,7 +44,6 @@ namespace KotB.StatePattern.PlayerStates
                 if (!player.IsJumping) {
                     if (bumpTimer > 0) {
                         player.Pass(targetPos, 7, 1.75f);
-                        canUnlock = true;
                         unlockTimer = unlockDelay;
                     }
                 } else {
@@ -91,6 +92,10 @@ namespace KotB.StatePattern.PlayerStates
 
         private void OnBumpAcross() {
             Bump(false);
+        }
+
+        private void OnTargetSet() {
+            canUnlock = true;
         }
     }
 }
