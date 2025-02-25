@@ -16,4 +16,4 @@ MonoBehaviour:
   computerControlled: 1
   outfit: 1
   top: {fileID: 11400000, guid: 7020cf51a0ab1294ab269781ecd23999, type: 2}
-  bottom: {fileID: 11400000, guid: 75836cdaea26c7042a9901cbea1d46a8, type: 2}
+  bottom: {fileID: 11400000, guid: 30e0fb2b1c0cc034ebb1c3612facf654, type: 2}

@@ -29,7 +29,6 @@ MonoBehaviour:
   servePower: 7
   blocking: 7.5
   height: 2.03
-  servingPartnerPos: {x: 3, y: 1.5}
   defensePos: {x: 2, y: 2}
   offenseXPos: 1.25
   playerPosition: 0

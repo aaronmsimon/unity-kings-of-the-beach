@@ -28,7 +28,7 @@ namespace KotB.StatePattern.AIStates
                 if (ai.JudgeInBounds()) {
                     ai.StateMachine.ChangeState(ai.DigReadyState);
                 } else {
-                    ai.SetTargetToGiveUp();
+                    ai.SetTargetToGiveUp(1, Random.Range(-0.5f, 0.5f));
                 }
             } else {
                 ai.StateMachine.ChangeState(ai.OffenseState);

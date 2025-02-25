@@ -23,7 +23,6 @@ namespace KotB.Actors
         public event Action ReachedTargetPos;
 
         private float stoppingDistance = 0.1f;
-        private float distToGiveUp = 1;
 
         protected override void Awake() {
             base.Awake();
@@ -57,8 +56,19 @@ namespace KotB.Actors
             base.Update();
         }
 
-        public void SetTargetToGiveUp() {
-            targetPos = Vector3.Lerp(transform.position, BallInfo.TargetPos, 1 - (distToGiveUp / Vector3.Distance(transform.position, BallInfo.TargetPos)));
+        public void SetTargetToGiveUp(float minDist, float giveUpDistance) {
+            Vector3 ballTargetPos = BallInfo.TargetPos;
+            Vector3 pos = transform.position;
+            Vector3 direction = ballTargetPos - pos;
+
+            // Check intersections with each boundary
+            if (ballTargetPos.x > courtSideLength * courtSide.Value) minDist = Mathf.Min(minDist, (courtSideLength * courtSide.Value - giveUpDistance - pos.x) / direction.x);
+            if (ballTargetPos.x < courtSideLength * -courtSide.Value) minDist = Mathf.Min(minDist, (courtSideLength * -courtSide.Value + giveUpDistance - pos.x) / direction.x);
+            if (ballTargetPos.z > courtSideLength / 2 * courtSide.Value) minDist = Mathf.Min(minDist, (courtSideLength / 2 * courtSide.Value - giveUpDistance - pos.z) / direction.z);
+            if (ballTargetPos.z < courtSideLength / 2 * -courtSide.Value) minDist = Mathf.Min(minDist, (courtSideLength / 2 * -courtSide.Value + giveUpDistance - pos.z) / direction.z);
+
+            // Compute final stopping position
+            targetPos = pos + direction * minDist;
         }
 
         public bool JudgeInBounds() {
