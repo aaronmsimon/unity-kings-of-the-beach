@@ -12,7 +12,6 @@ namespace KotB.StatePattern.AIStates
 
         private float targetProximity = 0.1f;
         private float defensePos = 6;
-        private float distToGiveUp = 1;
 
         public override void Enter() {
             targetPos = new Vector3(defensePos * ai.CourtSide, ai.transform.position.y, ai.transform.position.z);
@@ -38,7 +37,7 @@ namespace KotB.StatePattern.AIStates
                 if (ai.JudgeInBounds()) {
                     ai.StateMachine.ChangeState(ai.DigReadyState);
                 } else {
-                    targetPos = Vector3.Lerp(ai.transform.position, ai.BallInfo.TargetPos, 1 - (distToGiveUp / Vector3.Distance(ai.transform.position, ai.BallInfo.TargetPos)));
+                    targetPos = ai.SetTargetToGiveUp(ai.DistToGiveUp, Random.Range(-0.5f, 0.5f));
                 }
             } else {
                 float zBallTargetPos = ai.BallInfo.TargetPos.z;

@@ -23,6 +23,7 @@ namespace KotB.Actors
         public event Action ReachedTargetPos;
 
         private float stoppingDistance = 0.1f;
+        private float distToGiveUp = 1;
 
         protected override void Awake() {
             base.Awake();
@@ -56,7 +57,7 @@ namespace KotB.Actors
             base.Update();
         }
 
-        public void SetTargetToGiveUp(float minDist, float giveUpDistance) {
+        public Vector3 SetTargetToGiveUp(float minDist, float giveUpDistance) {
             Vector3 ballTargetPos = BallInfo.TargetPos;
             Vector3 pos = transform.position;
             Vector3 direction = ballTargetPos - pos;
@@ -68,7 +69,7 @@ namespace KotB.Actors
             if (ballTargetPos.z < courtSideLength / 2 * -courtSide.Value) minDist = Mathf.Min(minDist, (courtSideLength / 2 * -courtSide.Value + giveUpDistance - pos.z) / direction.z);
 
             // Compute final stopping position
-            targetPos = pos + direction * minDist;
+            return pos + direction * minDist;
         }
 
         public bool JudgeInBounds() {
@@ -130,5 +131,6 @@ namespace KotB.Actors
             get => targetPos;
             set => targetPos = value;
         }
+        public float DistToGiveUp => distToGiveUp;
     }
 }
