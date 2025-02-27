@@ -22,7 +22,6 @@ namespace KotB.Actors
 
         public Vector3 AdjustedServeDirection(Vector3 originalPos, float serving) {
             Vector2 adjAimPos = AdjustVectorAccuracy(new Vector2(originalPos.z, originalPos.y), serving / 10, serveAccuracy);
-            Debug.Log($"Serve aim: {new Vector2(originalPos.z, originalPos.y)}, final: {adjAimPos}");
             return new Vector3(0, adjAimPos.y, adjAimPos.x);
         }
 
@@ -63,9 +62,7 @@ namespace KotB.Actors
             // If in No Man's Land, push to closest side
             float noMansLand = 0.52f;
             if (Mathf.Abs(newVector.x) < noMansLand) {
-                string msg = $"Vector was going to be at {newVector}";
                 newVector = new Vector2(athlete.CourtSide * noMansLand, newVector.y);
-                Debug.Log($"{msg} so pushed to {newVector}");
             }
 
             return newVector;
