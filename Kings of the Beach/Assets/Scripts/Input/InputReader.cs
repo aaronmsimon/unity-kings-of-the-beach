@@ -14,6 +14,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 	public event UnityAction bumpAcrossEvent;
 	public event UnityAction jumpEvent;
 	public event UnityAction feintEvent;
+	public event UnityAction pauseEvent;
 
 	// Between Points
 	public event UnityAction interactEvent;
@@ -88,6 +89,12 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 			rightStickEvent?.Invoke(context.ReadValue<Vector2>());
 		}
     }
+
+	public void OnPause(InputAction.CallbackContext context)
+	{
+		if (context.phase == InputActionPhase.Performed)
+			pauseEvent?.Invoke();
+	}
 
 	public void OnTest(InputAction.CallbackContext context)
 	{

@@ -131,6 +131,8 @@ MonoBehaviour:
   hideServePowerMeter: {fileID: 11400000, guid: fa132226289672c4db4a955462efca33, type: 2}
   showServeAim: {fileID: 11400000, guid: 776db51e4f2b02d48a646f51ab718b47, type: 2}
   hideServeAim: {fileID: 11400000, guid: 3bc7c35d097785146b9e15d7f3183920, type: 2}
+  pauseGame: {fileID: 11400000, guid: 539e831542f0b9748ad9341893c8a963, type: 2}
+  unpauseGame: {fileID: 11400000, guid: 2ec0e233dcd06d647a1e736ece616883, type: 2}
   servePowerValue: {fileID: 11400000, guid: ce289d1ed0780894094eca75d709a4e4, type: 2}
   mainCameraPriority: {fileID: 11400000, guid: 3383009f79583304abeea1c0d5ae9f0a, type: 2}
   serveCameraPriority: {fileID: 11400000, guid: 2d278b1202028cd47bf52d7ebd3e11cd, type: 2}
