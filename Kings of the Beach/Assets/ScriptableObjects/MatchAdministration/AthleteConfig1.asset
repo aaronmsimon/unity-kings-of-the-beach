@@ -17,3 +17,4 @@ MonoBehaviour:
   outfit: 1
   top: {fileID: 11400000, guid: f58e69f90f4af464486c2849fe586a95, type: 2}
   bottom: {fileID: 11400000, guid: 2f5141de1063f6c4abd5139c27740747, type: 2}
+  athleteStats: {fileID: 11400000, guid: ad5f1fac895d172499892c09293ca5fb, type: 2}

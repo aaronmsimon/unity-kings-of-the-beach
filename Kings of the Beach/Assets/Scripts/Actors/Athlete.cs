@@ -4,6 +4,7 @@ using KotB.StatePattern;
 using KotB.Match;
 using RoboRyanTron.Unite2017.Variables;
 using KotB.Items;
+using KotB.Stats;
 
 namespace KotB.Actors
 {
@@ -15,6 +16,7 @@ namespace KotB.Actors
         [Header("Scriptable Objects")]
         [SerializeField] protected BallSO ballInfo;
         [SerializeField] protected MatchInfoSO matchInfo;
+        [SerializeField] private AthleteStatsSO athleteStats;
 
         [Header("Settings")]
         [SerializeField] protected FloatVariable courtSide;
@@ -167,7 +169,8 @@ namespace KotB.Actors
         }
 
         public void Pass(Vector3 targetPos, float height, float time) {
-            ballInfo.SetPassTarget(targetPos, height, time, this);
+            StatTypes statEvent = Mathf.Sign(targetPos.x) == courtSide.Value ? StatTypes.None : StatTypes.Attack;
+            ballInfo.SetPassTarget(targetPos, height, time, this, statEvent);
         }
 
         public void Spike(Vector3 targetPos) {
@@ -179,10 +182,10 @@ namespace KotB.Actors
             // Debug.Log($"spikeTime (skill): {ballInfo.SkillValues.SkillToValue(skills.SpikePower, ballInfo.SkillValues.SpikePower)} * (1 - Mathf.Abs({spikeSpeedPenalty})) = {spikeTime}");
             if (directLine) {
                 // If clear, spike
-                ballInfo.SetSpikeTarget(targetPos, spikeTime, this);
+                ballInfo.SetSpikeTarget(targetPos, spikeTime, this, StatTypes.Attack);
             } else {
                 // If not, pass
-                ballInfo.SetPassTarget(targetPos, startPos.y, spikeTime, this);
+                ballInfo.SetPassTarget(targetPos, startPos.y, spikeTime, this, StatTypes.Attack);
             }
         }
 
@@ -206,7 +209,7 @@ namespace KotB.Actors
             Vector3 targetPos = new Vector3(2 * -courtSide.Value, 0.01f, transform.position.z);
             float blockHeight = 4;
             float blockDuration = 2;
-            ballInfo.SetPassTarget(targetPos, blockHeight, blockDuration, this);
+            ballInfo.SetPassTarget(targetPos, blockHeight, blockDuration, this, StatTypes.Block);
             ballInfo.HitsForTeam = 0;
         }
 
@@ -216,6 +219,10 @@ namespace KotB.Actors
 
         public void SetCourtSide(FloatVariable courtSide) {
             this.courtSide = courtSide;
+        }
+
+        public void SetStats(AthleteStatsSO athleteStats) {
+            this.athleteStats = athleteStats;
         }
 
         public void FaceOpponent() {
@@ -228,8 +235,9 @@ namespace KotB.Actors
 
         public SkillsSO Skills { get { return skills; } }
         public float SkillLevelMax { get { return skillLevelMax; } }
-        public BallSO BallInfo { get { return ballInfo; } }
-        public MatchInfoSO MatchInfo { get { return matchInfo; } }
+        public BallSO BallInfo => ballInfo;
+        public MatchInfoSO MatchInfo => matchInfo;
+        public AthleteStatsSO AthleteStats => athleteStats;
         public StateMachine StateMachine { get { return stateMachine; } }
         public float CourtSide => courtSide.Value;
         public float CourtSideLength { get { return courtSideLength; } }

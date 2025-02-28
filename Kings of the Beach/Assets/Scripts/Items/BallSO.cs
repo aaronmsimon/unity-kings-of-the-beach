@@ -1,29 +1,34 @@
 using System;
 using UnityEngine;
 using KotB.Actors;
+using KotB.Stats;
 
 namespace KotB.Items
 {
     [CreateAssetMenu(fileName = "BallInfo", menuName = "Game/Ball Info")]
     public class BallSO : ScriptableObject
     {
+
         [Header("Skill Values")]
         [SerializeField] private SkillValues skillValues;
 
-        public Vector3 Position { get; set; }
         [Header("Everything else...")]
         [SerializeField] private Vector3 targetPos;
+        [SerializeField] private int possession;
+        [SerializeField] private int hitsForTeam;
+        [SerializeField] private StatEvent statUpdate;
+
+        public Vector3 Position { get; set; }
         public Vector3 StartPos { get; private set; }
         public float Height { get; set; }
         public float Duration { get; set; }
-        [SerializeField] private int possession;
-        [SerializeField] private int hitsForTeam;
-        public Athlete lastPlayerToHit { get; set; }
         public float TimeSinceLastHit { get; set; }
         public float BallRadius { get; set; }
-        public bool LockedOn;
-
-        public Athlete ballHeldBy { get; private set; }
+        
+        private Athlete lastPlayerToHit;
+        private Athlete ballHeldBy;
+        private StatTypes lastStatType;
+        private bool lockedOn;
 
         public event Action BallGiven;
         public event Action TargetSet;
@@ -75,11 +80,13 @@ namespace KotB.Items
 
         public void SetServeTarget() {
             ResetTimeSinceLastHit();
+            lastStatType = StatTypes.Serve;
+            UpdateStats();
             TargetSet?.Invoke();
             BallServed?.Invoke();
         }
 
-        public void SetPassTarget(Vector3 targetPos, float height, float duration, Athlete passer) {
+        public void SetPassTarget(Vector3 targetPos, float height, float duration, Athlete passer, StatTypes statType) {
             StartPos = Position;
             TargetPos = targetPos;
             Height = height;
@@ -87,10 +94,11 @@ namespace KotB.Items
             ResetTimeSinceLastHit();
             HitsForTeam += 1;
             lastPlayerToHit = passer;
+            lastStatType = statType;
             TargetSet?.Invoke();
         }
 
-        public void SetSpikeTarget(Vector3 targetPos, float duration, Athlete spiker) {
+        public void SetSpikeTarget(Vector3 targetPos, float duration, Athlete spiker, StatTypes statType) {
             StartPos = Position;
             TargetPos = targetPos;
             Height = -1;
@@ -98,6 +106,7 @@ namespace KotB.Items
             ResetTimeSinceLastHit();
             HitsForTeam += 1;
             lastPlayerToHit = spiker;
+            lastStatType = statType;
             TargetSet?.Invoke();
         }
 
@@ -143,7 +152,7 @@ namespace KotB.Items
         }
 
         private void ResetTimeSinceLastHit() {
-            LockedOn = false;
+            lockedOn = false;
             TimeSinceLastHit = 0;
         }
         
@@ -162,10 +171,19 @@ namespace KotB.Items
             return CalculateInFlightPosition(t, start, end, maxHeightPoint);
         }
 
+        private void UpdateStats() {
+            statUpdate.Raise(lastPlayerToHit, lastStatType);
+        }
+
         //---- PROPERTIES ----
         public int Possession { get { return possession; } set { possession = value; } }
         public Vector3 TargetPos { get { return targetPos; } set { targetPos = value; } }
         public SkillValues SkillValues { get { return skillValues; } }
         public int HitsForTeam { get { return hitsForTeam; } set { hitsForTeam = value; } }
+        public Athlete BallHeldBy => ballHeldBy;
+        public Athlete LastPlayerToHit => lastPlayerToHit;
+        public StatTypes LastStatType => lastStatType;
+        public bool LockedOn { get => lockedOn; set => lockedOn = value; }
+        public StatEvent StatUpdate => statUpdate;
     }
 }

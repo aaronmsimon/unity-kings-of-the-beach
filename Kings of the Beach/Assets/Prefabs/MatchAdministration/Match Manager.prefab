@@ -51,6 +51,7 @@ MonoBehaviour:
   inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
   scoreToWin: {fileID: 11400000, guid: 15b385560c9d9234c98373e5cdec0082, type: 2}
   scoreUpdate: {fileID: 11400000, guid: e1648f923f2620c40b2100061f6cfa6c, type: 2}
+  statUpdate: {fileID: 11400000, guid: dc0b3851a9983824ea1f83f3a03eb5e1, type: 2}
   aiPrefab: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
   playerPrefab: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
 --- !u!114 &8302372324360464159

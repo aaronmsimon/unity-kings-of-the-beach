@@ -18,7 +18,7 @@ namespace KotB.StatePattern.BallStates
         }
 
         public override void Update() {
-            ball.transform.position = ball.BallInfo.ballHeldBy.LeftHandEnd.position;
+            ball.transform.position = ball.BallInfo.BallHeldBy.LeftHandEnd.position;
         }
 
         private void OnTargetSet() {

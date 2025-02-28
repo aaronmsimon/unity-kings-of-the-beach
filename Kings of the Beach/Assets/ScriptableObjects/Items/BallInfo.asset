@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BallInfo
   m_EditorClassIdentifier: 
   skillValues: {fileID: 11400000, guid: e5d7f733b31098f40a5049a2eea99c9c, type: 2}
-  targetPos: {x: 6.0010347, y: 0, z: 6.3628597}
-  possession: 1
+  targetPos: {x: 0, y: 0, z: 0}
+  possession: -1
   hitsForTeam: 0
-  LockedOn: 0
+  statUpdate: {fileID: 11400000, guid: dc0b3851a9983824ea1f83f3a03eb5e1, type: 2}

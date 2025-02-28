@@ -39,6 +39,7 @@ namespace KotB.StatePattern.MatchStates
             // Assign Scriptable Objects
             athlete.SetSkills(athleteConfig.skills);
             athlete.SetCourtSide(team.CourtSide);
+            athlete.SetStats(athleteConfig.athleteStats);
 
             // Activate Outfit
             string outfit = athleteConfig.outfit.ToString() ?? athleteConfig.skills.DefaultOutfit.ToString();
@@ -56,6 +57,11 @@ namespace KotB.StatePattern.MatchStates
             Vector3 dPos = new Vector3(athlete.Skills.DefensePos.x * athlete.CourtSide, 0.01f, athlete.Skills.DefensePos.y * (index == 0 ? 1 : -1));
             if (athleteConfig.computerControlled) athleteGO.GetComponent<AI>().TargetPos = dPos;
             athleteGO.transform.position = dPos;
+
+            // Reset Stats
+            athlete.AthleteStats.ServeAttempts = 0;
+            athlete.AthleteStats.ServeAces = 0;
+            athlete.AthleteStats.ServeErrors = 0;
 
             // If Player and Cinemachine Serve Camera exists, assign
             if (!athleteConfig.computerControlled) {

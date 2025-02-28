@@ -24,7 +24,7 @@ namespace KotB.Testing
             }
             if (Input.GetKey(KeyCode.Space)) {
                 ball.StateMachine.ChangeState(ball.InFlightState);
-                ball.BallInfo.SetSpikeTarget(target.position, 2, null);
+                ball.BallInfo.SetSpikeTarget(target.position, 2, null, Stats.StatTypes.Attack);
             }
         }
 

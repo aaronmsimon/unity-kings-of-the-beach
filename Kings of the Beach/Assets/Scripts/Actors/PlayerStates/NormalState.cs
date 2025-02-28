@@ -23,7 +23,7 @@ namespace KotB.StatePattern.PlayerStates
         public override void Update() {
             player.MoveDir = new Vector3(player.MoveInput.x, 0, player.MoveInput.y);
 
-            if (player.MatchInfo.CurrentState is InPlayState && player.BallInfo.lastPlayerToHit != player && Mathf.Sign(player.BallInfo.TargetPos.x) == player.CourtSide && !player.BallInfo.LockedOn) {
+            if (player.MatchInfo.CurrentState is InPlayState && player.BallInfo.LastPlayerToHit != player && Mathf.Sign(player.BallInfo.TargetPos.x) == player.CourtSide && !player.BallInfo.LockedOn) {
                 float distanceToTarget = (player.transform.position - player.BallInfo.TargetPos).sqrMagnitude;
                 if (distanceToTarget <= player.Skills.TargetLockDistance * player.Skills.TargetLockDistance && Mathf.Abs(player.BallInfo.TargetPos.x) > player.NoMansLand) {
                     player.transform.position = player.BallInfo.TargetPos;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using KotB.Items;
+using KotB.Stats;
 
 namespace KotB.Match
 {
@@ -11,5 +12,6 @@ namespace KotB.Match
         public Outfit outfit;
         public MaterialSO top;
         public MaterialSO bottom;
+        public AthleteStatsSO athleteStats;
     }
 }
