@@ -198,6 +198,7 @@ namespace KotB.Actors
             float randValue = UnityEngine.Random.value * skillLevelMax;
             // skill check
             Debug.Log($"block attempt by {skills.AthleteName}: {randValue} vs {skills.Blocking} [{(randValue <= skills.Blocking ? "Blocked" : "Missed")}]");
+            ballInfo.StatUpdate.Raise(this, StatTypes.BlockAttempt);
             if (randValue <= skills.Blocking) Block();
         }
 
@@ -211,6 +212,7 @@ namespace KotB.Actors
             float blockDuration = 2;
             ballInfo.SetPassTarget(targetPos, blockHeight, blockDuration, this, StatTypes.Block);
             ballInfo.HitsForTeam = 0;
+            ballInfo.StatUpdate.Raise(this, StatTypes.Block);
         }
 
         public void SetSkills(SkillsSO skills) {

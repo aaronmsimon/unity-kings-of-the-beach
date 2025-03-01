@@ -13,7 +13,10 @@ namespace KotB.Stats
         Attack,
         AttackKill,
         AttackError,
+        BlockAttempt,
         Block,
+        BlockPoint,
+        BlockError,
         Dig,
         Set,
     }
@@ -30,7 +33,11 @@ namespace KotB.Stats
             statHandlers = new Dictionary<StatTypes, Action<Athlete>> {
                 { StatTypes.Serve, (athlete) => athlete.AthleteStats.ServeAttempts++ },
                 { StatTypes.ServiceAce, (athlete) => athlete.AthleteStats.ServeAces++ },
-                { StatTypes.ServiceError, (athlete) => athlete.AthleteStats.ServeErrors++ }
+                { StatTypes.ServiceError, (athlete) => athlete.AthleteStats.ServeErrors++ },
+                { StatTypes.BlockAttempt, (athlete) => athlete.AthleteStats.BlockAttempts++ },
+                { StatTypes.Block, (athlete) => athlete.AthleteStats.Blocks++ },
+                { StatTypes.BlockPoint, (athlete) => athlete.AthleteStats.BlockPoints++ },
+                { StatTypes.BlockError, (athlete) => athlete.AthleteStats.BlockErrors++ },
             };
         }
 
