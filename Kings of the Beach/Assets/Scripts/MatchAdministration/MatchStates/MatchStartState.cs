@@ -62,6 +62,14 @@ namespace KotB.StatePattern.MatchStates
             athlete.AthleteStats.ServeAttempts = 0;
             athlete.AthleteStats.ServeAces = 0;
             athlete.AthleteStats.ServeErrors = 0;
+            athlete.AthleteStats.BlockAttempts = 0;
+            athlete.AthleteStats.Blocks = 0;
+            athlete.AthleteStats.BlockPoints = 0;
+            athlete.AthleteStats.BlockErrors = 0;
+            athlete.AthleteStats.Attacks = 0;
+            athlete.AthleteStats.AttackKills = 0;
+            athlete.AthleteStats.AttackErrors = 0;
+            athlete.AthleteStats.Digs = 0;
 
             // If Player and Cinemachine Serve Camera exists, assign
             if (!athleteConfig.computerControlled) {

@@ -12,6 +12,10 @@ namespace KotB.Stats
         [SerializeField] private int blocks;
         [SerializeField] private int blockPoints;
         [SerializeField] private int blockErrors;
+        [SerializeField] private int attacks;
+        [SerializeField] private int attackKills;
+        [SerializeField] private int attackErrors;
+        [SerializeField] private int digs;
 
         // ---- PROPERTIES ----
         public int ServeAttempts { get => serveAttempts; set => serveAttempts = value; }
@@ -21,5 +25,9 @@ namespace KotB.Stats
         public int Blocks { get => blocks; set => blocks = value; }
         public int BlockPoints { get => blockPoints; set => blockPoints = value; }
         public int BlockErrors { get => blockErrors; set => blockErrors = value; }
+        public int Attacks { get => attacks; set => attacks = value; }
+        public int AttackKills { get => attackKills; set => attackKills = value; }
+        public int AttackErrors { get => attackErrors; set => attackErrors = value; }
+        public int Digs { get => digs; set => digs = value; }
     }
 }

@@ -38,6 +38,10 @@ namespace KotB.Stats
                 { StatTypes.Block, (athlete) => athlete.AthleteStats.Blocks++ },
                 { StatTypes.BlockPoint, (athlete) => athlete.AthleteStats.BlockPoints++ },
                 { StatTypes.BlockError, (athlete) => athlete.AthleteStats.BlockErrors++ },
+                { StatTypes.Attack, (athlete) => athlete.AthleteStats.Attacks++ },
+                { StatTypes.AttackKill, (athlete) => athlete.AthleteStats.AttackKills++ },
+                { StatTypes.AttackError, (athlete) => athlete.AthleteStats.AttackErrors++ },
+                { StatTypes.Dig, (athlete) => athlete.AthleteStats.Digs++ },
             };
         }
 

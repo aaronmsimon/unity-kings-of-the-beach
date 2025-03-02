@@ -43,12 +43,18 @@ namespace KotB.StatePattern.MatchStates
                     break;
                 case StatTypes.Block:
                     if (scoringTeam == matchManager.MatchInfo.GetTeam(matchManager.BallInfo.LastPlayerToHit)) {
-                        statType = StatTypes.BlockError;
-                    } else {
                         statType = StatTypes.BlockPoint;
+                    } else {
+                        statType = StatTypes.BlockError;
                     }
                     break;
-
+                case StatTypes.Attack:
+                    if (scoringTeam == matchManager.MatchInfo.GetTeam(matchManager.BallInfo.LastPlayerToHit)) {
+                        statType = StatTypes.AttackKill;
+                    } else {
+                        statType = StatTypes.AttackError;
+                    }
+                    break;
             }
             matchManager.BallInfo.StatUpdate.Raise(matchManager.BallInfo.LastPlayerToHit, statType);
 

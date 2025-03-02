@@ -169,8 +169,10 @@ namespace KotB.Actors
         }
 
         public void Pass(Vector3 targetPos, float height, float time) {
-            StatTypes statEvent = Mathf.Sign(targetPos.x) == courtSide.Value ? StatTypes.None : StatTypes.Attack;
-            ballInfo.SetPassTarget(targetPos, height, time, this, statEvent);
+            if (ballInfo.LastStatType == StatTypes.Attack) {
+                ballInfo.StatUpdate.Raise(this, StatTypes.Dig);
+            }
+            ballInfo.SetPassTarget(targetPos, height, time, this, StatTypes.None);
         }
 
         public void Spike(Vector3 targetPos) {
@@ -187,6 +189,7 @@ namespace KotB.Actors
                 // If not, pass
                 ballInfo.SetPassTarget(targetPos, startPos.y, spikeTime, this, StatTypes.Attack);
             }
+            ballInfo.StatUpdate.Raise(this, StatTypes.Attack);
         }
 
         public void SpikeFeint(Vector3 targetPos) {
