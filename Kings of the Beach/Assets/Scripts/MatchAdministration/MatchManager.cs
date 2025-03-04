@@ -31,7 +31,9 @@ namespace KotB.Match
 
         private float totalPoints;
         private float switchSidesPointsDivisor = 3;
-        float switchSidesPoints;
+        private float switchSidesPoints;
+        private bool paused = false;
+        private IState stateBeforePause;
 
         private StateMachine matchStateMachine;
         private PrePointState prePointState;
@@ -40,6 +42,7 @@ namespace KotB.Match
         private PostPointState postPointState;
         private MatchEndState matchEndState;
         private MatchStartState matchStartState;
+        private PauseState pauseState;
 
         private void Awake() {
             matchStateMachine = new StateMachine();
@@ -49,6 +52,7 @@ namespace KotB.Match
             postPointState = new PostPointState(this);
             matchEndState = new MatchEndState(this);
             matchStartState = new MatchStartState(this);
+            pauseState = new PauseState(this);
         }
 
         private void Start() {
@@ -73,10 +77,12 @@ namespace KotB.Match
 
         private void OnEnable() {
             matchStateMachine.StateChanged += OnStateChanged;
+            inputReader.pauseEvent += OnPause;
         }
 
         private void OnDisable() {
             matchStateMachine.StateChanged -= OnStateChanged;
+            inputReader.pauseEvent -= OnPause;
         }
 
         private void Update() {
@@ -91,6 +97,14 @@ namespace KotB.Match
             matchInfo.CurrentState = newState;
         }
 
+        private void OnPause() {
+            if (!paused) {
+                paused = true;
+                stateBeforePause = matchStateMachine.CurrentState;
+                matchStateMachine.ChangeState(pauseState);
+            }
+        }
+
         //---- PROPERTIES ----
         public StateMachine StateMachine { get { return matchStateMachine; } }
         public PrePointState PrePointState { get { return prePointState; } }
@@ -99,10 +113,12 @@ namespace KotB.Match
         public PostPointState PostPointState { get { return postPointState; } }
         public MatchEndState MatchEndState { get { return matchEndState; } }
         public MatchStartState MatchStartState { get { return matchStartState; } }
-        public InputReader InputReader { get { return inputReader; } }
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public BallSO BallInfo { get { return ballInfo; } }
+        public InputReader InputReader => inputReader;
         public GameObject AIPrefab { get { return aiPrefab; } }
         public GameObject PlayerPrefab { get { return playerPrefab; } }
+        public IState StateBeforePause => stateBeforePause;
+        public bool Paused { get => paused; set => paused = value; }
     }
 }

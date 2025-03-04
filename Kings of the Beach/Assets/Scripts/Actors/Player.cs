@@ -2,7 +2,6 @@ using UnityEngine;
 using KotB.StatePattern.PlayerStates;
 using RoboRyanTron.Unite2017.Events;
 using RoboRyanTron.Unite2017.Variables;
-using KotB.StatePattern;
 
 namespace KotB.Actors
 {
@@ -18,8 +17,6 @@ namespace KotB.Actors
         [SerializeField] private GameEvent hideServePowerMeter;
         [SerializeField] private GameEvent showServeAim;
         [SerializeField] private GameEvent hideServeAim;
-        [SerializeField] private GameEvent pauseGame;
-        [SerializeField] private GameEvent unpauseGame;
         
         [Header("Variables")]
         [SerializeField] private FloatVariable servePowerValue;
@@ -30,14 +27,11 @@ namespace KotB.Actors
 
         private Vector3 moveInput;
         private Vector3 rightStickInput;
-        private bool paused;
-        private IState stateBeforePause;
 
         private NormalState normalState;
         private LockState lockState;
         private ServeState serveState;
         private PostPointState postPointState;
-        private PauseState pauseState;
 
         protected override void Awake() {
             base.Awake();
@@ -46,7 +40,6 @@ namespace KotB.Actors
             lockState = new LockState(this);
             serveState = new ServeState(this);
             postPointState = new PostPointState(this);
-            pauseState = new PauseState(this);
             
             stateMachine.ChangeState(postPointState);
         }
@@ -57,7 +50,6 @@ namespace KotB.Actors
             inputReader.rightStickEvent += OnRightStick;
             inputReader.jumpEvent += OnJump;
             inputReader.feintEvent += OnJumpModified;
-            inputReader.pauseEvent += OnPause;
         }
         
         //Removes all listeners to the events coming from the InputReader script
@@ -66,7 +58,6 @@ namespace KotB.Actors
             inputReader.rightStickEvent -= OnRightStick;
             inputReader.jumpEvent -= OnJump;
             inputReader.feintEvent -= OnJumpModified;
-            inputReader.pauseEvent -= OnPause;
         }
 
         //---- EVENT LISTENERS ----
@@ -94,19 +85,6 @@ namespace KotB.Actors
             PerformJump();
         }
 
-        private void OnPause() {
-            if (!paused) {
-                paused = true;
-                stateBeforePause = stateMachine.CurrentState;
-                stateMachine.ChangeState(pauseState);
-                pauseGame.Raise();
-            } else {
-                paused = false;
-                stateMachine.ChangeState(stateBeforePause);
-                unpauseGame.Raise();
-            }
-        }
-
         //---- PROPERTIES ----
 
         public InputReader InputReader { get { return inputReader; } }
@@ -125,8 +103,6 @@ namespace KotB.Actors
         public GameEvent HideServePowerMeter { get { return hideServePowerMeter; } }
         public GameEvent ShowServeAim { get { return showServeAim; } }
         public GameEvent HideServeAim { get { return hideServeAim; } }
-        public GameEvent PauseGame => pauseGame;
-        public GameEvent UnpauseGame => unpauseGame;
         public FloatVariable MainCameraPriority {
             get { return mainCameraPriority; }
             set { mainCameraPriority = value; }

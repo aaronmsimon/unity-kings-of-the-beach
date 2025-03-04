@@ -89,6 +89,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""9e8721e8-27f0-44b0-a459-25cdca32f752"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -498,6 +507,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Feint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec422e2b-a318-47bd-bd20-c2d008b3afe6"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""83b721f8-9c45-4575-89b4-2a7a89f85fe2"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -624,6 +655,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""name"": ""SelectionRight"",
                     ""type"": ""Button"",
                     ""id"": ""aa6309c7-0d88-4f89-b059-13cc3d332b70"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""0fc5ac72-7845-4c38-9739-9c577d8741da"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -806,6 +846,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""SelectionRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7401dbe8-c44e-4978-8102-a0e7cf692be2"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe078df7-e5a1-464a-8e30-eef6bfee6982"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -844,6 +906,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_RightStick = m_Gameplay.FindAction("RightStick", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Feint = m_Gameplay.FindAction("Feint", throwIfNotFound: true);
+        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         // BetweenPoints
         m_BetweenPoints = asset.FindActionMap("BetweenPoints", throwIfNotFound: true);
         m_BetweenPoints_Interact = m_BetweenPoints.FindAction("Interact", throwIfNotFound: true);
@@ -856,6 +919,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Menu_SelectionDown = m_Menu.FindAction("SelectionDown", throwIfNotFound: true);
         m_Menu_SelectionLeft = m_Menu.FindAction("SelectionLeft", throwIfNotFound: true);
         m_Menu_SelectionRight = m_Menu.FindAction("SelectionRight", throwIfNotFound: true);
+        m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -924,6 +988,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_RightStick;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Feint;
+    private readonly InputAction m_Gameplay_Pause;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -935,6 +1000,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @RightStick => m_Wrapper.m_Gameplay_RightStick;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @Feint => m_Wrapper.m_Gameplay_Feint;
+        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -965,6 +1031,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Feint.started += instance.OnFeint;
             @Feint.performed += instance.OnFeint;
             @Feint.canceled += instance.OnFeint;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -990,6 +1059,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Feint.started -= instance.OnFeint;
             @Feint.performed -= instance.OnFeint;
             @Feint.canceled -= instance.OnFeint;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -1071,6 +1143,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Menu_SelectionDown;
     private readonly InputAction m_Menu_SelectionLeft;
     private readonly InputAction m_Menu_SelectionRight;
+    private readonly InputAction m_Menu_Pause;
     public struct MenuActions
     {
         private @GameInput m_Wrapper;
@@ -1081,6 +1154,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @SelectionDown => m_Wrapper.m_Menu_SelectionDown;
         public InputAction @SelectionLeft => m_Wrapper.m_Menu_SelectionLeft;
         public InputAction @SelectionRight => m_Wrapper.m_Menu_SelectionRight;
+        public InputAction @Pause => m_Wrapper.m_Menu_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1108,6 +1182,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @SelectionRight.started += instance.OnSelectionRight;
             @SelectionRight.performed += instance.OnSelectionRight;
             @SelectionRight.canceled += instance.OnSelectionRight;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IMenuActions instance)
@@ -1130,6 +1207,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @SelectionRight.started -= instance.OnSelectionRight;
             @SelectionRight.performed -= instance.OnSelectionRight;
             @SelectionRight.canceled -= instance.OnSelectionRight;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IMenuActions instance)
@@ -1174,6 +1254,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnRightStick(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnFeint(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IBetweenPointsActions
     {
@@ -1188,5 +1269,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnSelectionDown(InputAction.CallbackContext context);
         void OnSelectionLeft(InputAction.CallbackContext context);
         void OnSelectionRight(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
