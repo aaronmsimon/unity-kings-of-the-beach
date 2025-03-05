@@ -5,7 +5,6 @@ using KotB.StatePattern.MatchStates;
 using RoboRyanTron.Unite2017.Events;
 using RoboRyanTron.Unite2017.Variables;
 using KotB.Items;
-using KotB.Stats;
 
 namespace KotB.Match
 {
@@ -99,10 +98,11 @@ namespace KotB.Match
 
         private void OnPause() {
             if (!paused) {
-                paused = true;
                 stateBeforePause = matchStateMachine.CurrentState;
                 matchStateMachine.ChangeState(pauseState);
             }
+            paused = !paused;
+            matchInfo.TogglePauseEvent(paused);
         }
 
         //---- PROPERTIES ----

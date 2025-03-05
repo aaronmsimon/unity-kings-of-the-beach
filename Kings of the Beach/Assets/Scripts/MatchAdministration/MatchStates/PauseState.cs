@@ -13,7 +13,6 @@ namespace KotB.StatePattern.MatchStates
             matchManager.InputReader.pauseEvent += OnPause;
 
             Time.timeScale = 0;
-            Debug.Log("game paused");
         }
 
         public override void Exit() {
@@ -21,7 +20,6 @@ namespace KotB.StatePattern.MatchStates
 
             Time.timeScale = 1;
             matchManager.Paused = false;
-            Debug.Log("game unpaused");
         }
 
         private void OnPause() {

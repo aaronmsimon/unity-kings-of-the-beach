@@ -1,5 +1,6 @@
 using UnityEngine;
-using RoboRyanTron.Unite2017.Events;
+using UnityEngine.UIElements;
+using KotB.Match;
 
 public class UIManager : MonoBehaviour
 {
@@ -8,6 +9,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject powerMeter;
     [SerializeField] private GameObject aimServe;
     [SerializeField] private GameObject pauseMenu;
+
+    [Header("Scriptable Objects")]
+    [SerializeField] private MatchInfoSO matchInfo;
+
+    private void OnEnable() {
+        matchInfo.TogglePause += OnTogglePause;
+    }
+
+    private void OnDisable() {
+        matchInfo.TogglePause -= OnTogglePause;
+    }
 
     public void OnShowPowerMeter() {
         // Instantiate the UI object
@@ -25,11 +37,7 @@ public class UIManager : MonoBehaviour
         Instantiate(aimServe);
     }
 
-    public void OnPause() {
-        pauseMenu.SetActive(true);
-    }
-
-    public void OnUnpause() {
-        pauseMenu.SetActive(false);
+    public void OnTogglePause(bool paused) {
+        pauseMenu.SetActive(paused);
     }
 }

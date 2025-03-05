@@ -5,7 +5,6 @@ using UnityEngine;
 using KotB.StatePattern;
 using KotB.Actors;
 using RoboRyanTron.Unite2017.Variables;
-using KotB.Stats;
 
 namespace KotB.Match
 {
@@ -20,6 +19,7 @@ namespace KotB.Match
 
         public event Action TransitionToPrePointState;
         public event Action TransitionToServeState;
+        public event Action<bool> TogglePause;
 
         public void Initialize() {
             teamServeIndex = 0;
@@ -31,6 +31,10 @@ namespace KotB.Match
         
         public void TransitionToServeStateEvent() {
             TransitionToServeState?.Invoke();
+        }
+
+        public void TogglePauseEvent(bool paused) {
+            TogglePause?.Invoke(paused);
         }
 
         public Athlete GetTeammate(Athlete athlete) {

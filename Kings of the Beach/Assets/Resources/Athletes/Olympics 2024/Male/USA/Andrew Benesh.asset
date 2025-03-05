@@ -27,7 +27,7 @@ MonoBehaviour:
   digRange: 0.5
   serving: 8
   servePower: 7
-  blocking: 7.5
+  blocking: 10
   height: 2.03
   defensePos: {x: 2, y: 2}
   offenseXPos: 1.25

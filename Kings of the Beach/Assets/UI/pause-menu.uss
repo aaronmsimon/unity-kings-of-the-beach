@@ -1,0 +1,25 @@
+.panel {
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.menu {
+    width: 20%;
+    align-items: center;
+    background-color: rgb(0, 0, 0);
+    height: 50%;
+    justify-content: center;
+}
+
+.menu-button {
+    width: 50%;
+    height: 10%;
+    margin-bottom: 25px;
+    font-size: 35px;
+    -unity-font-style: bold;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
