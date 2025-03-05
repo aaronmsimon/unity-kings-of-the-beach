@@ -264,6 +264,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 07677c35fae42594aaa710bcbb079278, type: 3}
   m_PrefabInstance: {fileID: 165486962}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &183106430 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2889677268746467142, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
+  m_PrefabInstance: {fileID: 1233795791}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &183106432 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
+  m_PrefabInstance: {fileID: 1233795791}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183106430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 252ce7adc3f728542b676c1907249edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &183106434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183106430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f78bc95c58c9b3b4fa53facc23ce7fc4, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 183106432}
+        m_TargetAssemblyTypeName: KotB.Match.MatchManager, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &323094867
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1750,6 +1794,7 @@ GameObject:
   m_Component:
   - component: {fileID: 900313823}
   - component: {fileID: 900313822}
+  - component: {fileID: 900313824}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -1788,6 +1833,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &900313824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900313821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c5186f1ce97a8458daf05428ab3952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseEvent: {fileID: 11400000, guid: f78bc95c58c9b3b4fa53facc23ce7fc4, type: 2}
 --- !u!1 &957349218
 GameObject:
   m_ObjectHideFlags: 0
@@ -2732,7 +2790,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2889677268746467142, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 183106434}
   m_SourcePrefab: {fileID: 100100000, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
 --- !u!1 &1252484600
 GameObject:
