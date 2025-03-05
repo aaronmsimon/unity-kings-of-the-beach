@@ -10,19 +10,18 @@ namespace KotB.StatePattern.MatchStates
         public override void Enter() {
             matchManager.InputReader.EnableMenuInput();
             
-            matchManager.InputReader.pauseEvent += OnPause;
+            matchManager.MatchInfo.TogglePause += OnPause;
 
             Time.timeScale = 0;
         }
 
         public override void Exit() {
-            matchManager.InputReader.pauseEvent -= OnPause;
+            matchManager.MatchInfo.TogglePause -= OnPause;
 
             Time.timeScale = 1;
-            matchManager.Paused = false;
         }
 
-        private void OnPause() {
+        private void OnPause(bool pause) {
             matchManager.StateMachine.ChangeState(matchManager.StateBeforePause);
         }
     }

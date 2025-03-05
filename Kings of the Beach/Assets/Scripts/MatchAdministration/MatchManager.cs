@@ -96,13 +96,13 @@ namespace KotB.Match
             matchInfo.CurrentState = newState;
         }
 
-        private void OnPause() {
-            if (!paused) {
+        public void OnPause() {
+            paused = !paused;
+            matchInfo.TogglePauseEvent(paused);
+            if (paused) {
                 stateBeforePause = matchStateMachine.CurrentState;
                 matchStateMachine.ChangeState(pauseState);
             }
-            paused = !paused;
-            matchInfo.TogglePauseEvent(paused);
         }
 
         //---- PROPERTIES ----
