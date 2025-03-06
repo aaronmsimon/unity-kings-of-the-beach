@@ -1801,7 +1801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &900313822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3347,7 +3347,7 @@ PrefabInstance:
     - target: {fileID: 1837625881206567898, guid: 57c3ff77b4da08e45a5afe9d6e1ddd90, type: 3}
       propertyPath: pauseMenu
       value: 
-      objectReference: {fileID: 900313821}
+      objectReference: {fileID: 900313824}
     - target: {fileID: 8487343117069050565, guid: 57c3ff77b4da08e45a5afe9d6e1ddd90, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

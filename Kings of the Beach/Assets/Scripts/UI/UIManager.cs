@@ -1,5 +1,6 @@
 using UnityEngine;
 using KotB.Match;
+using KotB.Menus;
 
 public class UIManager : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject powerMeter;
     [SerializeField] private GameObject aimServe;
-    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private PauseMenu pauseMenu;
 
     [Header("Scriptable Objects")]
     [SerializeField] private MatchInfoSO matchInfo;
@@ -37,6 +38,6 @@ public class UIManager : MonoBehaviour
     }
 
     public void OnTogglePause(bool paused) {
-        pauseMenu.SetActive(paused);
+        pauseMenu.Hide(!paused);
     }
 }

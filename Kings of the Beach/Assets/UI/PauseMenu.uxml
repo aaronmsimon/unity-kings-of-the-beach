@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/pause-menu.uss?fileID=7433441132597879392&amp;guid=e54e6689983882f42a77a949249221ef&amp;type=3#pause-menu" />
     <Style src="project://database/Assets/UI/global.uss?fileID=7433441132597879392&amp;guid=b67b8d6e7e4a4384cad1bf33fe7a5ed6&amp;type=3#global" />
-    <ui:VisualElement name="Panel" class="panel" style="flex-grow: 1;">
+    <ui:VisualElement name="Panel" class="panel hidden" style="flex-grow: 1;">
         <ui:VisualElement name="Menu" class="menu">
             <ui:Button text="Resume" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ResumeButton" class="menu-button" />
             <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SettingsButton" class="menu-button" />
