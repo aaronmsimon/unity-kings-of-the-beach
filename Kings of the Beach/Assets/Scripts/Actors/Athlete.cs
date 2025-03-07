@@ -202,6 +202,8 @@ namespace KotB.Actors
             // skill check
             Debug.Log($"block attempt by {skills.AthleteName}: {randValue} vs {skills.Blocking} [{(randValue <= skills.Blocking ? "Blocked" : "Missed")}]");
             ballInfo.StatUpdate.Raise(this, StatTypes.BlockAttempt);
+            // just in case - avoid double blocks
+            spikeBlockCollider.enabled = false;
             if (randValue <= skills.Blocking) Block();
         }
 

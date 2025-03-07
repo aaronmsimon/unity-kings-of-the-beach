@@ -1845,6 +1845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03c5186f1ce97a8458daf05428ab3952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
   pauseEvent: {fileID: 11400000, guid: f78bc95c58c9b3b4fa53facc23ce7fc4, type: 2}
 --- !u!1 &957349218
 GameObject:

@@ -3,11 +3,9 @@ using UnityEngine.UIElements;
 using UnityEditor;
 using RoboRyanTron.Unite2017.Events;
 
-using System.Collections.Generic;
-
 namespace KotB.Menus
 {
-    public class PauseMenu : MonoBehaviour
+    public class PauseMenu : MenuNavigation
     {
         [SerializeField] private GameEvent pauseEvent;
 
@@ -19,24 +17,44 @@ namespace KotB.Menus
         private Button settingsButton;
         private Button quitButton;
 
+        private MenuButton resumeMenuButton;
+        private MenuButton settingsMenuButton;
+        private MenuButton quitMenuButton;
+
         private void Awake() {
             ui = GetComponent<UIDocument>().rootVisualElement;
             panel = ui.Q<VisualElement>("Panel");
             resumeButton = ui.Q<Button>("ResumeButton");
             settingsButton = ui.Q<Button>("SettingsButton");
             quitButton = ui.Q<Button>("QuitButton");
+
+            resumeMenuButton = new MenuButton(resumeButton);
+            settingsMenuButton = new MenuButton(settingsButton);
+            quitMenuButton = new MenuButton(quitButton);
+            resumeMenuButton.SetNavigationUp(quitMenuButton);
+            resumeMenuButton.SetNavigationDown(settingsMenuButton);
+            settingsMenuButton.SetNavigationUp(resumeMenuButton);
+            settingsMenuButton.SetNavigationDown(quitMenuButton);
+            quitMenuButton.SetNavigationUp(settingsMenuButton);
+            quitMenuButton.SetNavigationDown(resumeMenuButton);
+
+            SetDefault(resumeMenuButton);
         }
 
-        private void OnEnable() {
-            resumeButton.clicked += OnResumeButtonClicked;
-            settingsButton.clicked += OnSettingsButtonClicked;
-            quitButton.clicked += OnQuitButtonClicked;
+        protected override void OnEnable() {
+            base.OnEnable();
+
+            resumeMenuButton.ButtonPressed += OnResumeButtonPressed;
+            settingsMenuButton.ButtonPressed += OnSettingsButtonPressed;
+            quitMenuButton.ButtonPressed += OnQuitButtonPressed;
         }
 
-        private void OnDisable() {
-            resumeButton.clicked -= OnResumeButtonClicked;
-            settingsButton.clicked -= OnSettingsButtonClicked;
-            quitButton.clicked -= OnQuitButtonClicked;
+        protected override  void OnDisable() {
+            base.OnDisable();
+
+            resumeMenuButton.ButtonPressed -= OnResumeButtonPressed;
+            settingsMenuButton.ButtonPressed -= OnSettingsButtonPressed;
+            quitMenuButton.ButtonPressed -= OnQuitButtonPressed;
         }
 
         public void Hide(bool hide) {
@@ -47,15 +65,15 @@ namespace KotB.Menus
             }
         }
 
-        private void OnResumeButtonClicked() {
+        private void OnResumeButtonPressed() {
             pauseEvent.Raise();
         }
 
-        private void OnSettingsButtonClicked() {
+        private void OnSettingsButtonPressed() {
             Debug.Log("Settings Menu will load here");
         }
 
-        private void OnQuitButtonClicked() {
+        private void OnQuitButtonPressed() {
             Application.Quit();
 #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
