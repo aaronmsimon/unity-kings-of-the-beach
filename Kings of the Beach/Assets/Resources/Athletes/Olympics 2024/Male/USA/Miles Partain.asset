@@ -22,14 +22,13 @@ MonoBehaviour:
   reactionTime: 0.2
   passAccuracy: 7
   inBoundsJudgement: 8
-  spikeSkill: 1
+  spikeSkill: 7
   spikePower: 6.5
   digRange: 0.5
   serving: 8
   servePower: 7
   blocking: 4
   height: 1.91
-  servingPartnerPos: {x: 5, y: 1.5}
   defensePos: {x: 2, y: 2}
   offenseXPos: 1.25
   playerPosition: 1
