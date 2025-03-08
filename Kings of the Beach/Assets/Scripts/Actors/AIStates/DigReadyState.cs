@@ -82,9 +82,14 @@ namespace KotB.StatePattern.AIStates
 
             if (ai.MatchInfo.GetOpposingTeam(ai) != null) {
                 CalculateAttackZones();
-                int largestZoneIndex = LargestAttackZoneIndex();
-                xRange = new Vector2(attackZoneCenters[largestZoneIndex].x - attackZoneSizes[largestZoneIndex].x / 2, attackZoneCenters[largestZoneIndex].x + attackZoneSizes[largestZoneIndex].x / 2);
-                zRange = new Vector2(attackZoneCenters[largestZoneIndex].y - attackZoneSizes[largestZoneIndex].y / 2, attackZoneCenters[largestZoneIndex].y + attackZoneSizes[largestZoneIndex].y / 2);
+                int useZoneIndex;
+                if (Mathf.Abs(ai.transform.position.x) <= 2) {
+                    useZoneIndex = LargestAttackZoneIndex();
+                } else {
+                    useZoneIndex = 0;
+                }
+                xRange = new Vector2(attackZoneCenters[useZoneIndex].x - attackZoneSizes[useZoneIndex].x / 2, attackZoneCenters[useZoneIndex].x + attackZoneSizes[useZoneIndex].x / 2);
+                zRange = new Vector2(attackZoneCenters[useZoneIndex].y - attackZoneSizes[useZoneIndex].y / 2, attackZoneCenters[useZoneIndex].y + attackZoneSizes[useZoneIndex].y / 2);
             } else {
                 xRange = new Vector2(0, ai.CourtSideLength * -ai.CourtSide);
                 zRange = new Vector2(-ai.CourtSideLength / 2, ai.CourtSideLength / 2);
@@ -141,14 +146,16 @@ namespace KotB.StatePattern.AIStates
             Vector3 deepOpponent = (Mathf.Max(Mathf.Abs(opponents[0].transform.position.x), Mathf.Abs(opponents[1].transform.position.x)) == Mathf.Abs(opponents[0].transform.position.x) ? opponents[0] : opponents[1]).transform.position;
             Vector3 shallowOpponent = (Mathf.Max(Mathf.Abs(opponents[0].transform.position.x), Mathf.Abs(opponents[1].transform.position.x)) == Mathf.Abs(opponents[0].transform.position.x) ? opponents[1] : opponents[0]).transform.position;
 
+            float rangeDecrease = WeightedDecrease(ai.Skills.SpikeSkill);
+
             // Deep Zone
             attackZoneCenters[0] = new Vector2(
                 ((ai.CourtSideLength - Mathf.Abs(shallowOpponent.x)) / 2 + Mathf.Abs(shallowOpponent.x)) * Mathf.Sign(deepOpponent.x),
                 ((Mathf.Abs(deepOpponent.z) + 4) / 2 - Mathf.Abs(deepOpponent.z)) * -Mathf.Sign(deepOpponent.z)
             );
             attackZoneSizes[0] = new Vector2(
-                ai.CourtSideLength -Mathf.Abs(shallowOpponent.x),
-                Mathf.Abs(deepOpponent.z) + 4
+                (ai.CourtSideLength - Mathf.Abs(shallowOpponent.x)) * (1 - rangeDecrease),
+                (Mathf.Abs(deepOpponent.z) + 4) * (1 - rangeDecrease)
             );
 
             // Shallow Zone
@@ -157,8 +164,8 @@ namespace KotB.StatePattern.AIStates
                 ((Mathf.Abs(shallowOpponent.z) + 4) / 2 - Mathf.Abs(shallowOpponent.z)) * -Mathf.Sign(shallowOpponent.z)
             );
             attackZoneSizes[1] = new Vector2(
-                Mathf.Abs(deepOpponent.x),
-                Mathf.Abs(shallowOpponent.z) + 4
+                Mathf.Abs(deepOpponent.x) * (1 - rangeDecrease),
+                (Mathf.Abs(shallowOpponent.z) + 4) * (1 - rangeDecrease)
             );
         }
 
@@ -176,6 +183,10 @@ namespace KotB.StatePattern.AIStates
             }
 
             return index;
+        }
+
+        private float WeightedDecrease(float skill) {
+            return Mathf.Pow(Random.value, skill / 2);
         }
 
         private void OnTargetSet() {
