@@ -187,8 +187,13 @@ namespace KotB.Actors
                 ballInfo.SetSpikeTarget(targetPos, spikeTime, this, StatTypes.Attack);
             } else {
                 // If not, pass
-                ballInfo.SetPassTarget(targetPos, startPos.y, spikeTime, this, StatTypes.Attack);
+                float netCrossingT = Mathf.Abs(startPos.x) / Mathf.Abs(targetPos.x - startPos.x);
+                float heightAtNet = ballInfo.CalculateInFlightPosition(netCrossingT, startPos, targetPos, startPos.y).y;
+                float requiredHeight = 2.5f;
+                float adjustedHeight = startPos.y + requiredHeight - heightAtNet;
+                ballInfo.SetPassTarget(targetPos, adjustedHeight, spikeTime, this, StatTypes.Attack);
             }
+            Debug.Log($"{skills.AthleteName} has {(directLine ? "a clear line to a clean spike." : "no direct path (pos: " + startPos + " target: " + targetPos + "), using an arc shot.")}");
             ballInfo.StatUpdate.Raise(this, StatTypes.Attack);
         }
 
