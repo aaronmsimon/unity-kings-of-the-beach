@@ -63,10 +63,10 @@ namespace KotB.Actors
             Vector3 direction = ballTargetPos - pos;
 
             // Check intersections with each boundary
-            if (ballTargetPos.x > courtSideLength * courtSide.Value) minDist = Mathf.Min(minDist, (courtSideLength * courtSide.Value - giveUpDistance - pos.x) / direction.x);
-            if (ballTargetPos.x < courtSideLength * -courtSide.Value) minDist = Mathf.Min(minDist, (courtSideLength * -courtSide.Value + giveUpDistance - pos.x) / direction.x);
-            if (ballTargetPos.z > courtSideLength / 2 * courtSide.Value) minDist = Mathf.Min(minDist, (courtSideLength / 2 * courtSide.Value - giveUpDistance - pos.z) / direction.z);
-            if (ballTargetPos.z < courtSideLength / 2 * -courtSide.Value) minDist = Mathf.Min(minDist, (courtSideLength / 2 * -courtSide.Value + giveUpDistance - pos.z) / direction.z);
+            if (ballTargetPos.x > courtSideLength / 2 * courtSide.Value + 4) minDist = Mathf.Min(minDist, (courtSideLength / 2 * courtSide.Value + 4 - giveUpDistance - pos.x) / direction.x);
+            if (ballTargetPos.x < courtSideLength / 2 * courtSide.Value - 4) minDist = Mathf.Min(minDist, (courtSideLength / 2 * courtSide.Value - 4 + giveUpDistance - pos.x) / direction.x);
+            if (ballTargetPos.z > courtSideLength / 2) minDist = Mathf.Min(minDist, (courtSideLength / 2 - giveUpDistance - pos.z) / direction.z);
+            if (ballTargetPos.z < -courtSideLength / 2) minDist = Mathf.Min(minDist, (-courtSideLength / 2 + giveUpDistance - pos.z) / direction.z);
 
             // Compute final stopping position
             return pos + direction * minDist;
