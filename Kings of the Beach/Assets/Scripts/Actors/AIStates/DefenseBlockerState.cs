@@ -12,7 +12,8 @@ namespace KotB.StatePattern.AIStates
         private float blockPos = 1;
 
         public override void Enter() {
-            ai.TargetPos = ai.transform.position;
+            targetPos = ai.transform.position;
+            ai.FaceOpponent();
             
             ai.BallInfo.TargetSet += OnTargetSet;
         }
@@ -32,6 +33,7 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void OnTargetSet() {
+            Debug.Log("blocker: on target set");
             // Need to add consideration if a shot is not blockable
             if (Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
                 ai.PerformJump();
