@@ -37,11 +37,9 @@ namespace KotB.Actors
 
         private float jumpFrames = 7;
         private float actionFrames = 9;
-        private float actionFallFrames = 8;
         protected float serveOverhandFrames = 34;
         protected float serveOverhandContactFrames = 25;
         protected float animationFrameRate = 24;
-        private float jumpAnimationTime;
 
         private float reachHeight;
         private float spikeSpeedPenalty = 0;
@@ -86,8 +84,6 @@ namespace KotB.Actors
             
             if (!isJumping) {
                 Move();
-            } else {
-                Jump();
             }
         }
 
@@ -143,23 +139,22 @@ namespace KotB.Actors
             skills.Position = transform.position;
         }
 
-        private void Jump() {
-            jumpAnimationTime += Time.deltaTime;
+        public void OnJumpEvent() {
+            spikeBlockCollider.enabled = true;
+            capCollider.enabled = false;
+        }
 
-            if (jumpAnimationTime >= jumpFrames / animationFrameRate && jumpAnimationTime < (jumpFrames + actionFrames) / animationFrameRate) {
-                spikeBlockCollider.enabled = true;
-                capCollider.enabled = false;
-            } else if (jumpAnimationTime >= (jumpFrames + actionFrames) / animationFrameRate && jumpAnimationTime < (jumpFrames + actionFrames + actionFallFrames) / animationFrameRate) {
-                spikeBlockCollider.enabled = false;
-            } else if (jumpAnimationTime >= (jumpFrames + actionFrames + actionFallFrames) / animationFrameRate) {
-                isJumping = false;
-                capCollider.enabled = true;
-            }
+        public void OnJumpPeakEvent() {
+            spikeBlockCollider.enabled = false;
+        }
+
+        public void OnJumpCompletedEvent() {
+            isJumping = false;
+            capCollider.enabled = true;
         }
 
         public void PerformJump() {
             isJumping = true;
-            jumpAnimationTime = 0;
             FaceOpponent();
             if (courtSide.Value == Mathf.Sign(ballInfo.Position.x)) {
                 animator.Play("Spike");

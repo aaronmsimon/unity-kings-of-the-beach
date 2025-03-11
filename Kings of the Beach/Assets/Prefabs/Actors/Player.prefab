@@ -291,10 +291,79 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f1cfc2e7d7c667d42bdcd72e0ea3f16b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 495349747610334533}
   m_SourcePrefab: {fileID: 100100000, guid: f1cfc2e7d7c667d42bdcd72e0ea3f16b, type: 3}
 --- !u!4 &2850260958989150014 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f1cfc2e7d7c667d42bdcd72e0ea3f16b, type: 3}
   m_PrefabInstance: {fileID: 2307127517280665813}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3226259110102449540 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f1cfc2e7d7c667d42bdcd72e0ea3f16b, type: 3}
+  m_PrefabInstance: {fileID: 2307127517280665813}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &495349747610334533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3226259110102449540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06138fcf7f9f1c046a1a8f4667eb07a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationEvents:
+  - eventName: JumpEvent
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2903952158050811650}
+          m_TargetAssemblyTypeName: KotB.Actors.Athlete, Assembly-CSharp
+          m_MethodName: OnJumpEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: JumpPeakEvent
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2903952158050811650}
+          m_TargetAssemblyTypeName: KotB.Actors.Athlete, Assembly-CSharp
+          m_MethodName: OnJumpPeakEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: JumpCompletedEvent
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2903952158050811650}
+          m_TargetAssemblyTypeName: KotB.Actors.Athlete, Assembly-CSharp
+          m_MethodName: OnJumpCompletedEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
