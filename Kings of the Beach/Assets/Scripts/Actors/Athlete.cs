@@ -177,11 +177,19 @@ namespace KotB.Actors
             bool directLine = !Physics.Raycast(startPos, distance.normalized, distance.magnitude, invalidAimLayer);
             float spikeTime = ballInfo.SkillValues.SkillToValue(skills.SpikePower, ballInfo.SkillValues.SpikePower) * (1 - Mathf.Abs(spikeSpeedPenalty));
             // Debug.Log($"spikeTime (skill): {ballInfo.SkillValues.SkillToValue(skills.SpikePower, ballInfo.SkillValues.SpikePower)} * (1 - Mathf.Abs({spikeSpeedPenalty})) = {spikeTime}");
-            if (directLine) {
+            float skillCheckRand = UnityEngine.Random.value;
+            bool skillCheck = skillCheckRand <= ballInfo.SkillValues.SkillToValue(skills.SpikeSkill, ballInfo.SkillValues.SpikeOverNet);
+            if (directLine || (!directLine && !skillCheck)) {
                 // If clear, spike
+                if (directLine) {
+                    Debug.Log("Spike had a clear path");
+                } else {
+                    Debug.Log($"No clear line for spike. Spike Skill: {Skills.SpikeSkill}. Skill check failed ({skillCheckRand} > {ballInfo.SkillValues.SkillToValue(skills.SpikeSkill, ballInfo.SkillValues.SpikeOverNet)})");
+                }
                 ballInfo.SetSpikeTarget(targetPos, spikeTime, this, StatTypes.Attack);
             } else {
-                // If not, pass
+                Debug.Log($"No clear line for spike. Spike Skill: {Skills.SpikeSkill}. Skill check passed ({skillCheckRand} <= {ballInfo.SkillValues.SkillToValue(skills.SpikeSkill, ballInfo.SkillValues.SpikeOverNet)})");
+                // If not, use pass with adjusted height, pending a skill check
                 float netCrossingT = Mathf.Abs(startPos.x) / Mathf.Abs(targetPos.x - startPos.x);
                 float heightAtNet = ballInfo.CalculateInFlightPosition(netCrossingT, startPos, targetPos, startPos.y).y;
                 float requiredHeight = 2.5f;

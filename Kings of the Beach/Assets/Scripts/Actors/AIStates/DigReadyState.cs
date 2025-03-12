@@ -149,7 +149,7 @@ namespace KotB.StatePattern.AIStates
             Vector3 deepOpponent = (Mathf.Max(Mathf.Abs(opponents[0].transform.position.x), Mathf.Abs(opponents[1].transform.position.x)) == Mathf.Abs(opponents[0].transform.position.x) ? opponents[0] : opponents[1]).transform.position;
             Vector3 shallowOpponent = (Mathf.Max(Mathf.Abs(opponents[0].transform.position.x), Mathf.Abs(opponents[1].transform.position.x)) == Mathf.Abs(opponents[0].transform.position.x) ? opponents[1] : opponents[0]).transform.position;
 
-            float rangeDecrease = WeightedDecrease(ai.Skills.SpikeSkill);
+            float rangeDecrease = ai.BallInfo.SkillValues.WeightedDecrease(ai.Skills.SpikeSkill);
 
             // Deep Zone
             attackZoneCenters[0] = new Vector2(
@@ -186,10 +186,6 @@ namespace KotB.StatePattern.AIStates
             }
 
             return index;
-        }
-
-        private float WeightedDecrease(float skill) {
-            return Mathf.Pow(Random.value, skill / 2);
         }
 
         private void OnTargetSet() {

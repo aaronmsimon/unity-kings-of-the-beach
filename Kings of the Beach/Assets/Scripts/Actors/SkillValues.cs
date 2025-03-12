@@ -1,5 +1,4 @@
 using UnityEngine;
-using RoboRyanTron.Unite2017.Variables;
 
 namespace KotB.Actors
 {
@@ -17,6 +16,7 @@ namespace KotB.Actors
         [Header("Spiking")]
         [SerializeField] private MinMax spikePower;
         [SerializeField] private MinMax spikeTimingWindow;
+        [SerializeField] private MinMax spikeOverNet;
 
         private MinMax skillRange = new MinMax(1, 10);
 
@@ -33,7 +33,11 @@ namespace KotB.Actors
             return (skill - skillRange.min) * (valueRange.max - valueRange.min) / (skillRange.max - skillRange.min) + valueRange.min;
         }
 
-        private static Vector2 AdjustVectorAccuracy(Vector2 vector, float accuracy, MinMax skillRange)
+        public float WeightedDecrease(float skill) {
+            return Mathf.Pow(Random.value, skill / 2);
+        }
+
+        private Vector2 AdjustVectorAccuracy(Vector2 vector, float accuracy, MinMax skillRange)
         {
             // Clamp accuracy to the range of 0 to 1 to avoid unexpected results
             accuracy = Mathf.Clamp01(accuracy);
@@ -55,7 +59,7 @@ namespace KotB.Actors
             return vector + randomOffset;
         }
 
-        private static Vector2 AdjustPassVector(Vector2 vector, Athlete athlete, MinMax skillRange)
+        private Vector2 AdjustPassVector(Vector2 vector, Athlete athlete, MinMax skillRange)
         {
             Vector2 newVector = AdjustVectorAccuracy(vector, athlete.Skills.PassAccuracy / 10, skillRange);
 
@@ -72,5 +76,6 @@ namespace KotB.Actors
         public MinMax ServeAccuracy { get { return serveAccuracy; } }
         public MinMax SpikePower { get { return spikePower; } }
         public MinMax SpikeTimingWindow { get { return spikeTimingWindow; } }
+        public MinMax SpikeOverNet { get { return spikeOverNet; } }
     }
 }
