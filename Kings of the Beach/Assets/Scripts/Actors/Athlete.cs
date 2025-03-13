@@ -28,6 +28,7 @@ namespace KotB.Actors
         protected bool isJumping;
         protected bool feint;
         protected float receiveServeXPos = 5.5f;
+        private Vector3 lastBlockContactPoint;
 
         private LayerMask obstaclesLayer;
         private LayerMask invalidAimLayer;
@@ -90,6 +91,8 @@ namespace KotB.Actors
         protected virtual void OnTriggerEnter(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 this.ball = ball;
+                // Store the exact contact point
+                lastBlockContactPoint = spikeBlockCollider.ClosestPoint(ball.transform.position);
             }
 
             stateMachine.OnTriggerEnter(other);
@@ -177,18 +180,11 @@ namespace KotB.Actors
             bool directLine = !Physics.Raycast(startPos, distance.normalized, distance.magnitude, invalidAimLayer);
             float spikeTime = ballInfo.SkillValues.SkillToValue(skills.SpikePower, ballInfo.SkillValues.SpikePower) * (1 - Mathf.Abs(spikeSpeedPenalty));
             // Debug.Log($"spikeTime (skill): {ballInfo.SkillValues.SkillToValue(skills.SpikePower, ballInfo.SkillValues.SpikePower)} * (1 - Mathf.Abs({spikeSpeedPenalty})) = {spikeTime}");
-            float skillCheckRand = UnityEngine.Random.value;
-            bool skillCheck = skillCheckRand <= ballInfo.SkillValues.SkillToValue(skills.SpikeSkill, ballInfo.SkillValues.SpikeOverNet);
+            bool skillCheck = UnityEngine.Random.value <= ballInfo.SkillValues.SkillToValue(skills.SpikeSkill, ballInfo.SkillValues.SpikeOverNet);
             if (directLine || (!directLine && !skillCheck)) {
                 // If clear, spike
-                if (directLine) {
-                    Debug.Log("Spike had a clear path");
-                } else {
-                    Debug.Log($"No clear line for spike. Spike Skill: {Skills.SpikeSkill}. Skill check failed ({skillCheckRand} > {ballInfo.SkillValues.SkillToValue(skills.SpikeSkill, ballInfo.SkillValues.SpikeOverNet)})");
-                }
                 ballInfo.SetSpikeTarget(targetPos, spikeTime, this, StatTypes.Attack);
             } else {
-                Debug.Log($"No clear line for spike. Spike Skill: {Skills.SpikeSkill}. Skill check passed ({skillCheckRand} <= {ballInfo.SkillValues.SkillToValue(skills.SpikeSkill, ballInfo.SkillValues.SpikeOverNet)})");
                 // If not, use pass with adjusted height, pending a skill check
                 float netCrossingT = Mathf.Abs(startPos.x) / Mathf.Abs(targetPos.x - startPos.x);
                 float heightAtNet = ballInfo.CalculateInFlightPosition(netCrossingT, startPos, targetPos, startPos.y).y;
@@ -220,12 +216,40 @@ namespace KotB.Actors
         }
 
         private void Block() {
-            Vector3 targetPos = new Vector3(2 * -courtSide.Value, 0.01f, transform.position.z);
-            float blockHeight = 4;
-            float blockDuration = 2;
-            ballInfo.SetPassTarget(targetPos, blockHeight, blockDuration, this, StatTypes.Block);
+            // Use the stored contact point for more accurate quality calculation
+            Vector3 contactDirection = lastBlockContactPoint - (transform.position + spikeBlockCollider.center);
+            float contactQuality = Vector3.Dot(contactDirection.normalized, transform.right * -courtSide.Value);
+            contactQuality = Mathf.Clamp01(contactQuality);
+            float contactAngle = Vector3.Angle(contactDirection, transform.right * -courtSide.Value);
+            
+            // Determine if it's a strong block (spike) or a soft block (pass)
+            bool strongBlock = contactAngle <= 30;
+
+            float targetDistance = Mathf.Lerp(2f, 4f, contactQuality);
+            // TargetPos is more consistent with Kings of the Beach (Athlete's z-pos), but might want to actually use angles if wanting to add more realism
+            
+            if (strongBlock) {
+                // Strong blocks are like spikes - faster and more direct
+                Vector3 targetPos = new Vector3(targetDistance * -courtSide.Value, 0.01f, transform.position.z);
+                float blockDuration = Mathf.Lerp(ballInfo.SkillValues.BlockPower.min, ballInfo.SkillValues.BlockPower.max, skills.BlockPower);
+                ballInfo.SetSpikeTarget(targetPos, blockDuration, this, StatTypes.Block);
+            } else {
+                // Weak blocks are like passes - slower and higher
+                float powerReduction = -0.5f;
+                Vector3 targetPos = new Vector3(targetDistance * powerReduction * -courtSide.Value, 0.01f, transform.position.z);
+                float maxBlockHeight = 5;
+                float blockHeight = Mathf.Lerp(ball.transform.position.y, maxBlockHeight, contactQuality);
+                float blockDuration = Mathf.Lerp(1.5f, 2.5f, contactQuality);
+                ballInfo.SetPassTarget(targetPos + Vector3.right * powerReduction * -courtSide.Value, blockHeight, blockDuration, this, StatTypes.Block);
+            }
+            
+            // Reset hits for this team
             ballInfo.HitsForTeam = 0;
             ballInfo.StatUpdate.Raise(this, StatTypes.Block);
+            
+            // Log for debugging
+            // Debug.Log($"Block by {skills.AthleteName}: Effectiveness={blockEffectiveness:F2}, " +
+                    // $"Type={(strongBlock ? "Strong" : "Weak")}, Target={targetPos}");
         }
 
         public void SetSkills(SkillsSO skills) {

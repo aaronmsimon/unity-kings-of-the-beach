@@ -47,6 +47,7 @@ public class SkillsSO : ScriptableObject
 
     [Header("Blocking")]
     [SerializeField][Range(1,10)] private float blocking;
+    [SerializeField][Range(1,10)] private float blockPower;
 
     [Header("Behavior")]
     [SerializeField] private float height = 1.8f;
@@ -80,6 +81,7 @@ public class SkillsSO : ScriptableObject
     public int ServePower { get { return servePower; } }
 
     public float Blocking { get { return blocking; } }
+    public float BlockPower => blockPower;
 
     public float Height { get { return height; } }
     public Vector2 DefensePos { get { return defensePos; } }

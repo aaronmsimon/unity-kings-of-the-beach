@@ -18,6 +18,9 @@ namespace KotB.Actors
         [SerializeField] private MinMax spikeTimingWindow;
         [SerializeField] private MinMax spikeOverNet;
 
+        [Header("Blocking")]
+        [SerializeField] private MinMax blockPower;
+
         private MinMax skillRange = new MinMax(1, 10);
 
         public Vector3 AdjustedServeDirection(Vector3 originalPos, float serving) {
@@ -77,5 +80,6 @@ namespace KotB.Actors
         public MinMax SpikePower { get { return spikePower; } }
         public MinMax SpikeTimingWindow { get { return spikeTimingWindow; } }
         public MinMax SpikeOverNet { get { return spikeOverNet; } }
+        public MinMax BlockPower => blockPower;
     }
 }

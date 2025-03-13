@@ -27,3 +27,6 @@ MonoBehaviour:
   spikeTimingWindow:
     min: 0.1
     max: 0
+  spikeOverNet:
+    min: 0.8
+    max: 0.95
