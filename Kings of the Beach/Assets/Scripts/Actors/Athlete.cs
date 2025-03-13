@@ -224,22 +224,22 @@ namespace KotB.Actors
             
             // Determine if it's a strong block (spike) or a soft block (pass)
             bool strongBlock = contactAngle <= 30;
+            float powerReduction = 0.5f;
+            float maxBlockHeight = 5;
 
-            float targetDistance = Mathf.Lerp(2f, 4f, contactQuality);
+            float targetDistance = Mathf.Lerp(2f, 4f, contactQuality) * (strongBlock ? 1 : (1 - powerReduction));
             // TargetPos is more consistent with Kings of the Beach (Athlete's z-pos), but might want to actually use angles if wanting to add more realism
+            Vector3 targetPos = new Vector3(targetDistance * -courtSide.Value, 0.01f, transform.position.z);
+            float blockDuration;
             
             if (strongBlock) {
                 // Strong blocks are like spikes - faster and more direct
-                Vector3 targetPos = new Vector3(targetDistance * -courtSide.Value, 0.01f, transform.position.z);
-                float blockDuration = Mathf.Lerp(ballInfo.SkillValues.BlockPower.min, ballInfo.SkillValues.BlockPower.max, skills.BlockPower);
+                blockDuration = Mathf.Lerp(ballInfo.SkillValues.BlockPower.min, ballInfo.SkillValues.BlockPower.max, skills.BlockPower);
                 ballInfo.SetSpikeTarget(targetPos, blockDuration, this, StatTypes.Block);
             } else {
                 // Weak blocks are like passes - slower and higher
-                float powerReduction = -0.5f;
-                Vector3 targetPos = new Vector3(targetDistance * powerReduction * -courtSide.Value, 0.01f, transform.position.z);
-                float maxBlockHeight = 5;
                 float blockHeight = Mathf.Lerp(ball.transform.position.y, maxBlockHeight, contactQuality);
-                float blockDuration = Mathf.Lerp(1.5f, 2.5f, contactQuality);
+                blockDuration = Mathf.Lerp(1.5f, 2.5f, contactQuality);
                 ballInfo.SetPassTarget(targetPos + Vector3.right * powerReduction * -courtSide.Value, blockHeight, blockDuration, this, StatTypes.Block);
             }
             
@@ -248,8 +248,11 @@ namespace KotB.Actors
             ballInfo.StatUpdate.Raise(this, StatTypes.Block);
             
             // Log for debugging
-            // Debug.Log($"Block by {skills.AthleteName}: Effectiveness={blockEffectiveness:F2}, " +
-                    // $"Type={(strongBlock ? "Strong" : "Weak")}, Target={targetPos}");
+            Debug.Log($"Block by {skills.AthleteName}: Contact Point={lastBlockContactPoint}, Direction={contactDirection} " +
+                    $"Quality={contactQuality}, Angle={contactAngle} ({(strongBlock ? "Strong" : "Weak")}) " +
+                    $"Target={targetPos} (Distance={targetDistance}, Duration={blockDuration}" +
+                    $"{(!strongBlock ? "Height=" + Mathf.Lerp(ball.transform.position.y, maxBlockHeight, contactQuality) : "")})"
+            );
         }
 
         public void SetSkills(SkillsSO skills) {
