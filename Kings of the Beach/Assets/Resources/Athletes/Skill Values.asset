@@ -31,5 +31,5 @@ MonoBehaviour:
     min: 0.8
     max: 0.95
   blockPower:
-    min: 0.75
-    max: 0.35
+    min: 1
+    max: 0.5
