@@ -64,6 +64,8 @@ namespace KotB.Actors
 
             obstaclesLayer = LayerMask.GetMask("Obstacles");
             invalidAimLayer = LayerMask.GetMask("InvalidAim");
+
+            // Debug.Log(Vector3.Angle(new Vector3(.41f, -.43f, 0.25f), new Vector3(1,0,0)));
         }
 
         protected virtual void Start() {
@@ -218,12 +220,12 @@ namespace KotB.Actors
         private void Block() {
             // Use the stored contact point for more accurate quality calculation
             Vector3 contactDirection = lastBlockContactPoint - (transform.position + spikeBlockCollider.center);
-            float contactQuality = Vector3.Dot(contactDirection.normalized, transform.right * -courtSide.Value);
+            float contactQuality = Vector3.Dot(contactDirection.normalized, Vector3.right * -courtSide.Value);
             contactQuality = Mathf.Clamp01(contactQuality);
-            float contactAngle = Vector3.Angle(contactDirection, transform.right * -courtSide.Value);
+            float contactAngle = Vector3.Angle(contactDirection, Vector3.right * -courtSide.Value);
             
             // Determine if it's a strong block (spike) or a soft block (pass)
-            bool strongBlock = contactAngle <= 30;
+            bool strongBlock = contactAngle <= 45;
             float powerReduction = 0.5f;
             float maxBlockHeight = 5;
 
@@ -248,9 +250,9 @@ namespace KotB.Actors
             ballInfo.StatUpdate.Raise(this, StatTypes.Block);
             
             // Log for debugging
-            Debug.Log($"Block by {skills.AthleteName}: Contact Point={lastBlockContactPoint}, Direction={contactDirection} " +
-                    $"Quality={contactQuality}, Angle={contactAngle} ({(strongBlock ? "Strong" : "Weak")}) " +
-                    $"Target={targetPos} (Distance={targetDistance}, Duration={blockDuration}" +
+            Debug.Log($"Block by {skills.AthleteName}: Contact Point={lastBlockContactPoint}, AthletePos={transform.position}, ColliderPos={spikeBlockCollider.center}, " +
+                    $"Direction={contactDirection} Quality={contactQuality}, Angle={contactAngle} ({(strongBlock ? "Strong" : "Weak")}) " +
+                    $"Target={targetPos} (Distance={targetDistance}, Duration={blockDuration} " +
                     $"{(!strongBlock ? "Height=" + Mathf.Lerp(ball.transform.position.y, maxBlockHeight, contactQuality) : "")})"
             );
         }
