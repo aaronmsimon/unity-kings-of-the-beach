@@ -194,7 +194,7 @@ namespace KotB.Actors
                 float adjustedHeight = startPos.y + requiredHeight - heightAtNet;
                 ballInfo.SetPassTarget(targetPos, adjustedHeight, spikeTime, this, StatTypes.Attack);
             }
-            Debug.Log($"{skills.AthleteName} has {(directLine ? "a clear line to a clean spike." : "no direct path (pos: " + startPos + " target: " + targetPos + "), using an arc shot.")}");
+            // Debug.Log($"{skills.AthleteName} has {(directLine ? "a clear line to a clean spike." : "no direct path (pos: " + startPos + " target: " + targetPos + "), using an arc shot.")}");
             ballInfo.StatUpdate.Raise(this, StatTypes.Attack);
         }
 
@@ -250,11 +250,11 @@ namespace KotB.Actors
             ballInfo.StatUpdate.Raise(this, StatTypes.Block);
             
             // Log for debugging
-            Debug.Log($"Block by {skills.AthleteName}: Contact Point={lastBlockContactPoint}, AthletePos={transform.position}, ColliderPos={spikeBlockCollider.center}, " +
-                    $"Direction={contactDirection} Quality={contactQuality}, Angle={contactAngle} ({(strongBlock ? "Strong" : "Weak")}) " +
-                    $"Target={targetPos} (Distance={targetDistance}, Duration={blockDuration} " +
-                    $"{(!strongBlock ? "Height=" + Mathf.Lerp(ball.transform.position.y, maxBlockHeight, contactQuality) : "")})"
-            );
+            // Debug.Log($"Block by {skills.AthleteName}: Contact Point={lastBlockContactPoint}, AthletePos={transform.position}, ColliderPos={spikeBlockCollider.center}, " +
+            //         $"Direction={contactDirection} Quality={contactQuality}, Angle={contactAngle} ({(strongBlock ? "Strong" : "Weak")}) " +
+            //         $"Target={targetPos} (Distance={targetDistance}, Duration={blockDuration} " +
+            //         $"{(!strongBlock ? "Height=" + Mathf.Lerp(ball.transform.position.y, maxBlockHeight, contactQuality) : "")})"
+            // );
         }
 
         public void SetSkills(SkillsSO skills) {

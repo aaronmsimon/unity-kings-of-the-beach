@@ -56,13 +56,13 @@ namespace KotB.StatePattern.AIStates
                     case 2:
                         ConsiderSpikeFeint();
                         Vector3 spikeTarget = CalculateSpikeTarget();
-                        string message = $"{ai.Skills.AthleteName} {(Mathf.Abs(ai.transform.position.x) <= 2 ? "selected the largest zone." : "is too far from the net, so aimed for the furthest zone.")}";
+                        // string message = $"{ai.Skills.AthleteName} {(Mathf.Abs(ai.transform.position.x) <= 2 ? "selected the largest zone." : "is too far from the net, so aimed for the furthest zone.")}";
                         if (!ai.Feint) {
                             ai.Spike(spikeTarget);
-                            Debug.Log(message);
+                            // Debug.Log(message);
                         } else {
                             ai.SpikeFeint(spikeTarget);
-                            Debug.Log(message += " Decided to do a feint.");
+                            // Debug.Log(message += " Decided to do a feint.");
                         }
                         ai.StateMachine.ChangeState(ai.DefenseState);
                         break;

@@ -125,7 +125,6 @@ namespace KotB.Actors
         public ReceiveServeState ReceiveServeState { get { return receiveServeState; } }
         public DefenseBlockerState DefenseBlockerState => defenseBlockerState;
         public DefenseDefenderState DefenseDefenderState => defenseDefenderState;
-        public Vector3 OffensePos { get { return new Vector3(skills.OffenseXPos * courtSide.Value, 0.01f, transform.position.z); } }
         public Vector3 TargetPos
         {
             get => targetPos;

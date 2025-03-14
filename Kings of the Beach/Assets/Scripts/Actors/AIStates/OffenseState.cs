@@ -7,7 +7,11 @@ namespace KotB.StatePattern.AIStates
     {
         public OffenseState(AI ai) : base(ai) { }
 
+        private float buffer = 2;
+
         public override void Enter() {
+            SetOffensePos();
+            
             ai.BallInfo.TargetSet += OnTargetSet;
         }
 
@@ -15,8 +19,10 @@ namespace KotB.StatePattern.AIStates
             ai.BallInfo.TargetSet -= OnTargetSet;
         }
 
-        public override void Update() {
-            ai.TargetPos = ai.OffensePos;
+        private void SetOffensePos() {
+            float targetZPos = ai.BallInfo.TargetPos.z;
+            float zPos = Mathf.Lerp(targetZPos + buffer * -Mathf.Sign(targetZPos), ai.CourtSideLength / 2 * -Mathf.Sign(targetZPos), Random.value);
+            ai.TargetPos = new Vector3(ai.Skills.OffenseXPos * ai.CourtSide, 0.01f, zPos);
         }
 
         private void OnTargetSet() {
