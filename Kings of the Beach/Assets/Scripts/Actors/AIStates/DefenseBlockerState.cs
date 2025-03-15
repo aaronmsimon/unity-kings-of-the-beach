@@ -49,48 +49,65 @@ namespace KotB.StatePattern.AIStates
         private void OnTargetSet() {
             // Need to add consideration if a shot is not blockable
             if (Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
-                CalculateBlockTiming();
+                ai.StateMachine.ChangeState(ai.OffenseState);
             } else {
                 targetPos = new Vector3(blockPos * ai.CourtSide, ai.transform.position.y, ai.BallInfo.TargetPos.z);
+                AnticipateSpike();
             }
         }
 
-        private void CalculateBlockTiming() {
-            // Predict when ball will reach block position
-            Vector3 ballStart = ai.BallInfo.StartPos;
-            Vector3 ballTarget = ai.BallInfo.TargetPos;
-            float totalBallTime = ai.BallInfo.Duration;
+        private void AnticipateSpike() {
+            // Calculate how long until an opponent would likely spike
+            float distanceToNet = Mathf.Abs(ai.BallInfo.TargetPos.x);
             
-            // Calculate time for ball to reach block position
-            float blockX = ai.transform.position.x;
+            // Find the opposing team's attacker
+            Athlete attacker = null;
+            foreach (Athlete athlete in ai.MatchInfo.GetOpposingTeam(ai).Athletes) {
+                // If we can identify the likely spiker (closest to ball, offensive position, etc.)
+                if (attacker == null || 
+                    Vector3.Distance(athlete.transform.position, ai.BallInfo.TargetPos) < 
+                    Vector3.Distance(attacker.transform.position, ai.BallInfo.TargetPos)) {
+                    attacker = athlete;
+                }
+            }
             
-            // Calculate time when ball reaches block position
-            // This uses linear interpolation of x position to estimate time
-            float blockPositionRatio = Mathf.Abs((blockX - ballStart.x) / (ballTarget.x - ballStart.x));
+            // Base anticipation timing - how long after the setup an attacker typically spikes
+            float baseAnticipationTime = 0.6f; // Default timing
             
-            float timeToBlock = blockPositionRatio * totalBallTime;
+            if (attacker != null) {
+                // Adjust based on opponent's spike skill - better spikers hit quicker
+                float attackerSkillFactor = ai.BallInfo.SkillValues.SkillToValue(
+                    attacker.Skills.SpikeSkill, 
+                    new MinMax(0.8f, 0.5f) // Better spikers hit faster after setup
+                );
+                
+                // Adjust based on pass height - higher passes give more time
+                float heightFactor = ai.BallInfo.Height / optimalSpikeHeight;
+                heightFactor = Mathf.Clamp(heightFactor, 0.8f, 1.5f);
+                
+                // Calculate anticipation time
+                baseAnticipationTime *= attackerSkillFactor * heightFactor;
+            }
             
-            // Calculate when to jump based on:
-            // 1. Time for AI to react (skill based)
-            // 2. Time for jump animation to reach apex
+            // Adjust blocker timing based on skill
+            float blockerReactionSkill = ai.BallInfo.SkillValues.SkillToValue(
+                ai.Skills.Blocking, 
+                new MinMax(0.3f, -0.1f) // Skill range: high skill might even anticipate (-0.1), low skill is late (0.3)
+            );
+            
+            // Jump animation time
             float jumpAnimationTime = ai.JumpFrames / ai.AnimationFrameRate;
-            // float reactionDelay = ai.BallInfo.SkillValues.SkillToValue(
-            //     ai.Skills.Blocking, 
-            //     new MinMax(0.2f, 0f) // Better blocking skill = less reaction delay
-            // );
             
-            // Time until we need to start the jump
-            jumpTimeRemaining = timeToBlock - jumpAnimationTime/*2 - reactionDelay*/;
+            // Final calculation of when to jump
+            anticipationTimer = baseAnticipationTime + blockerReactionSkill - (jumpAnimationTime * 0.5f);
             
-            // Add some blocking skill-based randomization
-            // float randomFactor = Random.Range(-0.1f, 0.1f) * (11 - ai.Skills.Blocking) / 10f;
-            // jumpTimeRemaining += randomFactor;
+            // Add some randomization based on blocker skill
+            float randomVariation = Random.Range(-0.1f, 0.1f) * (11 - ai.Skills.Blocking) / 10f;
+            anticipationTimer += randomVariation;
             
-            // Only jump if there's actually time to do so
-            readyToJump = jumpTimeRemaining > 0;
+            // Debug.Log($"Anticipating spike in {baseAnticipationTime}s, jumping in {anticipationTimer}s (skill: {blockerReactionSkill}, anim: {jumpAnimationTime})");
             
-            Debug.Log($"Ball is starting at {ballStart} with a target of {ballTarget}. The blocker is at x={blockX} so the the ball will be in a blocking position at " +
-                $"{blockPositionRatio:F2} of the total time ({totalBallTime}), or {timeToBlock}. With an animation time of {jumpAnimationTime}, the athlete will need to jump in {jumpTimeRemaining}.");
+            readyToJump = true;
         }
     }
 }
