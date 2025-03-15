@@ -33,6 +33,7 @@ namespace KotB.Items
         public event Action BallGiven;
         public event Action TargetSet;
         public event Action BallServed;
+        public event Action BallPassed;
 
         // Serve
         private float idealServeHeight = 3f;
@@ -95,6 +96,7 @@ namespace KotB.Items
             HitsForTeam += 1;
             lastPlayerToHit = passer;
             lastStatType = statType;
+            BallPassed?.Invoke();
             TargetSet?.Invoke();
         }
 

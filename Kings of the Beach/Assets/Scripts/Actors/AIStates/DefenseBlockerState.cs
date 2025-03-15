@@ -8,35 +8,38 @@ namespace KotB.StatePattern.AIStates
         public DefenseBlockerState(AI ai) : base(ai) { }
         
         private Vector3 targetPos;
+        private float reactionTime;
+        private float spikeTime;
+        private bool isBlocking;
 
         private float blockPos = 1;
-        private float jumpTimeRemaining = -1;
-        private bool readyToJump = false;
+        private bool lastEnabledStatus = false;
 
         public override void Enter() {
             targetPos = ai.transform.position;
+            reactionTime = ai.Skills.ReactionTime;
             ai.FaceOpponent();
             
+            isBlocking = false;
+            
+            ai.BallInfo.BallPassed += OnBallPassed;
             ai.BallInfo.TargetSet += OnTargetSet;
         }
 
         public override void Exit() {
+            ai.BallInfo.BallPassed -= OnBallPassed;
             ai.BallInfo.TargetSet -= OnTargetSet;
         }
 
         public override void Update() {
             ai.TargetPos = targetPos;
 
-            // If we're ready to anticipate a jump
-            if (readyToJump) {
-                jumpTimeRemaining -= Time.deltaTime;
-                Debug.Log($"jumpTimeRemaining: {jumpTimeRemaining}");
-                
-                // Time to jump!
-                if (jumpTimeRemaining <= 0) {
-                    ai.PerformJump();
-                    ai.StateMachine.ChangeState(ai.OffenseState);
-                }
+            if (ai.BallInfo.HitsForTeam == 2 && !isBlocking) {
+                AnticipateSpike();
+            }
+            if (ai.SpikeBlockCollider.enabled != lastEnabledStatus) {
+                lastEnabledStatus = ai.SpikeBlockCollider.enabled;
+                Debug.Log($"{ai.Skills.AthleteName} changed collider enabled to {ai.SpikeBlockCollider.enabled} with time since last hit of {ai.BallInfo.TimeSinceLastHit}");
             }
         }
 
@@ -49,65 +52,26 @@ namespace KotB.StatePattern.AIStates
         private void OnTargetSet() {
             // Need to add consideration if a shot is not blockable
             if (Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
-                ai.StateMachine.ChangeState(ai.OffenseState);
+                // ai.StateMachine.ChangeState(ai.OffenseState);
             } else {
                 targetPos = new Vector3(blockPos * ai.CourtSide, ai.transform.position.y, ai.BallInfo.TargetPos.z);
-                AnticipateSpike();
             }
         }
 
         private void AnticipateSpike() {
-            // Calculate how long until an opponent would likely spike
-            float distanceToNet = Mathf.Abs(ai.BallInfo.TargetPos.x);
-            
-            // Find the opposing team's attacker
-            Athlete attacker = null;
-            foreach (Athlete athlete in ai.MatchInfo.GetOpposingTeam(ai).Athletes) {
-                // If we can identify the likely spiker (closest to ball, offensive position, etc.)
-                if (attacker == null || 
-                    Vector3.Distance(athlete.transform.position, ai.BallInfo.TargetPos) < 
-                    Vector3.Distance(attacker.transform.position, ai.BallInfo.TargetPos)) {
-                    attacker = athlete;
-                }
+            float jumpDuration = ai.JumpFrames / ai.AnimationFrameRate;
+            float spikeDuration = ai.ActionFrames / ai.AnimationFrameRate;
+            if (ai.BallInfo.TimeSinceLastHit >= spikeTime - jumpDuration - reactionTime && spikeTime >= 0) {
+                Debug.Log($"{ai.Skills.AthleteName} jumping to try to block now: {ai.BallInfo.TimeSinceLastHit} >= {spikeTime} - {jumpDuration} - {reactionTime}");
+                ai.PerformJump();
+                isBlocking = true;
             }
-            
-            // Base anticipation timing - how long after the setup an attacker typically spikes
-            float baseAnticipationTime = 0.6f; // Default timing
-            
-            if (attacker != null) {
-                // Adjust based on opponent's spike skill - better spikers hit quicker
-                float attackerSkillFactor = ai.BallInfo.SkillValues.SkillToValue(
-                    attacker.Skills.SpikeSkill, 
-                    new MinMax(0.8f, 0.5f) // Better spikers hit faster after setup
-                );
-                
-                // Adjust based on pass height - higher passes give more time
-                float heightFactor = ai.BallInfo.Height / optimalSpikeHeight;
-                heightFactor = Mathf.Clamp(heightFactor, 0.8f, 1.5f);
-                
-                // Calculate anticipation time
-                baseAnticipationTime *= attackerSkillFactor * heightFactor;
-            }
-            
-            // Adjust blocker timing based on skill
-            float blockerReactionSkill = ai.BallInfo.SkillValues.SkillToValue(
-                ai.Skills.Blocking, 
-                new MinMax(0.3f, -0.1f) // Skill range: high skill might even anticipate (-0.1), low skill is late (0.3)
-            );
-            
-            // Jump animation time
-            float jumpAnimationTime = ai.JumpFrames / ai.AnimationFrameRate;
-            
-            // Final calculation of when to jump
-            anticipationTimer = baseAnticipationTime + blockerReactionSkill - (jumpAnimationTime * 0.5f);
-            
-            // Add some randomization based on blocker skill
-            float randomVariation = Random.Range(-0.1f, 0.1f) * (11 - ai.Skills.Blocking) / 10f;
-            anticipationTimer += randomVariation;
-            
-            // Debug.Log($"Anticipating spike in {baseAnticipationTime}s, jumping in {anticipationTimer}s (skill: {blockerReactionSkill}, anim: {jumpAnimationTime})");
-            
-            readyToJump = true;
+        }
+
+        private void OnBallPassed() {
+            float optimalSpikeHeight = 4;
+            spikeTime = ai.GetTimeToContactHeight(optimalSpikeHeight, ai.BallInfo.Height, ai.BallInfo.StartPos.y, ai.BallInfo.TargetPos.y, ai.BallInfo.Duration);
+            Debug.Log($"{ai.Skills.AthleteName} is estimating spike time from {optimalSpikeHeight}, {ai.BallInfo.Height}, {ai.BallInfo.StartPos.y}, {ai.BallInfo.TargetPos.y}, {ai.BallInfo.Duration}");
         }
     }
 }

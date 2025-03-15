@@ -17,7 +17,8 @@ namespace KotB.StatePattern.AIStates
         public override void Enter() {
             reactionTime = ai.Skills.ReactionTime;
             // Expensive operation (square root) so running this just once this state is entered
-            spikeTime = GetTimeForSpike(ai.ReachHeight, ai.BallInfo.Height, ai.BallInfo.StartPos.y, ai.BallInfo.TargetPos.y, ai.BallInfo.Duration);
+            spikeTime = ai.GetTimeToContactHeight(ai.ReachHeight, ai.BallInfo.Height, ai.BallInfo.StartPos.y, ai.BallInfo.TargetPos.y, ai.BallInfo.Duration);
+            Debug.Log($"{ai.Skills.AthleteName} has a reach height of {ai.ReachHeight}");
             isSpiking = false;
 
             ai.BallInfo.TargetSet += OnTargetSet;
@@ -118,30 +119,6 @@ namespace KotB.StatePattern.AIStates
 
             // Temp random
             ai.Feint = Random.Range(0f,1) > 0.9f;
-        }
-
-        private float GetTimeForSpike(float spikePos, float height, float start, float end, float duration)
-        {
-            float a = -4 * height;
-            float b = 4 * height - start + end;
-            float c = start - spikePos;
-
-            float discriminant = b * b - 4 * a * c;
-
-            if (discriminant >= 0)
-            {
-                float sqrtDiscriminant = Mathf.Sqrt(discriminant);
-                float t1 = (-b + sqrtDiscriminant) / (2 * a);
-                float t2 = (-b - sqrtDiscriminant) / (2 * a);
-
-                if (t1 >= 0.5f && t1 <= 1)
-                    return t1 * duration;
-                else if (t2 >= 0.5f && t2 <= 1)
-                    return t2 * duration;
-            }
-
-            // Debug.LogError($"No real solution for spikePos={spikePos}, height={height}, start={start}, end={end}, duration={duration} leading to discriminant={discriminant}");
-            return -1;
         }
 
         private void CalculateAttackZones() {

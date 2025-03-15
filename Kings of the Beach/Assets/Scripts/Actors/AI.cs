@@ -57,6 +57,30 @@ namespace KotB.Actors
             base.Update();
         }
 
+        public float GetTimeToContactHeight(float contactHeight, float height, float start, float end, float duration)
+        {
+            float a = -4 * height;
+            float b = 4 * height - start + end;
+            float c = start - contactHeight;
+
+            float discriminant = b * b - 4 * a * c;
+
+            if (discriminant >= 0)
+            {
+                float sqrtDiscriminant = Mathf.Sqrt(discriminant);
+                float t1 = (-b + sqrtDiscriminant) / (2 * a);
+                float t2 = (-b - sqrtDiscriminant) / (2 * a);
+
+                if (t1 >= 0.5f && t1 <= 1)
+                    return t1 * duration;
+                else if (t2 >= 0.5f && t2 <= 1)
+                    return t2 * duration;
+            }
+
+            // Debug.LogError($"No real solution for spikePos={spikePos}, height={height}, start={start}, end={end}, duration={duration} leading to discriminant={discriminant}");
+            return -1;
+        }
+
         public Vector3 SetTargetToGiveUp(float minDist, float giveUpDistance) {
             Vector3 ballTargetPos = BallInfo.TargetPos;
             Vector3 pos = transform.position;

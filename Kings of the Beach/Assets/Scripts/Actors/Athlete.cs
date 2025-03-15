@@ -176,6 +176,7 @@ namespace KotB.Actors
         }
 
         public void Spike(Vector3 targetPos) {
+            Debug.Log($"Ball spiked at time since last hit: {ballInfo.TimeSinceLastHit}");
             // Raycast to target
             Vector3 startPos = ballInfo.Position;
             Vector3 distance = targetPos - startPos;
