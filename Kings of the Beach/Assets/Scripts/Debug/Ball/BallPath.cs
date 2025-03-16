@@ -42,6 +42,7 @@ namespace KotB.Testing
             trackingBallPath = true;
             hz = 1 / frequency;
             ResetTimeSinceLastMarker();
+            DestroyAllPathMarkers();
         }
 
         public void OnBallHitGround() {
