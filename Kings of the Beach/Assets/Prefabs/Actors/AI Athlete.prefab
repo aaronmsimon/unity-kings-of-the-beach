@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 5127179976974750972}
   - component: {fileID: 8463576540012695194}
   - component: {fileID: 1164755901000653087}
-  - component: {fileID: 1475508319195075641}
-  - component: {fileID: 6302614367976099131}
   m_Layer: 0
   m_Name: AI Athlete
   m_TagString: Untagged
@@ -156,49 +154,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1475508319195075641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5717242374435514889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 311d2774d387912498edd077b1827182, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6302614367976099131}
-        m_TargetAssemblyTypeName: KotB.Testing.DrawWireSphereHelper, Assembly-CSharp
-        m_MethodName: Draw
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &6302614367976099131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5717242374435514889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b5d9ccaf239d24498abc3e5d6f117d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  posOffset: {x: 0, y: 3.1, z: 0}
-  sphereRadius: 0.75
-  sphereColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &4044808691361283299
 PrefabInstance:
   m_ObjectHideFlags: 0

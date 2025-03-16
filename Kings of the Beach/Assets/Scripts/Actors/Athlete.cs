@@ -174,10 +174,8 @@ namespace KotB.Actors
                 animator.Play("Spike");
             } else {
                 animator.Play("Block");
-                if (Skills.AthleteName == "Jorge Luis Alayo Moliner") spikeEvent.Raise();
             }
         }
-        [SerializeField] private GameEvent spikeEvent;
 
         public void Pass(Vector3 targetPos, float height, float time) {
             if (ballInfo.LastStatType == StatTypes.Attack) {
