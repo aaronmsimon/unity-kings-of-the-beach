@@ -13,7 +13,6 @@ namespace KotB.StatePattern.AIStates
         private bool isBlocking;
 
         private float blockPos = 1;
-        private bool lastEnabledStatus = false;
 
         public override void Enter() {
             targetPos = ai.transform.position;
@@ -34,12 +33,8 @@ namespace KotB.StatePattern.AIStates
         public override void Update() {
             ai.TargetPos = targetPos;
 
-            if (ai.BallInfo.HitsForTeam == 2 && !isBlocking) {
+            if (Mathf.Sign(ai.BallInfo.Position.x) != ai.CourtSide && ai.BallInfo.HitsForTeam == 2 && !isBlocking) {
                 AnticipateSpike();
-            }
-            if (ai.SpikeBlockCollider.enabled != lastEnabledStatus) {
-                lastEnabledStatus = ai.SpikeBlockCollider.enabled;
-                Debug.Log($"{ai.Skills.AthleteName} changed collider enabled to {ai.SpikeBlockCollider.enabled} with time since last hit of {ai.BallInfo.TimeSinceLastHit}");
             }
         }
 
@@ -52,7 +47,7 @@ namespace KotB.StatePattern.AIStates
         private void OnTargetSet() {
             // Need to add consideration if a shot is not blockable
             if (Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
-                // ai.StateMachine.ChangeState(ai.OffenseState);
+                ai.StateMachine.ChangeState(ai.OffenseState);
             } else {
                 targetPos = new Vector3(blockPos * ai.CourtSide, ai.transform.position.y, ai.BallInfo.TargetPos.z);
             }
@@ -60,7 +55,6 @@ namespace KotB.StatePattern.AIStates
 
         private void AnticipateSpike() {
             float jumpDuration = ai.JumpFrames / ai.AnimationFrameRate;
-            float spikeDuration = ai.ActionFrames / ai.AnimationFrameRate;
             if (ai.BallInfo.TimeSinceLastHit >= spikeTime - jumpDuration - reactionTime && spikeTime >= 0) {
                 Debug.Log($"{ai.Skills.AthleteName} jumping to try to block now: {ai.BallInfo.TimeSinceLastHit} >= {spikeTime} - {jumpDuration} - {reactionTime}");
                 ai.PerformJump();

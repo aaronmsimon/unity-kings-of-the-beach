@@ -18,7 +18,6 @@ namespace KotB.StatePattern.AIStates
             reactionTime = ai.Skills.ReactionTime;
             // Expensive operation (square root) so running this just once this state is entered
             spikeTime = ai.GetTimeToContactHeight(ai.ReachHeight, ai.BallInfo.Height, ai.BallInfo.StartPos.y, ai.BallInfo.TargetPos.y, ai.BallInfo.Duration);
-            Debug.Log($"{ai.Skills.AthleteName} has a reach height of {ai.ReachHeight}");
             isSpiking = false;
 
             ai.BallInfo.TargetSet += OnTargetSet;

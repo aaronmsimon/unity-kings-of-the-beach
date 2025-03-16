@@ -22,7 +22,7 @@ namespace KotB.Match
         public event Action<bool> TogglePause;
 
         public void Initialize() {
-            teamServeIndex = 0;
+            teamServeIndex = 1;
         }
 
         public void TransitionToPrePointStateEvent() {

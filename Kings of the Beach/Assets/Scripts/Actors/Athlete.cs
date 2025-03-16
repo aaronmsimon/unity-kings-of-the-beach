@@ -88,7 +88,15 @@ namespace KotB.Actors
             if (!isJumping) {
                 Move();
             }
+
+            if (Skills.AthleteName == "Jorge Luis Alayo Moliner") {
+                if (SpikeBlockCollider.enabled != lastEnabledStatus) {
+                    lastEnabledStatus = SpikeBlockCollider.enabled;
+                    Debug.Log($"{Skills.AthleteName} changed collider enabled to {SpikeBlockCollider.enabled} at time {Time.time}");
+                }
+            }
         }
+        private bool lastEnabledStatus = false;
 
         protected virtual void OnTriggerEnter(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
@@ -176,7 +184,7 @@ namespace KotB.Actors
         }
 
         public void Spike(Vector3 targetPos) {
-            Debug.Log($"Ball spiked at time since last hit: {ballInfo.TimeSinceLastHit}");
+            Debug.Log($"Ball spiked at time {Time.time}");
             // Raycast to target
             Vector3 startPos = ballInfo.Position;
             Vector3 distance = targetPos - startPos;
