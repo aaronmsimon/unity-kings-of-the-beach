@@ -21,6 +21,8 @@ namespace KotB.Testing
             playerPostPoint,
             aiServe,
             aiDefense,
+            aiDefenseBlocker,
+            aiDefenseDefender,
             aiOffense,
             aiDigReady,
             aiPostPoint,
@@ -41,6 +43,8 @@ namespace KotB.Testing
         // AI States
         private StatePattern.AIStates.ServeState aiServeState;
         private DefenseState aiDefenseState;
+        private DefenseBlockerState aiDefenseBlocker;
+        private DefenseDefenderState aiDefenseDefender;
         private OffenseState aiOffenseState;
         private DigReadyState aiDigReadyState;
         private StatePattern.AIStates.PostPointState aiPostPointState;
@@ -62,6 +66,8 @@ namespace KotB.Testing
                 athleteType = AthleteType.ai;
                 aiServeState = new StatePattern.AIStates.ServeState(ai);
                 aiDefenseState = new DefenseState(ai);
+                aiDefenseBlocker = new DefenseBlockerState(ai);
+                aiDefenseDefender = new DefenseDefenderState(ai);
                 aiOffenseState = new OffenseState(ai);
                 aiDigReadyState = new DigReadyState(ai);
                 aiPostPointState = new StatePattern.AIStates.PostPointState(ai);
@@ -97,6 +103,12 @@ namespace KotB.Testing
                     break;
                 case AthleteState.aiDefense:
                     state = aiDefenseState;
+                    break;
+                case AthleteState.aiDefenseBlocker:
+                    state = aiDefenseBlocker;
+                    break;
+                case AthleteState.aiDefenseDefender:
+                    state = aiDefenseDefender;
                     break;
                 case AthleteState.aiOffense:
                     state = aiOffenseState;
