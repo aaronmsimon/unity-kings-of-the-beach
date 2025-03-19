@@ -55,6 +55,7 @@ namespace KotB.StatePattern.AIStates
 
         private void AnticipateSpike() {
             float jumpDuration = ai.JumpFrames / ai.AnimationFrameRate;
+            // Debug.Log($"{ai.BallInfo.TimeSinceLastHit} >= {spikeTime} - {jumpDuration} - {reactionTime} && {spikeTime} >= 0");
             if (ai.BallInfo.TimeSinceLastHit >= spikeTime - jumpDuration - reactionTime && spikeTime >= 0) {
                 Debug.Log($"{ai.Skills.AthleteName} jumping to try to block now: {ai.BallInfo.TimeSinceLastHit} >= {spikeTime} - {jumpDuration} - {reactionTime}");
                 ai.PerformJump();
