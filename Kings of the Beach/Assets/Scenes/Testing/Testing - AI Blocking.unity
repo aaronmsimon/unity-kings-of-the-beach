@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446241fde52def84b8b05ef1651144e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitsForTeam: 2
+  hitsForTeam: 1
   athletes:
   - {fileID: 234540892}
   - {fileID: 1589109999}
