@@ -5,7 +5,6 @@ using KotB.Match;
 using RoboRyanTron.Unite2017.Variables;
 using KotB.Items;
 using KotB.Stats;
-using RoboRyanTron.Unite2017.Events;
 
 namespace KotB.Actors
 {
@@ -54,7 +53,6 @@ namespace KotB.Actors
         private SphereCollider spikeBlockCollider;
         protected Animator animator;
         private Transform leftHandEnd;
-
 
         protected virtual void Awake() {
             stateMachine = new StateMachine();
@@ -184,8 +182,10 @@ namespace KotB.Actors
             ballInfo.SetPassTarget(targetPos, height, time, this, StatTypes.None);
         }
 
+public event Action BallSpiked;
         public void Spike(Vector3 targetPos) {
             Debug.Log($"Ball spiked at time {Time.time}");
+            BallSpiked?.Invoke();
             // Raycast to target
             Vector3 startPos = ballInfo.Position;
             Vector3 distance = targetPos - startPos;

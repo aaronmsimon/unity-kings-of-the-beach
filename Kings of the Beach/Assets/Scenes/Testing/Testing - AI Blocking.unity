@@ -352,7 +352,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: aeafa150cef3e0547a00b597cbdb0353, type: 2}
     - target: {fileID: -6829632742945956471, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       propertyPath: coachType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6829632742945956471, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       propertyPath: courtSide
@@ -364,7 +364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6829632742945956471, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       propertyPath: targetZonePos.y
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6829632742945956471, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       propertyPath: targetZoneSize.x
@@ -472,7 +472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8837344749861723447, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8837344749861723447, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -665,6 +665,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 349691251}
+    - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnBallHitGround
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: KotB.Testing.AIBlockTesting, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_Name
       value: AI Athlete

@@ -39,6 +39,7 @@ namespace KotB.StatePattern.AIStates
         }
 
         public override void OnTriggerEnter(Collider other) {
+            Debug.Log("triggered!");
             if (ai.Ball != null) {
                 ai.BlockAttempt();
             }

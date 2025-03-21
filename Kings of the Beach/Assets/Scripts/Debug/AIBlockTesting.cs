@@ -17,32 +17,42 @@ namespace KotB.Testing
         [Header("Scriptable Objects")]
         [SerializeField] private BallSO ballInfo;
 
-        private bool ballPassed;
+        private Player player;
+        private AI ai;
         private SphereCollider aiCollider;
+        private bool ballSpiked;
 
-        private void Start() {
-            ResetStates();
-            ballInfo.TimeSinceLastHit = -100;
+        private void Awake() {
             foreach (Athlete athlete in athletes) {
                 if (athlete.TryGetComponent<AI>(out AI ai)) {
+                    this.ai = ai;
                     aiCollider = ai.GetComponent<SphereCollider>();
+                }
+                if (athlete.TryGetComponent<Player>(out Player player)) {
+                    this.player = player;
                 }
             }            
         }
 
+        private void Start() {
+            ResetStates();
+            ballInfo.TimeSinceLastHit = -100;
+        }
+
         private void OnEnable() {
             coach.BallTaken += OnBallTaken;
-            ballInfo.BallPassed += OnBallPassed;
+            player.BallSpiked += OnBallSpiked;
         }
 
         private void OnDisable() {
             coach.BallTaken -= OnBallTaken;
-            ballInfo.BallPassed -= OnBallPassed;
+            player.BallSpiked -= OnBallSpiked;
         }
 
         private void Update() {
-            if (ballPassed) {
-                Debug.Log(DistanceToSphere(ballInfo.Position, aiCollider.center, aiCollider.radius));
+            if (ballSpiked) {
+                float dist = DistanceToSphere(ballInfo.Position, aiCollider.center, aiCollider.radius);
+                Debug.Log($"At ball.x = {ballInfo.Position.x:F2}, distance to collider = {dist:F3} (collider active: {aiCollider.enabled}) [{ai.StateMachine.CurrentState}] [{ai.BallInfo.Possession}]");
             }
         }
 
@@ -59,8 +69,12 @@ namespace KotB.Testing
             ResetStates();
         }
 
-        private void OnBallPassed() {
-            ballPassed = true;
+        private void OnBallSpiked() {
+            ballSpiked = true;
+        }
+
+        public void OnBallHitGround() {
+            ballSpiked = false;
         }
 
         private float DistanceToSphere(Vector3 point, Vector3 sphereCenter, float sphereRadius)
