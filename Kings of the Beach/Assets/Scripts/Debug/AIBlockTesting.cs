@@ -41,12 +41,12 @@ namespace KotB.Testing
 
         private void OnEnable() {
             coach.BallTaken += OnBallTaken;
-            player.BallSpiked += OnBallSpiked;
+            ballInfo.BallSpiked += OnBallSpiked;
         }
 
         private void OnDisable() {
             coach.BallTaken -= OnBallTaken;
-            player.BallSpiked -= OnBallSpiked;
+            ballInfo.BallSpiked -= OnBallSpiked;
         }
 
         private void Update() {

@@ -182,10 +182,8 @@ namespace KotB.Actors
             ballInfo.SetPassTarget(targetPos, height, time, this, StatTypes.None);
         }
 
-public event Action BallSpiked;
         public void Spike(Vector3 targetPos) {
             Debug.Log($"Ball spiked at time {Time.time}");
-            BallSpiked?.Invoke();
             // Raycast to target
             Vector3 startPos = ballInfo.Position;
             Vector3 distance = targetPos - startPos;
@@ -202,7 +200,7 @@ public event Action BallSpiked;
                 float heightAtNet = ballInfo.CalculateInFlightPosition(netCrossingT, startPos, targetPos, startPos.y).y;
                 float requiredHeight = 2.5f;
                 float adjustedHeight = startPos.y + requiredHeight - heightAtNet;
-                ballInfo.SetPassTarget(targetPos, adjustedHeight, spikeTime, this, StatTypes.Attack);
+                ballInfo.SetSpikeTarget(targetPos, spikeTime, this, StatTypes.Attack, adjustedHeight);
             }
             // Debug.Log($"{skills.AthleteName} has {(directLine ? "a clear line to a clean spike." : "no direct path (pos: " + startPos + " target: " + targetPos + "), using an arc shot.")}");
             ballInfo.StatUpdate.Raise(this, StatTypes.Attack);
@@ -252,7 +250,7 @@ public event Action BallSpiked;
                 // Weak blocks are like passes - slower and higher
                 float blockHeight = Mathf.Lerp(ball.transform.position.y, maxBlockHeight, contactQuality);
                 blockDuration = Mathf.Lerp(1.5f, 2.5f, contactQuality);
-                ballInfo.SetPassTarget(targetPos + Vector3.right * powerReduction * -courtSide.Value, blockHeight, blockDuration, this, StatTypes.Block);
+                ballInfo.SetSpikeTarget(targetPos + Vector3.right * powerReduction * -courtSide.Value, blockDuration, this, StatTypes.Block, blockHeight);
             }
             
             // Reset hits for this team

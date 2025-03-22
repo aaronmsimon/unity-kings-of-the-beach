@@ -34,6 +34,7 @@ namespace KotB.Items
         public event Action TargetSet;
         public event Action BallServed;
         public event Action BallPassed;
+        public event Action BallSpiked;
 
         // Serve
         private float idealServeHeight = 3f;
@@ -100,15 +101,16 @@ namespace KotB.Items
             TargetSet?.Invoke();
         }
 
-        public void SetSpikeTarget(Vector3 targetPos, float duration, Athlete spiker, StatTypes statType) {
+        public void SetSpikeTarget(Vector3 targetPos, float duration, Athlete spiker, StatTypes statType, float height = -1) {
             StartPos = Position;
             TargetPos = targetPos;
-            Height = -1;
+            Height = height;
             Duration = duration;
             ResetTimeSinceLastHit();
             HitsForTeam += 1;
             lastPlayerToHit = spiker;
             lastStatType = statType;
+            BallSpiked?.Invoke();
             TargetSet?.Invoke();
         }
 
