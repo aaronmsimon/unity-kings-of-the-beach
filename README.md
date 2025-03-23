@@ -113,7 +113,7 @@ I would like to actually finish this game this time. That means starting with a 
 - NEW interaction concept!!  hold for dig, press & release for directed pass/shot
 - Replays
 - Argue calls
-- Pass will be the gameplay mechanic for both Dig and Set, but Set will be more accurate
+- Pass will be the gameplay mechanic for both Dig and Set, but Set will be more accurate. Will add Set to improve accuracy of Spike on next hit
 - adjustments for men vs women (spike speed, net dimensions, etc)
 
 ### Cleanup
