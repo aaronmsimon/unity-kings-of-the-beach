@@ -51,7 +51,7 @@ namespace KotB.Testing
 
         private void Update() {
             if (ballSpiked) {
-                float dist = DistanceToSphere(ballInfo.Position, aiCollider.center, aiCollider.radius);
+                float dist = DistanceToSphere(ballInfo.Position, ai.transform.TransformPoint(aiCollider.center), aiCollider.radius);
                 Debug.Log($"At ball.x = {ballInfo.Position.x:F2}, distance to collider = {dist:F3} (collider active: {aiCollider.enabled}) [{ai.StateMachine.CurrentState}] [{ai.BallInfo.Possession}]");
             }
         }

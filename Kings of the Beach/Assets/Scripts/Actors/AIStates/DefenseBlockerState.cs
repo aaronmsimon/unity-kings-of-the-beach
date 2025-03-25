@@ -1,5 +1,6 @@
 using UnityEngine;
 using KotB.Actors;
+using KotB.Items;
 
 namespace KotB.StatePattern.AIStates
 {
@@ -36,10 +37,29 @@ namespace KotB.StatePattern.AIStates
             if (Mathf.Sign(ai.BallInfo.Position.x) != ai.CourtSide && ai.BallInfo.HitsForTeam == 2 && !isBlocking) {
                 AnticipateSpike();
             }
+
+            // Instead of using the OnTriggerEnter
+            if (ai.IsJumping) {
+                // Check for distance to overlapsphere
+                float locscale = ai.transform.localScale.x;
+                Vector3 manualPos = ai.transform.position + ai.SpikeBlockCollider.center;
+                Debug.Log($"manual collider distance: {DistanceToSphere(ai.BallInfo.Position, manualPos + Vector3.up * manualPos.y * (locscale - 1), ai.SpikeBlockCollider.radius * locscale)}");
+
+                // Check for collision manually
+                Collider[] collisions = Physics.OverlapSphere(
+                    ai.SpikeBlockCollider.transform.position + ai.SpikeBlockCollider.center, 
+                    ai.SpikeBlockCollider.radius);
+                    
+                foreach (var col in collisions) {
+                    if (col.TryGetComponent<Ball>(out Ball ball)) {
+                        ai.BlockAttempt();
+                        break;
+                    }
+                }
+            }
         }
 
         public override void OnTriggerEnter(Collider other) {
-            Debug.Log("triggered!");
             if (ai.Ball != null) {
                 ai.BlockAttempt();
             }
@@ -47,10 +67,12 @@ namespace KotB.StatePattern.AIStates
 
         private void OnTargetSet() {
             // Need to add consideration if a shot is not blockable
-            if (Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
-                ai.StateMachine.ChangeState(ai.OffenseState);
-            } else {
+            if (Mathf.Sign(ai.BallInfo.TargetPos.x) != ai.CourtSide) {
                 targetPos = new Vector3(blockPos * ai.CourtSide, ai.transform.position.y, ai.BallInfo.TargetPos.z);
+            } else {
+                if (ai.BallInfo.Possession == ai.CourtSide) {
+                    ai.StateMachine.ChangeState(ai.DigReadyState);
+                }
             }
         }
 
@@ -69,5 +91,19 @@ namespace KotB.StatePattern.AIStates
             spikeTime = ai.GetTimeToContactHeight(optimalSpikeHeight, ai.BallInfo.Height, ai.BallInfo.StartPos.y, ai.BallInfo.TargetPos.y, ai.BallInfo.Duration);
             Debug.Log($"{ai.Skills.AthleteName} is estimating spike time from {optimalSpikeHeight}, {ai.BallInfo.Height}, {ai.BallInfo.StartPos.y}, {ai.BallInfo.TargetPos.y}, {ai.BallInfo.Duration}");
         }
+
+// TEMPORARY
+private float DistanceToSphere(Vector3 point, Vector3 sphereCenter, float sphereRadius)
+{
+    // Calculate the distance between the point and sphere center
+    float distance = Vector3.Distance(point, sphereCenter);
+    
+    // If the point is inside the sphere, return 0 (or a negative value if you prefer)
+    if (distance <= sphereRadius)
+        return 0f; // Point is inside or on the sphere
+    
+    // Otherwise, return the distance to the sphere surface
+    return distance - sphereRadius;
+}
     }
 }

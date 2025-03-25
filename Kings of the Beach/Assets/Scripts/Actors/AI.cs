@@ -148,8 +148,8 @@ private void OnDrawGizmosSelected() {
         // Draw where your manual calculation thinks the collider is
         Gizmos.color = Color.blue;
         float locscale = transform.localScale.x;
-        Vector3 manualPos = (transform.position + SpikeBlockCollider.center) * locscale;
-        Gizmos.DrawWireSphere(manualPos, SpikeBlockCollider.radius * locscale);
+        Vector3 manualPos = transform.position + SpikeBlockCollider.center;
+        Gizmos.DrawWireSphere(manualPos + Vector3.up * manualPos.y * (locscale - 1), SpikeBlockCollider.radius * locscale);
         
         // Draw the spherecast origin and direction if applicable
         // This would depend on your implementation
