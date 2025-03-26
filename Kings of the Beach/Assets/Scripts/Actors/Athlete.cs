@@ -88,14 +88,14 @@ namespace KotB.Actors
                 Move();
             }
 
-            if (Skills.AthleteName == "Jorge Luis Alayo Moliner") {
-                if (SpikeBlockCollider.enabled != lastEnabledStatus) {
-                    lastEnabledStatus = SpikeBlockCollider.enabled;
-                    Debug.Log($"{Skills.AthleteName} changed collider enabled to {SpikeBlockCollider.enabled} at time {Time.time}");
-                }
-            }
+if (Skills.AthleteName == "Jorge Luis Alayo Moliner") {
+    if (SpikeBlockCollider.enabled != lastEnabledStatus) {
+        lastEnabledStatus = SpikeBlockCollider.enabled;
+        Debug.Log($"{Skills.AthleteName} changed collider enabled to {SpikeBlockCollider.enabled} at time {Time.time}");
+    }
+}
         }
-        private bool lastEnabledStatus = false;
+private bool lastEnabledStatus = false;
 
         protected virtual void OnTriggerEnter(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {

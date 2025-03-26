@@ -12,6 +12,7 @@ namespace KotB.StatePattern.AIStates
         private float reactionTime;
         private float spikeTime;
         private bool isBlocking;
+        private bool blockAttempted;
 
         private float blockPos = 1;
 
@@ -21,6 +22,7 @@ namespace KotB.StatePattern.AIStates
             ai.FaceOpponent();
             
             isBlocking = false;
+            blockAttempted = false;
             
             ai.BallInfo.BallPassed += OnBallPassed;
             ai.BallInfo.TargetSet += OnTargetSet;
@@ -37,31 +39,14 @@ namespace KotB.StatePattern.AIStates
             if (Mathf.Sign(ai.BallInfo.Position.x) != ai.CourtSide && ai.BallInfo.HitsForTeam == 2 && !isBlocking) {
                 AnticipateSpike();
             }
-
-            // Instead of using the OnTriggerEnter
-            if (ai.IsJumping) {
-                // Check for distance to overlapsphere
-                float locscale = ai.transform.localScale.x;
-                Vector3 manualPos = ai.transform.position + ai.SpikeBlockCollider.center;
-                Debug.Log($"manual collider distance: {DistanceToSphere(ai.BallInfo.Position, manualPos + Vector3.up * manualPos.y * (locscale - 1), ai.SpikeBlockCollider.radius * locscale)}");
-
-                // Check for collision manually
-                Collider[] collisions = Physics.OverlapSphere(
-                    ai.SpikeBlockCollider.transform.position + ai.SpikeBlockCollider.center, 
-                    ai.SpikeBlockCollider.radius);
-                    
-                foreach (var col in collisions) {
-                    if (col.TryGetComponent<Ball>(out Ball ball)) {
-                        ai.BlockAttempt();
-                        break;
-                    }
-                }
-            }
         }
 
         public override void OnTriggerEnter(Collider other) {
             if (ai.Ball != null) {
-                ai.BlockAttempt();
+                if (ai.SpikeBlockCollider.enabled & !blockAttempted) {
+                    ai.BlockAttempt();
+                    blockAttempted = true;
+                }
             }
         }
 

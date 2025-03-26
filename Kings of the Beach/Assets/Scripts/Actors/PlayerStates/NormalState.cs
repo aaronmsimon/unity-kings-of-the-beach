@@ -8,10 +8,14 @@ namespace KotB.StatePattern.PlayerStates
     {
         public NormalState(Player player) : base(player) { }
 
+        private bool blockAttempted;
+
         public override void Enter() {
             player.ServeCameraPriority.Value = 0;
             player.MainCameraPriority.Value = 10;
             player.UpdateCameraPriorty.Raise();
+
+            blockAttempted = false;
 
             player.MatchInfo.TransitionToServeState += OnMatchChangeToServeState;
         }
@@ -36,8 +40,9 @@ namespace KotB.StatePattern.PlayerStates
 
         public override void OnTriggerEnter(Collider other) {
             if (player.Ball != null) {
-                if (player.SpikeBlockCollider.enabled) {
+                if (player.SpikeBlockCollider.enabled & !blockAttempted) {
                     player.BlockAttempt();
+                    blockAttempted = true;
                 }
             }
         }
