@@ -15,6 +15,8 @@ namespace KotB.StatePattern.AIStates
         private bool blockAttempted;
 
         private float blockPos = 1;
+        private Vector3 boxCenter;
+        private Vector3 boxHalfSize;
 
         public override void Enter() {
             targetPos = ai.transform.position;
@@ -23,6 +25,9 @@ namespace KotB.StatePattern.AIStates
             
             isBlocking = false;
             blockAttempted = false;
+
+            boxCenter = new Vector3(0, 2.85f, 0.3875f);
+            boxHalfSize = new Vector3(0.5f, 1, 0.375f);
             
             ai.BallInfo.BallPassed += OnBallPassed;
             ai.BallInfo.TargetSet += OnTargetSet;
@@ -39,13 +44,18 @@ namespace KotB.StatePattern.AIStates
             if (Mathf.Sign(ai.BallInfo.Position.x) != ai.CourtSide && ai.BallInfo.HitsForTeam == 2 && !isBlocking) {
                 AnticipateSpike();
             }
+
+            if (!blockAttempted) CheckForBlock();
         }
 
-        public override void OnTriggerEnter(Collider other) {
-            if (ai.Ball != null) {
-                if (ai.SpikeBlockCollider.enabled & !blockAttempted) {
+        private void CheckForBlock() {
+            Collider[] collisions = Physics.OverlapBox(ai.transform.position + boxCenter, boxHalfSize);
+                
+            foreach (var col in collisions) {
+                if (col.TryGetComponent<Ball>(out Ball ball)) {
                     ai.BlockAttempt();
                     blockAttempted = true;
+                    break;
                 }
             }
         }
@@ -76,19 +86,5 @@ namespace KotB.StatePattern.AIStates
             spikeTime = ai.GetTimeToContactHeight(optimalSpikeHeight, ai.BallInfo.Height, ai.BallInfo.StartPos.y, ai.BallInfo.TargetPos.y, ai.BallInfo.Duration);
             Debug.Log($"{ai.Skills.AthleteName} is estimating spike time from {optimalSpikeHeight}, {ai.BallInfo.Height}, {ai.BallInfo.StartPos.y}, {ai.BallInfo.TargetPos.y}, {ai.BallInfo.Duration}");
         }
-
-// TEMPORARY
-private float DistanceToSphere(Vector3 point, Vector3 sphereCenter, float sphereRadius)
-{
-    // Calculate the distance between the point and sphere center
-    float distance = Vector3.Distance(point, sphereCenter);
-    
-    // If the point is inside the sphere, return 0 (or a negative value if you prefer)
-    if (distance <= sphereRadius)
-        return 0f; // Point is inside or on the sphere
-    
-    // Otherwise, return the distance to the sphere surface
-    return distance - sphereRadius;
-}
     }
 }
