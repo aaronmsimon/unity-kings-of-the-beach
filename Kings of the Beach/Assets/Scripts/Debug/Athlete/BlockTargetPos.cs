@@ -16,7 +16,8 @@ namespace KotB.Testing
 
         private void Block() {
             // Use the stored contact point for more accurate quality calculation
-            Vector3 contactDirection = lastBlockContactPoint.position - (transform.position + athlete.SpikeBlockCollider.center);
+            SphereCollider sphereCollider = (SphereCollider)athlete.SpikeTrigger.Collider;
+            Vector3 contactDirection = lastBlockContactPoint.position - (transform.position + sphereCollider.center);
             float contactQuality = Vector3.Dot(contactDirection.normalized, transform.right * -athlete.CourtSide);
             contactQuality = Mathf.Clamp01(contactQuality);
             
@@ -52,11 +53,12 @@ namespace KotB.Testing
         }
 
         private void OnDrawGizmos() {
+            SphereCollider sphereCollider = (SphereCollider)athlete.SpikeTrigger.Collider;
             Gizmos.color = Color.cyan;
-            Gizmos.DrawLine(lastBlockContactPoint.position, lastBlockContactPoint.position - (transform.position + athlete.SpikeBlockCollider.center));
+            Gizmos.DrawLine(lastBlockContactPoint.position, lastBlockContactPoint.position - (transform.position + sphereCollider.center));
 
             Gizmos.color = Color.magenta;
-            // Gizmos.DrawLine(lastBlockContactPoint.position, lastBlockContactPoint.position - (transform.position + athlete.SpikeBlockCollider.center));
+            // Gizmos.DrawLine(lastBlockContactPoint.position, lastBlockContactPoint.position - (transform.position + sphereCollider.center));
         }
     }
 }

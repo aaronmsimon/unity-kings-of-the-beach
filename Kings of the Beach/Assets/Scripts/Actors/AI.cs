@@ -136,25 +136,6 @@ namespace KotB.Actors
                 GizmoHelpers.DrawGizmoCircle(transform.position, skills.DigRange, Color.red, 12);
             }
         }
-// In OnDrawGizmos or better, in OnDrawGizmosSelected
-private void OnDrawGizmosSelected() {
-    if (SpikeBlockCollider != null) {
-        // Draw the actual collider position/size used by the physics system
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(
-            transform.TransformPoint(SpikeBlockCollider.center), 
-            SpikeBlockCollider.radius * transform.lossyScale.x);
-            
-        // Draw where your manual calculation thinks the collider is
-        Gizmos.color = Color.blue;
-        float locscale = transform.localScale.x;
-        Vector3 manualPos = transform.position + SpikeBlockCollider.center;
-        Gizmos.DrawWireSphere(manualPos + Vector3.up * manualPos.y * (locscale - 1), SpikeBlockCollider.radius * locscale);
-        
-        // Draw the spherecast origin and direction if applicable
-        // This would depend on your implementation
-    }
-}
 
         //---- PROPERTIES ----
         

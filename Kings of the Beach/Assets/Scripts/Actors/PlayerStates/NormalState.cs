@@ -40,7 +40,7 @@ namespace KotB.StatePattern.PlayerStates
 
         public override void OnTriggerEnter(Collider other) {
             if (player.Ball != null) {
-                if (player.SpikeBlockCollider.enabled & !blockAttempted) {
+                if (player.SpikeTrigger.Active & !blockAttempted) {
                     player.BlockAttempt();
                     blockAttempted = true;
                 }

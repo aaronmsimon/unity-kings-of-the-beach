@@ -6,6 +6,7 @@ public class CollisionTriggerReporter : MonoBehaviour
     public event Action Triggered;
 
     private Collider trigger;
+    private bool isActive;
 
     private void Awake() {
         trigger = GetComponent<Collider>();
@@ -14,6 +15,12 @@ public class CollisionTriggerReporter : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        Triggered?.Invoke();
+        if (isActive) Triggered?.Invoke();
     }
+
+    public bool Active {
+        get => isActive;
+        set => isActive = value;
+    }
+    public Collider Collider => trigger;
 }

@@ -49,16 +49,18 @@ namespace KotB.Actors
 
         // caching
         private float moveSpeed;
-        private CapsuleCollider capCollider;
-        private SphereCollider spikeBlockCollider;
+        private CollisionTriggerReporter bodyTrigger;
+        private CollisionTriggerReporter spikeTrigger;
+        private SphereCollider spikeCollider;
         protected Animator animator;
         private Transform leftHandEnd;
 
         protected virtual void Awake() {
             stateMachine = new StateMachine();
 
-            capCollider = GetComponent<CapsuleCollider>();
-            spikeBlockCollider = GetComponent<SphereCollider>();
+            bodyTrigger = GetComponent<CollisionTriggerReporter>();
+            spikeTrigger = GetComponent<CollisionTriggerReporter>();
+            spikeCollider = (SphereCollider)spikeTrigger.Collider;
             animator = GetComponentInChildren<Animator>();
 
             obstaclesLayer = LayerMask.GetMask("Obstacles");
@@ -73,7 +75,7 @@ namespace KotB.Actors
                 float percentScale = skills.Height / defaultHeight;
 
                 transform.localScale = new Vector3(percentScale, percentScale, percentScale);
-                reachHeight = (spikeBlockCollider.center.y + spikeBlockCollider.radius) * percentScale;
+                reachHeight = (spikeCollider.center.y + spikeCollider.radius) * percentScale;
             } else {
                 Debug.LogAssertion($"No skills found for { this.name }");
             }
@@ -89,9 +91,9 @@ namespace KotB.Actors
             }
 
 if (Skills.AthleteName == "Jorge Luis Alayo Moliner") {
-    if (SpikeBlockCollider.enabled != lastEnabledStatus) {
-        lastEnabledStatus = SpikeBlockCollider.enabled;
-        Debug.Log($"{Skills.AthleteName} changed collider enabled to {SpikeBlockCollider.enabled} at time {Time.time}");
+    if (spikeTrigger.Active != lastEnabledStatus) {
+        lastEnabledStatus = spikeTrigger.Active;
+        Debug.Log($"{Skills.AthleteName} changed collider enabled to {spikeTrigger.Active} at time {Time.time}");
     }
 }
         }
@@ -101,7 +103,7 @@ private bool lastEnabledStatus = false;
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 this.ball = ball;
                 // Store the exact contact point
-                lastBlockContactPoint = spikeBlockCollider.ClosestPoint(ball.transform.position);
+                lastBlockContactPoint = spikeTrigger.Collider.ClosestPoint(ball.transform.position);
             }
 
             stateMachine.OnTriggerEnter(other);
@@ -152,17 +154,17 @@ private bool lastEnabledStatus = false;
         }
 
         public void OnJumpEvent() {
-            spikeBlockCollider.enabled = true;
-            capCollider.enabled = false;
+            spikeTrigger.enabled = true;
+            bodyTrigger.enabled = false;
         }
 
         public void OnJumpPeakEvent() {
-            spikeBlockCollider.enabled = false;
+            spikeTrigger.enabled = false;
         }
 
         public void OnJumpCompletedEvent() {
             isJumping = false;
-            capCollider.enabled = true;
+            bodyTrigger.enabled = true;
         }
 
         public void PerformJump() {
@@ -217,7 +219,7 @@ private bool lastEnabledStatus = false;
             Debug.Log($"block attempt by {skills.AthleteName}: {randValue} vs {skills.Blocking} [{(randValue <= skills.Blocking ? "Blocked" : "Missed")}]");
             ballInfo.StatUpdate.Raise(this, StatTypes.BlockAttempt);
             // just in case - avoid double blocks
-            spikeBlockCollider.enabled = false;
+            spikeTrigger.enabled = false;
             if (randValue <= skills.Blocking) Block();
         }
 
@@ -227,7 +229,7 @@ private bool lastEnabledStatus = false;
 
         private void Block() {
             // Use the stored contact point for more accurate quality calculation
-            Vector3 contactDirection = lastBlockContactPoint - (transform.position + spikeBlockCollider.center);
+            Vector3 contactDirection = lastBlockContactPoint - (transform.position + spikeCollider.center);
             float contactQuality = Vector3.Dot(contactDirection.normalized, Vector3.right * -courtSide.Value);
             contactQuality = Mathf.Clamp01(contactQuality);
             float contactAngle = Vector3.Angle(contactDirection, Vector3.right * -courtSide.Value);
@@ -314,6 +316,6 @@ private bool lastEnabledStatus = false;
             }
         }
         public float NoMansLand { get { return noMansLand; } }
-        public SphereCollider SpikeBlockCollider { get { return spikeBlockCollider; } }
+        public CollisionTriggerReporter SpikeTrigger { get { return spikeTrigger; } }
     }
 }
