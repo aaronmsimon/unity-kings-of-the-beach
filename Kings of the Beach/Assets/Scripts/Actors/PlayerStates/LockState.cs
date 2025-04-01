@@ -1,5 +1,6 @@
 using UnityEngine;
 using KotB.Actors;
+using KotB.Items;
 
 namespace KotB.StatePattern.PlayerStates
 {
@@ -23,12 +24,14 @@ namespace KotB.StatePattern.PlayerStates
             animator = player.GetComponentInChildren<Animator>();
             stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
+            player.SpikeTrigger.Triggered += OnSpikeTriggered;
             player.InputReader.bumpEvent += OnPass;
             player.InputReader.bumpAcrossEvent += OnBumpAcross;
             player.BallInfo.TargetSet += OnTargetSet;
         }
 
         public override void Exit() {
+            player.SpikeTrigger.Triggered -= OnSpikeTriggered;
             player.InputReader.bumpEvent -= OnPass;
             player.InputReader.bumpAcrossEvent -= OnBumpAcross;
             player.BallInfo.TargetSet -= OnTargetSet;
@@ -39,8 +42,8 @@ namespace KotB.StatePattern.PlayerStates
             TryUnlock();
         }
 
-        public override void OnTriggerEnter(Collider other) {
-            if (player.Ball != null) {
+        public void OnSpikeTriggered(Collider other) {
+            if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 if (!player.IsJumping) {
                     if (bumpTimer > 0) {
                         player.Pass(targetPos, 7, 1.75f);

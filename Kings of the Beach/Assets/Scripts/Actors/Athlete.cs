@@ -58,15 +58,13 @@ namespace KotB.Actors
         protected virtual void Awake() {
             stateMachine = new StateMachine();
 
-            bodyTrigger = GetComponent<CollisionTriggerReporter>();
-            spikeTrigger = GetComponent<CollisionTriggerReporter>();
+            bodyTrigger = transform.Find("Body").GetComponent<CollisionTriggerReporter>();
+            spikeTrigger = transform.Find("Spike").GetComponent<CollisionTriggerReporter>();
             spikeCollider = (SphereCollider)spikeTrigger.Collider;
             animator = GetComponentInChildren<Animator>();
 
             obstaclesLayer = LayerMask.GetMask("Obstacles");
             invalidAimLayer = LayerMask.GetMask("InvalidAim");
-
-            // Debug.Log(Vector3.Angle(new Vector3(.41f, -.43f, 0.25f), new Vector3(1,0,0)));
         }
 
         protected virtual void Start() {
@@ -99,15 +97,15 @@ if (Skills.AthleteName == "Jorge Luis Alayo Moliner") {
         }
 private bool lastEnabledStatus = false;
 
-        protected virtual void OnTriggerEnter(Collider other) {
-            if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
-                this.ball = ball;
-                // Store the exact contact point
-                lastBlockContactPoint = spikeTrigger.Collider.ClosestPoint(ball.transform.position);
-            }
+        // protected virtual void OnTriggerEnter(Collider other) {
+        //     if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
+        //         this.ball = ball;
+        //         // Store the exact contact point
+        //         lastBlockContactPoint = spikeTrigger.Collider.ClosestPoint(ball.transform.position);
+        //     }
 
-            stateMachine.OnTriggerEnter(other);
-        }
+        //     stateMachine.OnTriggerEnter(other);
+        // }
 
         protected virtual void OnTriggerExit(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
@@ -154,17 +152,17 @@ private bool lastEnabledStatus = false;
         }
 
         public void OnJumpEvent() {
-            spikeTrigger.enabled = true;
-            bodyTrigger.enabled = false;
+            spikeTrigger.Active = true;
+            bodyTrigger.Active = false;
         }
 
         public void OnJumpPeakEvent() {
-            spikeTrigger.enabled = false;
+            spikeTrigger.Active = false;
         }
 
         public void OnJumpCompletedEvent() {
             isJumping = false;
-            bodyTrigger.enabled = true;
+            bodyTrigger.Active = true;
         }
 
         public void PerformJump() {
@@ -219,7 +217,7 @@ private bool lastEnabledStatus = false;
             Debug.Log($"block attempt by {skills.AthleteName}: {randValue} vs {skills.Blocking} [{(randValue <= skills.Blocking ? "Blocked" : "Missed")}]");
             ballInfo.StatUpdate.Raise(this, StatTypes.BlockAttempt);
             // just in case - avoid double blocks
-            spikeTrigger.enabled = false;
+            spikeTrigger.Active = false;
             if (randValue <= skills.Blocking) Block();
         }
 

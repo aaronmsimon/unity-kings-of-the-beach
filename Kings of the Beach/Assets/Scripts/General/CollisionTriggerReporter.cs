@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CollisionTriggerReporter : MonoBehaviour
 {
-    public event Action Triggered;
+    public event Action<Collider> Triggered;
 
     private Collider trigger;
     private bool isActive;
@@ -15,7 +15,7 @@ public class CollisionTriggerReporter : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (isActive) Triggered?.Invoke();
+        if (isActive) Triggered?.Invoke(other);
     }
 
     public bool Active {
