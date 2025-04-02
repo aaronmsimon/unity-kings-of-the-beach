@@ -13,11 +13,15 @@ namespace KotB.Testing
         [SerializeField][Range(1,10)] private float skillBlocking;
         
         private float skillLevelMax = 10;
+        private SphereCollider spikeCollider;
+
+        private void Awake() {
+            spikeCollider = athlete.transform.Find("Spike").GetComponent<SphereCollider>();
+        }
 
         private void Block() {
             // Use the stored contact point for more accurate quality calculation
-            SphereCollider sphereCollider = (SphereCollider)athlete.SpikeTrigger.Collider;
-            Vector3 contactDirection = lastBlockContactPoint.position - (transform.position + sphereCollider.center);
+            Vector3 contactDirection = lastBlockContactPoint.position - (transform.position + spikeCollider.center);
             float contactQuality = Vector3.Dot(contactDirection.normalized, transform.right * -athlete.CourtSide);
             contactQuality = Mathf.Clamp01(contactQuality);
             
@@ -53,9 +57,8 @@ namespace KotB.Testing
         }
 
         private void OnDrawGizmos() {
-            SphereCollider sphereCollider = (SphereCollider)athlete.SpikeTrigger.Collider;
             Gizmos.color = Color.cyan;
-            Gizmos.DrawLine(lastBlockContactPoint.position, lastBlockContactPoint.position - (transform.position + sphereCollider.center));
+            Gizmos.DrawLine(lastBlockContactPoint.position, lastBlockContactPoint.position - (transform.position + spikeCollider.center));
 
             Gizmos.color = Color.magenta;
             // Gizmos.DrawLine(lastBlockContactPoint.position, lastBlockContactPoint.position - (transform.position + sphereCollider.center));

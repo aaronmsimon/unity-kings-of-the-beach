@@ -24,6 +24,7 @@ namespace KotB.StatePattern.PlayerStates
             animator = player.GetComponentInChildren<Animator>();
             stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
+            player.BodyTrigger.Triggered += OnBodyTriggered;
             player.SpikeTrigger.Triggered += OnSpikeTriggered;
             player.InputReader.bumpEvent += OnPass;
             player.InputReader.bumpAcrossEvent += OnBumpAcross;
@@ -31,6 +32,7 @@ namespace KotB.StatePattern.PlayerStates
         }
 
         public override void Exit() {
+            player.BodyTrigger.Triggered -= OnBodyTriggered;
             player.SpikeTrigger.Triggered -= OnSpikeTriggered;
             player.InputReader.bumpEvent -= OnPass;
             player.InputReader.bumpAcrossEvent -= OnBumpAcross;
@@ -42,28 +44,30 @@ namespace KotB.StatePattern.PlayerStates
             TryUnlock();
         }
 
-        public void OnSpikeTriggered(Collider other) {
+        private void OnBodyTriggered(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
-                if (!player.IsJumping) {
-                    if (bumpTimer > 0) {
-                        player.Pass(targetPos, 7, 1.75f);
-                        unlockTimer = unlockDelay;
-                    }
-                } else {
-                    SetTargetPos(false);
-                    if (!player.Feint) {
-                        float timingVar = stateInfo.normalizedTime - 1;
-                        float window = player.BallInfo.SkillValues.SkillToValue(player.Skills.SpikeSkill, player.BallInfo.SkillValues.SpikeTimingWindow);
-                        float penalty = timingVar * window * spikeWindowPenalty;
-                        player.SpikeSpeedPenalty = timingVar * window;
-                        Vector3 newTargetPos = new Vector3(targetPos.x + penalty, targetPos.y, targetPos.z);
-                        Debug.Log($"timingVar: {timingVar} window: {window} penalty: {penalty} target: {targetPos} newtarget: {newTargetPos}");
-                        player.Spike(newTargetPos);
-                    } else {
-                        player.SpikeFeint(targetPos);
-                    }
-                    player.StateMachine.ChangeState(player.NormalState);
+                if (bumpTimer > 0) {
+                    player.Pass(targetPos, 7, 1.75f);
+                    unlockTimer = unlockDelay;
                 }
+            }
+        }
+
+        private void OnSpikeTriggered(Collider other) {
+            if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
+                SetTargetPos(false);
+                if (!player.Feint) {
+                    float timingVar = stateInfo.normalizedTime - 1;
+                    float window = player.BallInfo.SkillValues.SkillToValue(player.Skills.SpikeSkill, player.BallInfo.SkillValues.SpikeTimingWindow);
+                    float penalty = timingVar * window * spikeWindowPenalty;
+                    player.SpikeSpeedPenalty = timingVar * window;
+                    Vector3 newTargetPos = new Vector3(targetPos.x + penalty, targetPos.y, targetPos.z);
+                    Debug.Log($"timingVar: {timingVar} window: {window} penalty: {penalty} target: {targetPos} newtarget: {newTargetPos}");
+                    player.Spike(newTargetPos);
+                } else {
+                    player.SpikeFeint(targetPos);
+                }
+                player.StateMachine.ChangeState(player.NormalState);
             }
         }
 

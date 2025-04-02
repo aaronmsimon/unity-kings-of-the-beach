@@ -59,8 +59,9 @@ namespace KotB.Actors
             stateMachine = new StateMachine();
 
             bodyTrigger = transform.Find("Body").GetComponent<CollisionTriggerReporter>();
+            bodyTrigger.Active = true;
             spikeTrigger = transform.Find("Spike").GetComponent<CollisionTriggerReporter>();
-            spikeCollider = (SphereCollider)spikeTrigger.Collider;
+            spikeCollider = transform.Find("Spike").GetComponent<SphereCollider>();
             animator = GetComponentInChildren<Animator>();
 
             obstaclesLayer = LayerMask.GetMask("Obstacles");
@@ -314,6 +315,7 @@ private bool lastEnabledStatus = false;
             }
         }
         public float NoMansLand { get { return noMansLand; } }
-        public CollisionTriggerReporter SpikeTrigger { get { return spikeTrigger; } }
+        public CollisionTriggerReporter SpikeTrigger => spikeTrigger;
+        public CollisionTriggerReporter BodyTrigger => bodyTrigger;
     }
 }
