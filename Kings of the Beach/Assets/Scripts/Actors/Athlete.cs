@@ -52,6 +52,7 @@ namespace KotB.Actors
         private CollisionTriggerReporter bodyTrigger;
         private CollisionTriggerReporter spikeTrigger;
         private SphereCollider spikeCollider;
+        private CollisionTriggerReporter blockTrigger;
         protected Animator animator;
         private Transform leftHandEnd;
 
@@ -62,6 +63,8 @@ namespace KotB.Actors
             bodyTrigger.Active = true;
             spikeTrigger = transform.Find("Spike").GetComponent<CollisionTriggerReporter>();
             spikeCollider = transform.Find("Spike").GetComponent<SphereCollider>();
+            blockTrigger = transform.Find("Block").GetComponent<CollisionTriggerReporter>();
+
             animator = GetComponentInChildren<Animator>();
 
             obstaclesLayer = LayerMask.GetMask("Obstacles");
@@ -108,12 +111,6 @@ private bool lastEnabledStatus = false;
         //     stateMachine.OnTriggerEnter(other);
         // }
 
-        protected virtual void OnTriggerExit(Collider other) {
-            if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
-                this.ball = null;
-            }
-        }
-
         private void Move() {
             bool canMove = !Physics.Raycast(transform.position + Vector3.up * 0.5f, moveDir, out RaycastHit hit, 0.5f, obstaclesLayer);
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, moveDir, Color.red);
@@ -154,11 +151,13 @@ private bool lastEnabledStatus = false;
 
         public void OnJumpEvent() {
             spikeTrigger.Active = true;
+            blockTrigger.Active = true;
             bodyTrigger.Active = false;
         }
 
         public void OnJumpPeakEvent() {
             spikeTrigger.Active = false;
+            blockTrigger.Active = false;
         }
 
         public void OnJumpCompletedEvent() {
@@ -218,7 +217,7 @@ private bool lastEnabledStatus = false;
             Debug.Log($"block attempt by {skills.AthleteName}: {randValue} vs {skills.Blocking} [{(randValue <= skills.Blocking ? "Blocked" : "Missed")}]");
             ballInfo.StatUpdate.Raise(this, StatTypes.BlockAttempt);
             // just in case - avoid double blocks
-            spikeTrigger.Active = false;
+            blockTrigger.Active = false;
             if (randValue <= skills.Blocking) Block();
         }
 
@@ -235,6 +234,7 @@ private bool lastEnabledStatus = false;
             
             // Determine if it's a strong block (spike) or a soft block (pass)
             bool strongBlock = contactAngle <= 45;
+            Debug.Log($"{contactAngle} <= 45? -> {(strongBlock ? "Strong" : "Weak")} Block");
             float powerReduction = 0.5f;
             float maxBlockHeight = 5;
 
@@ -249,7 +249,7 @@ private bool lastEnabledStatus = false;
                 ballInfo.SetSpikeTarget(targetPos, blockDuration, this, StatTypes.Block);
             } else {
                 // Weak blocks are like passes - slower and higher
-                float blockHeight = Mathf.Lerp(ball.transform.position.y, maxBlockHeight, contactQuality);
+                float blockHeight = Mathf.Lerp(ballInfo.Position.y, maxBlockHeight, contactQuality);
                 blockDuration = Mathf.Lerp(1.5f, 2.5f, contactQuality);
                 ballInfo.SetSpikeTarget(targetPos + Vector3.right * powerReduction * -courtSide.Value, blockDuration, this, StatTypes.Block, blockHeight);
             }
@@ -317,5 +317,6 @@ private bool lastEnabledStatus = false;
         public float NoMansLand { get { return noMansLand; } }
         public CollisionTriggerReporter SpikeTrigger => spikeTrigger;
         public CollisionTriggerReporter BodyTrigger => bodyTrigger;
+        public CollisionTriggerReporter BlockTrigger => blockTrigger;
     }
 }

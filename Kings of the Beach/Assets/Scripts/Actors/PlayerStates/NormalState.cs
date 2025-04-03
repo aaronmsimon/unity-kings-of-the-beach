@@ -9,21 +9,21 @@ namespace KotB.StatePattern.PlayerStates
     {
         public NormalState(Player player) : base(player) { }
 
-        // private bool blockAttempted;
+        private bool blockAttempted;
 
         public override void Enter() {
             player.ServeCameraPriority.Value = 0;
             player.MainCameraPriority.Value = 10;
             player.UpdateCameraPriorty.Raise();
 
-            // blockAttempted = false;
+            blockAttempted = false;
 
-            // player.SpikeTrigger.Triggered += OnBlockTriggered;
+            player.BlockTrigger.Triggered += OnBlockTriggered;
             player.MatchInfo.TransitionToServeState += OnMatchChangeToServeState;
         }
 
         public override void Exit() {
-            // player.SpikeTrigger.Triggered -= OnBlockTriggered;
+            player.BlockTrigger.Triggered -= OnBlockTriggered;
             player.MatchInfo.TransitionToServeState -= OnMatchChangeToServeState;
         }
 
@@ -41,14 +41,14 @@ namespace KotB.StatePattern.PlayerStates
             }            
         }
 
-        // private void OnBlockTriggered(Collider other) {
-        //     if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
-        //         if (player.SpikeTrigger.Active & !blockAttempted) {
-        //             player.BlockAttempt();
-        //             blockAttempted = true;
-        //         }
-        //     }
-        // }
+        private void OnBlockTriggered(Collider other) {
+            if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
+                if (!blockAttempted) {
+                    player.BlockAttempt();
+                    blockAttempted = true;
+                }
+            }
+        }
 
         private void OnMatchChangeToServeState() {
             if (player.MatchInfo.GetServer() == player) {
