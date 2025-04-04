@@ -150,8 +150,11 @@ private bool lastEnabledStatus = false;
         }
 
         public void OnJumpEvent() {
-            spikeTrigger.Active = true;
-            blockTrigger.Active = true;
+            if (Mathf.Sign(ballInfo.Position.x) == courtSide.Value) {
+                spikeTrigger.Active = true;
+            } else {
+                blockTrigger.Active = true;
+            }
             bodyTrigger.Active = false;
         }
 
