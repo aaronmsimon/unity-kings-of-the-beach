@@ -213,7 +213,7 @@ private bool lastEnabledStatus = false;
             Pass(targetPos, feintHeight, feintTime);
         }
 
-        public void BlockAttempt() {
+        public void BlockAttempt(Vector3 contactPoint) {
             // get a random value on the skill level scale
             float randValue = UnityEngine.Random.value * skillLevelMax;
             // skill check
@@ -221,6 +221,7 @@ private bool lastEnabledStatus = false;
             ballInfo.StatUpdate.Raise(this, StatTypes.BlockAttempt);
             // just in case - avoid double blocks
             blockTrigger.Active = false;
+            lastBlockContactPoint = contactPoint;
             if (randValue <= skills.Blocking) Block();
         }
 
@@ -233,7 +234,7 @@ private bool lastEnabledStatus = false;
             Vector3 contactDirection = lastBlockContactPoint - (transform.position + spikeCollider.center);
             float contactQuality = Vector3.Dot(contactDirection.normalized, Vector3.right * -courtSide.Value);
             contactQuality = Mathf.Clamp01(contactQuality);
-            float contactAngle = Vector3.Angle(contactDirection, Vector3.right * -courtSide.Value);
+            float contactAngle = Vector2.Angle(new Vector2(contactDirection.x, contactDirection.z), Vector3.right * -courtSide.Value);
             
             // Determine if it's a strong block (spike) or a soft block (pass)
             bool strongBlock = contactAngle <= 45;
