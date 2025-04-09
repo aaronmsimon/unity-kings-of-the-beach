@@ -129,3 +129,6 @@ I started, finally, because I wanted to keep tabs on the bugs as I attempt to fi
 ### Considerations if Bugs
 - In case there are issues with passing/spiking ball, consider the LockedOn feature
 - In case there are issues with match management, consider the MatchManager StateMachine now initilized in Start
+
+Replay System Notes
+- Can i save every frame since not a long time. frame rate could be as low as physics (60)
