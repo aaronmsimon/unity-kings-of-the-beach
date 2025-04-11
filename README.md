@@ -134,3 +134,8 @@ Replay System Notes
 - Can i save every frame since not a long time. frame rate could be as low as physics (60)
 - Automatic replays will happen when good plays happen (ideas below), and can be ran from pause menu
 - Ability to save replays
+
+Automatic Replay Reasons
+- Game winning point
+- Long rally (4+ hits)
+- Power spike or block
