@@ -22,4 +22,5 @@ public class CollisionTriggerReporter : MonoBehaviour
         get => isActive;
         set => isActive = value;
     }
+    public Collider TriggerCollider => triggerCollider;
 }
