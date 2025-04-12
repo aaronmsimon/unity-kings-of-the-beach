@@ -28,7 +28,6 @@ namespace KotB.Actors
         protected bool isJumping;
         protected bool feint;
         protected float receiveServeXPos = 5.5f;
-        private Vector3 lastBlockContactPoint;
 
         private LayerMask obstaclesLayer;
         private LayerMask invalidAimLayer;
@@ -221,30 +220,31 @@ private bool lastEnabledStatus = false;
             ballInfo.StatUpdate.Raise(this, StatTypes.BlockAttempt);
             // just in case - avoid double blocks
             blockTrigger.Active = false;
-            lastBlockContactPoint = contactPoint;
-            if (randValue <= skills.Blocking) Block();
+            if (randValue <= skills.Blocking) Block(contactPoint);
         }
 
         public void ServeOverhandAnimation() {
             animator.Play("ServeOverhand");
         }
 
-        private void Block() {
+        private void Block(Vector3 contactPoint) {
             // Use the stored contact point for more accurate quality calculation
-            Vector3 contactDirection = lastBlockContactPoint - (transform.position + spikeCollider.center);
+            Vector3 contactDirection = contactPoint - (transform.position + spikeCollider.center);
             float contactQuality = Vector3.Dot(contactDirection.normalized, Vector3.right * -courtSide.Value);
             contactQuality = Mathf.Clamp01(contactQuality);
             float contactAngle = Vector2.Angle(new Vector2(contactDirection.x, contactDirection.z), Vector3.right * -courtSide.Value);
             
             // Determine if it's a strong block (spike) or a soft block (pass)
             bool strongBlock = contactAngle <= 45;
-            Debug.Log($"{contactAngle} <= 45? -> {(strongBlock ? "Strong" : "Weak")} Block");
+            Debug.Log($"{contactAngle} <= 45? -> {(strongBlock ? "Strong" : "Weak")} Block at y = {contactPoint.y}");
             float powerReduction = 0.5f;
             float maxBlockHeight = 5;
 
             float targetDistance = Mathf.Lerp(2f, 4f, contactQuality) * (strongBlock ? 1 : (1 - powerReduction));
             // TargetPos is more consistent with Kings of the Beach (Athlete's z-pos), but might want to actually use angles if wanting to add more realism
             Vector3 targetPos = new Vector3(targetDistance * -courtSide.Value, 0.01f, transform.position.z);
+            Debug.Log($"Target Distance: Lerp(2,4,{contactQuality})={targetDistance}");
+            Debug.DrawLine(contactPoint, targetPos, Color.red, 10f, false);
             float blockDuration;
             
             if (strongBlock) {
