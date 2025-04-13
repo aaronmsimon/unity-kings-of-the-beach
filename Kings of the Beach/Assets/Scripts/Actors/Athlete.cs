@@ -232,7 +232,9 @@ private bool lastEnabledStatus = false;
             Vector3 contactDirection = contactPoint - (transform.position + spikeCollider.center);
             float contactQuality = Vector3.Dot(contactDirection.normalized, Vector3.right * -courtSide.Value);
             contactQuality = Mathf.Clamp01(contactQuality);
-            float contactAngle = Vector2.Angle(new Vector2(contactDirection.x, contactDirection.z), Vector3.right * -courtSide.Value);
+            float contactAngle = Vector3.Angle(new Vector3(contactDirection.x, 0, contactDirection.z).normalized, Vector3.right * -courtSide.Value);
+            Debug.DrawLine(contactPoint, contactPoint + new Vector3(contactDirection.x, 0, contactDirection.z).normalized, Color.white, 10f, false);
+            Debug.DrawLine(contactPoint, contactPoint + Vector3.right * -courtSide.Value, Color.white, 10f, false);
             
             // Determine if it's a strong block (spike) or a soft block (pass)
             bool strongBlock = contactAngle <= 45;
