@@ -40,15 +40,21 @@ namespace KotB.Menus
         }
 
         private void OnSelectionUp() {
-            currentButton.ButtonDeselected();
-            currentButton = currentButton?.NavigateUp();
-            currentButton.ButtonSelected();
+            MenuButton menuButton = currentButton?.NavigateUp();
+            if (menuButton != null) {
+                currentButton.ButtonDeselected();
+                currentButton = menuButton;
+                currentButton.ButtonSelected();
+            }
         }
 
         private void OnSelectionDown() {
-            currentButton.ButtonDeselected();
-            currentButton = currentButton?.NavigateDown();
-            currentButton.ButtonSelected();
+            MenuButton menuButton = currentButton?.NavigateDown();
+            if (menuButton != null) {
+                currentButton.ButtonDeselected();
+                currentButton = menuButton;
+                currentButton.ButtonSelected();
+            }
         }
 
         private void OnSelectionLeft() {
@@ -61,9 +67,12 @@ namespace KotB.Menus
         }
 
         private void OnSelectionRight() {
-            currentButton.ButtonDeselected();
-            currentButton = currentButton?.NavigateRight();
-            currentButton.ButtonSelected();
+            MenuButton menuButton = currentButton?.NavigateRight();
+            if (menuButton != null) {
+                currentButton.ButtonDeselected();
+                currentButton = menuButton;
+                currentButton.ButtonSelected();
+            }
         }
 
         public virtual void OnStart() { }
