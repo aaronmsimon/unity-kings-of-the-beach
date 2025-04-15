@@ -52,9 +52,12 @@ namespace KotB.Menus
         }
 
         private void OnSelectionLeft() {
-            currentButton.ButtonDeselected();
-            currentButton = currentButton?.NavigateLeft();
-            currentButton.ButtonSelected();
+            MenuButton menuButton = currentButton?.NavigateLeft();
+            if (menuButton != null) {
+                currentButton.ButtonDeselected();
+                currentButton = menuButton;
+                currentButton.ButtonSelected();
+            }
         }
 
         private void OnSelectionRight() {

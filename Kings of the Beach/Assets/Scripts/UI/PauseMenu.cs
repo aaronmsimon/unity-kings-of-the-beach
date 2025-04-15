@@ -49,7 +49,7 @@ namespace KotB.Menus
             quitMenuButton.ButtonPressed += OnQuitButtonPressed;
         }
 
-        protected override  void OnDisable() {
+        protected override void OnDisable() {
             base.OnDisable();
 
             resumeMenuButton.ButtonPressed -= OnResumeButtonPressed;
