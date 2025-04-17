@@ -539,11 +539,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6829632742945956471, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       propertyPath: targetZoneSize.x
-      value: 1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -6829632742945956471, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       propertyPath: targetZoneSize.y
-      value: 1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 5717242374435514889, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       propertyPath: m_Name
