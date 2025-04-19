@@ -229,7 +229,7 @@ private bool lastEnabledStatus = false;
 
         private void Block(Vector3 contactPoint) {
             // Use the stored contact point for more accurate quality calculation
-            Vector3 contactDirection = contactPoint - (transform.position + spikeCollider.center);
+            Vector3 contactDirection = contactPoint - (transform.position + blockTrigger.TriggerCollider.bounds.center);
             float contactQuality = Vector3.Dot(contactDirection.normalized, Vector3.right * -courtSide.Value);
             contactQuality = Mathf.Clamp01(contactQuality);
             float contactAngle = Vector3.Angle(new Vector3(contactDirection.x, 0, contactDirection.z).normalized, Vector3.right * -courtSide.Value);
