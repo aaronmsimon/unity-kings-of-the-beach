@@ -74,8 +74,8 @@ namespace KotB.Actors
                 float percentScale = skills.Height / defaultHeight;
 
                 transform.localScale = new Vector3(percentScale, percentScale, percentScale);
-                reachHeight = (spikeTrigger.TriggerCollider.bounds.center.y + spikeTrigger.TriggerCollider.bounds.size.y / 2) * percentScale;
-                Debug.Log($"Scale: {percentScale} | Reach Height was {transform.Find("Spike-sphere").GetComponent<SphereCollider>().center.y}+{transform.Find("Spike-sphere").GetComponent<SphereCollider>().radius}={(transform.Find("Spike-sphere").GetComponent<SphereCollider>().center.y+transform.Find("Spike-sphere").GetComponent<SphereCollider>().radius)*percentScale} and now is {spikeTrigger.TriggerCollider.bounds.center.y}+{spikeTrigger.TriggerCollider.bounds.size.y}/2={reachHeight}");
+                BoxCollider spikeCollider = (BoxCollider)spikeTrigger.TriggerCollider;
+                reachHeight = (spikeCollider.center.y + spikeCollider.size.y / 2) * percentScale;
             } else {
                 Debug.LogAssertion($"No skills found for { this.name }");
             }

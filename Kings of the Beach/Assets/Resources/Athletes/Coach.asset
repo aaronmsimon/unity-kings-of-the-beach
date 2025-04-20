@@ -12,17 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37262e169b0a64548b7fbd6f67883702, type: 3}
   m_Name: Coach
   m_EditorClassIdentifier: 
+  athleteName: 
+  gender: 0
+  defaultOutfit: 0
+  defaultTop: {fileID: 0}
+  defaultBottom: {fileID: 0}
   moveSpeed: 10
   targetLockDistance: 1
   reactionTime: 0
   passAccuracy: 10
   inBoundsJudgement: 10
+  spikeSkill: 1
+  spikePower: 1
   digRange: 5
   serving: 10
   servePower: 10
   blocking: 1
+  blockPower: 1
   height: 1.8
-  servingPartnerPos: {x: 5, y: 1.5}
   defensePos: {x: 5, y: 2}
   offenseXPos: 1.25
   playerPosition: 0

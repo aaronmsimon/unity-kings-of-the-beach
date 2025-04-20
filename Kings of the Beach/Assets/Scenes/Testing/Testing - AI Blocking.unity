@@ -196,8 +196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d720cb75ba32c804fa9dc24027f714df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &266277631
-SphereCollider:
+--- !u!65 &266277631
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -215,8 +215,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.75
-  m_Center: {x: 0, y: 3.1, z: 0}
+  m_Size: {x: 1.5, y: 0.5, z: 1.5}
+  m_Center: {x: 0, y: 3.6, z: 0}
 --- !u!1 &321293237
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,6 +661,22 @@ PrefabInstance:
       propertyPath: courtSide
       value: 
       objectReference: {fileID: 11400000, guid: 718029772aacc8042a5d065803efe304, type: 2}
+    - target: {fileID: 4883147622998346402, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: m_Name
+      value: Spike
+      objectReference: {fileID: 0}
+    - target: {fileID: 4883147622998346402, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153443671954502703, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: m_Name
+      value: Spike-sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153443671954502703, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1049,7 +1065,8 @@ PrefabInstance:
       propertyPath: courtSide
       value: 
       objectReference: {fileID: 11400000, guid: 49066017a306d4c48954e99750cc8cf0, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6784167377463967678, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
