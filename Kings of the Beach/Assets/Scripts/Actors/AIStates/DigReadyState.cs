@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using KotB.Actors;
+using KotB.Items;
 
 namespace KotB.StatePattern.AIStates
 {
@@ -20,10 +21,12 @@ namespace KotB.StatePattern.AIStates
             spikeTime = ai.GetTimeToContactHeight(ai.ReachHeight, ai.BallInfo.Height, ai.BallInfo.StartPos.y, ai.BallInfo.TargetPos.y, ai.BallInfo.Duration);
             isSpiking = false;
 
+            ai.BodyTrigger.Triggered += OnBodyTriggered;
             ai.BallInfo.TargetSet += OnTargetSet;
         }
 
         public override void Exit() {
+            ai.BodyTrigger.Triggered -= OnBodyTriggered;
             ai.BallInfo.TargetSet -= OnTargetSet;
         }
 
@@ -42,8 +45,8 @@ namespace KotB.StatePattern.AIStates
             }
         }
 
-        public override void OnTriggerEnter(Collider other) {
-            if (ai.Ball != null) {
+        public void OnBodyTriggered(Collider other) {
+            if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 switch (ai.BallInfo.HitsForTeam) {
                     case 0:
                         ai.Pass(CalculatePassTarget(), 7, 1.75f);
