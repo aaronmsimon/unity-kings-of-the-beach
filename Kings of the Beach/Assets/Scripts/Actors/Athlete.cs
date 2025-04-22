@@ -184,7 +184,6 @@ private bool lastEnabledStatus = false;
         }
 
         public void Spike(Vector3 targetPos) {
-            Debug.Log($"Ball spiked at time {Time.time}");
             // Raycast to target
             Vector3 startPos = ballInfo.Position;
             Vector3 distance = targetPos - startPos;

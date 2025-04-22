@@ -22,11 +22,13 @@ namespace KotB.StatePattern.AIStates
             isSpiking = false;
 
             ai.BodyTrigger.Triggered += OnBodyTriggered;
+            ai.SpikeTrigger.Triggered += OnSpikeTriggered;
             ai.BallInfo.TargetSet += OnTargetSet;
         }
 
         public override void Exit() {
             ai.BodyTrigger.Triggered -= OnBodyTriggered;
+            ai.SpikeTrigger.Triggered -= OnSpikeTriggered;
             ai.BallInfo.TargetSet -= OnTargetSet;
         }
 
@@ -74,6 +76,24 @@ namespace KotB.StatePattern.AIStates
                         break;
                 }
             }
+        }
+
+        private void OnSpikeTriggered(Collider other) {
+            if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
+                if (ai.BallInfo.HitsForTeam == 2) {
+                    ConsiderSpikeFeint();
+                    Vector3 spikeTarget = CalculateSpikeTarget();
+                    // string message = $"{ai.Skills.AthleteName} {(Mathf.Abs(ai.transform.position.x) <= 2 ? "selected the largest zone." : "is too far from the net, so aimed for the furthest zone.")}";
+                    if (!ai.Feint) {
+                        ai.Spike(spikeTarget);
+                        // Debug.Log(message);
+                    } else {
+                        ai.SpikeFeint(spikeTarget);
+                        // Debug.Log(message += " Decided to do a feint.");
+                    }
+                    ai.StateMachine.ChangeState(ai.DefenseState);
+                }
+            }            
         }
 
         private Vector3 CalculatePassTarget() {
