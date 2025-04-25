@@ -34,7 +34,6 @@ namespace KotB.Testing
         }
 
         private void OnBlock(Collider other) {
-            Debug.Log("test");
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 if (!blockAttempted) {
                     Vector3 contactPoint = collisionTrigger.TriggerCollider.ClosestPoint(ball.transform.position);
@@ -49,10 +48,21 @@ namespace KotB.Testing
             Vector3 contactDirection = contactPoint - (transform.position + colliderCenter);
             float contactQuality = Vector3.Dot(contactDirection.normalized, Vector3.right * -courtSide.Value);
             contactQuality = Mathf.Clamp01(contactQuality);
-            float contactAngle = Vector3.Angle(new Vector3(contactDirection.x, 0, contactDirection.z).normalized, Vector3.right * -courtSide.Value);
-            Debug.DrawLine(contactPoint, contactPoint + new Vector3(contactDirection.x, 0, contactDirection.z).normalized, Color.white, 10f, false);
-            Debug.DrawLine(contactPoint, contactPoint + Vector3.right * -courtSide.Value, Color.white, 10f, false);
+
+            Vector3 spikeDir = contactPoint - ballInfo.StartPos;
+            Vector3 spikeDirXZ = new Vector3(spikeDir.x, 0, spikeDir.z).normalized;
+            Vector3 blockNormal = Vector3.right * -courtSide.Value;
+            Vector3 reflectDir = Vector3.Reflect(spikeDirXZ, blockNormal);
+            Vector3 bounceDir = new Vector3(reflectDir.x, 0, reflectDir.z).normalized;
+            float contactAngle = Vector3.Angle(spikeDirXZ, -blockNormal);
+            Debug.DrawLine(new Vector3(ballInfo.StartPos.x, contactPoint.y, ballInfo.StartPos.z), contactPoint, Color.yellow, 10f, false);
+            Debug.DrawLine(contactPoint, contactPoint + bounceDir * 3, Color.green, 10f, false);
+            Debug.DrawLine(contactPoint, contactPoint + blockNormal  * 3, Color.red, 10f, false);
             
+            float incomingAngle = Vector3.Angle(blockNormal, spikeDirXZ);
+            float outgoingAngle = Vector3.Angle(blockNormal, bounceDir);
+            Debug.Log($"incoming angle: {incomingAngle}, outgoing angle: {outgoingAngle}");
+
             // Determine if it's a strong block (spike) or a soft block (pass)
             bool strongBlock = contactAngle <= 45;
             Debug.Log($"{contactAngle} <= 45? -> {(strongBlock ? "Strong" : "Weak")} Block at y = {contactPoint.y}");
@@ -63,7 +73,7 @@ namespace KotB.Testing
             // TargetPos is more consistent with Kings of the Beach (Athlete's z-pos), but might want to actually use angles if wanting to add more realism
             Vector3 targetPos = new Vector3(targetDistance * -courtSide.Value, 0.01f, transform.position.z);
             Debug.Log($"Target Distance: Lerp(2,4,{contactQuality})={targetDistance}");
-            Debug.DrawLine(contactPoint, targetPos, Color.red, 10f, false);
+            // Debug.DrawLine(contactPoint, targetPos, Color.red, 10f, false);
             float blockDuration;
             
             if (strongBlock) {
