@@ -51,7 +51,7 @@ namespace KotB.Testing
 
             Vector3 spikeDir = contactPoint - ballInfo.StartPos;
             Vector3 spikeDirXZ = new Vector3(spikeDir.x, 0, spikeDir.z).normalized;
-            Vector3 blockNormal = Vector3.right * -courtSide.Value;
+            Vector3 blockNormal = transform.forward;
             Vector3 reflectDir = Vector3.Reflect(spikeDirXZ, blockNormal);
             Vector3 bounceDir = new Vector3(reflectDir.x, 0, reflectDir.z).normalized;
             float contactAngle = Vector3.Angle(spikeDirXZ, -blockNormal);
@@ -64,8 +64,8 @@ namespace KotB.Testing
             Debug.Log($"incoming angle: {incomingAngle}, outgoing angle: {outgoingAngle}");
 
             // Determine if it's a strong block (spike) or a soft block (pass)
-            bool strongBlock = contactAngle <= 45;
-            Debug.Log($"{contactAngle} <= 45? -> {(strongBlock ? "Strong" : "Weak")} Block at y = {contactPoint.y}");
+            bool strongBlock = contactAngle <= 15;
+            Debug.Log($"{contactAngle} <= 15? -> {(strongBlock ? "Strong" : "Weak")} Block at y = {contactPoint.y}");
             float powerReduction = 0.5f;
             float maxBlockHeight = 5;
 
