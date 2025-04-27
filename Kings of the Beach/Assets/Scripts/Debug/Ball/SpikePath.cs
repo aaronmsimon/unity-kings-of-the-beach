@@ -11,6 +11,7 @@ namespace KotB.Testing
         [SerializeField] private InputReader inputReader;
         [SerializeField] private float spikeTime = 1.5f;
         [SerializeField] private GameEvent ResetBallEvent;
+        [SerializeField] private bool showPath = true;
 
         private Ball ball;
 
@@ -47,8 +48,10 @@ namespace KotB.Testing
         }
 
         private void OnDrawGizmos() {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(startPos.position, target.position);
+            if (showPath) {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(startPos.position, target.position);
+            }
         }
     }
 }
