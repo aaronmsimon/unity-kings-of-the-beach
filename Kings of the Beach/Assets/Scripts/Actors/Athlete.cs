@@ -53,6 +53,7 @@ namespace KotB.Actors
         private CollisionTriggerReporter blockTrigger;
         protected Animator animator;
         private Transform leftHandEnd;
+        private Vector3 blockColliderCenter;
 
         protected virtual void Awake() {
             stateMachine = new StateMachine();
@@ -76,6 +77,8 @@ namespace KotB.Actors
                 transform.localScale = new Vector3(percentScale, percentScale, percentScale);
                 BoxCollider spikeCollider = (BoxCollider)spikeTrigger.TriggerCollider;
                 reachHeight = (spikeCollider.center.y + spikeCollider.size.y / 2) * percentScale;
+                BoxCollider blockCollider = (BoxCollider)blockTrigger.TriggerCollider;
+                blockColliderCenter = blockCollider.center * percentScale;
             } else {
                 Debug.LogAssertion($"No skills found for { this.name }");
             }
@@ -227,16 +230,25 @@ private bool lastEnabledStatus = false;
 
         private void Block(Vector3 contactPoint) {
             // Use the stored contact point for more accurate quality calculation
-            Vector3 contactDirection = contactPoint - (transform.position + blockTrigger.TriggerCollider.bounds.center);
+            Vector3 contactDirection = contactPoint - (transform.position + blockColliderCenter);
             float contactQuality = Vector3.Dot(contactDirection.normalized, Vector3.right * -courtSide.Value);
             contactQuality = Mathf.Clamp01(contactQuality);
-            float contactAngle = Vector3.Angle(new Vector3(contactDirection.x, 0, contactDirection.z).normalized, Vector3.right * -courtSide.Value);
+
+            Vector3 spikeDir = contactPoint - ballInfo.StartPos;
+            Vector3 spikeDirXZ = new Vector3(spikeDir.x, 0, spikeDir.z).normalized;
+            Vector3 blockNormal = transform.forward;
+            Vector3 reflectDir = Vector3.Reflect(spikeDirXZ, blockNormal);
+            Vector3 bounceDir = new Vector3(reflectDir.x, 0, reflectDir.z).normalized;
+            float contactAngle = Vector3.Angle(spikeDirXZ, -blockNormal);
             Debug.DrawLine(contactPoint, contactPoint + new Vector3(contactDirection.x, 0, contactDirection.z).normalized, Color.white, 10f, false);
             Debug.DrawLine(contactPoint, contactPoint + Vector3.right * -courtSide.Value, Color.white, 10f, false);
             
+            float incomingAngle = Vector3.Angle(blockNormal, spikeDirXZ);
+            float outgoingAngle = Vector3.Angle(blockNormal, bounceDir);
+            
             // Determine if it's a strong block (spike) or a soft block (pass)
-            bool strongBlock = contactAngle <= 45;
-            Debug.Log($"{contactAngle} <= 45? -> {(strongBlock ? "Strong" : "Weak")} Block at y = {contactPoint.y}");
+            bool strongBlock = contactAngle <= 15;
+            Debug.Log($"{contactAngle} <= 15? -> {(strongBlock ? "Strong" : "Weak")} Block at y = {contactPoint.y}");
             float powerReduction = 0.5f;
             float maxBlockHeight = 5;
 
@@ -244,18 +256,18 @@ private bool lastEnabledStatus = false;
             // TargetPos is more consistent with Kings of the Beach (Athlete's z-pos), but might want to actually use angles if wanting to add more realism
             Vector3 targetPos = new Vector3(targetDistance * -courtSide.Value, 0.01f, transform.position.z);
             Debug.Log($"Target Distance: Lerp(2,4,{contactQuality})={targetDistance}");
-            Debug.DrawLine(contactPoint, targetPos, Color.red, 10f, false);
+            Debug.DrawLine(contactPoint, GetBlockTargetPos(contactPoint, bounceDir, targetDistance), Color.green, 10f, false);
             float blockDuration;
             
             if (strongBlock) {
                 // Strong blocks are like spikes - faster and more direct
                 blockDuration = Mathf.Lerp(ballInfo.SkillValues.BlockPower.min, ballInfo.SkillValues.BlockPower.max, skills.BlockPower);
-                ballInfo.SetSpikeTarget(targetPos, blockDuration, this, StatTypes.Block);
+                ballInfo.SetSpikeTarget(GetBlockTargetPos(contactPoint, bounceDir, targetDistance), blockDuration, this, StatTypes.Block);
             } else {
                 // Weak blocks are like passes - slower and higher
                 float blockHeight = Mathf.Lerp(ballInfo.Position.y, maxBlockHeight, contactQuality);
                 blockDuration = Mathf.Lerp(1.5f, 2.5f, contactQuality);
-                ballInfo.SetSpikeTarget(targetPos + Vector3.right * powerReduction * -courtSide.Value, blockDuration, this, StatTypes.Block, blockHeight);
+                ballInfo.SetSpikeTarget(GetBlockTargetPos(contactPoint, bounceDir, targetDistance * powerReduction), blockDuration, this, StatTypes.Block, blockHeight);
             }
             
             // Reset hits for this team
@@ -268,6 +280,11 @@ private bool lastEnabledStatus = false;
             //         $"Target={targetPos} (Distance={targetDistance}, Duration={blockDuration} " +
             //         $"{(!strongBlock ? "Height=" + Mathf.Lerp(ball.transform.position.y, maxBlockHeight, contactQuality) : "")})"
             // );
+        }
+
+        private Vector3 GetBlockTargetPos(Vector3 contactPoint, Vector3 bounceDir, float blockDistance) {
+            Vector3 targetPosXZ = contactPoint + bounceDir * blockDistance;
+            return new Vector3(targetPosXZ.x, 0.01f, targetPosXZ.z);            
         }
 
         public void SetSkills(SkillsSO skills) {
