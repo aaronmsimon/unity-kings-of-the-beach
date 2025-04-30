@@ -240,11 +240,6 @@ private bool lastEnabledStatus = false;
             Vector3 reflectDir = Vector3.Reflect(spikeDirXZ, blockNormal);
             Vector3 bounceDir = new Vector3(reflectDir.x, 0, reflectDir.z).normalized;
             float contactAngle = Vector3.Angle(spikeDirXZ, -blockNormal);
-            Debug.DrawLine(contactPoint, contactPoint + new Vector3(contactDirection.x, 0, contactDirection.z).normalized, Color.white, 10f, false);
-            Debug.DrawLine(contactPoint, contactPoint + Vector3.right * -courtSide.Value, Color.white, 10f, false);
-            
-            float incomingAngle = Vector3.Angle(blockNormal, spikeDirXZ);
-            float outgoingAngle = Vector3.Angle(blockNormal, bounceDir);
             
             // Determine if it's a strong block (spike) or a soft block (pass)
             bool strongBlock = contactAngle <= 15;
@@ -253,12 +248,12 @@ private bool lastEnabledStatus = false;
             float maxBlockHeight = 5;
 
             float targetDistance = Mathf.Lerp(2f, 4f, contactQuality) * (strongBlock ? 1 : (1 - powerReduction));
-            // TargetPos is more consistent with Kings of the Beach (Athlete's z-pos), but might want to actually use angles if wanting to add more realism
-            Vector3 targetPos = new Vector3(targetDistance * -courtSide.Value, 0.01f, transform.position.z);
             Debug.Log($"Target Distance: Lerp(2,4,{contactQuality})={targetDistance}");
+            Debug.DrawLine(new Vector3(ballInfo.StartPos.x, contactPoint.y, ballInfo.StartPos.z), contactPoint, Color.yellow, 10f, false);
+            Debug.DrawLine(contactPoint, contactPoint + blockNormal  * 3, Color.red, 10f, false);
             Debug.DrawLine(contactPoint, GetBlockTargetPos(contactPoint, bounceDir, targetDistance), Color.green, 10f, false);
-            float blockDuration;
             
+            float blockDuration;
             if (strongBlock) {
                 // Strong blocks are like spikes - faster and more direct
                 blockDuration = Mathf.Lerp(ballInfo.SkillValues.BlockPower.min, ballInfo.SkillValues.BlockPower.max, skills.BlockPower);
