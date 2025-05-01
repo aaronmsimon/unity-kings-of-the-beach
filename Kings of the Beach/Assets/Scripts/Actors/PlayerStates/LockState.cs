@@ -67,6 +67,7 @@ namespace KotB.StatePattern.PlayerStates
                 } else {
                     player.SpikeFeint(targetPos);
                 }
+                player.SpikeTrigger.Active = false;
                 player.StateMachine.ChangeState(player.NormalState);
             }
         }

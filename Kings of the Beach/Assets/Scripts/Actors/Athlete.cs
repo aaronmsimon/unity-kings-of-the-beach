@@ -162,6 +162,7 @@ private bool lastEnabledStatus = false;
         public void OnJumpPeakEvent() {
             spikeTrigger.Active = false;
             blockTrigger.Active = false;
+if (Skills.AthleteName == "Jorge Luis Alayo Moliner") Debug.Log($"{Skills.AthleteName} disabled collider {blockTrigger.Active} at time {Time.time}");
         }
 
         public void OnJumpCompletedEvent() {

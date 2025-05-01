@@ -58,7 +58,7 @@ namespace KotB.StatePattern.AIStates
             float jumpDuration = ai.JumpFrames / ai.AnimationFrameRate;
             // Debug.Log($"{ai.BallInfo.TimeSinceLastHit} >= {spikeTime} - {jumpDuration} - {reactionTime} && {spikeTime} >= 0");
             if (ai.BallInfo.TimeSinceLastHit >= spikeTime - jumpDuration - reactionTime && spikeTime >= 0) {
-                Debug.Log($"{ai.Skills.AthleteName} jumping to try to block now: {ai.BallInfo.TimeSinceLastHit} >= {spikeTime} - {jumpDuration} - {reactionTime}");
+                Debug.Log($"{ai.Skills.AthleteName} jumping to try to block now: {ai.BallInfo.TimeSinceLastHit} >= {spikeTime} - {jumpDuration} - {reactionTime} time={Time.time}");
                 ai.PerformJump();
                 isBlocking = true;
             }
