@@ -9,14 +9,10 @@ namespace KotB.StatePattern.PlayerStates
     {
         public NormalState(Player player) : base(player) { }
 
-        private bool blockAttempted;
-
         public override void Enter() {
             player.ServeCameraPriority.Value = 0;
             player.MainCameraPriority.Value = 10;
             player.UpdateCameraPriorty.Raise();
-
-            blockAttempted = false;
 
             player.BlockTrigger.Triggered += OnBlockTriggered;
             player.MatchInfo.TransitionToServeState += OnMatchChangeToServeState;
@@ -43,11 +39,8 @@ namespace KotB.StatePattern.PlayerStates
 
         private void OnBlockTriggered(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
-                if (!blockAttempted) {
                     Vector3 contactPoint = player.BlockTrigger.TriggerCollider.ClosestPoint(ball.transform.position);
                     player.BlockAttempt(contactPoint);
-                    blockAttempted = true;
-                }
             }
         }
 

@@ -162,7 +162,6 @@ private bool lastEnabledStatus = false;
         public void OnJumpPeakEvent() {
             spikeTrigger.Active = false;
             blockTrigger.Active = false;
-if (Skills.AthleteName == "Jorge Luis Alayo Moliner") Debug.Log($"{Skills.AthleteName} disabled collider {blockTrigger.Active} at time {Time.time}");
         }
 
         public void OnJumpCompletedEvent() {
@@ -220,8 +219,6 @@ if (Skills.AthleteName == "Jorge Luis Alayo Moliner") Debug.Log($"{Skills.Athlet
             // skill check
             Debug.Log($"block attempt by {skills.AthleteName}: {randValue} vs {skills.Blocking} [{(randValue <= skills.Blocking ? "Blocked" : "Missed")}]");
             ballInfo.StatUpdate.Raise(this, StatTypes.BlockAttempt);
-            // just in case - avoid double blocks
-            blockTrigger.Active = false;
             if (randValue <= skills.Blocking) Block(contactPoint);
         }
 

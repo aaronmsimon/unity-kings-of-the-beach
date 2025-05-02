@@ -12,7 +12,6 @@ namespace KotB.StatePattern.AIStates
         private float reactionTime;
         private float spikeTime;
         private bool isBlocking;
-        private bool blockAttempted;
 
         private float blockPos = 1;
 
@@ -22,7 +21,6 @@ namespace KotB.StatePattern.AIStates
             ai.FaceOpponent();
             
             isBlocking = false;
-            blockAttempted = false;
 
             ai.BallInfo.BallPassed += OnBallPassed;
             ai.BallInfo.TargetSet += OnTargetSet;
@@ -58,7 +56,7 @@ namespace KotB.StatePattern.AIStates
             float jumpDuration = ai.JumpFrames / ai.AnimationFrameRate;
             // Debug.Log($"{ai.BallInfo.TimeSinceLastHit} >= {spikeTime} - {jumpDuration} - {reactionTime} && {spikeTime} >= 0");
             if (ai.BallInfo.TimeSinceLastHit >= spikeTime - jumpDuration - reactionTime && spikeTime >= 0) {
-                Debug.Log($"{ai.Skills.AthleteName} jumping to try to block now: {ai.BallInfo.TimeSinceLastHit} >= {spikeTime} - {jumpDuration} - {reactionTime} time={Time.time}");
+                Debug.Log($"{ai.Skills.AthleteName} jumping to try to block now: {ai.BallInfo.TimeSinceLastHit} >= {spikeTime} - {jumpDuration} - {reactionTime}");
                 ai.PerformJump();
                 isBlocking = true;
             }
@@ -72,11 +70,8 @@ namespace KotB.StatePattern.AIStates
 
         private void OnBlockTriggered(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
-                if (!blockAttempted) {
-                    Vector3 contactPoint = ai.BlockTrigger.TriggerCollider.ClosestPoint(ball.transform.position);
-                    ai.BlockAttempt(contactPoint);
-                    blockAttempted = true;
-                }
+                Vector3 contactPoint = ai.BlockTrigger.TriggerCollider.ClosestPoint(ball.transform.position);
+                ai.BlockAttempt(contactPoint);
             }
         }
     }
