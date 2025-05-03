@@ -69,10 +69,7 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void OnBlockTriggered(Collider other) {
-            if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
-                Vector3 contactPoint = ai.BlockTrigger.TriggerCollider.ClosestPoint(ball.transform.position);
-                ai.BlockAttempt(contactPoint);
-            }
+            ai.BlockAttempt(other);
         }
     }
 }

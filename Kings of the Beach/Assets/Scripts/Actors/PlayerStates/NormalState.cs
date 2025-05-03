@@ -38,10 +38,7 @@ namespace KotB.StatePattern.PlayerStates
         }
 
         private void OnBlockTriggered(Collider other) {
-            if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
-                    Vector3 contactPoint = player.BlockTrigger.TriggerCollider.ClosestPoint(ball.transform.position);
-                    player.BlockAttempt(contactPoint);
-            }
+            player.BlockAttempt(other);
         }
 
         private void OnMatchChangeToServeState() {

@@ -213,13 +213,16 @@ private bool lastEnabledStatus = false;
             Pass(targetPos, feintHeight, feintTime);
         }
 
-        public void BlockAttempt(Vector3 contactPoint) {
-            // get a random value on the skill level scale
-            float randValue = UnityEngine.Random.value * skillLevelMax;
-            // skill check
-            Debug.Log($"block attempt by {skills.AthleteName}: {randValue} vs {skills.Blocking} [{(randValue <= skills.Blocking ? "Blocked" : "Missed")}]");
-            ballInfo.StatUpdate.Raise(this, StatTypes.BlockAttempt);
-            if (randValue <= skills.Blocking) Block(contactPoint);
+        public void BlockAttempt(Collider blockedObject) {
+            if (blockedObject.gameObject.TryGetComponent<Ball>(out Ball ball)) {
+                Vector3 contactPoint = blockTrigger.TriggerCollider.ClosestPoint(ball.transform.position);
+                // get a random value on the skill level scale
+                float randValue = UnityEngine.Random.value * skillLevelMax;
+                // skill check
+                Debug.Log($"block attempt by {skills.AthleteName}: {randValue} vs {skills.Blocking} [{(randValue <= skills.Blocking ? "Blocked" : "Missed")}]");
+                ballInfo.StatUpdate.Raise(this, StatTypes.BlockAttempt);
+                if (randValue <= skills.Blocking) Block(contactPoint);
+            }
         }
 
         public void ServeOverhandAnimation() {
