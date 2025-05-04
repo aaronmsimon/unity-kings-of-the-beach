@@ -102,16 +102,6 @@ if (Skills.AthleteName == "Jorge Luis Alayo Moliner") {
         }
 private bool lastEnabledStatus = false;
 
-        // protected virtual void OnTriggerEnter(Collider other) {
-        //     if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
-        //         this.ball = ball;
-        //         // Store the exact contact point
-        //         lastBlockContactPoint = spikeTrigger.Collider.ClosestPoint(ball.transform.position);
-        //     }
-
-        //     stateMachine.OnTriggerEnter(other);
-        // }
-
         private void Move() {
             bool canMove = !Physics.Raycast(transform.position + Vector3.up * 0.5f, moveDir, out RaycastHit hit, 0.5f, obstaclesLayer);
             Debug.DrawRay(transform.position + Vector3.up * 0.5f, moveDir, Color.red);
