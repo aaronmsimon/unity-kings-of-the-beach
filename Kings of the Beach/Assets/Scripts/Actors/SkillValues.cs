@@ -32,6 +32,7 @@ namespace KotB.Actors
             return AdjustPassVector(originalLoc, athlete, passAccuracy);
         }
 
+        ///<summary>Scales a skill using the default skill range to the given value range.</summary>
         public float SkillToValue(float skill, MinMax valueRange) {
             return (skill - skillRange.min) * (valueRange.max - valueRange.min) / (skillRange.max - skillRange.min) + valueRange.min;
         }
