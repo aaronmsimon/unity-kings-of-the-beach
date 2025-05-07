@@ -177,26 +177,31 @@ private bool lastEnabledStatus = false;
         }
 
         public void Spike(Vector3 targetPos) {
+            SetSpikeTargetByType(targetPos, skills.SpikeSkill, skills.SpikePower, ballInfo.SkillValues.SpikePower, StatTypes.Attack);
+            ballInfo.StatUpdate.Raise(this, StatTypes.Attack);
+        }
+
+        private void SetSpikeTargetByType(Vector3 targetPos, float athleteSkill, float athleteSkillPower, MinMax skillPowerRange, StatTypes statType) {
             // Raycast to target
             Vector3 startPos = ballInfo.Position;
             Vector3 distance = targetPos - startPos;
             bool directLine = !Physics.Raycast(startPos, distance.normalized, distance.magnitude, invalidAimLayer);
-            float spikeTime = ballInfo.SkillValues.SkillToValue(skills.SpikePower, ballInfo.SkillValues.SpikePower) * (1 - Mathf.Abs(spikeSpeedPenalty));
-            // Debug.Log($"spikeTime (skill): {ballInfo.SkillValues.SkillToValue(skills.SpikePower, ballInfo.SkillValues.SpikePower)} * (1 - Mathf.Abs({spikeSpeedPenalty})) = {spikeTime}");
-            bool skillCheck = UnityEngine.Random.value <= ballInfo.SkillValues.SkillToValue(skills.SpikeSkill, ballInfo.SkillValues.SpikeOverNet);
+
+            float spikeTime = ballInfo.SkillValues.SkillToValue(athleteSkillPower, skillPowerRange) * (1 - Mathf.Abs(spikeSpeedPenalty));
+            bool skillCheck = UnityEngine.Random.value <= ballInfo.SkillValues.SkillToValue(athleteSkill, ballInfo.SkillValues.SpikeOverNet);
             if (directLine || (!directLine && !skillCheck)) {
-                // If clear, spike
-                ballInfo.SetSpikeTarget(targetPos, spikeTime, this, StatTypes.Attack);
+                // If clear, set direct target
+                ballInfo.SetSpikeTarget(targetPos, spikeTime, this, statType);
             } else {
                 // If not, use pass with adjusted height, pending a skill check
                 float netCrossingT = Mathf.Abs(startPos.x) / Mathf.Abs(targetPos.x - startPos.x);
                 float heightAtNet = ballInfo.CalculateInFlightPosition(netCrossingT, startPos, targetPos, startPos.y).y;
-                float requiredHeight = 2.5f;
+                float requiredHeight = 2.5f; // this should be based on net height
                 float adjustedHeight = startPos.y + requiredHeight - heightAtNet;
-                ballInfo.SetSpikeTarget(targetPos, spikeTime, this, StatTypes.Attack, adjustedHeight);
+                ballInfo.SetSpikeTarget(targetPos, spikeTime, this, statType, adjustedHeight);
             }
-            // Debug.Log($"{skills.AthleteName} has {(directLine ? "a clear line to a clean spike." : "no direct path (pos: " + startPos + " target: " + targetPos + "), using an arc shot.")}");
-            ballInfo.StatUpdate.Raise(this, StatTypes.Attack);
+            Debug.Log($"{skills.AthleteName} has {(directLine ? "a clear line." : "no direct path (pos: " + startPos + " target: " + targetPos + "), using an arc.")}");
+            ballInfo.StatUpdate.Raise(this, statType);
         }
 
         public void SpikeFeint(Vector3 targetPos) {
@@ -247,8 +252,8 @@ private bool lastEnabledStatus = false;
             float blockDuration;
             if (strongBlock) {
                 // Strong blocks are like spikes - faster and more direct
-                blockDuration = Mathf.Lerp(ballInfo.SkillValues.BlockPower.min, ballInfo.SkillValues.BlockPower.max, skills.BlockPower);
-                ballInfo.SetSpikeTarget(GetBlockTargetPos(contactPoint, bounceDir, targetDistance), blockDuration, this, StatTypes.Block);
+                // blockDuration = Mathf.Lerp(ballInfo.SkillValues.BlockPower.min, ballInfo.SkillValues.BlockPower.max, skills.BlockPower);
+                SetSpikeTargetByType(GetBlockTargetPos(contactPoint, bounceDir, targetDistance), skills.Blocking, skills.BlockPower, ballInfo.SkillValues.BlockPower, StatTypes.Block);
             } else {
                 // Weak blocks are like passes - slower and higher
                 float blockHeight = Mathf.Lerp(ballInfo.Position.y, maxBlockHeight, contactQuality);
