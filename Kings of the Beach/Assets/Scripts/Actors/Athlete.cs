@@ -60,6 +60,7 @@ namespace KotB.Actors
 
             bodyTrigger = transform.Find("Body").GetComponent<CollisionTriggerReporter>();
             bodyTrigger.Active = true;
+            bodyTrigger.DeactivateAfterTrigger = false;
             spikeTrigger = transform.Find("Spike").GetComponent<CollisionTriggerReporter>();
             blockTrigger = transform.Find("Block").GetComponent<CollisionTriggerReporter>();
 

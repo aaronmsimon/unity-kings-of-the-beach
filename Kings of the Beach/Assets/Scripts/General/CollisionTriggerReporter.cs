@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CollisionTriggerReporter : MonoBehaviour
 {
+    [SerializeField] private bool deactivateAfterTrigger = true;
+
     public event Action<Collider> Triggered;
 
     private Collider triggerCollider;
@@ -17,13 +19,19 @@ public class CollisionTriggerReporter : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (isActive) {
             Triggered?.Invoke(other);
-            isActive = false;
+            if (deactivateAfterTrigger) {
+                isActive = false;
+            }
         }
     }
 
     public bool Active {
         get => isActive;
         set => isActive = value;
+    }
+    public bool DeactivateAfterTrigger {
+        get => deactivateAfterTrigger;
+        set => deactivateAfterTrigger = value;
     }
     public Collider TriggerCollider => triggerCollider;
 }
