@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d720cb75ba32c804fa9dc24027f714df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deactivateAfterTrigger: 1
 --- !u!65 &266277631
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -531,7 +532,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 718029772aacc8042a5d065803efe304, type: 2}
     - target: {fileID: -6829632742945956471, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       propertyPath: targetZonePos.x
-      value: -1
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: -6829632742945956471, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       propertyPath: targetZonePos.y
@@ -812,6 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d720cb75ba32c804fa9dc24027f714df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deactivateAfterTrigger: 1
 --- !u!136 &1710621124
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1119,6 +1121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d720cb75ba32c804fa9dc24027f714df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deactivateAfterTrigger: 1
 --- !u!65 &1817829349
 BoxCollider:
   m_ObjectHideFlags: 0
