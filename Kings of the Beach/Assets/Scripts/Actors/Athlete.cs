@@ -179,7 +179,6 @@ private bool lastEnabledStatus = false;
 
         public void Spike(Vector3 targetPos) {
             SetSpikeTargetByType(targetPos, skills.SpikeSkill, skills.SpikePower, ballInfo.SkillValues.SpikePower, StatTypes.Attack);
-            ballInfo.StatUpdate.Raise(this, StatTypes.Attack);
         }
 
         private void SetSpikeTargetByType(Vector3 targetPos, float athleteSkill, float athleteSkillPower, MinMax skillPowerRange, StatTypes statType) {
@@ -201,7 +200,7 @@ private bool lastEnabledStatus = false;
                 float adjustedHeight = startPos.y + requiredHeight - heightAtNet;
                 ballInfo.SetSpikeTarget(targetPos, spikeTime, this, statType, adjustedHeight);
             }
-            Debug.Log($"{skills.AthleteName} has {(directLine ? "a clear line." : "no direct path (pos: " + startPos + " target: " + targetPos + "), using an arc.")}");
+            // Debug.Log($"{skills.AthleteName} has {(directLine ? "a clear line." : "no direct path (pos: " + startPos + " target: " + targetPos + "), using an arc.")}");
             ballInfo.StatUpdate.Raise(this, statType);
         }
 
@@ -264,7 +263,6 @@ private bool lastEnabledStatus = false;
             
             // Reset hits for this team
             ballInfo.HitsForTeam = 0;
-            ballInfo.StatUpdate.Raise(this, StatTypes.Block);
             
             // Log for debugging
             // Debug.Log($"Block by {skills.AthleteName}: Contact Point={lastBlockContactPoint}, AthletePos={transform.position}, ColliderPos={spikeBlockCollider.center}, " +
