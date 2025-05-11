@@ -1,6 +1,5 @@
 using UnityEngine;
 using KotB.Actors;
-using KotB.Items;
 
 namespace KotB.StatePattern.AIStates
 {
@@ -12,6 +11,7 @@ namespace KotB.StatePattern.AIStates
         private float reactionTime;
         private float spikeTime;
         private bool isBlocking;
+        private Vector3 spikePosEstimate;
 
         private float blockPos = 1;
 
@@ -54,9 +54,11 @@ namespace KotB.StatePattern.AIStates
 
         private void AnticipateSpike() {
             float jumpDuration = ai.JumpFrames / ai.AnimationFrameRate;
-            // Debug.Log($"{ai.BallInfo.TimeSinceLastHit} >= {spikeTime} - {jumpDuration} - {reactionTime} && {spikeTime} >= 0");
-            if (ai.BallInfo.TimeSinceLastHit >= spikeTime - jumpDuration - reactionTime && spikeTime >= 0) {
-                Debug.Log($"{ai.Skills.AthleteName} jumping to try to block now: {ai.BallInfo.TimeSinceLastHit} >= {spikeTime} - {jumpDuration} - {reactionTime}");
+            float guessedSpeed = 15;
+            float spikeToBlockDist = Vector3.Distance(spikePosEstimate, ai.transform.position);
+            float estimatedTimeToBlock = spikeToBlockDist / guessedSpeed;
+                Debug.Log($"{ai.Skills.AthleteName} jumping to try to block now: {ai.BallInfo.TimeSinceLastHit} >= {spikeTime} + {estimatedTimeToBlock} - {jumpDuration} - {reactionTime}");
+            if (ai.BallInfo.TimeSinceLastHit >= spikeTime + estimatedTimeToBlock - jumpDuration - reactionTime && spikeTime >= 0) {
                 ai.PerformJump();
                 isBlocking = true;
             }
@@ -66,6 +68,7 @@ namespace KotB.StatePattern.AIStates
             float optimalSpikeHeight = 4;
             spikeTime = ai.GetTimeToContactHeight(optimalSpikeHeight, ai.BallInfo.Height, ai.BallInfo.StartPos.y, ai.BallInfo.TargetPos.y, ai.BallInfo.Duration);
             Debug.Log($"{ai.Skills.AthleteName} is estimating spike time from {optimalSpikeHeight}, {ai.BallInfo.Height}, {ai.BallInfo.StartPos.y}, {ai.BallInfo.TargetPos.y}, {ai.BallInfo.Duration}");
+            spikePosEstimate = ai.BallInfo.TargetPos;
         }
 
         private void OnBlockTriggered(Collider other) {
