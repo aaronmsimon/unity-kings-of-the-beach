@@ -196,7 +196,7 @@ private bool lastEnabledStatus = false;
                 // If not, use pass with adjusted height, pending a skill check
                 float netCrossingT = Mathf.Abs(startPos.x) / Mathf.Abs(targetPos.x - startPos.x);
                 float heightAtNet = ballInfo.CalculateInFlightPosition(netCrossingT, startPos, targetPos, startPos.y).y;
-                float requiredHeight = 2.5f; // this should be based on net height
+                float requiredHeight = Mathf.Lerp(2.5f, 2.75f, Mathf.InverseLerp(1, 8, Mathf.Abs(transform.position.x))); // this should be based on net height
                 float adjustedHeight = startPos.y + requiredHeight - heightAtNet;
                 ballInfo.SetSpikeTarget(targetPos, spikeTime, this, statType, adjustedHeight);
             }

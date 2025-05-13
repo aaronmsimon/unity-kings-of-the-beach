@@ -57,7 +57,7 @@ namespace KotB.StatePattern.AIStates
             float guessedSpeed = 15;
             float spikeToBlockDist = Vector3.Distance(spikePosEstimate, ai.transform.position);
             float estimatedTimeToBlock = spikeToBlockDist / guessedSpeed;
-            Debug.Log($"{ai.Skills.AthleteName} jumping to try to block now: {ai.BallInfo.TimeSinceLastHit} >= {spikeTime} + {estimatedTimeToBlock} - {jumpDuration} - {reactionTime}");
+            // Debug.Log($"{ai.Skills.AthleteName} jumping to try to block now: {ai.BallInfo.TimeSinceLastHit} >= {spikeTime} + {estimatedTimeToBlock} - {jumpDuration} - {reactionTime}");
             if (ai.BallInfo.TimeSinceLastHit >= spikeTime + estimatedTimeToBlock - jumpDuration - reactionTime && spikeTime >= 0) {
                 ai.PerformJump();
                 isBlocking = true;
