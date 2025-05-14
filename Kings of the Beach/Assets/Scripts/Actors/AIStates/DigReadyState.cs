@@ -37,7 +37,9 @@ namespace KotB.StatePattern.AIStates
 
             if (reactionTime < 0) {
                 if ((ai.transform.position - ai.BallInfo.TargetPos).sqrMagnitude > ai.Skills.TargetLockDistance * ai.Skills.TargetLockDistance && !ai.BallInfo.LockedOn) {
-                    ai.TargetPos = ai.BallInfo.TargetPos;
+                    Vector2 lockTowardsTarget = ai.LockTowardsTarget();
+                    Vector3 lockPos = new Vector3(lockTowardsTarget.x, 0.01f, lockTowardsTarget.y);
+                    ai.TargetPos = lockPos;
                 } else {
                     ai.BallInfo.LockedOn = true;
                     if (ai.BallInfo.HitsForTeam == 2 && !isSpiking) {

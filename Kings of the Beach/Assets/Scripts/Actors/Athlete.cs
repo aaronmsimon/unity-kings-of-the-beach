@@ -224,6 +224,31 @@ private bool lastEnabledStatus = false;
             animator.Play("ServeOverhand");
         }
 
+        public Vector2 LockTowardsTarget() {
+            // Calculate the distance from start to target
+            Vector2 startPos = new Vector2(ballInfo.StartPos.x, ballInfo.StartPos.z);
+            Vector2 targetPos = new Vector2(ballInfo.TargetPos.x, ballInfo.TargetPos.z);
+            float ballTravelDistance = Vector2.Distance(startPos, targetPos);
+            
+            // Define your distance range and adjustment range
+            float minDistance = 0;   // Short passes (adjust based on your game scale)
+            float maxDistance = 10;  // Long passes (adjust based on your game scale)
+            
+            float minAdjustment = 0; // Minimum player position adjustment
+            float maxAdjustment = 0.5f; // Maximum player position adjustment
+            
+            // Calculate the adjustment using Lerp (clamped to the defined ranges)
+            float t = Mathf.InverseLerp(minDistance, maxDistance, ballTravelDistance);
+            float adjustmentDistance = Mathf.Lerp(minAdjustment, maxAdjustment, t);
+            Debug.Log($"{minDistance} to {maxDistance} of {ballTravelDistance} is {Mathf.InverseLerp(minDistance, maxDistance, ballTravelDistance)} with adjustment of {adjustmentDistance}");
+            
+            // Get direction from ball start to target
+            Vector2 ballPath = (targetPos - startPos).normalized;
+            
+            // Move player toward ball origin based on calculated adjustment
+            return targetPos - ballPath * adjustmentDistance;
+        }
+
         private void Block(Vector3 contactPoint) {
             // Use the stored contact point for more accurate quality calculation
             Vector3 contactDirection = contactPoint - (transform.position + blockColliderCenter);

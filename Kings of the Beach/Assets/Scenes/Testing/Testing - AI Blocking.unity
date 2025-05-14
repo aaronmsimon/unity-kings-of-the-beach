@@ -365,6 +365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 349691252}
   - component: {fileID: 349691251}
+  - component: {fileID: 349691253}
   m_Layer: 0
   m_Name: Debug
   m_TagString: Untagged
@@ -405,6 +406,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &349691253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349691250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d864f8ab1b745845ba853703811accc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballInfo: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
 --- !u!1 &481153329
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +538,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: aeafa150cef3e0547a00b597cbdb0353, type: 2}
     - target: {fileID: -6829632742945956471, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       propertyPath: coachType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6829632742945956471, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       propertyPath: courtSide
