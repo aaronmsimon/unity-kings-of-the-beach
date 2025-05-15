@@ -199,6 +199,7 @@ private bool lastEnabledStatus = false;
                 float requiredHeight = Mathf.Lerp(2.5f, 2.75f, Mathf.InverseLerp(1, 8, Mathf.Abs(transform.position.x))); // this should be based on net height
                 float adjustedHeight = startPos.y + requiredHeight - heightAtNet;
                 ballInfo.SetSpikeTarget(targetPos, spikeTime, this, statType, adjustedHeight);
+                Debug.Log($"No direct line and skill check passed. Adjusted height to {adjustedHeight}");
             }
             // Debug.Log($"{skills.AthleteName} has {(directLine ? "a clear line." : "no direct path (pos: " + startPos + " target: " + targetPos + "), using an arc.")}");
             ballInfo.StatUpdate.Raise(this, statType);
@@ -272,6 +273,7 @@ private bool lastEnabledStatus = false;
             Debug.Log($"Target Distance: Lerp(2,4,{contactQuality})={targetDistance}");
             Debug.DrawLine(new Vector3(ballInfo.StartPos.x, contactPoint.y, ballInfo.StartPos.z), contactPoint, Color.yellow, 10f, false);
             Debug.DrawLine(contactPoint, contactPoint + blockNormal  * 3, Color.red, 10f, false);
+            Debug.Log($"Contact point height: {contactPoint.y:F2}");
             Debug.DrawLine(contactPoint, GetBlockTargetPos(contactPoint, bounceDir, targetDistance), Color.green, 10f, false);
             
             float blockDuration;
