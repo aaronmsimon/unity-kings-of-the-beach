@@ -40,8 +40,8 @@ namespace KotB.StatePattern.AIStates
                     Vector2 lockTowardsTarget = ai.LockTowardsTarget();
                     Vector3 lockPos = new Vector3(lockTowardsTarget.x, 0.01f, lockTowardsTarget.y);
                     ai.TargetPos = lockPos;
-                } else {
                     ai.BallInfo.LockedOn = true;
+                } else {
                     if (ai.BallInfo.HitsForTeam == 2 && !isSpiking) {
                         TrySpike();
                     }
