@@ -7,7 +7,7 @@ using KotB.Items;
 
 namespace KotB.Actors
 {
-    public class Coach : Athlete
+    public class Coach_Original : Athlete
     {
         private enum CoachType { Bump, Pass }
 
