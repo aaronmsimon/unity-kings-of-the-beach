@@ -12,7 +12,7 @@ namespace KotB.Testing
 
         [Header("Athletes")]
         [SerializeField] private List<Athlete> athletes = new List<Athlete>();
-        [SerializeField] private Coach coach;
+        [SerializeField] private Coach_Original coach;
 
         [Header("Scriptable Objects")]
         [SerializeField] private BallSO ballInfo;

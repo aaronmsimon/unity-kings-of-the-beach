@@ -5,7 +5,7 @@ namespace KotB.Testing
 {
     public class AthleteReset : MonoBehaviour
     {
-        [SerializeField] private Coach coach;
+        [SerializeField] private Coach_Original coach;
 
         private Athlete athlete;
         private Vector3 startPos;

@@ -20,7 +20,7 @@ namespace KotB.Actors
         [SerializeField] private GameEvent resetBallEvent;
         [SerializeField][Range(0,2)] private int resetHitCounterAmount;
 
-        public event Action BallTaken;
+        // public event Action BallTaken;
 
         private MatchManager matchManager;
 
