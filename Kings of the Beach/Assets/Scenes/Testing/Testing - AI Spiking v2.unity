@@ -389,6 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coach: {fileID: 1494799647}
+  inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
 --- !u!1 &481153329
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,7 +808,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224069032}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f6e98ac5c50b56498310917da6727a5, type: 3}
   m_Name: 
@@ -1068,10 +1069,12 @@ MonoBehaviour:
   matchInfo: {fileID: 11400000, guid: 23b44ef1d3bbbbe42a97b3fd37ef9578, type: 2}
   athleteStats: {fileID: 0}
   courtSide: {fileID: 11400000, guid: 49066017a306d4c48954e99750cc8cf0, type: 2}
-  targetZonePos: {x: 0, y: 0}
-  targetZoneSize: {x: 0, y: 0}
-  showTargetZone: 0
+  targetZonePos: {x: 1, y: 0}
+  targetZoneSize: {x: 0.25, y: 0.25}
+  showTargetZone: 1
   targetZoneColor: {r: 1, g: 0, b: 0, a: 1}
+  aim: 0
+  passTeammate: {fileID: 0}
 --- !u!1 &1710621121
 GameObject:
   m_ObjectHideFlags: 0

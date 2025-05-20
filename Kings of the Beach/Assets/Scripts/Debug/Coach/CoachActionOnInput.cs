@@ -7,10 +7,19 @@ namespace KotB.Testing
     {
         [SerializeField] private Coach coach;
 
-        private void Update() {
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                coach.CoachAction();
-            }
+        [Header("User Input")]
+        [SerializeField] private InputReader inputReader;
+
+        private void OnEnable() {
+            inputReader.testEvent += OnTestEvent;
+        }
+
+        private void OnDisable() {
+            inputReader.testEvent -= OnTestEvent;
+        }
+
+        private void OnTestEvent() {
+            coach.CoachAction();
         }
     }
 }
