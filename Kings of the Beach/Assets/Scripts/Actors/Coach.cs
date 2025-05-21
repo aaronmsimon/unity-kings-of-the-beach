@@ -16,7 +16,21 @@ namespace KotB.Actors
             Reset();
         }
 
+        public void OnBallHitGround() {
+            Reset();
+        }
+
         protected virtual void Reset() {
+            TakeBall();
+        }
+
+        protected void TakeBall() {
+            ballInfo.GiveBall(this);
+            Debug.Log("Ball taken by coach");
+            // FaceOpponent();
+            // BallInfo.HitsForTeam = resetHitCounterAmount;
+            // animator.Play("HoldBall");
+            // resetBallEvent.Raise();
         }
 
         public abstract void CoachAction();
