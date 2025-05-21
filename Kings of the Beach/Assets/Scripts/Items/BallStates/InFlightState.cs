@@ -42,8 +42,8 @@ namespace KotB.StatePattern.BallStates
                 }
             } else {
                 ball.BallHitGround.Raise();
-                ball.StateMachine.ChangeState(ball.GroundState);
                 ball.DestroyBallTarget();
+                ball.StateMachine.ChangeState(ball.GroundState);
             }
         }
 
