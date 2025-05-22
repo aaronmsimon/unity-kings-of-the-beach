@@ -38,20 +38,19 @@ namespace KotB.Items
             groundState = new GroundState(this);
             heldState = new HeldState(this);
             inFlightState = new InFlightState(this);
+
+            ballStateMachine.ChangeState(groundState);
         }
 
         private void Start() {
             ballInfo.BallRadius = GetComponent<SphereCollider>().radius;
-            ballStateMachine.ChangeState(groundState);
         }
 
         private void OnEnable() {
-            ballStateMachine.StateChanged += OnStateChanged;
             ballInfo.TargetSet += OnTargetSet;
         }
 
         private void OnDisable() {
-            ballStateMachine.StateChanged -= OnStateChanged;
             ballInfo.TargetSet -= OnTargetSet;
         }
 
@@ -69,10 +68,6 @@ namespace KotB.Items
             ballInfo.Possession = (int)Mathf.Sign(transform.position.x);
 
             ballStateMachine.Update();
-        }
-
-        private void OnStateChanged(IState newState) {
-            Debug.Log($"Ball state machine set to {newState}");
         }
 
         private void OnTargetSet() {

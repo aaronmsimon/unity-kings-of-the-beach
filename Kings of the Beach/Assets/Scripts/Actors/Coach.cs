@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace KotB.Actors
@@ -10,6 +11,8 @@ namespace KotB.Actors
         [SerializeField] protected bool showTargetZone;
         [SerializeField] protected Color targetZoneColor = Color.red;
 
+        private bool hasBall = false;
+
         protected override void Start() {
             base.Start();
 
@@ -21,19 +24,28 @@ namespace KotB.Actors
         }
 
         protected virtual void Reset() {
-            TakeBall();
+            StartCoroutine(TakeBall());
         }
 
-        protected void TakeBall() {
+        private IEnumerator TakeBall() {
+            yield return new WaitForSeconds(1);
+
             ballInfo.GiveBall(this);
-            Debug.Log("Ball taken by coach");
-            // FaceOpponent();
+            hasBall = true;
+            FaceOpponent();
             // BallInfo.HitsForTeam = resetHitCounterAmount;
             // animator.Play("HoldBall");
             // resetBallEvent.Raise();
         }
 
-        public abstract void CoachAction();
+        public void CoachAction() {
+            if (hasBall) {
+                PerformCoachAction();
+                hasBall = false;
+            }
+        }
+
+        protected abstract void PerformCoachAction();
         
         protected override void OnDrawGizmos() {
             base.OnDrawGizmos();
