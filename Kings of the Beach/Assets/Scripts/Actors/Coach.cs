@@ -16,6 +16,7 @@ namespace KotB.Actors
         protected override void Start() {
             base.Start();
 
+            FaceOpponent();
             Reset();
         }
 

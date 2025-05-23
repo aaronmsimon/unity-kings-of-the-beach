@@ -2653,7 +2653,7 @@ MonoBehaviour:
   ballInfo: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
   matchInfo: {fileID: 0}
   athleteStats: {fileID: 0}
-  courtSide: {fileID: 0}
+  courtSide: {fileID: 11400000, guid: 49066017a306d4c48954e99750cc8cf0, type: 2}
   targetZonePos: {x: 1, y: 0}
   targetZoneSize: {x: 0.25, y: 0.25}
   showTargetZone: 1

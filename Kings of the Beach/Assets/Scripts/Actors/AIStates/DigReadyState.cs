@@ -53,11 +53,11 @@ namespace KotB.StatePattern.AIStates
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 switch (ai.BallInfo.HitsForTeam) {
                     case 0:
-                        ai.Pass(CalculatePassTarget(), 7, 1.75f);
+                        ai.Pass(ai.CalculatePassTarget(ai.MatchInfo.GetTeammate(ai)), 7, 1.75f);
                         ai.StateMachine.ChangeState(ai.OffenseState);
                         break;
                     case 1:
-                        ai.Pass(CalculatePassTarget(), 7, 1.75f);
+                        ai.Pass(ai.CalculatePassTarget(ai.MatchInfo.GetTeammate(ai)), 7, 1.75f);
                         ai.StateMachine.ChangeState(ai.DefenseState);
                         break;
                     case 2:
@@ -88,13 +88,6 @@ namespace KotB.StatePattern.AIStates
                     ai.StateMachine.ChangeState(ai.DefenseState);
                 }
             }            
-        }
-
-        private Vector3 CalculatePassTarget() {
-            Athlete teammate = ai.MatchInfo.GetTeammate(ai);
-            Vector2 teammatePos = new Vector2(teammate.transform.position.x, teammate.transform.position.z);
-            Vector2 aimLocation = ai.BallInfo.SkillValues.AdjustedPassLocation(teammatePos, ai);
-            return new Vector3(aimLocation.x, 0f, aimLocation.y);
         }
 
         private Vector3 CalculateSpikeTarget() {

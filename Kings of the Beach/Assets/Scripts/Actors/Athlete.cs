@@ -84,6 +84,10 @@ namespace KotB.Actors
                 Debug.LogAssertion($"No skills found for { this.name }");
             }
 
+            if (courtSide == null) {
+                Debug.LogAssertion($"No court side found for { this.name }");
+            }
+
             leftHandEnd = transform.Find("Volleyball-Character").Find("CCM-Armature").Find("Pelvis").Find("Spine1").Find("Spine2").Find("Shoulder.L").Find("UpperArm.L").Find("LowerArm.L").Find("Hand.L").Find("Hand.L_end");
         }
 
@@ -168,6 +172,12 @@ private bool lastEnabledStatus = false;
             } else {
                 animator.Play("Block");
             }
+        }
+
+        public Vector3 CalculatePassTarget(Athlete teammate) {
+            Vector2 teammatePos = new Vector2(teammate.transform.position.x, teammate.transform.position.z);
+            Vector2 aimLocation = ballInfo.SkillValues.AdjustedPassLocation(teammatePos, this);
+            return new Vector3(aimLocation.x, 0f, aimLocation.y);
         }
 
         public void Pass(Vector3 targetPos, float height, float time) {
@@ -317,7 +327,9 @@ private bool lastEnabledStatus = false;
         }
 
         public void FaceOpponent() {
-            transform.rotation = Quaternion.LookRotation(Vector3.right * -courtSide.Value);
+            if (courtSide != null) {
+                transform.rotation = Quaternion.LookRotation(Vector3.right * -courtSide.Value);
+            }
         }
 
         protected virtual void OnDrawGizmos() {}

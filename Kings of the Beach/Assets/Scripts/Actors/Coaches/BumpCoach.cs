@@ -23,12 +23,7 @@ namespace KotB.Actors
                     Debug.LogAssertion("No teammate selected but aim type was set to Pass. Please add a teammate to pass to.");
                     return;
                 }
-                // this should be a function on the Athlete that digreadystate uses, too
-                // or should it be on the AI class and therefore Coach should really inherit from there?
-                Vector2 teammatePos = new Vector2(passTeammate.transform.position.x, passTeammate.transform.position.z);
-                Vector2 aimLocation = ballInfo.SkillValues.AdjustedPassLocation(teammatePos, this);
-                Vector3 passTarget = new Vector3(aimLocation.x, 0f, aimLocation.y);
-                Pass(passTarget, 7, 1.75f);
+                Pass(CalculatePassTarget(passTeammate), 7, 1.75f);
             }
         }
     }
