@@ -20,7 +20,7 @@ namespace KotB.Testing
         }
 
         private void GoToServeState() {
-            ai.StateMachine.ChangeState(ai.ServeState);
+            // ai.StateMachine.ChangeState(ai.ServeState);
             ai.BallInfo.GiveBall(ai);
         }
     }

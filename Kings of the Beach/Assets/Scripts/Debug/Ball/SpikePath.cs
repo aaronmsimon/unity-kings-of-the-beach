@@ -43,7 +43,7 @@ namespace KotB.Testing
         }
 
         private void SpikeBall() {
-            ball.StateMachine.ChangeState(ball.InFlightState);
+            // ball.StateMachine.ChangeState(ball.InFlightState);
             ball.BallInfo.SetSpikeTarget(target.position, spikeTime, null, Stats.StatTypes.Attack);
         }
 

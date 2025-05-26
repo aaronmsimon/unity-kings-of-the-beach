@@ -15,17 +15,17 @@ namespace KotB.Testing
 
         private void Start()
         {
-            athlete.StateMachine.StateChanged += OnStateChanged;
+            // athlete.StateMachine.StateChanged += OnStateChanged;
         }
 
         private void OnDisable()
         {
-            athlete.StateMachine.StateChanged -= OnStateChanged;
+            // athlete.StateMachine.StateChanged -= OnStateChanged;
         }
 
         private void OnStateChanged(IState state)
         {
-            Debug.Log($"{athlete.Skills.AthleteName} state has changed from {athlete.StateMachine.CurrentState} to {state}");
+            // Debug.Log($"{athlete.Skills.AthleteName} state has changed from {athlete.StateMachine.CurrentState} to {state}");
         }
     }
 }

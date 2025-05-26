@@ -37,15 +37,15 @@ namespace KotB.Actors
             itemsQueue.Clear();
         }
 
-        public string CurrentState {
-            get {
-                if (athlete != null) {
-                    return athlete.StateMachine.CurrentState.GetType().Name;
-                } else {
-                    return "No State";
-                }
-            }
-        }
+        // public string CurrentState {
+            // get {
+            //     if (athlete != null) {
+            //         return athlete.StateMachine.CurrentState.GetType().Name;
+            //     } else {
+            //         return "No State";
+            //     }
+            // }
+        // }
 
         private void OnThought(string thought) {
             AddThought(thought);

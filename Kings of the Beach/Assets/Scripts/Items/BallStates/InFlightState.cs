@@ -41,9 +41,8 @@ namespace KotB.StatePattern.BallStates
                     ball.transform.position += Vector3.down * ballSpeedToGround * Time.deltaTime;
                 }
             } else {
-                ball.BallHitGround.Raise();
                 ball.DestroyBallTarget();
-                ball.StateMachine.ChangeState(ball.GroundState);
+                ball.BallHitGround.Raise();
             }
         }
 

@@ -12,7 +12,7 @@ namespace KotB.Testing
             if (Input.GetKeyDown(KeyCode.J)) {
                 AI ai = FindObjectOfType<AI>();
                 defenseState = new DefenseState(ai);
-                ai.StateMachine.ChangeState(defenseState);
+                // ai.StateMachine.ChangeState(defenseState);
             }
         }
     }

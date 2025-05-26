@@ -18,19 +18,19 @@ namespace KotB.Testing
 
         private void Update() {
             if (Input.GetKey(KeyCode.Tab)) {
-                ball.StateMachine.ChangeState(ball.GroundState);
+                // ball.StateMachine.ChangeState(ball.GroundState);
                 ball.transform.position = spikePoint.position;
                 ClearAthletesState();
             }
             if (Input.GetKey(KeyCode.Space)) {
-                ball.StateMachine.ChangeState(ball.InFlightState);
+                // ball.StateMachine.ChangeState(ball.InFlightState);
                 ball.BallInfo.SetSpikeTarget(target.position, 2, null, Stats.StatTypes.Attack);
             }
         }
 
         private void ClearAthletesState() {
             foreach (Athlete athlete in athletes) {
-                athlete.StateMachine.ChangeState(null);
+                // athlete.StateMachine.ChangeState(null);
             }
         }
 

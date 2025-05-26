@@ -14,7 +14,7 @@ namespace KotB.Cinemachine
         public void Play() {
             Debug.Log($"instant replay to run from {ball.BallInfo.StartPos} to {ball.BallInfo.TargetPos}");
             ball.transform.position = ball.BallInfo.StartPos;
-            ball.StateMachine.ChangeState(ball.InFlightState);
+            // ball.StateMachine.ChangeState(ball.InFlightState);
         }
     }
 }

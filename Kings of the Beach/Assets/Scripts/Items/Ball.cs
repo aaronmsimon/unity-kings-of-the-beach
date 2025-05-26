@@ -1,7 +1,6 @@
 using UnityEngine;
 using RoboRyanTron.Unite2017.Events;
 using RoboRyanTron.Unite2017.Variables;
-using KotB.Actors;
 using KotB.Match;
 using KotB.StatePattern;
 using KotB.StatePattern.MatchStates;
@@ -28,18 +27,13 @@ namespace KotB.Items
 
         private Transform ballTarget;
 
-        private StateMachine ballStateMachine;
-        private GroundState groundState;
-        private HeldState heldState;
-        private InFlightState inFlightState;
+        private StateMachine stateMachine;
+        private EventPredicate ballGivenPredicate;
+        private EventPredicate targetSetPredicate;
+        private EventPredicate ballHitGroundPredicate;
 
         private void Awake() {
-            ballStateMachine = new StateMachine();
-            groundState = new GroundState(this);
-            heldState = new HeldState(this);
-            inFlightState = new InFlightState(this);
-
-            ballStateMachine.ChangeState(groundState);
+            SetupStateMachine();
         }
 
         private void Start() {
@@ -52,6 +46,9 @@ namespace KotB.Items
 
         private void OnDisable() {
             ballInfo.TargetSet -= OnTargetSet;
+
+            ballInfo.BallGiven -= ballGivenPredicate.Trigger;
+            ballInfo.TargetSet -= targetSetPredicate.Trigger;
         }
 
         private void Update() {
@@ -67,12 +64,43 @@ namespace KotB.Items
             }
             ballInfo.Possession = (int)Mathf.Sign(transform.position.x);
 
-            ballStateMachine.Update();
+            stateMachine.Update();
+        }
+
+        private void SetupStateMachine() {
+            // State Machine
+            stateMachine = new StateMachine();
+
+            // Declare States
+            var groundState = new GroundState(this);
+            var heldState = new HeldState(this);
+            var inFlightState = new InFlightState(this);
+
+            // Declare Event Predicates
+            ballGivenPredicate = new EventPredicate();
+            targetSetPredicate = new EventPredicate();
+            ballHitGroundPredicate = new EventPredicate();
+
+            // Subscribe Event Predicates to Events
+            ballInfo.BallGiven += ballGivenPredicate.Trigger;
+            ballInfo.TargetSet += targetSetPredicate.Trigger;
+
+            // Define Transitions
+            stateMachine.AddAnyTransition(groundState, ballHitGroundPredicate);
+            stateMachine.AddTransition(groundState, heldState, ballGivenPredicate);
+            stateMachine.AddTransition(heldState, inFlightState, targetSetPredicate);
+
+            // Set Initial State
+            stateMachine.SetState(groundState);
         }
 
         private void OnTargetSet() {
             DestroyBallTarget();
             ballTarget = Instantiate(targetPrefab, ballInfo.TargetPos, Quaternion.identity);
+        }
+
+        public void OnBallHitGround() {
+            ballHitGroundPredicate.Trigger();
         }
 
         public void DestroyBallTarget() {
@@ -83,10 +111,6 @@ namespace KotB.Items
 
         //---- PROPERTIES ----
         public BallSO BallInfo { get { return ballInfo; } }
-        public StateMachine StateMachine { get { return ballStateMachine; } }
-        public GroundState GroundState { get { return groundState; } }
-        public HeldState HeldState { get { return heldState; } }
-        public InFlightState InFlightState { get { return inFlightState; } }
         public GameEvent BallHitGround { get { return ballHitGroundEvent; } }
         public LayerMask ObstaclesLayer { get { return obstaclesLayer; } }
         public LayerMask InvalidAimLayer => invalidAimLayer;

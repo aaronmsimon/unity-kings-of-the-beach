@@ -121,7 +121,7 @@ namespace KotB.Testing
                     break;
             }
 
-            athlete.StateMachine.ChangeState(state);
+            // athlete.StateMachine.ChangeState(state);
         }
     }
 }

@@ -51,7 +51,7 @@ namespace KotB.Testing
             EditorGUILayout.Space();
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Current State:", EditorStyles.boldLabel, GUILayout.Width(100));
-            EditorGUILayout.LabelField($"{thoughts.CurrentState}", GUILayout.Width(200));
+            // EditorGUILayout.LabelField($"{thoughts.CurrentState}", GUILayout.Width(200));
             EditorGUILayout.EndHorizontal();
 
             // Refresh the inspector when a change is made
