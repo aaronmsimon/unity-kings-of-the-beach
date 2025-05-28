@@ -1,15 +1,17 @@
 using System.Collections;
 using UnityEngine;
+using KotB.StatePattern;
 
 namespace KotB.Actors
 {
-    public abstract class Coach : Athlete
+    public class Coach : Athlete
     {
-        [Header("Target Area")]
-        [SerializeField] protected Vector2 targetZonePos;
-        [SerializeField] protected Vector2 targetZoneSize;
-        [SerializeField] protected bool showTargetZone;
-        [SerializeField] protected Color targetZoneColor = Color.red;
+        private enum CoachType { BumpTarget }
+
+        [Header("Coach Configuration")]
+        [SerializeField] private CoachType coachType;
+
+        private CoachAction coachAction;
 
         private bool hasBall = false;
 
@@ -18,13 +20,24 @@ namespace KotB.Actors
 
             FaceOpponent();
             Reset();
+            SetupStateMachine();
+        }
+
+        protected override void Update() {
+            switch (coachType) {
+                case CoachType.BumpTarget:
+                    coachAction = new BumpTargetCoach();
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void OnBallHitGround() {
             Reset();
         }
 
-        protected virtual void Reset() {
+        protected void Reset() {
             StartCoroutine(TakeBall());
         }
 
@@ -41,17 +54,14 @@ namespace KotB.Actors
 
         public void CoachAction() {
             if (hasBall) {
-                PerformCoachAction();
+                coachAction.Execute(this);
                 hasBall = false;
             }
         }
 
-        protected abstract void PerformCoachAction();
-        
-        protected override void OnDrawGizmos() {
-            base.OnDrawGizmos();
-
-            Helpers.DrawTargetZone(targetZonePos, targetZoneSize, targetZoneColor, showTargetZone);
+        private void SetupStateMachine() {
+            // State Machine
+            stateMachine = new StateMachine();
         }
     }
 }
