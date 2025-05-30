@@ -85,10 +85,15 @@ namespace KotB.Items
             ballInfo.BallGiven += ballGivenPredicate.Trigger;
             ballInfo.TargetSet += targetSetPredicate.Trigger;
 
+            // Declare Default Profile
+            TransitionProfile defaultProfile = new TransitionProfile();
+
             // Define Transitions
-            stateMachine.AddAnyTransition(groundState, ballHitGroundPredicate);
-            stateMachine.AddTransition(groundState, heldState, ballGivenPredicate);
-            stateMachine.AddTransition(heldState, inFlightState, targetSetPredicate);
+            defaultProfile.AddAnyTransition(groundState, ballHitGroundPredicate);
+            defaultProfile.AddTransition(groundState, heldState, ballGivenPredicate);
+            defaultProfile.AddTransition(heldState, inFlightState, targetSetPredicate);
+
+            stateMachine.AddProfile(defaultProfile);
 
             // Set Initial State
             stateMachine.SetState(groundState);
@@ -111,6 +116,7 @@ namespace KotB.Items
 
         //---- PROPERTIES ----
         public BallSO BallInfo { get { return ballInfo; } }
+        public StateMachine StateMachine => stateMachine;
         public GameEvent BallHitGround { get { return ballHitGroundEvent; } }
         public LayerMask ObstaclesLayer { get { return obstaclesLayer; } }
         public LayerMask InvalidAimLayer => invalidAimLayer;

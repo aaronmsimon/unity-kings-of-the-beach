@@ -687,7 +687,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -8341760479280743200, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
   m_PrefabInstance: {fileID: 1584301647}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 636553245}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fe0e2b99c855d849a6edb595e9cf32e, type: 3}
@@ -755,6 +755,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 07677c35fae42594aaa710bcbb079278, type: 3}
   m_PrefabInstance: {fileID: 623911959}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &636553245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5717242374435514889, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
+  m_PrefabInstance: {fileID: 1584301647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &636553248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636553245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 8fc138420100eab479f8562b3551909f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 603172561}
+        m_TargetAssemblyTypeName: KotB.Actors.Coach, Assembly-CSharp
+        m_MethodName: OnBallHitGround
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &678935064
 GameObject:
   m_ObjectHideFlags: 0
@@ -1922,7 +1955,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 636553248}
   m_SourcePrefab: {fileID: 100100000, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
 --- !u!1001 &1589760132
 PrefabInstance:
