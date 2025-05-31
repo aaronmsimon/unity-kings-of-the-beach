@@ -28,7 +28,7 @@ namespace KotB.StatePattern
             StateChanged?.Invoke(newState);
         }
 
-        public void AddProfile(TransitionProfile newProfile) {
+        public void AddProfile(TransitionProfile newProfile, bool setActive = false) {
             int i = profiles.IndexOf(newProfile);
 
             if (i == -1) {
@@ -37,12 +37,13 @@ namespace KotB.StatePattern
                 profiles[i] = newProfile;
             }
 
-            SetActiveProfile(newProfile);
+            if (setActive) SetActiveProfile(newProfile);
         }
 
         public void SetActiveProfile(TransitionProfile profile) {
             if (profiles.Contains(profile)) {
                 currentProfile = profile;
+                currentProfile.ActivateProfile();
             } else {
                 UnityEngine.Debug.LogAssertion($"No such profile {profile}");
             }

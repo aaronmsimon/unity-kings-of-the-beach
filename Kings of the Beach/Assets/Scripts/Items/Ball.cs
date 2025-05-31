@@ -92,11 +92,9 @@ namespace KotB.Items
             defaultProfile.AddAnyTransition(groundState, ballHitGroundPredicate);
             defaultProfile.AddTransition(groundState, heldState, ballGivenPredicate);
             defaultProfile.AddTransition(heldState, inFlightState, targetSetPredicate);
+            defaultProfile.SetStartingState(groundState);
 
-            stateMachine.AddProfile(defaultProfile);
-
-            // Set Initial State
-            stateMachine.SetState(groundState);
+            stateMachine.AddProfile(defaultProfile, true);
         }
 
         private void OnTargetSet() {

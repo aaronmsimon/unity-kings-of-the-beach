@@ -5,6 +5,7 @@ namespace KotB.StatePattern
 {
     public class TransitionProfile
     {
+        private IState startingState;
         private StateNode currentNode;
         private Dictionary<Type, StateNode> nodes = new();
         private HashSet<ITransition> anyTransitions = new();
@@ -55,6 +56,14 @@ namespace KotB.StatePattern
         public void SetState(IState newState) {
             currentNode = nodes[newState.GetType()];
             currentNode.State?.Enter();
+        }
+
+        public void SetStartingState(IState startState) {
+            startingState = startState;
+        }
+
+        public void ActivateProfile() {
+            SetState(startingState);
         }
 
         public void Update() {
