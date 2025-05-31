@@ -1,5 +1,3 @@
-using UnityEngine.UIElements.Experimental;
-
 namespace KotB.StatePattern
 {
     public class EventPredicate : IPredicate

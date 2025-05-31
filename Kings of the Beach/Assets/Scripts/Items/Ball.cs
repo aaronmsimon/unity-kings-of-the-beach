@@ -48,7 +48,6 @@ namespace KotB.Items
             ballInfo.TargetSet -= OnTargetSet;
 
             ballInfo.BallGiven -= ballGivenPredicate.Trigger;
-            ballInfo.TargetSet -= targetSetPredicate.Trigger;
         }
 
         private void Update() {
@@ -83,7 +82,6 @@ namespace KotB.Items
 
             // Subscribe Event Predicates to Events
             ballInfo.BallGiven += ballGivenPredicate.Trigger;
-            ballInfo.TargetSet += targetSetPredicate.Trigger;
 
             // Declare Default Profile
             TransitionProfile defaultProfile = new TransitionProfile();
@@ -100,6 +98,10 @@ namespace KotB.Items
         private void OnTargetSet() {
             DestroyBallTarget();
             ballTarget = Instantiate(targetPrefab, ballInfo.TargetPos, Quaternion.identity);
+
+            if (stateMachine.CurrentProfile.CurrentState is HeldState) {
+                targetSetPredicate.Trigger();
+            }
         }
 
         public void OnBallHitGround() {

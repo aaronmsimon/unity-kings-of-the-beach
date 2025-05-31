@@ -48,5 +48,7 @@ namespace KotB.StatePattern
                 UnityEngine.Debug.LogAssertion($"No such profile {profile}");
             }
         }
+
+        public TransitionProfile CurrentProfile => currentProfile;
     }
 }
