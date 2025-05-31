@@ -12,6 +12,7 @@ namespace KotB.StatePattern.BallStates
 
         public override void Enter() {
             ball.BallInfo.TimeSinceLastHit = 0f;
+            ball.BallInfo.InPlay = true;
             ballIntoNet = false;
         }
 

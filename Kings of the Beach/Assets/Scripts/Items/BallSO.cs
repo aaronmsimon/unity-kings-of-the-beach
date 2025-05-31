@@ -29,6 +29,7 @@ namespace KotB.Items
         private Athlete ballHeldBy;
         private StatTypes lastStatType;
         private bool lockedOn;
+        private bool inPlay;
 
         public event Action BallGiven;
         public event Action TargetSet;
@@ -188,6 +189,7 @@ namespace KotB.Items
         public Athlete LastPlayerToHit => lastPlayerToHit;
         public StatTypes LastStatType => lastStatType;
         public bool LockedOn { get => lockedOn; set => lockedOn = value; }
+        public bool InPlay { get => inPlay; set => inPlay = value; }
         public StatEvent StatUpdate => statUpdate;
     }
 }
