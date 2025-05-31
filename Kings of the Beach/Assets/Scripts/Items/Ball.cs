@@ -47,7 +47,9 @@ namespace KotB.Items
         private void OnDisable() {
             ballInfo.TargetSet -= OnTargetSet;
 
-            ballInfo.BallGiven -= ballGivenPredicate.Trigger;
+            ballGivenPredicate.Cleanup();
+            targetSetPredicate.Cleanup();
+            ballHitGroundPredicate.Cleanup();
         }
 
         private void Update() {
@@ -75,16 +77,17 @@ namespace KotB.Items
             var heldState = new HeldState(this);
             var inFlightState = new InFlightState(this);
 
+            // Default Profile
+            TransitionProfile defaultProfile = new TransitionProfile();
+
             // Declare Event Predicates
-            ballGivenPredicate = new EventPredicate();
-            targetSetPredicate = new EventPredicate();
-            ballHitGroundPredicate = new EventPredicate();
+            ballGivenPredicate = new EventPredicate(stateMachine);
+            targetSetPredicate = new EventPredicate(stateMachine);
+            ballHitGroundPredicate = new EventPredicate(stateMachine);
 
             // Subscribe Event Predicates to Events
             ballInfo.BallGiven += ballGivenPredicate.Trigger;
-
-            // Declare Default Profile
-            TransitionProfile defaultProfile = new TransitionProfile();
+            ballInfo.TargetSet += targetSetPredicate.Trigger;
 
             // Define Transitions
             defaultProfile.AddAnyTransition(groundState, ballHitGroundPredicate);
@@ -98,10 +101,6 @@ namespace KotB.Items
         private void OnTargetSet() {
             DestroyBallTarget();
             ballTarget = Instantiate(targetPrefab, ballInfo.TargetPos, Quaternion.identity);
-
-            if (stateMachine.CurrentProfile.CurrentState is HeldState) {
-                targetSetPredicate.Trigger();
-            }
         }
 
         public void OnBallHitGround() {
