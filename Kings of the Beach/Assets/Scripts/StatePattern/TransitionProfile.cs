@@ -5,11 +5,17 @@ namespace KotB.StatePattern
 {
     public class TransitionProfile
     {
+        public string Name { get; }
+
         private IState startingState;
         private StateNode currentNode;
         private Dictionary<Type, StateNode> nodes = new();
         private HashSet<ITransition> anyTransitions = new();
 
+        public TransitionProfile(string name) {
+            Name = name;
+        }
+        
         public void AddTransition(IState from, IState to, IPredicate condition) {
             GetOrAddNode(from).AddTransition(GetOrAddNode(to).State, condition);
         }

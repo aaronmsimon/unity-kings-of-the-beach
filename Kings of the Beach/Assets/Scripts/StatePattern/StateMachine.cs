@@ -29,7 +29,7 @@ namespace KotB.StatePattern
         }
 
         public void AddProfile(TransitionProfile newProfile, bool setActive = false) {
-            int i = profiles.IndexOf(newProfile);
+            int i = profiles.FindIndex(p => p.Name == newProfile.Name);
 
             if (i == -1) {
                 profiles.Add(newProfile);

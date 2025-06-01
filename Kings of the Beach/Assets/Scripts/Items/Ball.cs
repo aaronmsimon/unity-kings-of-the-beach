@@ -78,7 +78,7 @@ namespace KotB.Items
             var inFlightState = new InFlightState(this);
 
             // Default Profile
-            TransitionProfile defaultProfile = new TransitionProfile();
+            TransitionProfile defaultProfile = new TransitionProfile("Default");
 
             // Declare Event Predicates
             ballGivenPredicate = new EventPredicate(stateMachine);
