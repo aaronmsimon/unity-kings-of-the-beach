@@ -45,7 +45,18 @@ namespace KotB.StatePattern
                 currentProfile = profile;
                 currentProfile.ActivateProfile();
             } else {
-                UnityEngine.Debug.LogAssertion($"No such profile {profile}");
+                UnityEngine.Debug.LogAssertion($"{profile} does not exist.");
+            }
+        }
+
+        public void SetActiveProfile(string profileName) {
+            int i = profiles.FindIndex(p => p.Name == profileName);
+
+            if (i >= 0) {
+                currentProfile = profiles[i];
+                currentProfile.ActivateProfile();
+            } else {
+                UnityEngine.Debug.LogAssertion($"{profileName} does not exist.");
             }
         }
 
