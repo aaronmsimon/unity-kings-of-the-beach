@@ -16,8 +16,6 @@ namespace KotB.StatePattern.MatchStates
             // matchManager.InputReader.interactEvent += OnInteract;
 
             timeUntilChangeState = waitTime;
-
-            CheckGameEnd();
         }
 
         public override void Exit() {
@@ -28,23 +26,13 @@ namespace KotB.StatePattern.MatchStates
             timeUntilChangeState -= Time.deltaTime;
 
             if (timeUntilChangeState < 0) {
-                matchManager.StateMachine.ChangeState(matchManager.PrePointState);
+                matchManager.InvokePostPointComplete();
             }
         }
 
         private void OnInteract() {
             // matchManager.MatchInfo.TransitionToServeStateEvent();
             // matchManager.StateMachine.ChangeState(matchManager.ServeState);
-        }
-
-        private void CheckGameEnd() {
-            List<TeamSO> teams = matchManager.MatchInfo.Teams;
-            for (int i = 0; i < teams.Count; i++) {
-                if (teams[i].Score >= matchManager.MatchInfo.ScoreToWin && Mathf.Abs(teams[i].Score - teams[1 - i].Score) > 1 && teams[i].Score > teams[1 - i].Score) {
-                    Debug.Log($"{teams[i].TeamName.Value} wins!");
-                    matchManager.StateMachine.ChangeState(matchManager.MatchEndState);
-                }
-            }
         }
     }
 }

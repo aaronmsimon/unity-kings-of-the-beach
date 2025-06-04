@@ -14,8 +14,6 @@ namespace KotB.StatePattern.MatchStates
         {
             InitializeTeams();
             matchManager.MatchInfo.Initialize();
-
-            matchManager.StateMachine.ChangeState(matchManager.PrePointState);
         }
 
         private void InitializeTeams() {
@@ -52,6 +50,9 @@ namespace KotB.StatePattern.MatchStates
             materials[0] = athleteConfig.bottom != null ? athleteConfig.bottom.Mat : athleteConfig.skills.DefaultBottom.Mat;
             if (athleteConfig.outfit.ToString() != "NoShirt") materials[1] = athleteConfig.top != null ? athleteConfig.top.Mat : athleteConfig.skills.DefaultTop.Mat;
             r.materials = materials;
+
+            // Assign Transition Profile
+            athlete.StateMachine.SetActiveProfile(athleteConfig.computerControlled ? matchManager.AITransitionProfileName : matchManager.PlayerTransitionProfileName);
 
             // Move to Position
             Vector3 dPos = new Vector3(athlete.Skills.DefensePos.x * athlete.CourtSide, 0.01f, athlete.Skills.DefensePos.y * (index == 0 ? 1 : -1));

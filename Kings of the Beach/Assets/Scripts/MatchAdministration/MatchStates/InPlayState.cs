@@ -65,7 +65,8 @@ namespace KotB.StatePattern.MatchStates
 
             // Update Score & Change State
             matchManager.ScoreUpdate();
-            matchManager.StateMachine.ChangeState(matchManager.PostPointState);
+
+            matchManager.InvokePointComplete();
         }
     }
 }

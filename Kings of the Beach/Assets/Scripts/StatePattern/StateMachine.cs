@@ -61,5 +61,6 @@ namespace KotB.StatePattern
         }
 
         public TransitionProfile CurrentProfile => currentProfile;
+        public IState CurrentState => currentProfile.CurrentState;
     }
 }

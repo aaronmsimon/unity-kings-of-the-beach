@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 using UnityEngine;
 using KotB.StatePattern;
@@ -26,7 +27,13 @@ namespace KotB.Match
         [SerializeField] private GameObject aiPrefab;
         [SerializeField] private GameObject playerPrefab;
 
+        [Header("Transition Profiles")]
+        [SerializeField] private StringVariable playerTransitionProfile;
+        [SerializeField] private StringVariable aiTransitionProfile;
+
         public event Action BallHitGround;
+        public event Action PointComplete;
+        public event Action PostPointComplete;
 
         private float totalPoints;
         private float switchSidesPointsDivisor = 3;
@@ -34,29 +41,21 @@ namespace KotB.Match
         private bool paused = false;
         private IState stateBeforePause;
 
-        private StateMachine matchStateMachine;
-        private PrePointState prePointState;
-        private ServeState serveState;
-        private InPlayState inPlayState;
-        private PostPointState postPointState;
-        private MatchEndState matchEndState;
-        private MatchStartState matchStartState;
-        private PauseState pauseState;
+        private StateMachine stateMachine;
+
+        private EventPredicate matchInitializedPredicate;
+        private EventPredicate matchToServePredicate;
+        private EventPredicate ballServedPredicate;
+        private EventPredicate pointCompletePredicate;
+        private EventPredicate matchPostPointCompletePredicate;
+        private EventPredicate pausePredicate;
 
         private void Awake() {
-            matchStateMachine = new StateMachine();
-            prePointState = new PrePointState(this);
-            serveState = new ServeState(this);
-            inPlayState = new InPlayState(this);
-            postPointState = new PostPointState(this);
-            matchEndState = new MatchEndState(this);
-            matchStartState = new MatchStartState(this);
-            pauseState = new PauseState(this);
+            SetupStateMachine();
         }
 
         private void Start() {
             InitializeMatch();
-            matchStateMachine.ChangeState(matchStartState);
         }
 
         private void InitializeMatch() {
@@ -75,49 +74,117 @@ namespace KotB.Match
         }
 
         private void OnEnable() {
-            matchStateMachine.StateChanged += OnStateChanged;
+            stateMachine.StateChanged += OnStateChanged;
             inputReader.pauseEvent += OnPause;
         }
 
         private void OnDisable() {
-            matchStateMachine.StateChanged -= OnStateChanged;
+            stateMachine.StateChanged -= OnStateChanged;
             inputReader.pauseEvent -= OnPause;
+
+            matchInitializedPredicate.Cleanup();
+            matchToServePredicate.Cleanup();
+            ballServedPredicate.Cleanup();
+            pointCompletePredicate.Cleanup();
+            matchPostPointCompletePredicate.Cleanup();
+            pausePredicate.Cleanup();
         }
 
         private void Update() {
-            matchStateMachine.Update();
+            stateMachine.Update();
+        }
+
+        private void SetupStateMachine() {
+            // State Machine
+            stateMachine = new StateMachine();
+            
+            // Declare States;
+            var prePointState = new PrePointState(this);
+            var serveState = new ServeState(this);
+            var inPlayState = new InPlayState(this);
+            var postPointState = new PostPointState(this);
+            var matchEndState = new MatchEndState(this);
+            var matchStartState = new MatchStartState(this);
+            var pauseState = new PauseState(this);
+
+            // Declare Event Predicates
+            matchInitializedPredicate = new EventPredicate(stateMachine);
+            matchToServePredicate = new EventPredicate(stateMachine);
+            ballServedPredicate = new EventPredicate(stateMachine);
+            pointCompletePredicate = new EventPredicate(stateMachine);
+            matchPostPointCompletePredicate = new EventPredicate(stateMachine);
+            pausePredicate = new EventPredicate(stateMachine);
+
+            // Subscribe Event Predicates to Events
+            matchInfo.MatchInitialized += matchInitializedPredicate.Trigger;
+            matchInfo.TransitionToServeState += matchToServePredicate.Trigger;
+            ballInfo.BallServed += ballServedPredicate.Trigger;
+            PointComplete += pointCompletePredicate.Trigger;
+            PostPointComplete += matchPostPointCompletePredicate.Trigger;
+
+            // Declare Default Profile & Transitions
+            TransitionProfile gameProfile = new TransitionProfile("Game");
+
+                // Setup Transitions
+                gameProfile.AddAnyTransition(pauseState, pausePredicate);
+                gameProfile.AddTransition(matchStartState, prePointState, matchInitializedPredicate);
+                gameProfile.AddTransition(prePointState, serveState, matchToServePredicate);
+                gameProfile.AddTransition(serveState, inPlayState, ballServedPredicate);
+                gameProfile.AddTransition(inPlayState, postPointState, pointCompletePredicate);
+                gameProfile.AddTransition(postPointState, matchEndState, new FuncPredicate(() => CheckGameEnd()));
+                gameProfile.AddTransition(postPointState, prePointState, matchPostPointCompletePredicate);
+                gameProfile.SetStartingState(matchStartState);
+
+                stateMachine.AddProfile(gameProfile, true);
+        }
+
+        private bool CheckGameEnd() {
+            List<TeamSO> teams = matchInfo.Teams;
+            for (int i = 0; i < teams.Count; i++) {
+                if (teams[i].Score >= matchInfo.ScoreToWin && Mathf.Abs(teams[i].Score - teams[1 - i].Score) > 1 && teams[i].Score > teams[1 - i].Score) {
+                    Debug.Log($"{teams[i].TeamName.Value} wins!");
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void OnBallHitGround() {
             BallHitGround?.Invoke();
         }
 
-        private void OnStateChanged(IState newState) {
-            matchInfo.CurrentState = newState;
+        public void InvokePointComplete() {
+            PointComplete?.Invoke();
+        }
+
+        public void InvokePostPointComplete() {
+            PostPointComplete?.Invoke();
         }
 
         public void OnPause() {
             paused = !paused;
             matchInfo.TogglePauseEvent(paused);
             if (paused) {
-                stateBeforePause = matchStateMachine.CurrentState;
-                matchStateMachine.ChangeState(pauseState);
+                stateBeforePause = stateMachine.CurrentState;
+                pausePredicate.Trigger();
+            } else {
+                stateMachine.SetState(stateBeforePause);
             }
         }
 
+        private void OnStateChanged(IState newState) {
+            matchInfo.CurrentState = newState;
+        }
+
         //---- PROPERTIES ----
-        public StateMachine StateMachine { get { return matchStateMachine; } }
-        public PrePointState PrePointState { get { return prePointState; } }
-        public ServeState ServeState { get { return serveState; } }
-        public InPlayState InPlayState { get { return inPlayState; } }
-        public PostPointState PostPointState { get { return postPointState; } }
-        public MatchEndState MatchEndState { get { return matchEndState; } }
-        public MatchStartState MatchStartState { get { return matchStartState; } }
+        public StateMachine StateMachine { get { return stateMachine; } }
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public BallSO BallInfo { get { return ballInfo; } }
         public InputReader InputReader => inputReader;
         public GameObject AIPrefab { get { return aiPrefab; } }
         public GameObject PlayerPrefab { get { return playerPrefab; } }
+        public string PlayerTransitionProfileName => playerTransitionProfile.Value;
+        public string AITransitionProfileName => aiTransitionProfile.Value;
         public IState StateBeforePause => stateBeforePause;
         public bool Paused { get => paused; set => paused = value; }
     }

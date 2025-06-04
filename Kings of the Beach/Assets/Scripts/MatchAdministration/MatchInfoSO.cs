@@ -19,10 +19,12 @@ namespace KotB.Match
 
         public event Action TransitionToPrePointState;
         public event Action TransitionToServeState;
+        public event Action MatchInitialized;
         public event Action<bool> TogglePause;
 
         public void Initialize() {
             teamServeIndex = 0;
+            MatchInitialized?.Invoke();
         }
 
         public void TransitionToPrePointStateEvent() {
