@@ -22,7 +22,6 @@ namespace KotB.StatePattern.MatchStates
 
         private void OnInteract() {
             matchManager.MatchInfo.TransitionToServeStateEvent();
-            matchManager.StateMachine.ChangeState(matchManager.ServeState);
         }
     }
 }
