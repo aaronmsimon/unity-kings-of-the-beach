@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using KotB.StatePattern;
 using KotB.StatePattern.PlayerStates;
 using RoboRyanTron.Unite2017.Events;
 using RoboRyanTron.Unite2017.Variables;
@@ -23,25 +25,25 @@ namespace KotB.Actors
         [SerializeField] private FloatVariable mainCameraPriority;
         [SerializeField] private FloatVariable serveCameraPriority;
         [SerializeField] private Vector3Variable serveAimPosition;
-
+        [SerializeField] private StringVariable playerTransitionProfile;
 
         private Vector3 moveInput;
         private Vector3 rightStickInput;
 
-        private NormalState normalState;
-        private LockState lockState;
-        private ServeState serveState;
-        private PostPointState postPointState;
+        private event Action lockPlayer;
+        private event Action unlockPlayer;
+
+        private EventPredicate ballHitGroundPredicate;
+        private EventPredicate matchToPrePointPredicate;
+        private EventPredicate matchToServePredicate;
+        private EventPredicate serveTargetSetPredicate;
+        private EventPredicate lockPlayerPredicate;
+        private EventPredicate unlockPlayerPredicate;
 
         protected override void Awake() {
             base.Awake();
-
-            normalState = new NormalState(this);
-            lockState = new LockState(this);
-            serveState = new ServeState(this);
-            postPointState = new PostPointState(this);
             
-            stateMachine.ChangeState(postPointState);
+            SetupStateMachine();
         }
 
         //Adds listeners for events being triggered in the InputReader script
@@ -58,13 +60,86 @@ namespace KotB.Actors
             inputReader.rightStickEvent -= OnRightStick;
             inputReader.jumpEvent -= OnJump;
             inputReader.feintEvent -= OnJumpModified;
+
+            matchToPrePointPredicate.Cleanup();
+            matchToServePredicate.Cleanup();
+            serveTargetSetPredicate.Cleanup();
+            lockPlayerPredicate.Cleanup();
+            unlockPlayerPredicate.Cleanup();
+        }
+
+        protected override void SetupStateMachine() {
+            base.SetupStateMachine();
+            
+            // Declare States
+            var normalState = new NormalState(this);
+            var lockState = new LockState(this);
+            var serveState = new ServeState(this);
+            var postPointState = new PostPointState(this);
+
+            // Declare Event Predicates
+            ballHitGroundPredicate = new EventPredicate(stateMachine);
+
+            matchToPrePointPredicate = new EventPredicate(stateMachine);
+            matchToServePredicate = new EventPredicate(stateMachine);
+            serveTargetSetPredicate = new EventPredicate(stateMachine);
+            lockPlayerPredicate = new EventPredicate(stateMachine);
+            unlockPlayerPredicate = new EventPredicate(stateMachine);
+
+            // Subscribe Event Predicates to Events
+            matchInfo.TransitionToPrePointState += matchToPrePointPredicate.Trigger;
+            matchInfo.TransitionToServeState += matchToServePredicate.Trigger;
+            ballInfo.BallServed += serveTargetSetPredicate.Trigger;
+            lockPlayer += lockPlayerPredicate.Trigger;
+            unlockPlayer += unlockPlayerPredicate.Trigger;
+
+            // Declare Default Profile & Transitions
+            TransitionProfile gameProfile = new TransitionProfile("Game");
+
+                // Setup Transitions
+                gameProfile.AddAnyTransition(postPointState, ballHitGroundPredicate);
+                gameProfile.AddTransition(postPointState, normalState, matchToPrePointPredicate);
+                gameProfile.AddTransition(normalState, serveState, new AndPredicate(
+                    matchToServePredicate,
+                    new FuncPredicate(() => matchInfo.GetServer() == this)
+                ));
+                gameProfile.AddTransition(normalState, lockState, lockPlayerPredicate);
+                gameProfile.AddTransition(lockState, normalState, unlockPlayerPredicate);
+                gameProfile.AddTransition(serveState, normalState, serveTargetSetPredicate);
+                gameProfile.SetStartingState(postPointState);
+
+                stateMachine.AddProfile(gameProfile);
+
+            // Declare Tutorial Profile & Transitions
+            TransitionProfile tutorialProfile = new TransitionProfile("Tutorial");
+
+                // Setup Transitions
+                tutorialProfile.AddAnyTransition(normalState, ballHitGroundPredicate);
+                tutorialProfile.AddTransition(normalState, lockState, lockPlayerPredicate);
+                tutorialProfile.AddTransition(lockState, normalState, unlockPlayerPredicate);
+                // tutorialProfile.AddTransition(normalState, serveState, new AndPredicate(
+                //     matchToServePredicate,
+                //     new FuncPredicate(() => matchInfo.GetServer() == this)
+                // ));
+                // tutorialProfile.AddTransition(serveState, normalState, serveTargetSetPredicate);
+                tutorialProfile.SetStartingState(normalState);
+
+                stateMachine.AddProfile(tutorialProfile);
+        }
+
+        public void LockPlayer() {
+            lockPlayer?.Invoke();
+        }
+
+        public void UnlockPlayer() {
+            unlockPlayer?.Invoke();
         }
 
         //---- EVENT LISTENERS ----
 
         public void OnBallHitGround() {
+            ballHitGroundPredicate.Trigger();
             moveDir = Vector3.zero;
-            stateMachine.ChangeState(postPointState);
         }
 
         private void OnMove(Vector2 movement) {
@@ -88,10 +163,6 @@ namespace KotB.Actors
         //---- PROPERTIES ----
 
         public InputReader InputReader { get { return inputReader; } }
-        public NormalState NormalState { get { return normalState; } }
-        public LockState LockState { get { return lockState; } }
-        public ServeState ServeState { get { return serveState; } }
-        public PostPointState PostPointState { get { return postPointState; } }
         public Vector3 MoveInput { get { return moveInput; } }
         public Vector3 RightStickInput { get { return rightStickInput; } }
         public FloatVariable ServePowerValue {

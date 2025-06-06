@@ -98,7 +98,6 @@ namespace KotB.StatePattern.PlayerStates
         private void PerformServe() {
             if (isServing && Time.time > serveContactTime) {
                 player.BallInfo.SetServeTarget();
-                player.StateMachine.ChangeState(player.NormalState);
             }
         }
 

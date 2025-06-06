@@ -12,11 +12,12 @@ namespace KotB.Testing
 
         private void Start() {
             athlete = GetComponent<Athlete>();
-            athlete.StateChanged += OnStateChanged;
+            athleteState = athlete.StateMachine.CurrentState.ToString();
+            athlete.StateMachine.StateChanged += OnStateChanged;
         }
 
         private void OnDestroy() {
-            athlete.StateChanged -= OnStateChanged;
+            athlete.StateMachine.StateChanged -= OnStateChanged;
         }
 
         private void OnStateChanged(IState newState) {

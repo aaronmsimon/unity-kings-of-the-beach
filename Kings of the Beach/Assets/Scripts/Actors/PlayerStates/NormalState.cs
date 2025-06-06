@@ -1,7 +1,5 @@
 using UnityEngine;
 using KotB.Actors;
-using KotB.StatePattern.MatchStates;
-using KotB.Items;
 
 namespace KotB.StatePattern.PlayerStates
 {
@@ -26,7 +24,7 @@ namespace KotB.StatePattern.PlayerStates
         public override void Update() {
             player.MoveDir = new Vector3(player.MoveInput.x, 0, player.MoveInput.y);
 
-            if (player.MatchInfo.CurrentState is InPlayState && player.BallInfo.LastPlayerToHit != player && Mathf.Sign(player.BallInfo.TargetPos.x) == player.CourtSide && !player.BallInfo.LockedOn) {
+            if (player.BallInfo.InPlay && player.BallInfo.LastPlayerToHit != player && Mathf.Sign(player.BallInfo.TargetPos.x) == player.CourtSide && !player.BallInfo.LockedOn) {
                 float distanceToTarget = (player.transform.position - player.BallInfo.TargetPos).sqrMagnitude;
                 if (distanceToTarget <= player.Skills.TargetLockDistance * player.Skills.TargetLockDistance && Mathf.Abs(player.BallInfo.TargetPos.x) > player.NoMansLand) {
                     Vector2 lockTowardsTarget = player.LockTowardsTarget();
@@ -34,7 +32,7 @@ namespace KotB.StatePattern.PlayerStates
                     player.transform.position = lockPos;
                     player.MoveDir = Vector3.zero;
                     player.BallInfo.LockedOn = true;
-                    player.StateMachine.ChangeState(player.LockState);
+                    player.LockPlayer();
                 }
             }            
         }
@@ -44,9 +42,7 @@ namespace KotB.StatePattern.PlayerStates
         }
 
         private void OnMatchChangeToServeState() {
-            if (player.MatchInfo.GetServer() == player) {
-                player.StateMachine.ChangeState(player.ServeState);
-            } else {
+            if (player.MatchInfo.GetServer() != player) {
                 player.transform.position = player.ServeDefPos;
                 player.FaceOpponent();
             }

@@ -21,7 +21,6 @@ namespace KotB.Actors
         [Header("Settings")]
         [SerializeField] protected FloatVariable courtSide;
 
-        protected Ball ball;
         protected StateMachine stateMachine;
         protected float courtSideLength = 8;
         protected Vector3 moveDir;
@@ -56,8 +55,6 @@ namespace KotB.Actors
         private Vector3 blockColliderCenter;
 
         protected virtual void Awake() {
-            stateMachine = new StateMachine();
-
             bodyTrigger = transform.Find("Body").GetComponent<CollisionTriggerReporter>();
             bodyTrigger.Active = true;
             bodyTrigger.DeactivateAfterTrigger = false;
@@ -68,6 +65,8 @@ namespace KotB.Actors
 
             obstaclesLayer = LayerMask.GetMask("Obstacles");
             invalidAimLayer = LayerMask.GetMask("InvalidAim");
+
+            SetupStateMachine();
         }
 
         protected virtual void Start() {
@@ -87,7 +86,7 @@ namespace KotB.Actors
             if (courtSide == null) {
                 Debug.LogAssertion($"No court side found for { this.name }");
             }
-
+            
             leftHandEnd = transform.Find("Volleyball-Character").Find("CCM-Armature").Find("Pelvis").Find("Spine1").Find("Spine2").Find("Shoulder.L").Find("UpperArm.L").Find("LowerArm.L").Find("Hand.L").Find("Hand.L_end");
         }
 
@@ -106,6 +105,11 @@ if (Skills.AthleteName == "Jorge Luis Alayo Moliner") {
 }
         }
 private bool lastEnabledStatus = false;
+
+        protected virtual void SetupStateMachine() {
+            // State Machine
+            stateMachine = new StateMachine();
+        }
 
         private void Move() {
             bool canMove = !Physics.Raycast(transform.position + Vector3.up * 0.5f, moveDir, out RaycastHit hit, 0.5f, obstaclesLayer);
@@ -251,7 +255,7 @@ private bool lastEnabledStatus = false;
             // Calculate the adjustment using Lerp (clamped to the defined ranges)
             float t = Mathf.InverseLerp(minDistance, maxDistance, ballTravelDistance);
             float adjustmentDistance = Mathf.Lerp(minAdjustment, maxAdjustment, t);
-            Debug.Log($"{minDistance} to {maxDistance} of {ballTravelDistance} is {Mathf.InverseLerp(minDistance, maxDistance, ballTravelDistance)} with adjustment of {adjustmentDistance}");
+            // Debug.Log($"{minDistance} to {maxDistance} of {ballTravelDistance} is {Mathf.InverseLerp(minDistance, maxDistance, ballTravelDistance)} with adjustment of {adjustmentDistance}");
             
             // Get direction from ball start to target
             Vector2 ballPath = (targetPos - startPos).normalized;
@@ -341,15 +345,14 @@ private bool lastEnabledStatus = false;
         public BallSO BallInfo => ballInfo;
         public MatchInfoSO MatchInfo => matchInfo;
         public AthleteStatsSO AthleteStats => athleteStats;
-        public StateMachine StateMachine { get { return stateMachine; } }
         public float CourtSide => courtSide.Value;
         public float CourtSideLength { get { return courtSideLength; } }
+        public StateMachine StateMachine => stateMachine;
         public Vector3 MoveDir {
             get { return moveDir; }
             set { moveDir = value; }
         }
         public Transform LeftHandEnd { get { return leftHandEnd; } }
-        public Ball Ball { get { return ball; } }
         public bool IsJumping { get { return isJumping; } }
         public bool Feint { get { return feint; } set { feint = value; } }
         public float ReachHeight { get { return reachHeight; } }

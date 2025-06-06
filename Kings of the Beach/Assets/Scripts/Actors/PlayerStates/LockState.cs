@@ -67,7 +67,7 @@ namespace KotB.StatePattern.PlayerStates
                 } else {
                     player.SpikeFeint(targetPos);
                 }
-                player.StateMachine.ChangeState(player.NormalState);
+                player.UnlockPlayer();
             }
         }
 
@@ -88,7 +88,7 @@ namespace KotB.StatePattern.PlayerStates
             if (canUnlock) {
                 unlockTimer -= Time.deltaTime;
                 if (unlockTimer <= 0) {
-                    player.StateMachine.ChangeState(player.NormalState);
+                    player.UnlockPlayer();
                 }
             }
         }

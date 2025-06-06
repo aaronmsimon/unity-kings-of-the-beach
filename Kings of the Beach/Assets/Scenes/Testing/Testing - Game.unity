@@ -1778,12 +1778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3076cf43a648b454b94bfeac5e93867b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereCollider: {fileID: 882233320}
---- !u!135 &882233320 stripped
-SphereCollider:
-  m_CorrespondingSourceObject: {fileID: 2641742546945953085, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
-  m_PrefabInstance: {fileID: 1972912903}
-  m_PrefabAsset: {fileID: 0}
+  sphereCollider: {fileID: 0}
 --- !u!1 &900313821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2748,6 +2743,14 @@ PrefabInstance:
       propertyPath: ScoreChanged
       value: 
       objectReference: {fileID: 11400000, guid: f3394258f96f2574482e0cc63a9e4db6, type: 2}
+    - target: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
+      propertyPath: aiTransitionProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: bd8a1404ddf7d614a913a2e8a986e293, type: 2}
+    - target: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
+      propertyPath: playerTransitionProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 92094b047aa5cf444a3b1f7bd35f8c62, type: 2}
     - target: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
       propertyPath: teams.Array.data[0].score
       value: 
@@ -3860,7 +3863,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6765332559015744136, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
-      insertIndex: 5
+      insertIndex: -1
       addedObject: {fileID: 882233318}
   m_SourcePrefab: {fileID: 100100000, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
 --- !u!1 &1984453948
