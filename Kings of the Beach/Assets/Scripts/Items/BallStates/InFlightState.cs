@@ -44,6 +44,7 @@ namespace KotB.StatePattern.BallStates
             } else {
                 ball.DestroyBallTarget();
                 ball.BallHitGround.Raise();
+                ball.deadBallPredicate.Trigger();
             }
         }
 

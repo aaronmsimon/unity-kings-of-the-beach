@@ -31,6 +31,7 @@ namespace KotB.Items
         private EventPredicate ballGivenPredicate;
         private EventPredicate targetSetPredicate;
         private EventPredicate ballHitGroundPredicate;
+        public EventPredicate deadBallPredicate { get; private set; }
 
         private void Awake() {
             SetupStateMachine();
@@ -84,15 +85,16 @@ namespace KotB.Items
             ballGivenPredicate = new EventPredicate(stateMachine);
             targetSetPredicate = new EventPredicate(stateMachine);
             ballHitGroundPredicate = new EventPredicate(stateMachine);
+            deadBallPredicate = new EventPredicate(stateMachine);
 
             // Subscribe Event Predicates to Events
             ballInfo.BallGiven += ballGivenPredicate.Trigger;
             ballInfo.TargetSet += targetSetPredicate.Trigger;
 
             // Define Transitions
-            defaultProfile.AddAnyTransition(groundState, ballHitGroundPredicate);
             defaultProfile.AddTransition(groundState, heldState, ballGivenPredicate);
             defaultProfile.AddTransition(heldState, inFlightState, targetSetPredicate);
+            defaultProfile.AddTransition(inFlightState, groundState, deadBallPredicate);
             defaultProfile.SetStartingState(groundState);
 
             stateMachine.AddProfile(defaultProfile, true);
@@ -101,10 +103,6 @@ namespace KotB.Items
         private void OnTargetSet() {
             DestroyBallTarget();
             ballTarget = Instantiate(targetPrefab, ballInfo.TargetPos, Quaternion.identity);
-        }
-
-        public void OnBallHitGround() {
-            ballHitGroundPredicate.Trigger();
         }
 
         public void DestroyBallTarget() {

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 200157665986289291}
   - component: {fileID: 1408896858035837976}
   - component: {fileID: 6059847001209752604}
-  - component: {fileID: 702700521405749192}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -81,34 +80,6 @@ MonoBehaviour:
   ballHitGroundEvent: {fileID: 11400000, guid: 8fc138420100eab479f8562b3551909f, type: 2}
   changeToInPlayStateEvent: {fileID: 11400000, guid: a94effd70fe10864486482732c9f7269, type: 2}
   servePower: {fileID: 11400000, guid: ce289d1ed0780894094eca75d709a4e4, type: 2}
---- !u!114 &702700521405749192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210444293042598170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 8fc138420100eab479f8562b3551909f, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6059847001209752604}
-        m_TargetAssemblyTypeName: KotB.Items.Ball, Assembly-CSharp
-        m_MethodName: OnBallHitGround
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &230322478069418665
 PrefabInstance:
   m_ObjectHideFlags: 0
