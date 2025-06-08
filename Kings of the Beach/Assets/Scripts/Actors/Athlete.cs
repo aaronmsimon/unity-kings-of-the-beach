@@ -96,15 +96,7 @@ namespace KotB.Actors
             if (!isJumping) {
                 Move();
             }
-
-if (Skills.AthleteName == "Jorge Luis Alayo Moliner") {
-    if (spikeTrigger.Active != lastEnabledStatus) {
-        lastEnabledStatus = spikeTrigger.Active;
-        Debug.Log($"{Skills.AthleteName} changed collider enabled to {spikeTrigger.Active} at time {Time.time}");
-    }
-}
         }
-private bool lastEnabledStatus = false;
 
         protected virtual void SetupStateMachine() {
             // State Machine
@@ -284,10 +276,10 @@ private bool lastEnabledStatus = false;
             float maxBlockHeight = 5;
 
             float targetDistance = Mathf.Lerp(2f, 4f, contactQuality) * (strongBlock ? 1 : (1 - powerReduction));
-            Debug.Log($"Target Distance: Lerp(2,4,{contactQuality})={targetDistance}");
+            // Debug.Log($"Target Distance: Lerp(2,4,{contactQuality})={targetDistance}");
             Debug.DrawLine(new Vector3(ballInfo.StartPos.x, contactPoint.y, ballInfo.StartPos.z), contactPoint, Color.yellow, 10f, false);
             Debug.DrawLine(contactPoint, contactPoint + blockNormal  * 3, Color.red, 10f, false);
-            Debug.Log($"Contact point height: {contactPoint.y:F2}");
+            // Debug.Log($"Contact point height: {contactPoint.y:F2}");
             Debug.DrawLine(contactPoint, GetBlockTargetPos(contactPoint, bounceDir, targetDistance), Color.green, 10f, false);
             
             float blockDuration;

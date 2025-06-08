@@ -48,9 +48,9 @@ namespace KotB.Stats
         public void OnStatEvent(Athlete athlete, StatTypes statType) {
             if (statHandlers.TryGetValue(statType, out var handler)) {
                 handler(athlete);
-            } else {
+            } /*else {
                 Debug.LogWarning($"No handler found for stat type: {statType}");
-            }
+            }*/
         }
     }
 }
