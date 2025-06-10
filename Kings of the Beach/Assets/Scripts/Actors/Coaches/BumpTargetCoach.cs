@@ -11,6 +11,11 @@ namespace KotB.Actors
         [SerializeField] private bool showTargetZone;
         [SerializeField] private Color targetZoneColor = Color.red;
 
+        public BumpTargetCoach(Vector2 target)
+        {
+            targetZonePos = target;
+        }
+
         public override void Execute(Coach coach)
         {
             float posX = UnityEngine.Random.Range(targetZonePos.x - targetZoneSize.x / 2, targetZonePos.x + targetZoneSize.x / 2);

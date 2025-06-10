@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using KotB.StatePattern;
 
 namespace KotB.Actors
 {
@@ -20,13 +19,12 @@ namespace KotB.Actors
 
             FaceOpponent();
             Reset();
-            SetupStateMachine();
         }
 
         protected override void Update() {
             switch (coachType) {
                 case CoachType.BumpTarget:
-                    coachAction = new BumpTargetCoach();
+                    coachAction = new BumpTargetCoach(new Vector2(-2,0));
                     break;
                 default:
                     break;
@@ -47,9 +45,6 @@ namespace KotB.Actors
             ballInfo.GiveBall(this);
             hasBall = true;
             FaceOpponent();
-            // BallInfo.HitsForTeam = resetHitCounterAmount;
-            // animator.Play("HoldBall");
-            // resetBallEvent.Raise();
         }
 
         public void CoachAction() {
@@ -57,11 +52,6 @@ namespace KotB.Actors
                 coachAction.Execute(this);
                 hasBall = false;
             }
-        }
-
-        private void SetupStateMachine() {
-            // State Machine
-            stateMachine = new StateMachine();
         }
     }
 }
