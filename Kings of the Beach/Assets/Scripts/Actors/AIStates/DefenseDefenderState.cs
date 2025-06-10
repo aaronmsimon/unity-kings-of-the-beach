@@ -34,9 +34,7 @@ namespace KotB.StatePattern.AIStates
         private void OnTargetSet() {
             // Need to add consideration if a shot is not blockable and Blocker is closer
             if (Mathf.Sign(ai.BallInfo.TargetPos.x) == ai.CourtSide) {
-                if (ai.JudgeInBounds()) {
-                    ai.StateMachine.ChangeState(ai.DigReadyState);
-                } else {
+                if (!ai.JudgeInBounds()) {
                     targetPos = ai.SetTargetToGiveUp(ai.DistToGiveUp, Random.Range(-0.5f, 0.5f));
                 }
             } else {

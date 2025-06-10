@@ -45,10 +45,6 @@ namespace KotB.StatePattern.AIStates
             // Need to add consideration if a shot is not blockable
             if (Mathf.Sign(ai.BallInfo.TargetPos.x) != ai.CourtSide) {
                 targetPos = new Vector3(blockPos * ai.CourtSide, ai.transform.position.y, ai.BallInfo.TargetPos.z);
-            } else {
-                if (ai.BallInfo.Possession == ai.CourtSide) {
-                    ai.StateMachine.ChangeState(ai.DigReadyState);
-                }
             }
         }
 
@@ -67,7 +63,7 @@ namespace KotB.StatePattern.AIStates
         private void OnBallPassed() {
             float optimalSpikeHeight = 4;
             spikeTime = ai.GetTimeToContactHeight(optimalSpikeHeight, ai.BallInfo.Height, ai.BallInfo.StartPos.y, ai.BallInfo.TargetPos.y, ai.BallInfo.Duration);
-            Debug.Log($"{ai.Skills.AthleteName} is estimating spike time from {optimalSpikeHeight}, {ai.BallInfo.Height}, {ai.BallInfo.StartPos.y}, {ai.BallInfo.TargetPos.y}, {ai.BallInfo.Duration}");
+            // Debug.Log($"{ai.Skills.AthleteName} is estimating spike time from {optimalSpikeHeight}, {ai.BallInfo.Height}, {ai.BallInfo.StartPos.y}, {ai.BallInfo.TargetPos.y}, {ai.BallInfo.Duration}");
             spikePosEstimate = ai.BallInfo.TargetPos;
         }
 

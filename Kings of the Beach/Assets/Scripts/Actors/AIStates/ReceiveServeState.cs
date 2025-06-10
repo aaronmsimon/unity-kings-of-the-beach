@@ -8,6 +8,8 @@ namespace KotB.StatePattern.AIStates
         public ReceiveServeState(AI ai) : base(ai) { }
         
         public override void Enter() {
+            ai.transform.position = ai.ServeDefPos;
+            ai.FaceOpponent();
             ai.TargetPos = ai.transform.position;
             
             ai.ReachedTargetPos += OnReachedTargetPos;
@@ -24,15 +26,7 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void OnTargetSet() {
-            if (ai.MyBall()) {
-                if (ai.JudgeInBounds()) {
-                    ai.StateMachine.ChangeState(ai.DigReadyState);
-                } else {
-                    ai.TargetPos = ai.SetTargetToGiveUp(ai.DistToGiveUp, Random.Range(-0.5f, 0.5f));
-                }
-            } else {
-                ai.StateMachine.ChangeState(ai.OffenseState);
-            }
+            ai.TargetPos = ai.SetTargetToGiveUp(ai.DistToGiveUp, Random.Range(-0.5f, 0.5f));
         }
     }
 }

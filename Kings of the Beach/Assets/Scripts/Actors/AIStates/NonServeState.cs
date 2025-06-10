@@ -10,12 +10,10 @@ namespace KotB.StatePattern.AIStates
         public override void Enter() {
             ai.transform.position = GetMyDefensivePosition();
 
-            ai.BallInfo.BallServed += OnBallServed;
             ai.ReachedTargetPos += OnReachedTargetPos;
         }
 
         public override void Exit() {
-            ai.BallInfo.BallServed -= OnBallServed;
             ai.ReachedTargetPos -= OnReachedTargetPos;
         }
 
@@ -34,10 +32,6 @@ namespace KotB.StatePattern.AIStates
             }
 
             return new Vector3(ai.Skills.DefensePos.x * ai.CourtSide, 0.01f, defenseZPos);
-        }
-
-        private void OnBallServed() {
-            ai.StateMachine.ChangeState(ai.DefenseState);
         }
 
         private void OnReachedTargetPos() {

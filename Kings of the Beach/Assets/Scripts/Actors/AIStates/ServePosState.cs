@@ -27,7 +27,7 @@ namespace KotB.StatePattern.AIStates
             } else {
                 ai.TargetPos = targetPos;
                 if (ai.MoveDir == Vector3.zero) {
-                    ai.StateMachine.ChangeState(ai.ServeState);
+                    ai.ServeTargetPosReachedPredicate.Trigger();
                 }
             }
         }

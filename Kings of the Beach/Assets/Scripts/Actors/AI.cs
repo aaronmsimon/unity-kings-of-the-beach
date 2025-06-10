@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using KotB.StatePattern;
 using KotB.StatePattern.AIStates;
 using Cackenballz.Helpers;
 
@@ -7,16 +8,6 @@ namespace KotB.Actors
 {
     public class AI : Athlete
     {
-        private ServeState serveState;
-        private DefenseState defenseState;
-        private OffenseState offenseState;
-        private DigReadyState digReadyState;
-        private PostPointState postPointState;
-        private NonServeState nonServeState;
-        private ServePosState servePosState;
-        private ReceiveServeState receiveServeState;
-        private DefenseBlockerState defenseBlockerState;
-        private DefenseDefenderState defenseDefenderState;
         private Vector3 targetPos;
         private float estimateRange;
 
@@ -25,23 +16,33 @@ namespace KotB.Actors
         private float stoppingDistance = 0.1f;
         private float distToGiveUp = 1;
 
+        private EventPredicate ballHitGroundPredicate;
+        private EventPredicate ballServedPredicate;
+        private EventPredicate targetSetPredicate;
+        private EventPredicate matchToServePredicate;
+
+        public EventPredicate ServeTargetPosReachedPredicate { get; private set; }
+        public EventPredicate ServeToDefensePredicate { get; private set; }
+        public EventPredicate DigToOffensePredicate { get; private set; }
+        public EventPredicate DigToDefensePredicate { get; private set; }
+
         protected override void Awake() {
             base.Awake();
 
-            serveState = new ServeState(this);
-            defenseState = new DefenseState(this);
-            offenseState = new OffenseState(this);
-            digReadyState = new DigReadyState(this);
-            postPointState = new PostPointState(this);
-            nonServeState = new NonServeState(this);
-            servePosState = new ServePosState(this);
-            receiveServeState = new ReceiveServeState(this);
-            defenseBlockerState = new DefenseBlockerState(this);
-            defenseDefenderState = new DefenseDefenderState(this);
-
-            stateMachine.ChangeState(postPointState);
-
             estimateRange = BallInfo.BallRadius * 2;
+
+            SetupStateMachine();
+        }
+
+        private void OnDisable() {
+            ballInfo.BallServed -= ballServedPredicate.Trigger;
+            ballInfo.TargetSet -= targetSetPredicate.Trigger;
+            matchInfo.TransitionToServeState -= matchToServePredicate.Trigger;
+
+            ballHitGroundPredicate.Cleanup();
+            ballServedPredicate.Cleanup();
+            targetSetPredicate.Cleanup();
+            matchToServePredicate.Cleanup();
         }
 
         protected override void Update() {
@@ -113,7 +114,7 @@ namespace KotB.Actors
             
         }
 
-        public bool MyBall() {
+        private bool MyBall() {
             Athlete teammate = MatchInfo.GetTeammate(this);
             if (teammate != null) {
                 float myDistToBall = (BallInfo.TargetPos - transform.position).sqrMagnitude;
@@ -125,8 +126,73 @@ namespace KotB.Actors
         }
 
         public void OnBallHitGround() {
-            stateMachine.ChangeState(postPointState);
+            ballHitGroundPredicate.Trigger();
             targetPos = transform.position;
+        }
+
+        protected override void SetupStateMachine() {
+            base.SetupStateMachine();
+
+            // Declare States
+            var serveState = new ServeState(this);
+            var defenseState = new DefenseState(this);
+            var offenseState = new OffenseState(this);
+            var digReadyState = new DigReadyState(this);
+            var postPointState = new PostPointState(this);
+            var nonServeState = new NonServeState(this);
+            var servePosState = new ServePosState(this);
+            var receiveServeState = new ReceiveServeState(this);
+            var defenseBlockerState = new DefenseBlockerState(this);
+            var defenseDefenderState = new DefenseDefenderState(this);
+
+            // Declare Event Predicates
+            ballHitGroundPredicate = new EventPredicate(stateMachine);
+            
+            ballServedPredicate = new EventPredicate(stateMachine);
+            targetSetPredicate = new EventPredicate(stateMachine);
+            matchToServePredicate = new EventPredicate(stateMachine);
+            ServeTargetPosReachedPredicate = new EventPredicate(stateMachine);
+            ServeToDefensePredicate = new EventPredicate(stateMachine);
+            DigToOffensePredicate = new EventPredicate(stateMachine);
+            DigToDefensePredicate = new EventPredicate(stateMachine);
+
+            // Subscribe Event Predicates to Events
+            ballInfo.BallServed += ballServedPredicate.Trigger;
+            ballInfo.TargetSet += targetSetPredicate.Trigger;
+            matchInfo.TransitionToServeState += matchToServePredicate.Trigger;
+
+            // Declare Default Profile & Transitions
+            TransitionProfile defaultProfile = new TransitionProfile("Default");
+
+                // Setup Transitions
+                defaultProfile.AddAnyTransition(postPointState, ballHitGroundPredicate);
+                defaultProfile.AddTransition(postPointState, servePosState, new AndPredicate(matchToServePredicate, new FuncPredicate(() => matchInfo.GetServer() == this)));
+                defaultProfile.AddTransition(postPointState, nonServeState, new AndPredicate(matchToServePredicate, new FuncPredicate(() => matchInfo.Teams[matchInfo.TeamServeIndex] == matchInfo.GetTeam(this) && matchInfo.GetServer() != this)));
+                defaultProfile.AddTransition(postPointState, receiveServeState, new AndPredicate(matchToServePredicate, new FuncPredicate(() => matchInfo.Teams[matchInfo.TeamServeIndex] != matchInfo.GetTeam(this))));
+                defaultProfile.AddTransition(servePosState, serveState, ServeTargetPosReachedPredicate);
+                defaultProfile.AddTransition(nonServeState, defenseState, ballServedPredicate);
+                defaultProfile.AddTransition(receiveServeState, digReadyState, new AndPredicate(targetSetPredicate, new FuncPredicate(() => MyBall()), new FuncPredicate(() => JudgeInBounds())));
+                defaultProfile.AddTransition(receiveServeState, offenseState, new AndPredicate(targetSetPredicate, new FuncPredicate(() => !MyBall())));
+                defaultProfile.AddTransition(serveState, defenseState, ServeToDefensePredicate);
+                defaultProfile.AddTransition(defenseState, defenseBlockerState, new FuncPredicate(() => skills.PlayerPosition == PositionType.Blocker));
+                defaultProfile.AddTransition(defenseState, defenseDefenderState, new FuncPredicate(() => skills.PlayerPosition == PositionType.Defender));
+                defaultProfile.AddTransition(digReadyState, offenseState, DigToOffensePredicate);
+                defaultProfile.AddTransition(digReadyState, defenseState, DigToDefensePredicate);
+                defaultProfile.AddTransition(defenseBlockerState, digReadyState, new AndPredicate(
+                    targetSetPredicate,
+                    new FuncPredicate(() => Mathf.Sign(ballInfo.TargetPos.x) == courtSide.Value),
+                    new FuncPredicate(() => ballInfo.Possession == courtSide.Value)
+                ));
+                defaultProfile.AddTransition(defenseDefenderState, digReadyState, new AndPredicate(
+                    targetSetPredicate,
+                    new FuncPredicate(() => Mathf.Sign(ballInfo.TargetPos.x) == courtSide.Value),
+                    new FuncPredicate(() => JudgeInBounds())
+                ));
+                defaultProfile.AddTransition(offenseState, digReadyState, new AndPredicate(targetSetPredicate, new FuncPredicate(() => Mathf.Sign(ballInfo.TargetPos.x) == courtSide.Value)));
+                defaultProfile.AddTransition(offenseState, defenseState, new AndPredicate(targetSetPredicate, new FuncPredicate(() => Mathf.Sign(ballInfo.TargetPos.x) != courtSide.Value)));
+                defaultProfile.SetStartingState(postPointState);
+
+                stateMachine.AddProfile(defaultProfile);
         }
 
         protected override void OnDrawGizmos() {
@@ -139,16 +205,6 @@ namespace KotB.Actors
 
         //---- PROPERTIES ----
         
-        public ServeState ServeState { get { return serveState; } }
-        public DefenseState DefenseState { get { return defenseState; } }
-        public OffenseState OffenseState { get { return offenseState; } }
-        public DigReadyState DigReadyState { get { return digReadyState; } }
-        public PostPointState PostPointState { get { return postPointState; } }
-        public NonServeState NonServeState { get { return nonServeState; } }
-        public ServePosState ServePosState { get { return servePosState; } }
-        public ReceiveServeState ReceiveServeState { get { return receiveServeState; } }
-        public DefenseBlockerState DefenseBlockerState => defenseBlockerState;
-        public DefenseDefenderState DefenseDefenderState => defenseDefenderState;
         public Vector3 TargetPos
         {
             get => targetPos;

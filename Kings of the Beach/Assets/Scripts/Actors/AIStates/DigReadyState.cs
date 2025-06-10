@@ -54,16 +54,16 @@ namespace KotB.StatePattern.AIStates
                 switch (ai.BallInfo.HitsForTeam) {
                     case 0:
                         ai.Pass(ai.CalculatePassTarget(ai.MatchInfo.GetTeammate(ai)), 7, 1.75f);
-                        ai.StateMachine.ChangeState(ai.OffenseState);
+                        ai.DigToOffensePredicate.Trigger();
                         break;
                     case 1:
                         ai.Pass(ai.CalculatePassTarget(ai.MatchInfo.GetTeammate(ai)), 7, 1.75f);
-                        ai.StateMachine.ChangeState(ai.DefenseState);
+                        ai.DigToDefensePredicate.Trigger();
                         break;
                     case 2:
                         Vector3 bumpTarget = CalculateSpikeTarget();
                         ai.Pass(bumpTarget, 7, 1.75f);
-                        ai.StateMachine.ChangeState(ai.DefenseState);
+                        ai.DigToDefensePredicate.Trigger();
                         break;
                     default:
                         Debug.Log("Invalid number of hits, perhaps point for other team.");
@@ -85,7 +85,7 @@ namespace KotB.StatePattern.AIStates
                         ai.SpikeFeint(spikeTarget);
                         // Debug.Log(message += " Decided to do a feint.");
                     }
-                    ai.StateMachine.ChangeState(ai.DefenseState);
+                    ai.DigToDefensePredicate.Trigger();
                 }
             }            
         }
@@ -175,8 +175,9 @@ namespace KotB.StatePattern.AIStates
         }
 
         private void OnTargetSet() {
-            if (ai.BallInfo.TargetPos.x != ai.CourtSide) {
-                ai.StateMachine.ChangeState(ai.DefenseState);
+            if (Mathf.Sign(ai.BallInfo.TargetPos.x) != ai.CourtSide) {
+                Debug.Log($"{ai.Skills.AthleteName}: 'The target was set to {Mathf.Sign(ai.BallInfo.TargetPos.x)} and since that is not equal to my court side ({ai.CourtSide}), I will go to Defense State.");
+                ai.DigToDefensePredicate.Trigger();
             }
         }
     }

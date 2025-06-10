@@ -47,7 +47,7 @@ namespace KotB.StatePattern.AIStates
             } else {
                 timeUntilDefense -= Time.deltaTime;
                 if (timeUntilDefense < 0) {
-                    ai.StateMachine.ChangeState(ai.DefenseState);
+                    ai.ServeToDefensePredicate.Trigger();
                 }
             }
         }
