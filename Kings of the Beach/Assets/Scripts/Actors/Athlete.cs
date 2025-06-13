@@ -187,13 +187,19 @@ namespace KotB.Actors
             SetSpikeTargetByType(targetPos, skills.SpikeSkill, skills.SpikePower, ballInfo.SkillValues.SpikePower, StatTypes.Attack);
         }
 
-        private void SetSpikeTargetByType(Vector3 targetPos, float athleteSkill, float athleteSkillPower, MinMax skillPowerRange, StatTypes statType) {
+        private void SetSpikeTargetByType(Vector3 targetPos, float athleteSkill, float athletePower, MinMax skillPowerRange, StatTypes statType) {
             // Raycast to target
             Vector3 startPos = ballInfo.Position;
             Vector3 distance = targetPos - startPos;
             bool directLine = !Physics.Raycast(startPos, distance.normalized, distance.magnitude, invalidAimLayer);
 
-            float spikeTime = ballInfo.SkillValues.SkillToValue(athleteSkillPower, skillPowerRange) * (1 - Mathf.Abs(spikeSpeedPenalty));
+            // Define max variance depending on skill
+            float maxVariance = Mathf.Lerp(2f, 0.1f, athleteSkill / 10f); // Skill 1 → 2f variance, Skill 10 → 0.1f variance
+            // Apply random variation centered on power
+            float adjustedPower = Mathf.Clamp(athletePower + UnityEngine.Random.Range(-maxVariance, maxVariance), 1f, 10f);
+
+            float spikeTime = distance.magnitude / (ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange) * (1 - Mathf.Abs(spikeSpeedPenalty)));
+            Debug.Log($"t = d/r: {spikeTime} = {distance.magnitude} / {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, power: {athletePower}, {adjustedPower}");
             bool skillCheck = UnityEngine.Random.value <= ballInfo.SkillValues.SkillToValue(athleteSkill, ballInfo.SkillValues.SpikeOverNet);
             if (directLine || (!directLine && !skillCheck)) {
                 // If clear, set direct target
@@ -204,7 +210,7 @@ namespace KotB.Actors
                 float heightAtNet = ballInfo.CalculateInFlightPosition(netCrossingT, startPos, targetPos, startPos.y).y;
                 float requiredHeight = Mathf.Lerp(2.5f, 2.75f, Mathf.InverseLerp(1, 8, Mathf.Abs(transform.position.x))); // this should be based on net height
                 float adjustedHeight = startPos.y + requiredHeight - heightAtNet;
-                ballInfo.SetSpikeTarget(targetPos, spikeTime, this, statType, adjustedHeight);
+                ballInfo.SetSpikeTarget(targetPos, spikeTime * 2, this, statType, adjustedHeight);
                 Debug.Log($"No direct line and skill check passed. Adjusted height to {adjustedHeight}");
             }
             // Debug.Log($"{skills.AthleteName} has {(directLine ? "a clear line." : "no direct path (pos: " + startPos + " target: " + targetPos + "), using an arc.")}");

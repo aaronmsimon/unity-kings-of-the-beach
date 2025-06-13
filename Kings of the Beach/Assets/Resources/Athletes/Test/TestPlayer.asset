@@ -15,21 +15,21 @@ MonoBehaviour:
   athleteName: Player
   gender: 1
   defaultOutfit: 1
-  defaultTop: {fileID: 2100000, guid: 27d818651567ec14e999cd9b220e7298, type: 2}
-  defaultBottom: {fileID: 2100000, guid: 87b50695baa08c94db8b43fa342a42b4, type: 2}
+  defaultTop: {fileID: 0}
+  defaultBottom: {fileID: 0}
   moveSpeed: 4
   targetLockDistance: 0.75
   reactionTime: 0
   passAccuracy: 10
   inBoundsJudgement: 1
   spikeSkill: 7
-  spikePower: 10
+  spikePower: 7
   digRange: 0
   serving: 5
   servePower: 8
   blocking: 6.8
+  blockPower: 1
   height: 1.8
-  servingPartnerPos: {x: 5, y: 1.5}
   defensePos: {x: 5, y: -2}
   offenseXPos: 1.25
   playerPosition: 0

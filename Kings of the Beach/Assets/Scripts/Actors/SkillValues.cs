@@ -14,7 +14,7 @@ namespace KotB.Actors
         [SerializeField] private MinMax passAccuracy;
 
         [Header("Spiking")]
-        [SerializeField] private MinMax spikePower;
+        [SerializeField][Tooltip("Speed in m/s")] private MinMax spikePower;
         [SerializeField] private MinMax spikeTimingWindow;
         [SerializeField] private MinMax spikeOverNet;
 
