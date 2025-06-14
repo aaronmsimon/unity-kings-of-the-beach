@@ -6,11 +6,10 @@ namespace KotB.Testing
 {
     public class LoadTransitionProfile : MonoBehaviour
     {
-        [SerializeField] private StringVariable playerTransitionProfile;
+        [SerializeField] private StringVariable transitionProfile;
 
         private void Start() {
-            Player player = FindObjectOfType<Player>();
-            player.StateMachine.SetActiveProfile(playerTransitionProfile.Value);
+            GetComponent<Athlete>().StateMachine.SetActiveProfile(transitionProfile.Value);
         }
     }
 }

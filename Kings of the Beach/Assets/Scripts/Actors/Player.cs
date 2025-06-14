@@ -25,7 +25,6 @@ namespace KotB.Actors
         [SerializeField] private FloatVariable mainCameraPriority;
         [SerializeField] private FloatVariable serveCameraPriority;
         [SerializeField] private Vector3Variable serveAimPosition;
-        [SerializeField] private StringVariable playerTransitionProfile;
 
         private Vector3 moveInput;
         private Vector3 rightStickInput;

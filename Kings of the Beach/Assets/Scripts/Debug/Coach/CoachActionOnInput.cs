@@ -5,10 +5,14 @@ namespace KotB.Testing
 {
     public class CoachActionOnInput : MonoBehaviour
     {
-        [SerializeField] private Coach coach;
-
         [Header("User Input")]
         [SerializeField] private InputReader inputReader;
+
+        private Coach coach;
+
+        private void Start() {
+            coach = GetComponent<Coach>();
+        }
 
         private void OnEnable() {
             inputReader.testEvent += OnTestEvent;
