@@ -65,8 +65,6 @@ namespace KotB.Actors
 
             obstaclesLayer = LayerMask.GetMask("Obstacles");
             invalidAimLayer = LayerMask.GetMask("InvalidAim");
-
-            SetupStateMachine();
         }
 
         protected virtual void Start() {
@@ -91,16 +89,11 @@ namespace KotB.Actors
         }
 
         protected virtual void Update() {
-            stateMachine.Update();
+            stateMachine?.Update();
             
             if (!isJumping) {
                 Move();
             }
-        }
-
-        protected virtual void SetupStateMachine() {
-            // State Machine
-            stateMachine = new StateMachine();
         }
 
         private void Move() {

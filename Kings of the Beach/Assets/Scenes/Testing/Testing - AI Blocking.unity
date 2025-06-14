@@ -379,7 +379,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349691250}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 446241fde52def84b8b05ef1651144e9, type: 3}
   m_Name: 
@@ -388,7 +388,7 @@ MonoBehaviour:
   athletes:
   - {fileID: 234540892}
   - {fileID: 1589109999}
-  coach: {fileID: 1158920861}
+  coach: {fileID: 0}
   ballInfo: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
 --- !u!4 &349691252
 Transform:
@@ -510,6 +510,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &720684998 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5717242374435514889, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
+  m_PrefabInstance: {fileID: 1109411524}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1109411524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -606,19 +611,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7855929619521182701, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1817829347}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1494799643}
   m_SourcePrefab: {fileID: 100100000, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
---- !u!114 &1158920861 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -6829632742945956471, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
-  m_PrefabInstance: {fileID: 1109411524}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04bcd3ede32f92d4386cf39e7ad76c00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1224069032 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1210444293042598170, guid: a1d68553cfbbfda42a6bc6167b3f6f38, type: 3}
@@ -662,6 +659,10 @@ PrefabInstance:
       propertyPath: courtSide
       value: 
       objectReference: {fileID: 11400000, guid: 718029772aacc8042a5d065803efe304, type: 2}
+    - target: {fileID: 2903952158050811650, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
+      propertyPath: playerTransitionProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 92094b047aa5cf444a3b1f7bd35f8c62, type: 2}
     - target: {fileID: 4883147622998346402, guid: 5552b463231179546b0d32bda2c3422c, type: 3}
       propertyPath: m_Name
       value: Spike
@@ -739,30 +740,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7855929619521182701, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
   m_PrefabInstance: {fileID: 1109411524}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1589109990 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
-  m_PrefabInstance: {fileID: 1807161810}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1589109997
+--- !u!114 &1494799643
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589109990}
+  m_GameObject: {fileID: 720684998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 031055a86052a8c448cad9431eb433ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  athleteState: 6
+  Event: {fileID: 11400000, guid: 8fc138420100eab479f8562b3551909f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1494799644}
+        m_TargetAssemblyTypeName: KotB.Actors.Coach, Assembly-CSharp
+        m_MethodName: OnBallHitGround
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1494799644 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -8341760479280743200, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
+  m_PrefabInstance: {fileID: 1109411524}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720684998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe0e2b99c855d849a6edb595e9cf32e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1589109999 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8463576540012695194, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
   m_PrefabInstance: {fileID: 1807161810}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589109990}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14e6fb03f9f1aea49b2a2f830b2cc6e5, type: 3}
@@ -1071,10 +1093,7 @@ PrefabInstance:
     - {fileID: 6784167377463967678, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1589109997}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
 --- !u!1 &1817829346
 GameObject:

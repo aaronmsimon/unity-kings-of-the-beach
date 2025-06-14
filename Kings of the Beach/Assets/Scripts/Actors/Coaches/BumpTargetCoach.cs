@@ -11,22 +11,15 @@ namespace KotB.Actors
         [SerializeField] private bool showTargetZone;
         [SerializeField] private Color targetZoneColor = Color.red;
 
-        public BumpTargetCoach(Vector2 target)
+        public override void Execute()
         {
-            targetZonePos = target;
+            float posX = Random.Range(targetZonePos.x - targetZoneSize.x / 2, targetZonePos.x + targetZoneSize.x / 2);
+            float posY = Random.Range(targetZonePos.y - targetZoneSize.y / 2, targetZonePos.y + targetZoneSize.y / 2);
+            coach.Pass(new Vector3(posX, 0.01f, posY), 7, 1.75f);
         }
 
-        public override void Execute(Coach coach)
-        {
-            float posX = UnityEngine.Random.Range(targetZonePos.x - targetZoneSize.x / 2, targetZonePos.x + targetZoneSize.x / 2);
-            float posY = UnityEngine.Random.Range(targetZonePos.y - targetZoneSize.y / 2, targetZonePos.y + targetZoneSize.y / 2);
-            coach.Pass(new Vector3(posX, 0, posY), 7, 1.75f);
+        protected void OnDrawGizmos() {
+            Helpers.DrawTargetZone(targetZonePos, targetZoneSize, targetZoneColor, showTargetZone);
         }
-
-        // protected override void OnDrawGizmos() {
-        //     base.OnDrawGizmos();
-
-        //     Helpers.DrawTargetZone(targetZonePos, targetZoneSize, targetZoneColor, showTargetZone);
-        // }
     }
 }

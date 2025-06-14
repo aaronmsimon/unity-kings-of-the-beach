@@ -32,7 +32,7 @@ namespace KotB
         }
 
         public static void DrawTargetZone(Vector2 targetZonePos, Vector2 targetZoneSize, Color targetZoneColor, bool showTargetZone) {
-            float targetZoneHeight = 0.1f;
+            float targetZoneHeight = 0.01f;
 
             Vector3[] points;
             points = new Vector3[8] {

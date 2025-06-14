@@ -147,6 +147,9 @@ GameObject:
   - component: {fileID: 7855929619521182701}
   - component: {fileID: 5127179976974750972}
   - component: {fileID: -8341760479280743200}
+  - component: {fileID: 8880390346658291864}
+  - component: {fileID: 2453569792916852632}
+  - component: {fileID: 7328459484564261665}
   m_Layer: 0
   m_Name: Coach
   m_TagString: Untagged
@@ -218,6 +221,62 @@ MonoBehaviour:
   athleteStats: {fileID: 0}
   courtSide: {fileID: 11400000, guid: 718029772aacc8042a5d065803efe304, type: 2}
   coachType: 0
+--- !u!114 &8880390346658291864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5717242374435514889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc518657cf6a9448b44d25fb0e01572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 8fc138420100eab479f8562b3551909f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -8341760479280743200}
+        m_TargetAssemblyTypeName: KotB.Actors.Coach, Assembly-CSharp
+        m_MethodName: OnBallHitGround
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2453569792916852632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5717242374435514889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a60b62faef3369d45ae3f0b1355b3abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetZonePos: {x: 0, y: 0}
+  targetZoneSize: {x: 0, y: 0}
+  showTargetZone: 0
+  targetZoneColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &7328459484564261665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5717242374435514889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53799f5a324255e408113008954d426f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9075367318696454962
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +427,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: f1cfc2e7d7c667d42bdcd72e0ea3f16b, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 9cf704f7b711124478dadcf7568c2656, type: 2}
+      objectReference: {fileID: 9100000, guid: fd231248d07552e4c92f217bd42401f9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

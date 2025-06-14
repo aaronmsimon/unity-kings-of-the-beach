@@ -130,8 +130,9 @@ namespace KotB.Actors
             targetPos = transform.position;
         }
 
-        protected override void SetupStateMachine() {
-            base.SetupStateMachine();
+        private void SetupStateMachine() {
+            // State Machine
+            stateMachine = new StateMachine();
 
             // Declare States
             var serveState = new ServeState(this);

@@ -1,8 +1,16 @@
+using UnityEngine;
+
 namespace KotB.Actors
 {
-    [System.Serializable]
-    public abstract class CoachAction
+    [RequireComponent(typeof(Coach))]
+    public abstract class CoachAction : MonoBehaviour
     {
-        public abstract void Execute(Coach coach);
+        protected Coach coach;
+
+        private void Start() {
+            coach = GetComponent<Coach>();
+        }
+
+        public abstract void Execute();
     }
 }

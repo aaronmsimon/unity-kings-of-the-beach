@@ -67,8 +67,9 @@ namespace KotB.Actors
             unlockPlayerPredicate.Cleanup();
         }
 
-        protected override void SetupStateMachine() {
-            base.SetupStateMachine();
+        private void SetupStateMachine() {
+            // State Machine
+            stateMachine = new StateMachine();
             
             // Declare States
             var normalState = new NormalState(this);

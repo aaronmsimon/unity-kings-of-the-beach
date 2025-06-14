@@ -10,7 +10,7 @@ namespace KotB.Actors
         [Header("Coach Configuration")]
         [SerializeField] private CoachType coachType;
 
-        private CoachAction coachAction;
+        private CoachAction[] coachActions;
 
         private bool hasBall = false;
 
@@ -19,16 +19,8 @@ namespace KotB.Actors
 
             FaceOpponent();
             Reset();
-        }
 
-        protected override void Update() {
-            switch (coachType) {
-                case CoachType.BumpTarget:
-                    coachAction = new BumpTargetCoach(new Vector2(-2,0));
-                    break;
-                default:
-                    break;
-            }
+            coachActions = GetComponents<CoachAction>();
         }
 
         public void OnBallHitGround() {
@@ -49,7 +41,7 @@ namespace KotB.Actors
 
         public void CoachAction() {
             if (hasBall) {
-                coachAction.Execute(this);
+                coachActions[0].Execute();
                 hasBall = false;
             }
         }
