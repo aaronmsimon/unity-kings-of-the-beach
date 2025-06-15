@@ -10,7 +10,7 @@ namespace KotB.Actors
         [Header("Coach Configuration")]
         [SerializeField] private CoachType coachType;
 
-        private CoachAction[] coachActions;
+        private CoachAction coachAction;
 
         private bool hasBall = false;
 
@@ -20,7 +20,13 @@ namespace KotB.Actors
             FaceOpponent();
             Reset();
 
-            coachActions = GetComponents<CoachAction>();
+            int coachActionCount = GetComponents<CoachAction>().Length;
+            if (coachActionCount != 1) {
+                Debug.Log($"You must have just one CoachAction on a Coach; {coachActionCount} found.");
+                return;
+            }
+
+            coachAction = GetComponent<CoachAction>();
         }
 
         public void OnBallHitGround() {
@@ -41,7 +47,7 @@ namespace KotB.Actors
 
         public void CoachAction() {
             if (hasBall) {
-                coachActions[0].Execute();
+                coachAction.Execute();
                 hasBall = false;
             }
         }

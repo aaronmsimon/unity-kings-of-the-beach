@@ -5,7 +5,7 @@ namespace KotB.Testing
 {
     public class AthleteReset : MonoBehaviour
     {
-        [SerializeField] private Coach_Original coach;
+        [SerializeField] private Coach coach;
 
         private Athlete athlete;
         private Vector3 startPos;
@@ -16,11 +16,11 @@ namespace KotB.Testing
         }
 
         private void OnEnable() {
-            coach.BallTaken += ResetPosition;
+            coach.BallInfo.BallGiven += ResetPosition;
         }
 
         private void OnDisable() {
-            coach.BallTaken -= ResetPosition;
+            coach.BallInfo.BallGiven -= ResetPosition;
         }
 
         private void ResetPosition() {

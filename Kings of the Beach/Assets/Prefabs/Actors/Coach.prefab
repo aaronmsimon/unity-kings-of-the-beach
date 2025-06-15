@@ -148,8 +148,6 @@ GameObject:
   - component: {fileID: 5127179976974750972}
   - component: {fileID: -8341760479280743200}
   - component: {fileID: 8880390346658291864}
-  - component: {fileID: 2453569792916852632}
-  - component: {fileID: 7328459484564261665}
   m_Layer: 0
   m_Name: Coach
   m_TagString: Untagged
@@ -249,34 +247,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2453569792916852632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5717242374435514889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a60b62faef3369d45ae3f0b1355b3abb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetZonePos: {x: 0, y: 0}
-  targetZoneSize: {x: 0, y: 0}
-  showTargetZone: 0
-  targetZoneColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &7328459484564261665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5717242374435514889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53799f5a324255e408113008954d426f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9075367318696454962
 GameObject:
   m_ObjectHideFlags: 0
