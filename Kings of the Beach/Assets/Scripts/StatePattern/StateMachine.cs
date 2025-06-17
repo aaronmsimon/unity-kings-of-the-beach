@@ -55,6 +55,7 @@ namespace KotB.StatePattern
             if (i >= 0) {
                 currentProfile = profiles[i];
                 currentProfile.ActivateProfile();
+                StateChanged?.Invoke(currentProfile.CurrentState);
             } else {
                 UnityEngine.Debug.LogAssertion($"{profileName} does not exist.");
             }
