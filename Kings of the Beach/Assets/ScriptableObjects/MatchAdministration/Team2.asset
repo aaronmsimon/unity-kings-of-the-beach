@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Team2
   m_EditorClassIdentifier: 
   teamName: {fileID: 11400000, guid: 4be0a0172db0e1f438985c94c6a04c9f, type: 2}
+  teamAbbr: {fileID: 11400000, guid: 03a366eb2bdfacd40b0719be8f6d3163, type: 2}
+  teamLogo: {fileID: 21300000, guid: e7ca74227c07de84f84fcf260350f442, type: 3}
   score: {fileID: 11400000, guid: 85e4cb5a8d901de49a5c54cfb230235f, type: 2}
   courtSide: {fileID: 11400000, guid: 49066017a306d4c48954e99750cc8cf0, type: 2}
   athleteConfigs:

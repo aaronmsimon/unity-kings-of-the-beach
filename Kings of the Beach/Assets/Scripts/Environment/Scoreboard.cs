@@ -1,27 +1,37 @@
 using UnityEngine;
 using TMPro;
-using RoboRyanTron.Unite2017.Variables;
+using KotB.Match;
 
 namespace KotB.Environment
 {
     public class Scoreboard : MonoBehaviour
     {
         [Header("Scriptable Objects")]
-        [SerializeField] private FloatVariable team1Score;
-        [SerializeField] private FloatVariable team2Score;
+        [SerializeField] private TeamSO team1;
+        [SerializeField] private TeamSO team2;
 
-        [Header("Game Objects")]
-        [SerializeField] private TextMeshPro team1ScoreText;
-        [SerializeField] private TextMeshPro team2ScoreText;
+        private TextMeshPro team1ScoreText;
+        private TextMeshPro team2ScoreText;
 
         private void Start() {
-            team1ScoreText.text = "0";
-            team2ScoreText.text = "0";
+            SetupTeamPanel("Team1", team1, out team1ScoreText);
+            SetupTeamPanel("Team2", team2, out team2ScoreText);
+
+            OnScoreUpdate();
+        }
+
+        private void SetupTeamPanel(string panelName, TeamSO team, out TextMeshPro scoreText)
+        {
+            Transform panel = transform.Find(panelName);
+
+            panel.Find("Logo").GetComponent<SpriteRenderer>().sprite = team.TeamLogo;
+            panel.Find("Abbr").GetComponent<TextMeshPro>().text = team.TeamAbbr.Value;
+            scoreText = panel.Find("Score").GetComponent<TextMeshPro>();
         }
 
         public void OnScoreUpdate() {
-            team1ScoreText.text = team1Score.Value.ToString();
-            team2ScoreText.text = team2Score.Value.ToString();
+            team1ScoreText.text = team1.Score.ToString();
+            team2ScoreText.text = team2.Score.ToString();
         }
     }
 }

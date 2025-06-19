@@ -9,6 +9,8 @@ namespace KotB.Match
     public class TeamSO : ScriptableObject
     {
         [SerializeField] private StringVariable teamName;
+        [SerializeField] private StringVariable teamAbbr;
+        [SerializeField] private Sprite teamLogo;
         [SerializeField] private FloatVariable score;
         [SerializeField] private FloatVariable courtSide;
         [SerializeField] private List<AthleteConfigSO> athleteConfigs;
@@ -59,6 +61,8 @@ namespace KotB.Match
         public List<AthleteConfigSO> AthleteConfigs => athleteConfigs;
         public List<Athlete> Athletes => athletes;
         public StringVariable TeamName => teamName;
+        public StringVariable TeamAbbr => teamAbbr;
+        public Sprite TeamLogo => teamLogo;
         public FloatVariable CourtSide => courtSide;
         public float Score => score.Value;
     }
