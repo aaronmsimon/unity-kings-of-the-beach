@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace KotB.Actors
 {
-    [System.Serializable]
     public class BumpPassCoach : CoachAction
     {
         [SerializeField] private Athlete passRecipient;

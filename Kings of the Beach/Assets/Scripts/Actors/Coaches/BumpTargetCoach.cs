@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace KotB.Actors
 {
-    [System.Serializable]
     public class BumpTargetCoach : CoachAction
     {
         [Header("Target Area")]
