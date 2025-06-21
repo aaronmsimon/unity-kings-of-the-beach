@@ -8,12 +8,14 @@ namespace KotB.Testing
     {
         [SerializeField] private GameObject ballPathMarker;
         [SerializeField] private float frequency = 4;
+        [SerializeField] private bool logPositions = false;
 
         private Ball ball;
         private bool trackingBallPath;
         private float hz;
         private float timeSinceLastMarker;
         private List<GameObject> pathMarkers = new List<GameObject>();
+        private Vector3 lastPos;
 
         private void Awake() {
             ball = GetComponent<Ball>();
@@ -35,7 +37,10 @@ namespace KotB.Testing
                 GameObject pathMarker = Instantiate(ballPathMarker, transform.position, Quaternion.identity);
                 pathMarkers.Add(pathMarker);
                 ResetTimeSinceLastMarker();
+                if (logPositions && transform.position != lastPos) Debug.Log($"Ball is at {transform.position}");
             }
+
+            lastPos = transform.position;
         }
 
         private void OnTargetSet() {

@@ -50,7 +50,8 @@ namespace KotB.StatePattern.AIStates
 
         private void AnticipateSpike() {
             float jumpDuration = ai.JumpFrames / ai.AnimationFrameRate;
-            float guessedSpeed = 15;
+            Athlete spiker = ai.MatchInfo.GetTeammate(ai.BallInfo.LastPlayerToHit);
+            float guessedSpeed = ai.BallInfo.SkillValues.SkillToValue(spiker.Skills.SpikePower, ai.BallInfo.SkillValues.SpikePower);
             float spikeToBlockDist = Vector3.Distance(spikePosEstimate, ai.transform.position);
             float estimatedTimeToBlock = spikeToBlockDist / guessedSpeed;
             // Debug.Log($"{ai.Skills.AthleteName} jumping to try to block now: {ai.BallInfo.TimeSinceLastHit} >= {spikeTime} + {estimatedTimeToBlock} - {jumpDuration} - {reactionTime}");

@@ -27,11 +27,13 @@ namespace KotB.Testing
         private void OnEnable() {
             ballInfo.TargetSet += OnTargetSet;
             ballInfo.BallPassed += OnBallPassed;
+            BlockTrigger.Triggered += OnBlockTriggered;
         }
 
         private void OnDisable() {
             ballInfo.TargetSet -= OnTargetSet;
             ballInfo.BallPassed -= OnBallPassed;
+            BlockTrigger.Triggered -= OnBlockTriggered;
         }
 
         protected override void Update() {
@@ -46,7 +48,6 @@ namespace KotB.Testing
         public void Reset() {
             ballInfo.HitsForTeam = 1;
             isBlocking = false;
-            OnJumpCompletedEvent();
         }
 
         private void AnticipateSpike() {
@@ -63,7 +64,6 @@ namespace KotB.Testing
         private void OnTargetSet() {
             if (Mathf.Sign(ballInfo.TargetPos.x) != courtSide.Value) {
                 tgt = new Vector3(blockPos * courtSide.Value, transform.position.y, ballInfo.TargetPos.z);
-                Debug.Log($"target is now: {tgt}");
             }
         }
 
@@ -71,6 +71,10 @@ namespace KotB.Testing
             float optimalSpikeHeight = 4;
             spikeTime = GetTimeToContactHeight(optimalSpikeHeight, ballInfo.Height, ballInfo.StartPos.y, ballInfo.TargetPos.y, ballInfo.Duration);
             spikePosEstimate = ballInfo.TargetPos;
+        }
+
+        private void OnBlockTriggered(Collider other) {
+            BlockAttempt(other);
         }
     }
 }

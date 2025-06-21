@@ -548,7 +548,7 @@ PrefabInstance:
       addedObject: {fileID: 1494799646}
     - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1494799653}
+      addedObject: {fileID: 1494799658}
   m_SourcePrefab: {fileID: 100100000, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
 --- !u!1 &1224069032 stripped
 GameObject:
@@ -569,6 +569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPathMarker: {fileID: 481153329}
   frequency: 20
+  logPositions: 0
 --- !u!1001 &1323967397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -682,7 +683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
---- !u!114 &1494799653
+--- !u!114 &1494799658
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -908,6 +909,30 @@ PrefabInstance:
     - target: {fileID: 6655453355741588321, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498618658686594772, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: animationEvents.Array.data[0].OnAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1589110006}
+    - target: {fileID: 7498618658686594772, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: animationEvents.Array.data[1].OnAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1589110006}
+    - target: {fileID: 7498618658686594772, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: animationEvents.Array.data[2].OnAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1589110006}
+    - target: {fileID: 7498618658686594772, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: animationEvents.Array.data[0].OnAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnJumpEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498618658686594772, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: animationEvents.Array.data[1].OnAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnJumpPeakEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498618658686594772, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: animationEvents.Array.data[2].OnAnimationEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnJumpCompletedEvent
       objectReference: {fileID: 0}
     - target: {fileID: 7855929619521182701, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_LocalScale.x

@@ -62,7 +62,7 @@ namespace KotB.StatePattern.PlayerStates
                     float penalty = timingVar * window * spikeWindowPenalty;
                     player.SpikeSpeedPenalty = timingVar * window;
                     Vector3 newTargetPos = new Vector3(targetPos.x + penalty, targetPos.y, targetPos.z);
-                    Debug.Log($"timingVar: {timingVar} window: {window} penalty: {penalty} target: {targetPos} newtarget: {newTargetPos}");
+                    // Debug.Log($"timingVar: {timingVar} window: {window} penalty: {penalty} target: {targetPos} newtarget: {newTargetPos}");
                     player.Spike(newTargetPos);
                 } else {
                     player.SpikeFeint(targetPos);
