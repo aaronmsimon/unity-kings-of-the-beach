@@ -176,7 +176,6 @@ namespace KotB.StatePattern.AIStates
 
         private void OnTargetSet() {
             if (Mathf.Sign(ai.BallInfo.TargetPos.x) != ai.CourtSide) {
-                Debug.Log($"{ai.Skills.AthleteName}: 'The target was set to {Mathf.Sign(ai.BallInfo.TargetPos.x)} and since that is not equal to my court side ({ai.CourtSide}), I will go to Defense State.");
                 ai.DigToDefensePredicate.Trigger();
             }
         }
