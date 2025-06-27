@@ -14,7 +14,7 @@ namespace KotB.Actors
         {
             float posX = Random.Range(targetZonePos.x - targetZoneSize.x / 2, targetZonePos.x + targetZoneSize.x / 2);
             float posY = Random.Range(targetZonePos.y - targetZoneSize.y / 2, targetZonePos.y + targetZoneSize.y / 2);
-            coach.Pass(new Vector3(posX, 0.01f, posY), 7, 1.75f);
+            coach.Bump(new Vector3(posX, 0.01f, posY), 7, 1.75f);
         }
 
         protected void OnDrawGizmos() {

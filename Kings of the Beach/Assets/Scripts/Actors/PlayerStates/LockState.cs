@@ -47,7 +47,7 @@ namespace KotB.StatePattern.PlayerStates
         private void OnBodyTriggered(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 if (bumpTimer > 0) {
-                    player.Pass(targetPos, 7, 1.75f);
+                    player.Bump(targetPos, 7, 1.75f);
                     unlockTimer = unlockDelay;
                 }
             }
