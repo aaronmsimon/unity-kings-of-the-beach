@@ -176,6 +176,10 @@ namespace KotB.Actors
             ballInfo.SetPassTarget(targetPos, height, time, this, StatTypes.None);
         }
 
+        public void Set(Vector3 targetPos, float height, float time) {
+            ballInfo.SetPassTarget(targetPos, height, time, this, StatTypes.None);
+        }
+
         public void Spike(Vector3 targetPos) {
             SetSpikeTargetByType(targetPos, skills.SpikeSkill, skills.SpikePower, ballInfo.SkillValues.SpikePower, StatTypes.Attack);
         }
