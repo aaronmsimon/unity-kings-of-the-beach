@@ -12,6 +12,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 	public event UnityAction testCanceledEvent;
 	public event UnityAction bumpEvent;
 	public event UnityAction bumpAcrossEvent;
+	public event UnityAction setEvent;
 	public event UnityAction jumpEvent;
 	public event UnityAction feintEvent;
 	public event UnityAction pauseEvent;
@@ -68,6 +69,12 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 		if (context.phase == InputActionPhase.Performed) {
 			bumpAcrossEvent?.Invoke();
 		}
+	}
+
+	public void OnSet(InputAction.CallbackContext context)
+	{
+		if (context.phase == InputActionPhase.Performed)
+			setEvent?.Invoke();
 	}
 
 	public void OnJump(InputAction.CallbackContext context)

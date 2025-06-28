@@ -98,6 +98,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Set"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c740f9c-e060-4907-b814-374068f92bfd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -529,6 +538,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2aaba4a-2a89-407d-a74a-3f555b02d9c3"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Set"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9fd81429-a891-46a7-924a-fdde358c4717"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Set"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -907,6 +938,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Feint = m_Gameplay.FindAction("Feint", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
+        m_Gameplay_Set = m_Gameplay.FindAction("Set", throwIfNotFound: true);
         // BetweenPoints
         m_BetweenPoints = asset.FindActionMap("BetweenPoints", throwIfNotFound: true);
         m_BetweenPoints_Interact = m_BetweenPoints.FindAction("Interact", throwIfNotFound: true);
@@ -989,6 +1021,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Feint;
     private readonly InputAction m_Gameplay_Pause;
+    private readonly InputAction m_Gameplay_Set;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -1001,6 +1034,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @Feint => m_Wrapper.m_Gameplay_Feint;
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
+        public InputAction @Set => m_Wrapper.m_Gameplay_Set;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1034,6 +1068,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Set.started += instance.OnSet;
+            @Set.performed += instance.OnSet;
+            @Set.canceled += instance.OnSet;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -1062,6 +1099,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Set.started -= instance.OnSet;
+            @Set.performed -= instance.OnSet;
+            @Set.canceled -= instance.OnSet;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -1255,6 +1295,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnFeint(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnSet(InputAction.CallbackContext context);
     }
     public interface IBetweenPointsActions
     {
