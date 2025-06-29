@@ -26,16 +26,18 @@ namespace KotB.StatePattern.PlayerStates
 
             player.BodyTrigger.Triggered += OnBodyTriggered;
             player.SpikeTrigger.Triggered += OnSpikeTriggered;
-            player.InputReader.bumpEvent += OnPass;
+            player.InputReader.bumpEvent += OnBump;
             player.InputReader.bumpAcrossEvent += OnBumpAcross;
+            player.InputReader.setEvent += OnSet;
             player.BallInfo.TargetSet += OnTargetSet;
         }
 
         public override void Exit() {
             player.BodyTrigger.Triggered -= OnBodyTriggered;
             player.SpikeTrigger.Triggered -= OnSpikeTriggered;
-            player.InputReader.bumpEvent -= OnPass;
+            player.InputReader.bumpEvent -= OnBump;
             player.InputReader.bumpAcrossEvent -= OnBumpAcross;
+            player.InputReader.setEvent -= OnSet;
             player.BallInfo.TargetSet -= OnTargetSet;
         }
 
@@ -47,7 +49,7 @@ namespace KotB.StatePattern.PlayerStates
         private void OnBodyTriggered(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 if (bumpTimer > 0) {
-                    player.Bump(targetPos, 7, 1.75f);
+                    player.Pass(targetPos, 7, 1.75f);
                     unlockTimer = unlockDelay;
                 }
             }
@@ -93,12 +95,16 @@ namespace KotB.StatePattern.PlayerStates
             }
         }
 
-        private void OnPass() {
+        private void OnBump() {
             Bump(true);
         }
 
         private void OnBumpAcross() {
             Bump(false);
+        }
+
+        private void OnSet() {
+            // player.Set();
         }
 
         private void OnTargetSet() {

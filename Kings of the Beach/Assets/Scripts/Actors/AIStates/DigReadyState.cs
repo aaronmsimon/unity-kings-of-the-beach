@@ -53,16 +53,16 @@ namespace KotB.StatePattern.AIStates
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 switch (ai.BallInfo.HitsForTeam) {
                     case 0:
-                        ai.Bump(ai.CalculatePassTarget(ai.MatchInfo.GetTeammate(ai)), 7, 1.75f);
+                        ai.Pass(ai.CalculatePassTarget(ai.MatchInfo.GetTeammate(ai)), 7, 1.75f);
                         ai.DigToOffensePredicate.Trigger();
                         break;
                     case 1:
-                        ai.Bump(ai.CalculatePassTarget(ai.MatchInfo.GetTeammate(ai)), 7, 1.75f);
+                        ai.Pass(ai.CalculatePassTarget(ai.MatchInfo.GetTeammate(ai)), 7, 1.75f);
                         ai.DigToDefensePredicate.Trigger();
                         break;
                     case 2:
                         Vector3 bumpTarget = CalculateSpikeTarget();
-                        ai.Bump(bumpTarget, 7, 1.75f);
+                        ai.Pass(bumpTarget, 7, 1.75f);
                         ai.DigToDefensePredicate.Trigger();
                         break;
                     default:

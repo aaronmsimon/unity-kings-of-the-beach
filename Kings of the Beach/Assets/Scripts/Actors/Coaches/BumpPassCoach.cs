@@ -8,7 +8,7 @@ namespace KotB.Actors
 
         public override void Execute()
         {
-            if (passRecipient != null) coach.Bump(coach.CalculatePassTarget(passRecipient), 7, 1.75f);
+            if (passRecipient != null) coach.Pass(coach.CalculatePassTarget(passRecipient), 7, 1.75f);
         }
     }
 }
