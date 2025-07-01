@@ -5,6 +5,8 @@ using KotB.Stats;
 
 namespace KotB.Items
 {
+    public enum PassType { Bump, Set }
+    
     [CreateAssetMenu(fileName = "BallInfo", menuName = "Game/Ball Info")]
     public class BallSO : ScriptableObject
     {
@@ -24,6 +26,8 @@ namespace KotB.Items
         public float Duration { get; set; }
         public float TimeSinceLastHit { get; set; }
         public float BallRadius { get; set; }
+
+        public PassType LastPassType { get; private set; }
         
         private Athlete lastPlayerToHit;
         private Athlete ballHeldBy;
@@ -89,7 +93,7 @@ namespace KotB.Items
             BallServed?.Invoke();
         }
 
-        public void SetPassTarget(Vector3 targetPos, float height, float duration, Athlete passer, StatTypes statType) {
+        public void SetPassTarget(Vector3 targetPos, float height, float duration, Athlete passer, StatTypes statType, PassType passType) {
             StartPos = Position;
             TargetPos = targetPos;
             Height = height;
@@ -98,6 +102,7 @@ namespace KotB.Items
             HitsForTeam += 1;
             lastPlayerToHit = passer;
             lastStatType = statType;
+            LastPassType = passType;
             BallPassed?.Invoke();
             TargetSet?.Invoke();
         }

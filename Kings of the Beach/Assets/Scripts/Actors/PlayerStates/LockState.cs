@@ -16,6 +16,7 @@ namespace KotB.StatePattern.PlayerStates
         private Animator animator;
         private AnimatorStateInfo stateInfo;
         private float spikeWindowPenalty = 10;
+        private PassType passType;
 
         public override void Enter() {
             bumpTimer = 0;
@@ -49,7 +50,7 @@ namespace KotB.StatePattern.PlayerStates
         private void OnBodyTriggered(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 if (bumpTimer > 0) {
-                    player.Pass(targetPos, 7, 1.75f);
+                    player.Pass(targetPos, 7, 1.75f, passType);
                     unlockTimer = unlockDelay;
                 }
             }
@@ -96,15 +97,18 @@ namespace KotB.StatePattern.PlayerStates
         }
 
         private void OnBump() {
+            passType = PassType.Bump;
             Bump(true);
         }
 
         private void OnBumpAcross() {
+            passType = PassType.Bump;
             Bump(false);
         }
 
         private void OnSet() {
-            // player.Set();
+            passType = PassType.Set;
+            Bump(true);
         }
 
         private void OnTargetSet() {

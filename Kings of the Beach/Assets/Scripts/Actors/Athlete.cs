@@ -169,15 +169,11 @@ namespace KotB.Actors
             return new Vector3(aimLocation.x, 0f, aimLocation.y);
         }
 
-        public void Pass(Vector3 targetPos, float height, float time) {
+        public void Pass(Vector3 targetPos, float height, float time, PassType passType) {
             if (ballInfo.LastStatType == StatTypes.Attack) {
                 ballInfo.StatUpdate.Raise(this, StatTypes.Dig);
             }
-            ballInfo.SetPassTarget(targetPos, height, time, this, StatTypes.None);
-        }
-
-        public void Set(Vector3 targetPos, float height, float time) {
-            ballInfo.SetPassTarget(targetPos, height, time, this, StatTypes.None);
+            ballInfo.SetPassTarget(targetPos, height, time, this, StatTypes.None, passType);
         }
 
         public void Spike(Vector3 targetPos) {
@@ -215,7 +211,7 @@ namespace KotB.Actors
         }
 
         public void SpikeFeint(Vector3 targetPos) {
-            Pass(targetPos, feintHeight, feintTime);
+            Pass(targetPos, feintHeight, feintTime, PassType.Bump);
         }
 
         public void BlockAttempt(Collider blockedObject) {
