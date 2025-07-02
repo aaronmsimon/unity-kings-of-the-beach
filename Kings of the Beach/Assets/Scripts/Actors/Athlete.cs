@@ -191,7 +191,10 @@ namespace KotB.Actors
             // Apply random variation centered on power
             float adjustedPower = Mathf.Clamp(athletePower + UnityEngine.Random.Range(-maxVariance, maxVariance), 1f, 10f);
 
-            float spikeTime = distance.magnitude / (ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange) * (1 - Mathf.Abs(spikeSpeedPenalty)));
+            // Benefit from a Set
+            float setPassBenefit = 0.5f;
+            float setPassAdjustment = ballInfo.LastPassType == PassType.Set ? setPassBenefit : 1;
+            float spikeTime = distance.magnitude / (ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange) * (1 - Mathf.Abs(spikeSpeedPenalty) * setPassAdjustment));
             // Debug.Log($"t = d/r: {spikeTime} = {distance.magnitude} / {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, power: {athletePower}, {adjustedPower}");
             bool skillCheck = UnityEngine.Random.value <= ballInfo.SkillValues.SkillToValue(athleteSkill, ballInfo.SkillValues.SpikeOverNet);
             if (directLine || (!directLine && !skillCheck)) {
