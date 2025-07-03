@@ -51,6 +51,9 @@ namespace KotB.Actors
             inputReader.rightStickEvent += OnRightStick;
             inputReader.jumpEvent += OnJump;
             inputReader.feintEvent += OnJumpModified;
+            inputReader.bumpEvent += OnBump;
+            inputReader.setEvent += OnSet;
+            inputReader.bumpAcrossEvent += OnBump;
         }
         
         //Removes all listeners to the events coming from the InputReader script
@@ -59,6 +62,9 @@ namespace KotB.Actors
             inputReader.rightStickEvent -= OnRightStick;
             inputReader.jumpEvent -= OnJump;
             inputReader.feintEvent -= OnJumpModified;
+            inputReader.bumpEvent -= OnBump;
+            inputReader.setEvent -= OnSet;
+            inputReader.bumpAcrossEvent -= OnBump;
 
             matchToPrePointPredicate.Cleanup();
             matchToServePredicate.Cleanup();
@@ -158,6 +164,14 @@ namespace KotB.Actors
         private void OnJumpModified() {
             feint = true;
             PerformJump();
+        }
+
+        private void OnBump() {
+            PlayAnimation("Bump");
+        }
+
+        private void OnSet() {
+            PlayAnimation("Set");
         }
 
         //---- PROPERTIES ----

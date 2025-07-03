@@ -75,7 +75,6 @@ namespace KotB.StatePattern.PlayerStates
         }
 
         private void Bump(bool pass) {
-            player.PlayAnimation(passType.ToString());
             bumpTimer = player.CoyoteTime;
             SetTargetPos(pass);
         }
