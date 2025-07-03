@@ -330,6 +330,10 @@ namespace KotB.Actors
             }
         }
 
+        public void PlayAnimation(string animation) {
+            animator.Play(animation);
+        }
+
         protected virtual void OnDrawGizmos() {}
 
         //---- PROPERTIES ----

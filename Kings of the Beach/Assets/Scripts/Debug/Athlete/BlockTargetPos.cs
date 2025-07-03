@@ -48,7 +48,8 @@ namespace KotB.Testing
                 // Weak blocks are like passes - slower and higher
                 float blockHeight = Mathf.Lerp(2f, 4f, blockEffectiveness);
                 float blockDuration = Mathf.Lerp(2.5f, 1.5f, blockEffectiveness);
-                ballInfo.SetPassTarget(targetPos, blockHeight, blockDuration, athlete, StatTypes.Block);
+                // This was set to Spike in the final version, therefore, no need for a block value in the enum PassType
+                // ballInfo.SetPassTarget(targetPos, blockHeight, blockDuration, athlete, StatTypes.Block);
             }
             
             // Log for debugging
