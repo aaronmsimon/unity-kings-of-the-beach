@@ -135,9 +135,20 @@ namespace KotB.StatePattern.AIStates
         private void TrySpike() {
             float jumpDuration = ai.JumpFrames / ai.AnimationFrameRate;
             float spikeDuration = ai.ActionFrames / ai.AnimationFrameRate;
-            if (ai.BallInfo.TimeSinceLastHit >= spikeTime - jumpDuration - spikeDuration / 2 && spikeTime >= 0) {
+            float optimalTime = spikeTime - jumpDuration - spikeDuration / 2;
+
+            // Timing window based on skill
+            float timingWindow = ai.BallInfo.SkillValues.SkillToValue(ai.Skills.SpikeSkill, ai.BallInfo.SkillValues.SpikeTimingWindow);
+            float minTime = optimalTime - timingWindow;
+            float maxTime = optimalTime + timingWindow;
+
+            if (ai.BallInfo.TimeSinceLastHit >= minTime && ai.BallInfo.TimeSinceLastHit <= maxTime && spikeTime >= 0) {
                 ai.PerformJump();
                 isSpiking = true;
+
+                // Timing penalty
+                float timingError = Mathf.Abs(ai.BallInfo.TimeSinceLastHit - optimalTime);
+                ai.SpikeSpeedPenalty = timingError / timingWindow * ai.SpikeWindowPenalty;
             }
         }
 

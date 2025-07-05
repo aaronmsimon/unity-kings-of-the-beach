@@ -15,7 +15,6 @@ namespace KotB.StatePattern.PlayerStates
         private float unlockDelay = 0.25f;
         private Animator animator;
         private AnimatorStateInfo stateInfo;
-        private float spikeWindowPenalty = 10;
         private PassType passType;
 
         public override void Enter() {
@@ -62,7 +61,7 @@ namespace KotB.StatePattern.PlayerStates
                 if (!player.Feint) {
                     float timingVar = stateInfo.normalizedTime - 1;
                     float window = player.BallInfo.SkillValues.SkillToValue(player.Skills.SpikeSkill, player.BallInfo.SkillValues.SpikeTimingWindow);
-                    float penalty = timingVar * window * spikeWindowPenalty;
+                    float penalty = timingVar * window * player.SpikeWindowPenalty;
                     player.SpikeSpeedPenalty = timingVar * window;
                     Vector3 newTargetPos = new Vector3(targetPos.x + penalty, targetPos.y, targetPos.z);
                     // Debug.Log($"timingVar: {timingVar} window: {window} penalty: {penalty} target: {targetPos} newtarget: {newTargetPos}");
