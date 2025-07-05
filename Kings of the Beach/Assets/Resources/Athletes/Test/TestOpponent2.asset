@@ -15,20 +15,21 @@ MonoBehaviour:
   athleteName: Mack
   gender: 1
   defaultOutfit: 0
-  defaultTop: {fileID: 2100000, guid: 49b996495bf03e34485acf903e1f88cc, type: 2}
-  defaultBottom: {fileID: 2100000, guid: 52e66030987a4834a961f01cd00735d3, type: 2}
+  defaultTop: {fileID: 0}
+  defaultBottom: {fileID: 0}
   moveSpeed: 4
   targetLockDistance: 0.25
   reactionTime: 0.5
   passAccuracy: 1
   inBoundsJudgement: 1
+  spikeSkill: 1
   spikePower: 1
   digRange: 0.5
   serving: 1
   servePower: 1
   blocking: 1
+  blockPower: 1
   height: 1.8
-  servingPartnerPos: {x: 5, y: 1.5}
   defensePos: {x: 5, y: 2}
   offenseXPos: 2
   playerPosition: 1

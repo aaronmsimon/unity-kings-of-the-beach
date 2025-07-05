@@ -15,8 +15,8 @@ MonoBehaviour:
   athleteName: Vince
   gender: 1
   defaultOutfit: 0
-  defaultTop: {fileID: 2100000, guid: 5e728a237292e6848b762dc8044a996e, type: 2}
-  defaultBottom: {fileID: 2100000, guid: 52e66030987a4834a961f01cd00735d3, type: 2}
+  defaultTop: {fileID: 0}
+  defaultBottom: {fileID: 0}
   moveSpeed: 3
   targetLockDistance: 0.25
   reactionTime: 0.5
@@ -28,6 +28,7 @@ MonoBehaviour:
   serving: 8
   servePower: 6
   blocking: 8
+  blockPower: 1
   height: 1.9
   defensePos: {x: 5, y: 2}
   offenseXPos: 2

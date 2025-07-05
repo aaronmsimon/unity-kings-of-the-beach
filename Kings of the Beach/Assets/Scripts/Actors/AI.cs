@@ -25,11 +25,15 @@ namespace KotB.Actors
         public EventPredicate ServeToDefensePredicate { get; private set; }
         public EventPredicate DigToOffensePredicate { get; private set; }
         public EventPredicate DigToDefensePredicate { get; private set; }
+        
+        private CollisionTriggerReporter animBumpSetTrigger;
 
         protected override void Awake() {
             base.Awake();
 
             estimateRange = BallInfo.BallRadius * 2;
+
+            animBumpSetTrigger = transform.Find("AnimBumpSet").GetComponent<CollisionTriggerReporter>();
 
             SetupStateMachine();
         }
@@ -212,5 +216,6 @@ namespace KotB.Actors
             set => targetPos = value;
         }
         public float DistToGiveUp => distToGiveUp;
+        public CollisionTriggerReporter AnimBumpSetTrigger => animBumpSetTrigger;
     }
 }

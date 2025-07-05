@@ -20,15 +20,18 @@ namespace KotB.StatePattern.AIStates
             // Expensive operation (square root) so running this just once this state is entered
             spikeTime = ai.GetTimeToContactHeight(ai.ReachHeight, ai.BallInfo.Height, ai.BallInfo.StartPos.y, ai.BallInfo.TargetPos.y, ai.BallInfo.Duration);
             isSpiking = false;
+            ai.AnimBumpSetTrigger.Active = true;
 
             ai.BodyTrigger.Triggered += OnBodyTriggered;
             ai.SpikeTrigger.Triggered += OnSpikeTriggered;
+            ai.AnimBumpSetTrigger.Triggered += OnBumpSetTriggered;
             ai.BallInfo.TargetSet += OnTargetSet;
         }
 
         public override void Exit() {
             ai.BodyTrigger.Triggered -= OnBodyTriggered;
             ai.SpikeTrigger.Triggered -= OnSpikeTriggered;
+            ai.AnimBumpSetTrigger.Triggered -= OnBumpSetTriggered;
             ai.BallInfo.TargetSet -= OnTargetSet;
         }
 
@@ -87,7 +90,24 @@ namespace KotB.StatePattern.AIStates
                     }
                     ai.DigToDefensePredicate.Trigger();
                 }
-            }            
+            }
+        }
+
+        private void OnBumpSetTriggered(Collider other) {
+            if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
+                switch (ai.BallInfo.HitsForTeam) {
+                    case 0:
+                        ai.PlayAnimation("Bump");
+                        break;
+                    case 1:
+                        ai.PlayAnimation("Set");
+                        ai.AnimBumpSetTrigger.Active = false;
+                        break;
+                    default:
+                        Debug.Log($"Unexpected number of hits when AnimBumpSetTrigger was triggered for {ai.Skills.AthleteName}");
+                        break;
+                }                
+            }
         }
 
         private Vector3 CalculateSpikeTarget() {
