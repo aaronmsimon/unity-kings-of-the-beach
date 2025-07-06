@@ -21,12 +21,10 @@ namespace KotB.Testing
         }
 
         private void OnEnable() {
-            AnimBumpSetTrigger.Triggered += OnAnimTriggered;
             BodyTrigger.Triggered += OnBodyTriggered;
         }
 
         private void OnDisable() {
-            AnimBumpSetTrigger.Triggered -= OnAnimTriggered;
             BodyTrigger.Triggered -= OnBodyTriggered;
         }
 
@@ -51,11 +49,6 @@ namespace KotB.Testing
         }
 
         public void Reset() {
-            AnimBumpSetTrigger.Active = true;
-        }
-
-        private void OnAnimTriggered(Collider other) {
-            PlayAnimation(passType.ToString());
         }
 
         private void OnBodyTriggered(Collider other) {
