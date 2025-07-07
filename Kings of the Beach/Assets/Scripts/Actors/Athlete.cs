@@ -41,7 +41,6 @@ namespace KotB.Actors
         protected float animationFrameRate = 24;
 
         private float reachHeight;
-        private float spikeWindowPenalty = 10;
         private float spikeSpeedPenalty = 0;
         private float feintHeight = 5;
         private float feintTime = 1;
@@ -359,7 +358,6 @@ namespace KotB.Actors
         public float ActionFrames { get { return actionFrames; } }
         public float ServeOverhandContactFrames => serveOverhandContactFrames;
         public float AnimationFrameRate { get { return animationFrameRate; } }
-        public float SpikeWindowPenalty => spikeWindowPenalty;
         public float SpikeSpeedPenalty { set { spikeSpeedPenalty = value; } }
         public float ReceiveServeXPos => receiveServeXPos;
         public Vector3 ServeDefPos {

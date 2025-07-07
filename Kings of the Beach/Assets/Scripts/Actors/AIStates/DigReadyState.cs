@@ -128,7 +128,7 @@ namespace KotB.StatePattern.AIStates
 
                 // Timing penalty
                 float timingError = Mathf.Abs(ai.BallInfo.TimeSinceLastHit - optimalTime);
-                ai.SpikeSpeedPenalty = timingError / timingWindow * ai.SpikeWindowPenalty;
+                ai.SpikeSpeedPenalty = Mathf.Clamp01(timingError / timingWindow);
             }
         }
 

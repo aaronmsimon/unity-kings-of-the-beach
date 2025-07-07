@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8180c8341e65d4bb53980ffa04dd05, type: 3}
   m_Name: TransitionProfile_Player
   m_EditorClassIdentifier: 
-  value: Tutorial
+  value: Game
