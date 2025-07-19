@@ -897,7 +897,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1652178845}
+      addedObject: {fileID: 1652178851}
     - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1652178850}
@@ -956,20 +956,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5717242374435514889, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
   m_PrefabInstance: {fileID: 1413231225}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1652178845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1652178840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53799f5a324255e408113008954d426f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  passRecipient: {fileID: 2131170351}
-  passType: 0
 --- !u!114 &1652178850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -983,6 +969,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
+--- !u!114 &1652178851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652178840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a60b62faef3369d45ae3f0b1355b3abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passType: 1
+  targetZonePos: {x: -1, y: -2}
+  targetZoneSize: {x: 0.5, y: 0.5}
+  showTargetZone: 1
+  targetZoneColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &1857668800
 PrefabInstance:
   m_ObjectHideFlags: 0

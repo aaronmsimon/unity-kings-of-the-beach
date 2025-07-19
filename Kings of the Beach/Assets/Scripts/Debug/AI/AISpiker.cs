@@ -59,9 +59,21 @@ namespace KotB.Testing
         private void TrySpike() {
             float jumpDuration = JumpFrames / AnimationFrameRate;
             float spikeDuration = ActionFrames / AnimationFrameRate;
-            if (BallInfo.TimeSinceLastHit >= spikeTime - jumpDuration - spikeDuration / 2 && spikeTime >= 0) {
+            float optimalTime = spikeTime - jumpDuration - spikeDuration / 2;
+
+            // Timing window based on skill
+            float timingWindow = BallInfo.SkillValues.SkillToValue(Skills.SpikeSkill, BallInfo.SkillValues.SpikeTimingWindow);
+            float minTime = optimalTime - timingWindow;
+            float maxTime = optimalTime + timingWindow;
+
+            if (BallInfo.TimeSinceLastHit >= minTime && BallInfo.TimeSinceLastHit <= maxTime && spikeTime >= 0) {
                 PerformJump();
                 isSpiking = true;
+
+                // Calculate timing penalty (similar to human system)
+                float actualTimingError = BallInfo.TimeSinceLastHit - optimalTime;
+                SpikeSpeedPenalty = actualTimingError * timingWindow;
+                Debug.Log($"actualTimingError: {BallInfo.TimeSinceLastHit} - {optimalTime} = {actualTimingError} x window {timingWindow} = {actualTimingError * timingWindow}");
             }
         }
 
@@ -132,7 +144,6 @@ namespace KotB.Testing
         }
 
         private void OnSpikeTriggered(Collider other) {
-            Debug.Log("spike triggered");
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 if (BallInfo.HitsForTeam == 2) {
                     // ConsiderSpikeFeint();

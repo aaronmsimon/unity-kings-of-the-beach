@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e270426a7b450544ba59b0dd52069e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionProfile: {fileID: 11400000, guid: 92094b047aa5cf444a3b1f7bd35f8c62, type: 2}
+  transitionProfile: {fileID: 11400000, guid: 8a31e86561e7e974e8ffb0b4942f954e, type: 2}
 --- !u!1 &321293237
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +562,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224069032}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f6e98ac5c50b56498310917da6727a5, type: 3}
   m_Name: 
@@ -696,6 +696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passRecipient: {fileID: 234540892}
+  passType: 0
 --- !u!114 &1589110003
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,11 +5,6 @@ namespace KotB.Actors
 {
     public class Coach : Athlete
     {
-        private enum CoachType { BumpTarget }
-
-        [Header("Coach Configuration")]
-        [SerializeField] private CoachType coachType;
-
         private CoachAction coachAction;
 
         private bool hasBall = false;

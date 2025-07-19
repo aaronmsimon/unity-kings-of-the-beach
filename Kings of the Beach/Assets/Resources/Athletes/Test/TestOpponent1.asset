@@ -30,6 +30,6 @@ MonoBehaviour:
   blocking: 8
   blockPower: 1
   height: 1.9
-  defensePos: {x: 5, y: 2}
+  defensePos: {x: 2, y: 2}
   offenseXPos: 2
   playerPosition: 0

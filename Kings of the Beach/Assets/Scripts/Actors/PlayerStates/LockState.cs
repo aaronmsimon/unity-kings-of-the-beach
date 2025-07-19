@@ -15,7 +15,6 @@ namespace KotB.StatePattern.PlayerStates
         private float unlockDelay = 0.25f;
         private float spikeWindowPenalty = 10;
         private Animator animator;
-        private AnimatorStateInfo stateInfo;
         private PassType passType;
 
         public override void Enter() {
@@ -23,7 +22,6 @@ namespace KotB.StatePattern.PlayerStates
             canUnlock = false;
 
             animator = player.GetComponentInChildren<Animator>();
-            stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
             player.BodyTrigger.Triggered += OnBodyTriggered;
             player.SpikeTrigger.Triggered += OnSpikeTriggered;
@@ -60,6 +58,7 @@ namespace KotB.StatePattern.PlayerStates
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 SetTargetPos(false);
                 if (!player.Feint) {
+                    AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
                     float timingVar = stateInfo.normalizedTime - 1;
                     float window = player.BallInfo.SkillValues.SkillToValue(player.Skills.SpikeSkill, player.BallInfo.SkillValues.SpikeTimingWindow);
                     float penalty = timingVar * window * spikeWindowPenalty;
