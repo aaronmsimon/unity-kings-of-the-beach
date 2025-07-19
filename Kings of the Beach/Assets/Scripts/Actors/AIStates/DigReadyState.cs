@@ -126,9 +126,18 @@ namespace KotB.StatePattern.AIStates
                 ai.PerformJump();
                 isSpiking = true;
 
-                // Timing penalty
-                float timingError = Mathf.Abs(ai.BallInfo.TimeSinceLastHit - optimalTime);
-                ai.SpikeSpeedPenalty = Mathf.Clamp01(timingError / timingWindow);
+                // Calculate timing penalty (similar to human system)
+                float actualTimingError = ai.BallInfo.TimeSinceLastHit - optimalTime;
+                ai.SpikeSpeedPenalty = actualTimingError * timingWindow;
+                Debug.Log($"actualTimingError: {ai.BallInfo.TimeSinceLastHit} - {optimalTime} = {actualTimingError} x window {timingWindow} = {actualTimingError * timingWindow}");
+
+                // Timing penalty - match human system pattern
+                // float normalizedTimingError = (ai.BallInfo.TimeSinceLastHit - optimalTime) / timingWindow; // Range: -1 to 1
+                // Debug.Log($"normalizedTimingError: ({ai.BallInfo.TimeSinceLastHit} - {optimalTime}) / {timingWindow} = {normalizedTimingError} x window {timingWindow} = {Mathf.Abs(normalizedTimingError) * timingWindow}");
+                // ai.SpikeSpeedPenalty = Mathf.Abs(normalizedTimingError) * timingWindow; // Should be smaller values
+
+                // float timingError = Mathf.Abs(ai.BallInfo.TimeSinceLastHit - optimalTime);
+                // ai.SpikeSpeedPenalty = Mathf.Clamp01(timingError / timingWindow);
             }
         }
 
