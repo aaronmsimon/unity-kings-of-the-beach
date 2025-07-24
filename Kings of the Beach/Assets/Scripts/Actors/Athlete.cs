@@ -38,6 +38,8 @@ namespace KotB.Actors
         private float actionFrames = 9;
         protected float serveOverhandFrames = 34;
         protected float serveOverhandContactFrames = 25;
+        protected float bumpFrames = 20;
+        protected float setFrames = 20;
         protected float animationFrameRate = 24;
 
         private float reachHeight;
@@ -192,9 +194,10 @@ namespace KotB.Actors
             float adjustedPower = Mathf.Clamp(athletePower + UnityEngine.Random.Range(-maxVariance, maxVariance), 1f, 10f);
 
             // Benefit from a Set
-            float setPassBenefit = 0.5f;
-            float setPassAdjustment = ballInfo.LastPassType == PassType.Set ? setPassBenefit : 1;
-            float spikeTime = distance.magnitude / (ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange) * (1 - Mathf.Abs(spikeSpeedPenalty) * setPassAdjustment));
+            float setPassBenefit = 0.05f;
+            float setPassAdjustment = ballInfo.LastPassType == PassType.Set ? setPassBenefit : 0;
+            float spikeTime = distance.magnitude / (ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange) * (1 - (Mathf.Abs(spikeSpeedPenalty) - setPassAdjustment)));
+            Debug.Log($"distance: {distance.magnitude}, power: {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, speed pen: {spikeSpeedPenalty}, set bonus: {setPassAdjustment}, spikeTime = {spikeTime}");
             // Debug.Log($"t = d/r: {spikeTime} = {distance.magnitude} / {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, power: {athletePower}, {adjustedPower}");
             bool skillCheck = UnityEngine.Random.value <= ballInfo.SkillValues.SkillToValue(athleteSkill, ballInfo.SkillValues.SpikeOverNet);
             if (directLine || (!directLine && !skillCheck)) {
@@ -357,6 +360,8 @@ namespace KotB.Actors
         public float JumpFrames { get { return jumpFrames; } }
         public float ActionFrames { get { return actionFrames; } }
         public float ServeOverhandContactFrames => serveOverhandContactFrames;
+        public float BumpFrames => bumpFrames;
+        public float SetFrames => setFrames;
         public float AnimationFrameRate { get { return animationFrameRate; } }
         public float SpikeSpeedPenalty { set { spikeSpeedPenalty = value; } }
         public float ReceiveServeXPos => receiveServeXPos;
