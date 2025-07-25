@@ -145,19 +145,9 @@ namespace KotB.Testing
 
         private void OnSpikeTriggered(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
-                if (BallInfo.HitsForTeam == 2) {
-                    // ConsiderSpikeFeint();
-                    Vector3 spikeTarget = CalculateSpikeTarget();
-                    // string message = $"{ai.Skills.AthleteName} {(Mathf.Abs(ai.transform.position.x) <= 2 ? "selected the largest zone." : "is too far from the net, so aimed for the furthest zone.")}";
-                    if (!Feint) {
-                        Spike(spikeTarget);
-                        // Debug.Log(message);
-                    } else {
-                        SpikeFeint(spikeTarget);
-                        // Debug.Log(message += " Decided to do a feint.");
-                    }
-                    DigToDefensePredicate.Trigger();
-                }
+                Feint = false;
+                Spike(CalculateSpikeTarget());
+                DigToDefensePredicate.Trigger();
             }
         }
     }
