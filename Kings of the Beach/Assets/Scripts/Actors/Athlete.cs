@@ -44,6 +44,7 @@ namespace KotB.Actors
 
         private float reachHeight;
         private float spikeSpeedPenalty = 0;
+        private float spikeWindowPenalty = 10;
         private float feintHeight = 5;
         private float feintTime = 1;
 
@@ -179,7 +180,19 @@ namespace KotB.Actors
         }
 
         public void Spike(Vector3 targetPos) {
-            SetSpikeTargetByType(targetPos, skills.SpikeSkill, skills.SpikePower, ballInfo.SkillValues.SpikePower, StatTypes.Attack);
+            if (!feint) {
+                // do timing stuff with penalties
+                AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+                float timingVar = stateInfo.normalizedTime - 1;
+                float window = ballInfo.SkillValues.SkillToValue(skills.SpikeSkill, ballInfo.SkillValues.SpikeTimingWindow);
+                float penalty = timingVar * window * spikeWindowPenalty;
+                spikeSpeedPenalty = timingVar * window;
+                Vector3 newTargetPos = new Vector3(targetPos.x + penalty, targetPos.y, targetPos.z);
+                // Debug.Log($"timingVar: {timingVar} window: {window} penalty: {penalty} target: {targetPos} newtarget: {newTargetPos}");
+                SetSpikeTargetByType(newTargetPos, skills.SpikeSkill, skills.SpikePower, ballInfo.SkillValues.SpikePower, StatTypes.Attack);
+            } else {
+                Pass(targetPos, feintHeight, feintTime, PassType.Bump);
+            }
         }
 
         private void SetSpikeTargetByType(Vector3 targetPos, float athleteSkill, float athletePower, MinMax skillPowerRange, StatTypes statType) {
@@ -214,10 +227,6 @@ namespace KotB.Actors
             }
             // Debug.Log($"{skills.AthleteName} has {(directLine ? "a clear line." : "no direct path (pos: " + startPos + " target: " + targetPos + "), using an arc.")}");
             ballInfo.StatUpdate.Raise(this, statType);
-        }
-
-        public void SpikeFeint(Vector3 targetPos) {
-            Pass(targetPos, feintHeight, feintTime, PassType.Bump);
         }
 
         public void BlockAttempt(Collider blockedObject) {

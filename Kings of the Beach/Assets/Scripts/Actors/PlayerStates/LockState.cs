@@ -13,15 +13,11 @@ namespace KotB.StatePattern.PlayerStates
         private bool canUnlock;
         private float unlockTimer;
         private float unlockDelay = 0.25f;
-        private float spikeWindowPenalty = 10;
-        private Animator animator;
         private PassType passType;
 
         public override void Enter() {
             bumpTimer = 0;
             canUnlock = false;
-
-            animator = player.GetComponentInChildren<Animator>();
 
             player.BodyTrigger.Triggered += OnBodyTriggered;
             player.SpikeTrigger.Triggered += OnSpikeTriggered;
@@ -57,18 +53,7 @@ namespace KotB.StatePattern.PlayerStates
         private void OnSpikeTriggered(Collider other) {
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 SetTargetPos(false);
-                if (!player.Feint) {
-                    AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-                    float timingVar = stateInfo.normalizedTime - 1;
-                    float window = player.BallInfo.SkillValues.SkillToValue(player.Skills.SpikeSkill, player.BallInfo.SkillValues.SpikeTimingWindow);
-                    float penalty = timingVar * window * spikeWindowPenalty;
-                    player.SpikeSpeedPenalty = timingVar * window;
-                    Vector3 newTargetPos = new Vector3(targetPos.x + penalty, targetPos.y, targetPos.z);
-                    // Debug.Log($"timingVar: {timingVar} window: {window} penalty: {penalty} target: {targetPos} newtarget: {newTargetPos}");
-                    player.Spike(newTargetPos);
-                } else {
-                    player.SpikeFeint(targetPos);
-                }
+                player.Spike(targetPos);
                 player.UnlockPlayer();
             }
         }
