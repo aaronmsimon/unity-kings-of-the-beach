@@ -39,7 +39,6 @@ namespace KotB.Match
 
         public void AddScore(int amount) {
             score.Value += amount;
-            Debug.Log($"Score added to {teamName.Value} for a new total of {score.Value}");
         }
 
         public Athlete GetServer() {
