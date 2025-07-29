@@ -1,0 +1,74 @@
+/*
+DEFAULT USS STYLES (Create as MenuStyles.uss):
+
+.menu-item {
+    padding: 10px 20px;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition-duration: 0.2s;
+    transition-property: background-color, scale, color;
+}
+
+.menu-item--selected {
+    background-color: rgba(255, 255, 255, 0.2);
+    scale: 1.05 1.05;
+}
+
+.menu-item--hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.simple-menu-button {
+    justify-content: center;
+    align-items: center;
+}
+
+.simple-menu-button__label {
+    font-size: 18px;
+    color: white;
+    -unity-text-align: middle-center;
+}
+
+.menu-item--selected .simple-menu-button__label {
+    color: yellow;
+}
+
+.scrollable-menu-option__container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.scrollable-menu-option__title {
+    font-size: 16px;
+    color: white;
+    flex-grow: 1;
+}
+
+.scrollable-menu-option__value {
+    font-size: 16px;
+    color: yellow;
+    margin-left: 20px;
+    min-width: 100px;
+    -unity-text-align: middle-right;
+}
+
+.menu-container {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.vertical-menu {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 400px;
+}
+
+.horizontal-menu {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}

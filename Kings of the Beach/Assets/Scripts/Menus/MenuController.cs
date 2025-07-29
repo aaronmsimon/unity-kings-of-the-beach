@@ -1,31 +1,36 @@
+// MenuController.cs - Main menu controller using UI Toolkit
 using UnityEngine;
+using UnityEngine.UIElements;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace KotB.Menus
 {
-    public class MenuSystem : MonoBehaviour
+    public class MenuController : MonoBehaviour
     {
         [Header("Settings")]
         [SerializeField] private bool cycleThroughItems = true;
         [SerializeField] private bool debugMode = false;
         
-        [Header("Menu Items")]
-        [SerializeField] private List<MenuItemBase> menuItems = new List<MenuItemBase>();
-        
         [Header("Input")]
         [SerializeField] private InputReader inputReader;
+        
+        [Header("UI Document")]
+        [SerializeField] private UIDocument uiDocument;
 
+        private VisualElement rootElement;
+        private List<MenuItemElement> menuItems = new List<MenuItemElement>();
         private int currentItemIndex = 0;
-        private MenuItemBase currentItem;
+        private MenuItemElement currentItem;
+
+        private void Awake()
+        {
+            if (uiDocument == null)
+                uiDocument = GetComponent<UIDocument>();
+        }
 
         private void Start()
         {
-            if (menuItems.Count == 0)
-            {
-                FindMenuItems();
-            }
-            
             InitializeMenu();
         }
 
@@ -56,33 +61,45 @@ namespace KotB.Menus
             }
         }
 
-        private void FindMenuItems()
-        {
-            menuItems = GetComponentsInChildren<MenuItemBase>().ToList();
-            
-            // Sort by hierarchy order
-            menuItems.Sort((a, b) => a.transform.GetSiblingIndex().CompareTo(b.transform.GetSiblingIndex()));
-        }
-
         private void InitializeMenu()
         {
-            if (menuItems.Count == 0) return;
+            if (uiDocument == null) return;
 
-            // Initialize all items
-            for (int i = 0; i < menuItems.Count; i++)
+            rootElement = uiDocument.rootVisualElement;
+            FindMenuItems();
+
+            if (menuItems.Count > 0)
             {
-                menuItems[i].Initialize(this);
-                menuItems[i].SetSelected(false);
+                SetSelectedItem(0);
+            }
+        }
+
+        private void FindMenuItems()
+        {
+            menuItems.Clear();
+            
+            // Find all menu items in the UI hierarchy
+            var allElements = rootElement.Query<VisualElement>().Where(e => e is MenuItemElement).ToList();
+            
+            foreach (var element in allElements)
+            {
+                if (element is MenuItemElement menuItem)
+                {
+                    menuItems.Add(menuItem);
+                    menuItem.Initialize(this);
+                }
             }
 
-            // Select first item
-            SetSelectedItem(0);
+            if (debugMode)
+            {
+                Debug.Log($"Found {menuItems.Count} menu items");
+            }
         }
 
         private void OnSelectionUp()
         {
             if (currentItem != null && currentItem.HandleVerticalNavigation(-1))
-                return; // Item handled the input
+                return;
 
             NavigateVertical(-1);
         }
@@ -90,7 +107,7 @@ namespace KotB.Menus
         private void OnSelectionDown()
         {
             if (currentItem != null && currentItem.HandleVerticalNavigation(1))
-                return; // Item handled the input
+                return;
 
             NavigateVertical(1);
         }
@@ -98,17 +115,17 @@ namespace KotB.Menus
         private void OnSelectionLeft()
         {
             if (currentItem != null && currentItem.HandleHorizontalNavigation(-1))
-                return; // Item handled the input
+                return;
 
-            NavigateVertical(-1); // Default behavior for left
+            NavigateVertical(-1);
         }
 
         private void OnSelectionRight()
         {
             if (currentItem != null && currentItem.HandleHorizontalNavigation(1))
-                return; // Item handled the input
+                return;
 
-            NavigateVertical(1); // Default behavior for right
+            NavigateVertical(1);
         }
 
         private void OnSelect()
@@ -141,13 +158,8 @@ namespace KotB.Menus
         {
             if (index < 0 || index >= menuItems.Count) return;
 
-            // Deselect current item
-            if (currentItem != null)
-            {
-                currentItem.SetSelected(false);
-            }
+            currentItem?.SetSelected(false);
 
-            // Select new item
             currentItemIndex = index;
             currentItem = menuItems[currentItemIndex];
             currentItem.SetSelected(true);
@@ -158,22 +170,15 @@ namespace KotB.Menus
             }
         }
 
-        // Public methods for external control
-        public void SelectItem(int index)
-        {
-            SetSelectedItem(index);
-        }
-
-        public void SelectItem(MenuItemBase item)
+        // Public API
+        public void SelectItem(int index) => SetSelectedItem(index);
+        public void SelectItem(MenuItemElement item)
         {
             int index = menuItems.IndexOf(item);
-            if (index >= 0)
-            {
-                SetSelectedItem(index);
-            }
+            if (index >= 0) SetSelectedItem(index);
         }
 
-        public void AddMenuItem(MenuItemBase item)
+        public void RegisterMenuItem(MenuItemElement item)
         {
             if (!menuItems.Contains(item))
             {
@@ -182,17 +187,6 @@ namespace KotB.Menus
             }
         }
 
-        public void RemoveMenuItem(MenuItemBase item)
-        {
-            int index = menuItems.IndexOf(item);
-            if (index >= 0)
-            {
-                menuItems.RemoveAt(index);
-                if (currentItemIndex >= menuItems.Count)
-                {
-                    SetSelectedItem(menuItems.Count - 1);
-                }
-            }
-        }
+        public VisualElement RootElement => rootElement;
     }
 }
