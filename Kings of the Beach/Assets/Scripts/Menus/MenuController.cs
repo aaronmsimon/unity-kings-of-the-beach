@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace KotB.Menus
 {
@@ -19,9 +18,9 @@ namespace KotB.Menus
         [SerializeField] private UIDocument uiDocument;
 
         private VisualElement rootElement;
-        private List<MenuItemElement> menuItems = new List<MenuItemElement>();
+        private List<IMenuItemHandler> menuItems = new List<IMenuItemHandler>();
         private int currentItemIndex = 0;
-        private MenuItemElement currentItem;
+        private IMenuItemHandler currentItem;
 
         private void Awake()
         {
@@ -66,7 +65,7 @@ namespace KotB.Menus
             if (uiDocument == null) return;
 
             rootElement = uiDocument.rootVisualElement;
-            FindMenuItems();
+            FindAndSetupMenuItems();
 
             if (menuItems.Count > 0)
             {
@@ -74,25 +73,47 @@ namespace KotB.Menus
             }
         }
 
-        private void FindMenuItems()
+        private void FindAndSetupMenuItems()
         {
             menuItems.Clear();
             
-            // Find all menu items in the UI hierarchy
-            var allElements = rootElement.Query<VisualElement>().Where(e => e is MenuItemElement).ToList();
+            // Find all elements with menu-item class
+            var menuElements = rootElement.Query<VisualElement>(className: "menu-item").ToList();
             
-            foreach (var element in allElements)
+            foreach (var element in menuElements)
             {
-                if (element is MenuItemElement menuItem)
+                var handler = CreateHandlerForElement(element);
+                if (handler != null)
                 {
-                    menuItems.Add(menuItem);
-                    menuItem.Initialize(this);
+                    menuItems.Add(handler);
+                    handler.Initialize(this, element);
                 }
             }
 
             if (debugMode)
             {
                 Debug.Log($"Found {menuItems.Count} menu items");
+            }
+        }
+
+        private IMenuItemHandler CreateHandlerForElement(VisualElement element)
+        {
+            // Check data attributes or class names to determine handler type
+            if (element.ClassListContains("scrollable-option"))
+            {
+                return new ScrollableOptionHandler();
+            }
+            else if (element.ClassListContains("scene-button"))
+            {
+                return new SceneButtonHandler();
+            }
+            else if (element.ClassListContains("scriptable-object-option"))
+            {
+                return new ScriptableObjectOptionHandler();
+            }
+            else
+            {
+                return new SimpleButtonHandler();
             }
         }
 
@@ -166,27 +187,12 @@ namespace KotB.Menus
 
             if (debugMode)
             {
-                Debug.Log($"Selected menu item: {currentItem.name}");
+                Debug.Log($"Selected menu item: {currentItem.Element.name}");
             }
         }
 
         // Public API
         public void SelectItem(int index) => SetSelectedItem(index);
-        public void SelectItem(MenuItemElement item)
-        {
-            int index = menuItems.IndexOf(item);
-            if (index >= 0) SetSelectedItem(index);
-        }
-
-        public void RegisterMenuItem(MenuItemElement item)
-        {
-            if (!menuItems.Contains(item))
-            {
-                menuItems.Add(item);
-                item.Initialize(this);
-            }
-        }
-
         public VisualElement RootElement => rootElement;
     }
 }

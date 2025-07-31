@@ -1,31 +1,49 @@
-// ScriptableObjectMenuOption.cs - Menu option that writes to ScriptableObjects
+// ScriptableObjectOptionHandler.cs - Handler for ScriptableObject options
 using UnityEngine;
-using System.Collections.Generic;
+using System.Reflection;
 
 namespace KotB.Menus
 {
-    public class ScriptableObjectMenuOption : ScrollableMenuOption
+    public class ScriptableObjectOptionHandler : ScrollableOptionHandler
     {
         private ScriptableObject targetObject;
         private string fieldName;
 
-        public ScriptableObjectMenuOption() : base() { }
-
-        public ScriptableObjectMenuOption(string title, List<string> options, ScriptableObject target, string field) 
-            : base(title, options)
+        protected override void OnInitialize()
         {
-            targetObject = target;
-            fieldName = field;
-            OnValueChanged += WriteToScriptableObject;
+            base.OnInitialize();
+
+            // Get configuration from MenuItemComponent
+            var menuItemComponent = FindMenuItemComponent();
+            if (menuItemComponent != null)
+            {
+                var config = menuItemComponent.GetScriptableObjectConfig();
+                targetObject = config.targetObject;
+                fieldName = config.fieldName;
+            }
         }
 
-        public void SetTarget(ScriptableObject target, string field)
+        private MenuItemComponent FindMenuItemComponent()
         {
-            targetObject = target;
-            fieldName = field;
+            // Try to find MenuItemComponent in the scene that references this element
+            var menuItemComponents = Object.FindObjectsOfType<MenuItemComponent>();
+            foreach (var component in menuItemComponents)
+            {
+                if (component.GetTargetElement() == element)
+                {
+                    return component;
+                }
+            }
+            return null;
         }
 
-        private void WriteToScriptableObject(string value)
+        protected override void OnValueChanged()
+        {
+            base.OnValueChanged();
+            WriteToScriptableObject();
+        }
+
+        private void WriteToScriptableObject()
         {
             if (targetObject == null || string.IsNullOrEmpty(fieldName))
                 return;
@@ -35,6 +53,8 @@ namespace KotB.Menus
             {
                 try
                 {
+                    var value = CurrentValue;
+                    
                     if (field.FieldType == typeof(string))
                     {
                         field.SetValue(targetObject, value);
@@ -66,6 +86,12 @@ namespace KotB.Menus
                     Debug.LogError($"Failed to write to ScriptableObject field {fieldName}: {e.Message}");
                 }
             }
+        }
+
+        public void SetTarget(ScriptableObject target, string field)
+        {
+            targetObject = target;
+            fieldName = field;
         }
     }
 }
