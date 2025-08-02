@@ -1,7 +1,10 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+<ui:UXML 
+    xmlns:ui="UnityEngine.UIElements"
+    xmlns:KotB="clr-namespace:KotB.Menus">
+
     <ui:VisualElement class="menu-container">
-        <!--SimpleMenuButton text="Start Game" />
-        <ScrollableMenuOption title="Graphics Quality" />
-        <SceneMenuButton text="Settings" scene="SettingsScene" /-->
+        <KotB:MenuPanel>
+            <KotB:MenuActionItem text="Start Game" />
+        </KotB:MenuPanel>
     </ui:VisualElement>
 </ui:UXML>
