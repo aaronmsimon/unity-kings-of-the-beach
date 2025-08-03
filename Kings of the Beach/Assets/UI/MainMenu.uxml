@@ -1,10 +1,3 @@
-<ui:UXML 
-    xmlns:ui="UnityEngine.UIElements"
-    xmlns:KotB="clr-namespace:KotB.Menus">
-
-    <ui:VisualElement class="menu-container">
-        <KotB:MenuPanel>
-            <KotB:MenuActionItem text="Start Game" />
-        </KotB:MenuPanel>
-    </ui:VisualElement>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" KotB="clr-namespace:KotB.Menus" editor-extension-mode="False">
+    <ui:VisualElement class="menu-container" />
 </ui:UXML>
