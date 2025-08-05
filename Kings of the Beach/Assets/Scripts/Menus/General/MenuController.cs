@@ -10,7 +10,7 @@ namespace MenuSystem
         [SerializeField] private List<MenuOptionsSO> menuOptions;
         [SerializeField] private InputReader inputReader;
 
-        public event Action SelectionChanged;
+        // public event Action SelectionChanged;
 
         private List<Label> menuListSelections;
 
