@@ -64,6 +64,7 @@ I would like to actually finish this game this time. That means starting with a 
 5. Serve Power (affects ~~speed and~~ direction)
 6. ~~Blocking (likelihood to be successful)~~
 7. ~~Spike Power (affects speed)~~
+8. Spike Accuracy
 
 #### Ball Mechanics 🏐
 1. ~~Move to Target with Bezier curve~~
