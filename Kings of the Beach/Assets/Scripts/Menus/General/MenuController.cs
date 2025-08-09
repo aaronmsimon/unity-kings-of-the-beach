@@ -14,7 +14,7 @@ namespace MenuSystem
 
         private List<Label> menuListSelections;
 
-        private void Awake() {
+        private void Start() {
             VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
             menuListSelections = root.Query<Label>(className: "menu-list-selection").ToList();
