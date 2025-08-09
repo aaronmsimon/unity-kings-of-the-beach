@@ -1,37 +1,98 @@
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.UIElements;
+using KotB.Menus;
 
 namespace MenuSystem
 {
     public class MenuController : MonoBehaviour
     {
-        [SerializeField] private List<MenuOptionsSO> menuOptions;
+        [SerializeField] private List<MenuGroup> menuGroups;
         [SerializeField] private InputReader inputReader;
 
-        // public event Action SelectionChanged;
+        
 
-        private List<Label> menuListSelections;
+        private int menuGroupIndex = 0;
+        private Label[] labels;
 
-        private void Start() {
+        private void Awake() {
+            LoadMenus();
+            inputReader.EnableMenuInput();
+        }
+
+        private void OnEnable() {
+            inputReader.selectionUpEvent += OnSelectionUp;
+            inputReader.selectionDownEvent += OnSelectionDown;
+            inputReader.selectionLeftEvent += OnSelectionLeft;
+            inputReader.selectionRightEvent += OnSelectionRight;
+        }
+
+        private void OnDisable() {
+            inputReader.selectionUpEvent -= OnSelectionUp;
+            inputReader.selectionDownEvent -= OnSelectionDown;
+            inputReader.selectionLeftEvent -= OnSelectionLeft;
+            inputReader.selectionRightEvent -= OnSelectionRight;
+        }
+
+        public void LoadMenus() {
             VisualElement root = GetComponent<UIDocument>().rootVisualElement;
+            VisualElement menuContainer = root.Query<VisualElement>("Menu-Container");
 
-            menuListSelections = root.Query<Label>(className: "menu-list-selection").ToList();
+            labels = new Label[menuGroups.Count];
 
-            foreach (Label menuList in menuListSelections) {
-                Debug.Log(menuList.text);
+            int index = 0;
+            foreach (MenuGroup menuGroup in menuGroups) {
+                int sfIndex = menuGroup.SubfolderIndex;
+                menuGroup.LoadOptions(sfIndex > -1 ? menuGroups[sfIndex].Text : null);
+
+                Label label = new Label(menuGroup.Text);
+                label.name = menuGroup.Text.Replace(" ","-");
+                label.AddToClassList("menu-list-selection");
+                menuContainer.Add(label);
+
+                labels[index] = label;
+                index++;
             }
         }
 
-        protected void UpdateDisplay() {
-            // if (groupItems.Length > 0) {
-            //     _menuText.text = groupItems[groupItemIndex];
-            // }
+        private void OnSelectionUp() {
+            IncrementMenuIndex(-1);
         }
 
-        protected void RaiseSelectionChangedEvent() {
-            // SelectionChanged?.Invoke();
+        private void OnSelectionDown() {
+            IncrementMenuIndex(1);
+        }
+
+        private void OnSelectionLeft() {
+            menuGroups[menuGroupIndex].IncrementItemIndex(1);
+            UpdateDisplay();
+        }
+
+        private void OnSelectionRight() {
+            menuGroups[menuGroupIndex].IncrementItemIndex(-1);
+            UpdateDisplay();
+        }
+
+        private void UpdateDisplay() {
+            if (menuGroups.Count > 0) {
+                labels[menuGroupIndex].text = menuGroups[menuGroupIndex].Text;
+            }
+        }
+
+        private void IncrementMenuIndex(int direction) {
+            if (direction > 0) {
+                if (menuGroupIndex < menuGroups.Count - 1) {
+                    menuGroupIndex++;
+                } else {
+                    menuGroupIndex = 0;
+                }
+            } else {
+                if (menuGroupIndex > 0) {
+                    menuGroupIndex--;
+                } else {
+                    menuGroupIndex = menuGroups.Count - 1;
+                }
+            }
         }
     }
 }

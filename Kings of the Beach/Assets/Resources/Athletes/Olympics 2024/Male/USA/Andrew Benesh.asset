@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   athleteName: Andrew Benesh
   gender: 1
+  menuText: Andrew Benesh
   defaultOutfit: 1
   defaultTop: {fileID: 11400000, guid: 702e83f40caeb1b46b8fceb49b1aef1b, type: 2}
   defaultBottom: {fileID: 11400000, guid: a0cb325a93c0e404392f507e2cbad93f, type: 2}

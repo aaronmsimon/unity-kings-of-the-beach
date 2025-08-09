@@ -1,4 +1,5 @@
 using KotB.Items;
+using KotB.Menus;
 using UnityEngine;
 
 public enum Gender {
@@ -16,11 +17,12 @@ public enum Outfit {
 }
 
 [CreateAssetMenu(fileName = "Skills", menuName = "Game/Actor")]
-public class SkillsSO : ScriptableObject
+public class SkillsSO : ScriptableObject, IMenuSelection
 {
     [Header("Display")]
     [SerializeField] private string athleteName;
     [SerializeField] private Gender gender;
+    [SerializeField] private string menuText;
     [SerializeField] private Outfit defaultOutfit;
     [SerializeField] private MaterialSO defaultTop;
     [SerializeField] private MaterialSO defaultBottom;
@@ -58,6 +60,10 @@ public class SkillsSO : ScriptableObject
     [SerializeField] private PositionType playerPosition;
 
     private Vector3 position;
+
+    public string GetMenuText() {
+        return menuText;
+    }
 
     public string AthleteName { get { return athleteName; } }
     public Gender Gender { get { return gender; } }
