@@ -12,5 +12,10 @@ namespace MenuSystem
         {
             return menuText;
         }
+
+        public string GetMenuKey()
+        {
+            return GetMenuText();
+        }        
     }
 }

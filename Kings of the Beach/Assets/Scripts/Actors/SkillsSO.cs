@@ -65,6 +65,11 @@ public class SkillsSO : ScriptableObject, IMenuSelection
         return menuText;
     }
 
+    public string GetMenuKey()
+    {
+        return GetMenuText();
+    }
+
     public string AthleteName { get { return athleteName; } }
     public Gender Gender { get { return gender; } }
     public Outfit DefaultOutfit { get { return defaultOutfit; } }
