@@ -10,10 +10,9 @@ namespace MenuSystem
         [SerializeField] private List<MenuGroup> menuGroups;
         [SerializeField] private InputReader inputReader;
 
-        
-
         private int menuGroupIndex = 0;
         private Label[] labels;
+        private Dictionary<int, List<int>> dependencyMap;
 
         private void Awake() {
             LoadMenus();
@@ -34,7 +33,7 @@ namespace MenuSystem
             inputReader.selectionRightEvent -= OnSelectionRight;
         }
 
-        public void LoadMenus() {
+        private void LoadMenus() {
             VisualElement root = GetComponent<UIDocument>().rootVisualElement;
             VisualElement menuContainer = root.Query<VisualElement>("Menu-Container");
 
@@ -52,6 +51,23 @@ namespace MenuSystem
 
                 labels[index] = label;
                 index++;
+            }
+        }
+
+        private void BuildDependencyMap() {
+            dependencyMap = new Dictionary<int, List<int>>();
+            for (int i = 0; i < menuGroups.Count; i++)
+            {
+                int p = menuGroups[i].SubfolderIndex;
+                if (p >= 0 && p < menuGroups.Count)
+                {
+                    if (!dependencyMap.TryGetValue(p, out var kids))
+                    {
+                        kids = new List<int>();
+                        dependencyMap[p] = kids;
+                    }
+                    kids.Add(i);
+                }
             }
         }
 
