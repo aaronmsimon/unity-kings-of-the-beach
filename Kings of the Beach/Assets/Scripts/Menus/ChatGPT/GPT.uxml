@@ -1,6 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-  <ui:VisualElement style="flex-direction:row; flex-grow:1; padding:8px;">
-    <ui:ListView name="CountriesList" style="flex-grow:1; margin-right:8px; height:400px;" />
-    <ui:ListView name="AthletesList"  style="flex-grow:1; height:400px;" />
-  </ui:VisualElement>
-</ui:UXML>

@@ -56,6 +56,7 @@ namespace MenuSystem
 
         private void BuildDependencyMap() {
             dependencyMap = new Dictionary<int, List<int>>();
+            
             for (int i = 0; i < menuGroups.Count; i++)
             {
                 int p = menuGroups[i].SubfolderIndex;
