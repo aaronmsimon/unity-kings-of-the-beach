@@ -10,12 +10,17 @@ namespace MenuSystem
         [SerializeField] private List<MenuGroup> menuGroups;
         [SerializeField] private InputReader inputReader;
 
+        private VisualElement root;
+        private VisualElement menuContainer;
+
         private int menuGroupIndex = 0;
         private Label[] labels;
         private Dictionary<int, List<int>> dependencyMap;
 
         private void Awake() {
             LoadMenus();
+            BuildDependencyMap();
+            
             inputReader.EnableMenuInput();
         }
 
@@ -34,8 +39,8 @@ namespace MenuSystem
         }
 
         private void LoadMenus() {
-            VisualElement root = GetComponent<UIDocument>().rootVisualElement;
-            VisualElement menuContainer = root.Query<VisualElement>("Menu-Container");
+            root = GetComponent<UIDocument>().rootVisualElement;
+            menuContainer = root.Query<VisualElement>("Menu-Container");
 
             labels = new Label[menuGroups.Count];
 
@@ -72,6 +77,21 @@ namespace MenuSystem
             }
         }
 
+        private void CascadeChildren(int parentIndex)
+        {
+            if (!dependencyMap.TryGetValue(parentIndex, out var kids)) return;
+            // string parentKey = GetSelectedKey(parentIndex);
+
+            foreach (int childIndex in kids)
+            {
+                // ReloadGroup(childIndex, parentKey);
+                // CascadeChildren(childIndex);
+                MenuGroup menuGroup = menuGroups[childIndex];
+                menuGroup.LoadOptions(menuGroups[parentIndex].Text);
+                labels[childIndex].text = menuGroup.Text;
+            }
+        }
+
         private void OnSelectionUp() {
             IncrementMenuIndex(-1);
         }
@@ -82,11 +102,13 @@ namespace MenuSystem
 
         private void OnSelectionLeft() {
             menuGroups[menuGroupIndex].IncrementItemIndex(1);
+            CascadeChildren(menuGroupIndex);
             UpdateDisplay();
         }
 
         private void OnSelectionRight() {
             menuGroups[menuGroupIndex].IncrementItemIndex(-1);
+            CascadeChildren(menuGroupIndex);
             UpdateDisplay();
         }
 

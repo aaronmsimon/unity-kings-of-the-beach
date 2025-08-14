@@ -6,6 +6,7 @@ namespace KotB.Menus
     [Serializable]
     public class MenuGroup
     {
+        [SerializeField] private string menuGroupName;
         [SerializeField] private string resourcesPath;
         [SerializeField] private int subfolderIndex;
 
@@ -45,6 +46,7 @@ namespace KotB.Menus
             SelectionChanged?.Invoke();
         }
 
+        public string MenuGroupName => menuGroupName;
         public int Index => index;
         public int SubfolderIndex => subfolderIndex;
     }
