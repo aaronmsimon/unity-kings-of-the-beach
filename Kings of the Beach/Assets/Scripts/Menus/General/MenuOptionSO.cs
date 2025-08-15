@@ -16,6 +16,6 @@ namespace MenuSystem
         public string GetMenuKey()
         {
             return GetMenuText();
-        }        
+        }
     }
 }

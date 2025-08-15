@@ -80,12 +80,9 @@ namespace MenuSystem
         private void CascadeChildren(int parentIndex)
         {
             if (!dependencyMap.TryGetValue(parentIndex, out var kids)) return;
-            // string parentKey = GetSelectedKey(parentIndex);
 
             foreach (int childIndex in kids)
             {
-                // ReloadGroup(childIndex, parentKey);
-                // CascadeChildren(childIndex);
                 MenuGroup menuGroup = menuGroups[childIndex];
                 menuGroup.LoadOptions(menuGroups[parentIndex].Text);
                 labels[childIndex].text = menuGroup.Text;
@@ -101,13 +98,13 @@ namespace MenuSystem
         }
 
         private void OnSelectionLeft() {
-            menuGroups[menuGroupIndex].IncrementItemIndex(1);
+            menuGroups[menuGroupIndex].IncrementItemIndex(-1);
             CascadeChildren(menuGroupIndex);
             UpdateDisplay();
         }
 
         private void OnSelectionRight() {
-            menuGroups[menuGroupIndex].IncrementItemIndex(-1);
+            menuGroups[menuGroupIndex].IncrementItemIndex(1);
             CascadeChildren(menuGroupIndex);
             UpdateDisplay();
         }

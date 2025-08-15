@@ -542,6 +542,15 @@ MonoBehaviour:
   - menuGroupName: Athletes
     resourcesPath: Athletes/Olympics 2024/Male
     subfolderIndex: 0
+  - menuGroupName: Outfit
+    resourcesPath: Clothes/Male/Outfit Types
+    subfolderIndex: -1
+  - menuGroupName: Outfit Top
+    resourcesPath: Clothes/Male/Shirt
+    subfolderIndex: -1
+  - menuGroupName: Outfit Bottom
+    resourcesPath: Clothes/Male/Shorts
+    subfolderIndex: -1
   inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
 --- !u!4 &1465191358
 Transform:
