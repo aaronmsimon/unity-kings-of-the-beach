@@ -38,6 +38,10 @@ namespace MenuSystem
             inputReader.selectionRightEvent -= OnSelectionRight;
         }
 
+        public MenuGroup GetCurrentMenuGroup() {
+            return menuGroups[menuGroupIndex];
+        }
+
         private void LoadMenus() {
             root = GetComponent<UIDocument>().rootVisualElement;
             menuContainer = root.Query<VisualElement>("Menu-Container");

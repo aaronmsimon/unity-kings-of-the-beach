@@ -1,35 +1,36 @@
 using UnityEngine;
+using MenuSystem;
 
 namespace KotB.Menus
 {
     public class LoadDefaultOutfit : MonoBehaviour
     {
-        [SerializeField] private string resourcesPath;
-        [SerializeField] private UIGroupSelect country;
-        [SerializeField] private UIGroupSelect outfitTop;
-        [SerializeField] private UIGroupSelect outfitBottom;
-
-        private UIGroupSelect player;
+        private MenuController menuController;
 
         private void Awake() {
-            player = GetComponent<UIGroupSelect>();
+            menuController = GetComponent<MenuController>();
+            if (menuController == null) {
+                Debug.LogAssertion("Menu Controller component not found.");
+            }
         }
 
         private void OnEnable() {
-            player.SelectionChanged += OnSelectionChanged;
+            menuController.GetCurrentMenuGroup().SelectionChanged += OnSelectionChanged;
         }
 
         private void OnDisable() {
-            player.SelectionChanged -= OnSelectionChanged;
+            menuController.GetCurrentMenuGroup().SelectionChanged -= OnSelectionChanged;
         }
 
         private void OnSelectionChanged() {
-            string folderPath = resourcesPath + $"/Male/{country.GetSelectedValue()}";
-            SkillsSO[] skills = Resources.LoadAll<SkillsSO>(folderPath);
+            MenuGroup menuGroup = menuController.GetCurrentMenuGroup();
+            if (menuGroup.MenuGroupName != "Athlete") return;
+
+            SkillsSO[] skills = Resources.LoadAll<SkillsSO>(menuGroup.ResourcesPath);
             for(int i = 0; i < skills.Length; i++) {
-                if (skills[i].name == player.GetSelectedValue()) {
-                    outfitTop.MenuText.text = skills[i].DefaultTop.name;
-                    outfitBottom.MenuText.text = skills[i].DefaultBottom.name;
+                if (skills[i].name == menuGroup.Text) {
+                    // outfitTop.MenuText.text = skills[i].DefaultTop.name;
+                    // outfitBottom.MenuText.text = skills[i].DefaultBottom.name;
                     break;
                 }
             }

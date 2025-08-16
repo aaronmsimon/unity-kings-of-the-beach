@@ -47,7 +47,8 @@ namespace KotB.Menus
         }
 
         public string MenuGroupName => menuGroupName;
-        public int Index => index;
+        public string ResourcesPath => resourcesPath;
         public int SubfolderIndex => subfolderIndex;
+        public int Index => index;
     }
 }
