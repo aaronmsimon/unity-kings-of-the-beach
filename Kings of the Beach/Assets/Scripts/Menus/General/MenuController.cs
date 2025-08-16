@@ -57,6 +57,8 @@ namespace MenuSystem
                 labels[index] = label;
                 index++;
             }
+
+            UpdateDisplay();
         }
 
         private void BuildDependencyMap() {
@@ -79,6 +81,8 @@ namespace MenuSystem
 
         private void CascadeChildren(int parentIndex)
         {
+            UpdateDisplay();
+            
             if (!dependencyMap.TryGetValue(parentIndex, out var kids)) return;
 
             foreach (int childIndex in kids)
@@ -100,18 +104,22 @@ namespace MenuSystem
         private void OnSelectionLeft() {
             menuGroups[menuGroupIndex].IncrementItemIndex(-1);
             CascadeChildren(menuGroupIndex);
-            UpdateDisplay();
         }
 
         private void OnSelectionRight() {
             menuGroups[menuGroupIndex].IncrementItemIndex(1);
             CascadeChildren(menuGroupIndex);
-            UpdateDisplay();
         }
 
         private void UpdateDisplay() {
             if (menuGroups.Count > 0) {
                 labels[menuGroupIndex].text = menuGroups[menuGroupIndex].Text;
+
+                string ussMenuSelected = "menu-selected";
+                foreach (Label label in labels) {
+                    label.RemoveFromClassList(ussMenuSelected);
+                }
+                labels[menuGroupIndex].AddToClassList(ussMenuSelected);
             }
         }
 
@@ -129,6 +137,8 @@ namespace MenuSystem
                     menuGroupIndex = menuGroups.Count - 1;
                 }
             }
+
+            UpdateDisplay();
         }
     }
 }
