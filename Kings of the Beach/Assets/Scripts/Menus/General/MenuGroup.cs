@@ -46,6 +46,15 @@ namespace KotB.Menus
             SelectionChanged?.Invoke();
         }
 
+        public void SetItemIndex(int index) {
+            this.index = index;
+        }
+
+        public int GetIndexByName(string name) {
+            // Returns -1 if not found
+            return Array.FindIndex(options, o => o == name);
+        }
+
         public string MenuGroupName => menuGroupName;
         public string ResourcesPath => resourcesPath;
         public int SubfolderIndex => subfolderIndex;

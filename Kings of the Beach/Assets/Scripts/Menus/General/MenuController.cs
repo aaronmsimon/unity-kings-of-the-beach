@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using KotB.Menus;
+using System.Linq;
+using Unity.VisualScripting;
 
 namespace MenuSystem
 {
@@ -40,6 +42,19 @@ namespace MenuSystem
 
         public MenuGroup GetCurrentMenuGroup() {
             return menuGroups[menuGroupIndex];
+        }
+
+        public MenuGroup GetMenuGroupByName(string menuGroupNameLookup) {
+            return menuGroups.FirstOrDefault(menu => menu.MenuGroupName == menuGroupNameLookup);
+        }
+
+        public int GetMenuGroupIndexByName(string menuGroupNameLookup) {
+            return menuGroups.FindIndex(menu => menu.MenuGroupName == menuGroupNameLookup);
+        }
+
+        public void SetSelectionIndexByGroup(int groupIndex, int selectionIndex) {
+            menuGroups[groupIndex].SetItemIndex(selectionIndex);
+            CascadeChildren(groupIndex);
         }
 
         private void LoadMenus() {

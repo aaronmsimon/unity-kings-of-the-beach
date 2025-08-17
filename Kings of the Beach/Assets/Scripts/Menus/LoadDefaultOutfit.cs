@@ -1,5 +1,6 @@
 using UnityEngine;
 using MenuSystem;
+using System.Linq;
 
 namespace KotB.Menus
 {
@@ -8,32 +9,34 @@ namespace KotB.Menus
         private MenuController menuController;
 
         private void Awake() {
-            menuController = GetComponent<MenuController>();
+            menuController = GetComponent<MenuController>();  
             if (menuController == null) {
                 Debug.LogAssertion("Menu Controller component not found.");
             }
         }
 
         private void OnEnable() {
-            menuController.GetCurrentMenuGroup().SelectionChanged += OnSelectionChanged;
+            menuController.GetMenuGroupByName("Athletes").SelectionChanged += OnSelectionChanged;
         }
 
         private void OnDisable() {
-            menuController.GetCurrentMenuGroup().SelectionChanged -= OnSelectionChanged;
+            menuController.GetMenuGroupByName("Athletes").SelectionChanged -= OnSelectionChanged;
         }
 
         private void OnSelectionChanged() {
-            MenuGroup menuGroup = menuController.GetCurrentMenuGroup();
-            if (menuGroup.MenuGroupName != "Athlete") return;
+            MenuGroup menuGroup = menuController.GetMenuGroupByName("Athletes");
+            int athleteIndex = menuController.GetMenuGroupIndexByName("Athletes");
 
             SkillsSO[] skills = Resources.LoadAll<SkillsSO>(menuGroup.ResourcesPath);
-            for(int i = 0; i < skills.Length; i++) {
-                if (skills[i].name == menuGroup.Text) {
-                    // outfitTop.MenuText.text = skills[i].DefaultTop.name;
-                    // outfitBottom.MenuText.text = skills[i].DefaultBottom.name;
-                    break;
-                }
-            }
+            SkillsSO athleteSkills = skills.FirstOrDefault(s => s.name == menuGroup.Text);
+
+            MenuGroup outfitTop = menuController.GetMenuGroupByName("Outfit Top");
+            int topIndex = outfitTop.GetIndexByName(athleteSkills.DefaultTop.name);
+            menuController.SetSelectionIndexByGroup(athleteIndex, topIndex);
+
+            MenuGroup outfitBottom = menuController.GetMenuGroupByName("Outfit Bottom");
+            int bottomIndex = outfitBottom.GetIndexByName(athleteSkills.DefaultBottom.name);
+            menuController.SetSelectionIndexByGroup(athleteIndex, bottomIndex);
         }
     }
 }
