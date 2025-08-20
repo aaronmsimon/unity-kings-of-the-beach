@@ -32,11 +32,12 @@ namespace KotB.Menus
 
             MenuGroup outfitTop = menuController.GetMenuGroupByName("Outfit Top");
             int topIndex = outfitTop.GetIndexByName(athleteSkills.DefaultTop.name);
-            menuController.SetSelectionIndexByGroup(athleteIndex, topIndex);
+            Debug.Log($"athlete index: {athleteIndex}, top index: {topIndex}");
+            // menuController.SetSelectionIndexByGroup(athleteIndex, topIndex);
 
-            MenuGroup outfitBottom = menuController.GetMenuGroupByName("Outfit Bottom");
-            int bottomIndex = outfitBottom.GetIndexByName(athleteSkills.DefaultBottom.name);
-            menuController.SetSelectionIndexByGroup(athleteIndex, bottomIndex);
+            // MenuGroup outfitBottom = menuController.GetMenuGroupByName("Outfit Bottom");
+            // int bottomIndex = outfitBottom.GetIndexByName(athleteSkills.DefaultBottom.name);
+            // menuController.SetSelectionIndexByGroup(athleteIndex, bottomIndex);
         }
     }
 }

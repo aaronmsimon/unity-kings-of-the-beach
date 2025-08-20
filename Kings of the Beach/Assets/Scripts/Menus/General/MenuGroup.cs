@@ -26,6 +26,8 @@ namespace KotB.Menus
                 IMenuSelection menuSelection = (IMenuSelection)scriptableObjects[i];
                 options[i] = menuSelection.GetMenuText();
             }
+
+            SelectionChanged?.Invoke();
         }
 
         public void IncrementItemIndex(int direction) {
