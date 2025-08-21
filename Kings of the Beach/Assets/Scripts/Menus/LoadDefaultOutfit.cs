@@ -31,8 +31,9 @@ namespace KotB.Menus
             SkillsSO athleteSkills = skills.FirstOrDefault(s => s.name == menuGroup.Text);
 
             MenuGroup outfitTop = menuController.GetMenuGroupByName("Outfit Top");
+            int outfitTopIndex = menuController.GetMenuGroupIndexByName("Outfit Top");
             int topIndex = outfitTop.GetIndexByName(athleteSkills.DefaultTop.name);
-            Debug.Log($"athlete index: {athleteIndex}, top index: {topIndex}");
+            menuController.SetSelectionIndexByGroup(outfitTopIndex, topIndex);
             // menuController.SetSelectionIndexByGroup(athleteIndex, topIndex);
 
             // MenuGroup outfitBottom = menuController.GetMenuGroupByName("Outfit Bottom");

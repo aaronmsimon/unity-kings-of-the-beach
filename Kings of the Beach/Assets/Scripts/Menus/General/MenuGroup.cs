@@ -50,6 +50,7 @@ namespace KotB.Menus
 
         public void SetItemIndex(int index) {
             this.index = index;
+            SelectionChanged?.Invoke();
         }
 
         public int GetIndexByName(string name) {

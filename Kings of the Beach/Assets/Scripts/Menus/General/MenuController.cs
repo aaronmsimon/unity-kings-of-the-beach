@@ -77,7 +77,7 @@ namespace MenuSystem
                 index++;
             }
 
-            UpdateDisplay();
+            UpdateDisplay(menuGroupIndex);
         }
 
         private void BuildDependencyMap() {
@@ -100,7 +100,7 @@ namespace MenuSystem
 
         private void CascadeChildren(int parentIndex)
         {
-            UpdateDisplay();
+            UpdateDisplay(parentIndex);
             
             if (!dependencyMap.TryGetValue(parentIndex, out var kids)) return;
 
@@ -130,9 +130,9 @@ namespace MenuSystem
             CascadeChildren(menuGroupIndex);
         }
 
-        private void UpdateDisplay() {
+        private void UpdateDisplay(int updateIndex) {
             if (menuGroups.Count > 0) {
-                labels[menuGroupIndex].text = menuGroups[menuGroupIndex].Text;
+                labels[updateIndex].text = menuGroups[updateIndex].Text;
 
                 string ussMenuSelected = "menu-selected";
                 foreach (Label label in labels) {
@@ -157,7 +157,7 @@ namespace MenuSystem
                 }
             }
 
-            UpdateDisplay();
+            UpdateDisplay(menuGroupIndex);
         }
     }
 }
