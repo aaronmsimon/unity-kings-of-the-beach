@@ -16,8 +16,8 @@ MonoBehaviour:
   gender: 1
   menuText: Noslen Diaz Amaro
   defaultOutfit: 1
-  defaultTop: {fileID: 11400000, guid: 7020cf51a0ab1294ab269781ecd23999, type: 2}
-  defaultBottom: {fileID: 11400000, guid: 75836cdaea26c7042a9901cbea1d46a8, type: 2}
+  defaultTop: {fileID: 11400000, guid: f7bd5f7583331c64db6b80521d391123, type: 2}
+  defaultBottom: {fileID: 11400000, guid: 2f5141de1063f6c4abd5139c27740747, type: 2}
   moveSpeed: 7
   targetLockDistance: 0.5
   reactionTime: 0.2

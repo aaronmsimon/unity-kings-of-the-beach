@@ -16,8 +16,8 @@ MonoBehaviour:
   gender: 1
   menuText: Miles Partain
   defaultOutfit: 1
-  defaultTop: {fileID: 11400000, guid: 702e83f40caeb1b46b8fceb49b1aef1b, type: 2}
-  defaultBottom: {fileID: 11400000, guid: a0cb325a93c0e404392f507e2cbad93f, type: 2}
+  defaultTop: {fileID: 11400000, guid: f58e69f90f4af464486c2849fe586a95, type: 2}
+  defaultBottom: {fileID: 11400000, guid: 2f5141de1063f6c4abd5139c27740747, type: 2}
   moveSpeed: 7
   targetLockDistance: 0.5
   reactionTime: 0.2
