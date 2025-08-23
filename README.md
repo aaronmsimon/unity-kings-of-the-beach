@@ -105,6 +105,7 @@ I would like to actually finish this game this time. That means starting with a 
 #### UI
 1. Reference: [Game UI Database](https://www.gameuidatabase.com/)
 2. Convert to UI Toolkit
+3. Make UI with game assets for background
 
 ### Concepts/Ideas
 - use right stick to reach for ball on dig
