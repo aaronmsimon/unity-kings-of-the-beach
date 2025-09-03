@@ -1,3 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" KotB="clr-namespace:KotB.Menus" editor-extension-mode="False">
-    <ui:VisualElement class="menu-container" />
+    <ui:VisualElement class="menu-container">
+        <ui:Label tabindex="-1" text="EXHIBITION" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" />
+    </ui:VisualElement>
 </ui:UXML>
