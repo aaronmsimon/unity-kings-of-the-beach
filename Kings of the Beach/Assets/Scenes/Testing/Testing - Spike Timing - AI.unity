@@ -430,6 +430,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
+--- !u!114 &820022332 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -8341760479280743200, guid: d6697ad4ad17bde4e911abcd52fb5e43, type: 3}
+  m_PrefabInstance: {fileID: 820022327}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820022328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe0e2b99c855d849a6edb595e9cf32e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1484310304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -492,19 +503,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
   m_PrefabInstance: {fileID: 1870709357}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1514052819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514052818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e270426a7b450544ba59b0dd52069e12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transitionProfile: {fileID: 11400000, guid: bd8a1404ddf7d614a913a2e8a986e293, type: 2}
 --- !u!114 &1514052825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,6 +517,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 0.01, z: 0}
   faceOpponent: 1
+--- !u!114 &1514052826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514052818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb81c29b3457c844f8bdfdd59db6ff33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  athleteState: 
+--- !u!114 &1514052831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514052818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898e890e168b37e4bb7b85f57a2cc713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coach: {fileID: 820022332}
 --- !u!1001 &1870709357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -527,6 +551,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1514052831}
+    - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnBallHitGround
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: KotB.Actors.Athlete, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: m_Name
       value: AI Athlete
@@ -589,10 +641,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1514052819}
+      addedObject: {fileID: 1514052825}
     - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1514052825}
+      addedObject: {fileID: 1514052831}
+    - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1514052826}
   m_SourcePrefab: {fileID: 100100000, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
 --- !u!1001 &1996722264
 PrefabInstance:

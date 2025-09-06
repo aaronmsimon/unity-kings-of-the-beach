@@ -1,10 +1,13 @@
 using System.Collections;
+using System;
 using UnityEngine;
 
 namespace KotB.Actors
 {
     public class Coach : Athlete
     {
+        public event Action CoachActionPerformed;
+
         private CoachAction coachAction;
 
         private bool hasBall = false;
@@ -43,6 +46,7 @@ namespace KotB.Actors
         public void CoachAction() {
             if (hasBall) {
                 coachAction.Execute();
+                CoachActionPerformed?.Invoke();
                 hasBall = false;
             }
         }
