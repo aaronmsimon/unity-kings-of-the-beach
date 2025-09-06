@@ -6,6 +6,7 @@ namespace KotB.Testing
     public class SetAITarget : MonoBehaviour
     {
         [SerializeField] private Vector3 targetPos = new Vector3(0, 0.01f, 0);
+        [SerializeField] private bool faceOpponent;
 
         private AI ai;
 
@@ -17,8 +18,20 @@ namespace KotB.Testing
             targetPos = ai.transform.position;
         }
 
+        private void OnEnable() {
+            ai.ReachedTargetPos += OnReachedTargetPos;
+        }
+
+        private void OnDisable() {
+            ai.ReachedTargetPos -= OnReachedTargetPos;
+        }
+
         private void Update() {
             ai.TargetPos = targetPos;
+        }
+
+        private void OnReachedTargetPos() {
+            if (faceOpponent) ai.FaceOpponent();
         }
     }
 }
