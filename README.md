@@ -108,6 +108,7 @@ I would like to actually finish this game this time. That means starting with a 
 3. Make UI with game assets for background
 4. can use triggers and bumpers
 5. tiles vs text
+6. Animations in background
 
 ### Concepts/Ideas
 - use right stick to reach for ball on dig
