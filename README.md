@@ -101,6 +101,7 @@ I would like to actually finish this game this time. That means starting with a 
 3. Game setup: choose points/set, sets/match, assign side
 4. Game setup: players assigned to teams
 5. Pass setup info to Match scene
+6. Starting menu to choose Exhibition or Tournament
 
 #### UI
 1. Reference: [Game UI Database](https://www.gameuidatabase.com/)
