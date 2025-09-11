@@ -33,6 +33,7 @@ namespace KotB.Testing
         }
 
         protected override void Update() {
+            Debug.Log($"the ai spiker has state machine profile {stateMachine.CurrentProfile}");
             base.Update();
 
             reactionTime -= Time.deltaTime;

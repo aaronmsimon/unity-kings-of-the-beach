@@ -7,8 +7,6 @@ namespace KotB.Testing
 {
     public class AISpikeProfile : MonoBehaviour
     {
-        [SerializeField] private Coach coach;
-
         private EventPredicate ballHitGroundPredicate;
         private EventPredicate targetSetPredicate;
 
@@ -37,6 +35,7 @@ namespace KotB.Testing
             spikeProfile.SetStartingState(defenseState);
 
             ai.StateMachine.AddProfile(spikeProfile, true);
+            Debug.Log("spike profile loaded");
         }
 
         private void OnDisable() {
