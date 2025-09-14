@@ -512,29 +512,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1514052818}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 898e890e168b37e4bb7b85f57a2cc713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1514052832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514052818}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f6b420655c3838468eab836610fea57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skills: {fileID: 11400000, guid: c71d49c0442b67c44b6dff987f17d336, type: 2}
-  ballInfo: {fileID: 11400000, guid: 114d5afcf77d01345b1467438372a508, type: 2}
-  matchInfo: {fileID: 11400000, guid: 23b44ef1d3bbbbe42a97b3fd37ef9578, type: 2}
-  athleteStats: {fileID: 0}
-  courtSide: {fileID: 11400000, guid: 718029772aacc8042a5d065803efe304, type: 2}
---- !u!114 &1514052837
+--- !u!114 &1514052836
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -543,10 +526,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1514052818}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e270426a7b450544ba59b0dd52069e12, type: 3}
+  m_Script: {fileID: 11500000, guid: ce192382981feab4ab61c8592acb43fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionProfile: {fileID: 11400000, guid: bd8a1404ddf7d614a913a2e8a986e293, type: 2}
+  targetZoneSize: {x: 0.5, y: 0.5}
+  showTargetZone: 1
+  targetZoneColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1001 &1870709357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -557,7 +542,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -574,15 +559,15 @@ PrefabInstance:
     - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1514052832}
+      objectReference: {fileID: 1514052831}
     - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1514052831}
+      objectReference: {fileID: 0}
     - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1514052832}
+      objectReference: {fileID: 0}
     - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
@@ -601,7 +586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: OnBallHitGround
+      value: Reset
       objectReference: {fileID: 0}
     - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -613,7 +598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: KotB.Actors.Athlete, Assembly-CSharp
+      value: KotB.Testing.AISpiker, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1164755901000653087, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
@@ -700,17 +685,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 1514052837}
-    - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1514052831}
     - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1514052832}
+      addedObject: {fileID: 1514052826}
     - targetCorrespondingSourceObject: {fileID: 5717242374435514889, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1514052826}
+      addedObject: {fileID: 1514052836}
   m_SourcePrefab: {fileID: 100100000, guid: d4a58da3999ccf2439a135e2d7395e4e, type: 3}
 --- !u!1001 &1996722264
 PrefabInstance:
