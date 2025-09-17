@@ -210,7 +210,7 @@ namespace KotB.Actors
             float setPassBenefit = 0.05f;
             float setPassAdjustment = ballInfo.LastPassType == PassType.Set ? setPassBenefit : 0;
             float spikeTime = distance.magnitude / (ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange) * (1 - (Mathf.Abs(spikeSpeedPenalty) - setPassAdjustment)));
-            Debug.Log($"distance: {distance.magnitude}, power: {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, speed pen: {spikeSpeedPenalty}, set bonus: {setPassAdjustment}, spikeTime: {spikeTime}");
+            Debug.Log($"distance: {distance.magnitude}, power: {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, speed pen: {spikeSpeedPenalty}, set bonus: {setPassAdjustment}, spikeTime: {spikeTime}, speed: {(distance.magnitude / spikeTime).ToString("F2")}m/s / {(distance.magnitude / spikeTime * 2.23694).ToString("F2")}mph");
             // Debug.Log($"t = d/r: {spikeTime} = {distance.magnitude} / {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, power: {athletePower}, {adjustedPower}");
             bool skillCheck = UnityEngine.Random.value <= ballInfo.SkillValues.SkillToValue(athleteSkill, ballInfo.SkillValues.SpikeOverNet);
             if (directLine || (!directLine && !skillCheck)) {
