@@ -146,5 +146,3 @@ Automatic Replay Reasons
 - Game winning point
 - Long rally (4+ hits)
 - Power spike or block
-
-fudge
