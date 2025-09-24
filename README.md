@@ -147,4 +147,5 @@ Automatic Replay Reasons
 - Long rally (4+ hits)
 - Power spike or block
 
-hopeful...
+that was a shitshow
+now "too tired"
