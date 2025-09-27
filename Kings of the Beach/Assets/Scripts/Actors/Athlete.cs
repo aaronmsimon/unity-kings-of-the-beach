@@ -204,13 +204,14 @@ namespace KotB.Actors
             // Define max variance depending on skill
             float maxVariance = Mathf.Lerp(2f, 0.1f, athleteSkill / 10f); // Skill 1 → 2f variance, Skill 10 → 0.1f variance
             // Apply random variation centered on power
-            float adjustedPower = Mathf.Clamp(athletePower + UnityEngine.Random.Range(-maxVariance, maxVariance), 1f, 10f);
+            float randomVariance = UnityEngine.Random.Range(-maxVariance, maxVariance);
+            float adjustedPower = Mathf.Clamp(athletePower + randomVariance, 1f, 10f);
 
             // Benefit from a Set
             float setPassBenefit = 0.05f;
             float setPassAdjustment = ballInfo.LastPassType == PassType.Set ? setPassBenefit : 0;
             float spikeTime = distance.magnitude / (ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange) * (1 - (Mathf.Abs(spikeSpeedPenalty) - setPassAdjustment)));
-            Debug.Log($"distance: {distance.magnitude}, power: {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, speed pen: {spikeSpeedPenalty}, set bonus: {setPassAdjustment}, spikeTime: {spikeTime}, speed: {(distance.magnitude / spikeTime).ToString("F2")}m/s / {(distance.magnitude / spikeTime * 2.23694).ToString("F2")}mph");
+            Debug.Log($"distance: {distance.magnitude}, randVar: {randomVariance}, power: {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, speed pen: {spikeSpeedPenalty}, set bonus: {setPassAdjustment}, spikeTime: {spikeTime}, speed (m/s): {(distance.magnitude / spikeTime).ToString("F2")}, speed (mph): {(distance.magnitude / spikeTime * 2.23694).ToString("F2")}");
             // Debug.Log($"t = d/r: {spikeTime} = {distance.magnitude} / {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, power: {athletePower}, {adjustedPower}");
             bool skillCheck = UnityEngine.Random.value <= ballInfo.SkillValues.SkillToValue(athleteSkill, ballInfo.SkillValues.SpikeOverNet);
             if (directLine || (!directLine && !skillCheck)) {
