@@ -188,7 +188,7 @@ namespace KotB.Actors
                 float penalty = timingVar * window * spikeWindowPenalty;
                 spikeSpeedPenalty = timingVar * window;
                 Vector3 newTargetPos = new Vector3(targetPos.x + penalty, targetPos.y, targetPos.z);
-                // Debug.Log($"timingVar: {timingVar} window: {window} penalty: {penalty} target: {targetPos} newtarget: {newTargetPos}");
+                Debug.Log($"timingVar: {timingVar} window: {window} penalty: {penalty} target: {targetPos} newtarget: {newTargetPos}");
                 SetSpikeTargetByType(newTargetPos, skills.SpikeSkill, skills.SpikePower, ballInfo.SkillValues.SpikePower, StatTypes.Attack);
             } else {
                 Pass(targetPos, feintHeight, feintTime, PassType.Bump);
@@ -211,7 +211,7 @@ namespace KotB.Actors
             float setPassBenefit = 0.05f;
             float setPassAdjustment = ballInfo.LastPassType == PassType.Set ? setPassBenefit : 0;
             float spikeTime = distance.magnitude / (ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange) * (1 - (Mathf.Abs(spikeSpeedPenalty) - setPassAdjustment)));
-            Debug.Log($"distance: {distance.magnitude}, randVar: {randomVariance}, power: {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, speed pen: {spikeSpeedPenalty}, set bonus: {setPassAdjustment}, spikeTime: {spikeTime}, speed (m/s): {(distance.magnitude / spikeTime).ToString("F2")}, speed (mph): {(distance.magnitude / spikeTime * 2.23694).ToString("F2")}");
+            // Debug.Log($"distance: {distance.magnitude}, randVar: {randomVariance}, power: {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, speed pen: {spikeSpeedPenalty}, set bonus: {setPassAdjustment}, spikeTime: {spikeTime}, speed (m/s): {(distance.magnitude / spikeTime).ToString("F2")}, speed (mph): {(distance.magnitude / spikeTime * 2.23694).ToString("F2")}");
             // Debug.Log($"t = d/r: {spikeTime} = {distance.magnitude} / {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, power: {athletePower}, {adjustedPower}");
             bool skillCheck = UnityEngine.Random.value <= ballInfo.SkillValues.SkillToValue(athleteSkill, ballInfo.SkillValues.SpikeOverNet);
             if (directLine || (!directLine && !skillCheck)) {
