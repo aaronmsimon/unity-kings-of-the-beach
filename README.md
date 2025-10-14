@@ -147,4 +147,4 @@ Automatic Replay Reasons
 - Long rally (4+ hits)
 - Power spike or block
 
-boomer sooner?
+feel like I want there to be more penalty
