@@ -147,4 +147,4 @@ Automatic Replay Reasons
 - Long rally (4+ hits)
 - Power spike or block
 
-I guess she's excited
+booster meeting
