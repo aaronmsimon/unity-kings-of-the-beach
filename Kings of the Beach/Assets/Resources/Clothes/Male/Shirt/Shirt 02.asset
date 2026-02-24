@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Shirt 02
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 49b996495bf03e34485acf903e1f88cc, type: 2}
+  displayName: Shirt 02

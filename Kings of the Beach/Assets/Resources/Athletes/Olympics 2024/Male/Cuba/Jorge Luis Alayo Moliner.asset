@@ -18,6 +18,7 @@ MonoBehaviour:
   defaultOutfit: 1
   defaultTop: {fileID: 11400000, guid: 7020cf51a0ab1294ab269781ecd23999, type: 2}
   defaultBottom: {fileID: 11400000, guid: 75836cdaea26c7042a9901cbea1d46a8, type: 2}
+  displayName: Jorge Luis Alayo Moliner
   moveSpeed: 7
   targetLockDistance: 0.5
   reactionTime: 0.2

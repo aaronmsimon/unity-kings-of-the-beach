@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: USA 01
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 6ff328efcb3edf24f9fa372963b1a5f5, type: 2}
+  displayName: USA 01

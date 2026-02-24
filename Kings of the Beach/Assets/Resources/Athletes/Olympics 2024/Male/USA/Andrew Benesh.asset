@@ -18,6 +18,7 @@ MonoBehaviour:
   defaultOutfit: 1
   defaultTop: {fileID: 11400000, guid: 702e83f40caeb1b46b8fceb49b1aef1b, type: 2}
   defaultBottom: {fileID: 11400000, guid: a0cb325a93c0e404392f507e2cbad93f, type: 2}
+  displayName: Andrew Benesh
   moveSpeed: 7
   targetLockDistance: 0.5
   reactionTime: 0.2
