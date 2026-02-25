@@ -79,8 +79,8 @@ namespace KotB.Menus.Alt
 
         private void UpdateVisualState()
         {
-            EnableInClassList("panel--active", _isActive);
-            EnableInClassList("panel--inactive", !_isActive);
+            EnableInClassList("panel-active", _isActive);
+            EnableInClassList("panel-inactive", !_isActive);
         }
     }
 }

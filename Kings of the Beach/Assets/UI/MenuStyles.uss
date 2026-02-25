@@ -18,3 +18,26 @@
 .menu-selected {
     color: rgb(255, 255, 0);
 }
+
+.panel-active {
+    color: yellow;
+}
+
+MenuPanel {
+    font-size: 50px;
+    color: black;
+}
+
+.menu-root {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.athlete-select-container {
+    width: 80%;
+    height: 80%;
+    flex-direction: column;
+    flex-wrap: wrap;
+}

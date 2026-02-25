@@ -69,34 +69,34 @@ namespace KotB.Menus.Alt
         {
             inputReader.EnableMenuInput();
 
-            inputReader.selectionUpEvent += HandleUp;
-            inputReader.selectionDownEvent += HandleDown;
-            inputReader.selectionLeftEvent += HandleLeft;
-            inputReader.selectionRightEvent += HandleRight;
-            inputReader.startEvent += HandleStart;
+            inputReader.selectionUpEvent += OnSelectionUp;
+            inputReader.selectionDownEvent += OnSelectionDown;
+            inputReader.selectionLeftEvent += OnSelectionLeft;
+            inputReader.selectionRightEvent += OnSelectionRight;
+            inputReader.startEvent += OnStart;
 
             BuildPanels();
         }
 
         private void OnDisable()
         {
-            inputReader.selectionUpEvent -= HandleUp;
-            inputReader.selectionDownEvent -= HandleDown;
-            inputReader.selectionLeftEvent -= HandleLeft;
-            inputReader.selectionRightEvent -= HandleRight;
-            inputReader.startEvent -= HandleStart;
+            inputReader.selectionUpEvent -= OnSelectionUp;
+            inputReader.selectionDownEvent -= OnSelectionDown;
+            inputReader.selectionLeftEvent -= OnSelectionLeft;
+            inputReader.selectionRightEvent -= OnSelectionRight;
+            inputReader.startEvent -= OnStart;
         }
 
         private void BuildPanels()
         {
-            var root = uiDocument.rootVisualElement;
+            var container = uiDocument.rootVisualElement.Q(className: "athlete-select-container");
             _panels.Clear();
 
             foreach (var config in _panelConfigs)
             {
                 var panel = new MenuPanel();
                 panel.OnValueChanged += OnPanelValueChanged;
-                root.Add(panel);
+                container.Add(panel);
                 _panels.Add(panel);
                 config.Panel = panel;
             }
@@ -160,37 +160,37 @@ namespace KotB.Menus.Alt
             _panels[_activePanelIndex].Activate();
         }
 
-        private void HandleUp()
+        private void OnSelectionUp()
         {
             int next = (_activePanelIndex - 1 + _panels.Count) % _panels.Count;
             SetActivePanel(next);
         }
 
-        private void HandleDown()
+        private void OnSelectionDown()
         {
             int next = (_activePanelIndex + 1) % _panels.Count;
             SetActivePanel(next);
         }
 
-        private void HandleLeft()
+        private void OnSelectionLeft()
         {
             var activePanel = _panels[_activePanelIndex];
             if (activePanel.HasValues)
                 activePanel.HandleHorizontal(-1);
             else
-                HandleUp();
+                OnSelectionUp();
         }
 
-        private void HandleRight()
+        private void OnSelectionRight()
         {
             var activePanel = _panels[_activePanelIndex];
             if (activePanel.HasValues)
                 activePanel.HandleHorizontal(1);
             else
-                HandleDown();
+                OnSelectionDown();
         }
 
-        private void HandleStart()
+        private void OnStart()
         {
             // Write selections to your SO here
             // e.g. characterSelectionSO.SetSelection(_selectedClass, _selectedSubclass, _selectedOutfitTop, _selectedOutfitBottom);
