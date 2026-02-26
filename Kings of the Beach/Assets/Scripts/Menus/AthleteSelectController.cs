@@ -11,14 +11,6 @@ namespace KotB.Menus.Alt
         [SerializeField] private InputReader inputReader;
         [SerializeField] private UIDocument uiDocument;
 
-        // Panel configuration — explicit cascade relationships
-        private class PanelConfig
-        {
-            public MenuPanel Panel;
-            public Func<List<IMenuDisplayable>> LoadValues;
-            public Action<IMenuDisplayable> OnSelectionChanged; // null if static
-        }
-
         private List<PanelConfig> _panelConfigs = new();
         private List<MenuPanel> _panels = new();
         private int _activePanelIndex = 0;
