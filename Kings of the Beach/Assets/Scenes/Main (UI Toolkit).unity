@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 875496035}
   - component: {fileID: 875496034}
   m_Layer: 0
-  m_Name: MenuNavigator
+  m_Name: MenuController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,14 +148,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 875496033}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b8a6204b692837409fc211781581a81, type: 3}
+  m_Script: {fileID: 11500000, guid: cc7373d0a702af24d856753486a22642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSelection: {fileID: 0}
-  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  startMatchEvent: {fileID: 0}
   inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
+  uiDocument: {fileID: 920455079}
+  menuItems:
+  - displayName: Exhibition
+    sceneName: Exhibition
+  - displayName: Quit
+    sceneName: 
 --- !u!4 &875496035
 Transform:
   m_ObjectHideFlags: 0
@@ -202,7 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 1a21c7d838e155141bbeb49cf99e3bef, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: f612eaf8918ab0b4791a1a38a830cadd, type: 3}
   m_SortingOrder: 0
 --- !u!4 &920455080
 Transform:

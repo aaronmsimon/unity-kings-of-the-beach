@@ -1,16 +1,12 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UIElements;
 using KotB.Items;
 
 namespace KotB.Menus.Alt
 {
-    public class AthleteSelectController : MonoBehaviour
+    public class AthleteSelectController : MenuController
     {
-        [SerializeField] private InputReader inputReader;
-        [SerializeField] private UIDocument uiDocument;
-
         private List<PanelConfig> _panelConfigs = new();
         private List<MenuPanel> _panels = new();
         private int _activePanelIndex = 0;
@@ -57,26 +53,9 @@ namespace KotB.Menus.Alt
             };
         }
 
-        private void OnEnable()
-        {
-            inputReader.EnableMenuInput();
-
-            inputReader.selectionUpEvent += OnSelectionUp;
-            inputReader.selectionDownEvent += OnSelectionDown;
-            inputReader.selectionLeftEvent += OnSelectionLeft;
-            inputReader.selectionRightEvent += OnSelectionRight;
-            inputReader.startEvent += OnStart;
-
+        protected override void OnEnable() {
+            base.OnEnable();
             BuildPanels();
-        }
-
-        private void OnDisable()
-        {
-            inputReader.selectionUpEvent -= OnSelectionUp;
-            inputReader.selectionDownEvent -= OnSelectionDown;
-            inputReader.selectionLeftEvent -= OnSelectionLeft;
-            inputReader.selectionRightEvent -= OnSelectionRight;
-            inputReader.startEvent -= OnStart;
         }
 
         private void BuildPanels()
@@ -152,19 +131,19 @@ namespace KotB.Menus.Alt
             _panels[_activePanelIndex].Activate();
         }
 
-        private void OnSelectionUp()
+        protected override void OnSelectionUp()
         {
             int next = (_activePanelIndex - 1 + _panels.Count) % _panels.Count;
             SetActivePanel(next);
         }
 
-        private void OnSelectionDown()
+        protected override void OnSelectionDown()
         {
             int next = (_activePanelIndex + 1) % _panels.Count;
             SetActivePanel(next);
         }
 
-        private void OnSelectionLeft()
+        protected override void OnSelectionLeft()
         {
             var activePanel = _panels[_activePanelIndex];
             if (activePanel.HasValues)
@@ -173,7 +152,7 @@ namespace KotB.Menus.Alt
                 OnSelectionUp();
         }
 
-        private void OnSelectionRight()
+        protected override void OnSelectionRight()
         {
             var activePanel = _panels[_activePanelIndex];
             if (activePanel.HasValues)
@@ -182,10 +161,17 @@ namespace KotB.Menus.Alt
                 OnSelectionDown();
         }
 
-        private void OnStart()
+        protected override void OnStart()
         {
             // Write selections to your SO here
             // e.g. characterSelectionSO.SetSelection(_selectedClass, _selectedSubclass, _selectedOutfitTop, _selectedOutfitBottom);
+        }
+
+        private class PanelConfig
+        {
+            public MenuPanel Panel;
+            public Func<List<IMenuDisplayable>> LoadValues;
+            public Action<IMenuDisplayable> OnSelectionChanged; // null if static
         }
     }
 }

@@ -130,6 +130,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
     public void OnStart(InputAction.CallbackContext context)
     {
+		Debug.Log("start pressed");
         if (context.phase == InputActionPhase.Performed)
 			startEvent?.Invoke();
     }
