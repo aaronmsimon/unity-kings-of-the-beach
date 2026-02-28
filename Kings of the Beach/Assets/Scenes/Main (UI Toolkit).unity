@@ -156,6 +156,10 @@ MonoBehaviour:
   menuItems:
   - displayName: Exhibition
     sceneName: Exhibition
+  - displayName: Tournament
+    sceneName: 
+  - displayName: Options
+    sceneName: 
   - displayName: Quit
     sceneName: 
 --- !u!4 &875496035

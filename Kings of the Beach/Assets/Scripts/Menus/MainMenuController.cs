@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using UnityEditor;
 
 namespace KotB.Menus.Alt
 {
@@ -10,36 +11,60 @@ namespace KotB.Menus.Alt
     {
         [SerializeField] private List<MainMenuItemData> menuItems;
 
-        private MenuPanel _menuPanel;
+        private List<MenuPanel> _panels = new();
+        private int _activePanelIndex = 0;
 
         protected override void OnEnable() {
+            base.OnEnable();
             BuildMenu();
         }
 
         private void BuildMenu()
         {
             var root = uiDocument.rootVisualElement.Q("root");
+            _panels.Clear();
 
-            foreach (MainMenuItemData menuItem in menuItems) {
-                VisualElement el = new VisualElement();
-                el.Add(new Label(menuItem.DisplayName));
-                root.Add(el);
+            foreach (var item in menuItems)
+            {
+                var panel = new MenuPanel();
+                panel.Populate(new List<IMenuDisplayable> { item });
+                root.Add(panel);
+                _panels.Add(panel);
             }
+
+            SetActivePanel(0);
         }
 
-        // private void HandleUp() => _menuPanel.HandleVertical(-1);
-        // private void HandleDown() => _menuPanel.HandleVertical(1);
+        private void SetActivePanel(int index)
+        {
+            _panels[_activePanelIndex].Deactivate();
+            _activePanelIndex = index;
+            _panels[_activePanelIndex].Activate();
+        }
+
+        protected override void OnSelectionUp() {
+            int next = (_activePanelIndex - 1 + _panels.Count) % _panels.Count;
+            SetActivePanel(next);
+        }
+
+        protected override void OnSelectionDown() {
+            int next = (_activePanelIndex + 1) % _panels.Count;
+            SetActivePanel(next);
+        }
+
         // private void HandleLeft() => _menuPanel.HandleVertical(-1);
         // private void HandleRight() => _menuPanel.HandleVertical(1);
 
         protected override void OnStart() {
-            var selected = _menuPanel.CurrentValue as MainMenuItemData;
-            Debug.Log(selected);
+            MainMenuItemData selected = (MainMenuItemData)_panels[_activePanelIndex].CurrentValue;
             if (selected == null) return;
 
-            if (selected.SceneName == null)
+            if (string.IsNullOrEmpty(selected.SceneName))
             {
                 Application.Quit();
+#if UNITY_EDITOR
+                EditorApplication.isPlaying = false;
+#endif
                 return;
             }
 
