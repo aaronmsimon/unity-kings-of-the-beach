@@ -8,8 +8,6 @@ namespace KotB.Menus.Alt
     public class AthleteSelectController : MenuController
     {
         private List<PanelConfig> _panelConfigs = new();
-        private List<MenuPanel> _panels = new();
-        private int _activePanelIndex = 0;
 
         // Cached loaded lists for outfit panels (static, loaded once)
         private List<IMenuDisplayable> _outfitTops;
@@ -61,14 +59,14 @@ namespace KotB.Menus.Alt
         private void BuildPanels()
         {
             var container = uiDocument.rootVisualElement.Q(className: "athlete-select-container");
-            _panels.Clear();
+            panels.Clear();
 
             foreach (var config in _panelConfigs)
             {
                 var panel = new MenuPanel();
                 panel.OnValueChanged += OnPanelValueChanged;
                 container.Add(panel);
-                _panels.Add(panel);
+                panels.Add(panel);
                 config.Panel = panel;
             }
 
@@ -81,7 +79,7 @@ namespace KotB.Menus.Alt
         {
             var config = _panelConfigs[index];
             var values = config.LoadValues();
-            _panels[index].Populate(values);
+            panels[index].Populate(values);
 
             // Immediately register the default selection
             if (values.Count > 0)
@@ -94,7 +92,7 @@ namespace KotB.Menus.Alt
 
         private void OnPanelValueChanged(MenuPanel panel, IMenuDisplayable value)
         {
-            int index = _panels.IndexOf(panel);
+            int index = panels.IndexOf(panel);
             _panelConfigs[index].OnSelectionChanged?.Invoke(value);
         }
 
@@ -116,49 +114,12 @@ namespace KotB.Menus.Alt
                 int topIndex = AthleteMenuLoader.FindDefaultIndex(_outfitTops, _selectedAthlete.DefaultTop);
                 int bottomIndex = AthleteMenuLoader.FindDefaultIndex(_outfitBottoms, _selectedAthlete.DefaultBottom);
 
-                _panels[2].ResetToDefault(topIndex);
-                _panels[3].ResetToDefault(bottomIndex);
+                panels[2].ResetToDefault(topIndex);
+                panels[3].ResetToDefault(bottomIndex);
 
                 _selectedOutfitTop = _selectedAthlete.DefaultTop;
                 _selectedOutfitBottom = _selectedAthlete.DefaultBottom;
             }
-        }
-
-        private void SetActivePanel(int index)
-        {
-            _panels[_activePanelIndex].Deactivate();
-            _activePanelIndex = index;
-            _panels[_activePanelIndex].Activate();
-        }
-
-        protected override void OnSelectionUp()
-        {
-            int next = (_activePanelIndex - 1 + _panels.Count) % _panels.Count;
-            SetActivePanel(next);
-        }
-
-        protected override void OnSelectionDown()
-        {
-            int next = (_activePanelIndex + 1) % _panels.Count;
-            SetActivePanel(next);
-        }
-
-        protected override void OnSelectionLeft()
-        {
-            var activePanel = _panels[_activePanelIndex];
-            if (activePanel.HasValues)
-                activePanel.HandleHorizontal(-1);
-            else
-                OnSelectionUp();
-        }
-
-        protected override void OnSelectionRight()
-        {
-            var activePanel = _panels[_activePanelIndex];
-            if (activePanel.HasValues)
-                activePanel.HandleHorizontal(1);
-            else
-                OnSelectionDown();
         }
 
         protected override void OnStart()
