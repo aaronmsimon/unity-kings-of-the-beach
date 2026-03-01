@@ -43,7 +43,7 @@ namespace KotB.Menus.Alt
 
         protected virtual void OnSelectionLeft() {
             var activePanel = panels[activePanelIndex];
-            if (activePanel.HasValues)
+            if (activePanel.IsMulti)
                 activePanel.HandleHorizontal(-1);
             else
                 OnSelectionUp();
@@ -51,7 +51,7 @@ namespace KotB.Menus.Alt
 
         protected virtual void OnSelectionRight() {
             var activePanel = panels[activePanelIndex];
-            if (activePanel.HasValues)
+            if (activePanel.IsMulti)
                 activePanel.HandleHorizontal(1);
             else
                 OnSelectionDown();

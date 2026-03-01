@@ -1,52 +1,47 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
-using KotB.Items;
 
 namespace KotB.Menus.Alt
 {
     public class AthleteSelectController : MenuController
     {
-        private List<PanelConfig> _panelConfigs = new();
+        private List<PanelConfig> panelConfigs = new();
 
         // Cached loaded lists for outfit panels (static, loaded once)
-        private List<IMenuDisplayable> _outfitTops;
-        private List<IMenuDisplayable> _outfitBottoms;
+        private List<IMenuDisplayable> outfitTops;
+        private List<IMenuDisplayable> outfitBottoms;
 
         // Current selections
-        private CountrySO _selectedCountry;
-        private SkillsSO _selectedAthlete;
-        private MaterialSO _selectedOutfitTop;
-        private MaterialSO _selectedOutfitBottom;
+        private CountrySO selectedCountry;
+        private SkillsSO selectedAthlete;
 
-        private void Awake()
-        {
+        // Panel indeces
+        private const int COUNTRY_PANEL = 0;
+        private const int ATHLETE_PANEL = 1;
+        private const int OUTFIT_TOP_PANEL = 2;
+        private const int OUTFIT_BOT_PANEL = 3;
+
+        private void Awake() {
             // Load static lists once
-            _outfitTops = AthleteMenuLoader.LoadOutfitTops();
-            _outfitBottoms = AthleteMenuLoader.LoadOutfitBottoms();
+            outfitTops = AthleteMenuLoader.LoadOutfitTops();
+            outfitBottoms = AthleteMenuLoader.LoadOutfitBottoms();
 
             // Build panel configs explicitly
-            _panelConfigs = new List<PanelConfig>
-            {
-                new PanelConfig
-                {
+            panelConfigs = new List<PanelConfig> {
+                new PanelConfig {
                     LoadValues = AthleteMenuLoader.LoadCountries,
-                    OnSelectionChanged = OnClassChanged
+                    OnSelectionChanged = OnCountryChanged
                 },
-                new PanelConfig
-                {
-                    LoadValues = () => AthleteMenuLoader.LoadAthletes(_selectedCountry?.DisplayName),
-                    OnSelectionChanged = OnSubclassChanged
+                new PanelConfig {
+                    LoadValues = () => AthleteMenuLoader.LoadAthletes(selectedCountry?.DisplayName),
+                    OnSelectionChanged = OnAthleteChanged
                 },
-                new PanelConfig
-                {
-                    LoadValues = () => _outfitTops,
-                    OnSelectionChanged = value => _selectedOutfitTop = value as MaterialSO
+                new PanelConfig {
+                    LoadValues = () => outfitTops,
                 },
-                new PanelConfig
-                {
-                    LoadValues = () => _outfitBottoms,
-                    OnSelectionChanged = value => _selectedOutfitBottom = value as MaterialSO
+                new PanelConfig {
+                    LoadValues = () => outfitBottoms,
                 }
             };
         }
@@ -56,13 +51,11 @@ namespace KotB.Menus.Alt
             BuildPanels();
         }
 
-        private void BuildPanels()
-        {
+        private void BuildPanels() {
             var container = uiDocument.rootVisualElement.Q(className: "athlete-select-container");
             panels.Clear();
 
-            foreach (var config in _panelConfigs)
-            {
+            foreach (var config in panelConfigs) {
                 var panel = new MenuPanel();
                 panel.OnValueChanged += OnPanelValueChanged;
                 container.Add(panel);
@@ -71,54 +64,44 @@ namespace KotB.Menus.Alt
             }
 
             // Populate first panel and cascade from there
-            PopulatePanel(0);
-            SetActivePanel(0);
+            PopulatePanel(COUNTRY_PANEL);
+            PopulatePanel(OUTFIT_TOP_PANEL);
+            PopulatePanel(OUTFIT_BOT_PANEL);
+            SetActivePanel(COUNTRY_PANEL);
         }
 
-        private void PopulatePanel(int index)
-        {
-            var config = _panelConfigs[index];
+        private void PopulatePanel(int index) {
+            var config = panelConfigs[index];
             var values = config.LoadValues();
             panels[index].Populate(values);
 
             // Immediately register the default selection
-            if (values.Count > 0)
-                config.OnSelectionChanged?.Invoke(values[0]);
-
-            // Cascade to next panel if it exists
-            if (index + 1 < _panelConfigs.Count)
-                PopulatePanel(index + 1);
+            if (values.Count > 0) config.OnSelectionChanged?.Invoke(values[0]);
         }
 
-        private void OnPanelValueChanged(MenuPanel panel, IMenuDisplayable value)
-        {
+        private void OnPanelValueChanged(MenuPanel panel, IMenuDisplayable value) {
             int index = panels.IndexOf(panel);
-            _panelConfigs[index].OnSelectionChanged?.Invoke(value);
+            panelConfigs[index].OnSelectionChanged?.Invoke(value);
         }
 
-        private void OnClassChanged(IMenuDisplayable value)
-        {
-            _selectedCountry = value as CountrySO;
+        private void OnCountryChanged(IMenuDisplayable value) {
+            selectedCountry = (CountrySO)value;
 
-            // Cascade — repopulate subclass panel and everything downstream
-            PopulatePanel(1);
+            // Cascade — repopulate Athlete panel and everything downstream
+            PopulatePanel(ATHLETE_PANEL);
         }
 
-        private void OnSubclassChanged(IMenuDisplayable value)
+        private void OnAthleteChanged(IMenuDisplayable value)
         {
-            _selectedAthlete = value as SkillsSO;
+            selectedAthlete = (SkillsSO)value;
 
-            // Apply default outfits from subclass
-            if (_selectedAthlete != null)
-            {
-                int topIndex = AthleteMenuLoader.FindDefaultIndex(_outfitTops, _selectedAthlete.DefaultTop);
-                int bottomIndex = AthleteMenuLoader.FindDefaultIndex(_outfitBottoms, _selectedAthlete.DefaultBottom);
+            // Apply default outfits from Athlete
+            if (selectedAthlete != null) {
+                int defaultTop = AthleteMenuLoader.FindDefaultIndex(outfitTops, selectedAthlete.DefaultTop);
+                int defaultBottom = AthleteMenuLoader.FindDefaultIndex(outfitBottoms, selectedAthlete.DefaultBottom);
 
-                panels[2].ResetToDefault(topIndex);
-                panels[3].ResetToDefault(bottomIndex);
-
-                _selectedOutfitTop = _selectedAthlete.DefaultTop;
-                _selectedOutfitBottom = _selectedAthlete.DefaultBottom;
+                panels[OUTFIT_TOP_PANEL].ResetToDefault(defaultTop);
+                panels[OUTFIT_BOT_PANEL].ResetToDefault(defaultBottom);
             }
         }
 
