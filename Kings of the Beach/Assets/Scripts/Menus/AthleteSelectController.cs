@@ -1,11 +1,15 @@
-using System;
 using System.Collections.Generic;
+using System;
+using UnityEngine;
 using UnityEngine.UIElements;
+using System.ComponentModel.Design.Serialization;
 
 namespace KotB.Menus.Alt
 {
     public class AthleteSelectController : MenuController
     {
+        [SerializeField] private RenderTexture renderTexture;
+
         private List<PanelConfig> panelConfigs = new();
 
         // Cached loaded lists for outfit panels (static, loaded once)
@@ -52,18 +56,22 @@ namespace KotB.Menus.Alt
         }
 
         private void BuildPanels() {
-            var container = uiDocument.rootVisualElement.Q(className: "athlete-select-container");
+            var selectionsContainer = uiDocument.rootVisualElement.Q(className: "athlete-select-container");
             panels.Clear();
 
             foreach (var config in panelConfigs) {
                 var panel = new MenuPanel();
                 panel.OnValueChanged += OnPanelValueChanged;
-                container.Add(panel);
+                selectionsContainer.Add(panel);
                 panels.Add(panel);
                 config.Panel = panel;
             }
 
-            // Populate first panel and cascade from there
+            // Display render texture
+            var textureContainer = uiDocument.rootVisualElement.Q<VisualElement>("render-texture-container");
+            textureContainer.style.backgroundImage = new StyleBackground(Background.FromRenderTexture(renderTexture));
+
+            // Populate panels
             PopulatePanel(COUNTRY_PANEL);
             PopulatePanel(OUTFIT_TOP_PANEL);
             PopulatePanel(OUTFIT_BOT_PANEL);
