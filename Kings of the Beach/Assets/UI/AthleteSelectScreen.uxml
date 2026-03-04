@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/MenuStyles.uss?fileID=7433441132597879392&amp;guid=81e1aa93cbeb0ed4fbb4db2ff3f95b24&amp;type=3#MenuStyles" />
-    <ui:VisualElement name="root" class="menu-root">
-        <ui:VisualElement class="athlete-select-container" style="flex-grow: 1;" />
-        <ui:VisualElement name="render-texture-container" class="athlete-select-container" style="flex-grow: 1;" />
+    <ui:VisualElement name="root" class="menu-root" style="flex-direction: row;">
+        <ui:VisualElement class="athlete-select-container" style="flex-grow: 1; width: 500px; height: 500px;" />
+        <ui:VisualElement name="render-texture-container" class="athlete-select-container" style="flex-grow: 1; width: 500px; height: 500px;" />
     </ui:VisualElement>
 </ui:UXML>
