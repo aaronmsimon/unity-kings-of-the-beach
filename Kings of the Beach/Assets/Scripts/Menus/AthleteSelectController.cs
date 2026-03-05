@@ -2,13 +2,16 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
-using System.ComponentModel.Design.Serialization;
+using KotB.Items;
 
 namespace KotB.Menus.Alt
 {
     public class AthleteSelectController : MenuController
     {
         [SerializeField] private RenderTexture renderTexture;
+
+        public event Action<MaterialSO> OutfitTopChanged;
+        public event Action<MaterialSO> OutfitBottomChanged;
 
         private List<PanelConfig> panelConfigs = new();
 
@@ -20,7 +23,7 @@ namespace KotB.Menus.Alt
         private CountrySO selectedCountry;
         private SkillsSO selectedAthlete;
 
-        // Panel indeces
+        // Panel indices
         private const int COUNTRY_PANEL = 0;
         private const int ATHLETE_PANEL = 1;
         private const int OUTFIT_TOP_PANEL = 2;
@@ -43,9 +46,11 @@ namespace KotB.Menus.Alt
                 },
                 new PanelConfig {
                     LoadValues = () => outfitTops,
+                    OnSelectionChanged = OnTopChanged
                 },
                 new PanelConfig {
                     LoadValues = () => outfitBottoms,
+                    OnSelectionChanged = OnBottomChanged
                 }
             };
         }
@@ -109,8 +114,18 @@ namespace KotB.Menus.Alt
                 int defaultBottom = AthleteMenuLoader.FindDefaultIndex(outfitBottoms, selectedAthlete.DefaultBottom);
 
                 panels[OUTFIT_TOP_PANEL].ResetToDefault(defaultTop);
+                OnTopChanged(outfitTops[defaultTop]);
                 panels[OUTFIT_BOT_PANEL].ResetToDefault(defaultBottom);
+                OnBottomChanged(outfitBottoms[defaultBottom]);
             }
+        }
+
+        private void OnTopChanged(IMenuDisplayable value) {
+            OutfitTopChanged?.Invoke((MaterialSO)value);
+        }
+
+        private void OnBottomChanged(IMenuDisplayable value) {
+            OutfitBottomChanged?.Invoke((MaterialSO)value);
         }
 
         protected override void OnStart()

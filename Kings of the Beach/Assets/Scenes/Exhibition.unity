@@ -744,6 +744,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1740518834}
+  - component: {fileID: 1740518835}
   m_Layer: 0
   m_Name: Athlete1
   m_TagString: Untagged
@@ -768,6 +769,20 @@ Transform:
   - {fileID: 4587115706646355349}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1740518835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740518833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b8aa84e6411c7b4c999c46390c89e51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1358581012}
+  outfitTransform: {fileID: 8349711405613195366}
 --- !u!1 &155554256602081892
 GameObject:
   m_ObjectHideFlags: 0
