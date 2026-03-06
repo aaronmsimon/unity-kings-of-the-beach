@@ -11,9 +11,14 @@ namespace KotB.Menus.Alt
         private const int bottomMat = 0;
         private const int topMat = 1;
 
-        private void Awake() {
+        private void OnEnable() {
             controller.OutfitTopChanged += OnTopChanged;
             controller.OutfitBottomChanged += OnBottomChanged;
+        }
+
+        private void OnDisable() {
+            controller.OutfitTopChanged -= OnTopChanged;
+            controller.OutfitBottomChanged -= OnBottomChanged;
         }
 
         private void OnTopChanged(MaterialSO mat) {

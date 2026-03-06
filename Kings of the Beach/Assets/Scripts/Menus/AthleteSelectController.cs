@@ -55,6 +55,11 @@ namespace KotB.Menus.Alt
             };
         }
 
+        private void Start() {
+            // Load defaults
+            OnAthleteChanged(selectedAthlete);
+        }
+
         protected override void OnEnable() {
             base.OnEnable();
             BuildPanels();
