@@ -420,6 +420,7 @@ MonoBehaviour:
   inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
   uiDocument: {fileID: 1358581014}
   renderTexture: {fileID: 8400000, guid: eb03d7bcdba6a0647a88b13c9d81b680, type: 2}
+  athleteConfig: {fileID: 11400000, guid: b09022957e0637a40b0149006cc55afc, type: 2}
 --- !u!4 &1358581013
 Transform:
   m_ObjectHideFlags: 0

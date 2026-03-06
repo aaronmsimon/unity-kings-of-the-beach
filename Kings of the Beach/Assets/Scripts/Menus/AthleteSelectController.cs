@@ -3,12 +3,14 @@ using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 using KotB.Items;
+using KotB.Match;
 
 namespace KotB.Menus.Alt
 {
     public class AthleteSelectController : MenuController
     {
         [SerializeField] private RenderTexture renderTexture;
+        [SerializeField] private AthleteConfigSO athleteConfig;
 
         public event Action<MaterialSO> OutfitTopChanged;
         public event Action<MaterialSO> OutfitBottomChanged;
@@ -122,15 +124,21 @@ namespace KotB.Menus.Alt
                 OnTopChanged(outfitTops[defaultTop]);
                 panels[OUTFIT_BOT_PANEL].ResetToDefault(defaultBottom);
                 OnBottomChanged(outfitBottoms[defaultBottom]);
+
+                athleteConfig.skills = selectedAthlete;
             }
         }
 
         private void OnTopChanged(IMenuDisplayable value) {
-            OutfitTopChanged?.Invoke((MaterialSO)value);
+            MaterialSO mat = (MaterialSO)value;
+            OutfitTopChanged?.Invoke(mat);
+            athleteConfig.top = mat;
         }
 
         private void OnBottomChanged(IMenuDisplayable value) {
+            MaterialSO mat = (MaterialSO)value;
             OutfitBottomChanged?.Invoke((MaterialSO)value);
+            athleteConfig.bottom = mat;
         }
 
         protected override void OnStart()
