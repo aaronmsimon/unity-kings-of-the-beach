@@ -763,6 +763,24 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShoulderLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""fd5455c3-198d-4a77-9c51-ff3ca285ed52"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShoulderRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""c733d011-0e70-46c4-9b0c-f81ecd2883f8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -963,6 +981,50 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0254e04d-5393-4ed6-8d14-432bbebfe161"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ShoulderLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b1ea8c6-e8e2-47ea-be41-a933be96cdcc"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ShoulderLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b77f9e5-c1ba-47d8-ba09-72aeaab4d1de"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ShoulderRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d53c52fc-00c2-4faa-8e60-c250bf4a5f86"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ShoulderRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1016,6 +1078,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Menu_SelectionLeft = m_Menu.FindAction("SelectionLeft", throwIfNotFound: true);
         m_Menu_SelectionRight = m_Menu.FindAction("SelectionRight", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
+        m_Menu_ShoulderLeft = m_Menu.FindAction("ShoulderLeft", throwIfNotFound: true);
+        m_Menu_ShoulderRight = m_Menu.FindAction("ShoulderRight", throwIfNotFound: true);
     }
 
     ~@GameInput()
@@ -1396,6 +1460,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Menu_SelectionLeft;
     private readonly InputAction m_Menu_SelectionRight;
     private readonly InputAction m_Menu_Pause;
+    private readonly InputAction m_Menu_ShoulderLeft;
+    private readonly InputAction m_Menu_ShoulderRight;
     /// <summary>
     /// Provides access to input actions defined in input action map "Menu".
     /// </summary>
@@ -1435,6 +1501,14 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Menu/Pause".
         /// </summary>
         public InputAction @Pause => m_Wrapper.m_Menu_Pause;
+        /// <summary>
+        /// Provides access to the underlying input action "Menu/ShoulderLeft".
+        /// </summary>
+        public InputAction @ShoulderLeft => m_Wrapper.m_Menu_ShoulderLeft;
+        /// <summary>
+        /// Provides access to the underlying input action "Menu/ShoulderRight".
+        /// </summary>
+        public InputAction @ShoulderRight => m_Wrapper.m_Menu_ShoulderRight;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1482,6 +1556,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @ShoulderLeft.started += instance.OnShoulderLeft;
+            @ShoulderLeft.performed += instance.OnShoulderLeft;
+            @ShoulderLeft.canceled += instance.OnShoulderLeft;
+            @ShoulderRight.started += instance.OnShoulderRight;
+            @ShoulderRight.performed += instance.OnShoulderRight;
+            @ShoulderRight.canceled += instance.OnShoulderRight;
         }
 
         /// <summary>
@@ -1514,6 +1594,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @ShoulderLeft.started -= instance.OnShoulderLeft;
+            @ShoulderLeft.performed -= instance.OnShoulderLeft;
+            @ShoulderLeft.canceled -= instance.OnShoulderLeft;
+            @ShoulderRight.started -= instance.OnShoulderRight;
+            @ShoulderRight.performed -= instance.OnShoulderRight;
+            @ShoulderRight.canceled -= instance.OnShoulderRight;
         }
 
         /// <summary>
@@ -1722,5 +1808,19 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ShoulderLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShoulderLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ShoulderRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShoulderRight(InputAction.CallbackContext context);
     }
 }

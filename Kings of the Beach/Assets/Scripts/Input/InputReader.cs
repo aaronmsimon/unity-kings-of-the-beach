@@ -27,6 +27,8 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 	public event UnityAction selectionDownEvent;
 	public event UnityAction selectionLeftEvent;
 	public event UnityAction selectionRightEvent;
+	public event UnityAction shoulderLeftEvent;
+	public event UnityAction shoulderRightEvent;
 
 	private GameInput gameInput;
 
@@ -156,6 +158,18 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     {
         if (context.phase == InputActionPhase.Performed)
 			selectionRightEvent?.Invoke();
+    }
+
+    public void OnShoulderLeft(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+			shoulderLeftEvent?.Invoke();
+    }
+
+    public void OnShoulderRight(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+			shoulderRightEvent?.Invoke();
     }
 
 	// Enable/Disable
