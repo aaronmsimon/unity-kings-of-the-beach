@@ -9,6 +9,7 @@ namespace KotB.Menus.Alt
 {
     public class AthleteSelectController : MenuController
     {
+        [SerializeField] private int uiDocumentIndex;
         [SerializeField] private RenderTexture renderTexture;
         [SerializeField] private AthleteConfigSO athleteConfig;
 
@@ -32,6 +33,10 @@ namespace KotB.Menus.Alt
         private const int OUTFIT_BOT_PANEL = 3;
 
         private void Awake() {
+            // Check if prefab has been configured
+            if (renderTexture == null) Debug.LogAssertion($"No render texture for {transform.parent.name}.");
+            if (athleteConfig == null) Debug.LogAssertion($"No athlete configuration for {transform.parent.name}.");
+
             // Load static lists once
             outfitTops = AthleteMenuLoader.LoadOutfitTops();
             outfitBottoms = AthleteMenuLoader.LoadOutfitBottoms();
@@ -62,13 +67,12 @@ namespace KotB.Menus.Alt
             OnAthleteChanged(selectedAthlete);
         }
 
-        protected override void OnEnable() {
-            base.OnEnable();
+        private void OnEnable() {
             BuildPanels();
         }
 
         private void BuildPanels() {
-            var selectionsContainer = uiDocument.rootVisualElement.Q(className: "athlete-select-container");
+            var selectionsContainer = uiDocument.rootVisualElement.Q($"athlete-slot-{uiDocumentIndex}");
             panels.Clear();
 
             foreach (var config in panelConfigs) {

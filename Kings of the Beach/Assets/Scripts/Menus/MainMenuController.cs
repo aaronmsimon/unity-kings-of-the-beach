@@ -10,9 +10,17 @@ namespace KotB.Menus.Alt
     {
         [SerializeField] private List<MainMenuItemData> menuItems;
 
-        protected override void OnEnable() {
-            base.OnEnable();
+        private void Awake() {
+            inputReader.EnableMenuInput();
+        }
+
+        private void OnEnable() {
+            Activate();
             BuildMenu();
+        }
+
+        private void OnDisable() {
+            Deactivate();
         }
 
         private void BuildMenu()
