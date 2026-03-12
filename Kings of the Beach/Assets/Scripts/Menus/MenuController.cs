@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEditor;
 
 namespace KotB.Menus.Alt
@@ -8,7 +7,6 @@ namespace KotB.Menus.Alt
     public abstract class MenuController : MonoBehaviour
     {
         [SerializeField] protected InputReader inputReader;
-        [SerializeField] protected UIDocument uiDocument;
 
         protected List<MenuPanel> panels = new();
         protected int activePanelIndex = 0;

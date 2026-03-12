@@ -8,6 +8,7 @@ namespace KotB.Menus.Alt
 {
     public class MainMenuController : MenuController
     {
+        [SerializeField] private UIDocument uiDocument;
         [SerializeField] private List<MainMenuItemData> menuItems;
 
         private void Awake() {

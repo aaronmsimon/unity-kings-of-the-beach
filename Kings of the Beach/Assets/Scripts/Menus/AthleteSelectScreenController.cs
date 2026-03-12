@@ -1,10 +1,11 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace KotB.Menus.Alt
 {
     public class AthleteSelectScreenController : MonoBehaviour
     {
+        [SerializeField] private UIDocument uiDocument;
         [SerializeField] private InputReader inputReader;
         [SerializeField] private AthleteSelectController[] athleteSelectControllers;
 
@@ -17,6 +18,12 @@ namespace KotB.Menus.Alt
         private void OnEnable() {
             inputReader.shoulderLeftEvent += OnShoulderLeft;
             inputReader.shoulderRightEvent += OnShoulderRight;
+        }
+
+        private void Start() {
+            foreach(AthleteSelectController athleteSelectController in athleteSelectControllers) {
+                athleteSelectController.BuildPanels(uiDocument);
+            }
         }
 
         private void OnDisable() {

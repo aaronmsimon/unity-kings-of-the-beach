@@ -12,6 +12,7 @@ namespace KotB.Menus.Alt
         [SerializeField] private int uiDocumentIndex;
         [SerializeField] private RenderTexture renderTexture;
         [SerializeField] private AthleteConfigSO athleteConfig;
+        [SerializeField] private Camera cam;
 
         public event Action<MaterialSO> OutfitTopChanged;
         public event Action<MaterialSO> OutfitBottomChanged;
@@ -36,6 +37,7 @@ namespace KotB.Menus.Alt
             // Check if prefab has been configured
             if (renderTexture == null) Debug.LogAssertion($"No render texture for {transform.parent.name}.");
             if (athleteConfig == null) Debug.LogAssertion($"No athlete configuration for {transform.parent.name}.");
+            if (cam.targetTexture == null) Debug.LogAssertion($"No render texture (camera) for {transform.parent.name}.");
 
             // Load static lists once
             outfitTops = AthleteMenuLoader.LoadOutfitTops();
@@ -67,12 +69,11 @@ namespace KotB.Menus.Alt
             OnAthleteChanged(selectedAthlete);
         }
 
-        private void OnEnable() {
-            BuildPanels();
-        }
+        public void BuildPanels(UIDocument uiDocument) {
+            var slot = uiDocument.rootVisualElement.Q($"athlete-slot-{uiDocumentIndex}");
+            var selectionsContainer = slot.Q(className: "athlete-select-container");
+            var textureContainer = slot.Q(className: "render-texture-container");
 
-        private void BuildPanels() {
-            var selectionsContainer = uiDocument.rootVisualElement.Q($"athlete-slot-{uiDocumentIndex}");
             panels.Clear();
 
             foreach (var config in panelConfigs) {
@@ -84,7 +85,6 @@ namespace KotB.Menus.Alt
             }
 
             // Display render texture
-            var textureContainer = uiDocument.rootVisualElement.Q<VisualElement>("render-texture-container");
             textureContainer.style.backgroundImage = new StyleBackground(Background.FromRenderTexture(renderTexture));
 
             // Populate panels
