@@ -1125,6 +1125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 658653944807412542}
   - component: {fileID: 124215386270948035}
+  - component: {fileID: 3749826833984291020}
   m_Layer: 0
   m_Name: Volleyball-Character
   m_TagString: Untagged
@@ -1172,6 +1173,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3749826833984291020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7548163476762175584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e9ac75d56455e478f6e904b8cb83eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips: []
+  timeBetweenClips: 2
 --- !u!1 &7642314018949643673
 GameObject:
   m_ObjectHideFlags: 0

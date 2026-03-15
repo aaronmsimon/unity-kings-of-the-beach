@@ -24,6 +24,7 @@ namespace KotB.Menus.Alt
             foreach(AthleteSelectController athleteSelectController in athleteSelectControllers) {
                 athleteSelectController.BuildPanels(uiDocument);
             }
+            SetActiveAthleteSelectController(0);
         }
 
         private void OnDisable() {
