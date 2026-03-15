@@ -38,20 +38,26 @@ MenuPanel {
 .athlete-grid {
     width: 80%;
     height: 80%;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 
 .athlete-slot {
     width: 50%;
     height: 50%;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .render-texture-container {
     flex-grow: 1;
+    width: 50%;
 }
 
 .athlete-select-container {
-    flex-direction: row;
+    flex-direction: column;
+    width: 50%;
+}
+
+MenuPanel Label {
+    white-space: normal;
 }
