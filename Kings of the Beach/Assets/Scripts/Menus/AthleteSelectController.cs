@@ -18,6 +18,7 @@ namespace KotB.Menus.Alt
         public event Action<MaterialSO> OutfitBottomChanged;
 
         private List<PanelConfig> panelConfigs = new();
+        private VisualElement slot;
 
         // Cached loaded lists for outfit panels (static, loaded once)
         private List<IMenuDisplayable> outfitTops;
@@ -69,8 +70,18 @@ namespace KotB.Menus.Alt
             OnAthleteChanged(selectedAthlete);
         }
 
+        public override void Activate() {
+            base.Activate();
+            slot.AddToClassList("athlete-slot-active");
+        }
+
+        public override void Deactivate() {
+            base.Deactivate();
+            slot.RemoveFromClassList("athlete-slot-active");
+        }
+
         public void BuildPanels(UIDocument uiDocument) {
-            var slot = uiDocument.rootVisualElement.Q($"athlete-slot-{uiDocumentIndex}");
+            slot = uiDocument.rootVisualElement.Q($"athlete-slot-{uiDocumentIndex}");
             var selectionsContainer = slot.Q(className: "athlete-select-container");
             var textureContainer = slot.Q(className: "render-texture-container");
 

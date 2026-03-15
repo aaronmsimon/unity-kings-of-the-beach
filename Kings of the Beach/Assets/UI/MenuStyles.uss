@@ -46,6 +46,13 @@ MenuPanel {
     width: 50%;
     height: 50%;
     flex-direction: row;
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, 0);
+    border-radius: 4px;
+}
+
+.athlete-slot-active {
+    border-color: white;
 }
 
 .render-texture-container {

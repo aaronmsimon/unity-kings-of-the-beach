@@ -11,7 +11,7 @@ namespace KotB.Menus.Alt
         protected List<MenuPanel> panels = new();
         protected int activePanelIndex = 0;
 
-        public void Activate() {
+        public virtual void Activate() {
             inputReader.selectionUpEvent += OnSelectionUp;
             inputReader.selectionDownEvent += OnSelectionDown;
             inputReader.selectionLeftEvent += OnSelectionLeft;
@@ -19,7 +19,7 @@ namespace KotB.Menus.Alt
             inputReader.startEvent += OnStart;
         }
 
-        public void Deactivate() {
+        public virtual void Deactivate() {
             inputReader.selectionUpEvent -= OnSelectionUp;
             inputReader.selectionDownEvent -= OnSelectionDown;
             inputReader.selectionLeftEvent -= OnSelectionLeft;
