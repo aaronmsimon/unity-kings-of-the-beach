@@ -18,6 +18,7 @@ namespace KotB.Menus.Alt
         private void OnEnable() {
             inputReader.shoulderLeftEvent += OnShoulderLeft;
             inputReader.shoulderRightEvent += OnShoulderRight;
+            inputReader.interaction1Event += OnInteraction1;
         }
 
         private void Start() {
@@ -48,6 +49,13 @@ namespace KotB.Menus.Alt
 
         private void SelectionChange(int direction) {
             SetActiveAthleteSelectController((activeAthleteSelectControllerIndex + direction + athleteSelectControllers.Length) % athleteSelectControllers.Length);
+        }
+
+        private void OnInteraction1() {
+            foreach(AthleteSelectController athleteSelectController in athleteSelectControllers) {
+                athleteSelectController.AthleteConfig.computerControlled = true;
+            }
+            athleteSelectControllers[activeAthleteSelectControllerIndex].AthleteConfig.computerControlled = false;
         }
     }
 }

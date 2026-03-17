@@ -168,5 +168,7 @@ namespace KotB.Menus.Alt
             public Func<List<IMenuDisplayable>> LoadValues;
             public Action<IMenuDisplayable> OnSelectionChanged; // null if static
         }
+
+        public AthleteConfigSO AthleteConfig => athleteConfig;
     }
 }

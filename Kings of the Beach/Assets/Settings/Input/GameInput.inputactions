@@ -695,6 +695,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Interaction1",
+                    "type": "Button",
+                    "id": "d393ba01-0189-40a0-84bf-fc9ed205e666",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -937,6 +946,28 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "ShoulderRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2364b67f-7740-4926-abbb-ea6a0392e582",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Interaction1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "25932da9-ba7d-45b2-9594-dc7e65f192e9",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interaction1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
