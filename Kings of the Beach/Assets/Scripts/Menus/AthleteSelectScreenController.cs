@@ -25,7 +25,10 @@ namespace KotB.Menus.Alt
             foreach(AthleteSelectController athleteSelectController in athleteSelectControllers) {
                 athleteSelectController.BuildPanels(uiDocument);
             }
+
+            // Set defaults
             SetActiveAthleteSelectController(0);
+            SetHumanControlled(0);
         }
 
         private void OnDisable() {
@@ -52,10 +55,16 @@ namespace KotB.Menus.Alt
         }
 
         private void OnInteraction1() {
+            SetHumanControlled(activeAthleteSelectControllerIndex);
+        }
+
+        private void SetHumanControlled(int index) {
             foreach(AthleteSelectController athleteSelectController in athleteSelectControllers) {
-                athleteSelectController.AthleteConfig.computerControlled = true;
+                athleteSelectController.SetComputerControlled(true);
+                athleteSelectController.SetLabelText("Computer Controlled");
             }
-            athleteSelectControllers[activeAthleteSelectControllerIndex].AthleteConfig.computerControlled = false;
+            athleteSelectControllers[index].SetComputerControlled(false);
+            athleteSelectControllers[index].SetLabelText("Human Controlled");
         }
     }
 }

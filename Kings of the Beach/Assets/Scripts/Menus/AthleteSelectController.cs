@@ -19,6 +19,7 @@ namespace KotB.Menus.Alt
 
         private List<PanelConfig> panelConfigs = new();
         private VisualElement slot;
+        private Label controlledByLabel;
 
         // Cached loaded lists for outfit panels (static, loaded once)
         private List<IMenuDisplayable> outfitTops;
@@ -80,10 +81,19 @@ namespace KotB.Menus.Alt
             slot.RemoveFromClassList("athlete-slot-active");
         }
 
+        public void SetComputerControlled(bool computerControlled) {
+            athleteConfig.computerControlled = computerControlled;
+        }
+
+        public void SetLabelText(string labelText) {
+            controlledByLabel.text = labelText;
+        }
+
         public void BuildPanels(UIDocument uiDocument) {
             slot = uiDocument.rootVisualElement.Q($"athlete-slot-{uiDocumentIndex}");
             var selectionsContainer = slot.Q(className: "athlete-select-container");
             var textureContainer = slot.Q(className: "render-texture-container");
+            controlledByLabel = slot.Q(className: "controlled-by").Q<Label>();
 
             panels.Clear();
 
@@ -156,19 +166,11 @@ namespace KotB.Menus.Alt
             athleteConfig.bottom = mat;
         }
 
-        protected override void OnStart()
-        {
-            // Write selections to your SO here
-            // e.g. characterSelectionSO.SetSelection(_selectedClass, _selectedSubclass, _selectedOutfitTop, _selectedOutfitBottom);
-        }
-
         private class PanelConfig
         {
             public MenuPanel Panel;
             public Func<List<IMenuDisplayable>> LoadValues;
             public Action<IMenuDisplayable> OnSelectionChanged; // null if static
         }
-
-        public AthleteConfigSO AthleteConfig => athleteConfig;
     }
 }

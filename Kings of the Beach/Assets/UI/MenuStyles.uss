@@ -45,10 +45,18 @@ MenuPanel {
 .athlete-slot {
     width: 50%;
     height: 50%;
-    flex-direction: row;
+    flex-direction: column;
     border-width: 2px;
     border-color: rgba(0, 0, 0, 0);
     border-radius: 4px;
+}
+
+.athlete-slot-content {
+    flex-direction: row;
+}
+
+.controlled-by Label {
+    font-size: 35px;
 }
 
 .athlete-slot-active {
