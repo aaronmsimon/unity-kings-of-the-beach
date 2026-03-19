@@ -59,7 +59,6 @@ namespace KotB.Menus.Alt
 
         private void UpdateVisualState() {
             EnableInClassList("panel-active", isActive);
-            EnableInClassList("panel-inactive", !isActive);
         }
 
         public IMenuDisplayable CurrentValue => values.Count > 0 ? values[currentIndex] : null;

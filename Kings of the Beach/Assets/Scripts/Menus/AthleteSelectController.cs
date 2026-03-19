@@ -74,11 +74,13 @@ namespace KotB.Menus.Alt
         public override void Activate() {
             base.Activate();
             slot.AddToClassList("athlete-slot-active");
+            panels[activePanelIndex].Activate();
         }
 
         public override void Deactivate() {
             base.Deactivate();
             slot.RemoveFromClassList("athlete-slot-active");
+            panels[activePanelIndex].Deactivate();
         }
 
         public void SetComputerControlled(bool computerControlled) {
@@ -112,7 +114,6 @@ namespace KotB.Menus.Alt
             PopulatePanel(COUNTRY_PANEL);
             PopulatePanel(OUTFIT_TOP_PANEL);
             PopulatePanel(OUTFIT_BOT_PANEL);
-            SetActivePanel(COUNTRY_PANEL);
         }
 
         private void PopulatePanel(int index) {
