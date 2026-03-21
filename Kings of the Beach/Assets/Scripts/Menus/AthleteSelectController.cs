@@ -66,11 +66,6 @@ namespace KotB.Menus.Alt
             };
         }
 
-        private void Start() {
-            // Load defaults
-            OnAthleteChanged(selectedAthlete);
-        }
-
         public override void Activate() {
             base.Activate();
             slot.AddToClassList("athlete-slot-active");
@@ -111,9 +106,9 @@ namespace KotB.Menus.Alt
             textureContainer.style.backgroundImage = new StyleBackground(Background.FromRenderTexture(renderTexture));
 
             // Populate panels
-            PopulatePanel(COUNTRY_PANEL);
             PopulatePanel(OUTFIT_TOP_PANEL);
             PopulatePanel(OUTFIT_BOT_PANEL);
+            PopulatePanel(COUNTRY_PANEL);
         }
 
         private void PopulatePanel(int index) {
