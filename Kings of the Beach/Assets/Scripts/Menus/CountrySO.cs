@@ -6,6 +6,7 @@ namespace KotB.Menus.Alt
     public class CountrySO : ScriptableObject, IMenuDisplayable
     {
         [SerializeField] private string displayName;
+        [SerializeField] private Sprite flag;
 
         public string DisplayName => displayName;
     }
