@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: USA
   m_EditorClassIdentifier: 
   displayName: USA
+  flag: {fileID: 21300000, guid: 77983c47e7dde7b46964f5b2febb2fa2, type: 3}
