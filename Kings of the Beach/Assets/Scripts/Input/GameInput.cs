@@ -790,6 +790,24 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TriggerLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""85cecb52-eef9-4c4b-b82e-19f7790f7229"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TriggerRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""bb66bd71-5157-47bb-b075-870b79f5d4c9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1056,6 +1074,50 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Interaction1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""827174bd-1869-4a3e-bff8-35fc60a543ec"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""TriggerLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d2a8154-6438-4d7e-a43a-0e3affd7ad65"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""TriggerLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89d2092e-4c39-4215-88ed-7c0fe7ca61b6"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""TriggerRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d772288-bf1a-41f6-82ef-2dcaa49a9a21"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""TriggerRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1112,6 +1174,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Menu_ShoulderLeft = m_Menu.FindAction("ShoulderLeft", throwIfNotFound: true);
         m_Menu_ShoulderRight = m_Menu.FindAction("ShoulderRight", throwIfNotFound: true);
         m_Menu_Interaction1 = m_Menu.FindAction("Interaction1", throwIfNotFound: true);
+        m_Menu_TriggerLeft = m_Menu.FindAction("TriggerLeft", throwIfNotFound: true);
+        m_Menu_TriggerRight = m_Menu.FindAction("TriggerRight", throwIfNotFound: true);
     }
 
     ~@GameInput()
@@ -1495,6 +1559,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Menu_ShoulderLeft;
     private readonly InputAction m_Menu_ShoulderRight;
     private readonly InputAction m_Menu_Interaction1;
+    private readonly InputAction m_Menu_TriggerLeft;
+    private readonly InputAction m_Menu_TriggerRight;
     /// <summary>
     /// Provides access to input actions defined in input action map "Menu".
     /// </summary>
@@ -1546,6 +1612,14 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Menu/Interaction1".
         /// </summary>
         public InputAction @Interaction1 => m_Wrapper.m_Menu_Interaction1;
+        /// <summary>
+        /// Provides access to the underlying input action "Menu/TriggerLeft".
+        /// </summary>
+        public InputAction @TriggerLeft => m_Wrapper.m_Menu_TriggerLeft;
+        /// <summary>
+        /// Provides access to the underlying input action "Menu/TriggerRight".
+        /// </summary>
+        public InputAction @TriggerRight => m_Wrapper.m_Menu_TriggerRight;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1602,6 +1676,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Interaction1.started += instance.OnInteraction1;
             @Interaction1.performed += instance.OnInteraction1;
             @Interaction1.canceled += instance.OnInteraction1;
+            @TriggerLeft.started += instance.OnTriggerLeft;
+            @TriggerLeft.performed += instance.OnTriggerLeft;
+            @TriggerLeft.canceled += instance.OnTriggerLeft;
+            @TriggerRight.started += instance.OnTriggerRight;
+            @TriggerRight.performed += instance.OnTriggerRight;
+            @TriggerRight.canceled += instance.OnTriggerRight;
         }
 
         /// <summary>
@@ -1643,6 +1723,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Interaction1.started -= instance.OnInteraction1;
             @Interaction1.performed -= instance.OnInteraction1;
             @Interaction1.canceled -= instance.OnInteraction1;
+            @TriggerLeft.started -= instance.OnTriggerLeft;
+            @TriggerLeft.performed -= instance.OnTriggerLeft;
+            @TriggerLeft.canceled -= instance.OnTriggerLeft;
+            @TriggerRight.started -= instance.OnTriggerRight;
+            @TriggerRight.performed -= instance.OnTriggerRight;
+            @TriggerRight.canceled -= instance.OnTriggerRight;
         }
 
         /// <summary>
@@ -1872,5 +1958,19 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteraction1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TriggerLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTriggerLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TriggerRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTriggerRight(InputAction.CallbackContext context);
     }
 }
