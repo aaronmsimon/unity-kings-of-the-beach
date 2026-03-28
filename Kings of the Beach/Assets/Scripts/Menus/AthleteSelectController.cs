@@ -9,7 +9,7 @@ namespace KotB.Menus.Alt
 {
     public class AthleteSelectController : MenuController
     {
-        [SerializeField] private int uiDocumentIndex;
+        [SerializeField][Range(1,4)] private int uiDocumentIndex;
         [SerializeField] private RenderTexture renderTexture;
         [SerializeField] private AthleteConfigSO athleteConfig;
         [SerializeField] private Camera cam;
@@ -17,7 +17,7 @@ namespace KotB.Menus.Alt
         public event Action<MaterialSO> OutfitTopChanged;
         public event Action<MaterialSO> OutfitBottomChanged;
 
-        private List<PanelConfig> panelConfigs = new();
+        private List<PanelConfig> panelConfigs = new List<PanelConfig>();
         private VisualElement slot;
         private Label controlledByLabel;
 
