@@ -9,5 +9,6 @@ namespace KotB.Menus.Alt
         [SerializeField] private Sprite flag;
 
         public string DisplayName => displayName;
+        public Sprite Flag => flag;
     }
 }
