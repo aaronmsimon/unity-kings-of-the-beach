@@ -32,6 +32,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 	public event UnityAction triggerLeftEvent;
 	public event UnityAction triggerRightEvent;
 	public event UnityAction interaction1Event;
+	public event UnityAction interaction2Event;
 
 	private GameInput gameInput;
 
@@ -191,6 +192,12 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     {
         if (context.phase == InputActionPhase.Performed)
 			interaction1Event?.Invoke();
+    }
+
+    public void OnInteraction2(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+			interaction2Event?.Invoke();
     }
 
 	// Enable/Disable

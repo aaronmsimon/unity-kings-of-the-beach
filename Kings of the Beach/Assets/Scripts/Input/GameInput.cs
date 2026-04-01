@@ -808,6 +808,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interaction2"",
+                    ""type"": ""Button"",
+                    ""id"": ""34474435-97e4-48c0-a9f9-32015ccedf79"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1118,6 +1127,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""TriggerRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99851096-8640-4a52-a934-99c7ce33318a"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Interaction2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eaf688fa-cc61-4b36-b591-57c7eecbd3df"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Interaction2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1176,6 +1207,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Menu_Interaction1 = m_Menu.FindAction("Interaction1", throwIfNotFound: true);
         m_Menu_TriggerLeft = m_Menu.FindAction("TriggerLeft", throwIfNotFound: true);
         m_Menu_TriggerRight = m_Menu.FindAction("TriggerRight", throwIfNotFound: true);
+        m_Menu_Interaction2 = m_Menu.FindAction("Interaction2", throwIfNotFound: true);
     }
 
     ~@GameInput()
@@ -1561,6 +1593,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Menu_Interaction1;
     private readonly InputAction m_Menu_TriggerLeft;
     private readonly InputAction m_Menu_TriggerRight;
+    private readonly InputAction m_Menu_Interaction2;
     /// <summary>
     /// Provides access to input actions defined in input action map "Menu".
     /// </summary>
@@ -1620,6 +1653,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Menu/TriggerRight".
         /// </summary>
         public InputAction @TriggerRight => m_Wrapper.m_Menu_TriggerRight;
+        /// <summary>
+        /// Provides access to the underlying input action "Menu/Interaction2".
+        /// </summary>
+        public InputAction @Interaction2 => m_Wrapper.m_Menu_Interaction2;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1682,6 +1719,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @TriggerRight.started += instance.OnTriggerRight;
             @TriggerRight.performed += instance.OnTriggerRight;
             @TriggerRight.canceled += instance.OnTriggerRight;
+            @Interaction2.started += instance.OnInteraction2;
+            @Interaction2.performed += instance.OnInteraction2;
+            @Interaction2.canceled += instance.OnInteraction2;
         }
 
         /// <summary>
@@ -1729,6 +1769,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @TriggerRight.started -= instance.OnTriggerRight;
             @TriggerRight.performed -= instance.OnTriggerRight;
             @TriggerRight.canceled -= instance.OnTriggerRight;
+            @Interaction2.started -= instance.OnInteraction2;
+            @Interaction2.performed -= instance.OnInteraction2;
+            @Interaction2.canceled -= instance.OnInteraction2;
         }
 
         /// <summary>
@@ -1972,5 +2015,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTriggerRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Interaction2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteraction2(InputAction.CallbackContext context);
     }
 }
