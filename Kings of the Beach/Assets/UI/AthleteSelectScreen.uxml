@@ -2,40 +2,50 @@
     <Style src="project://database/Assets/UI/MenuStyles.uss?fileID=7433441132597879392&amp;guid=81e1aa93cbeb0ed4fbb4db2ff3f95b24&amp;type=3#MenuStyles" />
     <ui:VisualElement name="root" class="menu-root">
         <ui:VisualElement class="athlete-grid">
-            <ui:VisualElement name="athlete-slot-1" class="athlete-slot">
-                <ui:VisualElement class="athlete-slot-content">
-                    <ui:VisualElement class="render-texture-container" />
-                    <ui:VisualElement class="athlete-select-container" />
+            <ui:VisualElement class="team">
+                <ui:VisualElement name="team-name-1" class="team-selection">
+                    <ui:VisualElement class="team-logo" />
                 </ui:VisualElement>
-                <ui:VisualElement class="controlled-by">
-                    <ui:Label />
+                <ui:VisualElement name="athlete-slot-1" class="athlete-slot">
+                    <ui:VisualElement class="athlete-slot-content">
+                        <ui:VisualElement class="render-texture-container" />
+                        <ui:VisualElement class="athlete-select-container" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="controlled-by">
+                        <ui:Label />
+                    </ui:VisualElement>
                 </ui:VisualElement>
-            </ui:VisualElement>
-            <ui:VisualElement name="athlete-slot-2" class="athlete-slot">
-                <ui:VisualElement class="athlete-slot-content">
-                    <ui:VisualElement class="render-texture-container" />
-                    <ui:VisualElement class="athlete-select-container" />
-                </ui:VisualElement>
-                <ui:VisualElement class="controlled-by">
-                    <ui:Label />
-                </ui:VisualElement>
-            </ui:VisualElement>
-            <ui:VisualElement name="athlete-slot-3" class="athlete-slot">
-                <ui:VisualElement class="athlete-slot-content">
-                    <ui:VisualElement class="athlete-select-container" />
-                    <ui:VisualElement class="render-texture-container" />
-                </ui:VisualElement>
-                <ui:VisualElement class="controlled-by">
-                    <ui:Label />
+                <ui:VisualElement name="athlete-slot-2" class="athlete-slot">
+                    <ui:VisualElement class="athlete-slot-content">
+                        <ui:VisualElement class="render-texture-container" />
+                        <ui:VisualElement class="athlete-select-container" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="controlled-by">
+                        <ui:Label />
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="athlete-slot-4" class="athlete-slot">
-                <ui:VisualElement class="athlete-slot-content">
-                    <ui:VisualElement class="athlete-select-container" />
-                    <ui:VisualElement class="render-texture-container" />
+            <ui:VisualElement class="team">
+                <ui:VisualElement name="team-name-2" class="team-selection">
+                    <ui:VisualElement class="team-logo" />
                 </ui:VisualElement>
-                <ui:VisualElement class="controlled-by">
-                    <ui:Label />
+                <ui:VisualElement name="athlete-slot-3" class="athlete-slot">
+                    <ui:VisualElement class="athlete-slot-content">
+                        <ui:VisualElement class="athlete-select-container" />
+                        <ui:VisualElement class="render-texture-container" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="controlled-by">
+                        <ui:Label />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="athlete-slot-4" class="athlete-slot">
+                    <ui:VisualElement class="athlete-slot-content">
+                        <ui:VisualElement class="athlete-select-container" />
+                        <ui:VisualElement class="render-texture-container" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="controlled-by">
+                        <ui:Label />
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

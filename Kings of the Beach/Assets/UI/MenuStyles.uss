@@ -38,13 +38,29 @@ MenuPanel {
 .athlete-grid {
     width: 80%;
     height: 80%;
+    flex-direction: row;
+}
+
+.team {
+    width: 50%;
     flex-direction: column;
-    flex-wrap: wrap;
+}
+
+.team-selection {
+    font-size: 35px;
+}
+
+.team-label Label {
+    font-size: 35px;
+}
+
+.team-logo {
+    height: 100%;
+    background-size: contain;
 }
 
 .athlete-slot {
-    width: 50%;
-    height: 50%;
+    height: 40%;
     flex-direction: column;
     border-width: 2px;
     border-color: rgba(0, 0, 0, 0);
