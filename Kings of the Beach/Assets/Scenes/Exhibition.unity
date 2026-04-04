@@ -181,6 +181,10 @@ PrefabInstance:
       propertyPath: uiDocumentIndex
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
+      propertyPath: athleteSlotIndex
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6505548621809873542, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9
@@ -395,6 +399,52 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1086283418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1086283420}
+  - component: {fileID: 1086283419}
+  m_Layer: 0
+  m_Name: TeamSelectController2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1086283419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086283418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a9feb1c7ab6a9949b37146e6263dd80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 1510093233}
+  teamIndex: 2
+--- !u!4 &1086283420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086283418}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1087054337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -433,6 +483,10 @@ PrefabInstance:
       objectReference: {fileID: 8400000, guid: ce202e641a1e41f4c8db230d248bb883, type: 2}
     - target: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
       propertyPath: uiDocumentIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
+      propertyPath: athleteSlotIndex
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6505548621809873542, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
@@ -512,6 +566,52 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
+--- !u!1 &1345072356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1345072358}
+  - component: {fileID: 1345072357}
+  m_Layer: 0
+  m_Name: TeamSelectController1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1345072357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345072356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a9feb1c7ab6a9949b37146e6263dd80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 1510093233}
+  teamIndex: 1
+--- !u!4 &1345072358
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345072356}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1386290060 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
@@ -569,6 +669,10 @@ PrefabInstance:
       objectReference: {fileID: 8400000, guid: 7fb4d1c903e701642b94ddada033b9e9, type: 2}
     - target: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
       propertyPath: uiDocumentIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
+      propertyPath: athleteSlotIndex
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6505548621809873542, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
@@ -758,6 +862,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 1510093233}
   inputReader: {fileID: 11400000, guid: 96135c9e53101f04c989bab379fbc6e5, type: 2}
+  teamSelectControllers:
+  - {fileID: 1345072357}
+  - {fileID: 1086283419}
   athleteSelectControllers:
   - {fileID: 2106311913}
   - {fileID: 661803618}
@@ -1035,6 +1142,10 @@ PrefabInstance:
       propertyPath: uiDocumentIndex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
+      propertyPath: athleteSlotIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6505548621809873542, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1093,6 +1204,8 @@ SceneRoots:
   - {fileID: 1650681858}
   - {fileID: 1465191358}
   - {fileID: 1510093231}
+  - {fileID: 1345072358}
+  - {fileID: 1086283420}
   - {fileID: 5401304540831855516}
   - {fileID: 1463707223}
   - {fileID: 1087054337}

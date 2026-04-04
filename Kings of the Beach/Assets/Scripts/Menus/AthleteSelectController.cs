@@ -9,7 +9,7 @@ namespace KotB.Menus.Alt
 {
     public class AthleteSelectController : MenuController
     {
-        [SerializeField][Range(1,4)] private int uiDocumentIndex;
+        [SerializeField][Range(1,4)] private int athleteSlotIndex;
         [SerializeField] private RenderTexture renderTexture;
         [SerializeField] private AthleteConfigSO athleteConfig;
         [SerializeField] private Camera cam;
@@ -87,7 +87,7 @@ namespace KotB.Menus.Alt
         }
 
         public void BuildPanels(UIDocument uiDocument) {
-            slot = uiDocument.rootVisualElement.Q($"athlete-slot-{uiDocumentIndex}");
+            slot = uiDocument.rootVisualElement.Q($"athlete-slot-{athleteSlotIndex}");
             var selectionsContainer = slot.Q(className: "athlete-select-container");
             var textureContainer = slot.Q(className: "render-texture-container");
             controlledByLabel = slot.Q(className: "controlled-by").Q<Label>();

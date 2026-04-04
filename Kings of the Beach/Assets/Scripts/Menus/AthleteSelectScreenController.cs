@@ -7,9 +7,12 @@ namespace KotB.Menus.Alt
     {
         [SerializeField] private UIDocument uiDocument;
         [SerializeField] private InputReader inputReader;
+        [SerializeField] private TeamSelectController[] teamSelectControllers;
         [SerializeField] private AthleteSelectController[] athleteSelectControllers;
 
         public int activeAthleteSelectControllerIndex;
+
+        private int teamIndex;
 
         private void Awake() {
             inputReader.EnableMenuInput();
@@ -18,7 +21,10 @@ namespace KotB.Menus.Alt
         private void OnEnable() {
             inputReader.shoulderLeftEvent += OnShoulderLeft;
             inputReader.shoulderRightEvent += OnShoulderRight;
-            inputReader.interaction1Event += OnInteraction1;
+            inputReader.triggerLeftEvent += OnTriggerLeft;
+            inputReader.triggerRightEvent += OnTriggerRight;
+            inputReader.interaction1Event += OnSetHumanControlled;
+            inputReader.interaction2Event += OnSwitchTeam;
         }
 
         private void Start() {
@@ -29,11 +35,17 @@ namespace KotB.Menus.Alt
             // Set defaults
             SetActiveAthleteSelectController(0);
             SetHumanControlled(0);
+
+            teamIndex = 0;
         }
 
         private void OnDisable() {
             inputReader.shoulderLeftEvent -= OnShoulderLeft;
             inputReader.shoulderRightEvent -= OnShoulderRight;
+            inputReader.triggerLeftEvent -= OnTriggerLeft;
+            inputReader.triggerRightEvent -= OnTriggerRight;
+            inputReader.interaction1Event -= OnSetHumanControlled;
+            inputReader.interaction2Event -= OnSwitchTeam;
         }
 
         private void SetActiveAthleteSelectController(int index) {
@@ -43,19 +55,35 @@ namespace KotB.Menus.Alt
         }
 
         private void OnShoulderLeft() {
-            SelectionChange(-1);
+            SwitchAthlete(-1);
         }
 
         private void OnShoulderRight() {
-            SelectionChange(1);
+            SwitchAthlete(1);
         }
 
-        private void SelectionChange(int direction) {
+        private void SwitchAthlete(int direction) {
             SetActiveAthleteSelectController((activeAthleteSelectControllerIndex + direction + athleteSelectControllers.Length) % athleteSelectControllers.Length);
         }
 
-        private void OnInteraction1() {
+        private void OnTriggerLeft() {
+            SelectTeam(-1);
+        }
+
+        private void OnTriggerRight() {
+            SelectTeam(1);
+        }
+
+        private void SelectTeam(int direction) {
+            teamSelectControllers[teamIndex].Panel.HandleHorizontal(direction);
+        }
+
+        private void OnSetHumanControlled() {
             SetHumanControlled(activeAthleteSelectControllerIndex);
+        }
+
+        private void OnSwitchTeam() {
+            teamIndex = 1 - teamIndex;
         }
 
         private void SetHumanControlled(int index) {

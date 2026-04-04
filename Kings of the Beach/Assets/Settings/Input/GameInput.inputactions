@@ -722,6 +722,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Interaction2",
+                    "type": "Button",
+                    "id": "34474435-97e4-48c0-a9f9-32015ccedf79",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1030,6 +1039,28 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "TriggerRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "99851096-8640-4a52-a934-99c7ce33318a",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Interaction2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eaf688fa-cc61-4b36-b591-57c7eecbd3df",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Interaction2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
