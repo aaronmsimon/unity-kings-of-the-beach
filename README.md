@@ -148,4 +148,4 @@ Automatic Replay Reasons
 - Power spike or block
 
 Need to refactor the entire controller architecture
-Will have main controller for page and controls the team controller and athlete controller
+Need to leverage default outfit types to load default countries to start
