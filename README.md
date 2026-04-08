@@ -149,4 +149,4 @@ Automatic Replay Reasons
 
 Need to refactor the entire controller architecture
 Need to leverage default outfit types to load default countries to start
-UI needs to be simpler 
+UI needs to be simpler - will rely on feedback!
