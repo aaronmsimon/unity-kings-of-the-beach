@@ -19,11 +19,10 @@ namespace KotB.Menus.Alt
         }
 
         private void OnEnable() {
-            inputReader.shoulderLeftEvent += OnShoulderLeft;
-            inputReader.shoulderRightEvent += OnShoulderRight;
             inputReader.triggerLeftEvent += OnTriggerLeft;
             inputReader.triggerRightEvent += OnTriggerRight;
-            inputReader.interaction1Event += OnSetHumanControlled;
+            inputReader.selectEvent += OnSetHumanControlled;
+            inputReader.interaction1Event += OnSwitchAthlete;
             inputReader.interaction2Event += OnSwitchTeam;
         }
 
@@ -40,11 +39,10 @@ namespace KotB.Menus.Alt
         }
 
         private void OnDisable() {
-            inputReader.shoulderLeftEvent -= OnShoulderLeft;
-            inputReader.shoulderRightEvent -= OnShoulderRight;
             inputReader.triggerLeftEvent -= OnTriggerLeft;
             inputReader.triggerRightEvent -= OnTriggerRight;
-            inputReader.interaction1Event -= OnSetHumanControlled;
+            inputReader.selectEvent -= OnSetHumanControlled;
+            inputReader.interaction1Event -= OnSwitchAthlete;
             inputReader.interaction2Event -= OnSwitchTeam;
         }
 
@@ -54,16 +52,8 @@ namespace KotB.Menus.Alt
             athleteSelectControllers[activeAthleteSelectControllerIndex].Activate();
         }
 
-        private void OnShoulderLeft() {
-            SwitchAthlete(-1);
-        }
-
-        private void OnShoulderRight() {
-            SwitchAthlete(1);
-        }
-
-        private void SwitchAthlete(int direction) {
-            SetActiveAthleteSelectController((activeAthleteSelectControllerIndex + direction + athleteSelectControllers.Length) % athleteSelectControllers.Length);
+        private void OnSwitchAthlete() {
+            SetActiveAthleteSelectController(teamIndex * 2 + (1 - (activeAthleteSelectControllerIndex % 2)));
         }
 
         private void OnTriggerLeft() {
@@ -84,6 +74,8 @@ namespace KotB.Menus.Alt
 
         private void OnSwitchTeam() {
             teamIndex = 1 - teamIndex;
+            activeAthleteSelectControllerIndex = 0;
+            OnSwitchAthlete();
         }
 
         private void SetHumanControlled(int index) {
