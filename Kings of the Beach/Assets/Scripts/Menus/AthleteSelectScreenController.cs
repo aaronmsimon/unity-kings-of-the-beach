@@ -13,6 +13,7 @@ namespace KotB.Menus.Alt
         public int activeAthleteSelectControllerIndex;
 
         private int teamIndex;
+        private int[] teamAthleteIndex = new int[] { 0, 0 };
 
         private void Awake() {
             inputReader.EnableMenuInput();
@@ -47,13 +48,16 @@ namespace KotB.Menus.Alt
         }
 
         private void SetActiveAthleteSelectController(int index) {
+            Debug.Log($"Deactivating {activeAthleteSelectControllerIndex}");
             athleteSelectControllers[activeAthleteSelectControllerIndex].Deactivate();
             activeAthleteSelectControllerIndex = index;
+            Debug.Log($"Activating {activeAthleteSelectControllerIndex}");
             athleteSelectControllers[activeAthleteSelectControllerIndex].Activate();
         }
 
         private void OnSwitchAthlete() {
-            SetActiveAthleteSelectController(teamIndex * 2 + (1 - (activeAthleteSelectControllerIndex % 2)));
+            teamAthleteIndex[teamIndex] = 1 - teamAthleteIndex[teamIndex];
+            SetActiveAthleteSelectController(teamIndex * 2 + teamAthleteIndex[teamIndex]);
         }
 
         private void OnTriggerLeft() {
@@ -74,8 +78,7 @@ namespace KotB.Menus.Alt
 
         private void OnSwitchTeam() {
             teamIndex = 1 - teamIndex;
-            activeAthleteSelectControllerIndex = 0;
-            OnSwitchAthlete();
+            SetActiveAthleteSelectController(teamIndex * 2 + teamAthleteIndex[teamIndex]);
         }
 
         private void SetHumanControlled(int index) {
