@@ -1,8 +1,56 @@
-.team {
-    flex-grow: 1;
+#root {
     width: 100%;
     height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#athlete-grid {
+    width: 80%;
+    height: 80%;
+    flex-direction: row;
+}
+
+.athlete-grid-column {
+    height: 100%;
+}
+
+.team {
+    width: 100%;
+}
+
+.grow {
+    flex-grow: 1;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.column {
     flex-direction: column;
+}
+
+.team-row {
+    max-height: 10%;
+}
+
+.athlete-row {
+    max-height: 45%;
+    justify-content: center;
+}
+
+.label {
+    -unity-text-align: middle-center;
+}
+
+.position-label {
+    font-size: 25px;
+    rotate: -90deg;
+}
+
+.team-label {
+    font-size: 25px;
 }
 
 .athlete-menupanel {
