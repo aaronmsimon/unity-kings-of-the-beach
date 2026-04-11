@@ -12,63 +12,41 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement class="grow athlete-grid-column column team">
-                <ui:VisualElement class="grow team-row">
-                    <ui:VisualElement class="grow" style="background-image: resource(&apos;Textures/Teams/Countries/USA&apos;); -unity-background-scale-mode: scale-to-fit;" />
-                    <ui:Label text="USA" class="label team-label" />
+                <ui:VisualElement name="team-name-1" class="grow team-row">
+                    <ui:VisualElement class="grow graphics team-logo" />
                 </ui:VisualElement>
-                <ui:VisualElement name="athlete-1" class="grow athlete-row column">
-                    <ui:VisualElement class="row">
-                        <ui:VisualElement class="grow" style="background-image: url(&quot;project://database/Assets/Textures/Render/Athlete1RenderTexture.renderTexture?fileID=8400000&amp;guid=eb03d7bcdba6a0647a88b13c9d81b680&amp;type=2#Athlete1RenderTexture&quot;); -unity-background-scale-mode: scale-to-fit;" />
-                        <ui:VisualElement class="grow">
-                            <ui:Label text="Country" class="athlete-menupanel" />
-                            <ui:Label text="Player" class="athlete-menupanel" />
-                            <ui:Label text="Shirt" class="athlete-menupanel" />
-                            <ui:Label text="Shorts" class="athlete-menupanel" />
-                        </ui:VisualElement>
+                <ui:VisualElement name="athlete-slot-1" class="grow athlete-row column">
+                    <ui:VisualElement class="grow row">
+                        <ui:VisualElement class="grow render-texture-container" />
+                        <ui:VisualElement class="grow column athlete-select-container" />
                     </ui:VisualElement>
-                    <ui:Label text="Human Controlled" />
+                    <ui:Label class="controlled-by" />
                 </ui:VisualElement>
-                <ui:VisualElement name="athlete-2" class="grow athlete-row column">
-                    <ui:VisualElement class="row">
-                        <ui:VisualElement class="grow" style="background-image: url(&quot;project://database/Assets/Textures/Render/Athlete1RenderTexture.renderTexture?fileID=8400000&amp;guid=eb03d7bcdba6a0647a88b13c9d81b680&amp;type=2#Athlete1RenderTexture&quot;); -unity-background-scale-mode: scale-to-fit;" />
-                        <ui:VisualElement class="grow">
-                            <ui:Label text="Country" class="athlete-menupanel" />
-                            <ui:Label text="Player" class="athlete-menupanel" />
-                            <ui:Label text="Shirt" class="athlete-menupanel" />
-                            <ui:Label text="Shorts" class="athlete-menupanel" />
-                        </ui:VisualElement>
+                <ui:VisualElement name="athlete-slot-2" class="grow athlete-row column">
+                    <ui:VisualElement class="grow row">
+                        <ui:VisualElement class="grow render-texture-container" />
+                        <ui:VisualElement class="grow column athlete-select-container" />
                     </ui:VisualElement>
-                    <ui:Label text="Human Controlled" />
+                    <ui:Label class="controlled-by" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement class="grow athlete-grid-column column team">
-                <ui:VisualElement class="grow team-row">
-                    <ui:VisualElement class="grow" style="background-image: resource(&apos;Textures/Teams/Countries/USA&apos;); -unity-background-scale-mode: scale-to-fit;" />
-                    <ui:Label text="USA" class="label team-label" />
+                <ui:VisualElement name="team-name-2" class="grow team-row">
+                    <ui:VisualElement class="grow graphics team-logo" />
                 </ui:VisualElement>
-                <ui:VisualElement name="athlete-1" class="grow athlete-row column">
-                    <ui:VisualElement class="row">
-                        <ui:VisualElement class="grow">
-                            <ui:Label text="Country" class="athlete-menupanel" />
-                            <ui:Label text="Player" class="athlete-menupanel" />
-                            <ui:Label text="Shirt" class="athlete-menupanel" />
-                            <ui:Label text="Shorts" class="athlete-menupanel" />
-                        </ui:VisualElement>
-                        <ui:VisualElement class="grow" style="background-image: url(&quot;project://database/Assets/Textures/Render/Athlete1RenderTexture.renderTexture?fileID=8400000&amp;guid=eb03d7bcdba6a0647a88b13c9d81b680&amp;type=2#Athlete1RenderTexture&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                <ui:VisualElement name="athlete-slot-3" class="grow athlete-row column">
+                    <ui:VisualElement class="grow row">
+                        <ui:VisualElement class="grow column athlete-select-container" />
+                        <ui:VisualElement class="grow render-texture-container" />
                     </ui:VisualElement>
-                    <ui:Label text="Human Controlled" />
+                    <ui:Label class="controlled-by" />
                 </ui:VisualElement>
-                <ui:VisualElement name="athlete-2" class="grow athlete-row column">
-                    <ui:VisualElement class="row">
-                        <ui:VisualElement class="grow">
-                            <ui:Label text="Country" class="athlete-menupanel" />
-                            <ui:Label text="Player" class="athlete-menupanel" />
-                            <ui:Label text="Shirt" class="athlete-menupanel" />
-                            <ui:Label text="Shorts" class="athlete-menupanel" />
-                        </ui:VisualElement>
-                        <ui:VisualElement class="grow" style="background-image: url(&quot;project://database/Assets/Textures/Render/Athlete1RenderTexture.renderTexture?fileID=8400000&amp;guid=eb03d7bcdba6a0647a88b13c9d81b680&amp;type=2#Athlete1RenderTexture&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                <ui:VisualElement name="athlete-slot-4" class="grow athlete-row column">
+                    <ui:VisualElement class="grow row">
+                        <ui:VisualElement class="grow column athlete-select-container" />
+                        <ui:VisualElement class="grow render-texture-container" />
                     </ui:VisualElement>
-                    <ui:Label text="Human Controlled" />
+                    <ui:Label class="controlled-by" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

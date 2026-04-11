@@ -1,51 +1,52 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/MenuStyles.uss?fileID=7433441132597879392&amp;guid=81e1aa93cbeb0ed4fbb4db2ff3f95b24&amp;type=3#MenuStyles" />
-    <ui:VisualElement name="root" class="menu-root">
-        <ui:VisualElement class="athlete-grid">
-            <ui:VisualElement class="team">
-                <ui:VisualElement name="team-name-1" class="team-selection">
-                    <ui:VisualElement class="team-logo" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/mockup.uss?fileID=7433441132597879392&amp;guid=234d28f9bfd7879438c1b4d58389f753&amp;type=3#AthleteSelectMenu" />
+    <ui:VisualElement name="root">
+        <ui:VisualElement name="athlete-grid">
+            <ui:VisualElement class="grow athlete-grid-column column">
+                <ui:VisualElement class="grow team-row" />
+                <ui:VisualElement class="grow athlete-row">
+                    <ui:Label text="Blocker" class="label position-label" />
                 </ui:VisualElement>
-                <ui:VisualElement name="athlete-slot-1" class="athlete-slot">
-                    <ui:VisualElement class="athlete-slot-content">
-                        <ui:VisualElement class="render-texture-container" />
-                        <ui:VisualElement class="athlete-select-container" />
-                    </ui:VisualElement>
-                    <ui:VisualElement class="controlled-by">
-                        <ui:Label />
-                    </ui:VisualElement>
-                </ui:VisualElement>
-                <ui:VisualElement name="athlete-slot-2" class="athlete-slot">
-                    <ui:VisualElement class="athlete-slot-content">
-                        <ui:VisualElement class="render-texture-container" />
-                        <ui:VisualElement class="athlete-select-container" />
-                    </ui:VisualElement>
-                    <ui:VisualElement class="controlled-by">
-                        <ui:Label />
-                    </ui:VisualElement>
+                <ui:VisualElement class="grow athlete-row">
+                    <ui:Label text="Defender" class="label position-label" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement class="team">
-                <ui:VisualElement name="team-name-2" class="team-selection">
-                    <ui:VisualElement class="team-logo" />
+            <ui:VisualElement class="grow athlete-grid-column column team">
+                <ui:VisualElement name="team-name-1" class="grow team-row">
+                    <ui:VisualElement class="grow graphics team-logo" />
                 </ui:VisualElement>
-                <ui:VisualElement name="athlete-slot-3" class="athlete-slot">
-                    <ui:VisualElement class="athlete-slot-content">
-                        <ui:VisualElement class="athlete-select-container" />
-                        <ui:VisualElement class="render-texture-container" />
+                <ui:VisualElement name="athlete-slot-1" class="grow athlete-row column">
+                    <ui:VisualElement class="grow row">
+                        <ui:VisualElement class="grow render-texture-container" />
+                        <ui:VisualElement class="grow column athlete-select-container" />
                     </ui:VisualElement>
-                    <ui:VisualElement class="controlled-by">
-                        <ui:Label />
-                    </ui:VisualElement>
+                    <ui:Label class="controlled-by" />
                 </ui:VisualElement>
-                <ui:VisualElement name="athlete-slot-4" class="athlete-slot">
-                    <ui:VisualElement class="athlete-slot-content">
-                        <ui:VisualElement class="athlete-select-container" />
-                        <ui:VisualElement class="render-texture-container" />
+                <ui:VisualElement name="athlete-slot-2" class="grow athlete-row column">
+                    <ui:VisualElement class="grow row">
+                        <ui:VisualElement class="grow render-texture-container" />
+                        <ui:VisualElement class="grow column athlete-select-container" />
                     </ui:VisualElement>
-                    <ui:VisualElement class="controlled-by">
-                        <ui:Label />
+                    <ui:Label class="controlled-by" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="grow athlete-grid-column column team">
+                <ui:VisualElement name="team-name-2" class="grow team-row">
+                    <ui:VisualElement class="grow graphics team-logo" />
+                </ui:VisualElement>
+                <ui:VisualElement name="athlete-slot-3" class="grow athlete-row column">
+                    <ui:VisualElement class="grow row">
+                        <ui:VisualElement class="grow column athlete-select-container" />
+                        <ui:VisualElement class="grow render-texture-container" />
                     </ui:VisualElement>
+                    <ui:Label class="controlled-by" />
+                </ui:VisualElement>
+                <ui:VisualElement name="athlete-slot-4" class="grow athlete-row column">
+                    <ui:VisualElement class="grow row">
+                        <ui:VisualElement class="grow column athlete-select-container" />
+                        <ui:VisualElement class="grow render-texture-container" />
+                    </ui:VisualElement>
+                    <ui:Label class="controlled-by" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

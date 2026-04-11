@@ -50,9 +50,26 @@
 }
 
 .team-label {
-    font-size: 25px;
+    font-size: 35px;
+}
+
+.graphics {
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.render-texture-container {
+    width: 50%;
+}
+
+.athlete-select-container {
+    width: 50%;
+    font-size: 50px;
 }
 
 .athlete-menupanel {
     font-size: 35px;
+}
+
+.panel-active {
+    color: yellow;
 }

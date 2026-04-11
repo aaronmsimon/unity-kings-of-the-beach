@@ -48,10 +48,8 @@ namespace KotB.Menus.Alt
         }
 
         private void SetActiveAthleteSelectController(int index) {
-            Debug.Log($"Deactivating {activeAthleteSelectControllerIndex}");
             athleteSelectControllers[activeAthleteSelectControllerIndex].Deactivate();
             activeAthleteSelectControllerIndex = index;
-            Debug.Log($"Activating {activeAthleteSelectControllerIndex}");
             athleteSelectControllers[activeAthleteSelectControllerIndex].Activate();
         }
 
