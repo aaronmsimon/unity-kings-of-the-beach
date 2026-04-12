@@ -12,5 +12,7 @@ namespace KotB.Menus.Alt
 
         public string DisplayName => $"{country.DisplayName} {teamVersion}";
         public CountrySO Country => country;
+        public SkillsSO Blocker => blocker;
+        public SkillsSO Defender => defender;
     }
 }

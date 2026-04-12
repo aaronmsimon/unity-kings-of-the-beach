@@ -25,6 +25,10 @@ namespace KotB.Menus.Alt
             inputReader.selectEvent += OnSetHumanControlled;
             inputReader.interaction1Event += OnSwitchAthlete;
             inputReader.interaction2Event += OnSwitchTeam;
+
+            foreach (TeamSelectController team in teamSelectControllers) {
+                team.TeamChanged += OnTeamChanged;
+            }
         }
 
         private void Start() {
@@ -77,6 +81,11 @@ namespace KotB.Menus.Alt
         private void OnSwitchTeam() {
             teamIndex = 1 - teamIndex;
             SetActiveAthleteSelectController(teamIndex * 2 + teamAthleteIndex[teamIndex]);
+        }
+
+        private void OnTeamChanged(IMenuDisplayable country, SkillsSO blocker, SkillsSO defender) {
+            athleteSelectControllers[teamIndex * 2].SetAthlete(country, blocker);
+            athleteSelectControllers[teamIndex * 2 + 1].SetAthlete(country, defender);
         }
 
         private void SetHumanControlled(int index) {

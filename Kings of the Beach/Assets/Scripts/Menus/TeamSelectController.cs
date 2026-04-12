@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,6 +10,9 @@ namespace KotB.Menus.Alt
     {
         [SerializeField] private UIDocument uiDocument;
         [SerializeField][Range(1,2)] private int teamIndex;
+
+        public delegate void TeamChangedHandler(IMenuDisplayable country, SkillsSO blocker, SkillsSO defender);
+        public event TeamChangedHandler TeamChanged;
 
         private MenuPanel panel;
         private VisualElement teamLogo;
@@ -40,6 +44,13 @@ namespace KotB.Menus.Alt
         private void OnPanelValueChanged(MenuPanel panel, IMenuDisplayable value) {
             TeamSO team = (TeamSO)value;
             teamLogo.style.backgroundImage = new StyleBackground(Background.FromSprite(team.Country.Flag));
+
+            LoadDefaultAthletes(panel.CurrentValue);
+        }
+
+        private void LoadDefaultAthletes(IMenuDisplayable team) {
+            TeamSO teamSO = Resources.LoadAll<TeamSO>(TeamsPath).FirstOrDefault(t => t.DisplayName == team.DisplayName);
+            TeamChanged?.Invoke(team, teamSO.Blocker, teamSO.Defender);
         }
 
         public MenuPanel Panel => panel;
