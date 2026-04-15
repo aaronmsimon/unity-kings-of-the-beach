@@ -34,7 +34,13 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 	public event UnityAction interaction1Event;
 	public event UnityAction interaction2Event;
 
+	// Device
+	public enum InputScheme { Keyboard, Xbox, PlayStation, Generic }
+	public event UnityAction<InputScheme> inputSchemeChangedEvent;
+
 	private GameInput gameInput;
+
+	private InputScheme currentScheme;
 
 	private void OnEnable()
 	{
@@ -45,6 +51,8 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 			gameInput.BetweenPoints.SetCallbacks(this);
 			gameInput.Menu.SetCallbacks(this);
 		}
+
+		InputSystem.onActionChange += OnActionChange;
 
 		EnableGameplayInput();
 	}
@@ -229,4 +237,46 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 		gameInput.BetweenPoints.Disable();
 		gameInput.Menu.Disable();
 	}
+
+	// Device
+	private void OnActionChange(object obj, InputActionChange change) {
+        if (change != InputActionChange.ActionPerformed) return;
+
+        var action = obj as InputAction;
+        var activeControl = action?.activeControl;
+        if (activeControl == null) return;
+
+        var detectedScheme = DetectScheme(activeControl.device);
+
+        if (detectedScheme != currentScheme)
+        {
+            currentScheme = detectedScheme;
+            inputSchemeChangedEvent?.Invoke(currentScheme);
+        }
+	}
+
+	private InputScheme DetectScheme(InputDevice device) {
+        if (device is Keyboard)
+            return InputScheme.Keyboard;
+
+        if (device is Gamepad gamepad)
+        {
+            string deviceName = device.name.ToLower();
+            string displayName = device.displayName?.ToLower() ?? "";
+
+            if (deviceName.Contains("dualshock") || deviceName.Contains("dualsense") ||
+                displayName.Contains("playstation") || displayName.Contains("ps4") || displayName.Contains("ps5"))
+                return InputScheme.PlayStation;
+
+            if (deviceName.Contains("xbox") || displayName.Contains("xbox"))
+                return InputScheme.Xbox;
+
+            return InputScheme.Generic;
+        }
+
+        return InputScheme.Generic;
+	}
+
+	// PROPERTIES
+	public InputScheme CurrentScheme => currentScheme;
 }
