@@ -87,7 +87,7 @@ namespace KotB.Menus.Alt
         }
 
         public void BuildPanels(UIDocument uiDocument) {
-            slot = uiDocument.rootVisualElement.Q($"athlete-slot-{athleteSlotIndex}");
+            slot = uiDocument.rootVisualElement.Q($"athlete-{athleteSlotIndex}");
             var selectionsContainer = slot.Q(className: "athlete-select-container");
             var textureContainer = slot.Q(className: "render-texture-container");
             controlledByLabel = slot.Q(className: "controlled-by").Q<Label>();

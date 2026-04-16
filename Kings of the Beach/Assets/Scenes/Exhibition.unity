@@ -918,7 +918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 1a21c7d838e155141bbeb49cf99e3bef, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 6188bfa8f703cb54190a977489181c0b, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 4575ea5e9b6cc1642ac5378275e65161, type: 3}
   m_SortingOrder: 0
 --- !u!1 &1595308339
 GameObject:

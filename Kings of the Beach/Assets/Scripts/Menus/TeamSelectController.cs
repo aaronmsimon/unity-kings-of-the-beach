@@ -26,7 +26,8 @@ namespace KotB.Menus.Alt
         }
 
         private void Start() {
-            OnPanelValueChanged(panel, panel.CurrentValue);
+            TeamSO team = (TeamSO)panel.CurrentValue;
+            OnPanelValueChanged(panel, team);
         }
 
         public void BuildTeamPanel(List<IMenuDisplayable> teams) {
@@ -38,19 +39,19 @@ namespace KotB.Menus.Alt
             panel.OnValueChanged += OnPanelValueChanged;
             panel.Activate();
             panel.AddToClassList("team-label");
-            team.Add(panel);
+            team.Insert(2, panel);
         }
 
         private void OnPanelValueChanged(MenuPanel panel, IMenuDisplayable value) {
             TeamSO team = (TeamSO)value;
             teamLogo.style.backgroundImage = new StyleBackground(Background.FromSprite(team.Country.Flag));
 
-            LoadDefaultAthletes(panel.CurrentValue);
+            LoadDefaultAthletes(value);
         }
 
         private void LoadDefaultAthletes(IMenuDisplayable team) {
             TeamSO teamSO = Resources.LoadAll<TeamSO>(TeamsPath).FirstOrDefault(t => t.DisplayName == team.DisplayName);
-            TeamChanged?.Invoke(team, teamSO.Blocker, teamSO.Defender);
+            TeamChanged?.Invoke(teamSO.Country, teamSO.Blocker, teamSO.Defender);
         }
 
         public MenuPanel Panel => panel;

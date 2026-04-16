@@ -25,15 +25,15 @@ namespace KotB.Menus.Alt
             inputReader.selectEvent += OnSetHumanControlled;
             inputReader.interaction1Event += OnSwitchAthlete;
             inputReader.interaction2Event += OnSwitchTeam;
-
-            foreach (TeamSelectController team in teamSelectControllers) {
-                team.TeamChanged += OnTeamChanged;
-            }
         }
 
         private void Start() {
             foreach(AthleteSelectController athleteSelectController in athleteSelectControllers) {
                 athleteSelectController.BuildPanels(uiDocument);
+            }
+
+            foreach (TeamSelectController team in teamSelectControllers) {
+                team.TeamChanged += OnTeamChanged;
             }
 
             // Set defaults
