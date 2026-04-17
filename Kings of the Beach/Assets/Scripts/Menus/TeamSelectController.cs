@@ -10,6 +10,7 @@ namespace KotB.Menus.Alt
     {
         [SerializeField] private UIDocument uiDocument;
         [SerializeField][Range(1,2)] private int teamIndex;
+        [SerializeField] private TeamSO defaultTeam;
 
         public delegate void TeamChangedHandler(IMenuDisplayable country, SkillsSO blocker, SkillsSO defender);
         public event TeamChangedHandler TeamChanged;
@@ -35,7 +36,8 @@ namespace KotB.Menus.Alt
             teamLogo = team.Q(className: "team-logo");
 
             panel = new MenuPanel();
-            panel.Populate(teams);
+            int defaultIndex = teams.IndexOf(defaultTeam);
+            panel.Populate(teams, defaultIndex);
             panel.OnValueChanged += OnPanelValueChanged;
             panel.Activate();
             panel.AddToClassList("team-label");
@@ -49,7 +51,7 @@ namespace KotB.Menus.Alt
             LoadDefaultAthletes(value);
         }
 
-        private void LoadDefaultAthletes(IMenuDisplayable team) {
+        public void LoadDefaultAthletes(IMenuDisplayable team) {
             TeamSO teamSO = Resources.LoadAll<TeamSO>(TeamsPath).FirstOrDefault(t => t.DisplayName == team.DisplayName);
             TeamChanged?.Invoke(teamSO.Country, teamSO.Blocker, teamSO.Defender);
         }

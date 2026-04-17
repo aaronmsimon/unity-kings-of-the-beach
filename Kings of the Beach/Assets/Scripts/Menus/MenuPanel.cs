@@ -50,6 +50,15 @@ namespace KotB.Menus.Alt
             OnValueChanged?.Invoke(this, CurrentValue);
         }
 
+        public void SetValue(IMenuDisplayable value) {
+            int index = values.IndexOf(value);
+            Debug.Log($"try to set value to {value} where index is {index}");
+            if (index >= 0) {
+                currentIndex = index;
+                RefreshDisplay();
+            }
+        }
+
         private void RefreshDisplay() {
             if (values.Count == 0) return;
 

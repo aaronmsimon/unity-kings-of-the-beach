@@ -112,8 +112,12 @@ namespace KotB.Menus.Alt
         }
 
         public void SetAthlete(IMenuDisplayable country, IMenuDisplayable athlete) {
-            OnCountryChanged(country);
-            OnAthleteChanged(athlete);
+            selectedCountry = (CountrySO)country;
+            panels[COUNTRY_PANEL].SetValue(country);
+            PopulatePanel(ATHLETE_PANEL);
+            panels[ATHLETE_PANEL].SetValue(athlete);
+            // OnCountryChanged(country);
+            // OnAthleteChanged(athlete);
         }
 
         private void PopulatePanel(int index) {
