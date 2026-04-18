@@ -119,8 +119,7 @@ namespace KotB.Menus.Alt
             panels[COUNTRY_PANEL].SetValue(country);
             PopulatePanel(ATHLETE_PANEL);
             panels[ATHLETE_PANEL].SetValue(athlete);
-            // OnCountryChanged(country);
-            // OnAthleteChanged(athlete);
+            OnAthleteChanged(athlete);
         }
 
         private void PopulatePanel(int index) {
