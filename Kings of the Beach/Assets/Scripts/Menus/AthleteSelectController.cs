@@ -9,6 +9,7 @@ namespace KotB.Menus.Alt
 {
     public class AthleteSelectController : MenuController
     {
+        [SerializeField] private UIDocument uiDocument;
         [SerializeField][Range(1,4)] private int athleteSlotIndex;
         [SerializeField] private RenderTexture renderTexture;
         [SerializeField] private AthleteConfigSO athleteConfig;
@@ -64,6 +65,8 @@ namespace KotB.Menus.Alt
                     OnSelectionChanged = OnBottomChanged
                 }
             };
+
+            BuildPanels();
         }
 
         public override void Activate() {
@@ -86,7 +89,7 @@ namespace KotB.Menus.Alt
             controlledByLabel.text = labelText;
         }
 
-        public void BuildPanels(UIDocument uiDocument) {
+        private void BuildPanels() {
             slot = uiDocument.rootVisualElement.Q($"athlete-{athleteSlotIndex}");
             var selectionsContainer = slot.Q(className: "athlete-select-container");
             var textureContainer = slot.Q(className: "render-texture-container");

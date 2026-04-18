@@ -203,6 +203,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
+      propertyPath: uiDocument
+      value: 
+      objectReference: {fileID: 1510093233}
+    - target: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
       propertyPath: athleteConfig
       value: 
       objectReference: {fileID: 11400000, guid: 23f533b684c663945bfce66b28bce05b, type: 2}
@@ -463,6 +467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 1510093233}
   teamIndex: 2
+  defaultTeam: {fileID: 11400000, guid: 635764e645b74e445bf1b27d3ae96557, type: 2}
 --- !u!4 &1086283420
 Transform:
   m_ObjectHideFlags: 0
@@ -506,6 +511,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AthleteSelection3
       objectReference: {fileID: 0}
+    - target: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
+      propertyPath: uiDocument
+      value: 
+      objectReference: {fileID: 1510093233}
     - target: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
       propertyPath: athleteConfig
       value: 
@@ -630,6 +639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 1510093233}
   teamIndex: 1
+  defaultTeam: {fileID: 11400000, guid: d8cefea491c41f8418a3d009c6ee6218, type: 2}
 --- !u!4 &1345072358
 Transform:
   m_ObjectHideFlags: 0
@@ -692,6 +702,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
+      propertyPath: uiDocument
+      value: 
+      objectReference: {fileID: 1510093233}
     - target: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
       propertyPath: athleteConfig
       value: 
@@ -1163,6 +1177,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AthleteSelection1
       objectReference: {fileID: 0}
+    - target: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
+      propertyPath: uiDocument
+      value: 
+      objectReference: {fileID: 1510093233}
     - target: {fileID: 5835957745057148083, guid: d59630570c63d5548ac9a2a1611ae8ba, type: 3}
       propertyPath: athleteConfig
       value: 

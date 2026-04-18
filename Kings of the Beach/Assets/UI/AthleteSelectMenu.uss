@@ -51,6 +51,7 @@
 
 .team-label {
     font-size: 35px;
+    justify-content: center;
 }
 
 .graphics {
@@ -72,4 +73,18 @@
 
 .panel-active {
     color: yellow;
+}
+
+.input-lt {
+    background-image: url("project://database/Assets/Textures/UI Icons/xbox_lt.png");
+    -unity-background-scale-mode: scale-to-fit;
+    max-width: 40px;
+    margin-right: 5px;
+}
+
+.input-rt {
+    background-image: url("project://database/Assets/Textures/UI Icons/xbox_rt.png");
+    -unity-background-scale-mode: scale-to-fit;
+    max-width: 40px;
+    margin-right: 5px;
 }

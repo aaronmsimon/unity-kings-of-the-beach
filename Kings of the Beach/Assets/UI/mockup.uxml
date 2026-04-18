@@ -13,9 +13,9 @@
             </ui:VisualElement>
             <ui:VisualElement class="team">
                 <ui:VisualElement name="team-name-1" style="flex-grow: 1; max-height: 10%; flex-direction: row; justify-content: center;">
-                    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/xbox_lt.png?fileID=2800000&amp;guid=64c6cd96baf6d204bb77f3c3503f54d5&amp;type=3#xbox_lt&quot;); -unity-background-scale-mode: scale-to-fit; max-width: 40px; margin-right: 5px;" />
+                    <ui:VisualElement class="grow input-lt" />
                     <ui:VisualElement class="team-logo" style="flex-grow: 1; background-image: resource(&apos;Textures/Teams/Countries/USA&apos;); -unity-background-scale-mode: scale-to-fit; max-width: 100px;" />
-                    <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/xbox_rt.png?fileID=2800000&amp;guid=9ba8bcdca5ac73d4baec1e2b8717b8b6&amp;type=3#xbox_rt&quot;); -unity-background-scale-mode: scale-to-fit; max-width: 40px; margin-left: 5px;" />
+                    <ui:VisualElement class="grow input-rt" />
                 </ui:VisualElement>
                 <ui:VisualElement name="athlete-1" style="flex-grow: 1; flex-direction: column; max-height: 45%;">
                     <ui:VisualElement name="VisualElement" style="flex-direction: row;">
@@ -44,9 +44,9 @@
             </ui:VisualElement>
             <ui:VisualElement class="team">
                 <ui:VisualElement name="team-name-2" style="flex-grow: 1; max-height: 10%; flex-direction: row; justify-content: center;">
-                    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/xbox_lt.png?fileID=2800000&amp;guid=64c6cd96baf6d204bb77f3c3503f54d5&amp;type=3#xbox_lt&quot;); -unity-background-scale-mode: scale-to-fit; max-width: 40px; margin-right: 5px;" />
+                    <ui:VisualElement class="grow input-lt" />
                     <ui:VisualElement class="team-logo" style="flex-grow: 1; background-image: resource(&apos;Textures/Teams/Countries/USA&apos;); -unity-background-scale-mode: scale-to-fit; max-width: 100px;" />
-                    <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/xbox_rt.png?fileID=2800000&amp;guid=9ba8bcdca5ac73d4baec1e2b8717b8b6&amp;type=3#xbox_rt&quot;); -unity-background-scale-mode: scale-to-fit; max-width: 40px; margin-left: 5px;" />
+                    <ui:VisualElement class="grow input-rt" />
                 </ui:VisualElement>
                 <ui:VisualElement name="athlete-1" style="flex-grow: 1; flex-direction: column; max-height: 45%;">
                     <ui:VisualElement name="VisualElement" style="flex-direction: row;">
