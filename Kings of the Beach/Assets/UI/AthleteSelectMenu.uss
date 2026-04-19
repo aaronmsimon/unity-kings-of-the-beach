@@ -49,6 +49,11 @@
     rotate: -90deg;
 }
 
+.team-logo {
+    -unity-background-scale-mode: scale-to-fit;
+    max-width: 100px;
+}
+
 .team-label {
     font-size: 35px;
     justify-content: center;
@@ -75,16 +80,56 @@
     color: yellow;
 }
 
-.input-lt {
-    background-image: url("project://database/Assets/Textures/UI Icons/xbox_lt.png");
+#controls-helper {
+    height: 5%;
+    width: 80%;
+}
+
+.input-icon {
     -unity-background-scale-mode: scale-to-fit;
+}
+
+.input-team-select {
     max-width: 40px;
     margin-right: 5px;
 }
 
-.input-rt {
-    background-image: url("project://database/Assets/Textures/UI Icons/xbox_rt.png");
-    -unity-background-scale-mode: scale-to-fit;
-    max-width: 40px;
-    margin-right: 5px;
+.input-lt.xbox {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_lt.png?fileID=2800000&guid=64c6cd96baf6d204bb77f3c3503f54d5&type=3#xbox_lt");
+}
+
+.input-rt.xbox {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_rt.png?fileID=2800000&guid=9ba8bcdca5ac73d4baec1e2b8717b8b6&type=3#xbox_rt");
+}
+
+.input-lt.keyboard {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_z.png?fileID=2800000&guid=1ad5c270ef9ea714498bc57076c09cb1&type=3#keyboard_z");
+}
+
+.input-rt.keyboard {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_c.png?fileID=2800000&guid=e34ca6fcb1921774eacb0bd5ae27232e&type=3#keyboard_c");
+}
+
+.input-helper {
+    max-width: 5%;
+}
+
+#controls-helper Label {
+    font-size: 20px;
+}
+
+.input-interaction1.xbox {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_x.png?fileID=2800000&guid=14d4e2a15d84ca742a4efcba0a71d5fe&type=3#xbox_button_x");
+}
+
+.input-interaction2.xbox {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_y.png?fileID=2800000&guid=9abfd693ae4bdc44b9cdfed010da5915&type=3#xbox_button_y");
+}
+
+.input-interaction1.keyboard {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_shift.png?fileID=2800000&guid=c3660b54f5e1ef741bc81bae648a5591&type=3#keyboard_shift");
+}
+
+.input-interaction2.keyboard {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/key_tab.png?fileID=2800000&guid=08e5eb6d1f22637458ed97e1788352b0&type=3#key_tab");
 }

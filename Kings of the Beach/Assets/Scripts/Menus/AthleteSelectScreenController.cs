@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,11 +13,14 @@ namespace KotB.Menus.Alt
 
         public int activeAthleteSelectControllerIndex;
 
+        private List<VisualElement> elements;
         private int teamIndex;
         private int[] teamAthleteIndex = new int[] { 0, 0 };
 
         private void Awake() {
             inputReader.EnableMenuInput();
+
+            elements = uiDocument.rootVisualElement.Query(className: "input-icon").ToList();
         }
 
         private void OnEnable() {
@@ -26,9 +30,15 @@ namespace KotB.Menus.Alt
             inputReader.interaction1Event += OnSwitchAthlete;
             inputReader.interaction2Event += OnSwitchTeam;
 
+            inputReader.inputSchemeChangedEvent += OnInputSchemeChanged;
+
             foreach (TeamSelectController team in teamSelectControllers) {
                 team.TeamChanged += OnTeamChanged;
             }
+
+#if UNITY_EDITOR
+            OnInputSchemeChanged(InputReader.InputScheme.Keyboard);
+#endif
         }
 
         private void Start() {
@@ -45,6 +55,8 @@ namespace KotB.Menus.Alt
             inputReader.selectEvent -= OnSetHumanControlled;
             inputReader.interaction1Event -= OnSwitchAthlete;
             inputReader.interaction2Event -= OnSwitchTeam;
+
+            inputReader.inputSchemeChangedEvent -= OnInputSchemeChanged;
         }
 
         private void SetActiveAthleteSelectController(int index) {
@@ -91,6 +103,15 @@ namespace KotB.Menus.Alt
             }
             athleteSelectControllers[index].SetComputerControlled(false);
             athleteSelectControllers[index].SetLabelText("Human Controlled");
+        }
+
+        private void OnInputSchemeChanged(InputReader.InputScheme newScheme) {
+            foreach (VisualElement el in elements) {
+                foreach (InputReader.InputScheme scheme in System.Enum.GetValues(typeof(InputReader.InputScheme))) {
+                    el.RemoveFromClassList(scheme.ToString().ToLower());
+                }
+                el.AddToClassList(newScheme.ToString().ToLower());
+            }
         }
     }
 }

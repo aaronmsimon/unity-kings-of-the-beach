@@ -13,9 +13,9 @@
             </ui:VisualElement>
             <ui:VisualElement class="grow athlete-grid-column column team">
                 <ui:VisualElement name="team-name-1" style="flex-grow: 1; max-height: 10%; flex-direction: row; justify-content: center;">
-                    <ui:VisualElement class="trigger-left" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/UI Icons/xbox_lt.png?fileID=2800000&amp;guid=64c6cd96baf6d204bb77f3c3503f54d5&amp;type=3#xbox_lt&quot;); -unity-background-scale-mode: scale-to-fit; max-width: 40px; margin-right: 5px;" />
-                    <ui:VisualElement class="team-logo" style="flex-grow: 1; background-image: resource(&apos;Textures/Teams/Countries/USA&apos;); -unity-background-scale-mode: scale-to-fit; max-width: 100px;" />
-                    <ui:VisualElement class="trigger-right" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/UI Icons/xbox_rt.png?fileID=2800000&amp;guid=9ba8bcdca5ac73d4baec1e2b8717b8b6&amp;type=3#xbox_rt&quot;); -unity-background-scale-mode: scale-to-fit; max-width: 40px; margin-left: 5px;" />
+                    <ui:VisualElement class="input-team-select input-icon input-lt grow" />
+                    <ui:VisualElement class="team-logo grow" />
+                    <ui:VisualElement class="input-team-select input-icon input-rt grow" />
                 </ui:VisualElement>
                 <!-- <ui:VisualElement name="team-name-1" class="grow team-row column">
                     <ui:VisualElement class="grow team-logo" style="-unity-background-scale-mode: scale-to-fit;" />
@@ -38,9 +38,9 @@
             </ui:VisualElement>
             <ui:VisualElement class="grow athlete-grid-column column team">
                 <ui:VisualElement name="team-name-2" style="flex-grow: 1; max-height: 10%; flex-direction: row; justify-content: center;">
-                    <ui:VisualElement class="trigger-left" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/UI Icons/xbox_lt.png?fileID=2800000&amp;guid=64c6cd96baf6d204bb77f3c3503f54d5&amp;type=3#xbox_lt&quot;); -unity-background-scale-mode: scale-to-fit; max-width: 40px; margin-right: 5px;" />
-                    <ui:VisualElement class="team-logo" style="flex-grow: 1; background-image: resource(&apos;Textures/Teams/Countries/USA&apos;); -unity-background-scale-mode: scale-to-fit; max-width: 100px;" />
-                    <ui:VisualElement class="trigger-right" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/UI Icons/xbox_rt.png?fileID=2800000&amp;guid=9ba8bcdca5ac73d4baec1e2b8717b8b6&amp;type=3#xbox_rt&quot;); -unity-background-scale-mode: scale-to-fit; max-width: 40px; margin-left: 5px;" />
+                    <ui:VisualElement class="input-team-select input-icon input-lt grow" />
+                    <ui:VisualElement class="team-logo grow" />
+                    <ui:VisualElement class="input-team-select input-icon input-rt grow" />
                 </ui:VisualElement>
                 <!-- <ui:VisualElement name="team-name-2" class="grow team-row">
                     <ui:VisualElement class="grow team-logo" style="-unity-background-scale-mode: scale-to-fit;" />
@@ -61,6 +61,12 @@
                     <ui:Label class="controlled-by" />
                 </ui:VisualElement>
             </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="controls-helper" class="row">
+            <ui:VisualElement class="input-helper input-icon input-interaction1 grow" />
+            <ui:Label text="Switch Athlete" />
+            <ui:VisualElement class="input-helper input-icon input-interaction2 grow" />
+            <ui:Label text="Switch Team" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
