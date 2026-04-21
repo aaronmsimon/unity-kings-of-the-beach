@@ -17,10 +17,6 @@
                     <ui:VisualElement class="team-logo grow" />
                     <ui:VisualElement class="input-team-select input-icon input-rt grow" />
                 </ui:VisualElement>
-                <!-- <ui:VisualElement name="team-name-1" class="grow team-row column">
-                    <ui:VisualElement class="grow team-logo" style="-unity-background-scale-mode: scale-to-fit;" />
-                    <ui:Label class="label team-label" />
-                </ui:VisualElement> -->
                 <ui:VisualElement name="athlete-1" class="grow athlete-row column">
                     <ui:VisualElement class="row">
                         <ui:VisualElement class="grow render-texture-container" style="-unity-background-scale-mode: scale-to-fit;" />
@@ -42,10 +38,6 @@
                     <ui:VisualElement class="team-logo grow" />
                     <ui:VisualElement class="input-team-select input-icon input-rt grow" />
                 </ui:VisualElement>
-                <!-- <ui:VisualElement name="team-name-2" class="grow team-row">
-                    <ui:VisualElement class="grow team-logo" style="-unity-background-scale-mode: scale-to-fit;" />
-                    <ui:Label class="label team-label" />
-                </ui:VisualElement> -->
                 <ui:VisualElement name="athlete-3" class="grow athlete-row column">
                     <ui:VisualElement class="row">
                         <ui:VisualElement class="grow athlete-select-container" />
