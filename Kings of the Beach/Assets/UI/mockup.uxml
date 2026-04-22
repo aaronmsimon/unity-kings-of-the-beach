@@ -20,17 +20,39 @@
                 <ui:VisualElement name="athlete-1" style="flex-grow: 1; flex-direction: column; max-height: 45%;">
                     <ui:VisualElement name="VisualElement" style="flex-direction: row;">
                         <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/Render/Athlete1RenderTexture.renderTexture?fileID=8400000&amp;guid=eb03d7bcdba6a0647a88b13c9d81b680&amp;type=2#Athlete1RenderTexture&quot;); -unity-background-scale-mode: scale-to-fit; display: none;" />
-                        <ui:VisualElement style="flex-grow: 1;">
-                            <ui:Label text="Pass Accuracy" style="font-size: 10px;" />
-                            <ui:VisualElement class="stat-bar" style="width: 100%; height: 12px; background-color: rgba(255, 255, 255, 0.2); border-radius: 4px;">
-                                <ui:VisualElement class="stat-bar-fill" style="height: 100%; background-color: white; border-radius: 4px; width: 50%;"/>
+                        <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                            <ui:VisualElement class="stats-names" style="flex-grow: 1; flex-direction: column;">
+                                <ui:Label text="Pass Accuracy" style="font-size: 10px;" />
+                                <ui:Label text="Spike Skill" style="font-size: 10px;" />
+                                <ui:Label text="Spike Power" style="font-size: 10px;" />
+                                <ui:Label text="Serve Skill" style="font-size: 10px;" />
+                                <ui:Label text="Serve Power" style="font-size: 10px;" />
+                                <ui:Label text="Blocking" style="font-size: 10px;" />
+                                <ui:Label text="Position: Blocker" style="font-size: 10px;" />
                             </ui:VisualElement>
-                            <ui:Label text="Spike Skill" style="font-size: 10px;" />
-                            <ui:Label text="Spike Power" style="font-size: 10px;" />
-                            <ui:Label text="Serve Skill" style="font-size: 10px;" />
-                            <ui:Label text="Serve Power" style="font-size: 10px;" />
-                            <ui:Label text="Blocking" style="font-size: 10px;" />
-                            <!-- <ui:Label text="Position: Blocker" style="font-size: 10px;" /> -->
+                            <ui:VisualElement class="stats-bars" style="flex-grow: 1; flex-direction: column;">
+                                <ui:VisualElement class="stat-bar" style="width: 100%; height: 12px; background-color: rgba(255, 255, 255, 0.2); border-radius: 4px;">
+                                    <ui:VisualElement class="stat-bar-fill" style="height: 100%; background-color: white; border-radius: 4px; width: 50%;"/>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="stat-bar" style="width: 100%; height: 12px; background-color: rgba(255, 255, 255, 0.2); border-radius: 4px;">
+                                    <ui:VisualElement class="stat-bar-fill" style="height: 100%; background-color: white; border-radius: 4px; width: 25%;"/>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="stat-bar" style="width: 100%; height: 12px; background-color: rgba(255, 255, 255, 0.2); border-radius: 4px;">
+                                    <ui:VisualElement class="stat-bar-fill" style="height: 100%; background-color: white; border-radius: 4px; width: 70%;"/>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="stat-bar" style="width: 100%; height: 12px; background-color: rgba(255, 255, 255, 0.2); border-radius: 4px;">
+                                    <ui:VisualElement class="stat-bar-fill" style="height: 100%; background-color: white; border-radius: 4px; width: 90%;"/>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="stat-bar" style="width: 100%; height: 12px; background-color: rgba(255, 255, 255, 0.2); border-radius: 4px;">
+                                    <ui:VisualElement class="stat-bar-fill" style="height: 100%; background-color: white; border-radius: 4px; width: 60%;"/>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="stat-bar" style="width: 100%; height: 12px; background-color: rgba(255, 255, 255, 0.2); border-radius: 4px;">
+                                    <ui:VisualElement class="stat-bar-fill" style="height: 100%; background-color: white; border-radius: 4px; width: 50%;"/>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="stat-bar" style="width: 100%; height: 12px; background-color: rgba(255, 255, 255, 0.2); border-radius: 4px;">
+                                    <ui:VisualElement class="stat-bar-fill" style="height: 100%; background-color: white; border-radius: 4px; width: 30%;"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
                         </ui:VisualElement>
                         <ui:VisualElement style="flex-grow: 1;">
                             <ui:Label tabindex="-1" text="Country" parse-escape-sequences="true" display-tooltip-when-elided="true" class="athlete-menupanel" />
