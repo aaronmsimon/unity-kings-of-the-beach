@@ -11,6 +11,10 @@
     flex-direction: row;
 }
 
+.hidden {
+    display: none;
+}
+
 .athlete-grid-column {
     height: 100%;
 }
@@ -31,6 +35,14 @@
     flex-direction: column;
 }
 
+.center-content {
+    justify-content: center;
+}
+
+.team-name {
+    max-height: 10%;
+}
+
 .team-row {
     max-height: 10%;
 }
@@ -49,18 +61,17 @@
     rotate: -90deg;
 }
 
-.team-logo {
+.scale {
     -unity-background-scale-mode: scale-to-fit;
+}
+
+.team-logo {
     max-width: 100px;
 }
 
 .team-label {
     font-size: 35px;
     justify-content: center;
-}
-
-.graphics {
-    -unity-background-scale-mode: scale-to-fit;
 }
 
 .render-texture-container {
@@ -85,13 +96,39 @@
     width: 80%;
 }
 
-.input-icon {
-    -unity-background-scale-mode: scale-to-fit;
-}
-
 .input-team-select {
     max-width: 40px;
     margin-right: 5px;
+}
+
+.stats-names {
+    max-width: 35%;
+}
+
+.stats-names Label {
+    font-size: 15px;
+    -unity-text-align: middle-left;
+}
+
+.stats-bars {
+    max-width: 60%;
+}
+
+.stat-bar-container {
+    height: 20%;
+}
+
+.stat-bar {
+    width: 100%;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.stat-bar-fill {
+    height: 100%;
+    background-color: white;
+    border-radius: 4px;
 }
 
 .input-lt.xbox {

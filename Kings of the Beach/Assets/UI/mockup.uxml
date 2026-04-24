@@ -22,7 +22,7 @@
                         <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/Render/Athlete1RenderTexture.renderTexture?fileID=8400000&amp;guid=eb03d7bcdba6a0647a88b13c9d81b680&amp;type=2#Athlete1RenderTexture&quot;); -unity-background-scale-mode: scale-to-fit; display: none;" />
                         <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
                             <ui:VisualElement class="stats-names" style="flex-grow: 1; flex-direction: column; max-width: 35%;">
-                                <ui:Label text="Passing" style="font-size: 10px; flex-grow: 1;" />
+                                <ui:Label text="Passing" style="font-size: 10px; flex-grow: 1; -unity-text-align: middle-left;" />
                                 <ui:Label text="Spiking" style="font-size: 10px; flex-grow: 1;" />
                                 <ui:Label text="Serving" style="font-size: 10px; flex-grow: 1;" />
                                 <ui:Label text="Blocking" style="font-size: 10px; flex-grow: 1;" />

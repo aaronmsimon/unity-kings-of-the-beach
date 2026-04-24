@@ -12,52 +12,176 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement class="grow athlete-grid-column column team">
-                <ui:VisualElement name="team-name-1" style="flex-grow: 1; max-height: 10%; flex-direction: row; justify-content: center;">
-                    <ui:VisualElement class="input-team-select input-icon input-lt grow" />
-                    <ui:VisualElement class="team-logo grow" />
-                    <ui:VisualElement class="input-team-select input-icon input-rt grow" />
+                <ui:VisualElement name="team-name-1" class="grow row center-content team-name">
+                    <ui:VisualElement class="input-team-select input-icon input-lt grow scale" />
+                    <ui:VisualElement class="team-logo grow scale" />
+                    <ui:VisualElement class="input-team-select input-icon input-rt grow scale" />
                 </ui:VisualElement>
                 <ui:VisualElement name="athlete-1" class="grow athlete-row column">
                     <ui:VisualElement class="row">
-                        <ui:VisualElement class="grow render-texture-container" style="-unity-background-scale-mode: scale-to-fit;" />
+                        <ui:VisualElement class="grow scale render-texture-container" />
+                        <ui:VisualElement class="grow row stats-container hidden">
+                            <ui:VisualElement class="grow column stats-names">
+                                <ui:Label text="Passing" class="grow" />
+                                <ui:Label text="Spiking" class="grow" />
+                                <ui:Label text="Serving" class="grow" />
+                                <ui:Label text="Blocking" class="grow" />
+                                <ui:Label text="Blocker" class="grow" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="grow column stats-bars">
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
                         <ui:VisualElement class="grow athlete-select-container" />
                     </ui:VisualElement>
                     <ui:Label class="controlled-by" />
                 </ui:VisualElement>
                 <ui:VisualElement name="athlete-2" class="grow athlete-row column">
                     <ui:VisualElement class="row">
-                        <ui:VisualElement class="grow render-texture-container" style="-unity-background-scale-mode: scale-to-fit;" />
+                        <ui:VisualElement class="grow scale render-texture-container" />
+                        <ui:VisualElement class="grow row stats-container hidden">
+                            <ui:VisualElement class="grow column stats-names">
+                                <ui:Label text="Passing" class="grow" />
+                                <ui:Label text="Spiking" class="grow" />
+                                <ui:Label text="Serving" class="grow" />
+                                <ui:Label text="Blocking" class="grow" />
+                                <ui:Label text="Blocker" class="grow" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="grow column stats-bars">
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
                         <ui:VisualElement class="grow athlete-select-container" />
                     </ui:VisualElement>
                     <ui:Label class="controlled-by" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement class="grow athlete-grid-column column team">
-                <ui:VisualElement name="team-name-2" style="flex-grow: 1; max-height: 10%; flex-direction: row; justify-content: center;">
-                    <ui:VisualElement class="input-team-select input-icon input-lt grow" />
-                    <ui:VisualElement class="team-logo grow" />
-                    <ui:VisualElement class="input-team-select input-icon input-rt grow" />
+                <ui:VisualElement name="team-name-2" class="grow row center-content team-name">
+                    <ui:VisualElement class="input-team-select input-icon input-lt grow scale" />
+                    <ui:VisualElement class="team-logo grow scale" />
+                    <ui:VisualElement class="input-team-select input-icon input-rt grow scale" />
                 </ui:VisualElement>
                 <ui:VisualElement name="athlete-3" class="grow athlete-row column">
                     <ui:VisualElement class="row">
                         <ui:VisualElement class="grow athlete-select-container" />
-                        <ui:VisualElement class="grow render-texture-container" style="-unity-background-scale-mode: scale-to-fit;" />
+                        <ui:VisualElement class="grow scale render-texture-container" />
+                        <ui:VisualElement class="grow row stats-container hidden">
+                            <ui:VisualElement class="grow column stats-names">
+                                <ui:Label text="Passing" class="grow" />
+                                <ui:Label text="Spiking" class="grow" />
+                                <ui:Label text="Serving" class="grow" />
+                                <ui:Label text="Blocking" class="grow" />
+                                <ui:Label text="Blocker" class="grow" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="grow column stats-bars">
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:Label class="controlled-by" />
                 </ui:VisualElement>
                 <ui:VisualElement name="athlete-4" class="grow athlete-row column">
                     <ui:VisualElement class="row">
                         <ui:VisualElement class="grow athlete-select-container" />
-                        <ui:VisualElement class="grow render-texture-container" style="-unity-background-scale-mode: scale-to-fit;" />
+                        <ui:VisualElement class="grow scale render-texture-container" />
+                        <ui:VisualElement class="grow row stats-container hidden">
+                            <ui:VisualElement class="grow column stats-names">
+                                <ui:Label text="Passing" class="grow" />
+                                <ui:Label text="Spiking" class="grow" />
+                                <ui:Label text="Serving" class="grow" />
+                                <ui:Label text="Blocking" class="grow" />
+                                <ui:Label text="Blocker" class="grow" />
+                            </ui:VisualElement>
+                            <ui:VisualElement class="grow column stats-bars">
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                                <ui:VisualElement class="center-content stat-bar-container">
+                                    <ui:VisualElement class="stat-bar">
+                                        <ui:VisualElement class="stat-bar-fill" />
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:Label class="controlled-by" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="controls-helper" class="row">
-            <ui:VisualElement class="input-helper input-icon input-interaction1 grow" />
+            <ui:VisualElement class="input-helper input-icon input-interaction1 grow scale" />
             <ui:Label text="Switch Athlete" />
-            <ui:VisualElement class="input-helper input-icon input-interaction2 grow" />
+            <ui:VisualElement class="input-helper input-icon input-interaction2 grow scale" />
             <ui:Label text="Switch Team" />
         </ui:VisualElement>
     </ui:VisualElement>
