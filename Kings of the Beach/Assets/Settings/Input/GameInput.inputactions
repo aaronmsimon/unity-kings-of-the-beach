@@ -670,15 +670,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "0fc5ac72-7845-4c38-9739-9c577d8741da",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "ShoulderLeft",
                     "type": "Button",
                     "id": "fd5455c3-198d-4a77-9c51-ff3ca285ed52",
@@ -731,13 +722,22 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Interaction4",
+                    "type": "Button",
+                    "id": "71d5fa80-af70-407f-891d-74310007f1af",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "9dd76fef-44b5-4a16-b9a3-58fd4e1180a0",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/select",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -748,7 +748,7 @@
                 {
                     "name": "",
                     "id": "fe28c99b-c7e2-41b2-9643-49fb69a1b0c5",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/rightAlt",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -912,28 +912,6 @@
                 },
                 {
                     "name": "",
-                    "id": "7401dbe8-c44e-4978-8102-a0e7cf692be2",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fe078df7-e5a1-464a-8e30-eef6bfee6982",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0254e04d-5393-4ed6-8d14-432bbebfe161",
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
@@ -1061,6 +1039,28 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Interaction2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7fdf333-b9d9-425e-b5e7-a2eed0b2affb",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Interaction4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "42dd2809-26a3-424d-be8e-bcb73b0bffb7",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Interaction4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

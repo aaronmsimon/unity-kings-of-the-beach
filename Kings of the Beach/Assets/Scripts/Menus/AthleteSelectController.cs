@@ -89,6 +89,18 @@ namespace KotB.Menus.Alt
             controlledByLabel.text = labelText;
         }
 
+        public void DisplayStats(bool visible) {
+            VisualElement renderContainer = slot.Q(className: "render-texture-container");
+            VisualElement statsContainer = slot.Q(className: "stats-container");
+            if (visible) {
+                renderContainer.AddToClassList("hidden");
+                statsContainer.RemoveFromClassList("hidden");
+            } else {
+                renderContainer.RemoveFromClassList("hidden");
+                statsContainer.AddToClassList("hidden");
+            }
+        }
+
         private void BuildPanels() {
             slot = uiDocument.rootVisualElement.Q($"athlete-{athleteSlotIndex}");
             var selectionsContainer = slot.Q(className: "athlete-select-container");

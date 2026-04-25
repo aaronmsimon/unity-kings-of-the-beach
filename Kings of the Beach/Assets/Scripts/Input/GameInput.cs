@@ -756,15 +756,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause"",
-                    ""type"": ""Button"",
-                    ""id"": ""0fc5ac72-7845-4c38-9739-9c577d8741da"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""ShoulderLeft"",
                     ""type"": ""Button"",
                     ""id"": ""fd5455c3-198d-4a77-9c51-ff3ca285ed52"",
@@ -817,13 +808,22 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interaction4"",
+                    ""type"": ""Button"",
+                    ""id"": ""71d5fa80-af70-407f-891d-74310007f1af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""9dd76fef-44b5-4a16-b9a3-58fd4e1180a0"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -834,7 +834,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""fe28c99b-c7e2-41b2-9643-49fb69a1b0c5"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/rightAlt"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -998,28 +998,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7401dbe8-c44e-4978-8102-a0e7cf692be2"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fe078df7-e5a1-464a-8e30-eef6bfee6982"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""0254e04d-5393-4ed6-8d14-432bbebfe161"",
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
@@ -1149,6 +1127,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Interaction2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e7fdf333-b9d9-425e-b5e7-a2eed0b2affb"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Interaction4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42dd2809-26a3-424d-be8e-bcb73b0bffb7"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Interaction4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1201,13 +1201,13 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Menu_SelectionDown = m_Menu.FindAction("SelectionDown", throwIfNotFound: true);
         m_Menu_SelectionLeft = m_Menu.FindAction("SelectionLeft", throwIfNotFound: true);
         m_Menu_SelectionRight = m_Menu.FindAction("SelectionRight", throwIfNotFound: true);
-        m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
         m_Menu_ShoulderLeft = m_Menu.FindAction("ShoulderLeft", throwIfNotFound: true);
         m_Menu_ShoulderRight = m_Menu.FindAction("ShoulderRight", throwIfNotFound: true);
         m_Menu_Interaction1 = m_Menu.FindAction("Interaction1", throwIfNotFound: true);
         m_Menu_TriggerLeft = m_Menu.FindAction("TriggerLeft", throwIfNotFound: true);
         m_Menu_TriggerRight = m_Menu.FindAction("TriggerRight", throwIfNotFound: true);
         m_Menu_Interaction2 = m_Menu.FindAction("Interaction2", throwIfNotFound: true);
+        m_Menu_Interaction4 = m_Menu.FindAction("Interaction4", throwIfNotFound: true);
     }
 
     ~@GameInput()
@@ -1587,13 +1587,13 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Menu_SelectionDown;
     private readonly InputAction m_Menu_SelectionLeft;
     private readonly InputAction m_Menu_SelectionRight;
-    private readonly InputAction m_Menu_Pause;
     private readonly InputAction m_Menu_ShoulderLeft;
     private readonly InputAction m_Menu_ShoulderRight;
     private readonly InputAction m_Menu_Interaction1;
     private readonly InputAction m_Menu_TriggerLeft;
     private readonly InputAction m_Menu_TriggerRight;
     private readonly InputAction m_Menu_Interaction2;
+    private readonly InputAction m_Menu_Interaction4;
     /// <summary>
     /// Provides access to input actions defined in input action map "Menu".
     /// </summary>
@@ -1630,10 +1630,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @SelectionRight => m_Wrapper.m_Menu_SelectionRight;
         /// <summary>
-        /// Provides access to the underlying input action "Menu/Pause".
-        /// </summary>
-        public InputAction @Pause => m_Wrapper.m_Menu_Pause;
-        /// <summary>
         /// Provides access to the underlying input action "Menu/ShoulderLeft".
         /// </summary>
         public InputAction @ShoulderLeft => m_Wrapper.m_Menu_ShoulderLeft;
@@ -1657,6 +1653,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Menu/Interaction2".
         /// </summary>
         public InputAction @Interaction2 => m_Wrapper.m_Menu_Interaction2;
+        /// <summary>
+        /// Provides access to the underlying input action "Menu/Interaction4".
+        /// </summary>
+        public InputAction @Interaction4 => m_Wrapper.m_Menu_Interaction4;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1701,9 +1701,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @SelectionRight.started += instance.OnSelectionRight;
             @SelectionRight.performed += instance.OnSelectionRight;
             @SelectionRight.canceled += instance.OnSelectionRight;
-            @Pause.started += instance.OnPause;
-            @Pause.performed += instance.OnPause;
-            @Pause.canceled += instance.OnPause;
             @ShoulderLeft.started += instance.OnShoulderLeft;
             @ShoulderLeft.performed += instance.OnShoulderLeft;
             @ShoulderLeft.canceled += instance.OnShoulderLeft;
@@ -1722,6 +1719,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Interaction2.started += instance.OnInteraction2;
             @Interaction2.performed += instance.OnInteraction2;
             @Interaction2.canceled += instance.OnInteraction2;
+            @Interaction4.started += instance.OnInteraction4;
+            @Interaction4.performed += instance.OnInteraction4;
+            @Interaction4.canceled += instance.OnInteraction4;
         }
 
         /// <summary>
@@ -1751,9 +1751,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @SelectionRight.started -= instance.OnSelectionRight;
             @SelectionRight.performed -= instance.OnSelectionRight;
             @SelectionRight.canceled -= instance.OnSelectionRight;
-            @Pause.started -= instance.OnPause;
-            @Pause.performed -= instance.OnPause;
-            @Pause.canceled -= instance.OnPause;
             @ShoulderLeft.started -= instance.OnShoulderLeft;
             @ShoulderLeft.performed -= instance.OnShoulderLeft;
             @ShoulderLeft.canceled -= instance.OnShoulderLeft;
@@ -1772,6 +1769,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Interaction2.started -= instance.OnInteraction2;
             @Interaction2.performed -= instance.OnInteraction2;
             @Interaction2.canceled -= instance.OnInteraction2;
+            @Interaction4.started -= instance.OnInteraction4;
+            @Interaction4.performed -= instance.OnInteraction4;
+            @Interaction4.canceled -= instance.OnInteraction4;
         }
 
         /// <summary>
@@ -1974,13 +1974,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSelectionRight(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnPause(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "ShoulderLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -2022,5 +2015,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteraction2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Interaction4" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteraction4(InputAction.CallbackContext context);
     }
 }

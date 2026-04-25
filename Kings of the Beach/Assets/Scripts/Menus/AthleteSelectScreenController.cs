@@ -16,6 +16,7 @@ namespace KotB.Menus.Alt
         private List<VisualElement> elements;
         private int teamIndex;
         private int[] teamAthleteIndex = new int[] { 0, 0 };
+        private bool statsVisible;
 
         private void Awake() {
             inputReader.EnableMenuInput();
@@ -26,9 +27,10 @@ namespace KotB.Menus.Alt
         private void OnEnable() {
             inputReader.triggerLeftEvent += OnTriggerLeft;
             inputReader.triggerRightEvent += OnTriggerRight;
-            inputReader.selectEvent += OnSetHumanControlled;
             inputReader.interaction1Event += OnSwitchAthlete;
             inputReader.interaction2Event += OnSwitchTeam;
+            inputReader.interaction4Event += OnSetHumanControlled;
+            inputReader.selectEvent += OnToggleStats;
 
             inputReader.inputSchemeChangedEvent += OnInputSchemeChanged;
 
@@ -47,14 +49,16 @@ namespace KotB.Menus.Alt
             SetHumanControlled(0);
 
             teamIndex = 0;
+            statsVisible = false;
         }
 
         private void OnDisable() {
             inputReader.triggerLeftEvent -= OnTriggerLeft;
             inputReader.triggerRightEvent -= OnTriggerRight;
-            inputReader.selectEvent -= OnSetHumanControlled;
             inputReader.interaction1Event -= OnSwitchAthlete;
             inputReader.interaction2Event -= OnSwitchTeam;
+            inputReader.interaction4Event -= OnSetHumanControlled;
+            inputReader.selectEvent -= OnToggleStats;
 
             inputReader.inputSchemeChangedEvent -= OnInputSchemeChanged;
         }
@@ -89,6 +93,13 @@ namespace KotB.Menus.Alt
         private void OnSwitchTeam() {
             teamIndex = 1 - teamIndex;
             SetActiveAthleteSelectController(teamIndex * 2 + teamAthleteIndex[teamIndex]);
+        }
+
+        private void OnToggleStats() {
+            statsVisible = !statsVisible;
+            foreach(AthleteSelectController athleteSelectController in athleteSelectControllers) {
+                athleteSelectController.DisplayStats(statsVisible);
+            }
         }
 
         private void OnTeamChanged(int teamIndex, IMenuDisplayable country, SkillsSO blocker, SkillsSO defender) {

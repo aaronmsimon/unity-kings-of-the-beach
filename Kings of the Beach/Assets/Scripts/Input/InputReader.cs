@@ -33,6 +33,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 	public event UnityAction triggerRightEvent;
 	public event UnityAction interaction1Event;
 	public event UnityAction interaction2Event;
+	public event UnityAction interaction4Event;
 
 	// Device
 	public enum InputScheme { Keyboard, Xbox, PlayStation, Generic }
@@ -206,6 +207,12 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
     {
         if (context.phase == InputActionPhase.Performed)
 			interaction2Event?.Invoke();
+    }
+
+    public void OnInteraction4(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+			interaction4Event?.Invoke();
     }
 
 	// Enable/Disable
