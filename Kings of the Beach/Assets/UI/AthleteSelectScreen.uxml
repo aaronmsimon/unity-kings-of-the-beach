@@ -26,27 +26,27 @@
                                 <ui:Label text="Spiking" class="grow" />
                                 <ui:Label text="Serving" class="grow" />
                                 <ui:Label text="Blocking" class="grow" />
-                                <ui:Label text="Blocker" class="grow" />
+                                <ui:Label class="grow position" />
                             </ui:VisualElement>
                             <ui:VisualElement class="grow column stats-bars">
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill passing" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill spiking" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill serving" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill blocking" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                             </ui:VisualElement>
@@ -64,27 +64,27 @@
                                 <ui:Label text="Spiking" class="grow" />
                                 <ui:Label text="Serving" class="grow" />
                                 <ui:Label text="Blocking" class="grow" />
-                                <ui:Label text="Blocker" class="grow" />
+                                <ui:Label class="grow position" />
                             </ui:VisualElement>
                             <ui:VisualElement class="grow column stats-bars">
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill passing" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill spiking" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill serving" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill blocking" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                             </ui:VisualElement>
@@ -110,27 +110,27 @@
                                 <ui:Label text="Spiking" class="grow" />
                                 <ui:Label text="Serving" class="grow" />
                                 <ui:Label text="Blocking" class="grow" />
-                                <ui:Label text="Blocker" class="grow" />
+                                <ui:Label class="grow position" />
                             </ui:VisualElement>
                             <ui:VisualElement class="grow column stats-bars">
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill passing" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill spiking" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill serving" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill blocking" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                             </ui:VisualElement>
@@ -148,27 +148,27 @@
                                 <ui:Label text="Spiking" class="grow" />
                                 <ui:Label text="Serving" class="grow" />
                                 <ui:Label text="Blocking" class="grow" />
-                                <ui:Label text="Blocker" class="grow" />
+                                <ui:Label class="grow position" />
                             </ui:VisualElement>
                             <ui:VisualElement class="grow column stats-bars">
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill passing" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill spiking" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill serving" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                                 <ui:VisualElement class="center-content stat-bar-container">
                                     <ui:VisualElement class="stat-bar">
-                                        <ui:VisualElement class="stat-bar-fill" />
+                                        <ui:VisualElement class="stat-bar-fill blocking" />
                                     </ui:VisualElement>
                                 </ui:VisualElement>
                             </ui:VisualElement>

@@ -120,6 +120,19 @@ namespace KotB.Menus.Alt
             PopulatePanel(ATHLETE_PANEL);
             panels[ATHLETE_PANEL].SetValue(athlete);
             OnAthleteChanged(athlete);
+
+            // Populate stats
+            SkillsSO skillsSO = (SkillsSO)athlete;
+            Label position = (Label)slot.Q(className: "position");
+            position.text = skillsSO.PlayerPosition.ToString();
+            VisualElement passing = slot.Q(className: "passing");
+            passing.style.width = Length.Percent(skillsSO.PassAccuracy * 10);
+            VisualElement spiking = slot.Q(className: "spiking");
+            spiking.style.width = Length.Percent(skillsSO.SpikeSkill * 10);
+            VisualElement serving = slot.Q(className: "serving");
+            serving.style.width = Length.Percent(skillsSO.Serving * 10);
+            VisualElement blocking = slot.Q(className: "blocking");
+            blocking.style.width = Length.Percent(skillsSO.Blocking * 10);
         }
 
         private void PopulatePanel(int index) {
