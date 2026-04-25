@@ -17,6 +17,8 @@ namespace KotB.Menus.Alt
 
         private MenuPanel panel;
         private VisualElement teamLogo;
+        private VisualElement lt;
+        private VisualElement rt;
 
         private const string TeamsPath = "Athletes/Olympics 2024/Male/Team Selections";
 
@@ -33,6 +35,8 @@ namespace KotB.Menus.Alt
         public void BuildTeamPanel(List<IMenuDisplayable> teams) {
             var team = uiDocument.rootVisualElement.Q($"team-name-{teamIndex}");
             teamLogo = team.Q(className: "team-logo");
+            lt = team.Q(className: "input-lt");
+            rt = team.Q(className: "input-rt");
 
             panel = new MenuPanel();
             int defaultIndex = teams.IndexOf(defaultTeam);
@@ -41,6 +45,16 @@ namespace KotB.Menus.Alt
             panel.Activate();
             panel.AddToClassList("team-label");
             team.Insert(2, panel);
+        }
+
+        public void Activate() {
+            lt.RemoveFromClassList("hidden");
+            rt.RemoveFromClassList("hidden");
+        }
+
+        public void Deactivate() {
+            lt.AddToClassList("hidden");
+            rt.AddToClassList("hidden");
         }
 
         private void OnPanelValueChanged(MenuPanel panel, IMenuDisplayable value) {

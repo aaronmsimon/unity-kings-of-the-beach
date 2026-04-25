@@ -48,7 +48,8 @@ namespace KotB.Menus.Alt
             SetActiveAthleteSelectController(0);
             SetHumanControlled(0);
 
-            teamIndex = 0;
+            teamIndex = 1;
+            OnSwitchTeam();
             statsVisible = false;
         }
 
@@ -91,7 +92,9 @@ namespace KotB.Menus.Alt
         }
 
         private void OnSwitchTeam() {
+            teamSelectControllers[teamIndex].Deactivate();
             teamIndex = 1 - teamIndex;
+            teamSelectControllers[teamIndex].Activate();
             SetActiveAthleteSelectController(teamIndex * 2 + teamAthleteIndex[teamIndex]);
         }
 
