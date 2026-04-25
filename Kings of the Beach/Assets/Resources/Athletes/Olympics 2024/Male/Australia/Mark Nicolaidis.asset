@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37262e169b0a64548b7fbd6f67883702, type: 3}
-  m_Name: Noslen Diaz Amaro
+  m_Name: Mark Nicolaidis
   m_EditorClassIdentifier: 
-  athleteName: Noslen Diaz Amaro
+  athleteName: Mark Nicolaidis
   gender: 1
-  menuText: Noslen Diaz Amaro
+  menuText: Mark Nicolaidis
   defaultOutfit: 1
-  defaultTop: {fileID: 11400000, guid: 7020cf51a0ab1294ab269781ecd23999, type: 2}
-  defaultBottom: {fileID: 11400000, guid: 75836cdaea26c7042a9901cbea1d46a8, type: 2}
-  displayName: Noslen Diaz Amaro
+  defaultTop: {fileID: 11400000, guid: 9094b86a5c056004da2e8b58c538793d, type: 2}
+  defaultBottom: {fileID: 11400000, guid: ddfe083de0f855748a523af1abf45c7c, type: 2}
+  displayName: Mark Nicolaidis
   moveSpeed: 7
   targetLockDistance: 0.5
   reactionTime: 0.2
-  passAccuracy: 7
-  inBoundsJudgement: 8
+  passAccuracy: 5
+  inBoundsJudgement: 5
   spikeSkill: 5
-  spikePower: 6.5
+  spikePower: 5
   digRange: 0.5
-  serving: 8
-  servePower: 7
-  blocking: 1
-  blockPower: 1
-  height: 2.07
+  serving: 5
+  servePower: 5
+  blocking: 5
+  blockPower: 5
+  height: 1.83
   defensePos: {x: 5, y: 2}
   offenseXPos: 1.25
   playerPosition: 1
