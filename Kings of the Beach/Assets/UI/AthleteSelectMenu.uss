@@ -132,19 +132,27 @@
 }
 
 .input-lt.xbox {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_lt.png?fileID=2800000&guid=64c6cd96baf6d204bb77f3c3503f54d5&type=3#xbox_lt");
+    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_lt.png");
 }
 
 .input-rt.xbox {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_rt.png?fileID=2800000&guid=9ba8bcdca5ac73d4baec1e2b8717b8b6&type=3#xbox_rt");
+    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_rt.png");
+}
+
+.input-lt.playstation {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/playstation_trigger_l2_alternative.png");
+}
+
+.input-rt.playstation {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/playstation_trigger_r2_alternative.png");
 }
 
 .input-lt.keyboard {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_z.png?fileID=2800000&guid=1ad5c270ef9ea714498bc57076c09cb1&type=3#keyboard_z");
+    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_z.png");
 }
 
 .input-rt.keyboard {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_c.png?fileID=2800000&guid=e34ca6fcb1921774eacb0bd5ae27232e&type=3#keyboard_c");
+    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_c.png");
 }
 
 .input-helper {
@@ -156,17 +164,37 @@
 }
 
 .input-interaction1.xbox {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_x.png?fileID=2800000&guid=14d4e2a15d84ca742a4efcba0a71d5fe&type=3#xbox_button_x");
+    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_x.png");
 }
 
 .input-interaction2.xbox {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_y.png?fileID=2800000&guid=9abfd693ae4bdc44b9cdfed010da5915&type=3#xbox_button_y");
+    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_y.png");
+}
+
+.input-select.xbox {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_view.png");
+}
+
+.input-interaction1.playstation {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/playstation_button_color_square.png");
+}
+
+.input-interaction2.playstation {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/playstation_button_color_triangle.png");
+}
+
+.input-select.playstation {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/playstation_button_share.png");
 }
 
 .input-interaction1.keyboard {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_shift.png?fileID=2800000&guid=c3660b54f5e1ef741bc81bae648a5591&type=3#keyboard_shift");
+    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_shift.png");
 }
 
 .input-interaction2.keyboard {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/key_tab.png?fileID=2800000&guid=08e5eb6d1f22637458ed97e1788352b0&type=3#key_tab");
+    background-image: url("project://database/Assets/Textures/UI%20Icons/key_tab.png");
+}
+
+.input-select.keyboard {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_alt.png");
 }

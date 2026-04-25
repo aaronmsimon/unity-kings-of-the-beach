@@ -183,6 +183,8 @@
             <ui:Label text="Switch Athlete" />
             <ui:VisualElement class="input-helper input-icon input-interaction2 grow scale" />
             <ui:Label text="Switch Team" />
+            <ui:VisualElement class="input-helper input-icon input-select grow scale" />
+            <ui:Label text="Toggle Stats" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
