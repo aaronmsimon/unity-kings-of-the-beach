@@ -80,7 +80,11 @@
 
 .athlete-select-container {
     width: 50%;
-    font-size: 50px;
+    font-size: 40px;
+}
+
+.athlete-select-container Label {
+    white-space: normal;
 }
 
 .athlete-menupanel {
@@ -89,6 +93,10 @@
 
 .panel-active {
     color: yellow;
+}
+
+.controlled-by {
+    font-size: 25px;
 }
 
 #controls-helper {
@@ -164,11 +172,15 @@
 }
 
 .input-interaction1.xbox {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_x.png");
+    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_color_x.png");
 }
 
 .input-interaction2.xbox {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_y.png");
+    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_color_y.png");
+}
+
+.input-interaction4.xbox {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_color_a.png");
 }
 
 .input-select.xbox {
@@ -181,6 +193,10 @@
 
 .input-interaction2.playstation {
     background-image: url("project://database/Assets/Textures/UI%20Icons/playstation_button_color_triangle.png");
+}
+
+.input-interaction4.playstation {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/playstation_button_color_cross.png");
 }
 
 .input-select.playstation {
@@ -197,4 +213,8 @@
 
 .input-select.keyboard {
     background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_alt.png");
+}
+
+.input-interaction4.keyboard {
+    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_space.png");
 }

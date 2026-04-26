@@ -18,7 +18,7 @@
                     <ui:VisualElement class="input-team-select input-icon input-rt grow scale" />
                 </ui:VisualElement>
                 <ui:VisualElement name="athlete-1" class="grow athlete-row column">
-                    <ui:VisualElement class="row">
+                    <ui:VisualElement class="grow row">
                         <ui:VisualElement class="grow scale render-texture-container" />
                         <ui:VisualElement class="grow row stats-container hidden">
                             <ui:VisualElement class="grow column stats-names">
@@ -56,7 +56,7 @@
                     <ui:Label class="controlled-by" />
                 </ui:VisualElement>
                 <ui:VisualElement name="athlete-2" class="grow athlete-row column">
-                    <ui:VisualElement class="row">
+                    <ui:VisualElement class="grow row">
                         <ui:VisualElement class="grow scale render-texture-container" />
                         <ui:VisualElement class="grow row stats-container hidden">
                             <ui:VisualElement class="grow column stats-names">
@@ -101,7 +101,7 @@
                     <ui:VisualElement class="input-team-select input-icon input-rt grow scale" />
                 </ui:VisualElement>
                 <ui:VisualElement name="athlete-3" class="grow athlete-row column">
-                    <ui:VisualElement class="row">
+                    <ui:VisualElement class="grow row">
                         <ui:VisualElement class="grow athlete-select-container" />
                         <ui:VisualElement class="grow scale render-texture-container" />
                         <ui:VisualElement class="grow row stats-container hidden">
@@ -139,7 +139,7 @@
                     <ui:Label class="controlled-by" />
                 </ui:VisualElement>
                 <ui:VisualElement name="athlete-4" class="grow athlete-row column">
-                    <ui:VisualElement class="row">
+                    <ui:VisualElement class="grow row">
                         <ui:VisualElement class="grow athlete-select-container" />
                         <ui:VisualElement class="grow scale render-texture-container" />
                         <ui:VisualElement class="grow row stats-container hidden">
@@ -185,6 +185,8 @@
             <ui:Label text="Switch Team" />
             <ui:VisualElement class="input-helper input-icon input-select grow scale" />
             <ui:Label text="Toggle Stats" />
+            <ui:VisualElement class="input-helper input-icon input-interaction4 grow scale" />
+            <ui:Label text="Set Human Controlled" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
