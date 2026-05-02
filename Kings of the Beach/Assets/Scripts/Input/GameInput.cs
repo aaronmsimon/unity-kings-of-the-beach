@@ -834,7 +834,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""fe28c99b-c7e2-41b2-9643-49fb69a1b0c5"",
-                    ""path"": ""<Keyboard>/rightAlt"",
+                    ""path"": ""<Keyboard>/alt"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
