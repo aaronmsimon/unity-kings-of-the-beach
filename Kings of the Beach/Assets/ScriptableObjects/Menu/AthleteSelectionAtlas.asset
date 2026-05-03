@@ -19,3 +19,33 @@ MonoBehaviour:
       Xbox: {fileID: 2800000, guid: 64c6cd96baf6d204bb77f3c3503f54d5, type: 3}
       PlayStation: {fileID: 2800000, guid: 90c56109a26123f47837529449db0902, type: 3}
       Generic: {fileID: 2800000, guid: 64c6cd96baf6d204bb77f3c3503f54d5, type: 3}
+  - inputName: input-rt
+    inputSchemes:
+      Keyboard: {fileID: 2800000, guid: e34ca6fcb1921774eacb0bd5ae27232e, type: 3}
+      Xbox: {fileID: 2800000, guid: 9ba8bcdca5ac73d4baec1e2b8717b8b6, type: 3}
+      PlayStation: {fileID: 2800000, guid: 353cd9fac822ff5438523b1cc50bbec9, type: 3}
+      Generic: {fileID: 2800000, guid: 9ba8bcdca5ac73d4baec1e2b8717b8b6, type: 3}
+  - inputName: input-interaction1
+    inputSchemes:
+      Keyboard: {fileID: 2800000, guid: c3660b54f5e1ef741bc81bae648a5591, type: 3}
+      Xbox: {fileID: 2800000, guid: b4e4d35a4b82ad643b4446ab62ec5c4d, type: 3}
+      PlayStation: {fileID: 2800000, guid: 178008f679d4d6842be7a11c9bc958b8, type: 3}
+      Generic: {fileID: 2800000, guid: 14d4e2a15d84ca742a4efcba0a71d5fe, type: 3}
+  - inputName: input-interaction2
+    inputSchemes:
+      Keyboard: {fileID: 2800000, guid: 08e5eb6d1f22637458ed97e1788352b0, type: 3}
+      Xbox: {fileID: 2800000, guid: 95fd10e8dcab1814eb6ddf541e7b1864, type: 3}
+      PlayStation: {fileID: 2800000, guid: a302bdfa18355f6439a177531ffec247, type: 3}
+      Generic: {fileID: 2800000, guid: 9abfd693ae4bdc44b9cdfed010da5915, type: 3}
+  - inputName: input-interaction4
+    inputSchemes:
+      Keyboard: {fileID: 2800000, guid: 9472f99e170d4374497e210d4fc6d334, type: 3}
+      Xbox: {fileID: 2800000, guid: e89b90cbbff258f48b9d4cddf00a20e5, type: 3}
+      PlayStation: {fileID: 2800000, guid: f886d1423cb17f64c89ef4c615c94a63, type: 3}
+      Generic: {fileID: 2800000, guid: e89b90cbbff258f48b9d4cddf00a20e5, type: 3}
+  - inputName: input-select
+    inputSchemes:
+      Keyboard: {fileID: 2800000, guid: bed0f87a64f8d8d4b82e84cc52a7458d, type: 3}
+      Xbox: {fileID: 2800000, guid: 008b67f02f97d564b98b3fe8c2d07d9e, type: 3}
+      PlayStation: {fileID: 2800000, guid: b9f62841e5ead4649a94f06c80627299, type: 3}
+      Generic: {fileID: 2800000, guid: 008b67f02f97d564b98b3fe8c2d07d9e, type: 3}
