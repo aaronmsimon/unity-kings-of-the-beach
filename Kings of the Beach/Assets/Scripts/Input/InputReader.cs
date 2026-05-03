@@ -60,6 +60,8 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInp
 
 	private void OnDisable()
 	{
+		InputSystem.onActionChange -= OnActionChange;
+
 		DisableAllInput();
 	}
 
