@@ -917,6 +917,7 @@ MonoBehaviour:
   - {fileID: 661803618}
   - {fileID: 1779039996}
   - {fileID: 1386290060}
+  atlasSO: {fileID: 11400000, guid: 4fa3d7362db634b47b89889e1d78205c, type: 2}
   activeAthleteSelectControllerIndex: 0
 --- !u!114 &1510093233
 MonoBehaviour:
