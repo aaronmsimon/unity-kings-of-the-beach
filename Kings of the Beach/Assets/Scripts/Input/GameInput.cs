@@ -899,6 +899,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""7d271148-f09b-4ce9-865b-fbb9f5793095"",
+                    ""path"": ""<WebGLGamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectionUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""4baa30b3-d6e1-4f05-8a08-04b80d61177b"",
                     ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
@@ -926,6 +937,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
+                    ""action"": ""SelectionDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""94441072-4674-4ad8-88eb-443631522148"",
+                    ""path"": ""<WebGLGamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""SelectionDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -965,6 +987,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e2c9548c-c924-4da7-894f-5f9a22f65e9a"",
+                    ""path"": ""<WebGLGamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectionLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""e59e399a-2fc7-4f1c-a1c0-9a4a0ad370d1"",
                     ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
@@ -992,6 +1025,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
+                    ""action"": ""SelectionRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04935486-c1cb-458f-a019-29e733aedd70"",
+                    ""path"": ""<WebGLGamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""SelectionRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
