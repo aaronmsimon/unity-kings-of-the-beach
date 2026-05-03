@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,6 +11,7 @@ namespace KotB.Menus.Alt
         [SerializeField] private InputReader inputReader;
         [SerializeField] private TeamSelectController[] teamSelectControllers;
         [SerializeField] private AthleteSelectController[] athleteSelectControllers;
+        [SerializeField] private AthleteSelectionAtlasSO atlasSO;
 
         public int activeAthleteSelectControllerIndex;
 
@@ -38,9 +40,9 @@ namespace KotB.Menus.Alt
                 team.TeamChanged += OnTeamChanged;
             }
 
-#if UNITY_EDITOR
-            OnInputSchemeChanged(InputReader.InputScheme.Keyboard);
-#endif
+// #if UNITY_EDITOR
+            OnInputSchemeChanged(inputReader.CurrentScheme);
+// #endif
         }
 
         private void Start() {
@@ -125,6 +127,15 @@ namespace KotB.Menus.Alt
                     el.RemoveFromClassList(scheme.ToString().ToLower());
                 }
                 el.AddToClassList(newScheme.ToString().ToLower());
+
+                var match = atlasSO.inputIcons.FirstOrDefault(icon => el.ClassListContains(icon.inputName));
+                if (match == null) continue;
+
+                var field = typeof(AthleteSelectionAtlasSO.InputSchemes).GetField(newScheme.ToString());
+                var tex = field?.GetValue(match.inputSchemes) as Texture2D;
+
+                if (tex != null)
+                    el.style.backgroundImage = new StyleBackground(tex);
             }
         }
     }

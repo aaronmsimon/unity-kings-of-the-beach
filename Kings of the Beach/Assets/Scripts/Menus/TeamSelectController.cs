@@ -42,17 +42,18 @@ namespace KotB.Menus.Alt
             int defaultIndex = teams.IndexOf(defaultTeam);
             panel.Populate(teams, defaultIndex);
             panel.OnValueChanged += OnPanelValueChanged;
-            panel.Activate();
             panel.AddToClassList("team-label");
             team.Insert(2, panel);
         }
 
         public void Activate() {
+            panel.Activate();
             lt.RemoveFromClassList("hidden");
             rt.RemoveFromClassList("hidden");
         }
 
         public void Deactivate() {
+            panel.Deactivate();
             lt.AddToClassList("hidden");
             rt.AddToClassList("hidden");
         }

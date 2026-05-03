@@ -139,82 +139,10 @@
     border-radius: 4px;
 }
 
-.input-lt.xbox {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_lt.png");
-}
-
-.input-rt.xbox {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_rt.png");
-}
-
-.input-lt.playstation {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/playstation_trigger_l2_alternative.png");
-}
-
-.input-rt.playstation {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/playstation_trigger_r2_alternative.png");
-}
-
-.input-lt.keyboard {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_z.png");
-}
-
-.input-rt.keyboard {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_c.png");
-}
-
 .input-helper {
     max-width: 5%;
 }
 
 #controls-helper Label {
     font-size: 20px;
-}
-
-.input-interaction1.xbox {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_color_x.png");
-}
-
-.input-interaction2.xbox {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_color_y.png");
-}
-
-.input-interaction4.xbox {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_color_a.png");
-}
-
-.input-select.xbox {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/xbox_button_view.png");
-}
-
-.input-interaction1.playstation {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/playstation_button_color_square.png");
-}
-
-.input-interaction2.playstation {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/playstation_button_color_triangle.png");
-}
-
-.input-interaction4.playstation {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/playstation_button_color_cross.png");
-}
-
-.input-select.playstation {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/playstation_button_share.png");
-}
-
-.input-interaction1.keyboard {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_shift.png");
-}
-
-.input-interaction2.keyboard {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/key_tab.png");
-}
-
-.input-select.keyboard {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_alt.png");
-}
-
-.input-interaction4.keyboard {
-    background-image: url("project://database/Assets/Textures/UI%20Icons/keyboard_space.png");
 }
