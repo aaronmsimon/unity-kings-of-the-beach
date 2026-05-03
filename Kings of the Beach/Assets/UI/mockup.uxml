@@ -106,9 +106,9 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="VisualElement" style="height: 5%; width: 80%; flex-direction: row;">
-            <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/UI%20Icons/xbox_button_x.png?fileID=2800000&amp;guid=14d4e2a15d84ca742a4efcba0a71d5fe&amp;type=3#xbox_button_x&quot;); -unity-background-scale-mode: scale-to-fit; max-width: 5%;" />
+            <ui:VisualElement style="flex-grow: 1; background-image: resource(&apos;Textures/UI Icons/xbox_button_x&apos;); -unity-background-scale-mode: scale-to-fit; max-width: 5%;" />
             <ui:Label tabindex="-1" text="Switch Athlete" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 20px;" />
-            <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/UI%20Icons/xbox_button_y.png?fileID=2800000&amp;guid=9abfd693ae4bdc44b9cdfed010da5915&amp;type=3#xbox_button_y&quot;); -unity-background-scale-mode: scale-to-fit; max-width: 5%;" />
+            <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Resources/Textures/UI%20Icons/xbox_button_y.png?fileID=2800000&amp;guid=9abfd693ae4bdc44b9cdfed010da5915&amp;type=3#xbox_button_y&quot;); -unity-background-scale-mode: scale-to-fit; max-width: 5%;" />
             <ui:Label tabindex="-1" text="Switch Team" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 20px;" />
         </ui:VisualElement>
     </ui:VisualElement>
