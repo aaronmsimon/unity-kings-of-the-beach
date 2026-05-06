@@ -468,6 +468,7 @@ MonoBehaviour:
   uiDocument: {fileID: 1510093233}
   teamIndex: 2
   defaultTeam: {fileID: 11400000, guid: d8cefea491c41f8418a3d009c6ee6218, type: 2}
+  teamConfig: {fileID: 11400000, guid: 114c7e95942f36b4bbdcaa65e4602a6f, type: 2}
 --- !u!4 &1086283420
 Transform:
   m_ObjectHideFlags: 0
@@ -640,6 +641,7 @@ MonoBehaviour:
   uiDocument: {fileID: 1510093233}
   teamIndex: 1
   defaultTeam: {fileID: 11400000, guid: 635764e645b74e445bf1b27d3ae96557, type: 2}
+  teamConfig: {fileID: 11400000, guid: 7c9a9fdff16c4cb48abe71f93521b7c2, type: 2}
 --- !u!4 &1345072358
 Transform:
   m_ObjectHideFlags: 0

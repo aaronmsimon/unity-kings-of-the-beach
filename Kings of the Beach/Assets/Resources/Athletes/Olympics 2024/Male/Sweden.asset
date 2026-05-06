@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Sweden
   m_EditorClassIdentifier: 
   displayName: Sweden
+  abbreviation: SWE
   flag: {fileID: 21300000, guid: 62a053602cfd7c14e8162428914c4bdb, type: 3}

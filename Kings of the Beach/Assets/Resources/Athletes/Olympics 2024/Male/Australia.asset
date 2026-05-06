@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Australia
   m_EditorClassIdentifier: 
   displayName: Australia
+  abbreviation: AUS
   flag: {fileID: 21300000, guid: 68a3f43be3da7374380df64fae663981, type: 3}

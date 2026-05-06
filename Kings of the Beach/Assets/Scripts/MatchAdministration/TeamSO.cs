@@ -62,7 +62,7 @@ namespace KotB.Match
         public List<Athlete> Athletes => athletes;
         public StringVariable TeamName => teamName;
         public StringVariable TeamAbbr => teamAbbr;
-        public Sprite TeamLogo => teamLogo;
+        public Sprite TeamLogo { get { return teamLogo; } set { teamLogo = value; } }
         public FloatVariable CourtSide => courtSide;
         public float Score => score.Value;
     }

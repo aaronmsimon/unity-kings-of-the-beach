@@ -11,6 +11,7 @@ namespace KotB.Menus.Alt
         [SerializeField] private UIDocument uiDocument;
         [SerializeField][Range(1,2)] private int teamIndex;
         [SerializeField] private TeamSO defaultTeam;
+        [SerializeField] private Match.TeamSO teamConfig;
 
         public delegate void TeamChangedHandler(int teamIndex, IMenuDisplayable country, SkillsSO blocker, SkillsSO defender);
         public event TeamChangedHandler TeamChanged;
@@ -61,6 +62,10 @@ namespace KotB.Menus.Alt
         private void OnPanelValueChanged(MenuPanel panel, IMenuDisplayable value) {
             TeamSO team = (TeamSO)value;
             teamLogo.style.backgroundImage = new StyleBackground(Background.FromSprite(team.Country.Flag));
+
+            teamConfig.TeamName.Value = team.Country.DisplayName;
+            teamConfig.TeamAbbr.Value = team.Country.Abbreviation;
+            teamConfig.TeamLogo = team.Country.Flag;
 
             LoadDefaultAthletes(value);
         }

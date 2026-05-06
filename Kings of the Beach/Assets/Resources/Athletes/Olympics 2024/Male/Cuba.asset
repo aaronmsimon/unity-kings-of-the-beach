@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Cuba
   m_EditorClassIdentifier: 
   displayName: Cuba
+  abbreviation: CUB
   flag: {fileID: 21300000, guid: e7ca74227c07de84f84fcf260350f442, type: 3}
