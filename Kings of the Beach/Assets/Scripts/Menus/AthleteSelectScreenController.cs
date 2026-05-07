@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 namespace KotB.Menus.Alt
 {
@@ -33,6 +34,7 @@ namespace KotB.Menus.Alt
             inputReader.interaction2Event += OnSwitchTeam;
             inputReader.interaction4Event += OnSetHumanControlled;
             inputReader.selectEvent += OnToggleStats;
+            inputReader.startEvent += OnStart;
 
             inputReader.inputSchemeChangedEvent += OnInputSchemeChanged;
 
@@ -62,6 +64,7 @@ namespace KotB.Menus.Alt
             inputReader.interaction2Event -= OnSwitchTeam;
             inputReader.interaction4Event -= OnSetHumanControlled;
             inputReader.selectEvent -= OnToggleStats;
+            inputReader.startEvent -= OnStart;
 
             inputReader.inputSchemeChangedEvent -= OnInputSchemeChanged;
         }
@@ -105,6 +108,10 @@ namespace KotB.Menus.Alt
             foreach(AthleteSelectController athleteSelectController in athleteSelectControllers) {
                 athleteSelectController.DisplayStats(statsVisible);
             }
+        }
+
+        private void OnStart() {
+            SceneManager.LoadScene("Testing - Game");
         }
 
         private void OnTeamChanged(int teamIndex, IMenuDisplayable country, SkillsSO blocker, SkillsSO defender) {

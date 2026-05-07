@@ -187,6 +187,8 @@
             <ui:Label text="Toggle Stats" />
             <ui:VisualElement class="input-helper input-icon input-interaction4 grow scale" />
             <ui:Label text="Set Human Controlled" />
+            <ui:VisualElement class="input-helper input-icon input-start grow scale" />
+            <ui:Label text="Start Game" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -13,7 +13,6 @@ namespace KotB.StatePattern.MatchStates
         public override void Enter()
         {
             InitializeTeams();
-            matchManager.MatchInfo.Initialize();
         }
 
         private void InitializeTeams() {

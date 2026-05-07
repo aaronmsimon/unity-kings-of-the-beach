@@ -61,6 +61,7 @@ namespace KotB.Match
         private void InitializeMatch() {
             totalPoints = 0;
             scoreToWin.Value = 21;
+            matchInfo.Initialize();
         }
 
         public void ScoreUpdate() {
@@ -127,6 +128,8 @@ namespace KotB.Match
 
                 // Setup Transitions
                 gameProfile.AddAnyTransition(pauseState, pausePredicate);
+                // stateBeforePause = matchStartState;
+                // gameProfile.AddTransition(pauseState, stateBeforePause, pausePredicate);
                 gameProfile.AddTransition(matchStartState, prePointState, matchInitializedPredicate);
                 gameProfile.AddTransition(prePointState, serveState, matchToServePredicate);
                 gameProfile.AddTransition(serveState, inPlayState, ballServedPredicate);
@@ -166,10 +169,8 @@ namespace KotB.Match
             matchInfo.TogglePauseEvent(paused);
             if (paused) {
                 stateBeforePause = stateMachine.CurrentState;
-                pausePredicate.Trigger();
-            } else {
-                stateMachine.SetState(stateBeforePause);
             }
+            pausePredicate.Trigger();
         }
 
         private void OnStateChanged(IState newState) {
