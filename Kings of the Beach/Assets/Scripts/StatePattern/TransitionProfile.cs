@@ -24,6 +24,10 @@ namespace KotB.StatePattern
             anyTransitions.Add(new Transition(GetOrAddNode(to).State, condition));
         }
 
+        public void AddReturnTransition(IState from, IPredicate condition) {
+            GetOrAddNode(from).AddTransition(null, condition);
+        }
+
         public ITransition GetTransition() {
             foreach (var transition in anyTransitions) {
                 if (transition.Condition.Evaluate()) {

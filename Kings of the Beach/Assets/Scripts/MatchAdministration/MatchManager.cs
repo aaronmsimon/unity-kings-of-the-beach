@@ -39,7 +39,6 @@ namespace KotB.Match
         private float switchSidesPointsDivisor = 3;
         private float switchSidesPoints;
         private bool paused = false;
-        private IState stateBeforePause;
 
         private StateMachine stateMachine;
 
@@ -49,6 +48,7 @@ namespace KotB.Match
         private EventPredicate pointCompletePredicate;
         private EventPredicate matchPostPointCompletePredicate;
         private EventPredicate pausePredicate;
+        private EventPredicate resumePredicate;
 
         private void Awake() {
             SetupStateMachine();
@@ -89,6 +89,7 @@ namespace KotB.Match
             pointCompletePredicate.Cleanup();
             matchPostPointCompletePredicate.Cleanup();
             pausePredicate.Cleanup();
+            resumePredicate.Cleanup();
         }
 
         private void Update() {
@@ -115,6 +116,7 @@ namespace KotB.Match
             pointCompletePredicate = new EventPredicate(stateMachine);
             matchPostPointCompletePredicate = new EventPredicate(stateMachine);
             pausePredicate = new EventPredicate(stateMachine);
+            resumePredicate = new EventPredicate(stateMachine);
 
             // Subscribe Event Predicates to Events
             matchInfo.MatchInitialized += matchInitializedPredicate.Trigger;
@@ -128,6 +130,7 @@ namespace KotB.Match
 
                 // Setup Transitions
                 gameProfile.AddAnyTransition(pauseState, pausePredicate);
+                gameProfile.AddReturnTransition(pauseState, resumePredicate);
                 gameProfile.AddTransition(matchStartState, prePointState, matchInitializedPredicate);
                 gameProfile.AddTransition(prePointState, serveState, matchToServePredicate);
                 gameProfile.AddTransition(serveState, inPlayState, ballServedPredicate);
@@ -164,11 +167,11 @@ namespace KotB.Match
 
         public void OnPause() {
             paused = !paused;
-            matchInfo.TogglePauseEvent(paused);
             if (paused) {
-                stateBeforePause = stateMachine.CurrentState;
+                pausePredicate.Trigger();
+            } else {
+                resumePredicate.Trigger();
             }
-            pausePredicate.Trigger();
         }
 
         private void OnStateChanged(IState newState) {
@@ -184,7 +187,6 @@ namespace KotB.Match
         public GameObject PlayerPrefab { get { return playerPrefab; } }
         public string PlayerTransitionProfileName => playerTransitionProfile.Value;
         public string AITransitionProfileName => aiTransitionProfile.Value;
-        public IState StateBeforePause => stateBeforePause;
         public bool Paused { get => paused; set => paused = value; }
     }
 }

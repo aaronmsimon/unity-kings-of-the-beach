@@ -7,10 +7,12 @@ namespace KotB.StatePattern
     {
         private TransitionProfile currentProfile;
         private List<TransitionProfile> profiles = new List<TransitionProfile>();
+        private IState previousState;
 
         public event Action<IState> StateChanged;
 
         public void ChangeState(IState newState) {
+            previousState = currentProfile.CurrentState;
             currentProfile.ChangeState(newState);
             StateChanged?.Invoke(newState);
         }
@@ -18,7 +20,11 @@ namespace KotB.StatePattern
         public void Update() {
             var transition = currentProfile.GetTransition();
             if (transition != null) {
-                ChangeState(transition.To);
+                if (transition.To != null) {
+                    ChangeState(transition.To);
+                } else {
+                    ReturnToPrevious();
+                }
             }
             currentProfile.Update();
         }
@@ -60,6 +66,10 @@ namespace KotB.StatePattern
             } else {
                 UnityEngine.Debug.LogAssertion($"{profileName} does not exist.");
             }
+        }
+
+        private void ReturnToPrevious() {
+            if (previousState != null) ChangeState(previousState);
         }
 
         public TransitionProfile CurrentProfile => currentProfile;
