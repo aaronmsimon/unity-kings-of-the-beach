@@ -128,8 +128,6 @@ namespace KotB.Match
 
                 // Setup Transitions
                 gameProfile.AddAnyTransition(pauseState, pausePredicate);
-                // stateBeforePause = matchStartState;
-                // gameProfile.AddTransition(pauseState, stateBeforePause, pausePredicate);
                 gameProfile.AddTransition(matchStartState, prePointState, matchInitializedPredicate);
                 gameProfile.AddTransition(prePointState, serveState, matchToServePredicate);
                 gameProfile.AddTransition(serveState, inPlayState, ballServedPredicate);

@@ -15,6 +15,11 @@ namespace KotB.Menus
 
         public MenuButton(Button button) {
             this.button = button;
+            button.clicked += ButtonPressedEvent;
+        }
+
+        public void Cleanup() {
+            button.clicked -= ButtonPressedEvent;
         }
 
         public void SetNavigationUp(MenuButton menuButton) {
