@@ -1,6 +1,7 @@
 using UnityEngine;
 using KotB.Match;
 using KotB.Menus;
+using RoboRyanTron.Unite2017.Variables;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,14 +13,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Scriptable Objects")]
     [SerializeField] private MatchInfoSO matchInfo;
-
-    private void OnEnable() {
-        matchInfo.TogglePause += OnTogglePause;
-    }
-
-    private void OnDisable() {
-        matchInfo.TogglePause -= OnTogglePause;
-    }
+    [SerializeField] private BooleanVariable paused;
 
     public void OnShowPowerMeter() {
         // Instantiate the UI object
@@ -37,7 +31,7 @@ public class UIManager : MonoBehaviour
         Instantiate(aimServe);
     }
 
-    public void OnTogglePause(bool paused) {
-        pauseMenu.Hide(!paused);
+    public void OnTogglePause() {
+        pauseMenu.Hide(paused.Value);
     }
 }

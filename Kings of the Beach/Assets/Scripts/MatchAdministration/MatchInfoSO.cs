@@ -20,7 +20,6 @@ namespace KotB.Match
         public event Action TransitionToPrePointState;
         public event Action TransitionToServeState;
         public event Action MatchInitialized;
-        public event Action<bool> TogglePause;
 
         public void Initialize() {
             teamServeIndex = 0;
@@ -33,10 +32,6 @@ namespace KotB.Match
         
         public void TransitionToServeStateEvent() {
             TransitionToServeState?.Invoke();
-        }
-
-        public void TogglePauseEvent(bool paused) {
-            TogglePause?.Invoke(paused);
         }
 
         public Athlete GetTeammate(Athlete athlete) {

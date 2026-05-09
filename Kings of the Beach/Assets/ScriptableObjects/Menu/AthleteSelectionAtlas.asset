@@ -49,3 +49,9 @@ MonoBehaviour:
       Xbox: {fileID: 2800000, guid: 008b67f02f97d564b98b3fe8c2d07d9e, type: 3}
       PlayStation: {fileID: 2800000, guid: b9f62841e5ead4649a94f06c80627299, type: 3}
       Generic: {fileID: 2800000, guid: 008b67f02f97d564b98b3fe8c2d07d9e, type: 3}
+  - inputName: input-start
+    inputSchemes:
+      Keyboard: {fileID: 2800000, guid: 2ae03d882f8b2424b9bbf2af3b7f6649, type: 3}
+      Xbox: {fileID: 2800000, guid: 617679dcf1ec82a4a844bf32b8728d9e, type: 3}
+      PlayStation: {fileID: 2800000, guid: 047bda466c9ac1f449495e804c227ad1, type: 3}
+      Generic: {fileID: 2800000, guid: 617679dcf1ec82a4a844bf32b8728d9e, type: 3}

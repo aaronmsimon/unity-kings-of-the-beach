@@ -23,7 +23,7 @@ namespace KotB.Menus
             inputReader.selectionLeftEvent += OnSelectionLeft;
             inputReader.selectionRightEvent += OnSelectionRight;
             inputReader.startEvent += OnStart;
-            inputReader.selectEvent += OnSelect;
+            inputReader.interaction4Event += OnSelect;
         }
 
         protected virtual void OnDisable() {
@@ -32,7 +32,7 @@ namespace KotB.Menus
             inputReader.selectionLeftEvent -= OnSelectionLeft;
             inputReader.selectionRightEvent -= OnSelectionRight;
             inputReader.startEvent -= OnStart;
-            inputReader.selectEvent -= OnSelect;
+            inputReader.interaction4Event -= OnSelect;
         }
 
         protected void SetDefault(MenuButton menuButton) {

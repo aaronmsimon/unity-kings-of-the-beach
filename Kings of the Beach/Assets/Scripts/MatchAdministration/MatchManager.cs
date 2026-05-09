@@ -19,9 +19,11 @@ namespace KotB.Match
 
         [Header("Match Variables")]
         [SerializeField] private FloatVariable scoreToWin;
+        [SerializeField] private BooleanVariable paused;
 
         [Header("Game Events")]
         [SerializeField] private GameEvent scoreUpdate;
+        [SerializeField] private GameEvent pauseEvent;
 
         [Header("Prefabs")]
         [SerializeField] private GameObject aiPrefab;
@@ -38,7 +40,6 @@ namespace KotB.Match
         private float totalPoints;
         private float switchSidesPointsDivisor = 3;
         private float switchSidesPoints;
-        private bool paused = false;
 
         private StateMachine stateMachine;
 
@@ -52,6 +53,7 @@ namespace KotB.Match
 
         private void Awake() {
             SetupStateMachine();
+            paused.Value = false;
         }
 
         private void Start() {
@@ -165,13 +167,17 @@ namespace KotB.Match
             PostPointComplete?.Invoke();
         }
 
-        public void OnPause() {
-            paused = !paused;
-            if (paused) {
+        public void OnPauseEvent() {
+            paused.Value = !paused.Value;
+            if (paused.Value) {
                 pausePredicate.Trigger();
             } else {
                 resumePredicate.Trigger();
             }
+        }
+
+        private void OnPause() {
+            pauseEvent.Raise();            
         }
 
         private void OnStateChanged(IState newState) {
@@ -187,6 +193,5 @@ namespace KotB.Match
         public GameObject PlayerPrefab { get { return playerPrefab; } }
         public string PlayerTransitionProfileName => playerTransitionProfile.Value;
         public string AITransitionProfileName => aiTransitionProfile.Value;
-        public bool Paused { get => paused; set => paused = value; }
     }
 }
