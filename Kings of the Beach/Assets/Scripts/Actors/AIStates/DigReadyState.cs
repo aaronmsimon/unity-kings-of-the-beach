@@ -105,29 +105,9 @@ namespace KotB.StatePattern.AIStates
         private void TrySpike() {
             float jumpDuration = ai.JumpFrames / ai.AnimationFrameRate;
             float spikeDuration = ai.ActionFrames / ai.AnimationFrameRate;
-            float optimalTime = spikeTime - jumpDuration - spikeDuration / 2;
-
-            // Timing window based on skill
-            float timingWindow = ai.BallInfo.SkillValues.SkillToValue(ai.Skills.SpikeSkill, ai.BallInfo.SkillValues.SpikeTimingWindow);
-            float minTime = optimalTime - timingWindow;
-            float maxTime = optimalTime + timingWindow;
-
-            if (ai.BallInfo.TimeSinceLastHit >= minTime && ai.BallInfo.TimeSinceLastHit <= maxTime && spikeTime >= 0) {
+            if (ai.BallInfo.TimeSinceLastHit >= spikeTime - jumpDuration - spikeDuration / 2 && spikeTime >= 0) {
                 ai.PerformJump();
                 isSpiking = true;
-
-                // Calculate timing penalty (similar to human system)
-                float actualTimingError = ai.BallInfo.TimeSinceLastHit - optimalTime;
-                ai.SpikeSpeedPenalty = actualTimingError * timingWindow;
-                Debug.Log($"actualTimingError: {ai.BallInfo.TimeSinceLastHit} - {optimalTime} = {actualTimingError} x window {timingWindow} = {actualTimingError * timingWindow}");
-
-                // Timing penalty - match human system pattern
-                // float normalizedTimingError = (ai.BallInfo.TimeSinceLastHit - optimalTime) / timingWindow; // Range: -1 to 1
-                // Debug.Log($"normalizedTimingError: ({ai.BallInfo.TimeSinceLastHit} - {optimalTime}) / {timingWindow} = {normalizedTimingError} x window {timingWindow} = {Mathf.Abs(normalizedTimingError) * timingWindow}");
-                // ai.SpikeSpeedPenalty = Mathf.Abs(normalizedTimingError) * timingWindow; // Should be smaller values
-
-                // float timingError = Mathf.Abs(ai.BallInfo.TimeSinceLastHit - optimalTime);
-                // ai.SpikeSpeedPenalty = Mathf.Clamp01(timingError / timingWindow);
             }
         }
 
