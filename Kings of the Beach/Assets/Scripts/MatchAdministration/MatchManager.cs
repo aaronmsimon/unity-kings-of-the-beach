@@ -54,6 +54,7 @@ namespace KotB.Match
         private void Awake() {
             SetupStateMachine();
             paused.Value = false;
+            DynamicGI.UpdateEnvironment();
         }
 
         private void Start() {
