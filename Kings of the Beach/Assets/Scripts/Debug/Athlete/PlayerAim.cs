@@ -1,12 +1,14 @@
 using UnityEngine;
 using KotB.Actors;
 using KotB.StatePattern.PlayerStates;
+using Cackenballz.Helpers;
 
 namespace KotB.Testing
 {
     public class PlayerAim : MonoBehaviour
     {
-        [SerializeField] private Transform target;
+        [SerializeField] private float targetSize;
+        [SerializeField] private Color targetColor;
 
         private Player player;
         private Vector3 targetPos;
@@ -18,7 +20,6 @@ namespace KotB.Testing
         private void Update() {
             if (player.StateMachine.CurrentState is LockState) {
                 SetTargetPos(false);
-                target.position = targetPos;
             }
         }
 
@@ -28,6 +29,11 @@ namespace KotB.Testing
             float targetX = aim.x * 5 + 4 * (pass ? player.CourtSide : -player.CourtSide);
             float targetZ = aim.y * 5;
             targetPos = new Vector3(targetX, 0f, targetZ);
+        }
+
+        private void OnDrawGizmos() {
+            GizmoHelpers.DrawGizmoCircle(targetPos, targetSize, targetColor, 8);
+            // GizmoHelpers.DrawGizmoCircle(targetPos, player.Skills.SpikeSkill, targetColor, 8);
         }
     }
 }
