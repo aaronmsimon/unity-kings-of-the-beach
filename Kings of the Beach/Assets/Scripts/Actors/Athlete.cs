@@ -5,6 +5,7 @@ using KotB.Match;
 using RoboRyanTron.Unite2017.Variables;
 using KotB.Items;
 using KotB.Stats;
+using Cackenballz.Helpers;
 
 namespace KotB.Actors
 {
@@ -179,6 +180,9 @@ namespace KotB.Actors
             ballInfo.SetPassTarget(targetPos, height, time, this, StatTypes.None, passType);
         }
 
+        [Header("Testing")]
+        [SerializeField] private string playerName;
+
         public void Spike(Vector3 targetPos) {
             if (!feint) {
                 // do timing stuff with penalties
@@ -190,6 +194,7 @@ namespace KotB.Actors
                 spikeSpeedPenalty = timingVar * window;
                 Vector3 newTargetPos = new Vector3(targetPos.x + penalty, targetPos.y, targetPos.z);
                 // Debug.Log($"spikeAnim: {stateInfo.normalizedTime} timingVar: {timingVar} window: {window} penalty: {penalty} target: {targetPos} newTarget: {newTargetPos}");
+                DebugLogger.Log(playerName, timingVar);
                 SetSpikeTargetByType(newTargetPos, skills.SpikeSkill, skills.SpikePower, ballInfo.SkillValues.SpikePower, StatTypes.Attack);
             } else {
                 Pass(targetPos, feintHeight, feintTime, PassType.Bump);
@@ -212,7 +217,7 @@ namespace KotB.Actors
             float setPassBenefit = 0.05f;
             float setPassAdjustment = ballInfo.LastPassType == PassType.Set ? setPassBenefit : 0;
             float spikeTime = distance.magnitude / (ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange) * (1 - (Mathf.Abs(spikeSpeedPenalty) - setPassAdjustment)));
-            Debug.Log($"distance: {distance.magnitude}, randVar: {randomVariance}, power: {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, speed pen: {spikeSpeedPenalty}, set bonus: {setPassAdjustment}, spikeTime: {spikeTime}, speed (m/s): {(distance.magnitude / spikeTime).ToString("F2")}, speed (mph): {(distance.magnitude / spikeTime * 2.23694).ToString("F2")}");
+            // Debug.Log($"distance: {distance.magnitude}, randVar: {randomVariance}, power: {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, speed pen: {spikeSpeedPenalty}, set bonus: {setPassAdjustment}, spikeTime: {spikeTime}, speed (m/s): {(distance.magnitude / spikeTime).ToString("F2")}, speed (mph): {(distance.magnitude / spikeTime * 2.23694).ToString("F2")}");
             // Debug.Log($"t = d/r: {spikeTime} = {distance.magnitude} / {ballInfo.SkillValues.SkillToValue(adjustedPower, skillPowerRange)}, power: {athletePower}, {adjustedPower}");
             bool skillCheck = UnityEngine.Random.value <= ballInfo.SkillValues.SkillToValue(athleteSkill, ballInfo.SkillValues.SpikeOverNet);
             if (directLine || (!directLine && !skillCheck)) {
