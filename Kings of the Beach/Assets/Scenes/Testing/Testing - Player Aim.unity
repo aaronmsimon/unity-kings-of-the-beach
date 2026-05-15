@@ -823,8 +823,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d854ab58a7a9db34691ab4c4750a52da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetSize: 0.1
+  targetSize: 0.025
   targetColor: {r: 1, g: 0, b: 0, a: 1}
+  skill: 8
+  timingVar: 0.2
 --- !u!1 &1992665022
 GameObject:
   m_ObjectHideFlags: 0

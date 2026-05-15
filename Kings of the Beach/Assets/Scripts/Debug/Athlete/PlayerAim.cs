@@ -9,6 +9,8 @@ namespace KotB.Testing
     {
         [SerializeField] private float targetSize;
         [SerializeField] private Color targetColor;
+        [SerializeField] private float skill;
+        [SerializeField] private float timingVar;
 
         private Player player;
         private Vector3 targetPos;
@@ -33,7 +35,9 @@ namespace KotB.Testing
 
         private void OnDrawGizmos() {
             GizmoHelpers.DrawGizmoCircle(targetPos, targetSize, targetColor, 8);
-            // GizmoHelpers.DrawGizmoCircle(targetPos, player.Skills.SpikeSkill, targetColor, 8);
+            float skillFactor = Mathf.Lerp(2f, 0.2f, (skill - 1f) / 9f);
+            float radius = timingVar * skillFactor;
+            GizmoHelpers.DrawGizmoCircle(targetPos, radius, targetColor, 8);
         }
     }
 }

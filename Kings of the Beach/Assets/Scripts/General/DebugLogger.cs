@@ -8,7 +8,7 @@ namespace Cackenballz.Helpers
     {
         private static string _path;
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        // [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         static void Init()
         {
             _path = Path.Combine(Application.persistentDataPath, $"log_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
