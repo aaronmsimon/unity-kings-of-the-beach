@@ -9,7 +9,7 @@ namespace Cackenballz.Helpers
         private static string _path;
 
         // [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        static void Init()
+        public static void Init()
         {
             _path = Path.Combine(Application.persistentDataPath, $"log_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
             File.WriteAllText(_path, "Time,Tag,Value\n"); // header
