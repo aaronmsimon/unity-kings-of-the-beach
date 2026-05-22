@@ -88,6 +88,7 @@ namespace KotB.Actors
             }
             
             leftHandEnd = transform.Find("Volleyball-Character").Find("CCM-Armature").Find("Pelvis").Find("Spine1").Find("Spine2").Find("Shoulder.L").Find("UpperArm.L").Find("LowerArm.L").Find("Hand.L").Find("Hand.L_end");
+            Cackenballz.Helpers.DebugLogger.Init();
         }
 
         protected virtual void Update() {
@@ -95,6 +96,13 @@ namespace KotB.Actors
             
             if (!isJumping) {
                 Move();
+            }
+
+            if (ballInfo.InPlay) {
+                Cackenballz.Helpers.DebugLogger.Log("spike trigger active",spikeTrigger.Active);
+                BoxCollider box = (BoxCollider)spikeTrigger.TriggerCollider;
+                Cackenballz.Helpers.DebugLogger.Log("spike trigger y-pos",box.center.y + transform.position.y);
+                Cackenballz.Helpers.DebugLogger.Log("ball y-pos",ballInfo.Position.y);
             }
         }
 
