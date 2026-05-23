@@ -43,6 +43,28 @@ namespace KotB.Actors
             base.Awake();
             
             SetupStateMachine();
+            Cackenballz.Helpers.DebugLogger.Init();
+        }
+bool lockedThisFrame;
+        protected override  void Update()
+        {
+            base.Update();
+            if (ballInfo.InPlay) {
+                Cackenballz.Helpers.DebugLogger.Log("spike trigger active",(isJumping ? 1 : 0));
+                BoxCollider box = (BoxCollider)SpikeTrigger.TriggerCollider;
+                Cackenballz.Helpers.DebugLogger.Log("spike trigger y-pos",box.center.y + transform.position.y);
+                Cackenballz.Helpers.DebugLogger.Log("ball y-pos",ballInfo.Position.y);
+                if (stateMachine.CurrentState is not LockState && lockedThisFrame)
+                {
+                    Cackenballz.Helpers.DebugLogger.Log("ball collided",1);
+                    lockedThisFrame = false;
+                }
+                AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+                Cackenballz.Helpers.DebugLogger.Log("animation progress",stateInfo.normalizedTime);
+            }
+            if (stateMachine.CurrentState is LockState) {
+                lockedThisFrame = true;
+            }
         }
 
         //Adds listeners for events being triggered in the InputReader script
