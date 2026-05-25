@@ -178,7 +178,7 @@ namespace KotB.Actors
             ballInfo.SetPassTarget(targetPos, height, time, this, StatTypes.None, passType);
         }
 
-        public void Spike(Vector3 targetPos) {
+        public virtual void Spike(Vector3 targetPos) {
             if (!feint) {
                 // do timing stuff with penalties
                 AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);

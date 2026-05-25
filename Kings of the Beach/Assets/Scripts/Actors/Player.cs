@@ -4,6 +4,7 @@ using KotB.StatePattern;
 using KotB.StatePattern.PlayerStates;
 using RoboRyanTron.Unite2017.Events;
 using RoboRyanTron.Unite2017.Variables;
+using Cackenballz.Helpers;
 
 namespace KotB.Actors
 {
@@ -131,6 +132,12 @@ namespace KotB.Actors
                 tutorialProfile.SetStartingState(normalState);
 
                 stateMachine.AddProfile(tutorialProfile);
+        }
+
+        public override void Spike(Vector3 targetPos) {
+            base.Spike(targetPos);
+
+            StartCoroutine(Rumble.RumbleCoroutine(.35f,.75f,0));
         }
 
         public void LockPlayer() {
