@@ -21,6 +21,9 @@ namespace KotB.Match
         [SerializeField] private FloatVariable scoreToWin;
         [SerializeField] private BooleanVariable paused;
 
+        [Header("Settings")]
+        [SerializeField] private float timeInPostPoint;
+
         [Header("Game Events")]
         [SerializeField] private GameEvent scoreUpdate;
         [SerializeField] private GameEvent pauseEvent;
@@ -190,6 +193,7 @@ namespace KotB.Match
         public MatchInfoSO MatchInfo { get { return matchInfo; } }
         public BallSO BallInfo { get { return ballInfo; } }
         public InputReader InputReader => inputReader;
+        public float TimeInPostPoint => timeInPostPoint;
         public GameObject AIPrefab { get { return aiPrefab; } }
         public GameObject PlayerPrefab { get { return playerPrefab; } }
         public string PlayerTransitionProfileName => playerTransitionProfile.Value;

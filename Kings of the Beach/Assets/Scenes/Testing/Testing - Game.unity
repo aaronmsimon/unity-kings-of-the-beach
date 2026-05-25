@@ -3080,17 +3080,13 @@ PrefabInstance:
       value: OnBallHitGround
       objectReference: {fileID: 0}
     - target: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
-      propertyPath: paused
-      value: 
-      objectReference: {fileID: 11400000, guid: 53ed7b5a65dcbc345bbd7db5c21dbb36, type: 2}
-    - target: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
-      propertyPath: pauseEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: f78bc95c58c9b3b4fa53facc23ce7fc4, type: 2}
-    - target: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
       propertyPath: ScoreChanged
       value: 
       objectReference: {fileID: 11400000, guid: f3394258f96f2574482e0cc63a9e4db6, type: 2}
+    - target: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
+      propertyPath: timeInPostPoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8316344147264950940, guid: 04396ded0900afa4fb4fdc866eed5b8e, type: 3}
       propertyPath: aiTransitionProfile
       value: 

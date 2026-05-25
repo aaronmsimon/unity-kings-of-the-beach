@@ -9,17 +9,9 @@ namespace KotB.StatePattern.MatchStates
         public PostPointState(MatchManager matchManager) : base(matchManager) { }
 
         private float timeUntilChangeState;
-        private float waitTime = 3f;
 
         public override void Enter() {
-            // matchManager.InputReader.EnableBetweenPointsInput();
-            // matchManager.InputReader.interactEvent += OnInteract;
-
-            timeUntilChangeState = waitTime;
-        }
-
-        public override void Exit() {
-            // matchManager.InputReader.interactEvent -= OnInteract;
+            timeUntilChangeState = matchManager.TimeInPostPoint;
         }
 
         public override void Update() {
@@ -28,11 +20,6 @@ namespace KotB.StatePattern.MatchStates
             if (timeUntilChangeState < 0) {
                 matchManager.InvokePostPointComplete();
             }
-        }
-
-        private void OnInteract() {
-            // matchManager.MatchInfo.TransitionToServeStateEvent();
-            // matchManager.StateMachine.ChangeState(matchManager.ServeState);
         }
     }
 }
