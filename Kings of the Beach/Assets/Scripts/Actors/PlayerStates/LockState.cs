@@ -45,6 +45,7 @@ namespace KotB.StatePattern.PlayerStates
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 if (bumpTimer > 0) {
                     player.Pass(targetPos, 7, 1.75f, passType);
+                    player.HapticVibration(.25f, 0f, .5f);
                     unlockTimer = unlockDelay;
                 }
             }
@@ -54,6 +55,7 @@ namespace KotB.StatePattern.PlayerStates
             if (other.gameObject.TryGetComponent<Ball>(out Ball ball)) {
                 SetTargetPos(false);
                 player.Spike(targetPos);
+                player.HapticVibration(.35f, .75f, 0f);
                 player.UnlockPlayer();
             }
         }

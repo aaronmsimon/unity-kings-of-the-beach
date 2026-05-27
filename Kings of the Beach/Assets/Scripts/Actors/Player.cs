@@ -134,10 +134,8 @@ namespace KotB.Actors
                 stateMachine.AddProfile(tutorialProfile);
         }
 
-        public override void Spike(Vector3 targetPos) {
-            base.Spike(targetPos);
-
-            StartCoroutine(Rumble.RumbleCoroutine(.35f,.75f,0));
+        public void HapticVibration(float duration, float lowFreq, float highFreq) {
+            StartCoroutine(Rumble.RumbleCoroutine(duration, lowFreq, highFreq));
         }
 
         public void LockPlayer() {
