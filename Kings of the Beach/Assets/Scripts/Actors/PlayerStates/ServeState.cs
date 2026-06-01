@@ -98,6 +98,7 @@ namespace KotB.StatePattern.PlayerStates
         private void PerformServe() {
             if (isServing && Time.time > serveContactTime) {
                 player.BallInfo.SetServeTarget();
+                player.HapticVibration(.35f, .75f, 0f);
             }
         }
 

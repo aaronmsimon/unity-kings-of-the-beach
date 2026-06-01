@@ -138,6 +138,12 @@ namespace KotB.Actors
             StartCoroutine(Rumble.RumbleCoroutine(duration, lowFreq, highFreq));
         }
 
+        protected override void Block(Vector3 contactPoint) {
+            base.Block(contactPoint);
+
+            HapticVibration(.35f, .75f, 0f);            
+        }
+
         public void LockPlayer() {
             lockPlayer?.Invoke();
         }

@@ -273,7 +273,7 @@ namespace KotB.Actors
             return targetPos - ballPath * adjustmentDistance;
         }
 
-        private void Block(Vector3 contactPoint) {
+        protected virtual void Block(Vector3 contactPoint) {
             // Use the stored contact point for more accurate quality calculation
             Vector3 contactDirection = contactPoint - (transform.position + blockColliderCenter);
             float contactQuality = Vector3.Dot(contactDirection.normalized, Vector3.right * -courtSide.Value);
